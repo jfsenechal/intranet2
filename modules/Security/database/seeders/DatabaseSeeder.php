@@ -17,7 +17,7 @@ final class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::find(1)
+        User::query()->where('email', config('app.default_user.name'))
             ->update([
                 'password' => Hash::make(config('app.default_user.password')),
                 'email' => config('app.default_user.email'),

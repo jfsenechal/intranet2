@@ -35,11 +35,6 @@ final class SecurityServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        FilamentView::registerRenderHook(
-            PanelsRenderHook::AUTH_LOGIN_FORM_BEFORE,
-            fn (): View => view('security::filament._logo'),
-        );
-
         // Load migrations
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
