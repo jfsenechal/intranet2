@@ -30,11 +30,11 @@ final class PstServiceProvider extends ServiceProvider
         RegisterPolicies::register();
 
         // Load views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'pst');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'pst');
 
         // Load routes
-        if (file_exists(__DIR__.'/../routes/web.php')) {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        if (file_exists(__DIR__.'/../../routes/web.php')) {
+            $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
         }
 
         // Register commands
@@ -48,27 +48,27 @@ final class PstServiceProvider extends ServiceProvider
 
         // Publish config
         $this->publishes([
-            __DIR__.'/../config/pst.php' => config_path('pst.php'),
+            __DIR__.'/../../config/pst.php' => config_path('pst.php'),
         ], 'pst-config');
 
         // Publish database config
         $this->publishes([
-            __DIR__.'/../config/database.php' => config_path('pst-database.php'),
+            __DIR__.'/../../config/database.php' => config_path('pst-database.php'),
         ], 'pst-database-config');
 
         // Publish migrations
         $this->publishes([
-            __DIR__.'/../database/migrations' => database_path('migrations'),
+            __DIR__.'/../../database/migrations' => database_path('migrations'),
         ], 'pst-migrations');
 
         // Publish views
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/pst'),
+            __DIR__.'/../../resources/views' => resource_path('views/vendor/pst'),
         ], 'pst-views');
 
         // Publish assets
         $this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/pst'),
+            __DIR__.'/../../resources/assets' => public_path('vendor/pst'),
         ], 'pst-assets');
     }
 

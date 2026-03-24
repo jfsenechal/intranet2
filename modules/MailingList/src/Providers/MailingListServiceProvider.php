@@ -25,34 +25,34 @@ final class MailingListServiceProvider extends ServiceProvider
     {
         RegisterPolicies::register();
         // Load migrations
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
 
         // Load views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'mailing-list');
+        $this->loadViewsFrom(__DIR__.'/../../views', 'mailing-list');
 
         // Load routes
-        if (file_exists(__DIR__.'/../routes/web.php')) {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        if (file_exists(__DIR__.'/../../routes/web.php')) {
+            $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
         }
 
         // Publish config
         $this->publishes([
-            __DIR__.'/../config/mailing-list.php' => config_path('mailing-list.php'),
+            __DIR__.'/../../config/mailing-list.php' => config_path('mailing-list.php'),
         ], 'mailing-list-config');
 
         // Publish database config
         $this->publishes([
-            __DIR__.'/../config/database.php' => config_path('mailing-list-database.php'),
+            __DIR__.'/../../config/database.php' => config_path('mailing-list-database.php'),
         ], 'mailing-list-database-config');
 
         // Publish migrations
         $this->publishes([
-            __DIR__.'/../database/migrations' => database_path('migrations'),
+            __DIR__.'/../../database/migrations' => database_path('migrations'),
         ], 'mailing-list-migrations');
 
         // Publish views
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/mailing-list'),
+            __DIR__.'/../../views' => resource_path('views/vendor/mailing-list'),
         ], 'mailing-list-views');
     }
 
