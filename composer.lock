@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "acmarche/app",
-            "version": "dev-main",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./modules/App",
@@ -50,7 +50,7 @@
         },
         {
             "name": "acmarche/mailing-list",
-            "version": "dev-main",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./modules/MailingList",
@@ -93,7 +93,7 @@
         },
         {
             "name": "acmarche/pst",
-            "version": "dev-main",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./modules/Pst",
@@ -136,7 +136,7 @@
         },
         {
             "name": "acmarche/security",
-            "version": "dev-main",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./modules/Security",
