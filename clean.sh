@@ -3,4 +3,4 @@ php artisan config:clear --silent
 php artisan optimize:clear --silent
 php artisan filament:optimize-clear --silent
 rm -f storage/logs/*.log
-php artisan filament:optimize --silent
+rm -rf bootstrap/cache/blade-icons.php bootstrap/cache/filament/ bootstrap/cache/packages.php bootstrap/cache/services.php

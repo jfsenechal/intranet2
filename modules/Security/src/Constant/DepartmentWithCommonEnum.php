@@ -2,17 +2,15 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Pst\Enums;
+namespace AcMarche\Security\Constant;
 
-use BackedEnum;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
-use Filament\Support\Icons\Heroicon;
-use Illuminate\Contracts\Support\Htmlable;
 
-enum DepartmentEnum: string implements HasColor, HasIcon, HasLabel
+enum DepartmentWithCommonEnum: string implements HasColor, HasIcon, HasLabel
 {
+    case COMMON = 'COMMON';
     case CPAS = 'CPAS';
     case VILLE = 'VILLE';
 
@@ -29,6 +27,7 @@ enum DepartmentEnum: string implements HasColor, HasIcon, HasLabel
     public function getLabel(): string
     {
         return match ($this) {
+            self::COMMON => 'Cpas et Ville',
             self::CPAS => 'Cpas',
             self::VILLE => 'Ville',
         };
@@ -37,16 +36,18 @@ enum DepartmentEnum: string implements HasColor, HasIcon, HasLabel
     public function getColor(): string|array|null
     {
         return match ($this) {
+            self::COMMON => 'success',
             self::CPAS => 'primary',
-            self::VILLE => 'success',
+            self::VILLE => 'danger',
         };
     }
 
-    public function getIcon(): string|BackedEnum|Htmlable|null
+    public function getIcon(): ?string
     {
         return match ($this) {
-            self::CPAS => Heroicon::Heart,
-            self::VILLE => Heroicon::BuildingOffice2,
+            self::COMMON => 'tabler-cell-signal-4',
+            self::CPAS => 'tabler-cell-signal-2',
+            self::VILLE => 'tabler-cell-signal-5',
         };
     }
 }

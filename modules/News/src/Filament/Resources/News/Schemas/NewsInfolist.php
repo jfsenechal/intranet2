@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News\Schemas;
 
-use AcMarche\Security\Constant\DepartmentEnum;
+use AcMarche\Security\Constant\DepartmentWithCommonEnum;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
@@ -19,11 +19,11 @@ final class NewsInfolist
                     ->icon('tabler-mail')
                     ->dateTime(),
                 TextEntry::make('department')
-                    ->formatStateUsing(fn ($state) => DepartmentEnum::tryFrom($state)?->getLabel() ?? 'Unknown')
+                    ->formatStateUsing(fn ($state) => DepartmentWithCommonEnum::tryFrom($state)?->getLabel() ?? 'Unknown')
                     ->icon(
-                        fn ($state) => DepartmentEnum::tryFrom($state)?->getIcon() ?? 'heroicon-m-question-mark-circle'
+                        fn ($state) => DepartmentWithCommonEnum::tryFrom($state)?->getIcon() ?? 'heroicon-m-question-mark-circle'
                     )
-                    ->color(fn ($state) => DepartmentEnum::tryFrom($state)?->getColor() ?? 'gray')
+                    ->color(fn ($state) => DepartmentWithCommonEnum::tryFrom($state)?->getColor() ?? 'gray')
                     ->icon('tabler-mail'),
                 TextEntry::make('content')
                     ->label(null)

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News\Schemas;
 
-use AcMarche\Security\Constant\DepartmentEnum;
+use AcMarche\Security\Constant\DepartmentWithCommonEnum;
 use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -77,8 +77,8 @@ final class NewsForm
                             ->required(),
                         Forms\Components\Select::make('department')
                             ->label('Département')
-                            ->default(DepartmentEnum::COMMON->value)
-                            ->options(DepartmentEnum::class)
+                            ->default(DepartmentWithCommonEnum::COMMON->value)
+                            ->options(DepartmentWithCommonEnum::class)
                             ->required()
                             ->suffixIcon('tabler-ladder'),
                         Forms\Components\DatePicker::make('end_date')

@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace AcMarche\Security\Database\Factories;
 
 use AcMarche\Security\Models\Role;
+use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Security\Models\Role>
- */
+#[UseModel(Role::class)]
 final class RoleFactory extends Factory
 {
     protected $model = Role::class;
@@ -23,6 +22,7 @@ final class RoleFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'label' => fake()->name(),
         ];
     }
 }
