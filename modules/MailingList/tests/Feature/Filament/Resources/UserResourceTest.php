@@ -5,7 +5,7 @@ declare(strict_types=1);
 use AcMarche\MailingList\Filament\Resources\Users\Pages\CreateUser;
 use AcMarche\MailingList\Filament\Resources\Users\Pages\EditUser;
 use AcMarche\MailingList\Filament\Resources\Users\Pages\ListUsers;
-use AcMarche\MailingList\Models\User;
+use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\Testing\TestAction;

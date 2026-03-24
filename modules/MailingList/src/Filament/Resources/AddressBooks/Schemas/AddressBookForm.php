@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\MailingList\Filament\Resources\AddressBooks\Schemas;
 
 use AcMarche\MailingList\Models\Contact;
-use AcMarche\MailingList\Models\User;
+use App\Models\User;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -21,8 +21,8 @@ final class AddressBookForm
                 TextInput::make('name')
                     ->maxLength(255)
                     ->required(),
-                Hidden::make('user_id')
-                    ->default(fn (): ?int => auth()->id()),
+                Hidden::make('username')
+                    ->default(fn (): ?string => auth()->user()?->username),
                 Select::make('contacts')
                     ->relationship('contacts', 'email')
                     ->getOptionLabelFromRecordUsing(
@@ -52,7 +52,7 @@ final class AddressBookForm
                     ->createOptionUsing(function (array $data): int {
                         return Contact::query()->create([
                             ...$data,
-                            'user_id' => auth()->id(),
+                            'username' => auth()->user()?->username,
                         ])->getKey();
                     }),
                 Select::make('sharedWithUsers')

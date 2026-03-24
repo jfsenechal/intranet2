@@ -23,7 +23,7 @@ final class Contact extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'username', 'username');
     }
 
     /**
@@ -47,7 +47,7 @@ final class Contact extends Model
      */
     public function sharedWithUsers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'contact_shares')
+        return $this->belongsToMany(User::class, 'contact_shares', 'contact_id', 'username', 'id', 'username')
             ->withPivot('permission')
             ->withTimestamps();
     }

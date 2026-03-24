@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use AcMarche\MailingList\Models\User;
+use App\Models\User;
 
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;

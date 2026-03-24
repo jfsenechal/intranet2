@@ -9,7 +9,7 @@ use AcMarche\MailingList\Filament\Resources\Users\Pages\EditUser;
 use AcMarche\MailingList\Filament\Resources\Users\Pages\ListUsers;
 use AcMarche\MailingList\Filament\Resources\Users\Schemas\UserForm;
 use AcMarche\MailingList\Filament\Resources\Users\Tables\UsersTable;
-use AcMarche\MailingList\Models\User;
+use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;

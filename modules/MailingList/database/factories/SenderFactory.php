@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use AcMarche\MailingList\Models\Sender;
-use AcMarche\MailingList\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +20,7 @@ final class SenderFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'username' => fake()->userName(),
             'name' => fake()->company(),
             'email' => fake()->unique()->companyEmail(),
         ];

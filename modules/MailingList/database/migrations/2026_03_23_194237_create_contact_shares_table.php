@@ -15,11 +15,11 @@ return new class() extends Migration
         Schema::create('contact_shares', function (Blueprint $table) {
             $table->id();
             $table->foreignId('contact_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('username');
             $table->string('permission')->default('read');
             $table->timestamps();
 
-            $table->unique(['contact_id', 'user_id']);
+            $table->unique(['contact_id', 'username']);
         });
     }
 };

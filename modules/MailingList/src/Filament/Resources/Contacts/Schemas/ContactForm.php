@@ -33,8 +33,8 @@ final class ContactForm
                 Textarea::make('description')
                     ->rows(3)
                     ->maxLength(65535),
-                Hidden::make('user_id')
-                    ->default(fn (): ?int => auth()->id()),
+                Hidden::make('username')
+                    ->default(fn (): ?string => auth()->user()?->username),
                 CheckboxList::make('addressBooks')
                     ->relationship('addressBooks', 'name')
                     ->searchable(),

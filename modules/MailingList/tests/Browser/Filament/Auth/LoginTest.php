@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use AcMarche\MailingList\Models\User;
+use App\Models\User;
 
 beforeEach(function () {
     auth()->logout();

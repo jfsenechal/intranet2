@@ -7,7 +7,6 @@ namespace Database\Factories;
 use AcMarche\MailingList\Enums\EmailStatus;
 use AcMarche\MailingList\Models\Email;
 use AcMarche\MailingList\Models\Sender;
-use AcMarche\MailingList\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +20,7 @@ final class EmailFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'username' => fake()->userName(),
             'sender_id' => Sender::factory(),
             'subject' => fake()->sentence(),
             'body' => fake()->paragraphs(3, true),

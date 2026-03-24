@@ -14,7 +14,7 @@ return new class() extends Migration
     {
         Schema::create('address_books', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('username')->index();
             $table->string('name');
             $table->timestamps();
         });

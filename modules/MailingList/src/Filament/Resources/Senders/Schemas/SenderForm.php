@@ -21,8 +21,8 @@ final class SenderForm
                     ->email()
                     ->maxLength(255)
                     ->required(),
-                Hidden::make('user_id')
-                    ->default(fn (): ?int => auth()->id()),
+                Hidden::make('username')
+                    ->default(fn (): ?string => auth()->user()?->username),
             ]);
     }
 }

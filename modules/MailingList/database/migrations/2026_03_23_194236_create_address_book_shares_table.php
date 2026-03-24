@@ -15,11 +15,11 @@ return new class() extends Migration
         Schema::create('address_book_shares', function (Blueprint $table) {
             $table->id();
             $table->foreignId('address_book_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('username');
             $table->string('permission')->default('read');
             $table->timestamps();
 
-            $table->unique(['address_book_id', 'user_id']);
+            $table->unique(['address_book_id', 'username']);
         });
     }
 };

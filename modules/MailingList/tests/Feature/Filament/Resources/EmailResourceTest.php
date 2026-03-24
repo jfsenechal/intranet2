@@ -12,7 +12,7 @@ use AcMarche\MailingList\Models\Contact;
 use AcMarche\MailingList\Models\Email;
 use AcMarche\MailingList\Models\EmailRecipient;
 use AcMarche\MailingList\Models\Sender;
-use AcMarche\MailingList\Models\User;
+use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Illuminate\Support\Facades\Bus;
 
@@ -23,7 +23,7 @@ use function Pest\Livewire\livewire;
 beforeEach(function () {
     $this->user = User::factory()->create();
     $this->actingAs($this->user);
-    $this->sender = Sender::factory()->create(['user_id' => $this->user->id]);
+    $this->sender = Sender::factory()->create(['username' => $this->user->username]);
 });
 
 it('can render the index page', function () {
@@ -38,7 +38,7 @@ it('can render the create page', function () {
 
 it('can render the edit page', function () {
     $email = Email::factory()->create([
-        'user_id' => $this->user->id,
+        'username' => $this->user->username,
         'sender_id' => $this->sender->id,
     ]);
 
@@ -50,7 +50,7 @@ it('can render the edit page', function () {
 });
 
 it('can create an email with contacts', function () {
-    $contacts = Contact::factory(3)->create(['user_id' => $this->user->id]);
+    $contacts = Contact::factory(3)->create(['username' => $this->user->username]);
 
     livewire(CreateEmail::class)
         ->fillForm([
@@ -64,7 +64,7 @@ it('can create an email with contacts', function () {
 
     assertDatabaseHas(Email::class, [
         'subject' => 'Test Newsletter',
-        'user_id' => $this->user->id,
+        'username' => $this->user->username,
         'sender_id' => $this->sender->id,
         'total_count' => 3,
     ]);
@@ -73,8 +73,8 @@ it('can create an email with contacts', function () {
 });
 
 it('can create an email with address book', function () {
-    $addressBook = AddressBook::factory()->create(['user_id' => $this->user->id]);
-    $contacts = Contact::factory(5)->create(['user_id' => $this->user->id]);
+    $addressBook = AddressBook::factory()->create(['username' => $this->user->username]);
+    $contacts = Contact::factory(5)->create(['username' => $this->user->username]);
     $addressBook->contacts()->attach($contacts->pluck('id'));
 
     livewire(CreateEmail::class)
@@ -93,8 +93,8 @@ it('can create an email with address book', function () {
 });
 
 it('deduplicates contacts from multiple sources', function () {
-    $addressBook = AddressBook::factory()->create(['user_id' => $this->user->id]);
-    $contacts = Contact::factory(3)->create(['user_id' => $this->user->id]);
+    $addressBook = AddressBook::factory()->create(['username' => $this->user->username]);
+    $contacts = Contact::factory(3)->create(['username' => $this->user->username]);
     $addressBook->contacts()->attach($contacts->pluck('id'));
 
     livewire(CreateEmail::class)
@@ -114,7 +114,7 @@ it('deduplicates contacts from multiple sources', function () {
 
 it('can update an email', function () {
     $email = Email::factory()->create([
-        'user_id' => $this->user->id,
+        'username' => $this->user->username,
         'sender_id' => $this->sender->id,
     ]);
 
@@ -133,7 +133,7 @@ it('can update an email', function () {
 
 it('can delete an email', function () {
     $email = Email::factory()->create([
-        'user_id' => $this->user->id,
+        'username' => $this->user->username,
         'sender_id' => $this->sender->id,
     ]);
 
@@ -149,13 +149,13 @@ it('can dispatch send action', function () {
     Bus::fake();
 
     $email = Email::factory()->create([
-        'user_id' => $this->user->id,
+        'username' => $this->user->username,
         'sender_id' => $this->sender->id,
         'status' => EmailStatus::Draft,
         'total_count' => 2,
     ]);
 
-    $contacts = Contact::factory(2)->create(['user_id' => $this->user->id]);
+    $contacts = Contact::factory(2)->create(['username' => $this->user->username]);
     foreach ($contacts as $contact) {
         EmailRecipient::factory()->create([
             'email_id' => $email->id,
@@ -178,7 +178,7 @@ it('can dispatch send action', function () {
 
 it('prevents sending with no recipients', function () {
     $email = Email::factory()->create([
-        'user_id' => $this->user->id,
+        'username' => $this->user->username,
         'sender_id' => $this->sender->id,
         'status' => EmailStatus::Draft,
         'total_count' => 0,
@@ -194,7 +194,7 @@ it('prevents sending with no recipients', function () {
 
 it('hides send action for sent emails', function () {
     $email = Email::factory()->sent()->create([
-        'user_id' => $this->user->id,
+        'username' => $this->user->username,
         'sender_id' => $this->sender->id,
     ]);
 

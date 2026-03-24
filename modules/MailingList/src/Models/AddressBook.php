@@ -23,7 +23,7 @@ final class AddressBook extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'username', 'username');
     }
 
     /**
@@ -47,7 +47,7 @@ final class AddressBook extends Model
      */
     public function sharedWithUsers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'address_book_shares')
+        return $this->belongsToMany(User::class, 'address_book_shares', 'address_book_id', 'username', 'id', 'username')
             ->withPivot('permission')
             ->withTimestamps();
     }

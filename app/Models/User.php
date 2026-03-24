@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use AcMarche\MailingList\Models\UserMailingListTrait;
 use AcMarche\Pst\Models\UserPstTrait;
 use AcMarche\Security\Database\Factories\UserFactory;
 use AcMarche\Security\Ldap\UserLdap;
@@ -29,7 +30,7 @@ use Laravel\Scout\Searchable;
 final class User extends Authenticatable implements FilamentUser, HasAppAuthentication, HasAppAuthenticationRecovery, HasName
 {
     use HasApiTokens, HasFactory, Impersonate, Notifiable, Searchable;
-    use UserPstTrait;
+    use UserPstTrait, UserMailingListTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -237,6 +238,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
      * default => null,
      * };
      * }*/
+
     public function getAppAuthenticationSecret(): ?string
     {
         return $this->app_authentication_secret;
@@ -300,16 +302,5 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
             'roles' => 'array',
             'is_administrator' => 'boolean',
         ];
-    }
-
-    private static function getUuidFromIntranetDb(string $username): ?string
-    {
-        $user = UserIntranet::query()->where('username', $username)->first();
-
-        if ($user) {
-            return $user->uuid;
-        }
-
-        return null;
     }
 }

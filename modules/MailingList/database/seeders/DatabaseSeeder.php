@@ -7,7 +7,7 @@ namespace Database\Seeders;
 use AcMarche\MailingList\Models\AddressBook;
 use AcMarche\MailingList\Models\Contact;
 use AcMarche\MailingList\Models\Sender;
-use AcMarche\MailingList\Models\User;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 final class DatabaseSeeder extends Seeder
@@ -23,10 +23,10 @@ final class DatabaseSeeder extends Seeder
         $otherUsers = User::factory(3)->create();
 
         // Create contacts for admin
-        $adminContacts = Contact::factory(20)->create(['user_id' => $admin->id]);
+        $adminContacts = Contact::factory(20)->create(['username' => $admin->username]);
 
         // Create address books for admin and attach contacts
-        $adminAddressBooks = AddressBook::factory(3)->create(['user_id' => $admin->id]);
+        $adminAddressBooks = AddressBook::factory(3)->create(['username' => $admin->username]);
         foreach ($adminAddressBooks as $addressBook) {
             $addressBook->contacts()->attach(
                 $adminContacts->random(rand(5, 10))->pluck('id')
@@ -34,15 +34,15 @@ final class DatabaseSeeder extends Seeder
         }
 
         // Create senders for admin
-        Sender::factory(2)->create(['user_id' => $admin->id]);
+        Sender::factory(2)->create(['username' => $admin->username]);
 
         // Share first address book with another user (read access)
-        $adminAddressBooks->first()->sharedWithUsers()->attach($otherUsers->first()->id, ['permission' => 'read']);
+        $adminAddressBooks->first()->sharedWithUsers()->attach($otherUsers->first()->username, ['permission' => 'read']);
 
         // Create data for other users
         foreach ($otherUsers as $user) {
-            $contacts = Contact::factory(10)->create(['user_id' => $user->id]);
-            $addressBooks = AddressBook::factory(2)->create(['user_id' => $user->id]);
+            $contacts = Contact::factory(10)->create(['username' => $user->username]);
+            $addressBooks = AddressBook::factory(2)->create(['username' => $user->username]);
 
             foreach ($addressBooks as $addressBook) {
                 $addressBook->contacts()->attach(
@@ -50,7 +50,7 @@ final class DatabaseSeeder extends Seeder
                 );
             }
 
-            Sender::factory(1)->create(['user_id' => $user->id]);
+            Sender::factory(1)->create(['username' => $user->username]);
         }
     }
 }

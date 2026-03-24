@@ -19,10 +19,10 @@ final class EmailForm
     {
         return $schema
             ->components([
-                Hidden::make('user_id')
-                    ->default(fn (): ?int => auth()->id()),
+                Hidden::make('username')
+                    ->default(fn (): ?string => auth()->user()?->username),
                 Select::make('sender_id')
-                    ->relationship('sender', 'name', fn ($query) => $query->where('user_id', auth()->id()))
+                    ->relationship('sender', 'name', fn ($query) => $query->where('username', auth()->user()?->username))
                     ->getOptionLabelFromRecordUsing(fn ($record): string => "{$record->name} <{$record->email}>")
                     ->required()
                     ->searchable()
@@ -45,7 +45,7 @@ final class EmailForm
                     ->label('Address Books')
                     ->multiple()
                     ->options(fn () => AddressBook::query()
-                        ->where('user_id', auth()->id())
+                        ->where('username', auth()->user()?->username)
                         ->pluck('name', 'id'))
                     ->searchable()
                     ->preload()
@@ -55,7 +55,7 @@ final class EmailForm
                     ->label('Individual Contacts')
                     ->multiple()
                     ->options(fn () => Contact::query()
-                        ->where('user_id', auth()->id())
+                        ->where('username', auth()->user()?->username)
                         ->get()
                         ->mapWithKeys(fn (Contact $contact): array => [
                             $contact->id => "{$contact->first_name} {$contact->last_name} <{$contact->email}>",
