@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 return [
-    'connection' => 'maria-mailinglist',
+    'connection' => 'maria-mailing-list',
     'connections' => [
-        'maria-mailinglist' => [
+        'maria-mailing-list' => [
             'driver' => env('DB_MAILINGLIST_DRIVER', 'mariadb'),
             'host' => env('DB_MAILINGLIST_HOST', '127.0.0.1'),
             'port' => env('DB_MAILINGLIST_PORT', '3306'),

@@ -16,7 +16,7 @@ final class Email extends Model
     /** @use HasFactory<EmailFactory> */
     use HasFactory;
 
-    protected $connection = 'maria-mailinglist';
+    protected $connection = 'maria-mailing-list';
 
     /**
      * @return BelongsTo<User, $this>

@@ -16,7 +16,7 @@ final class AddressBook extends Model
     /** @use HasFactory<AddressBookFactory> */
     use HasFactory;
 
-    protected $connection = 'maria-mailinglist';
+    protected $connection = 'maria-mailing-list';
 
     /**
      * @return BelongsTo<User, $this>

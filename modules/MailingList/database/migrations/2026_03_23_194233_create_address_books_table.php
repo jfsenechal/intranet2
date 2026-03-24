@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class() extends Migration
 {
-    protected $connection = 'maria-mailinglist';
+    protected $connection = 'maria-mailing-list';
 
     public function up(): void
     {
