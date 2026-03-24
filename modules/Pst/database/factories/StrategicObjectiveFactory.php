@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace  AcMarche\Pst\Database\Factories;
 
 use App\Enums\ActionScopeEnum;
 use App\Enums\DepartmentEnum;

@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
 
+namespace AcMarche\MailingList\Database\Factories;
 use AcMarche\MailingList\Enums\EmailStatus;
 use AcMarche\MailingList\Models\Email;
 use AcMarche\MailingList\Models\Sender;

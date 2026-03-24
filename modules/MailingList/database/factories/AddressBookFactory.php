@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+
+namespace AcMarche\MailingList\Database\Factories;
 
 use AcMarche\MailingList\Models\AddressBook;
 use Illuminate\Database\Eloquent\Factories\Factory;

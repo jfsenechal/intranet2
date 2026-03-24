@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories;
+namespace  AcMarche\Pst\Database\Factories;
 
-use App\Models\Action;
+use AcMarche\Pst\Models\Action;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 final class ActionFactory extends Factory

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Models;
 
-use Database\Factories\SenderFactory;
+use  AcMarche\MailingList\Database\Factories\SenderFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Database\Seeders;
+namespace AcMarche\MailingList\Database\Seeders;
 
 use AcMarche\MailingList\Models\AddressBook;
 use AcMarche\MailingList\Models\Contact;

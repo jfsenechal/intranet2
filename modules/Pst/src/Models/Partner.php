@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
-use Database\Factories\PartnerFactory;
+use  AcMarche\Pst\Database\Factories\PartnerFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
