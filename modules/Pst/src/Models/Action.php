@@ -9,7 +9,7 @@ use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Pst\Enums\ActionStateEnum;
 use AcMarche\Pst\Enums\ActionSynergyEnum;
 use AcMarche\Pst\Enums\ActionTypeEnum;
-use AcMarche\Pst\Enums\DepartmentEnum;
+use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Enums\RoleEnum;
 use AcMarche\Pst\Enums\YesOrNoEnum;
 use AcMarche\Pst\Models\Scopes\DepartmentScope;
@@ -37,6 +37,8 @@ use Laravel\Scout\Searchable;
 final class Action extends Model
 {
     use HasDepartmentScope, HasFactory, Notifiable, Searchable, SoftDeletes;
+
+    protected $connection = 'maria-pst';
 
     protected $fillable = [
         'name',

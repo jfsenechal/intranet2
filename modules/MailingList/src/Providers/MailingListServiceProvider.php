@@ -11,54 +11,49 @@ final class MailingListServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        // Merge pst config
+        // Merge news config
         $this->mergeConfigFrom(
             __DIR__.'/../../config/mailing-list.php',
-            'pst'
+            'mailing-list'
         );
+
         // Register database connection from module config
         $this->registerDatabaseConnection();
-        // Load views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'pst');
-        // Load routes
-        if (file_exists(__DIR__.'/../routes/web.php')) {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-        }
-
-        // Register commands
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-
-            ]);
-        } // Publish config
-        $this->publishes([
-            __DIR__.'/../config/pst.php' => config_path('pst.php'),
-        ], 'pst-config');
-
-        // Publish database config
-        $this->publishes([
-            __DIR__.'/../config/database.php' => config_path('pst-database.php'),
-        ], 'pst-database-config');
-
-        // Publish migrations
-        $this->publishes([
-            __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'pst-migrations');
-
-        // Publish views
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/pst'),
-        ], 'pst-views');
-
-        // Publish assets
-        $this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/pst'),
-        ], 'pst-assets');
     }
 
     public function boot(): void
     {
         RegisterPolicies::register();
+        // Load migrations
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+        // Load views
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'mailing-list');
+
+        // Load routes
+        if (file_exists(__DIR__.'/../routes/web.php')) {
+            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        }
+
+        // Publish config
+        $this->publishes([
+            __DIR__.'/../config/mailing-list.php' => config_path('mailing-list.php'),
+        ], 'mailing-list-config');
+
+        // Publish database config
+        $this->publishes([
+            __DIR__.'/../config/database.php' => config_path('mailing-list-database.php'),
+        ], 'mailing-list-database-config');
+
+        // Publish migrations
+        $this->publishes([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
+        ], 'mailing-list-migrations');
+
+        // Publish views
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/mailing-list'),
+        ], 'mailing-list-views');
     }
 
     /**

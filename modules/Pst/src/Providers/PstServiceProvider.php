@@ -14,15 +14,24 @@ final class PstServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        // Merge pst config
+        // Merge config
         $this->mergeConfigFrom(
             __DIR__.'/../../config/pst.php',
             'pst'
         );
+
         // Register database connection from module config
         $this->registerDatabaseConnection();
+    }
+
+    public function boot(): void
+    {
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+        RegisterPolicies::register();
+
         // Load views
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'pst');
+
         // Load routes
         if (file_exists(__DIR__.'/../routes/web.php')) {
             $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
@@ -35,7 +44,9 @@ final class PstServiceProvider extends ServiceProvider
                 SyncUserCommand::class,
                 FixCommand::class,
             ]);
-        } // Publish config
+        }
+
+        // Publish config
         $this->publishes([
             __DIR__.'/../config/pst.php' => config_path('pst.php'),
         ], 'pst-config');
@@ -59,11 +70,6 @@ final class PstServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/assets' => public_path('vendor/pst'),
         ], 'pst-assets');
-    }
-
-    public function boot(): void
-    {
-        RegisterPolicies::register();
     }
 
     /**

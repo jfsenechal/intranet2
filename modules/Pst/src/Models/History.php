@@ -18,6 +18,7 @@ final class History extends Model
 
     protected $fillable = ['action_id', 'body', 'property', 'old_value', 'new_value', 'user_add'];
 
+    protected $connection = 'maria-pst';
     /**
      * Get the action that owns the followup
      */

@@ -19,6 +19,7 @@ final class Odd extends Model
 {
     use HasFactory, Searchable;
 
+    protected $connection = 'maria-pst';
     protected $fillable = [
         'name',
         'icon',

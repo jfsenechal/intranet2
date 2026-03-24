@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Users\Schemas;
 
-use AcMarche\Pst\Enums\DepartmentEnum;
+use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Security\Repository\UserRepository;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Select;

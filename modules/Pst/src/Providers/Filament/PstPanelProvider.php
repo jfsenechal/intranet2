@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Pst\Providers\Filament;
 
 use AcMarche\App\Traits\PluginTrait;
-use AcMarche\Pst\Enums\DepartmentEnum;
+use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Security\Repository\UserRepository;
 use Filament\Actions\Action;
 use Filament\Http\Middleware\Authenticate;

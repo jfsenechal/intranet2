@@ -14,6 +14,7 @@ final class Media extends Model
     /** @use HasFactory<\Database\Factories\MediaFactory> */
     use HasFactory, Notifiable;
 
+    protected $connection = 'maria-pst';
     protected $fillable = [
         'name',
         'action_id',

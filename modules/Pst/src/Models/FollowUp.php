@@ -18,6 +18,7 @@ final class FollowUp extends Model
 
     protected $fillable = ['content', 'user_add'];
 
+    protected $connection = 'maria-pst';
     /**
      * Get the action that owns the followup
      */

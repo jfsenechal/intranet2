@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Observers;
 
-use AcMarche\Pst\Enums\DepartmentEnum;
+use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Models\Action;
 use AcMarche\Pst\Models\TracksHistoryTrait;
 use Exception;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Ldap;
 
-use AcMarche\Pst\Enums\DepartmentEnum;
+use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Ldap\User as UserLdap;
 use App\Models\User;
 use Exception;

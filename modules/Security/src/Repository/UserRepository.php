@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Repository;
 
-use AcMarche\Pst\Enums\DepartmentEnum;
+use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Security\Ldap\UserLdap;
 use App\Models\User;
 

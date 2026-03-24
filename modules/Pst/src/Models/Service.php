@@ -19,6 +19,7 @@ final class Service extends Model
     use HasFactory, Notifiable;
     use Searchable;
 
+    protected $connection = 'maria-pst';
     protected $fillable = [
         'name',
         'initials',

@@ -6,7 +6,7 @@ use AcMarche\Pst\Enums\ActionRoadmapEnum;
 use AcMarche\Pst\Enums\ActionStateEnum;
 use AcMarche\Pst\Enums\ActionSynergyEnum;
 use AcMarche\Pst\Enums\ActionTypeEnum;
-use AcMarche\Pst\Enums\DepartmentEnum;
+use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Models\Action;
 use AcMarche\Pst\Models\Odd;
 use AcMarche\Pst\Models\OperationalObjective;

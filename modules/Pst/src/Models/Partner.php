@@ -17,6 +17,7 @@ final class Partner extends Model
 {
     use HasFactory, Notifiable, Searchable;
 
+    protected $connection = 'maria-pst';
     protected $fillable = [
         'name',
         'phone',

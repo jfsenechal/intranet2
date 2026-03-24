@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait UserPstTrait
 {
+    protected $connection = 'maria-pst';
+
     /**
      * @return BelongsToMany<Service>
      */

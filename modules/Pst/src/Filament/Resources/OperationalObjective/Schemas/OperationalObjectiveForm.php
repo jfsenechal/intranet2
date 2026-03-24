@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Pst\Filament\Resources\OperationalObjective\Schemas;
 
 use AcMarche\Pst\Enums\ActionScopeEnum;
-use AcMarche\Pst\Enums\DepartmentEnum;
+use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Security\Repository\UserRepository;
 use Filament\Forms;
 use Filament\Schemas\Components\Grid;
