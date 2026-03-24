@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
+use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Enums\ActionRoadmapEnum;
 use AcMarche\Pst\Enums\ActionStateEnum;
 use AcMarche\Pst\Enums\ActionSynergyEnum;
 use AcMarche\Pst\Enums\ActionTypeEnum;
-use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Models\Action;
 use AcMarche\Pst\Models\Odd;
 use AcMarche\Pst\Models\OperationalObjective;
@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    protected $connection = 'maria-pst';
+
     public function up(): void
     {
         Schema::create('strategic_objectives', function (Blueprint $table) {

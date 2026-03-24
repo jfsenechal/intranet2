@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class AddressBookShare extends Model
 {
-    protected $connection = 'maria-mailing-list';
+    protected $connection = 'maria-mailinglist';
 
     /**
      * @return BelongsTo<AddressBook, $this>

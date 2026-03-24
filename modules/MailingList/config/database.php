@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 return [
-    'connection' => 'maria-mailing-list',
+    'connection' => 'maria-mailinglist',
     'connections' => [
         'maria-mailinglist' => [
             'driver' => env('DB_MAILINGLIST_DRIVER', 'mariadb'),
             'host' => env('DB_MAILINGLIST_HOST', '127.0.0.1'),
             'port' => env('DB_MAILINGLIST_PORT', '3306'),
-            'database' => env('DB_MAILINGLIST_DATABASE', 'finance'),
+            'database' => env('DB_MAILINGLIST_DATABASE', 'mailinglist'),
             'username' => env('DB_MAILINGLIST_USERNAME', 'root'),
             'password' => env('DB_MAILINGLIST_PASSWORD', ''),
             'unix_socket' => env('DB_MAILINGLIST_SOCKET', ''),

@@ -14,7 +14,7 @@ final class Sender extends Model
     /** @use HasFactory<SenderFactory> */
     use HasFactory;
 
-    protected $connection = 'maria-mailing-list';
+    protected $connection = 'maria-mailinglist';
 
     /**
      * @return BelongsTo<User, $this>

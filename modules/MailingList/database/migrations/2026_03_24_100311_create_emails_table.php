@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Schema;
 
 return new class() extends Migration
 {
+    protected $connection = 'maria-mailinglist';
+
     public function up(): void
     {
         Schema::create('emails', function (Blueprint $table) {

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Schema;
 
 return new class() extends Migration
 {
+    protected $connection = 'maria-pst';
+
     public function up(): void
     {
         Schema::table('strategic_objectives', function (Blueprint $table) {
