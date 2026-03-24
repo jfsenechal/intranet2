@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\MailingList\Models\UserMailingListTrait;
 use AcMarche\Pst\Models\UserPstTrait;
 use AcMarche\Security\Database\Factories\UserFactory;
@@ -67,21 +68,21 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         'app_authentication_recovery_codes',
     ];
 
-    public static function generateDataFromLdap(UserLdap $userLdap, string $username): array
+    public static function generateDataFromLdap(UserLdap $userLdap): array
     {
         $email = $userLdap->getFirstAttribute('mail');
 
-        /*   $department = match (true) {
-               str_contains($email, 'cpas.marche') => DepartmentEnum::CPAS->value,
-               str_contains($email, 'ac.marche') => DepartmentEnum::VILLE->value,
-               default => DepartmentEnum::VILLE->value,
-           };*/
+        $department = match (true) {
+            str_contains($email, 'cpas.marche') => DepartmentEnum::CPAS->value,
+            str_contains($email, 'ac.marche') => DepartmentEnum::VILLE->value,
+            default => DepartmentEnum::VILLE->value,
+        };
 
         return [
             'first_name' => $userLdap->getFirstAttribute('givenname'),
             'last_name' => $userLdap->getFirstAttribute('sn'),
             'email' => $email,
-            // 'departments' => [$department],
+            'departments' => [$department],
             'mobile' => $userLdap->getFirstAttribute('mobile'),
             'phone' => $userLdap->getFirstAttribute('telephoneNumber'),
             'extension' => $userLdap->getFirstAttribute('ipPhone'),

@@ -7,7 +7,7 @@ namespace AcMarche\Pst\Filament\Resources\Users\Pages;
 use AcMarche\Pst\Enums\RoleEnum;
 use AcMarche\Pst\Filament\Resources\Users\Schemas\UserForm;
 use AcMarche\Pst\Filament\Resources\Users\UserResource;
-use AcMarche\Pst\Ldap\UserHandler;
+use AcMarche\Security\Ldap\UserHandler;
 use Exception;
 use Filament\Actions;
 use Filament\Notifications\Notification;
