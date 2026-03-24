@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use AcMarche\Pst\Models\UserIntranet;
 use AcMarche\Pst\Models\UserPstTrait;
 use AcMarche\Security\Database\Factories\UserFactory;
 use AcMarche\Security\Ldap\UserLdap;
@@ -85,7 +84,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
             'mobile' => $userLdap->getFirstAttribute('mobile'),
             'phone' => $userLdap->getFirstAttribute('telephoneNumber'),
             'extension' => $userLdap->getFirstAttribute('ipPhone'),
-            'uuid' => self::getUuidFromIntranetDb($username),
+            'uuid' => Str::Uuid()->toString(),
         ];
     }
 
@@ -97,7 +96,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         return Str::of($this->name)
             ->explode(' ')
             ->take(2)
-            ->map(fn ($word) => Str::substr($word, 0, 1))
+            ->map(fn($word) => Str::substr($word, 0, 1))
             ->implode('');
     }
 
@@ -176,7 +175,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
 
     public function addRole(Role $role): void
     {
-        if (! $this->hasRole($role->name)) {
+        if (!$this->hasRole($role->name)) {
             $this->roles()->attach($role);
         }
     }
@@ -194,7 +193,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
 
     public function addModule(Module $module): void
     {
-        if (! $this->hasModule($module->name)) {
+        if (!$this->hasModule($module->name)) {
             $this->modules()->attach($module);
         }
     }
