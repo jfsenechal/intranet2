@@ -300,6 +300,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
             'password' => 'hashed',
             'app_authentication_secret' => 'encrypted',
             'app_authentication_recovery_codes' => 'encrypted:array',
+            'departments' => 'array',
             'roles' => 'array',
             'is_administrator' => 'boolean',
         ];

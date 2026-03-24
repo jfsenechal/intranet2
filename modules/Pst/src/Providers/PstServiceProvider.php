@@ -6,7 +6,6 @@ namespace AcMarche\Pst\Providers;
 
 use AcMarche\Pst\Console\Commands\FixCommand;
 use AcMarche\Pst\Console\Commands\MeiliCommand;
-use AcMarche\Pst\Console\Commands\SyncUserCommand;
 use AcMarche\Pst\Policies\RegisterPolicies;
 use Illuminate\Support\ServiceProvider;
 
@@ -41,7 +40,6 @@ final class PstServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 MeiliCommand::class,
-                SyncUserCommand::class,
                 FixCommand::class,
             ]);
         }
