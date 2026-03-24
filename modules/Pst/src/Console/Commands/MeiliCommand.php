@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Console\Commands;
 
 use AcMarche\Pst\Models\Action;
@@ -8,7 +10,7 @@ use AcMarche\Pst\Models\OperationalObjective;
 use AcMarche\Pst\Models\Partner;
 use AcMarche\Pst\Models\Service;
 use AcMarche\Pst\Models\StrategicObjective;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 

@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Http\Controllers;
 
 use AcMarche\Pst\Auth\MagicLoginLink;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;

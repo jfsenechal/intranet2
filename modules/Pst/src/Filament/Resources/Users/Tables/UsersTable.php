@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Filament\Resources\Users\Tables;
 
 use AcMarche\Pst\Filament\Resources\Users\UserResource;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;

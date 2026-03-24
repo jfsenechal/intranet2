@@ -13,7 +13,6 @@ use AcMarche\Pst\Models\OperationalObjective;
 use AcMarche\Pst\Models\Partner;
 use AcMarche\Pst\Models\Service;
 use AcMarche\Pst\Models\StrategicObjective;
-use AcMarche\Pst\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -131,15 +130,15 @@ return new class extends Migration
         Schema::create('action_user', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Action::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->unique(['action_id', 'user_id']);
+            $table->string('username');
+            $table->unique(['action_id', 'username']);
         });
 
         Schema::create('action_mandatory', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Action::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->unique(['action_id', 'user_id']);
+            $table->string('username');
+            $table->unique(['action_id', 'username']);
         });
 
         Schema::create('action_partner', function (Blueprint $table) {
@@ -179,9 +178,9 @@ return new class extends Migration
 
         Schema::create('service_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->string('username');
             $table->foreignIdFor(Service::class)->constrained()->cascadeOnDelete();
-            $table->unique(['user_id', 'service_id']);
+            $table->unique(['username', 'service_id']);
         });
     }
 };

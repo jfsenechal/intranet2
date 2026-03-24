@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Actions;
 
 use Filament\Actions\Action;

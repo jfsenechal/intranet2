@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Models;
 
 use AcMarche\Pst\Enums\ActionRoadmapEnum;
@@ -161,12 +163,12 @@ final class Action extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'action_user', 'action_id', 'username', 'id', 'username');
     }
 
     public function mandataries(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'action_mandatory')
+        return $this->belongsToMany(User::class, 'action_mandatory', 'action_id', 'username', 'id', 'username')
             ->whereHas('roles', function ($query) {
                 $query->where('name', RoleEnum::MANDATAIRE->value);
             });

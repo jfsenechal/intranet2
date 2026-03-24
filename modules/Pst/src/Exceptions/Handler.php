@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Exceptions;
 
-use App;
 use AcMarche\Pst\Mail\ExceptionMail;
+use App;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;

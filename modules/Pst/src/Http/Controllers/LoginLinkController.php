@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Http\Controllers;
 
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use Exception;
 use Filament\Facades\Filament;
 use Filament\Models\Contracts\FilamentUser;

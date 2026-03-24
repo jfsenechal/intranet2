@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Filament\Resources\Service\Pages;
 
 use AcMarche\Pst\Filament\Resources\Service\RelationManagers\ActionsRelationManager;
 use AcMarche\Pst\Filament\Resources\Service\ServiceResource;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use Filament\Actions;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;

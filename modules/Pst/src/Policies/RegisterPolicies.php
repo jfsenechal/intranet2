@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Policies;
 
 use AcMarche\Pst\Models\Action;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
 final class RegisterPolicies

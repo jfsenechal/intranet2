@@ -7,7 +7,7 @@ namespace AcMarche\Pst\Actions;
 use AcMarche\Pst\Filament\Resources\ActionPst\Schemas\ActionForm;
 use AcMarche\Pst\Mail\ActionReminderMail;
 use AcMarche\Pst\Models\Action as ActionModel;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use Exception;
 use Filament\Actions\Action as ActionAction;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +18,7 @@ final class ReminderAction
 {
     public static function createAction(Model|ActionModel $action): ActionAction
     {
-        $defaultRecipients = $action->users()->pluck('users.id')->toArray();
+        $defaultRecipients = $action->users()->pluck('users.username')->toArray();
 
         return ActionAction::make('reminder')
             ->label('Houspiller')
@@ -35,7 +35,7 @@ final class ReminderAction
             ])
             ->action(function (array $data, ActionModel $action) {
                 $emails = User::query()
-                    ->whereIn('id', $data['recipients'])
+                    ->whereIn('username', $data['recipients'])
                     ->pluck('email')
                     ->unique()
                     ->values();

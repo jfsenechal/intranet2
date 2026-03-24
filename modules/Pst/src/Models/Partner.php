@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Models;
 
 use Database\Factories\PartnerFactory;

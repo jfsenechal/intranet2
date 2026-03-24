@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Filament\Resources\StrategicObjective\Pages;
 
 use AcMarche\Pst\Filament\Resources\StrategicObjective\StrategicObjectiveResource;
-use AcMarche\Pst\Repository\UserRepository;
+use AcMarche\Security\Repository\UserRepository;
 use Filament\Resources\Pages\CreateRecord;
 
 final class CreateStrategicObjective extends CreateRecord

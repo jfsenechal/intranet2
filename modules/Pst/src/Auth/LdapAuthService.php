@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Auth;
 
 use AcMarche\Pst\Ldap\User as UserLdap;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use LdapRecord\Container;
 
 final class LdapAuthService

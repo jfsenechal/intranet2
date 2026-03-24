@@ -12,9 +12,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class EmailRecipient extends Model
 {
-    protected $connection = 'maria-mailing-list';
     /** @use HasFactory<EmailRecipientFactory> */
     use HasFactory;
+
+    protected $connection = 'maria-mailing-list';
 
     /**
      * @return BelongsTo<Email, $this>

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security;
 
-//use AcMarche\Mileage\Console\Commands\MigrationCommand;
+// use AcMarche\Mileage\Console\Commands\MigrationCommand;
 use AcMarche\Security\Console\Commands\CreateUserCommand;
 use AcMarche\Security\Console\Commands\MigrationRoleCommand;
 use AcMarche\Security\Console\Commands\SyncUserCommand;
@@ -57,7 +57,7 @@ final class SecurityServiceProvider extends ServiceProvider
                 CreateUserCommand::class,
                 SyncUserCommand::class,
                 MigrationRoleCommand::class,
-         //       MigrationCommand::class,
+                //       MigrationCommand::class,
             ]);
         }
 

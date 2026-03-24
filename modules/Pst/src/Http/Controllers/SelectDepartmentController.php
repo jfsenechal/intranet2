@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Http\Controllers;
 
-use AcMarche\Pst\Repository\UserRepository;
+use AcMarche\Security\Repository\UserRepository;
 use Illuminate\Http\RedirectResponse;
 
 final class SelectDepartmentController extends Controller

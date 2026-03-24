@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Ldap;
 
 use AcMarche\Pst\Enums\DepartmentEnum;
 use AcMarche\Pst\Ldap\User as UserLdap;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use Exception;
 use Illuminate\Support\Str;
 

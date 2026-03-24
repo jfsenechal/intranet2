@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Pst\Console\Commands;
 
 use AcMarche\Pst\Ldap\User as UserLdap;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Command\Command as SfCommand;
 

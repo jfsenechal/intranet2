@@ -30,13 +30,13 @@ final class AppServiceProvider extends ServiceProvider
     {
         $this->configureTable();
         $this->translatableComponents();
-        if (!app()->environment('production')) {
+        if (! app()->environment('production')) {
             Mail::alwaysTo('jf@marche.be');
         }
         $this->configureRichEditor();
         FilamentView::registerRenderHook(
             PanelsRenderHook::AUTH_LOGIN_FORM_BEFORE,
-            fn(): View => view('filament.login_form'),
+            fn (): View => view('filament.login_form'),
         );
     }
 

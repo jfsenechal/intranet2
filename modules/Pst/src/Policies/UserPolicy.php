@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Policies;
 
 use AcMarche\Pst\Enums\RoleEnum;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 
 final class UserPolicy
 {

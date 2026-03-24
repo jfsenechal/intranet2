@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Models\Scopes;
 
-use AcMarche\Pst\Repository\UserRepository;
+use AcMarche\Security\Repository\UserRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;

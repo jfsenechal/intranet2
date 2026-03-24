@@ -9,7 +9,6 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -40,7 +39,7 @@ final class MailingListPanelProvider extends PanelProvider
                 'primary' => Color::Blue,
             ])
             ->viteTheme('resources/css/filament/admin/theme.css')
-            ->discoverResources(                in: $path.'Filament/Resources',                for: 'AcMarche\\MailingList\\Filament\\Resources'            )
+            ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\MailingList\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\MailingList\\Filament\\Pages')
             ->pages([
 

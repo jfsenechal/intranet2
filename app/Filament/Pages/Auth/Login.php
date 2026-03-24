@@ -28,6 +28,7 @@ final class Login extends BasePage
             ]);
         }
     }
+
     public function getHeading(): string|Htmlable|null
     {
         return 'Bienvenue sur l\'intranet';

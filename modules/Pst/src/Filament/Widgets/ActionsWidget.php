@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Filament\Widgets;
 
 use AcMarche\Pst\Enums\ActionStateEnum;
 use AcMarche\Pst\Models\Action;
-use AcMarche\Pst\Repository\UserRepository;
+use AcMarche\Security\Repository\UserRepository;
 use DB;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;

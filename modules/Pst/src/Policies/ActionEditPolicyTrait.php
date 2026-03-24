@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Policies;
 
 use AcMarche\Pst\Enums\RoleEnum;
@@ -16,13 +18,13 @@ trait ActionEditPolicyTrait
         }
 
         // Check if user is directly linked to the action
-        if ($action->users()->where('user_id', $user->id)->exists()) {
+        if ($action->users()->where('action_user.username', $user->username)->exists()) {
             return true;
         }
 
         return $action->leaderServices()
             ->whereHas('users', function ($query) use ($user) {
-                $query->where('user_id', $user->id);
+                $query->where('service_user.username', $user->username);
             })
             ->exists();
     }

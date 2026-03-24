@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Filament\Exports;
 
 use AcMarche\Pst\Models\Odd;
 use AcMarche\Pst\Models\Partner;
 use AcMarche\Pst\Models\Service;
 use AcMarche\Pst\Models\StrategicObjective;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use Filament\Actions\Exports\Models\Export;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;

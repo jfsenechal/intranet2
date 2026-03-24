@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Http\Controllers\Api;
 
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
 final class UserController

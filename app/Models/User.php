@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use AcMarche\Courrier\Enums\DepartmentCourrierEnum;
-use AcMarche\Courrier\Enums\RolesEnum;
+use AcMarche\Pst\Models\UserIntranet;
+use AcMarche\Pst\Models\UserPstTrait;
 use AcMarche\Security\Database\Factories\UserFactory;
 use AcMarche\Security\Ldap\UserLdap;
 use AcMarche\Security\Models\Module;
@@ -13,6 +13,7 @@ use AcMarche\Security\Models\Role;
 use Filament\Auth\MultiFactor\App\Contracts\HasAppAuthentication;
 use Filament\Auth\MultiFactor\App\Contracts\HasAppAuthenticationRecovery;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,11 +22,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Lab404\Impersonate\Models\Impersonate;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Searchable;
 
 #[UseFactory(UserFactory::class)]
-final class User extends Authenticatable implements FilamentUser, HasAppAuthentication, HasAppAuthenticationRecovery
+final class User extends Authenticatable implements FilamentUser, HasAppAuthentication, HasAppAuthenticationRecovery, HasName
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Impersonate, Notifiable, Searchable;
+    use UserPstTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -41,6 +46,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         'mobile',
         'username',
         'uuid',
+        'departments',
         'mandatory',
         'color_primary',
         'color_secondary',
@@ -61,7 +67,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         'app_authentication_recovery_codes',
     ];
 
-    public static function generateDataFromLdap(UserLdap $userLdap): array
+    public static function generateDataFromLdap(UserLdap $userLdap, string $username): array
     {
         $email = $userLdap->getFirstAttribute('mail');
 
@@ -71,10 +77,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
                default => DepartmentEnum::VILLE->value,
            };*/
 
-        $fullName = $userLdap->getFirstAttribute('givenname').' '.$userLdap->getFirstAttribute('sn');
-
         return [
-            'name' => $fullName,
             'first_name' => $userLdap->getFirstAttribute('givenname'),
             'last_name' => $userLdap->getFirstAttribute('sn'),
             'email' => $email,
@@ -82,7 +85,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
             'mobile' => $userLdap->getFirstAttribute('mobile'),
             'phone' => $userLdap->getFirstAttribute('telephoneNumber'),
             'extension' => $userLdap->getFirstAttribute('ipPhone'),
-            'uuid' => Str::uuid(),
+            'uuid' => self::getUuidFromIntranetDb($username),
         ];
     }
 
@@ -96,6 +99,29 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
             ->take(2)
             ->map(fn ($word) => Str::substr($word, 0, 1))
             ->implode('');
+    }
+
+    /**
+     * Get the name of the index associated with the model.
+     */
+    public function searchableAs(): string
+    {
+        return 'users_index';
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array<string, mixed>
+     */
+    public function toSearchableArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'username' => $this->username,
+        ];
     }
 
     public function fullName(): string
@@ -179,7 +205,8 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
             return $this->is_administrator;
         }
 
-        return true;//todo check !
+        return true; // todo check !
+
         return $this->hasModule($panel->getId());
     }
 
@@ -188,30 +215,29 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         return $this->is_administrator;
     }
 
-  /**  public function courrierDepartment(): ?DepartmentCourrierEnum
-    {
-        return match (true) {
-            $this->hasOneOfThisRoles([
-                RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN->value,
-                RolesEnum::ROLE_INDICATEUR_VILLE_INDEX->value,
-                RolesEnum::ROLE_INDICATEUR_VILLE_READ->value,
-            ]) => DepartmentCourrierEnum::VILLE,
-            $this->hasOneOfThisRoles([
-                RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN->value,
-                RolesEnum::ROLE_INDICATEUR_CPAS->value,
-                RolesEnum::ROLE_INDICATEUR_CPAS_INDEX->value,
-                RolesEnum::ROLE_INDICATEUR_CPAS_READ->value,
-            ]) => DepartmentCourrierEnum::CPAS,
-            $this->hasOneOfThisRoles([
-                RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_ADMIN->value,
-                RolesEnum::ROLE_INDICATEUR_BOURGMESTRE->value,
-                RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_INDEX->value,
-                RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_READ->value,
-            ]) => DepartmentCourrierEnum::BGM,
-            default => null,
-        };
-    }*/
-
+    /**  public function courrierDepartment(): ?DepartmentCourrierEnum
+     * {
+     * return match (true) {
+     * $this->hasOneOfThisRoles([
+     * RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN->value,
+     * RolesEnum::ROLE_INDICATEUR_VILLE_INDEX->value,
+     * RolesEnum::ROLE_INDICATEUR_VILLE_READ->value,
+     * ]) => DepartmentCourrierEnum::VILLE,
+     * $this->hasOneOfThisRoles([
+     * RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN->value,
+     * RolesEnum::ROLE_INDICATEUR_CPAS->value,
+     * RolesEnum::ROLE_INDICATEUR_CPAS_INDEX->value,
+     * RolesEnum::ROLE_INDICATEUR_CPAS_READ->value,
+     * ]) => DepartmentCourrierEnum::CPAS,
+     * $this->hasOneOfThisRoles([
+     * RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_ADMIN->value,
+     * RolesEnum::ROLE_INDICATEUR_BOURGMESTRE->value,
+     * RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_INDEX->value,
+     * RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_READ->value,
+     * ]) => DepartmentCourrierEnum::BGM,
+     * default => null,
+     * };
+     * }*/
     public function getAppAuthenticationSecret(): ?string
     {
         return $this->app_authentication_secret;
@@ -242,6 +268,11 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         $this->save();
     }
 
+    public function getFilamentName(): string
+    {
+        return $this->fullName();
+    }
+
     protected static function boot(): void
     {
         parent::boot();
@@ -270,5 +301,16 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
             'roles' => 'array',
             'is_administrator' => 'boolean',
         ];
+    }
+
+    private static function getUuidFromIntranetDb(string $username): ?string
+    {
+        $user = UserIntranet::query()->where('username', $username)->first();
+
+        if ($user) {
+            return $user->uuid;
+        }
+
+        return null;
     }
 }

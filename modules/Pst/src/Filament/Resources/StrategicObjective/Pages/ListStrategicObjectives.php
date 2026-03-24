@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Filament\Resources\StrategicObjective\Pages;
 
 use AcMarche\Pst\Filament\Exports\StrategicObjectiveExport;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\StrategicObjectiveResource;
-use AcMarche\Pst\Repository\UserRepository;
+use AcMarche\Security\Repository\UserRepository;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;

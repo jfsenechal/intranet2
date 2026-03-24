@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Filament\Resources\Odd\Pages;
 
 use AcMarche\Pst\Filament\Resources\Odd\OddResource;

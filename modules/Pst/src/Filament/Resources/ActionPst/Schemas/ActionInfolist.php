@@ -13,7 +13,7 @@ use AcMarche\Pst\Filament\Components\ProgressEntry;
 use AcMarche\Pst\Models\Odd;
 use AcMarche\Pst\Models\Partner;
 use AcMarche\Pst\Models\Service;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use DateTimeImmutable;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;

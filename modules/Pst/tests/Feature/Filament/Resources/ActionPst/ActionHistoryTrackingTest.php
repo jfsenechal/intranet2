@@ -47,7 +47,7 @@ final class ActionHistoryTrackingTest extends TestCase
 
         Livewire::test(EditAction::class, ['record' => $this->action->id])
             ->fillForm([
-                'action_users' => [$newUser->id],
+                'action_users' => [$newUser->username],
             ])
             ->call('save')
             ->assertNotified();
@@ -157,7 +157,7 @@ final class ActionHistoryTrackingTest extends TestCase
 
         Livewire::test(EditAction::class, ['record' => $this->action->id])
             ->fillForm([
-                'action_mandatory' => [$mandataire->id],
+                'action_mandatory' => [$mandataire->username],
             ])
             ->call('save')
             ->assertNotified();
@@ -180,7 +180,7 @@ final class ActionHistoryTrackingTest extends TestCase
 
         Livewire::test(EditAction::class, ['record' => $this->action->id])
             ->fillForm([
-                'action_users' => [$user->id],
+                'action_users' => [$user->username],
             ])
             ->call('save')
             ->assertNotified();

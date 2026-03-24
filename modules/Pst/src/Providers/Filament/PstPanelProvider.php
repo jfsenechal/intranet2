@@ -6,8 +6,7 @@ namespace AcMarche\Pst\Providers\Filament;
 
 use AcMarche\App\Traits\PluginTrait;
 use AcMarche\Pst\Enums\DepartmentEnum;
-use AcMarche\Pst\Http\Middleware\FilamentPanelColorMiddleware;
-use AcMarche\Pst\Repository\UserRepository;
+use AcMarche\Security\Repository\UserRepository;
 use Filament\Actions\Action;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -57,7 +56,6 @@ final class PstPanelProvider extends PanelProvider
 
             ])
             ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\Pst\\Filament\\Widgets')
-
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
@@ -77,7 +75,6 @@ final class PstPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                FilamentPanelColorMiddleware::class,
             ])
             ->authMiddleware([
                 Authenticate::class,

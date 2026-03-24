@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Pages;
 
 use AcMarche\Pst\Events\ActionProcessed;
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
-use AcMarche\Pst\Repository\UserRepository;
+use AcMarche\Security\Repository\UserRepository;
 use Filament\Facades\Filament;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;

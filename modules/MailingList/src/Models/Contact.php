@@ -13,9 +13,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class Contact extends Model
 {
-    protected $connection = 'maria-mailing-list';
     /** @use HasFactory<ContactFactory> */
     use HasFactory;
+
+    protected $connection = 'maria-mailing-list';
 
     /**
      * @return BelongsTo<User, $this>

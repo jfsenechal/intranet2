@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Providers;
 
+use AcMarche\Pst\Console\Commands\FixCommand;
 use AcMarche\Pst\Console\Commands\MeiliCommand;
 use AcMarche\Pst\Console\Commands\SyncUserCommand;
 use AcMarche\Pst\Policies\RegisterPolicies;
@@ -32,6 +33,7 @@ final class PstServiceProvider extends ServiceProvider
             $this->commands([
                 MeiliCommand::class,
                 SyncUserCommand::class,
+                FixCommand::class,
             ]);
         } // Publish config
         $this->publishes([

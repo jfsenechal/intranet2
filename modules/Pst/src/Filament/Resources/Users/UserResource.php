@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace AcMarche\Pst\Filament\Resources\Users;
 
 use AcMarche\Pst\Enums\NavigationGroupEnum;
-use AcMarche\Pst\Enums\RoleEnum;
 use AcMarche\Pst\Filament\Resources\Users\Pages\EditUser;
 use AcMarche\Pst\Filament\Resources\Users\Pages\ListUsers;
 use AcMarche\Pst\Filament\Resources\Users\Schemas\UserForm;
 use AcMarche\Pst\Filament\Resources\Users\Tables\UsersTable;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use BackedEnum;
 use Filament\GlobalSearch\GlobalSearchResult;
 use Filament\Resources\Resource;
@@ -18,7 +17,6 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use UnitEnum;
 
 final class UserResource extends Resource

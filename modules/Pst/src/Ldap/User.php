@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Ldap;
 
 use LdapRecord\Models\Model;

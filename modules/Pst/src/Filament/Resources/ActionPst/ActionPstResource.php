@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Filament\Resources\ActionPst;
 
 use AcMarche\Pst\Filament\Resources\ActionPst\RelationManagers\FollowUpsRelationManager;

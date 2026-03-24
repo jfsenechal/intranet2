@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Http\Controllers;
 
 use AcMarche\Pst\Filament\Exports\PdfExport;
@@ -9,11 +11,12 @@ use Filament\Notifications\Notification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+
 use function Spatie\LaravelPdf\Support\pdf;
 
 final class PdfExportController extends Controller
 {
-    //todo try
+    // todo try
     public function exprotTiti(Action $action)
     {
         return pdf()

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Schemas;
 
 use AcMarche\Pst\Enums\ActionRoadmapEnum;
@@ -11,8 +13,8 @@ use AcMarche\Pst\Enums\DepartmentEnum;
 use AcMarche\Pst\Enums\RoleEnum;
 use AcMarche\Pst\Enums\YesOrNoEnum;
 use AcMarche\Pst\Models\OperationalObjective;
-use AcMarche\Pst\Models\User;
-use AcMarche\Pst\Repository\UserRepository;
+use AcMarche\Security\Repository\UserRepository;
+use App\Models\User;
 use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Schemas\Components\Fieldset;
@@ -92,7 +94,7 @@ final class ActionForm
                         ->orderBy('last_name')
                         ->orderBy('first_name')
                         ->get()
-                        ->mapWithKeys(fn ($user) => [$user->id => "{$user->last_name} {$user->first_name}"]))
+                        ->mapWithKeys(fn ($user) => [$user->username => "{$user->last_name} {$user->first_name}"]))
                     ->multiple()
                     ->searchable()
                     ->required(),

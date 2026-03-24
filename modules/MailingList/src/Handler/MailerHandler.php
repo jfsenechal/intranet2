@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\MailingList\Handler;
 
 use AcMarche\MailingList\Enums\EmailStatus;
@@ -11,7 +13,7 @@ use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Bus;
 
-class MailerHandler
+final class MailerHandler
 {
     public static function sendEmail(Email|Model $email): void
     {
@@ -39,7 +41,7 @@ class MailerHandler
             ->get();
 
         $jobs = $pendingRecipients->map(
-            fn($recipient) => new SendEmailJob($email, $recipient)
+            fn ($recipient) => new SendEmailJob($email, $recipient)
         )->all();
 
         $batch = Bus::batch($jobs)
@@ -72,14 +74,14 @@ class MailerHandler
 
         $contacts = collect();
 
-        if (!empty($addressBookIds)) {
+        if (! empty($addressBookIds)) {
             $addressBookContacts = Contact::query()
-                ->whereHas('addressBooks', fn($query) => $query->whereIn('address_books.id', $addressBookIds))
+                ->whereHas('addressBooks', fn ($query) => $query->whereIn('address_books.id', $addressBookIds))
                 ->get();
             $contacts = $contacts->merge($addressBookContacts);
         }
 
-        if (!empty($contactIds)) {
+        if (! empty($contactIds)) {
             $individualContacts = Contact::query()
                 ->whereIn('id', $contactIds)
                 ->get();

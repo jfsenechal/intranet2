@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Filament\Resources\Partner\Schemas;
 
 use AcMarche\Pst\Models\Partner;

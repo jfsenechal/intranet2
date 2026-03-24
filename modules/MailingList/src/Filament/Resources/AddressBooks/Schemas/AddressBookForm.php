@@ -22,11 +22,11 @@ final class AddressBookForm
                     ->maxLength(255)
                     ->required(),
                 Hidden::make('user_id')
-                    ->default(fn(): ?int => auth()->id()),
+                    ->default(fn (): ?int => auth()->id()),
                 Select::make('contacts')
                     ->relationship('contacts', 'email')
                     ->getOptionLabelFromRecordUsing(
-                        fn(Contact $record): string => "{$record->first_name} {$record->last_name} ({$record->email})"
+                        fn (Contact $record): string => "{$record->first_name} {$record->last_name} ({$record->email})"
                     )
                     ->multiple()
                     ->preload()
@@ -57,7 +57,7 @@ final class AddressBookForm
                     }),
                 Select::make('sharedWithUsers')
                     ->relationship('sharedWithUsers', 'name')
-                    ->getOptionLabelFromRecordUsing(fn(User $record): string => "{$record->name} ({$record->email})")
+                    ->getOptionLabelFromRecordUsing(fn (User $record): string => "{$record->name} ({$record->email})")
                     ->multiple()
                     ->preload()
                     ->searchable(),

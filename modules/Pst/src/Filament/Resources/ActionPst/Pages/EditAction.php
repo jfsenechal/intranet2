@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Pages;
 
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Pst\Models\Service;
 use AcMarche\Pst\Models\TracksHistoryTrait;
-use AcMarche\Pst\Models\User;
+use App\Models\User;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
@@ -49,10 +51,10 @@ final class EditAction extends EditRecord
         $record = $this->getRecord();
 
         $this->oldRelationshipIds = [
-            'users' => $record->users()->pluck('users.id')->toArray(),
+            'users' => $record->users()->pluck('users.username')->toArray(),
             'leaderServices' => $record->leaderServices()->pluck('services.id')->toArray(),
             'partnerServices' => $record->partnerServices()->pluck('services.id')->toArray(),
-            'mandataries' => $record->mandataries()->pluck('users.id')->toArray(),
+            'mandataries' => $record->mandataries()->pluck('users.username')->toArray(),
         ];
     }
 
@@ -63,9 +65,9 @@ final class EditAction extends EditRecord
         $relationships = [
             'users' => [
                 'old' => $this->oldRelationshipIds['users'],
-                'new' => $record->users()->pluck('users.id')->toArray(),
+                'new' => $record->users()->pluck('users.username')->toArray(),
                 'label' => 'agent pilote',
-                'getDisplayName' => fn (int $id): string => $this->getUserDisplayName($id),
+                'getDisplayName' => fn (string $username): string => $this->getUserDisplayName($username),
             ],
             'leaderServices' => [
                 'old' => $this->oldRelationshipIds['leaderServices'],
@@ -81,20 +83,20 @@ final class EditAction extends EditRecord
             ],
             'mandataries' => [
                 'old' => $this->oldRelationshipIds['mandataries'],
-                'new' => $record->mandataries()->pluck('users.id')->toArray(),
+                'new' => $record->mandataries()->pluck('users.username')->toArray(),
                 'label' => 'mandataire',
-                'getDisplayName' => fn (int $id): string => $this->getUserDisplayName($id),
+                'getDisplayName' => fn (string $username): string => $this->getUserDisplayName($username),
             ],
         ];
 
         $this->trackRelationships($record, $relationships);
     }
 
-    private function getUserDisplayName(int $id): string
+    private function getUserDisplayName(string $username): string
     {
-        $user = User::find($id);
+        $user = User::query()->where('username', $username)->first();
 
-        return $user ? "{$user->first_name} {$user->last_name}" : "ID: {$id}";
+        return $user ? "{$user->first_name} {$user->last_name}" : $username;
     }
 
     private function getServiceDisplayName(int $id): string
