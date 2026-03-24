@@ -1,0 +1,21 @@
+{
+    "agents": [
+        "claude_code"
+    ],
+    "guidelines": true,
+    "herd_mcp": false,
+    "mcp": true,
+    "nightwatch_mcp": true,
+    "packages": [
+        "filament/filament",
+        "filament/blueprint",
+        "spatie/laravel-pdf"
+    ],
+    "sail": false,
+    "skills": [
+        "scout-development",
+        "pest-testing",
+        "tailwindcss-development",
+        "laravel-pdf"
+    ]
+}

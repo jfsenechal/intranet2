@@ -1,0 +1,77 @@
+<?php
+
+namespace AcMarche\Pst\Policies;
+
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Models\Action;
+use AcMarche\Pst\Models\User;
+
+// https://laravel.com/docs/12.x/authorization#creating-policies
+final class ActionPolicy
+{
+    use ActionEditPolicyTrait;
+
+    /**
+     * Determine whether the user can view any models.
+     */
+    public function viewAny(User $user): bool
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     */
+    public function view(User $user, Action $action): bool
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     */
+    public function create(User $user): bool
+    {
+        if ($user->hasOneOfThisRoles([RoleEnum::MANDATAIRE->value])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     */
+    public function update(User $user, Action $action): bool
+    {
+        return self::isUserLinkedToAction($user, $action);
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete(User $user, Action $action): bool
+    {
+        return self::isUserLinkedToAction($user, $action);
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     */
+    public function restore(User $user, Action $action): bool
+    {
+        if ($user->hasOneOfThisRoles([RoleEnum::ADMIN->value])) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete(User $user, Action $action): bool
+    {
+        return false;
+    }
+}

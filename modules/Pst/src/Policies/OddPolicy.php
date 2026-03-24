@@ -1,0 +1,75 @@
+<?php
+
+namespace AcMarche\Pst\Policies;
+
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Models\Odd;
+use AcMarche\Pst\Models\User;
+
+final class OddPolicy
+{
+    /**
+     * Determine whether the user can view any models.
+     */
+    public function viewAny(User $user): bool
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     */
+    public function view(User $user, Odd $odd): bool
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     */
+    public function create(User $user): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     */
+    public function update(User $user, Odd $odd): bool
+    {
+        return $this->hasRoles($user);
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete(User $user, Odd $odd): bool
+    {
+        return $this->hasRoles($user);
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     */
+    public function restore(User $user, Odd $odd): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete(User $user, Odd $odd): bool
+    {
+        return false;
+    }
+
+    private function hasRoles(User $user): bool
+    {
+        if ($user->hasOneOfThisRoles([RoleEnum::MANDATAIRE->value])) {
+            return false;
+        }
+
+        return $user->hasOneOfThisRoles([RoleEnum::ADMIN->value]);
+    }
+}

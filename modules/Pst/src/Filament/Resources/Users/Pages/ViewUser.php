@@ -1,0 +1,41 @@
+<?php
+
+namespace AcMarche\Pst\Filament\Resources\Users\Pages;
+
+use AcMarche\Pst\Filament\Resources\Users\Schemas\UserInfolist;
+use AcMarche\Pst\Filament\Resources\Users\UserResource;
+use Filament\Actions;
+use Filament\Resources\Pages\ViewRecord;
+use Filament\Schemas\Schema;
+use STS\FilamentImpersonate\Actions\Impersonate;
+
+final class ViewUser extends ViewRecord
+{
+    protected static string $resource = UserResource::class;
+
+    public function getTitle(): string
+    {
+        return $this->record->fullName();
+    }
+
+    public function infolist(Schema $schema): Schema
+    {
+        return UserInfolist::configure($schema);
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\EditAction::make()
+                ->icon('tabler-edit'),
+            Impersonate::make(),
+        ];
+    }
+
+    protected function getAllRelationManagers(): array
+    {
+        $relations = $this->getResource()::getRelations();
+
+        return $relations;
+    }
+}

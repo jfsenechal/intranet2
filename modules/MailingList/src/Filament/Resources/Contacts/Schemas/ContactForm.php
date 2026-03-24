@@ -1,0 +1,43 @@
+<?php
+
+declare(strict_types=1);
+
+namespace AcMarche\MailingList\Filament\Resources\Contacts\Schemas;
+
+use Filament\Forms\Components\CheckboxList;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
+
+final class ContactForm
+{
+    public static function configure(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                TextInput::make('last_name')
+                    ->maxLength(255)
+                    ->required(),
+                TextInput::make('first_name')
+                    ->maxLength(255)
+                    ->required(),
+                TextInput::make('email')
+                    ->email()
+                    ->unique(ignoreRecord: true)
+                    ->maxLength(255)
+                    ->required(),
+                TextInput::make('phone')
+                    ->tel()
+                    ->maxLength(255),
+                Textarea::make('description')
+                    ->rows(3)
+                    ->maxLength(65535),
+                Hidden::make('user_id')
+                    ->default(fn (): ?int => auth()->id()),
+                CheckboxList::make('addressBooks')
+                    ->relationship('addressBooks', 'name')
+                    ->searchable(),
+            ]);
+    }
+}

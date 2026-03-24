@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+namespace AcMarche\MailingList\Filament\Resources\Senders\Pages;
+
+use AcMarche\MailingList\Filament\Resources\Senders\SenderResource;
+use Filament\Resources\Pages\CreateRecord;
+
+final class CreateSender extends CreateRecord
+{
+    protected static string $resource = SenderResource::class;
+}
