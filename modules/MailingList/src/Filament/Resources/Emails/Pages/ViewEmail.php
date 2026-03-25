@@ -8,11 +8,10 @@ use AcMarche\MailingList\Enums\EmailStatus;
 use AcMarche\MailingList\Filament\Actions\PreviewAction;
 use AcMarche\MailingList\Filament\Actions\SendAction;
 use AcMarche\MailingList\Filament\Resources\Emails\EmailResource;
+use AcMarche\MailingList\Filament\Resources\Emails\Schemas\EmailInfolist;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
-use Filament\Infolists\Components\RepeatableEntry;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -28,36 +27,7 @@ final class ViewEmail extends ViewRecord
 
     public function infolist(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                TextEntry::make('sender.name')
-                    ->label('Expéditeur'),
-                TextEntry::make('sender.email')
-                    ->label('Expéditeur Email'),
-                TextEntry::make('status')
-                    ->badge()
-                    ->color(fn (EmailStatus $state): string => match ($state) {
-                        EmailStatus::Draft => 'gray',
-                        EmailStatus::Sending => 'warning',
-                        EmailStatus::Sent => 'success',
-                        EmailStatus::Failed => 'danger',
-                    }),
-                TextEntry::make('total_count')
-                    ->label('Recipients'),
-                TextEntry::make('body')
-                    ->html()
-                    ->prose()
-                    ->columnSpanFull(),
-                RepeatableEntry::make('recipients')
-                    ->schema([
-                        TextEntry::make('name'),
-                        TextEntry::make('email_address'),
-                        TextEntry::make('status')
-                            ->badge(),
-                    ])
-                    ->columns(3)
-                    ->columnSpanFull(),
-            ]);
+        return EmailInfolist::configure($schema);
     }
 
     protected function getHeaderActions(): array

@@ -21,14 +21,15 @@ final class AddressBookForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label('Nom')
                     ->maxLength(255)
                     ->required(),
                 Hidden::make('username')
-                    ->default(fn (): ?string => auth()->user()?->username),
+                    ->default(fn(): ?string => auth()->user()?->username),
                 Select::make('contacts')
                     ->relationship('contacts', 'email')
                     ->getOptionLabelFromRecordUsing(
-                        fn (Contact $record): string => "{$record->first_name} {$record->last_name} ({$record->email})"
+                        fn(Contact $record): string => "{$record->first_name} {$record->last_name} ({$record->email})"
                     )
                     ->multiple()
                     ->preload()
@@ -36,17 +37,20 @@ final class AddressBookForm
                     ->createOptionForm([
                         Grid::make(2)->schema([
                             TextInput::make('first_name')
+                                ->label('Prénom')
                                 ->maxLength(255)
-                                ->required(),
+                               ,
                             TextInput::make('last_name')
+                                ->label('Nom')
                                 ->maxLength(255)
-                                ->required(),
+                                ,
                             TextInput::make('email')
                                 ->email()
                                 ->unique('contacts', 'email')
                                 ->maxLength(255)
                                 ->required(),
                             TextInput::make('phone')
+                                ->label('Téléphone')
                                 ->tel()
                                 ->maxLength(255),
                         ]),
@@ -59,9 +63,9 @@ final class AddressBookForm
                     }),
                 Select::make('sharedWithUsers')
                     ->options(
-                        fn (): array => User::query()
+                        fn(): array => User::query()
                             ->get()
-                            ->mapWithKeys(fn (User $user): array => [
+                            ->mapWithKeys(fn(User $user): array => [
                                 $user->username => "{$user->name} ({$user->email})",
                             ])
                             ->all()
@@ -90,7 +94,7 @@ final class AddressBookForm
                             ->where('address_book_id', $record->id)
                             ->pluck('username');
 
-                        $usernames->diff($existing)->each(fn (string $username) => AddressBookShare::query()->create([
+                        $usernames->diff($existing)->each(fn(string $username) => AddressBookShare::query()->create([
                             'address_book_id' => $record->id,
                             'username' => $username,
                             'permission' => 'read',

@@ -17,24 +17,27 @@ final class ContactForm
         return $schema
             ->components([
                 TextInput::make('last_name')
+                    ->label('Nom')
                     ->maxLength(255)
-                    ->required(),
+                   ,
                 TextInput::make('first_name')
+                    ->label('Prénom')
                     ->maxLength(255)
-                    ->required(),
+                   ,
                 TextInput::make('email')
                     ->email()
                     ->unique(ignoreRecord: true)
                     ->maxLength(255)
                     ->required(),
                 TextInput::make('phone')
+                    ->label('Téléphone')
                     ->tel()
                     ->maxLength(255),
                 Textarea::make('description')
                     ->rows(3)
                     ->maxLength(65535),
                 Hidden::make('username')
-                    ->default(fn (): ?string => auth()->user()?->username),
+                    ->default(fn(): ?string => auth()->user()?->username),
                 CheckboxList::make('addressBooks')
                     ->relationship('addressBooks', 'name')
                     ->searchable(),

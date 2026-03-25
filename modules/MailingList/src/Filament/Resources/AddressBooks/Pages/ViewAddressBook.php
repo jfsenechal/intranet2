@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace AcMarche\MailingList\Filament\Resources\AddressBooks\Pages;
 
 use AcMarche\MailingList\Filament\Resources\AddressBooks\AddressBookResource;
+use AcMarche\MailingList\Models\AddressBookShare;
+use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Infolists\Components\RepeatableEntry;
@@ -35,8 +37,17 @@ final class ViewAddressBook extends ViewRecord
                     ])
                     ->columns(4)
                     ->columnSpanFull(),
-                RepeatableEntry::make('sharedWithUsers')
+                RepeatableEntry::make('sharedUsers')
                     ->label('Partagé avec')
+                    ->state(function () {
+                        $usernames = AddressBookShare::query()
+                            ->where('address_book_id', $this->record->id)
+                            ->pluck('username');
+
+                        return User::query()
+                            ->whereIn('username', $usernames)
+                            ->get();
+                    })
                     ->schema([
                         TextEntry::make('name'),
                         TextEntry::make('email'),
