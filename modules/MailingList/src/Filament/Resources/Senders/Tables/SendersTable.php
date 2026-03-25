@@ -23,9 +23,6 @@ final class SendersTable
                 TextColumn::make('email')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('user.name')
-                    ->label('Owner')
-                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

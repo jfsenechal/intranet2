@@ -23,6 +23,12 @@ final class AddressBookResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookOpen;
 
+    protected static ?string $navigationLabel = 'Carnets d\'adresses';
+
+    protected static ?string $modelLabel = 'carnet d\'adresses';
+
+    protected static ?string $pluralModelLabel = 'carnets d\'adresses';
+
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getGloballySearchableAttributes(): array

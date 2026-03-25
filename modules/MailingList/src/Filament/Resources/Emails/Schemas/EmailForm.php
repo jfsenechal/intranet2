@@ -38,7 +38,7 @@ final class EmailForm
                 FileUpload::make('attachments')
                     ->multiple()
                     ->disk('public')
-                    ->directory('email-attachments')
+                    ->directory('mailing-list/email-attachments')
                     ->visibility('public')
                     ->columnSpanFull(),
                 Select::make('address_book_ids')

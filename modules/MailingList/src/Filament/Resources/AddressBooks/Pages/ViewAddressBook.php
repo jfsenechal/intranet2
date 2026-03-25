@@ -17,22 +17,26 @@ final class ViewAddressBook extends ViewRecord
 {
     protected static string $resource = AddressBookResource::class;
 
+    public function getTitle(): string
+    {
+        return $this->record->name;
+    }
+
     public function infolist(Schema $schema): Schema
     {
         return $schema
             ->components([
-                TextEntry::make('name'),
                 RepeatableEntry::make('contacts')
                     ->schema([
-                        TextEntry::make('first_name'),
-                        TextEntry::make('last_name'),
+                        TextEntry::make('first_name')->label('Prénom'),
+                        TextEntry::make('last_name')->label('Nom'),
                         TextEntry::make('email'),
-                        TextEntry::make('phone'),
+                        TextEntry::make('phone')->label('Téléphone'),
                     ])
                     ->columns(4)
                     ->columnSpanFull(),
                 RepeatableEntry::make('sharedWithUsers')
-                    ->label('Shared With')
+                    ->label('Partagé avec')
                     ->schema([
                         TextEntry::make('name'),
                         TextEntry::make('email'),

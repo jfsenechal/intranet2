@@ -22,6 +22,12 @@ final class SenderResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPaperAirplane;
 
+    protected static ?string $navigationLabel = 'Expediteurs';
+
+    protected static ?string $modelLabel = 'expediteur';
+
+    protected static ?string $pluralModelLabel = 'expediteurs';
+
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getGloballySearchableAttributes(): array

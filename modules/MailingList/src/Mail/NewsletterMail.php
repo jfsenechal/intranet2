@@ -37,6 +37,10 @@ final class NewsletterMail extends Mailable
             with: [
                 'body' => $this->email->body,
                 'recipientName' => $this->recipientName,
+                'footer' => $this->email->sender->footer,
+                'logoUrl' => $this->email->sender->logo
+                    ? asset('storage/'.$this->email->sender->logo)
+                    : null,
             ],
         );
     }

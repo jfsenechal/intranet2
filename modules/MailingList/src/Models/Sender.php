@@ -23,6 +23,8 @@ final class Sender extends Model
         'username',
         'name',
         'email',
+        'footer',
+        'logo',
     ];
 
     /**

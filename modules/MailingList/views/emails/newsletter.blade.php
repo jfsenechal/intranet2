@@ -26,6 +26,14 @@
             max-width: 100%;
             height: auto;
         }
+        .email-logo {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .email-logo img {
+            max-width: 300px;
+            height: auto;
+        }
         .email-footer {
             margin-top: 32px;
             padding-top: 16px;
@@ -38,11 +46,20 @@
 </head>
 <body>
     <div class="email-container">
+        @if(!empty($logoUrl))
+            <div class="email-logo">
+                <img src="{{ $logoUrl }}" alt="Logo">
+            </div>
+        @endif
         <div class="email-body">
             {!! $body !!}
         </div>
         <div class="email-footer">
-            &copy; {{ date('Y') }} {{ config('app.name') }}
+            @if(!empty($footer))
+                {!! $footer !!}
+            @else
+                &copy; {{ date('Y') }} {{ config('app.name') }}
+            @endif
         </div>
     </div>
 </body>

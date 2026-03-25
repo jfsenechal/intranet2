@@ -22,6 +22,12 @@ final class ContactResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
+    protected static ?string $navigationLabel = 'Contacts';
+
+    protected static ?string $modelLabel = 'contact';
+
+    protected static ?string $pluralModelLabel = 'contacts';
+
     protected static ?string $recordTitleAttribute = 'email';
 
     public static function getGloballySearchableAttributes(): array
