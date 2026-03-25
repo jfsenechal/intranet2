@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace AcMarche\MailingList\Models;
 
 use AcMarche\MailingList\Database\Factories\SenderFactory;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[UseFactory(SenderFactory::class)]
 final class Sender extends Model
 {
     /** @use HasFactory<SenderFactory> */

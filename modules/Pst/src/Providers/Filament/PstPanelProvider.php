@@ -33,7 +33,7 @@ final class PstPanelProvider extends PanelProvider
 
     public function panel(Panel $panel): Panel
     {
-        $path = $this->getPluginBasePath().'/../';
+        $path = $this->getPluginBasePath().'/../../';
 
         return $panel
             ->id('pst')

@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Models;
 
+use AcMarche\MailingList\Database\Factories\AddressBookFactory;
 use AcMarche\MailingList\Database\Factories\ContactFactory;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[UseFactory(ContactFactory::class)]
 final class Contact extends Model
 {
     /** @use HasFactory<ContactFactory> */
