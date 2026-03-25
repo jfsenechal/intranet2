@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\MailingList\Filament\Resources\AddressBooks\Schemas;
 
 use AcMarche\MailingList\Models\AddressBook;
+use AcMarche\MailingList\Models\AddressBookShare;
 use AcMarche\MailingList\Models\Contact;
 use App\Models\User;
 use Filament\Forms\Components\Hidden;
@@ -69,11 +70,31 @@ final class AddressBookForm
                     ->searchable()
                     ->afterStateHydrated(function (Select $component, ?AddressBook $record): void {
                         if ($record) {
-                            $component->state($record->sharedWithUsers->pluck('username')->all());
+                            $component->state(
+                                AddressBookShare::query()
+                                    ->where('address_book_id', $record->id)
+                                    ->pluck('username')
+                                    ->all()
+                            );
                         }
                     })
                     ->saveRelationshipsUsing(function (AddressBook $record, ?array $state): void {
-                        $record->sharedWithUsers()->sync($state ?? []);
+                        $usernames = collect($state ?? []);
+
+                        AddressBookShare::query()
+                            ->where('address_book_id', $record->id)
+                            ->whereNotIn('username', $usernames)
+                            ->delete();
+
+                        $existing = AddressBookShare::query()
+                            ->where('address_book_id', $record->id)
+                            ->pluck('username');
+
+                        $usernames->diff($existing)->each(fn (string $username) => AddressBookShare::query()->create([
+                            'address_book_id' => $record->id,
+                            'username' => $username,
+                            'permission' => 'read',
+                        ]));
                     })
                     ->dehydrated(false),
             ]);

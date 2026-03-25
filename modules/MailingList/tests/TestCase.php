@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace AcMarche\MailingList\Tests;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
