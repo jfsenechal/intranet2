@@ -36,7 +36,6 @@ final class PstPanelProvider extends PanelProvider
         $path = $this->getPluginBasePath().'/../';
 
         return $panel
-            ->default()
             ->id('pst')
             ->path('pst')
             ->spa()
@@ -102,6 +101,6 @@ final class PstPanelProvider extends PanelProvider
 FilamentView::registerRenderHook(
     PanelsRenderHook::TOPBAR_START,
     function (): View {
-        return view('pst-view::filament.sidebar', ['department' => UserRepository::departmentSelected()]);
+        return view('pst-view::filament.topbar', ['department' => UserRepository::departmentSelected()]);
     }
 );

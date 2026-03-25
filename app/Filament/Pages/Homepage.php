@@ -66,7 +66,7 @@ final class Homepage extends Page
                         $module->url = $url;
                         $module->migrated = true;
                     } else {
-                        $module->migrated = false;
+                        $module->migrated = true;
                     }
                 } else {
                     $module->migrated = true;

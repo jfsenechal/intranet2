@@ -32,7 +32,7 @@
                             @endif
                                 {{-- Module Icon --}}
                                 @if ($module->icon)
-                                    <div class="flex-shrink-0">
+                                    <div class="shrink-0">
                                         <x-filament::icon
                                             icon="heroicon-o-arrow-top-right-on-square"
                                             class="h-6 w-6 text-gray-400"

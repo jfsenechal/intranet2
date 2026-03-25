@@ -29,15 +29,17 @@ final class MailingListPanelProvider extends PanelProvider
         $path = $this->getPluginBasePath().'/../';
 
         return $panel
-            ->default()
             ->id('mailing-list')
             ->path('mailing-list')
             ->spa()
             ->sidebarCollapsibleOnDesktop()
 //            ->topNavigation()
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::Slate,
+                'secondary' => Color::Pink,
             ])
+            ->unsavedChangesAlerts()
+            ->databaseNotifications()
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\MailingList\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\MailingList\\Filament\\Pages')
@@ -61,7 +63,7 @@ final class MailingListPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])->globalSearchFieldSuffix(fn (): ?string => match (Platform::detect()) {
+            ])->globalSearchFieldSuffix(fn(): ?string => match (Platform::detect()) {
                 Platform::Windows, Platform::Linux => 'CTRL + K',
                 Platform::Mac => '⌘ + K',
                 default => null,

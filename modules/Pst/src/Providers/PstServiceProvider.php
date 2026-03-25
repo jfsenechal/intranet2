@@ -29,7 +29,7 @@ final class PstServiceProvider extends ServiceProvider
         RegisterPolicies::register();
 
         // Load views
-        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'pst');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'pst-view');
 
         // Load routes
         if (file_exists(__DIR__.'/../../routes/web.php')) {
