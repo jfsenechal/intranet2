@@ -77,7 +77,8 @@ final class PstServiceProvider extends ServiceProvider
             PanelsRenderHook::TOPBAR_START,
             function (): View {
                 return view('pst-view::filament.topbar', ['department' => UserRepository::departmentSelected()]);
-            }
+            },
+            scopes: 'pst',
         );
     }
 

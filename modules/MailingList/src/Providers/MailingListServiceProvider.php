@@ -62,7 +62,8 @@ final class MailingListServiceProvider extends ServiceProvider
             PanelsRenderHook::TOPBAR_START,
             function (): View {
                 return view('mailing-list-view::filament.topbar');
-            }
+            },
+            scopes: 'mailing-list',
         );
     }
 

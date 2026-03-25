@@ -31,7 +31,7 @@ final class MailingListPanelProvider extends PanelProvider
 
         return $panel
             ->id('mailing-list')
-            ->path('newsletter')
+            ->path('mailing-list')
             ->spa()
             ->sidebarCollapsibleOnDesktop()
 //            ->topNavigation()
@@ -67,7 +67,7 @@ final class MailingListPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])->globalSearchFieldSuffix(fn(): ?string => match (Platform::detect()) {
+            ])->globalSearchFieldSuffix(fn (): ?string => match (Platform::detect()) {
                 Platform::Windows, Platform::Linux => 'CTRL + K',
                 Platform::Mac => '⌘ + K',
                 default => null,
