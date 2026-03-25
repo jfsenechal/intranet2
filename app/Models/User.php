@@ -201,7 +201,8 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
     }
 
     public function canAccessPanel(Panel $panel): bool
-    {return true;
+    {
+        return true;
         if ($panel->getId() === 'admin') {
             return $this->is_administrator;
         }

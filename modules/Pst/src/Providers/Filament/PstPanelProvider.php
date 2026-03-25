@@ -55,12 +55,9 @@ final class PstPanelProvider extends PanelProvider
 
             ])
             ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\Pst\\Filament\\Widgets')
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
 
             ])
