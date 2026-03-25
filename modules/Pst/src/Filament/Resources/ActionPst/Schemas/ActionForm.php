@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Schemas;
 
+use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Enums\ActionRoadmapEnum;
 use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Pst\Enums\ActionStateEnum;
 use AcMarche\Pst\Enums\ActionSynergyEnum;
 use AcMarche\Pst\Enums\ActionTypeEnum;
-use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Enums\RoleEnum;
 use AcMarche\Pst\Enums\YesOrNoEnum;
 use AcMarche\Pst\Models\OperationalObjective;

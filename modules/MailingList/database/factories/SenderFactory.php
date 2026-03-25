@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-
 namespace AcMarche\MailingList\Database\Factories;
+
 use AcMarche\MailingList\Models\Sender;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

@@ -31,7 +31,7 @@ use Laravel\Scout\Searchable;
 final class User extends Authenticatable implements FilamentUser, HasAppAuthentication, HasAppAuthenticationRecovery, HasName
 {
     use HasApiTokens, HasFactory, Impersonate, Notifiable, Searchable;
-    use UserPstTrait, UserMailingListTrait;
+    use UserMailingListTrait, UserPstTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -98,7 +98,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         return Str::of($this->name)
             ->explode(' ')
             ->take(2)
-            ->map(fn($word) => Str::substr($word, 0, 1))
+            ->map(fn ($word) => Str::substr($word, 0, 1))
             ->implode('');
     }
 
@@ -177,7 +177,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
 
     public function addRole(Role $role): void
     {
-        if (!$this->hasRole($role->name)) {
+        if (! $this->hasRole($role->name)) {
             $this->roles()->attach($role);
         }
     }
@@ -195,7 +195,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
 
     public function addModule(Module $module): void
     {
-        if (!$this->hasModule($module->name)) {
+        if (! $this->hasModule($module->name)) {
             $this->modules()->attach($module);
         }
     }
@@ -239,7 +239,6 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
      * default => null,
      * };
      * }*/
-
     public function getAppAuthenticationSecret(): ?string
     {
         return $this->app_authentication_secret;

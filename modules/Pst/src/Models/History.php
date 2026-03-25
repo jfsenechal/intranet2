@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
-use  AcMarche\Pst\Database\Factories\HistoryFactory;
+use AcMarche\Pst\Database\Factories\HistoryFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +19,7 @@ final class History extends Model
     protected $fillable = ['action_id', 'body', 'property', 'old_value', 'new_value', 'user_add'];
 
     protected $connection = 'maria-pst';
+
     /**
      * Get the action that owns the followup
      */

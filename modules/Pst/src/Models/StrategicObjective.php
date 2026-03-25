@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
-use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\App\Enums\DepartmentEnum;
+use AcMarche\Pst\Database\Factories\StrategicObjectiveFactory;
+use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Pst\Models\Scopes\HasDepartmentScope;
-use  AcMarche\Pst\Database\Factories\StrategicObjectiveFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +21,7 @@ final class StrategicObjective extends Model
     use HasDepartmentScope, HasFactory, Notifiable, Searchable;
 
     protected $connection = 'maria-pst';
+
     protected $fillable = [
         'name',
         'position',

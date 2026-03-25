@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
-use  AcMarche\Pst\Database\Factories\PartnerFactory;
+use AcMarche\Pst\Database\Factories\PartnerFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +18,7 @@ final class Partner extends Model
     use HasFactory, Notifiable, Searchable;
 
     protected $connection = 'maria-pst';
+
     protected $fillable = [
         'name',
         'phone',

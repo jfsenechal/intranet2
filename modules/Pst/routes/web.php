@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\PdfExportController;
-use App\Http\Controllers\SelectDepartmentController;
+use AcMarche\Pst\Http\Controllers\PdfExportController;
+use AcMarche\Pst\Http\Controllers\SelectDepartmentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/export-action/{action}', [PdfExportController::class, 'export'])->name('export.action');

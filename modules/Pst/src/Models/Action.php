@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
+use AcMarche\App\Enums\DepartmentEnum;
+use AcMarche\Pst\Database\Factories\ActionFactory;
 use AcMarche\Pst\Enums\ActionRoadmapEnum;
 use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Pst\Enums\ActionStateEnum;
 use AcMarche\Pst\Enums\ActionSynergyEnum;
 use AcMarche\Pst\Enums\ActionTypeEnum;
-use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Enums\RoleEnum;
 use AcMarche\Pst\Enums\YesOrNoEnum;
 use AcMarche\Pst\Models\Scopes\DepartmentScope;
 use AcMarche\Pst\Models\Scopes\HasDepartmentScope;
 use AcMarche\Pst\Observers\ActionObserver;
-use  AcMarche\Pst\Database\Factories\ActionFactory;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;

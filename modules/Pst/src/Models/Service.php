@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
-use  AcMarche\Pst\Database\Factories\ServiceFactory;
+use AcMarche\Pst\Database\Factories\ServiceFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,6 +20,7 @@ final class Service extends Model
     use Searchable;
 
     protected $connection = 'maria-pst';
+
     protected $fillable = [
         'name',
         'initials',

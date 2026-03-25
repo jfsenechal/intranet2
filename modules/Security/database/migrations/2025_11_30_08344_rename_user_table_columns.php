@@ -6,7 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     protected $connection = 'maria-security';
 
     /**
@@ -34,7 +35,7 @@ return new class extends Migration {
             } else {
                 $table->json('departments')->nullable(false);
             }
-            if (!Schema::connection('maria-security')->hasColumn('users', 'username')) {
+            if (! Schema::connection('maria-security')->hasColumn('users', 'username')) {
                 $table->string('username')->unique();
             }
 
@@ -50,25 +51,25 @@ return new class extends Migration {
                 $table->uuid('uuid')->nullable()->change();
             }
             $table->boolean('is_administrator')->default(false);
-            if (!Schema::connection('maria-security')->hasColumn('users', 'app_authentication_secret')) {
+            if (! Schema::connection('maria-security')->hasColumn('users', 'app_authentication_secret')) {
                 $table->text('app_authentication_secret')->nullable();
             }
-            if (!Schema::connection('maria-security')->hasColumn('users', 'app_authentication_recovery_codes')) {
+            if (! Schema::connection('maria-security')->hasColumn('users', 'app_authentication_recovery_codes')) {
                 $table->text('app_authentication_recovery_codes')->nullable();
             }
-            if (!Schema::connection('maria-security')->hasColumn('users', 'name')) {
+            if (! Schema::connection('maria-security')->hasColumn('users', 'name')) {
                 $table->string('name');
             }
-            if (!Schema::connection('maria-security')->hasColumn('users', 'email_verified_at')) {
+            if (! Schema::connection('maria-security')->hasColumn('users', 'email_verified_at')) {
                 $table->timestamp('email_verified_at')->nullable();
             }
-            if (!Schema::connection('maria-security')->hasColumn('users', 'remember_token')) {
+            if (! Schema::connection('maria-security')->hasColumn('users', 'remember_token')) {
                 $table->rememberToken();
             }
-            if (!Schema::connection('maria-security')->hasColumn('users', 'created_at')) {
+            if (! Schema::connection('maria-security')->hasColumn('users', 'created_at')) {
                 $table->timestamps();
             }
-            if (!Schema::connection('maria-security')->hasColumn('users', 'uuid')) {
+            if (! Schema::connection('maria-security')->hasColumn('users', 'uuid')) {
                 $table->uuid()->nullable();
             }
 

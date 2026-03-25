@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace  AcMarche\Pst\Database\Factories;
+namespace AcMarche\Pst\Database\Factories;
 
 use App\Models\Partner;
 use Illuminate\Database\Eloquent\Factories\Factory;

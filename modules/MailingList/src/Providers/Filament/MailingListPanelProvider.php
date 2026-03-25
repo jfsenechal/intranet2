@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\MailingList\Providers\Filament;
 
 use AcMarche\App\Traits\PluginTrait;
+use AcMarche\MailingList\Filament\Resources\AddressBooks\AddressBookResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -33,6 +34,7 @@ final class MailingListPanelProvider extends PanelProvider
             ->path('mailing-list')
             ->spa()
             ->sidebarCollapsibleOnDesktop()
+            ->homeUrl(fn (): string => AddressBookResource::getUrl())
 //            ->topNavigation()
             ->colors([
                 'primary' => Color::Slate,
@@ -63,7 +65,7 @@ final class MailingListPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])->globalSearchFieldSuffix(fn(): ?string => match (Platform::detect()) {
+            ])->globalSearchFieldSuffix(fn (): ?string => match (Platform::detect()) {
                 Platform::Windows, Platform::Linux => 'CTRL + K',
                 Platform::Mac => '⌘ + K',
                 default => null,
