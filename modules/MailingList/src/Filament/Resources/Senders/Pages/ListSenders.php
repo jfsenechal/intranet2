@@ -7,6 +7,7 @@ namespace AcMarche\MailingList\Filament\Resources\Senders\Pages;
 use AcMarche\MailingList\Filament\Resources\Senders\SenderResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Icons\Heroicon;
 
 final class ListSenders extends ListRecords
 {
@@ -15,7 +16,9 @@ final class ListSenders extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->label('Nouvel expediteur')
+                ->icon(Heroicon::Plus),
         ];
     }
 }

@@ -7,6 +7,7 @@ namespace AcMarche\MailingList\Filament\Resources\AddressBooks\Pages;
 use AcMarche\MailingList\Filament\Resources\AddressBooks\AddressBookResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Icons\Heroicon;
 
 final class EditAddressBook extends EditRecord
 {
@@ -15,7 +16,9 @@ final class EditAddressBook extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->label('Supprimer')
+                ->icon(Heroicon::Trash),
         ];
     }
 }

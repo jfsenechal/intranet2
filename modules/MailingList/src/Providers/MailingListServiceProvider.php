@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace AcMarche\MailingList\Providers;
 
 use AcMarche\Pst\Policies\RegisterPolicies;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\ServiceProvider;
 
 final class MailingListServiceProvider extends ServiceProvider
@@ -54,6 +57,13 @@ final class MailingListServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../../views' => resource_path('views/vendor/mailing-list'),
         ], 'mailing-list-views');
+
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::TOPBAR_START,
+            function (): View {
+                return view('mailing-list-view::filament.topbar');
+            }
+        );
     }
 
     /**

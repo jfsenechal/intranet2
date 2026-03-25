@@ -8,6 +8,7 @@ use AcMarche\MailingList\Enums\EmailStatus;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\ViewAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -47,11 +48,16 @@ final class EmailsTable
             ->defaultSort('created_at', 'desc')
             ->filters([])
             ->recordActions([
-                ViewAction::make()->visible(false),
+                ViewAction::make()
+                    ->label('Voir')
+                    ->icon(Heroicon::Eye)
+                    ->visible(false),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->label('Supprimer la selection')
+                        ->icon(Heroicon::Trash),
                 ]),
             ]);
     }

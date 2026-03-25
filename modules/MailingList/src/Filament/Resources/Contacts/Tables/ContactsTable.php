@@ -7,6 +7,7 @@ namespace AcMarche\MailingList\Filament\Resources\Contacts\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -48,11 +49,15 @@ final class ContactsTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->label('Modifier')
+                    ->icon(Heroicon::PencilSquare),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->label('Supprimer la selection')
+                        ->icon(Heroicon::Trash),
                 ]),
             ]);
     }

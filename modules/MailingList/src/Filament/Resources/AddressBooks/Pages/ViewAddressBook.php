@@ -11,6 +11,7 @@ use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 
 final class ViewAddressBook extends ViewRecord
 {
@@ -44,8 +45,12 @@ final class ViewAddressBook extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
-            DeleteAction::make(),
+            EditAction::make()
+                ->label('Modifier')
+                ->icon(Heroicon::PencilSquare),
+            DeleteAction::make()
+                ->label('Supprimer')
+                ->icon(Heroicon::Trash),
         ];
     }
 }

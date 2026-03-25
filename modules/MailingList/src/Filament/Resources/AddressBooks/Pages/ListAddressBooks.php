@@ -7,6 +7,7 @@ namespace AcMarche\MailingList\Filament\Resources\AddressBooks\Pages;
 use AcMarche\MailingList\Filament\Resources\AddressBooks\AddressBookResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Icons\Heroicon;
 
 final class ListAddressBooks extends ListRecords
 {
@@ -15,7 +16,9 @@ final class ListAddressBooks extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->label('Nouveau carnet')
+                ->icon(Heroicon::Plus),
         ];
     }
 }

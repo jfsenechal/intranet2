@@ -6,7 +6,6 @@ namespace AcMarche\Pst\Providers\Filament;
 
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\App\Traits\PluginTrait;
-use AcMarche\Security\Repository\UserRepository;
 use Filament\Actions\Action;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -17,9 +16,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Platform;
-use Filament\Support\Facades\FilamentView;
-use Filament\View\PanelsRenderHook;
-use Illuminate\Contracts\View\View;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -94,10 +90,3 @@ final class PstPanelProvider extends PanelProvider
             ]);
     }
 }
-
-FilamentView::registerRenderHook(
-    PanelsRenderHook::TOPBAR_START,
-    function (): View {
-        return view('pst-view::filament.topbar', ['department' => UserRepository::departmentSelected()]);
-    }
-);

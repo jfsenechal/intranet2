@@ -7,6 +7,7 @@ namespace AcMarche\MailingList\Filament\Resources\Contacts\Pages;
 use AcMarche\MailingList\Filament\Resources\Contacts\ContactResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Icons\Heroicon;
 
 final class EditContact extends EditRecord
 {
@@ -15,7 +16,9 @@ final class EditContact extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->label('Supprimer')
+                ->icon(Heroicon::Trash),
         ];
     }
 }

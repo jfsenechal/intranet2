@@ -7,6 +7,7 @@ namespace AcMarche\MailingList\Filament\Resources\Senders\Pages;
 use AcMarche\MailingList\Filament\Resources\Senders\SenderResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Icons\Heroicon;
 
 final class EditSender extends EditRecord
 {
@@ -15,7 +16,9 @@ final class EditSender extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->label('Supprimer')
+                ->icon(Heroicon::Trash),
         ];
     }
 }

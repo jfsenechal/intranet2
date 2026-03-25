@@ -14,6 +14,7 @@ use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 
 final class ViewEmail extends ViewRecord
 {
@@ -59,17 +60,17 @@ final class ViewEmail extends ViewRecord
     {
         return [
             Action::make('send')
-                ->label('Send Email')
-                ->icon('heroicon-o-paper-airplane')
+                ->label('Envoyer')
+                ->icon(Heroicon::PaperAirplane)
                 ->color('success')
                 ->requiresConfirmation()
-                ->modalHeading('Send Newsletter')
-                ->modalDescription(fn (): string => "This will send the email to {$this->record->total_count} recipients. Continue?")
+                ->modalHeading('Envoyer la newsletter')
+                ->modalDescription(fn (): string => "Cet e-mail sera envoyé à {$this->record->total_count} destinataires. Continuer ?")
                 ->visible(fn (): bool => $this->record->status === EmailStatus::Draft || $this->record->status === EmailStatus::Failed)
                 ->action(fn () => MailerHandler::sendEmail($this->record)),
             Action::make('progress')
-                ->label(fn (): string => "Sent: {$this->record->sent_count}/{$this->record->total_count}")
-                ->icon('heroicon-o-chart-bar')
+                ->label(fn (): string => "Envoyé : {$this->record->sent_count}/{$this->record->total_count}")
+                ->icon(Heroicon::ChartBar)
                 ->color(fn (): string => match ($this->record->status) {
                     EmailStatus::Sending => 'warning',
                     EmailStatus::Sent => 'success',
@@ -78,8 +79,12 @@ final class ViewEmail extends ViewRecord
                 })
                 ->disabled()
                 ->visible(fn (): bool => $this->record->status !== EmailStatus::Draft),
-            EditAction::make(),
-            DeleteAction::make(),
+            EditAction::make()
+                ->label('Modifier')
+                ->icon(Heroicon::PencilSquare),
+            DeleteAction::make()
+                ->label('Supprimer')
+                ->icon(Heroicon::Trash),
         ];
     }
 }
