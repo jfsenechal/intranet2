@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Models;
 
-use AcMarche\MailingList\Database\Factories\AddressBookFactory;
 use AcMarche\MailingList\Database\Factories\ContactFactory;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
@@ -21,12 +20,19 @@ final class Contact extends Model
     use HasFactory;
 
     protected $connection = 'maria-mailing-list';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
     protected $fillable = [
+        'username',
+        'last_name',
+        'first_name',
+        'email',
+        'description',
+        'phone',
     ];
 
     /**

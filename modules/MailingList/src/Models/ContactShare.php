@@ -12,6 +12,12 @@ final class ContactShare extends Model
 {
     protected $connection = 'maria-mailing-list';
 
+    protected $fillable = [
+        'contact_id',
+        'username',
+        'permission',
+    ];
+
     /**
      * @return BelongsTo<Contact, $this>
      */

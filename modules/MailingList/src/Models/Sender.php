@@ -20,7 +20,11 @@ final class Sender extends Model
     protected $connection = 'maria-mailing-list';
 
     protected $fillable = [
+        'username',
+        'name',
+        'email',
     ];
+
     /**
      * @return BelongsTo<User, $this>
      */

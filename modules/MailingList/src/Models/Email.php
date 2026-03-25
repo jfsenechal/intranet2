@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Models;
 
-use AcMarche\MailingList\Database\Factories\AddressBookFactory;
 use AcMarche\MailingList\Database\Factories\EmailFactory;
 use AcMarche\MailingList\Enums\EmailStatus;
 use App\Models\User;
@@ -23,7 +22,17 @@ final class Email extends Model
     protected $connection = 'maria-mailing-list';
 
     protected $fillable = [
+        'username',
+        'sender_id',
+        'subject',
+        'body',
+        'attachments',
+        'status',
+        'batch_id',
+        'sent_count',
+        'total_count',
     ];
+
     /**
      * @return BelongsTo<User, $this>
      */

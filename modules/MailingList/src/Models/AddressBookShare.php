@@ -12,6 +12,12 @@ final class AddressBookShare extends Model
 {
     protected $connection = 'maria-mailing-list';
 
+    protected $fillable = [
+        'address_book_id',
+        'username',
+        'permission',
+    ];
+
     /**
      * @return BelongsTo<AddressBook, $this>
      */

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Models;
 
-use AcMarche\MailingList\Database\Factories\AddressBookFactory;
 use AcMarche\MailingList\Database\Factories\EmailRecipientFactory;
 use AcMarche\MailingList\Enums\RecipientStatus;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
@@ -19,6 +18,16 @@ final class EmailRecipient extends Model
     use HasFactory;
 
     protected $connection = 'maria-mailing-list';
+
+    protected $fillable = [
+        'email_id',
+        'contact_id',
+        'email_address',
+        'name',
+        'status',
+        'error',
+        'sent_at',
+    ];
 
     /**
      * @return BelongsTo<Email, $this>
