@@ -31,7 +31,7 @@ final class MailingListPanelProvider extends PanelProvider
 
         return $panel
             ->id('mailing-list')
-            ->path('mailing-list')
+            ->path('newsletter')
             ->spa()
             ->sidebarCollapsibleOnDesktop()
             ->homeUrl(fn (): string => AddressBookResource::getUrl())

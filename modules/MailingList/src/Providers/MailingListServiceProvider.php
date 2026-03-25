@@ -28,7 +28,7 @@ final class MailingListServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
 
         // Load views
-        $this->loadViewsFrom(__DIR__.'/../../views', 'mailing-list');
+        $this->loadViewsFrom(__DIR__.'/../../views', 'mailing-list-view');
 
         // Load routes
         if (file_exists(__DIR__.'/../../routes/web.php')) {
