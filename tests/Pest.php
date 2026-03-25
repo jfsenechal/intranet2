@@ -5,4 +5,14 @@ declare(strict_types=1);
 uses(
     Tests\TestCase::class,
     Illuminate\Foundation\Testing\RefreshDatabase::class,
-)->in('Feature', 'Unit', 'Browser');
+)->in(
+    'Feature',
+    'Unit',
+    'Browser',
+    '../modules/MailingList/tests/Feature',
+    '../modules/MailingList/tests/Unit',
+    '../modules/MailingList/tests/Browser',
+    '../modules/Pst/tests/Feature',
+    '../modules/Pst/tests/Unit',
+    '../modules/Pst/tests/Browser',
+);
