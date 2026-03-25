@@ -20,6 +20,8 @@ final class AddressBook extends Model
 
     protected $connection = 'maria-mailing-list';
 
+    protected $fillable = [
+    ];
     /**
      * @return BelongsTo<User, $this>
      */

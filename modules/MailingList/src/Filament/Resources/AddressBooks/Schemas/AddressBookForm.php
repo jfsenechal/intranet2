@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\AddressBooks\Schemas;
 
+use AcMarche\MailingList\Models\AddressBook;
 use AcMarche\MailingList\Models\Contact;
 use App\Models\User;
 use Filament\Forms\Components\Hidden;
@@ -56,11 +57,25 @@ final class AddressBookForm
                         ])->getKey();
                     }),
                 Select::make('sharedWithUsers')
-                    ->relationship('sharedWithUsers', 'name')
-                    ->getOptionLabelFromRecordUsing(fn (User $record): string => "{$record->name} ({$record->email})")
+                    ->options(
+                        fn (): array => User::query()
+                            ->get()
+                            ->mapWithKeys(fn (User $user): array => [
+                                $user->username => "{$user->name} ({$user->email})",
+                            ])
+                            ->all()
+                    )
                     ->multiple()
-                    ->preload()
-                    ->searchable(),
+                    ->searchable()
+                    ->afterStateHydrated(function (Select $component, ?AddressBook $record): void {
+                        if ($record) {
+                            $component->state($record->sharedWithUsers->pluck('username')->all());
+                        }
+                    })
+                    ->saveRelationshipsUsing(function (AddressBook $record, ?array $state): void {
+                        $record->sharedWithUsers()->sync($state ?? []);
+                    })
+                    ->dehydrated(false),
             ]);
     }
 }

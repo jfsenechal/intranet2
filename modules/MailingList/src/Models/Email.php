@@ -22,6 +22,8 @@ final class Email extends Model
 
     protected $connection = 'maria-mailing-list';
 
+    protected $fillable = [
+    ];
     /**
      * @return BelongsTo<User, $this>
      */
