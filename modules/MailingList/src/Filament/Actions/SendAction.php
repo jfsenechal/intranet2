@@ -25,6 +25,7 @@ final class SendAction
                 fn (): string => "Cet e-mail sera envoyé à {$email->total_count} destinataires. Continuer ?"
             )
             ->disabled(fn (): bool => $email->total_count < 1)
+            ->tooltip(fn (): ?string => $email->total_count < 1 ? 'Ajoutez au moins un destinataire avant d\'envoyer' : null)
             ->visible(
                 fn (
                 ): bool => $email->status === EmailStatus::Draft || $email->status === EmailStatus::Failed
