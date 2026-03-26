@@ -14,6 +14,7 @@ use AcMarche\MailingList\Models\EmailRecipient;
 use AcMarche\MailingList\Models\Sender;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
+use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Bus;
 
 use function Pest\Laravel\assertDatabaseHas;
@@ -21,6 +22,7 @@ use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
+    Filament::setCurrentPanel(Filament::getPanel('mailing-list'));
     $this->user = User::factory()->create();
     $this->actingAs($this->user);
     $this->sender = Sender::factory()->create(['username' => $this->user->username]);

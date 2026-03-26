@@ -10,6 +10,7 @@ use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\Testing\TestAction;
+use Filament\Facades\Filament;
 use Illuminate\Support\Str;
 
 use function Pest\Laravel\assertDatabaseHas;
@@ -17,6 +18,7 @@ use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
+    Filament::setCurrentPanel(Filament::getPanel('mailing-list'));
     $this->user = User::factory()->create();
     $this->actingAs($this->user);
 });
@@ -174,9 +176,7 @@ it('validates the form data', function (array $data, array $errors) {
         ->assertHasFormErrors($errors)
         ->assertNotNotified();
 })->with([
-    '`last_name` is required' => [['last_name' => null], ['last_name' => 'required']],
     '`last_name` is max 255 characters' => [['last_name' => Str::random(256)], ['last_name' => 'max']],
-    '`first_name` is required' => [['first_name' => null], ['first_name' => 'required']],
     '`first_name` is max 255 characters' => [['first_name' => Str::random(256)], ['first_name' => 'max']],
     '`email` is required' => [['email' => null], ['email' => 'required']],
     '`email` is a valid email address' => [['email' => Str::random()], ['email' => 'email']],

@@ -10,12 +10,14 @@ use AcMarche\MailingList\Models\AddressBook;
 use AcMarche\MailingList\Models\AddressBookShare;
 use AcMarche\MailingList\Models\Contact;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Illuminate\Support\Str;
 
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
+    Filament::setCurrentPanel(Filament::getPanel('mailing-list'));
     $this->user = User::factory()->create();
     $this->actingAs($this->user);
 });

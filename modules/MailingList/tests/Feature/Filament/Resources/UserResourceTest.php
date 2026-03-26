@@ -9,6 +9,7 @@ use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\Testing\TestAction;
+use Filament\Facades\Filament;
 use Illuminate\Support\Str;
 
 use function Pest\Laravel\assertDatabaseHas;
@@ -16,6 +17,7 @@ use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
+    Filament::setCurrentPanel(Filament::getPanel('mailing-list'));
     /* The TestCase setup generates a user before each test, so we need to clear the table to make sure we have a clean slate. */
     User::truncate();
 });
