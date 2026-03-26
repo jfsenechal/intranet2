@@ -57,7 +57,9 @@ for db in "${DATABASES[@]}"; do
   echo "---"
 done
 
-#exit
+mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASS" "pst" -e "SET FOREIGN_KEY_CHECKS = 0; DROP TABLE IF EXISTS \`cache\`, \`cache_locks\`, \`failed_jobs\`, \`jobs\`, \`job_batches\`, \`migrations\`, \`notifications\`, \`password_reset_tokens\`, \`personal_access_tokens\`, \`roles\`, \`role_user\`, \`sessions\`, \`users\`; SET FOREIGN_KEY_CHECKS = 1;"
+
+exit
 echo "All tables dropped and SQL dumps imported for specified databases."
 php artisan migrate
 echo "Migrate and db seed done."
