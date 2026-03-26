@@ -12,10 +12,10 @@ return [
     |
     */
 
-    'connection' => 'maria-security',
+    'connection' => 'mariadb',
 
     'connections' => [
-        'maria-security' => [
+        'mariadb' => [
             'driver' => env('DB_SECURITY_DRIVER', 'mariadb'),
             'url' => env('DB_SECURITY_URL'),
             'host' => env('DB_SECURITY_HOST', env('DB_HOST', '127.0.0.1')),

@@ -23,6 +23,8 @@ final class Module extends Model
 
     public bool $migrated = false;
 
+    protected $connection = 'mariadb';
+
     protected $fillable = [
         'name',
         'url',

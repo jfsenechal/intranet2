@@ -21,6 +21,8 @@ final class Role extends Model
 
     protected $fillable = ['name', 'description', 'label', 'module_id'];
 
+    protected $connection = 'mariadb';
+
     public function module(): BelongsTo
     {
         return $this->belongsTo(Module::class);

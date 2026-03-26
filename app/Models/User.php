@@ -34,8 +34,6 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
     use HasApiTokens, HasFactory, Impersonate, Notifiable, Searchable;
     use UserMailingListTrait, UserPstTrait;
 
-    protected $connection = 'mariadb';
-
     /**
      * The attributes that are mass assignable.
      *

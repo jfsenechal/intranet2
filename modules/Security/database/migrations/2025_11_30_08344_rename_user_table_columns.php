@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    protected $connection = 'maria-security';
+    protected $connection = 'mariadb';
 
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        $schema = Schema::connection('maria-security');
+        $schema = Schema::connection('mariadb');
         $hasColumn = fn (string $column): bool => $schema->hasColumn('users', $column);
 
         $schema->table('users', function (Blueprint $table) use ($hasColumn) {

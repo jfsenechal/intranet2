@@ -10,7 +10,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (! Schema::connection('maria-security')->hasTable('users')) {
+        if (! Schema::connection('mariadb')->hasTable('users')) {
             Schema::create('users', function (Blueprint $table): void {
                 $table->id();
                 $table->string('name')->nullable()->default(null);

@@ -32,7 +32,7 @@ final class FixCommand extends Command
         $tables = ['action_user', 'action_mandatory'];
 
         foreach ($tables as $table) {
-           // $this->migrateTable($table);
+            // $this->migrateTable($table);
         }
 
         $this->info('Migration completed successfully.');

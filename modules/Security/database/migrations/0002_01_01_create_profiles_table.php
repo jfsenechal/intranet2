@@ -8,18 +8,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    protected $connection = 'maria-security';
+    protected $connection = 'mariadb';
 
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        if (Schema::connection('maria-security')->hasTable('profile')) {
-            Schema::connection('maria-security')->table('profile', function (Blueprint $table) {
+        if (Schema::connection('mariadb')->hasTable('profile')) {
+            Schema::connection('mariadb')->table('profile', function (Blueprint $table) {
                 $table->rename('profiles');
             });
-            Schema::connection('maria-security')->table('profiles', function (Blueprint $table) {
+            Schema::connection('mariadb')->table('profiles', function (Blueprint $table) {
                 $table->renameColumn('plaque1', 'car_license_plate1');
                 $table->renameColumn('plaque2', 'car_license_plate2');
                 $table->renameColumn('rue', 'street');

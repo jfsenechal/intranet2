@@ -18,6 +18,8 @@ final class Tab extends Model
 
     public $timestamps = false;
 
+    protected $connection = 'mariadb';
+
     protected $fillable = [
         'name',
         'icon',
