@@ -1,27 +1,22 @@
 <?php
 
-namespace Tests;
+namespace AcMarche\Pst\Tests;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\RefreshDatabaseState;
+use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
-    use RefreshDatabase;
-
-    protected function beforeRefreshingDatabase(): void
+    protected function setUp(): void
     {
-        $path = storage_path().'/../data/sqlite/';
-        $tables = ['pst'];
+        parent::setUp();
 
-        if (is_writable($path)) {
-            shell_exec('rm -f '.$path.'*');
-            foreach ($tables as $table) {
-                shell_exec('touch '.$path.$table);
-            }
-        }
-        $this->artisan('migrate --env testing');
-        RefreshDatabaseState::$migrated = true;
+        $this->actingAs(User::factory()->create([
+            'name' => config('app.default_user.name'),
+            'email' => config('app.default_user.email'),
+            'password' => config('app.default_user.password'),
+        ]));
+
+        $this->withoutVite();
     }
 }
