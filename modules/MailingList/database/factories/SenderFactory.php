@@ -22,7 +22,7 @@ final class SenderFactory extends Factory
         return [
             'username' => fake()->userName(),
             'name' => fake()->company(),
-            'email' => fake()->unique()->companyEmail(),
+            'email' => fake()->unique()->userName().'@marche.be',
         ];
     }
 }

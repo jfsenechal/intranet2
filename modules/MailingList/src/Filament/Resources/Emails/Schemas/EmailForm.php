@@ -36,11 +36,16 @@ final class EmailForm
                     ->columnSpanFull(),
                 RichEditor::make('body')
                     ->label('Contenu')
+                    ->resizableImages()
+                    ->fileAttachmentsMaxSize(8388)
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDirectory('mailing-list/email-attachments')
                     ->required()
                     ->columnSpanFull(),
                 FileUpload::make('attachments')
                     ->label('Pièces jointes')
                     ->multiple()
+                    ->maxSize(12588)
                     ->disk('public')
                     ->directory('mailing-list/email-attachments')
                     ->visibility('public')
