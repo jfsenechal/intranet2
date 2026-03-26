@@ -16,6 +16,7 @@ use AcMarche\Pst\Enums\YesOrNoEnum;
 use AcMarche\Pst\Models\Scopes\DepartmentScope;
 use AcMarche\Pst\Models\Scopes\HasDepartmentScope;
 use AcMarche\Pst\Observers\ActionObserver;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;

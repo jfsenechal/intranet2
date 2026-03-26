@@ -13,6 +13,7 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 final class UsersTable
 {
@@ -38,7 +39,10 @@ final class UsersTable
                 TextColumn::make('extension')
                     ->label('Extension')
                     ->icon('tabler-device-landline-phone')->toggleable(),
-                TextColumn::make('roles.label')->toggleable(),
+                TextColumn::make('roles_list')
+                    ->label('Roles')
+                    ->state(fn (User $record) => $record->roles()->pluck('name')->join(', '))
+                    ->toggleable(),
                 TextColumn::make('services.name')
                     ->label('Services')
                     ->badge()
@@ -58,8 +62,15 @@ final class UsersTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('roles')
-                    ->relationship('roles', 'label'),
+                SelectFilter::make('role')
+                    ->options(fn () => \AcMarche\Security\Models\Role::pluck('name', 'id'))
+                    ->query(fn (Builder $query, array $data) => $query->when(
+                        $data['value'],
+                        fn (Builder $query, $roleId) => $query->whereHas(
+                            'roles',
+                            fn (Builder $q) => $q->where('roles.id', $roleId)
+                        )
+                    )),
             ])
             ->recordActions([
                 EditAction::make(),

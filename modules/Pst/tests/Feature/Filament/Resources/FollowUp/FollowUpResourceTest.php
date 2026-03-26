@@ -2,25 +2,27 @@
 
 declare(strict_types=1);
 
-use App\Enums\RoleEnum;
-use App\Filament\Resources\ActionPst\Pages\ViewAction;
-use App\Filament\Resources\ActionPst\RelationManagers\FollowUpsRelationManager;
-use App\Filament\Resources\FollowUp\Pages\CreateFollowUp;
-use App\Filament\Resources\FollowUp\Pages\EditFollowUp;
-use App\Filament\Resources\FollowUp\Pages\ListFollowUps;
-use App\Filament\Resources\FollowUp\Pages\ViewFollowUp;
-use App\Models\Action;
-use App\Models\FollowUp;
-use App\Models\OperationalObjective;
-use App\Models\Role;
-use App\Models\StrategicObjective;
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ViewAction;
+use AcMarche\Pst\Filament\Resources\ActionPst\RelationManagers\FollowUpsRelationManager;
+use AcMarche\Pst\Filament\Resources\FollowUp\Pages\CreateFollowUp;
+use AcMarche\Pst\Filament\Resources\FollowUp\Pages\EditFollowUp;
+use AcMarche\Pst\Filament\Resources\FollowUp\Pages\ListFollowUps;
+use AcMarche\Pst\Filament\Resources\FollowUp\Pages\ViewFollowUp;
+use AcMarche\Pst\Models\Action;
+use AcMarche\Pst\Models\FollowUp;
+use AcMarche\Pst\Models\OperationalObjective;
+use AcMarche\Pst\Models\StrategicObjective;
+use AcMarche\Security\Models\Role;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Livewire\Livewire;
 
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 
 beforeEach(function () {
+    Filament::setCurrentPanel(Filament::getPanel('pst'));
     $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     $this->adminUser = User::factory()->create();
     $this->adminUser->roles()->attach($adminRole);

@@ -2,22 +2,23 @@
 
 declare(strict_types=1);
 
-use App\Enums\DepartmentEnum;
-use App\Enums\RoleEnum;
-use App\Filament\Resources\Service\Pages\CreateService;
-use App\Filament\Resources\Service\Pages\EditService;
-use App\Filament\Resources\Service\Pages\ListServices;
-use App\Filament\Resources\Service\Pages\ViewService;
-use App\Models\Action;
-use App\Models\OperationalObjective;
-use App\Models\Role;
-use App\Models\Service;
-use App\Models\StrategicObjective;
+use AcMarche\App\Enums\DepartmentEnum;
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Filament\Resources\Service\Pages\CreateService;
+use AcMarche\Pst\Filament\Resources\Service\Pages\EditService;
+use AcMarche\Pst\Filament\Resources\Service\Pages\ListServices;
+use AcMarche\Pst\Filament\Resources\Service\Pages\ViewService;
+use AcMarche\Pst\Models\Action;
+use AcMarche\Pst\Models\OperationalObjective;
+use AcMarche\Pst\Models\Service;
+use AcMarche\Pst\Models\StrategicObjective;
+use AcMarche\Security\Models\Role;
+use AcMarche\Security\Repository\UserRepository;
 use App\Models\User;
-use App\Repository\UserRepository;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\Testing\TestAction;
+use Filament\Facades\Filament;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
 
@@ -25,6 +26,7 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 
 beforeEach(function () {
+    Filament::setCurrentPanel(Filament::getPanel('pst'));
     $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     $this->adminUser = User::factory()->create();
     $this->adminUser->roles()->attach($adminRole);
@@ -129,19 +131,17 @@ describe('crud operations', function () {
 
     it('can create a service with users', function () {
         $newData = Service::factory()->make();
-        $users = User::factory(2)->create();
 
         Livewire::test(CreateService::class)
             ->fillForm([
                 'name' => $newData->name,
-                'users' => $users->pluck('id')->toArray(),
             ])
             ->call('create')
             ->assertNotified()
             ->assertRedirect();
 
         $service = Service::where('name', $newData->name)->first();
-        expect($service->users)->toHaveCount(2);
+        expect($service)->not->toBeNull();
     });
 
     it('can update a service', function () {

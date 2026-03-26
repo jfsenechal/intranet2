@@ -22,7 +22,7 @@ final class RoleFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'label' => fake()->name(),
+            'description' => fake()->sentence(),
         ];
     }
 }

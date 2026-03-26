@@ -2,17 +2,19 @@
 
 declare(strict_types=1);
 
-use App\Enums\DepartmentEnum;
-use App\Enums\RoleEnum;
-use App\Filament\Resources\Users\Pages\EditUser;
-use App\Filament\Resources\Users\Pages\ListUsers;
-use App\Models\Role;
+use AcMarche\App\Enums\DepartmentEnum;
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Filament\Resources\Users\Pages\EditUser;
+use AcMarche\Pst\Filament\Resources\Users\Pages\ListUsers;
+use AcMarche\Security\Models\Role;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Livewire\Livewire;
 
 use function Pest\Laravel\assertDatabaseHas;
 
 beforeEach(function () {
+    Filament::setCurrentPanel(Filament::getPanel('pst'));
     $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     $this->adminUser = User::factory()->create();
     $this->adminUser->roles()->attach($adminRole);
@@ -69,7 +71,7 @@ it('can search column', function (string $column) {
         ->searchTable($value)
         ->assertCanSeeTableRecords($records->where($column, $value))
         ->assertCanNotSeeTableRecords($records->where($column, '!=', $value));
-})->with(['name']);
+})->with(['last_name']);
 
 it('can update a user', function () {
     $user = User::factory()->create();

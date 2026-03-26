@@ -2,16 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Filament\Resources\OperationalObjective;
+namespace AcMarche\Pst\Tests\Feature\Filament\Resources\OperationalObjective;
 
-use App\Enums\ActionScopeEnum;
-use App\Enums\DepartmentEnum;
-use App\Enums\RoleEnum;
-use App\Filament\Resources\OperationalObjective\Pages\CreateOperationalObjective;
-use App\Models\Role;
-use App\Models\StrategicObjective;
+use AcMarche\App\Enums\DepartmentEnum;
+use AcMarche\Pst\Enums\ActionScopeEnum;
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\CreateOperationalObjective;
+use AcMarche\Pst\Models\StrategicObjective;
+use AcMarche\Security\Models\Role;
+use AcMarche\Security\Repository\UserRepository;
 use App\Models\User;
-use App\Repository\UserRepository;
+use Filament\Facades\Filament;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -24,11 +26,15 @@ use Tests\TestCase;
  */
 final class OperationalObjectiveSelectDepartmentFilterTest extends TestCase
 {
+    use RefreshDatabase;
+
     private Role $adminRole;
 
     protected function setUp(): void
     {
         parent::setUp();
+
+        Filament::setCurrentPanel(Filament::getPanel('pst'));
 
         $this->adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     }

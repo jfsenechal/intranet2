@@ -2,21 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Filament\Resources\ActionPst;
+namespace AcMarche\Pst\Tests\Feature\Filament\Resources\ActionPst;
 
-use App\Enums\ActionScopeEnum;
-use App\Enums\ActionStateEnum;
-use App\Enums\ActionSynergyEnum;
-use App\Enums\DepartmentEnum;
-use App\Enums\RoleEnum;
-use App\Filament\Resources\ActionPst\Pages\CreateAction;
-use App\Filament\Resources\ActionPst\Pages\ListActions;
-use App\Models\Action;
-use App\Models\OperationalObjective;
-use App\Models\Role;
-use App\Models\StrategicObjective;
+use AcMarche\App\Enums\DepartmentEnum;
+use AcMarche\Pst\Enums\ActionScopeEnum;
+use AcMarche\Pst\Enums\ActionStateEnum;
+use AcMarche\Pst\Enums\ActionSynergyEnum;
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\CreateAction;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ListActions;
+use AcMarche\Pst\Models\Action;
+use AcMarche\Pst\Models\OperationalObjective;
+use AcMarche\Pst\Models\StrategicObjective;
+use AcMarche\Security\Models\Role;
+use AcMarche\Security\Repository\UserRepository;
 use App\Models\User;
-use App\Repository\UserRepository;
+use Filament\Facades\Filament;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -40,6 +42,8 @@ use Tests\TestCase;
  */
 final class ActionDepartmentTest extends TestCase
 {
+    use RefreshDatabase;
+
     private Role $adminRole;
 
     private Role $mandataireRole;
@@ -47,6 +51,8 @@ final class ActionDepartmentTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        Filament::setCurrentPanel(Filament::getPanel('pst'));
 
         $this->adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
         $this->mandataireRole = Role::factory()->create(['name' => RoleEnum::MANDATAIRE->value]);

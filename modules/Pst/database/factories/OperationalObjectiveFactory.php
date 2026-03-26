@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Database\Factories;
 
-use App\Enums\ActionScopeEnum;
-use App\Models\OperationalObjective;
+use AcMarche\Pst\Enums\ActionScopeEnum;
+use AcMarche\Pst\Models\OperationalObjective;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 final class OperationalObjectiveFactory extends Factory

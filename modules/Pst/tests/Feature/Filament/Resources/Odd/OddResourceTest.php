@@ -2,19 +2,20 @@
 
 declare(strict_types=1);
 
-use App\Enums\RoleEnum;
-use App\Filament\Resources\Odd\Pages\CreateOdd;
-use App\Filament\Resources\Odd\Pages\EditOdd;
-use App\Filament\Resources\Odd\Pages\ListOdds;
-use App\Filament\Resources\Odd\Pages\ViewOdd;
-use App\Filament\Resources\Odd\RelationManagers\ActionsRelationManager;
-use App\Models\Action;
-use App\Models\Odd;
-use App\Models\OperationalObjective;
-use App\Models\Role;
-use App\Models\StrategicObjective;
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Filament\Resources\Odd\Pages\CreateOdd;
+use AcMarche\Pst\Filament\Resources\Odd\Pages\EditOdd;
+use AcMarche\Pst\Filament\Resources\Odd\Pages\ListOdds;
+use AcMarche\Pst\Filament\Resources\Odd\Pages\ViewOdd;
+use AcMarche\Pst\Filament\Resources\Odd\RelationManagers\ActionsRelationManager;
+use AcMarche\Pst\Models\Action;
+use AcMarche\Pst\Models\Odd;
+use AcMarche\Pst\Models\OperationalObjective;
+use AcMarche\Pst\Models\StrategicObjective;
+use AcMarche\Security\Models\Role;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
+use Filament\Facades\Filament;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
 
@@ -22,6 +23,7 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 
 beforeEach(function () {
+    Filament::setCurrentPanel(Filament::getPanel('pst'));
     $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     $this->adminUser = User::factory()->create();
     $this->adminUser->roles()->attach($adminRole);

@@ -2,25 +2,29 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Filament\Resources\ActionPst;
+namespace AcMarche\Pst\Tests\Feature\Filament\Resources\ActionPst;
 
-use App\Enums\ActionStateEnum;
-use App\Enums\ActionSynergyEnum;
-use App\Enums\ActionTypeEnum;
-use App\Enums\RoleEnum;
-use App\Filament\Resources\ActionPst\Pages\EditAction;
-use App\Models\Action;
-use App\Models\History;
-use App\Models\OperationalObjective;
-use App\Models\Role;
-use App\Models\Service;
-use App\Models\StrategicObjective;
+use AcMarche\Pst\Enums\ActionStateEnum;
+use AcMarche\Pst\Enums\ActionSynergyEnum;
+use AcMarche\Pst\Enums\ActionTypeEnum;
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\EditAction;
+use AcMarche\Pst\Models\Action;
+use AcMarche\Pst\Models\History;
+use AcMarche\Pst\Models\OperationalObjective;
+use AcMarche\Pst\Models\Service;
+use AcMarche\Pst\Models\StrategicObjective;
+use AcMarche\Security\Models\Role;
 use App\Models\User;
+use Filament\Facades\Filament;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 final class ActionHistoryTrackingTest extends TestCase
 {
+    use RefreshDatabase;
+
     private User $adminUser;
 
     private Action $action;
@@ -28,6 +32,8 @@ final class ActionHistoryTrackingTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        Filament::setCurrentPanel(Filament::getPanel('pst'));
 
         $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
         $this->adminUser = User::factory()->create();

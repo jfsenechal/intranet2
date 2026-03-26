@@ -1,4 +1,4 @@
-@php use App\Enums\ActionSynergyEnum;use App\Filament\Resources\OperationalObjective\OperationalObjectiveResource;use App\Filament\Resources\StrategicObjective\StrategicObjectiveResource; @endphp
+@php use AcMarche\Pst\Filament\Resources\OperationalObjective\OperationalObjectiveResource;use AcMarche\Pst\Filament\Resources\StrategicObjective\StrategicObjectiveResource; @endphp
 <x-filament-panels::page
     @class([
         'fi-resource-list-records-page',

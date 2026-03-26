@@ -2,20 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Policies;
+namespace AcMarche\Pst\Tests\Feature\Policies;
 
-use App\Enums\RoleEnum;
-use App\Models\Action;
-use App\Models\OperationalObjective;
-use App\Models\Role;
-use App\Models\Service;
-use App\Models\StrategicObjective;
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Models\Action;
+use AcMarche\Pst\Models\OperationalObjective;
+use AcMarche\Pst\Models\Service;
+use AcMarche\Pst\Models\StrategicObjective;
+use AcMarche\Security\Models\Role;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Gate;
 use Tests\TestCase;
 
 final class RegisterPoliciesTest extends TestCase
 {
+    use RefreshDatabase;
+
     private User $adminUser;
 
     private User $regularUser;

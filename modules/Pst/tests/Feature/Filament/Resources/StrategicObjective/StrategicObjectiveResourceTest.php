@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-use App\Enums\ActionScopeEnum;
-use App\Enums\RoleEnum;
-use App\Filament\Resources\StrategicObjective\Pages\CreateStrategicObjective;
-use App\Filament\Resources\StrategicObjective\Pages\EditStrategicObjective;
-use App\Filament\Resources\StrategicObjective\Pages\ListStrategicObjectives;
-use App\Filament\Resources\StrategicObjective\Pages\ViewStrategicObjective;
-use App\Filament\Resources\StrategicObjective\RelationManagers\OosRelationManager;
-use App\Models\OperationalObjective;
-use App\Models\Role;
-use App\Models\StrategicObjective;
+use AcMarche\Pst\Enums\ActionScopeEnum;
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\CreateStrategicObjective;
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\EditStrategicObjective;
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\ListStrategicObjectives;
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\ViewStrategicObjective;
+use AcMarche\Pst\Filament\Resources\StrategicObjective\RelationManagers\OosRelationManager;
+use AcMarche\Pst\Models\OperationalObjective;
+use AcMarche\Pst\Models\StrategicObjective;
+use AcMarche\Security\Models\Role;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
+use Filament\Facades\Filament;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
 
@@ -21,6 +22,7 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 
 beforeEach(function () {
+    Filament::setCurrentPanel(Filament::getPanel('pst'));
     $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     $this->adminUser = User::factory()->create();
     $this->adminUser->roles()->attach($adminRole);

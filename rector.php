@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
-use RectorLaravel\Set\LaravelLevelSetList;
 use RectorLaravel\Set\LaravelSetList;
 use RectorLaravel\Set\LaravelSetProvider;
 
 return RectorConfig::configure()
     ->withPhpSets()
     ->withSetProviders(LaravelSetProvider::class)
+    ->withComposerBased(laravel: true)
     ->withSets([
-        LaravelLevelSetList::UP_TO_LARAVEL_130,
         LaravelSetList::LARAVEL_CODE_QUALITY,
         LaravelSetList::LARAVEL_COLLECTION,
         LaravelSetList::LARAVEL_130,

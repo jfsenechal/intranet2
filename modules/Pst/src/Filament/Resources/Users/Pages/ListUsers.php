@@ -55,7 +55,7 @@ final class ListUsers extends ListRecords
                 ->icon('tabler-user-heart')
                 ->modal()
                 ->modalHeading('Explications des différents rôles')
-                ->modalContent(view('filament.resources.user-resource.pages.roles-help')),
+                ->modalContent(view('pst-view::filament.resources.user-resource.pages.roles-help')),
         ];
     }
 }

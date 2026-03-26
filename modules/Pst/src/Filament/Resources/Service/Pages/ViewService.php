@@ -29,7 +29,7 @@ final class ViewService extends ViewRecord
                 ->label('Agents')
                 ->schema([
                     TextEntry::make('users')
-                        ->label(false)
+                        ->hiddenLabel()
                         ->badge()
                         ->formatStateUsing(fn (User $state): string => $state->last_name.' '.$state->first_name),
                 ]),

@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-use App\Enums\RoleEnum;
-use App\Filament\Resources\Partner\Pages\CreatePartner;
-use App\Filament\Resources\Partner\Pages\EditPartner;
-use App\Filament\Resources\Partner\Pages\ListPartners;
-use App\Filament\Resources\Partner\Pages\ViewPartner;
-use App\Models\Partner;
-use App\Models\Role;
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\CreatePartner;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\EditPartner;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\ListPartners;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\ViewPartner;
+use AcMarche\Pst\Models\Partner;
+use AcMarche\Security\Models\Role;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\Testing\TestAction;
+use Filament\Facades\Filament;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
 
@@ -20,6 +21,7 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 
 beforeEach(function () {
+    Filament::setCurrentPanel(Filament::getPanel('pst'));
     $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     $this->adminUser = User::factory()->create();
     $this->adminUser->roles()->attach($adminRole);

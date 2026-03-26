@@ -17,6 +17,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -125,11 +126,6 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
             'last_name' => $this->last_name,
             'username' => $this->username,
         ];
-    }
-
-    public function fullName(): string
-    {
-        return $this->last_name.' '.$this->first_name;
     }
 
     /**
@@ -274,7 +270,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
 
     public function getFilamentName(): string
     {
-        return $this->fullName();
+        return $this->full_name;
     }
 
     protected static function boot(): void
@@ -288,6 +284,11 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
                 unset($model->attributes['plainPassword']);
             }
         });
+    }
+
+    protected function fullName(): Attribute
+    {
+        return Attribute::get(fn () => $this->last_name.' '.$this->first_name);
     }
 
     /**

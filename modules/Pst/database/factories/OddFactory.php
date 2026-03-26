@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Database\Factories;
 
-use App\Models\Odd;
+use AcMarche\Pst\Models\Odd;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 final class OddFactory extends Factory

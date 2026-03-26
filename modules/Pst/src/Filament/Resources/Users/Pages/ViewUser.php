@@ -17,7 +17,7 @@ final class ViewUser extends ViewRecord
 
     public function getTitle(): string
     {
-        return $this->record->fullName();
+        return $this->record->full_name;
     }
 
     public function infolist(Schema $schema): Schema

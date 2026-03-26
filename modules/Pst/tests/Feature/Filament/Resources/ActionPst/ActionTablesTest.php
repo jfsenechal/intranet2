@@ -2,21 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Filament\Resources\ActionPst;
+namespace AcMarche\Pst\Tests\Feature\Filament\Resources\ActionPst;
 
-use App\Enums\ActionScopeEnum;
-use App\Enums\RoleEnum;
-use App\Filament\Resources\ActionPst\Pages\ListActions;
-use App\Models\Action;
-use App\Models\OperationalObjective;
-use App\Models\Role;
-use App\Models\StrategicObjective;
+use AcMarche\Pst\Enums\ActionScopeEnum;
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ListActions;
+use AcMarche\Pst\Models\Action;
+use AcMarche\Pst\Models\OperationalObjective;
+use AcMarche\Pst\Models\StrategicObjective;
+use AcMarche\Security\Models\Role;
 use App\Models\User;
+use Filament\Facades\Filament;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 final class ActionTablesTest extends TestCase
 {
+    use RefreshDatabase;
+
     private User $adminUser;
 
     private Role $adminRole;
@@ -24,6 +28,8 @@ final class ActionTablesTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        Filament::setCurrentPanel(Filament::getPanel('pst'));
 
         $this->adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
 

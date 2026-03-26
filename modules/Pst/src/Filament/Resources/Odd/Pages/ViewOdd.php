@@ -25,7 +25,7 @@ final class ViewOdd extends ViewRecord
         return $schema
             ->schema([
                 TextEntry::make('descripton')
-                    ->label(false)
+                    ->hiddenLabel()
                     ->columnSpanFull(),
             ]);
     }

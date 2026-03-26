@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Database\Factories;
 
-use App\Models\History;
+use AcMarche\Pst\Models\History;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 final class HistoryFactory extends Factory

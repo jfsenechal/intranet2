@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Pst\Filament\Resources\Users\Schemas;
 
 use AcMarche\App\Enums\DepartmentEnum;
+use AcMarche\Security\Models\Role;
 use AcMarche\Security\Repository\UserRepository;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Select;
@@ -17,9 +18,10 @@ final class UserForm
     {
         return $schema
             ->schema([
-                CheckboxList::make('roles')
+                CheckboxList::make('user_roles')
                     ->label('Rôles')
-                    ->relationship('roles', 'label'),
+                    ->options(fn () => Role::pluck('name', 'id'))
+                    ->dehydrated(false),
                 ToggleButtons::make('departments')
                     ->label('Département(s)')
                     ->default(DepartmentEnum::VILLE->value)
@@ -31,9 +33,10 @@ final class UserForm
                     )
                     ->multiple()
                     ->required(),
-                CheckboxList::make('services')
+                CheckboxList::make('user_services')
                     ->label('Services')
-                    ->relationship('services', 'name')
+                    ->options(fn () => \AcMarche\Pst\Models\Service::pluck('name', 'id'))
+                    ->dehydrated(false)
                     ->columns(2),
             ]);
     }
@@ -57,9 +60,9 @@ final class UserForm
                     )
                     ->multiple()
                     ->required(),
-                CheckboxList::make('roles')
+                CheckboxList::make('user_roles')
                     ->label('Rôles')
-                    ->relationship('roles', 'label'),
+                    ->options(fn () => Role::pluck('name', 'id')),
             ]);
     }
 }

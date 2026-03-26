@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Database\Factories;
 
-use App\Enums\ActionScopeEnum;
-use App\Enums\DepartmentEnum;
-use App\Models\StrategicObjective;
+use AcMarche\App\Enums\DepartmentEnum;
+use AcMarche\Pst\Enums\ActionScopeEnum;
+use AcMarche\Pst\Models\StrategicObjective;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 final class StrategicObjectiveFactory extends Factory

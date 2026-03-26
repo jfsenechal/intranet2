@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace AcMarche\Pst\Models;
 
 use AcMarche\App\Enums\DepartmentEnum;
+use AcMarche\Pst\Database\Factories\OperationalObjectiveFactory;
 use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Pst\Models\Scopes\HasDepartmentScope;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
+#[UseFactory(OperationalObjectiveFactory::class)]
 final class OperationalObjective extends Model
 {
     use HasDepartmentScope, HasFactory, Notifiable, Searchable;
