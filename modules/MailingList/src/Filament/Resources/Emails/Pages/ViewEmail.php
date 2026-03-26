@@ -33,7 +33,7 @@ final class ViewEmail extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            PreviewAction::make(),
+            PreviewAction::make($this->record),
             SendAction::make($this->record),
             Action::make('progress')
                 ->label(fn (): string => "Envoyé : {$this->record->sent_count}/{$this->record->total_count}")

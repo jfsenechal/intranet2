@@ -3,6 +3,7 @@
 namespace AcMarche\MailingList\Filament\Actions;
 
 use AcMarche\MailingList\Mail\NewsletterMail;
+use AcMarche\MailingList\Models\Email;
 use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 
 class PreviewAction
 {
-    public static function make(): Action
+    public static function make(Email $record): Action
     {
         return Action::make('preview')
             ->label('Apercu')
@@ -25,11 +26,11 @@ class PreviewAction
                     ->required()
                     ->default(fn(): ?string => auth()->user()?->email),
             ])
-            ->action(function (array $data): void {
-                $this->record->load('sender');
+            ->action(function (array $data) use ($record): void {
+                $record->load('sender');
 
                 Mail::to($data['email'])
-                    ->send(new NewsletterMail($this->record, 'Apercu'));
+                    ->send(new NewsletterMail($record, 'Apercu'));
 
                 Notification::make()
                     ->title('Apercu envoyé')
