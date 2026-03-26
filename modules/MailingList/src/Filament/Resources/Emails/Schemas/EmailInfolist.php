@@ -6,8 +6,11 @@ namespace AcMarche\MailingList\Filament\Resources\Emails\Schemas;
 
 use AcMarche\MailingList\Enums\EmailStatus;
 use AcMarche\MailingList\Enums\RecipientStatus;
+use AcMarche\MailingList\Filament\Actions\SendAction;
+use AcMarche\MailingList\Models\Email;
 use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Callout;
 use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -18,6 +21,14 @@ final class EmailInfolist
     {
         return $schema
             ->schema([
+                Callout::make('Les pièces jointes dépassent la limite de '.SendAction::MAX_ATTACHMENTS_SIZE_MB.' Mo')
+                    ->description(fn (Email $record): string => 'Taille actuelle : '.SendAction::attachmentsSizeMb($record).' Mo. Réduisez la taille des pièces jointes avant d\'envoyer.')
+                    ->danger()
+                    ->visible(fn (Email $record): bool => SendAction::attachmentsSizeExceeded($record)),
+                Callout::make('Aucun destinataire')
+                    ->description('Ajoutez au moins un destinataire avant d\'envoyer.')
+                    ->warning()
+                    ->visible(fn (Email $record): bool => $record->total_count < 1),
                 Flex::make([
                     Section::make('Informations')
                         ->label(null)
