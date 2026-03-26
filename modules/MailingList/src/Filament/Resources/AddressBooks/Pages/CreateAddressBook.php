@@ -10,4 +10,9 @@ use Filament\Resources\Pages\CreateRecord;
 final class CreateAddressBook extends CreateRecord
 {
     protected static string $resource = AddressBookResource::class;
+
+    public function getTitle(): string
+    {
+        return 'Nouveau carnet';
+    }
 }

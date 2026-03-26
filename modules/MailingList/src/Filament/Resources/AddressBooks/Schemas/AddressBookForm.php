@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\AddressBooks\Schemas;
 
+use AcMarche\MailingList\Filament\Resources\Contacts\Schemas\ContactForm;
 use AcMarche\MailingList\Models\AddressBook;
-use AcMarche\MailingList\Models\AddressBookShare;
 use AcMarche\MailingList\Models\Contact;
-use App\Models\User;
+use AcMarche\MailingList\Repositories\AddressBookRepository;
+use AcMarche\MailingList\Shares\ShareHandler;
+use AcMarche\Security\Repository\UserRepository;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -25,35 +27,19 @@ final class AddressBookForm
                     ->maxLength(255)
                     ->required(),
                 Hidden::make('username')
-                    ->default(fn(): ?string => auth()->user()?->username),
+                    ->default(fn (): ?string => auth()->user()?->username),
                 Select::make('contacts')
                     ->relationship('contacts', 'email')
                     ->getOptionLabelFromRecordUsing(
-                        fn(Contact $record): string => "{$record->first_name} {$record->last_name} ({$record->email})"
+                        fn (Contact $record): string => "{$record->first_name} {$record->last_name} ({$record->email})"
                     )
                     ->multiple()
                     ->preload()
                     ->searchable()
                     ->createOptionForm([
-                        Grid::make(2)->schema([
-                            TextInput::make('first_name')
-                                ->label('Prénom')
-                                ->maxLength(255)
-                               ,
-                            TextInput::make('last_name')
-                                ->label('Nom')
-                                ->maxLength(255)
-                                ,
-                            TextInput::make('email')
-                                ->email()
-                                ->unique('contacts', 'email')
-                                ->maxLength(255)
-                                ->required(),
-                            TextInput::make('phone')
-                                ->label('Téléphone')
-                                ->tel()
-                                ->maxLength(255),
-                        ]),
+                        Grid::make(2)->schema(
+                            ContactForm::columns()
+                        ),
                     ])
                     ->createOptionUsing(function (array $data): int {
                         return Contact::query()->create([
@@ -62,43 +48,21 @@ final class AddressBookForm
                         ])->getKey();
                     }),
                 Select::make('sharedWithUsers')
+                    ->label('Partager avec')
                     ->options(
-                        fn(): array => User::query()
-                            ->get()
-                            ->mapWithKeys(fn(User $user): array => [
-                                $user->username => "{$user->name} ({$user->email})",
-                            ])
-                            ->all()
+                        fn (): array => UserRepository::getUsersForSelectOrderByName()
                     )
                     ->multiple()
                     ->searchable()
                     ->afterStateHydrated(function (Select $component, ?AddressBook $record): void {
                         if ($record) {
                             $component->state(
-                                AddressBookShare::query()
-                                    ->where('address_book_id', $record->id)
-                                    ->pluck('username')
-                                    ->all()
+                                AddressBookRepository::getSharingAddressBookByAddressBook($record)
                             );
                         }
                     })
                     ->saveRelationshipsUsing(function (AddressBook $record, ?array $state): void {
-                        $usernames = collect($state ?? []);
-
-                        AddressBookShare::query()
-                            ->where('address_book_id', $record->id)
-                            ->whereNotIn('username', $usernames)
-                            ->delete();
-
-                        $existing = AddressBookShare::query()
-                            ->where('address_book_id', $record->id)
-                            ->pluck('username');
-
-                        $usernames->diff($existing)->each(fn(string $username) => AddressBookShare::query()->create([
-                            'address_book_id' => $record->id,
-                            'username' => $username,
-                            'permission' => 'read',
-                        ]));
+                        ShareHandler::syncSharing($record, $state);
                     })
                     ->dehydrated(false),
             ]);

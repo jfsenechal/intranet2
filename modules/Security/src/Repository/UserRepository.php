@@ -12,6 +12,17 @@ final class UserRepository
 {
     public static string $department_selected_key = 'department_selected';
 
+    public static function getUsersForSelectOrderByName(): array
+    {
+        return User::query()
+            ->orderBy('last_name')
+            ->get()
+            ->mapWithKeys(fn (User $user): array => [
+                $user->username => "{$user->last_name} $user->first_name",
+            ])
+            ->all();
+    }
+
     public static function getUsersForSelect(): array
     {
         $users = [];

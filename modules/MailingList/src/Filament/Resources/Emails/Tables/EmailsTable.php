@@ -19,10 +19,12 @@ final class EmailsTable
         return $table
             ->columns([
                 TextColumn::make('subject')
+                    ->label('Sujet')
                     ->sortable()
                     ->searchable()
                     ->limit(50),
                 TextColumn::make('sender.name')
+                    ->label('Expéditeur')
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge()
@@ -33,7 +35,7 @@ final class EmailsTable
                         EmailStatus::Failed => 'danger',
                     }),
                 TextColumn::make('sent_count')
-                    ->label('Progress')
+                    ->label('Progression')
                     ->state(fn ($record): string => "{$record->sent_count}/{$record->total_count}")
                     ->sortable(),
                 TextColumn::make('created_at')

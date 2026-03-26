@@ -10,4 +10,6 @@ use Filament\Resources\Pages\CreateRecord;
 final class CreateSender extends CreateRecord
 {
     protected static string $resource = SenderResource::class;
+
+    protected static ?string $title = 'Nouvel expéditeur';
 }

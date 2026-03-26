@@ -18,6 +18,7 @@ final class SendersTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Nom')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('email')

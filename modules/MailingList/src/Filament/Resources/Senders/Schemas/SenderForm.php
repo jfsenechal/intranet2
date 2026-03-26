@@ -22,11 +22,14 @@ final class SenderForm
                     ->required(),
                 TextInput::make('email')
                     ->label('E-mail')
+                    ->helperText('Seules les adresses @marche.be, @ac.marche.be, @cpas.marche.be sont autorisées.')
                     ->email()
                     ->maxLength(255)
-                    ->required(),
+                    ->required()
+                    ->rules(['regex:/^.+@(marche\.be|ac\.marche\.be|cpas\.marche\.be)$/i']),
                 FileUpload::make('logo')
                     ->label('Logo')
+                    ->helperText('Le logo sera joint au mail')
                     ->image()
                     ->disk('public')
                     ->directory('mailing-list/senders/logos')
@@ -37,6 +40,7 @@ final class SenderForm
                     ->columnSpanFull(),
                 RichEditor::make('footer')
                     ->label('Pied de page')
+                    ->helperText('Sera joint du mail')
                     ->columnSpanFull(),
                 Hidden::make('username')
                     ->default(fn (): ?string => auth()->user()?->username),

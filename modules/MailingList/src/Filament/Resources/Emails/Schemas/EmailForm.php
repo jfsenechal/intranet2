@@ -22,6 +22,7 @@ final class EmailForm
                 Hidden::make('username')
                     ->default(fn (): ?string => auth()->user()?->username),
                 Select::make('sender_id')
+                    ->label('Expéditeur')
                     ->relationship('sender', 'name', fn ($query) => $query->where('username', auth()->user()?->username))
                     ->getOptionLabelFromRecordUsing(fn ($record): string => "{$record->name} <{$record->email}>")
                     ->required()
@@ -29,20 +30,24 @@ final class EmailForm
                     ->preload()
                     ->columnSpanFull(),
                 TextInput::make('subject')
+                    ->label('Sujet')
                     ->maxLength(255)
                     ->required()
                     ->columnSpanFull(),
                 RichEditor::make('body')
+                    ->label('Contenu')
                     ->required()
                     ->columnSpanFull(),
                 FileUpload::make('attachments')
+                    ->label('Pièces jointes')
                     ->multiple()
                     ->disk('public')
                     ->directory('mailing-list/email-attachments')
                     ->visibility('public')
                     ->columnSpanFull(),
                 Select::make('address_book_ids')
-                    ->label('Address Books')
+                    ->label('Carnets d\'adresses')
+                    ->helperText('Envoyer aux carnets suivants')
                     ->multiple()
                     ->options(fn () => AddressBook::query()
                         ->where('username', auth()->user()?->username)
@@ -52,7 +57,8 @@ final class EmailForm
                     ->columnSpanFull()
                     ->dehydrated(false),
                 Select::make('contact_ids')
-                    ->label('Individual Contacts')
+                    ->label('Contacts individuels')
+                    ->helperText('Envoyer aux contacts suivants')
                     ->multiple()
                     ->options(fn () => Contact::query()
                         ->where('username', auth()->user()?->username)

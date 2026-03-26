@@ -43,7 +43,6 @@ final class DatabaseSeeder extends Seeder
                 'description' => 'Carnets d\'adresses et liste de diffusion',
                 'icon' => 'heroicon-o-envelope',
                 'color' => '#000000',
-                'migrated' => true,
             ]
         );
         Module::create(
@@ -55,7 +54,6 @@ final class DatabaseSeeder extends Seeder
                 'description' => 'Programme Stratégique Transversal',
                 'icon' => 'heroicon-o-envelope',
                 'color' => '#000000',
-                'migrated' => true,
             ]
         );
     }

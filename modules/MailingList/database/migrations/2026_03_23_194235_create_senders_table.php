@@ -17,8 +17,8 @@ return new class() extends Migration
             $table->string('username')->index();
             $table->string('name');
             $table->string('email');
-            $table->text('footer')->nullable()->after('email');
-            $table->string('logo')->nullable()->after('footer');
+            $table->text('footer')->nullable();
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

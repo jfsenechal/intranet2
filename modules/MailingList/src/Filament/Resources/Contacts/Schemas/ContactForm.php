@@ -16,31 +16,36 @@ final class ContactForm
     {
         return $schema
             ->components([
-                TextInput::make('last_name')
-                    ->label('Nom')
-                    ->maxLength(255)
-                   ,
-                TextInput::make('first_name')
-                    ->label('Prénom')
-                    ->maxLength(255)
-                   ,
-                TextInput::make('email')
-                    ->email()
-                    ->unique(ignoreRecord: true)
-                    ->maxLength(255)
-                    ->required(),
-                TextInput::make('phone')
-                    ->label('Téléphone')
-                    ->tel()
-                    ->maxLength(255),
-                Textarea::make('description')
-                    ->rows(3)
-                    ->maxLength(65535),
+                ...self::columns(),
                 Hidden::make('username')
-                    ->default(fn(): ?string => auth()->user()?->username),
+                    ->default(fn (): ?string => auth()->user()?->username),
                 CheckboxList::make('addressBooks')
-                    ->relationship('addressBooks', 'name')
-                    ->searchable(),
+                    ->label('Carnets d\'adresses')
+                    ->relationship('addressBooks', 'name'),
+                // ->searchable(),
             ]);
+    }
+
+    public static function columns(): array
+    {
+        return [
+            TextInput::make('last_name')
+                ->label('Nom')
+                ->maxLength(255),
+            TextInput::make('first_name')
+                ->label('Prénom')
+                ->maxLength(255),
+            TextInput::make('email')
+                ->email()
+                ->unique(ignoreRecord: true)
+                ->maxLength(255)
+                ->required(),
+            TextInput::make('phone')
+                ->label('Téléphone')
+                ->tel()
+                ->maxLength(255),
+            Textarea::make('description')
+                ->rows(3),
+        ];
     }
 }

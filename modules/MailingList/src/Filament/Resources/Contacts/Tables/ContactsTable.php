@@ -18,23 +18,26 @@ final class ContactsTable
         return $table
             ->columns([
                 TextColumn::make('last_name')
+                    ->label('Nom')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('first_name')
+                    ->label('Prénom')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('email')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('phone')
+                    ->label('Téléphone')
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('user.name')
-                    ->label('Owner')
+                    ->label('Propriétaire')
                     ->sortable(),
                 TextColumn::make('address_books_count')
                     ->counts('addressBooks')
-                    ->label('Address Books')
+                    ->label('Carnets')
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
