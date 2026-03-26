@@ -11,8 +11,9 @@ use Filament\Support\Contracts\HasLabel;
 
 enum RoleEnum: string implements HasColor, HasDescription, HasIcon, HasLabel
 {
-    case ADMIN = 'ROLE_ADMIN';
-    case MANDATAIRE = 'ROLE_MANDATAIRE';
+    case PST = 'ROLE_PST';
+    case ADMIN = 'ROLE_PST_ADMIN';
+    case MANDATAIRE = 'ROLE_PST_MANDATAIRE';
 
     public static function toArray(): array
     {
@@ -27,7 +28,7 @@ enum RoleEnum: string implements HasColor, HasDescription, HasIcon, HasLabel
     public function getLabel(): string
     {
         return match ($this) {
-            self::ADMIN => 'Administrateur',
+            self::ADMIN => 'Administrateur PST',
             self::MANDATAIRE => 'Mandataire',
         };
     }

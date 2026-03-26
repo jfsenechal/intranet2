@@ -15,6 +15,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('actions')) {
+            return;
+        }
         Schema::table('actions', function (Blueprint $table) {
             $table->boolean('is_internal')->default(false);
         });

@@ -23,6 +23,9 @@ return new class extends Migration
 
     public function up(): void
     {
+        if (Schema::hasTable('strategic_objectives')) {
+            return;
+        }
         Schema::create('strategic_objectives', function (Blueprint $table) {
             $table->id();
             $table->string('name');

@@ -45,17 +45,6 @@ final class DatabaseSeeder extends Seeder
                 'color' => '#000000',
             ]
         );
-        Module::create(
-            [
-                'name' => 'Pst',
-                'tab_id' => $tab->id,
-                'url' => 'administration',
-                'is_public' => true,
-                'description' => 'Programme Stratégique Transversal',
-                'icon' => 'heroicon-o-envelope',
-                'color' => '#000000',
-            ]
-        );
     }
 
     private function createTab(int $moduleId): ?Tab

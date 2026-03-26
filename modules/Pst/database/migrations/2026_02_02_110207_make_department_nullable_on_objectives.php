@@ -12,23 +12,15 @@ return new class() extends Migration
 
     public function up(): void
     {
+        if (Schema::hasTable('actions')) {
+            return;
+        }
         Schema::table('strategic_objectives', function (Blueprint $table) {
             $table->string('department')->nullable()->change();
         });
 
         Schema::table('operational_objectives', function (Blueprint $table) {
             $table->string('department')->nullable()->change();
-        });
-    }
-
-    public function down(): void
-    {
-        Schema::table('strategic_objectives', function (Blueprint $table) {
-            $table->string('department')->nullable(false)->change();
-        });
-
-        Schema::table('operational_objectives', function (Blueprint $table) {
-            $table->string('department')->nullable(false)->change();
         });
     }
 };

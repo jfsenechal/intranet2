@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Database\Seeders;
+namespace AcMarche\Pst\Database\Seeders;
 
-use App\Enums\RoleEnum;
-use App\Models\Odd;
-use App\Models\Role;
-use App\Models\Service;
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Pst\Models\Odd;
+use AcMarche\Pst\Models\Service;
+use AcMarche\Security\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -15,13 +15,6 @@ use Illuminate\Support\Facades\Hash;
 final class DatabaseSeeder extends Seeder
 {
     protected static ?string $password;
-    /**
-     * TRUNCATE `roles`;
-     * TRUNCATE `role_user`;
-     * TRUNCATE `services`;
-     * TRUNCATE `users`;
-     * TRUNCATE `odds`;
-     */
 
     /**
      * Seed the application's database.

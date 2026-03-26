@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Console\Commands;
 
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Security\Models\Role;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +19,16 @@ final class FixCommand extends Command
 
     public function handle(): int
     {
+        $adminRole = Role::factory()->create([
+            'name' => RoleEnum::ADMIN->value,
+        ]);
+        $adminRole = Role::factory()->create([
+            'name' => RoleEnum::MANDATAIRE->value,
+        ]);
+        $adminRole = Role::factory()->create([
+            'name' => RoleEnum::PST->value,
+        ]);
+
         $tables = ['action_user', 'action_mandatory'];
 
         foreach ($tables as $table) {

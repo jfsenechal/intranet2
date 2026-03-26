@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c956afb0f0496f09c513cc03d8ce56f",
+    "content-hash": "4c9ef905ac3b7e4cf5818bd715503461",
     "packages": [
         {
             "name": "acmarche/app",
@@ -44,6 +44,133 @@
                 }
             ],
             "description": "App management module for AcMarche",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "acmarche/courrier",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./modules/Courrier",
+                "reference": "452a1c7ca7a535c6603f3194d797eb8d2aef6dcc"
+            },
+            "require": {
+                "filament/filament": "^5.0",
+                "illuminate/contracts": "^12.0|^13.0",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AcMarche\\Courrier\\CourrierServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AcMarche\\Courrier\\": "src/",
+                    "AcMarche\\Courrier\\Database\\Factories\\": "database/factories/",
+                    "AcMarche\\Courrier\\Database\\Seeders\\": "database/seeders/",
+                    "AcMarche\\Courrier\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AcMarche",
+                    "email": "info@acmarche.be"
+                }
+            ],
+            "description": "Incoming physical mail management module for AcMarche",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "acmarche/document",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./modules/Document",
+                "reference": "831be318b4c33c1fef9ebbaa08ce8c77164d9158"
+            },
+            "require": {
+                "filament/filament": "^5.0",
+                "illuminate/contracts": "^12.0|^13.0",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AcMarche\\Document\\DocumentServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AcMarche\\Document\\": "src/",
+                    "AcMarche\\Document\\Database\\Factories\\": "database/factories/",
+                    "AcMarche\\Document\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AcMarche",
+                    "email": "info@acmarche.be"
+                }
+            ],
+            "description": "Document management module for AcMarche",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "acmarche/hrm",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./modules/Hrm",
+                "reference": "e5a43479723366f864725c04274dca9b76e871bf"
+            },
+            "require": {
+                "filament/filament": "^5.0",
+                "illuminate/contracts": "^12.0|^13.0",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AcMarche\\Hrm\\HrmServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AcMarche\\Hrm\\": "src/",
+                    "AcMarche\\Hrm\\Database\\Factories\\": "database/factories/",
+                    "AcMarche\\Hrm\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AcMarche",
+                    "email": "info@acmarche.be"
+                }
+            ],
+            "description": "Human Resource Management module for AcMarche",
             "transport-options": {
                 "relative": true
             }
@@ -92,6 +219,91 @@
             }
         },
         {
+            "name": "acmarche/mileage",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./modules/Mileage",
+                "reference": "f0ffd73ef929b9c8fd79bb2a4c4eb9978ebbbaac"
+            },
+            "require": {
+                "filament/filament": "^5.0",
+                "illuminate/contracts": "^12.0|^13.0",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AcMarche\\Mileage\\MileageServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AcMarche\\Mileage\\": "src/",
+                    "AcMarche\\Mileage\\Database\\Factories\\": "database/factories/",
+                    "AcMarche\\Mileage\\Database\\Seeders\\": "database/seeders/",
+                    "AcMarche\\Mileage\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AcMarche",
+                    "email": "info@acmarche.be"
+                }
+            ],
+            "description": "Mileage and travel expense management module for AcMarche",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "acmarche/news",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./modules/News",
+                "reference": "3cf5941cb3cced5b9e555d24a0c78bddbcb735ff"
+            },
+            "require": {
+                "filament/filament": "^5.0",
+                "illuminate/contracts": "^12.0|^13.0",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AcMarche\\News\\NewsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AcMarche\\News\\": "src/",
+                    "AcMarche\\News\\Database\\Factories\\": "database/factories/",
+                    "AcMarche\\News\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AcMarche",
+                    "email": "info@acmarche.be"
+                }
+            ],
+            "description": "News management module for AcMarche",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "acmarche/pst",
             "version": "dev-master",
             "dist": {
@@ -130,6 +342,48 @@
                 }
             ],
             "description": "PST - Programme Stratégique Transversal",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "acmarche/publication",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./modules/Publication",
+                "reference": "cbf52c121f3010c997a8597fb2efa95fa7bb1f3d"
+            },
+            "require": {
+                "filament/filament": "^5.0",
+                "illuminate/contracts": "^12.0|^13.0",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AcMarche\\Publication\\PublicationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AcMarche\\Publication\\": "src/",
+                    "AcMarche\\Publication\\Database\\Factories\\": "database/factories/",
+                    "AcMarche\\Publication\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AcMarche",
+                    "email": "info@acmarche.be"
+                }
+            ],
+            "description": "Publication management module for AcMarche",
             "transport-options": {
                 "relative": true
             }
@@ -15859,8 +16113,14 @@
     "minimum-stability": "beta",
     "stability-flags": {
         "acmarche/app": 20,
+        "acmarche/courrier": 20,
+        "acmarche/document": 20,
+        "acmarche/hrm": 20,
         "acmarche/mailing-list": 20,
+        "acmarche/mileage": 20,
+        "acmarche/news": 20,
         "acmarche/pst": 20,
+        "acmarche/publication": 20,
         "acmarche/security": 20
     },
     "prefer-stable": true,
