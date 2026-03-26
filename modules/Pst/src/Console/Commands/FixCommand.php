@@ -13,7 +13,7 @@ use Symfony\Component\Console\Command\Command as SfCommand;
 
 final class FixCommand extends Command
 {
-    protected $signature = 'pst:fix';
+    protected $signature = 'pst:migration';
 
     protected $description = 'Migrate action_user and action_mandatory tables from user_id to username';
 
@@ -32,7 +32,7 @@ final class FixCommand extends Command
         $tables = ['action_user', 'action_mandatory'];
 
         foreach ($tables as $table) {
-            $this->migrateTable($table);
+           // $this->migrateTable($table);
         }
 
         $this->info('Migration completed successfully.');

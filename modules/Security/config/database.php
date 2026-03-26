@@ -20,7 +20,7 @@ return [
             'url' => env('DB_SECURITY_URL'),
             'host' => env('DB_SECURITY_HOST', env('DB_HOST', '127.0.0.1')),
             'port' => env('DB_SECURITY_PORT', env('DB_PORT', '3306')),
-            'database' => env('DB_SECURITY_DATABASE', 'intranet'),
+            'database' => env('DB_SECURITY_DATABASE', env('DB_DATABASE', 'intranet')),
             'username' => env('DB_SECURITY_USERNAME', env('DB_USERNAME', 'root')),
             'password' => env('DB_SECURITY_PASSWORD', env('DB_PASSWORD', '')),
             'unix_socket' => env('DB_SOCKET', ''),
