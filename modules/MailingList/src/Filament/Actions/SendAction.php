@@ -24,6 +24,7 @@ final class SendAction
             ->modalDescription(
                 fn (): string => "Cet e-mail sera envoyé à {$email->total_count} destinataires. Continuer ?"
             )
+            ->disabled(fn (): bool => $email->total_count < 1)
             ->visible(
                 fn (
                 ): bool => $email->status === EmailStatus::Draft || $email->status === EmailStatus::Failed

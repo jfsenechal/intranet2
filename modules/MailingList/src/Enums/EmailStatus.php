@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\MailingList\Enums;
 
 use Filament\Support\Contracts\HasColor;
-use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 use Filament\Support\Icons\Heroicon;
 

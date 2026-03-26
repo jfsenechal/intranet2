@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\MailingList\Filament\Actions;
 
 use AcMarche\MailingList\Mail\NewsletterMail;
@@ -8,11 +10,12 @@ use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 
-class PreviewAction
+final class PreviewAction
 {
-    public static function make(Email $record): Action
+    public static function make(Email|Model $record): Action
     {
         return Action::make('preview')
             ->label('Apercu')
@@ -24,7 +27,7 @@ class PreviewAction
                     ->label('Adresse e-mail')
                     ->email()
                     ->required()
-                    ->default(fn(): ?string => auth()->user()?->email),
+                    ->default(fn (): ?string => auth()->user()?->email),
             ])
             ->action(function (array $data) use ($record): void {
                 $record->load('sender');
@@ -40,5 +43,4 @@ class PreviewAction
             });
 
     }
-
 }

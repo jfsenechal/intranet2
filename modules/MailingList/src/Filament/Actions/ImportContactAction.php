@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\MailingList\Filament\Actions;
 
 use AcMarche\MailingList\Filament\Imports\ContactImporter;
@@ -7,7 +9,7 @@ use Filament\Actions\Action;
 use Filament\Actions\ImportAction;
 use Filament\Support\Icons\Heroicon;
 
-class ImportContactAction
+final class ImportContactAction
 {
     public static function make(): Action
     {
