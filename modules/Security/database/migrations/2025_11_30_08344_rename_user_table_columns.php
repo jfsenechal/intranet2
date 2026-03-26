@@ -6,7 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     protected $connection = 'maria-security';
 
     /**
@@ -15,14 +16,14 @@ return new class extends Migration {
     public function up(): void
     {
         $schema = Schema::connection('maria-security');
-        $hasColumn = fn(string $column): bool => $schema->hasColumn('users', $column);
+        $hasColumn = fn (string $column): bool => $schema->hasColumn('users', $column);
 
         $schema->table('users', function (Blueprint $table) use ($hasColumn) {
             if ($hasColumn('departement')) {
                 $table->dropColumn('departement');
             }
 
-            if (!$hasColumn('departments')) {
+            if (! $hasColumn('departments')) {
                 $table->json('departments')->nullable(false);
             }
 
@@ -44,61 +45,59 @@ return new class extends Migration {
                 $table->string('first_name')->nullable(false);
             }
 
-            if (!$hasColumn('phone')) {
+            if (! $hasColumn('phone')) {
                 $table->string('phone', 50)->nullable();
             }
 
-            if (!$hasColumn('mobile')) {
+            if (! $hasColumn('mobile')) {
                 $table->string('mobile', 50)->nullable();
             }
 
-            if (!$hasColumn('extension')) {
+            if (! $hasColumn('extension')) {
                 $table->string('extension', 50)->nullable();
             }
 
-            if (!$hasColumn('color_primary')) {
+            if (! $hasColumn('color_primary')) {
                 $table->string('color_primary', 50)->nullable();
             }
 
-            if (!$hasColumn('color_secondary')) {
+            if (! $hasColumn('color_secondary')) {
                 $table->string('color_secondary', 50)->nullable();
             }
 
-            if ($hasColumn('uuid')) {
-
-            } else {
+            if (! $hasColumn('uuid')) {
                 $table->uuid()->nullable();
             }
 
-            if (!$hasColumn('is_administrator')) {
+            if (! $hasColumn('is_administrator')) {
                 $table->boolean('is_administrator')->default(false);
             }
 
-            if (!$hasColumn('app_authentication_secret')) {
+            if (! $hasColumn('app_authentication_secret')) {
                 $table->text('app_authentication_secret')->nullable();
             }
 
-            if (!$hasColumn('app_authentication_recovery_codes')) {
+            if (! $hasColumn('app_authentication_recovery_codes')) {
                 $table->text('app_authentication_recovery_codes')->nullable();
             }
-            if (!$hasColumn('email_verified_at')) {
+            if (! $hasColumn('email_verified_at')) {
                 $table->timestamp('email_verified_at')->nullable();
             }
 
-            if (!$hasColumn('remember_token')) {
+            if (! $hasColumn('remember_token')) {
                 $table->rememberToken();
             }
 
-            if (!$hasColumn('created_at')) {
+            if (! $hasColumn('created_at')) {
                 $table->timestamps();
             }
 
-            if (!$hasColumn('mandatory')) {
+            if (! $hasColumn('mandatory')) {
                 $table->tinyInteger('mandatory')->default(0);
             }
 
             if ($hasColumn('news_attachment')) {
-                $table->string('news_attachment')->nullable(false)->default('0')->change();
+                $table->boolean('news_attachment')->nullable(false)->default(false)->change();
             }
         });
     }
