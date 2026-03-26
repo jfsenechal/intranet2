@@ -38,7 +38,7 @@ final class SenderForm
                         ->directory('mailing-list/senders/logos')
                         ->visibility('public')
                         ->automaticallyResizeImagesMode('cover')
-                        ->imageAspectRatio('16:9')
+                       // ->imageAspectRatio('16:9')
                         ->automaticallyResizeImagesToWidth('300')
                         ->columnSpanFull(),
                 ])
