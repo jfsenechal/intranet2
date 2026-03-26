@@ -23,6 +23,8 @@ final class EmailResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
 
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $navigationLabel = 'E-mails';
 
     protected static ?string $modelLabel = 'e-mail';

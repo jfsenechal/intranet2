@@ -8,6 +8,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Schema;
 
 final class SenderForm
@@ -19,28 +20,32 @@ final class SenderForm
                 TextInput::make('name')
                     ->label('Nom')
                     ->maxLength(255)
-                    ->required(),
-                TextInput::make('email')
-                    ->label('E-mail')
-                    ->helperText('Seules les adresses @marche.be, @ac.marche.be, @cpas.marche.be sont autorisées.')
-                    ->email()
-                    ->maxLength(255)
                     ->required()
-                    ->rules(['regex:/^.+@(marche\.be|ac\.marche\.be|cpas\.marche\.be)$/i']),
-                FileUpload::make('logo')
-                    ->label('Logo')
-                    ->helperText('Le logo sera joint au mail')
-                    ->image()
-                    ->disk('public')
-                    ->directory('mailing-list/senders/logos')
-                    ->visibility('public')
-                    ->automaticallyResizeImagesMode('cover')
-                    ->imageAspectRatio('16:9')
-                    ->automaticallyResizeImagesToWidth('300')
+                    ->columnSpanFull(),
+                Flex::make([
+                    TextInput::make('email')
+                        ->label('E-mail')
+                        ->helperText('Seules les adresses @marche.be, @ac.marche.be, @cpas.marche.be sont autorisées.')
+                        ->email()
+                        ->maxLength(255)
+                        ->required()
+                        ->rules(['regex:/^.+@(marche\.be|ac\.marche\.be|cpas\.marche\.be)$/i']),
+                    FileUpload::make('logo')
+                        ->label('Logo')
+                        ->helperText('Le logo sera joint au mail')
+                        ->image()
+                        ->disk('public')
+                        ->directory('mailing-list/senders/logos')
+                        ->visibility('public')
+                        ->automaticallyResizeImagesMode('cover')
+                        ->imageAspectRatio('16:9')
+                        ->automaticallyResizeImagesToWidth('300')
+                        ->columnSpanFull(),
+                ])
                     ->columnSpanFull(),
                 RichEditor::make('footer')
                     ->label('Pied de page')
-                    ->helperText('Sera joint du mail')
+                    ->helperText('Il sera affiché dans le pied page.')
                     ->columnSpanFull(),
                 Hidden::make('username')
                     ->default(fn (): ?string => auth()->user()?->username),

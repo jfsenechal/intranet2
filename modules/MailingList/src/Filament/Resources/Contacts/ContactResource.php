@@ -22,6 +22,8 @@ final class ContactResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
+    protected static ?int $navigationSort = 3;
+
     protected static ?string $navigationLabel = 'Contacts';
 
     protected static ?string $modelLabel = 'contact';

@@ -22,6 +22,8 @@ final class SenderResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPaperAirplane;
 
+    protected static ?int $navigationSort = 4;
+
     protected static ?string $navigationLabel = 'Expediteurs';
 
     protected static ?string $modelLabel = 'expediteur';

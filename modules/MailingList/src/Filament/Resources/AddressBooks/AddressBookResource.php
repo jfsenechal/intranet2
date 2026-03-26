@@ -23,6 +23,8 @@ final class AddressBookResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookOpen;
 
+    protected static ?int $navigationSort = 2;
+
     protected static ?string $navigationLabel = 'Carnets d\'adresses';
 
     protected static ?string $modelLabel = 'carnet d\'adresses';
