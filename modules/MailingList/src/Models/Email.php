@@ -6,7 +6,9 @@ namespace AcMarche\MailingList\Models;
 
 use AcMarche\MailingList\Database\Factories\EmailFactory;
 use AcMarche\MailingList\Enums\EmailStatus;
+use AcMarche\MailingList\Repositories\OwnerScope;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[UseFactory(EmailFactory::class)]
+#[ScopedBy(OwnerScope::class)]
 final class Email extends Model
 {
     /** @use HasFactory<EmailFactory> */
