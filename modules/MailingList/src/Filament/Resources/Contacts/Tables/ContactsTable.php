@@ -32,9 +32,6 @@ final class ContactsTable
                     ->label('Téléphone')
                     ->searchable()
                     ->toggleable(),
-                TextColumn::make('user.name')
-                    ->label('Propriétaire')
-                    ->sortable(),
                 TextColumn::make('address_books_count')
                     ->counts('addressBooks')
                     ->label('Carnets')
