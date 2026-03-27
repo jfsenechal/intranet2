@@ -25,9 +25,6 @@ final class FixCommand extends Command
         $adminRole = Role::factory()->create([
             'name' => RoleEnum::MANDATAIRE->value,
         ]);
-        $adminRole = Role::factory()->create([
-            'name' => RoleEnum::PST->value,
-        ]);
 
         $tables = ['action_user', 'action_mandatory'];
 
