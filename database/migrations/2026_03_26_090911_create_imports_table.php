@@ -7,13 +7,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        if (!Schema::hasTable('imports')) {
+        if (! Schema::hasTable('imports')) {
             Schema::create('imports', function (Blueprint $table): void {
                 $table->id();
                 $table->timestamp('completed_at')->nullable();
@@ -23,8 +24,8 @@ return new class extends Migration {
                 $table->unsignedInteger('processed_rows')->default(0);
                 $table->unsignedInteger('total_rows');
                 $table->unsignedInteger('successful_rows')->default(0);
-              //  $table->unsignedInteger('user_id');
-              //  $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+                //  $table->unsignedInteger('user_id');
+                //  $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
                 $table->foreignIdFor(User::class)->cascadeOnDelete();
                 $table->timestamps();
             });
