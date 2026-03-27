@@ -32,6 +32,14 @@ final class ContactsTable
                     ->label('Téléphone')
                     ->searchable()
                     ->toggleable(),
+                TextColumn::make('is_shared')
+                    ->label('Partagé')
+                    ->badge()
+                    ->state(fn ($record): string => $record->username === auth()->user()->username ? 'Owned' : 'Shared')
+                    ->color(fn (string $state): string => match ($state) {
+                        'Owned' => 'blue',
+                        'Shared' => 'green',
+                    }),
                 TextColumn::make('address_books_count')
                     ->counts('addressBooks')
                     ->label('Carnets')

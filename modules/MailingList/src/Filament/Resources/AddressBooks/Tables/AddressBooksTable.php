@@ -20,10 +20,14 @@ final class AddressBooksTable
                 TextColumn::make('name')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('user.name')
-                    ->label('Owner')
-                    ->sortable()
-                    ->searchable(),
+                TextColumn::make('is_shared')
+                    ->label('Partagé')
+                    ->badge()
+                    ->state(fn ($record): string => $record->username === auth()->user()->username ? 'Owned' : 'Shared')
+                    ->color(fn (string $state): string => match ($state) {
+                        'Owned' => 'blue',
+                        'Shared' => 'green',
+                    }),
                 TextColumn::make('contacts_count')
                     ->counts('contacts')
                     ->label('Contacts')
