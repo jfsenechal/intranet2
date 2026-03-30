@@ -12,6 +12,11 @@ return new class() extends Migration
 
     public function up(): void
     {
+        //$connection = Schema::connection('maria-mailing-list')->getConnection();
+        //$connection->statement('SET FOREIGN_KEY_CHECKS=0');
+        if (Schema::connection('maria-mailing-list')->hasTable('senders')) {
+            return;
+        }
         Schema::connection('maria-mailing-list')->dropIfExists('senders');
         Schema::connection('maria-mailing-list')->create('senders', function (Blueprint $table) {
             $table->id();
@@ -22,5 +27,7 @@ return new class() extends Migration
             $table->string('logo')->nullable();
             $table->timestamps();
         });
+
+        //$connection->statement('SET FOREIGN_KEY_CHECKS=1');
     }
 };
