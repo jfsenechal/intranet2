@@ -12,7 +12,7 @@ return new class() extends Migration
 
     public function up(): void
     {
-        if (Schema::connection('maria-mailing-list')->hasTable('address_books')) {
+        if (Schema::connection('maria-mailing-list')->hasTable('address_book_shares')) {
             return;
         }
         Schema::create('address_book_shares', function (Blueprint $table) {

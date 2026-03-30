@@ -43,7 +43,7 @@ return new class extends Migration
             Schema::connection('maria-publication')->table('category', function (Blueprint $table) {
                 $table->rename('categories');
             });
-        } else {
+        } elseif (!Schema::connection('maria-publication')->hasTable('categories')) {
             Schema::connection('maria-publication')->create('categories', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
