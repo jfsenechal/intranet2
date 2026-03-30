@@ -8,7 +8,8 @@
     "packages": [
         "filament/filament",
         "filament/blueprint",
-        "spatie/laravel-pdf"
+        "spatie/laravel-pdf",
+        "fruitcake/laravel-debugbar"
     ],
     "sail": false,
     "skills": [
