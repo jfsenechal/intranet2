@@ -26,7 +26,7 @@ return new class extends Migration
                 $table->string('color', 7)->default('#6b7280')->change();
 
             });
-        } else {
+        } elseif (! Schema::connection('maria-courrier')->hasTable('categories')) {
             Schema::connection('maria-courrier')->create('categories', function (Blueprint $table): void {
                 $table->id();
                 $table->string('name');
@@ -57,7 +57,7 @@ return new class extends Migration
                 $table->enum('department', DepartmentCourrierEnum::toArray())
                     ->nullable();
             });
-        } else {
+        } elseif (! Schema::connection('maria-courrier')->hasTable('incoming_mails')) {
             Schema::connection('maria-courrier')->create('incoming_mails', function (Blueprint $table): void {
                 $table->id();
                 $table->string('reference_number');

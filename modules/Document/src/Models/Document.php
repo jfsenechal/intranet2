@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Models;
 
+use AcMarche\Document\Database\Factories\DocumentFactory;
 use AcMarche\Document\Observers\DocumentObserver;
 use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
@@ -28,7 +29,6 @@ final class Document extends Model
         'file_name',
         'file_size',
         'file_mime',
-        'category',
         'user_add',
         'category_id',
     ];
@@ -44,6 +44,11 @@ final class Document extends Model
     protected static function booted(): void
     {
         self::bootHasUser();
+    }
+
+    protected static function newFactory(): DocumentFactory
+    {
+        return DocumentFactory::new();
     }
 
     protected function casts(): array

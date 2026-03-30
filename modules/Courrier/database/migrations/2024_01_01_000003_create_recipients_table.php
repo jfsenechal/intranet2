@@ -27,7 +27,7 @@ return new class extends Migration
                 $table->boolean('receives_attachments')->default(false)->change();
             });
 
-        } else {
+        } elseif (! Schema::connection('maria-courrier')->hasTable('recipients')) {
             Schema::connection('maria-courrier')->create('recipients', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('supervisor_id')->nullable()->constrained('recipients')->nullOnDelete();

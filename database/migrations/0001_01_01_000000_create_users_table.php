@@ -14,12 +14,18 @@ return new class extends Migration
             Schema::create('users', function (Blueprint $table): void {
                 $table->id();
                 $table->string('name')->nullable()->default(null);
+                $table->string('first_name')->nullable(false)->default('');
+                $table->string('last_name')->nullable(false)->default('');
+                $table->string('username')->nullable()->default(null);
                 $table->string('email')->unique();
                 $table->timestamp('email_verified_at')->nullable();
+                $table->json('departments')->nullable(false)->default('[]');
                 $table->string('password');
                 $table->text('app_authentication_secret')->nullable();
                 $table->text('app_authentication_recovery_codes')->nullable();
                 $table->rememberToken();
+                $table->string('color_primary', 50)->nullable();
+                $table->string('color_secondary', 50)->nullable();
                 $table->timestamps();
             });
         }

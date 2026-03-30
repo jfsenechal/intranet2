@@ -41,7 +41,6 @@ return new class extends Migration
                 $table->string('file_name');
                 $table->integer('file_size')->nullable();
                 $table->string('file_mime')->nullable();
-                $table->string('category')->nullable();
                 $table->string('user_add');
                 $table->foreignIdFor(Category::class);
                 $table->softDeletes();

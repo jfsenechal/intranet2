@@ -18,7 +18,8 @@
         "psr-4": {
             "AcMarche\\Document\\": "src/",
             "AcMarche\\Document\\Database\\Factories\\": "database/factories/",
-            "AcMarche\\Document\\Database\\Seeders\\": "database/seeders/"
+            "AcMarche\\Document\\Database\\Seeders\\": "database/seeders/",
+            "AcMarche\\Document\\Tests\\": "tests/"
         }
     },
     "extra": {

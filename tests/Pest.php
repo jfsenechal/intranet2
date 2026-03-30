@@ -15,4 +15,7 @@ uses(
     '../modules/Pst/tests/Feature',
     '../modules/Pst/tests/Unit',
     '../modules/Pst/tests/Browser',
+    '../modules/Document/tests/Feature',
+    '../modules/Document/tests/Unit',
+    '../modules/Document/tests/Browser',
 );

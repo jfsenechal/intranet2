@@ -14,8 +14,13 @@ abstract class TestCase extends BaseTestCase
     private const MODULE_CONNECTIONS = [
         'mariadb',
         'maria-mailing-list',
-        'mariadb',
         'maria-pst',
+        'maria-document',
+        'maria-courrier',
+        'maria-news',
+        'maria-hrm',
+        'maria-mileage',
+        'maria-publication',
     ];
 
     protected function refreshApplication(): void

@@ -23,7 +23,7 @@ return new class extends Migration
                 $table->enum('department', DepartmentCourrierEnum::toArray())
                     ->nullable();
             });
-        } else {
+        } elseif (! Schema::connection('maria-courrier')->hasTable('senders')) {
             Schema::connection('maria-courrier')->create('senders', function (Blueprint $table): void {
                 $table->id();
                 $table->string('slug', 70)->unique();

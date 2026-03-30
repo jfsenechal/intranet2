@@ -21,7 +21,7 @@ return new class extends Migration
                 $table->renameColumn('courrier_id', 'incoming_mail_id');
             });
 
-        } else {
+        } elseif (! Schema::connection('maria-courrier')->hasTable('attachments')) {
             Schema::connection('maria-courrier')->create('attachments', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('incoming_mail_id')->constrained('incoming_mails')->cascadeOnDelete();

@@ -27,7 +27,7 @@ return new class extends Migration
                 $table->index(['incoming_mail_id', 'recipient_id']);
             });
 
-        } else {
+        } elseif (! Schema::connection('maria-courrier')->hasTable('incoming_mail_recipient')) {
             Schema::connection('maria-courrier')->create('incoming_mail_recipient', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('incoming_mail_id')->constrained('incoming_mails')->cascadeOnDelete();

@@ -19,7 +19,7 @@ return new class extends Migration
             Schema::connection('maria-courrier')->table('recipient_service', function (Blueprint $table) {
                 $table->renameColumn('destinataire_id', 'recipient_id');
             });
-        } else {
+        } elseif (! Schema::connection('maria-courrier')->hasTable('recipient_service')) {
             Schema::connection('maria-courrier')->create('recipient_service', function (Blueprint $table): void {
                 $table->foreignId('recipient_id')->constrained('recipients')->cascadeOnDelete();
                 $table->foreignId('service_id')->constrained('services')->cascadeOnDelete();
