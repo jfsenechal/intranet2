@@ -22,7 +22,7 @@ final class ListEmails extends ListRecords
                 ->label('RGPD & Mailing Lists')
                 ->icon(Heroicon::InformationCircle)
                 ->color('info')
-                ->modalHeading('RGPD & Mailing Lists en Belgique')
+                ->modalHeading('Un rappel des règles RGPD concernant le Mailing Lists')
                 ->modalContent(fn (): View => view('mailing-list-view::doc'))
                 ->modalSubmitAction(false),
             CreateAction::make()
