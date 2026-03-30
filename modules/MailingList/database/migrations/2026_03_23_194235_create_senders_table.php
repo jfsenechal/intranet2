@@ -12,10 +12,8 @@ return new class() extends Migration
 
     public function up(): void
     {
-        if (Schema::connection('maria-mailing-list')->hasTable('senders')) {
-            return;
-        }
-        Schema::create('senders', function (Blueprint $table) {
+        Schema::connection('maria-mailing-list')->dropIfExists('senders');
+        Schema::connection('maria-mailing-list')->create('senders', function (Blueprint $table) {
             $table->id();
             $table->string('username')->index();
             $table->string('name');
