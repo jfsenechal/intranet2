@@ -18,7 +18,8 @@
         "psr-4": {
             "AcMarche\\News\\": "src/",
             "AcMarche\\News\\Database\\Factories\\": "database/factories/",
-            "AcMarche\\News\\Database\\Seeders\\": "database/seeders/"
+            "AcMarche\\News\\Database\\Seeders\\": "database/seeders/",
+            "AcMarche\\News\\Tests\\": "tests/"
         }
     },
     "extra": {

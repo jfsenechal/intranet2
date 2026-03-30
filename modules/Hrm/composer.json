@@ -18,7 +18,8 @@
         "psr-4": {
             "AcMarche\\Hrm\\": "src/",
             "AcMarche\\Hrm\\Database\\Factories\\": "database/factories/",
-            "AcMarche\\Hrm\\Database\\Seeders\\": "database/seeders/"
+            "AcMarche\\Hrm\\Database\\Seeders\\": "database/seeders/",
+            "AcMarche\\Hrm\\Tests\\": "tests/"
         }
     },
     "extra": {
