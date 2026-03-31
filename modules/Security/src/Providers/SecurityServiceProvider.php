@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Providers;
 
-// use AcMarche\Mileage\Console\Commands\MigrationCommand;
+use AcMarche\App\Traits\ModuleServiceProviderTrait;
 use AcMarche\Security\Console\Commands\CreateUserCommand;
 use AcMarche\Security\Console\Commands\MigrationRoleCommand;
 use AcMarche\Security\Console\Commands\SyncUserCommand;
@@ -12,79 +12,58 @@ use Illuminate\Support\ServiceProvider;
 
 final class SecurityServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
+    use ModuleServiceProviderTrait;
+
     public function register(): void
     {
-        // Merge security config
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/security.php',
-            'security'
-        );
-
-        // Register database connection from module config
-        $this->registerDatabaseConnection();
+        $this->registerModuleConfig();
     }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
-        // Load views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'security');
-
-        // Load routes
-        if (file_exists(__DIR__.'/../routes/web.php')) {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-        }
-
         // Register commands
         if ($this->app->runningInConsole()) {
             $this->commands([
                 CreateUserCommand::class,
                 SyncUserCommand::class,
                 MigrationRoleCommand::class,
-                //       MigrationCommand::class,
             ]);
         }
 
-        // Publish config
-        $this->publishes([
-            __DIR__.'/../config/security.php' => config_path('security.php'),
-        ], 'security-config');
+        // Custom boot without migrations (Security module has no migrations)
+        $path = $this->modulePath();
+        $name = $this->moduleName();
 
-        // Publish database config
-        $this->publishes([
-            __DIR__.'/../config/database.php' => config_path('security-database.php'),
-        ], 'security-database-config');
+        $this->loadViewsFrom($path.'/resources/views', $name);
 
-        // Publish migrations
-        $this->publishes([
-            __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'security-migrations');
+        if (file_exists($path.'/routes/web.php')) {
+            $this->loadRoutesFrom($path.'/routes/web.php');
+        }
 
-        // Publish views
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/security'),
-        ], 'security-views');
+            $path."/config/{$name}.php" => config_path("{$name}.php"),
+        ], "{$name}-config");
 
-        // Publish assets
         $this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/security'),
-        ], 'security-assets');
+            $path.'/config/database.php' => config_path("{$name}-database.php"),
+        ], "{$name}-database-config");
+
+        $this->publishes([
+            $path.'/resources/views' => resource_path("views/vendor/{$name}"),
+        ], "{$name}-views");
+
+        $this->publishes([
+            $path.'/resources/assets' => public_path("vendor/{$name}"),
+        ], "{$name}-assets");
     }
 
-    /**
-     * Register the module's database connection.
-     */
-    protected function registerDatabaseConnection(): void
+    protected function moduleName(): string
     {
-        $connections = require __DIR__.'/../config/database.php';
+        return 'security';
+    }
 
-        foreach ($connections['connections'] ?? [] as $name => $config) {
-            config(['database.connections.'.$name => $config]);
-        }
+    protected function modulePath(): string
+    {
+        return __DIR__.'/../..';
     }
 }

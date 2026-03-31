@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Providers;
 
+use AcMarche\App\Traits\ModuleServiceProviderTrait;
 use AcMarche\Pst\Console\Commands\FixCommand;
 use AcMarche\Pst\Console\Commands\MeiliCommand;
 use AcMarche\Pst\Policies\RegisterPolicies;
@@ -15,29 +16,27 @@ use Illuminate\Support\ServiceProvider;
 
 final class PstServiceProvider extends ServiceProvider
 {
+    use ModuleServiceProviderTrait;
+
     public function register(): void
     {
-        // Merge config
-        $this->mergeConfigFrom(
-            __DIR__.'/../../config/pst.php',
-            'pst'
-        );
-
-        // Register database connection from module config
-        $this->registerDatabaseConnection();
+        $this->registerModuleConfig();
     }
 
     public function boot(): void
     {
-        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+        $path = $this->modulePath();
+        $name = $this->moduleName();
+
+        $this->loadMigrationsFrom($path.'/database/migrations');
         RegisterPolicies::register();
 
         // Load views
-        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'pst-view');
+        $this->loadViewsFrom($path.'/resources/views', 'pst-view');
 
         // Load routes
-        if (file_exists(__DIR__.'/../../routes/web.php')) {
-            $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
+        if (file_exists($path.'/routes/web.php')) {
+            $this->loadRoutesFrom($path.'/routes/web.php');
         }
 
         // Register commands
@@ -50,28 +49,28 @@ final class PstServiceProvider extends ServiceProvider
 
         // Publish config
         $this->publishes([
-            __DIR__.'/../../config/pst.php' => config_path('pst.php'),
-        ], 'pst-config');
+            $path."/config/{$name}.php" => config_path("{$name}.php"),
+        ], "{$name}-config");
 
         // Publish database config
         $this->publishes([
-            __DIR__.'/../../config/database.php' => config_path('pst-database.php'),
-        ], 'pst-database-config');
+            $path.'/config/database.php' => config_path("{$name}-database.php"),
+        ], "{$name}-database-config");
 
         // Publish migrations
         $this->publishes([
-            __DIR__.'/../../database/migrations' => database_path('migrations'),
-        ], 'pst-migrations');
+            $path.'/database/migrations' => database_path('migrations'),
+        ], "{$name}-migrations");
 
         // Publish views
         $this->publishes([
-            __DIR__.'/../../resources/views' => resource_path('views/vendor/pst'),
-        ], 'pst-views');
+            $path.'/resources/views' => resource_path('views/vendor/pst'),
+        ], "{$name}-views");
 
         // Publish assets
         $this->publishes([
-            __DIR__.'/../../resources/assets' => public_path('vendor/pst'),
-        ], 'pst-assets');
+            $path.'/resources/assets' => public_path("vendor/{$name}"),
+        ], "{$name}-assets");
 
         FilamentView::registerRenderHook(
             PanelsRenderHook::TOPBAR_START,
@@ -82,15 +81,13 @@ final class PstServiceProvider extends ServiceProvider
         );
     }
 
-    /**
-     * Register the module's database connection.
-     */
-    protected function registerDatabaseConnection(): void
+    protected function moduleName(): string
     {
-        $connections = require __DIR__.'/../../config/database.php';
+        return 'pst';
+    }
 
-        foreach ($connections['connections'] ?? [] as $name => $config) {
-            config(['database.connections.'.$name => $config]);
-        }
+    protected function modulePath(): string
+    {
+        return __DIR__.'/../..';
     }
 }

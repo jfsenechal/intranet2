@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Courrier;
+namespace AcMarche\Courrier\Providers;
 
+use AcMarche\App\Traits\ModuleServiceProviderTrait;
 use AcMarche\Courrier\Console\Commands\MergeCommand;
 use AcMarche\Courrier\Console\Commands\SyncCommand;
 use AcMarche\Courrier\Policies\RegisterPolicies;
@@ -12,24 +13,13 @@ use Illuminate\Support\ServiceProvider;
 
 final class CourrierServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
+    use ModuleServiceProviderTrait;
+
     public function register(): void
     {
-        // Merge courrier config
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/courrier.php',
-            'courrier'
-        );
-
-        // Register database connection from module config
-        $this->registerDatabaseConnection();
+        $this->registerModuleConfig();
     }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
         // Register commands
@@ -42,36 +32,7 @@ final class CourrierServiceProvider extends ServiceProvider
 
         RegisterPolicies::register();
 
-        // Load migrations
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
-        // Load views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'courrier');
-
-        // Load routes
-        if (file_exists(__DIR__.'/../routes/web.php')) {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-        }
-
-        // Publish config
-        $this->publishes([
-            __DIR__.'/../config/courrier.php' => config_path('courrier.php'),
-        ], 'courrier-config');
-
-        // Publish database config
-        $this->publishes([
-            __DIR__.'/../config/database.php' => config_path('courrier-database.php'),
-        ], 'courrier-database-config');
-
-        // Publish migrations
-        $this->publishes([
-            __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'courrier-migrations');
-
-        // Publish views
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/courrier'),
-        ], 'courrier-views');
+        $this->bootModule();
 
         // Register IMAP mailboxes
         $this->registerImapMailboxes();
@@ -91,15 +52,13 @@ final class CourrierServiceProvider extends ServiceProvider
         ]);
     }
 
-    /**
-     * Register the module's database connection.
-     */
-    protected function registerDatabaseConnection(): void
+    protected function moduleName(): string
     {
-        $connections = require __DIR__.'/../config/database.php';
+        return 'courrier';
+    }
 
-        foreach ($connections['connections'] ?? [] as $name => $config) {
-            config(['database.connections.'.$name => $config]);
-        }
+    protected function modulePath(): string
+    {
+        return __DIR__.'/../..';
     }
 }
