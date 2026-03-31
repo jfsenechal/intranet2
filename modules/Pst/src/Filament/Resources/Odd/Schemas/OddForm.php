@@ -20,6 +20,8 @@ final class OddForm
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('icon')
                     ->label('Icône')
+                    ->disk('public')
+                    ->directory(config('pst.uploads.odds_icons'))
                     ->previewable(false)
                     ->maxFiles(1)
                     ->image(),

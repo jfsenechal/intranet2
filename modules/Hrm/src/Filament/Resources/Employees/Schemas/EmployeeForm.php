@@ -163,7 +163,7 @@ final class EmployeeForm
                                     ->label('Photo')
                                     ->image()
                                     ->disk('public')
-                                    ->directory('uploads/hrm/photos')
+                                    ->directory(config('hrm.uploads.photos'))
                                     ->imageEditor(),
                             ]),
                         Tabs\Tab::make('Parametres')

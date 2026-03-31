@@ -117,11 +117,11 @@ final class ContractForm
                         Forms\Components\FileUpload::make('file1_name')
                             ->label('Document 1')
                             ->disk('public')
-                            ->directory('uploads/hrm/contracts'),
+                            ->directory(config('hrm.uploads.contracts')),
                         Forms\Components\FileUpload::make('file2_name')
                             ->label('Document 2')
                             ->disk('public')
-                            ->directory('uploads/hrm/contracts'),
+                            ->directory(config('hrm.uploads.contracts')),
                     ]),
                 Forms\Components\RichEditor::make('college')
                     ->label('College')

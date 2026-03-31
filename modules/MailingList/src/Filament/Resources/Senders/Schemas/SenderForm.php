@@ -35,7 +35,7 @@ final class SenderForm
                         ->helperText('Le logo sera joint au mail')
                         ->image()
                         ->disk('public')
-                        ->directory('mailing-list/senders/logos')
+                        ->directory(config('mailing-list.uploads.senders_logos'))
                         ->visibility('public')
                         ->automaticallyResizeImagesMode('cover')
                        // ->imageAspectRatio('16:9')

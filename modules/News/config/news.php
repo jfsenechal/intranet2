@@ -25,9 +25,14 @@ return [
     |
     */
 
-    'featured_image' => [
-        'disk' => env('NEWS_IMAGE_DISK', 'public'),
-        'directory' => env('NEWS_IMAGE_DIRECTORY', 'news'),
+    /*
+    |--------------------------------------------------------------------------
+    | Upload Directories
+    |--------------------------------------------------------------------------
+    */
+    'uploads' => [
+        'featured_image' => 'news',
+        'medias' => 'uploads/news',
     ],
 
     /*

@@ -24,7 +24,7 @@ final class NewsForm
                     ->label('Featured Image')
                     ->image()
                     ->disk('public')
-                    ->directory('news')
+                    ->directory(config('news.uploads.featured_image'))
                     ->columnSpanFull(),
             ]);
     }
@@ -62,7 +62,7 @@ final class NewsForm
                             ->required()
                             ->maxFiles(3)
                             ->disk('public')
-                            ->directory('uploads/news')
+                            ->directory(config('news.uploads.medias'))
                             // ->acceptedFileTypes(['image/jpeg', 'image/png', 'application/pdf'])
                             // ->preserveFilenames()
                             ->multiple()

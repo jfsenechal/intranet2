@@ -28,7 +28,7 @@ final class MediaForm
                     ->required()
                     ->maxFiles(1)
                     ->disk('public')
-                    ->directory('uploads')
+                    ->directory(config('pst.uploads.medias'))
                     ->downloadable()
                     ->maxSize(10240)
                     ->afterStateUpdated(function ($state, Set $set) {

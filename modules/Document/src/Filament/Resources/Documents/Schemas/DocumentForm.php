@@ -36,7 +36,7 @@ final class DocumentForm
                             ->label('Pièce jointe')
                             ->required()
                             ->disk('public')
-                            ->directory('uploads/document')
+                            ->directory(config('document.uploads.documents'))
                             ->previewable(false)
                             ->downloadable()
                             ->maxSize(10240)

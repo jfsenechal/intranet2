@@ -17,7 +17,9 @@ final class FollowUpForm
                     ->required()
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('icon')
-                    ->label('Icône'),
+                    ->label('Icône')
+                    ->disk('public')
+                    ->directory(config('pst.uploads.followups_icons')),
             ]);
     }
 }

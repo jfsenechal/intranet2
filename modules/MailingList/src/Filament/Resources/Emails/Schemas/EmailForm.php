@@ -39,7 +39,7 @@ final class EmailForm
                     ->resizableImages()
                     ->fileAttachmentsMaxSize(8388)
                     ->fileAttachmentsDisk('public')
-                    ->fileAttachmentsDirectory('mailing-list/email-attachments')
+                    ->fileAttachmentsDirectory(config('mailing-list.uploads.email_attachments'))
                     ->required()
                     ->columnSpanFull(),
                 FileUpload::make('attachments')
@@ -47,7 +47,7 @@ final class EmailForm
                     ->multiple()
                     ->maxSize(12588)
                     ->disk('public')
-                    ->directory('mailing-list/email-attachments')
+                    ->directory(config('mailing-list.uploads.email_attachments'))
                     ->visibility('public')
                     ->columnSpanFull(),
                 Select::make('address_book_ids')

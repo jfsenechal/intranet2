@@ -74,7 +74,7 @@ final class TrainingForm
                         Forms\Components\FileUpload::make('certificate_file')
                             ->label('Fichier attestation')
                             ->disk('public')
-                            ->directory('uploads/hrm/formations'),
+                            ->directory(config('hrm.uploads.formations')),
                     ]),
                 Section::make('Description')
                     ->schema([
