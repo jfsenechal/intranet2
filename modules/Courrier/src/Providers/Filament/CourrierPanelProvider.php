@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Security\Providers;
+namespace AcMarche\Courrier\Providers\Filament;
 
 use AcMarche\App\Traits\PluginTrait;
 use Filament\Http\Middleware\Authenticate;
@@ -12,7 +12,6 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Support\Enums\Width;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -20,7 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-final class SecurityPanelProvider extends PanelProvider
+final class CourrierPanelProvider extends PanelProvider
 {
     use PluginTrait;
 
@@ -29,22 +28,22 @@ final class SecurityPanelProvider extends PanelProvider
         $path = $this->getPluginBasePath().'/../';
 
         return $panel
-            ->id('security-panel')
-            ->path('security')
+            ->id('courrier-panel')
+            ->path('indicateur')
+            ->brandName('Indicateur')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Pink,
             ])
             ->viteTheme('resources/css/filament/admin/theme.css')
-            ->unsavedChangesAlerts()
             ->resourceCreatePageRedirect('view')
             ->resourceEditPageRedirect('view')
-            ->maxContentWidth(Width::Full)
-            ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Security\\Filament\\Resources')
-            ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Security\\Filament\\Pages')
+            ->unsavedChangesAlerts()
+            ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Courrier\\Filament\\Resources')
+            ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Courrier\\Filament\\Pages')
             ->pages([
 
             ])
-            ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\Security\\Filament\\Widgets')
+            ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\Courrier\\Filament\\Widgets')
             ->widgets([
 
             ])

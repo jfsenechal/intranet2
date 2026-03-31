@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Security;
+namespace AcMarche\Security\Providers;
 
 // use AcMarche\Mileage\Console\Commands\MigrationCommand;
 use AcMarche\Security\Console\Commands\CreateUserCommand;

@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Publication;
+namespace AcMarche\Mileage\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-final class PublicationServiceProvider extends ServiceProvider
+final class MileageServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
      */
     public function register(): void
     {
-        // Merge publication config
+        // Merge mileage config
         $this->mergeConfigFrom(
-            __DIR__.'/../config/publication.php',
-            'publication'
+            __DIR__.'/../config/mileage.php',
+            'mileage'
         );
 
         // Register database connection from module config
@@ -32,7 +32,7 @@ final class PublicationServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         // Load views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'publication');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'mileage');
 
         // Load routes
         if (file_exists(__DIR__.'/../routes/web.php')) {
@@ -41,23 +41,23 @@ final class PublicationServiceProvider extends ServiceProvider
 
         // Publish config
         $this->publishes([
-            __DIR__.'/../config/publication.php' => config_path('publication.php'),
-        ], 'publication-config');
+            __DIR__.'/../config/mileage.php' => config_path('mileage.php'),
+        ], 'mileage-config');
 
         // Publish database config
         $this->publishes([
-            __DIR__.'/../config/database.php' => config_path('publication-database.php'),
-        ], 'publication-database-config');
+            __DIR__.'/../config/database.php' => config_path('mileage-database.php'),
+        ], 'mileage-database-config');
 
         // Publish migrations
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'publication-migrations');
+        ], 'mileage-migrations');
 
         // Publish views
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/publication'),
-        ], 'publication-views');
+            __DIR__.'/../resources/views' => resource_path('views/vendor/mileage'),
+        ], 'mileage-views');
     }
 
     /**

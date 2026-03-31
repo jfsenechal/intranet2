@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Publication\Providers;
+namespace AcMarche\Document\Providers\Filament;
 
 use AcMarche\App\Traits\PluginTrait;
 use Filament\Http\Middleware\Authenticate;
@@ -19,7 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-final class PublicationPanelProvider extends PanelProvider
+final class DocumentPanelProvider extends PanelProvider
 {
     use PluginTrait;
 
@@ -28,9 +28,9 @@ final class PublicationPanelProvider extends PanelProvider
         $path = $this->getPluginBasePath().'/../';
 
         return $panel
-            ->id('publication-panel')
-            ->path('publication')
-            ->brandName('Publications communales')
+            ->id('document-panel')
+            ->path('document')
+            ->brandName('Documents utiles')
             ->colors([
                 'primary' => Color::Pink,
             ])
@@ -38,12 +38,12 @@ final class PublicationPanelProvider extends PanelProvider
             ->unsavedChangesAlerts()
             ->resourceCreatePageRedirect('view')
             ->resourceEditPageRedirect('view')
-            ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Publication\\Filament\\Resources')
-            ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Publication\\Filament\\Pages')
+            ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Document\\Filament\\Resources')
+            ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Document\\Filament\\Pages')
             ->pages([
 
             ])
-            ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\Publication\\Filament\\Widgets')
+            ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\Document\\Filament\\Widgets')
             ->widgets([
 
             ])

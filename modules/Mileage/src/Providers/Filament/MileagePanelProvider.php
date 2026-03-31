@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Document\Providers;
+namespace AcMarche\Mileage\Providers\Filament;
 
 use AcMarche\App\Traits\PluginTrait;
 use Filament\Http\Middleware\Authenticate;
@@ -19,7 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-final class DocumentPanelProvider extends PanelProvider
+final class MileagePanelProvider extends PanelProvider
 {
     use PluginTrait;
 
@@ -28,22 +28,23 @@ final class DocumentPanelProvider extends PanelProvider
         $path = $this->getPluginBasePath().'/../';
 
         return $panel
-            ->id('document-panel')
-            ->path('document')
-            ->brandName('Documents utiles')
+            ->id('mileage-panel')
+            ->path('mileage')
+            ->brandName('Frais de déplacement')
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->colors([
                 'primary' => Color::Pink,
             ])
-            ->viteTheme('resources/css/filament/admin/theme.css')
             ->unsavedChangesAlerts()
             ->resourceCreatePageRedirect('view')
             ->resourceEditPageRedirect('view')
-            ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Document\\Filament\\Resources')
-            ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Document\\Filament\\Pages')
+            ->databaseNotifications()
+            ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Mileage\\Filament\\Resources')
+            ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Mileage\\Filament\\Pages')
             ->pages([
 
             ])
-            ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\Document\\Filament\\Widgets')
+            ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\Mileage\\Filament\\Widgets')
             ->widgets([
 
             ])

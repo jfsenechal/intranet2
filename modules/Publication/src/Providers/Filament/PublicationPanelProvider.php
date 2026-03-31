@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Courrier\Providers;
+namespace AcMarche\Publication\Providers\Filament;
 
 use AcMarche\App\Traits\PluginTrait;
 use Filament\Http\Middleware\Authenticate;
@@ -19,7 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-final class CourrierPanelProvider extends PanelProvider
+final class PublicationPanelProvider extends PanelProvider
 {
     use PluginTrait;
 
@@ -28,22 +28,22 @@ final class CourrierPanelProvider extends PanelProvider
         $path = $this->getPluginBasePath().'/../';
 
         return $panel
-            ->id('courrier-panel')
-            ->path('indicateur')
-            ->brandName('Indicateur')
+            ->id('publication-panel')
+            ->path('publication')
+            ->brandName('Publications communales')
             ->colors([
                 'primary' => Color::Pink,
             ])
             ->viteTheme('resources/css/filament/admin/theme.css')
+            ->unsavedChangesAlerts()
             ->resourceCreatePageRedirect('view')
             ->resourceEditPageRedirect('view')
-            ->unsavedChangesAlerts()
-            ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Courrier\\Filament\\Resources')
-            ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Courrier\\Filament\\Pages')
+            ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Publication\\Filament\\Resources')
+            ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Publication\\Filament\\Pages')
             ->pages([
 
             ])
-            ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\Courrier\\Filament\\Widgets')
+            ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\Publication\\Filament\\Widgets')
             ->widgets([
 
             ])

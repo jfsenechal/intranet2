@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Hrm\Providers;
+namespace AcMarche\Hrm\Providers\Filament;
 
 use AcMarche\App\Traits\PluginTrait;
 use Filament\Http\Middleware\Authenticate;

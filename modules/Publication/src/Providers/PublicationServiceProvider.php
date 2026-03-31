@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Document;
+namespace AcMarche\Publication\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-final class DocumentServiceProvider extends ServiceProvider
+final class PublicationServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
      */
     public function register(): void
     {
-        // Merge document config
+        // Merge publication config
         $this->mergeConfigFrom(
-            __DIR__.'/../config/document.php',
-            'document'
+            __DIR__.'/../config/publication.php',
+            'publication'
         );
 
         // Register database connection from module config
@@ -32,7 +32,7 @@ final class DocumentServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         // Load views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'document');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'publication');
 
         // Load routes
         if (file_exists(__DIR__.'/../routes/web.php')) {
@@ -41,23 +41,23 @@ final class DocumentServiceProvider extends ServiceProvider
 
         // Publish config
         $this->publishes([
-            __DIR__.'/../config/document.php' => config_path('document.php'),
-        ], 'document-config');
+            __DIR__.'/../config/publication.php' => config_path('publication.php'),
+        ], 'publication-config');
 
         // Publish database config
         $this->publishes([
-            __DIR__.'/../config/database.php' => config_path('document-database.php'),
-        ], 'document-database-config');
+            __DIR__.'/../config/database.php' => config_path('publication-database.php'),
+        ], 'publication-database-config');
 
         // Publish migrations
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'document-migrations');
+        ], 'publication-migrations');
 
         // Publish views
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/document'),
-        ], 'document-views');
+            __DIR__.'/../resources/views' => resource_path('views/vendor/publication'),
+        ], 'publication-views');
     }
 
     /**

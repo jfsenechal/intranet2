@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Mileage;
+namespace AcMarche\News\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-final class MileageServiceProvider extends ServiceProvider
+final class NewsServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
      */
     public function register(): void
     {
-        // Merge mileage config
+        // Merge news config
         $this->mergeConfigFrom(
-            __DIR__.'/../config/mileage.php',
-            'mileage'
+            __DIR__.'/../config/news.php',
+            'news'
         );
 
         // Register database connection from module config
@@ -32,7 +32,7 @@ final class MileageServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         // Load views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'mileage');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'news');
 
         // Load routes
         if (file_exists(__DIR__.'/../routes/web.php')) {
@@ -41,23 +41,23 @@ final class MileageServiceProvider extends ServiceProvider
 
         // Publish config
         $this->publishes([
-            __DIR__.'/../config/mileage.php' => config_path('mileage.php'),
-        ], 'mileage-config');
+            __DIR__.'/../config/news.php' => config_path('news.php'),
+        ], 'news-config');
 
         // Publish database config
         $this->publishes([
-            __DIR__.'/../config/database.php' => config_path('mileage-database.php'),
-        ], 'mileage-database-config');
+            __DIR__.'/../config/database.php' => config_path('news-database.php'),
+        ], 'news-database-config');
 
         // Publish migrations
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'mileage-migrations');
+        ], 'news-migrations');
 
         // Publish views
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/mileage'),
-        ], 'mileage-views');
+            __DIR__.'/../resources/views' => resource_path('views/vendor/news'),
+        ], 'news-views');
     }
 
     /**

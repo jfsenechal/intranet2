@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Hrm;
+namespace AcMarche\Hrm\Providers;
 
-use AcMarche\Hrm\Models\Absence;
+use  AcMarche\Hrm\Models\Absence;
 use AcMarche\Hrm\Models\Application;
 use AcMarche\Hrm\Models\Contract;
 use AcMarche\Hrm\Models\ContractNature;

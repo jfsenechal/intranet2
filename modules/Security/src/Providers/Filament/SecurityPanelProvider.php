@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Mileage\Providers;
+namespace AcMarche\Security\Providers\Filament;
 
 use AcMarche\App\Traits\PluginTrait;
 use Filament\Http\Middleware\Authenticate;
@@ -12,6 +12,7 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\Width;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -19,7 +20,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-final class MileagePanelProvider extends PanelProvider
+final class SecurityPanelProvider extends PanelProvider
 {
     use PluginTrait;
 
@@ -28,23 +29,22 @@ final class MileagePanelProvider extends PanelProvider
         $path = $this->getPluginBasePath().'/../';
 
         return $panel
-            ->id('mileage-panel')
-            ->path('mileage')
-            ->brandName('Frais de déplacement')
-            ->viteTheme('resources/css/filament/admin/theme.css')
+            ->id('security-panel')
+            ->path('security')
             ->colors([
-                'primary' => Color::Pink,
+                'primary' => Color::Amber,
             ])
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->unsavedChangesAlerts()
             ->resourceCreatePageRedirect('view')
             ->resourceEditPageRedirect('view')
-            ->databaseNotifications()
-            ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Mileage\\Filament\\Resources')
-            ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Mileage\\Filament\\Pages')
+            ->maxContentWidth(Width::Full)
+            ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Security\\Filament\\Resources')
+            ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Security\\Filament\\Pages')
             ->pages([
 
             ])
-            ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\Mileage\\Filament\\Widgets')
+            ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\Security\\Filament\\Widgets')
             ->widgets([
 
             ])

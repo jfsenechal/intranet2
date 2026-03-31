@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\App;
+namespace AcMarche\App\Providers;
 
 use AcMarche\App\Traits\HooksTrait;
 use Filament\Panel;
@@ -26,8 +26,6 @@ final class AppServiceProvider extends ServiceProvider
             if ($panel->getId() !== 'admin') {
                 return;
             }
-
-            $panel->plugin(AppPlugin::make());
         });
     }
 
