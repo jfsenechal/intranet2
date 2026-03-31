@@ -8,17 +8,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    protected $connection = 'mariadb';
-
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        $schema = Schema::connection('mariadb');
-        $hasColumn = fn (string $column): bool => $schema->hasColumn('users', $column);
+        $hasColumn = fn (string $column): bool => Schema::hasColumn('users', $column);
 
-        $schema->table('users', function (Blueprint $table) use ($hasColumn) {
+        Schema::table('users', function (Blueprint $table) use ($hasColumn) {
             if ($hasColumn('departement')) {
                 $table->dropColumn('departement');
             }

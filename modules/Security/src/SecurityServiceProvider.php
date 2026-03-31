@@ -32,9 +32,6 @@ final class SecurityServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Load migrations
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
         // Load views
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'security');
 

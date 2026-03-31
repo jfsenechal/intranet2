@@ -12,18 +12,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    protected $connection = 'mariadb';
-
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        if (Schema::connection('mariadb')->hasTable('heading')) {
-            Schema::connection('mariadb')->table('heading', function (Blueprint $table) {
+        if (Schema::hasTable('heading')) {
+            Schema::table('heading', function (Blueprint $table) {
                 $table->rename('tabs');
             });
-            Schema::connection('mariadb')->table('tabs', function (Blueprint $table) {
+            Schema::table('tabs', function (Blueprint $table) {
                 $table->renameColumn('nom', 'name');
                 $table->renameColumn('icone', 'icon');
             });
@@ -35,11 +33,11 @@ return new class extends Migration
             });
         }
 
-        if (Schema::connection('mariadb')->hasTable('module')) {
-            Schema::connection('mariadb')->table('module', function (Blueprint $table) {
+        if (Schema::hasTable('module')) {
+            Schema::table('module', function (Blueprint $table) {
                 $table->rename('modules');
             });
-            Schema::connection('mariadb')->table('modules', function (Blueprint $table) {
+            Schema::table('modules', function (Blueprint $table) {
                 $table->renameColumn('nom', 'name');
                 $table->renameColumn('exterieur', 'is_external');
                 $table->renameColumn('public', 'is_public');
