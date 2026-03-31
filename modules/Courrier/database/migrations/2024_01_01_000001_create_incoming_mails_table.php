@@ -18,16 +18,15 @@ return new class extends Migration
          */
         if (Schema::connection('maria-courrier')->hasTable('categorie')) {
             Schema::connection('maria-courrier')->table('categorie', function (Blueprint $table) {
-                $table->rename('categories');
+                $table->rename('courrier_categories');
             });
-            Schema::connection('maria-courrier')->table('categories', function (Blueprint $table) {
+            Schema::connection('maria-courrier')->table('courrier_categories', function (Blueprint $table) {
                 $table->renameColumn('nom', 'name');
                 $table->renameColumn('couleur', 'color');
                 $table->string('color', 7)->default('#6b7280')->change();
-
             });
-        } elseif (! Schema::connection('maria-courrier')->hasTable('categories')) {
-            Schema::connection('maria-courrier')->create('categories', function (Blueprint $table): void {
+        } elseif (! Schema::connection('maria-courrier')->hasTable('courrier_categories')) {
+            Schema::connection('maria-courrier')->create('courrier_categories', function (Blueprint $table): void {
                 $table->id();
                 $table->string('name');
                 $table->string('color', 7)->default('#6b7280');
@@ -49,7 +48,7 @@ return new class extends Migration
                 $table->renameColumn('recommande', 'is_registered');
                 $table->renameColumn('accuse', 'has_acknowledgment');
                 $table->integer('file_size')->nullable();
-                $table->foreignId('category_id')->nullable()->after('id')->constrained('categories')->nullOnDelete();
+                $table->foreignId('category_id')->nullable()->after('id')->constrained('courrier_categories')->nullOnDelete();
                 $table->string('file_mime')->nullable();
                 $table->softDeletes();
                 $table->index('reference_number');
@@ -67,7 +66,7 @@ return new class extends Migration
                 $table->boolean('is_notified')->default(false);
                 $table->boolean('is_registered')->default(false);
                 $table->boolean('has_acknowledgment')->default(false);
-                $table->foreignId('category_id')->nullable()->after('id')->constrained('categories')->nullOnDelete();
+                $table->foreignId('category_id')->nullable()->after('id')->constrained('courrier_categories')->nullOnDelete();
                 $table->string('user_add');
                 $table->softDeletes();
                 $table->timestamps();
@@ -82,6 +81,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::connection('maria-courrier')->dropIfExists('incoming_mails');
-        Schema::connection('maria-courrier')->dropIfExists('categories');
+        Schema::connection('maria-courrier')->dropIfExists('courrier_categories');
     }
 };

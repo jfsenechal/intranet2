@@ -15,6 +15,8 @@ final class Category extends Model
 {
     use HasFactory;
 
+    protected $table = 'courrier_categories';
+
     protected $connection = 'maria-courrier';
 
     protected $fillable = [

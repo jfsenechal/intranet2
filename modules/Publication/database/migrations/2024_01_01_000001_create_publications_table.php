@@ -29,7 +29,7 @@ return new class extends Migration
         } else {
             Schema::connection('maria-publication')->create('publications', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
+                $table->foreignId('category_id')->nullable()->constrained('publication_categories')->nullOnDelete();
                 $table->string('name');
                 $table->string('url');
                 $table->dateTime('expire_date')->nullable();
@@ -41,10 +41,10 @@ return new class extends Migration
 
         if (Schema::connection('maria-publication')->hasTable('category')) {
             Schema::connection('maria-publication')->table('category', function (Blueprint $table) {
-                $table->rename('categories');
+                $table->rename('publication_categories');
             });
-        } elseif (!Schema::connection('maria-publication')->hasTable('categories')) {
-            Schema::connection('maria-publication')->create('categories', function (Blueprint $table) {
+        } elseif (! Schema::connection('maria-publication')->hasTable('publication_categories')) {
+            Schema::connection('maria-publication')->create('publication_categories', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
                 $table->string('url')->nullable();
@@ -58,7 +58,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::connection('maria-publication')->dropIfExists('publication');
-        Schema::connection('maria-publication')->dropIfExists('category');
+        Schema::connection('maria-publication')->dropIfExists('publications');
+        Schema::connection('maria-publication')->dropIfExists('publication_categories');
     }
 };

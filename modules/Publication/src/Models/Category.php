@@ -11,6 +11,8 @@ final class Category extends Model
 {
     public $timestamps = false;
 
+    protected $table = 'publication_categories';
+
     protected $connection = 'maria-publication';
 
     protected $fillable = [
