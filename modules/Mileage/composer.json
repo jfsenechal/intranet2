@@ -25,7 +25,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AcMarche\\Mileage\\MileageServiceProvider"
+                "AcMarche\\Mileage\\Providers\\MileageServiceProvider"
             ]
         }
     },

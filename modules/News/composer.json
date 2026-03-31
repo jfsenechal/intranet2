@@ -25,7 +25,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AcMarche\\News\\NewsServiceProvider"
+                "AcMarche\\News\\Providers\\NewsServiceProvider"
             ]
         }
     },

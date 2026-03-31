@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "./modules/App",
-                "reference": "be29da9abe570ead01123754658dce6eb756ee49"
+                "reference": "939adb4b6c65b24a5c11075698459944604ddcce"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -23,7 +23,7 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "AcMarche\\App\\AppServiceProvider"
+                        "AcMarche\\App\\Providers\\AppServiceProvider"
                     ]
                 }
             },
@@ -54,7 +54,7 @@
             "dist": {
                 "type": "path",
                 "url": "./modules/Courrier",
-                "reference": "452a1c7ca7a535c6603f3194d797eb8d2aef6dcc"
+                "reference": "1e20db85bcde29ca9673b4ce115b520186c4c091"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -65,7 +65,7 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "AcMarche\\Courrier\\CourrierServiceProvider"
+                        "AcMarche\\Courrier\\Providers\\CourrierServiceProvider"
                     ]
                 }
             },
@@ -97,7 +97,7 @@
             "dist": {
                 "type": "path",
                 "url": "./modules/Document",
-                "reference": "b2fab3d1b6756d0e09c4290d7d87f9154493df7b"
+                "reference": "aaf171cdd65f14641acad81d1d3922d382d71b19"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -108,7 +108,7 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "AcMarche\\Document\\DocumentServiceProvider"
+                        "AcMarche\\Document\\Providers\\DocumentServiceProvider"
                     ]
                 }
             },
@@ -140,7 +140,7 @@
             "dist": {
                 "type": "path",
                 "url": "./modules/Hrm",
-                "reference": "5b4c5f138d84f46e8fa6b59ff4d7cdf11e8f90d7"
+                "reference": "ca7303a51a45e9cb95d31244a430e6fcff1b09d7"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -151,7 +151,7 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "AcMarche\\Hrm\\HrmServiceProvider"
+                        "AcMarche\\Hrm\\Providers\\HrmServiceProvider"
                     ]
                 }
             },
@@ -226,7 +226,7 @@
             "dist": {
                 "type": "path",
                 "url": "./modules/Mileage",
-                "reference": "f0ffd73ef929b9c8fd79bb2a4c4eb9978ebbbaac"
+                "reference": "dbf30f7a946df031920884e6cb3098ccb6dd14fe"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -237,7 +237,7 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "AcMarche\\Mileage\\MileageServiceProvider"
+                        "AcMarche\\Mileage\\Providers\\MileageServiceProvider"
                     ]
                 }
             },
@@ -269,7 +269,7 @@
             "dist": {
                 "type": "path",
                 "url": "./modules/News",
-                "reference": "d000a7e2d3eea4cfa2db5e00acfa3fa3651cb5af"
+                "reference": "1e8b5bd3e239c9bb60933f943c472cfa01d1ca0a"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -280,7 +280,7 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "AcMarche\\News\\NewsServiceProvider"
+                        "AcMarche\\News\\Providers\\NewsServiceProvider"
                     ]
                 }
             },
@@ -355,7 +355,7 @@
             "dist": {
                 "type": "path",
                 "url": "./modules/Publication",
-                "reference": "74650f39c33bf4c7f13003148b925345ab815cce"
+                "reference": "4a02e077412f243485506de6e552774153137883"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -366,7 +366,7 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "AcMarche\\Publication\\PublicationServiceProvider"
+                        "AcMarche\\Publication\\Providers\\PublicationServiceProvider"
                     ]
                 }
             },
@@ -398,7 +398,7 @@
             "dist": {
                 "type": "path",
                 "url": "./modules/Security",
-                "reference": "fcae22863204b7d16510c26ce6cb5b73d43cec2b"
+                "reference": "0bfe1f27cac5d4747173768fb5f079dd15b411d2"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -409,7 +409,7 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "AcMarche\\Security\\SecurityServiceProvider"
+                        "AcMarche\\Security\\Providers\\SecurityServiceProvider"
                     ]
                 }
             },
