@@ -18,4 +18,6 @@ uses(
     '../modules/Document/tests/Feature',
     '../modules/Document/tests/Unit',
     '../modules/Document/tests/Browser',
+    '../modules/Mileage/tests/Feature',
+    '../modules/Mileage/tests/Unit',
 );

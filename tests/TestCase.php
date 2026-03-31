@@ -66,6 +66,8 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        $this->app['config']->set('scout.driver', 'null');
+
         $this->actingAs(User::factory()->create([
             'name' => config('app.default_user.name'),
             'email' => config('app.default_user.email'),
