@@ -140,7 +140,7 @@
             "dist": {
                 "type": "path",
                 "url": "./modules/Hrm",
-                "reference": "e5a43479723366f864725c04274dca9b76e871bf"
+                "reference": "5b4c5f138d84f46e8fa6b59ff4d7cdf11e8f90d7"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -159,7 +159,8 @@
                 "psr-4": {
                     "AcMarche\\Hrm\\": "src/",
                     "AcMarche\\Hrm\\Database\\Factories\\": "database/factories/",
-                    "AcMarche\\Hrm\\Database\\Seeders\\": "database/seeders/"
+                    "AcMarche\\Hrm\\Database\\Seeders\\": "database/seeders/",
+                    "AcMarche\\Hrm\\Tests\\": "tests/"
                 }
             },
             "license": [
@@ -268,7 +269,7 @@
             "dist": {
                 "type": "path",
                 "url": "./modules/News",
-                "reference": "3cf5941cb3cced5b9e555d24a0c78bddbcb735ff"
+                "reference": "d000a7e2d3eea4cfa2db5e00acfa3fa3651cb5af"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -287,7 +288,8 @@
                 "psr-4": {
                     "AcMarche\\News\\": "src/",
                     "AcMarche\\News\\Database\\Factories\\": "database/factories/",
-                    "AcMarche\\News\\Database\\Seeders\\": "database/seeders/"
+                    "AcMarche\\News\\Database\\Seeders\\": "database/seeders/",
+                    "AcMarche\\News\\Tests\\": "tests/"
                 }
             },
             "license": [
@@ -353,7 +355,7 @@
             "dist": {
                 "type": "path",
                 "url": "./modules/Publication",
-                "reference": "cbf52c121f3010c997a8597fb2efa95fa7bb1f3d"
+                "reference": "74650f39c33bf4c7f13003148b925345ab815cce"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -372,7 +374,8 @@
                 "psr-4": {
                     "AcMarche\\Publication\\": "src/",
                     "AcMarche\\Publication\\Database\\Factories\\": "database/factories/",
-                    "AcMarche\\Publication\\Database\\Seeders\\": "database/seeders/"
+                    "AcMarche\\Publication\\Database\\Seeders\\": "database/seeders/",
+                    "AcMarche\\Publication\\Tests\\": "tests/"
                 }
             },
             "license": [
@@ -395,7 +398,7 @@
             "dist": {
                 "type": "path",
                 "url": "./modules/Security",
-                "reference": "cce2ee3b37e0cf09f213c835a990fd7cbf2fd4a6"
+                "reference": "fcae22863204b7d16510c26ce6cb5b73d43cec2b"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -414,7 +417,8 @@
                 "psr-4": {
                     "AcMarche\\Security\\": "src/",
                     "AcMarche\\Security\\Database\\Factories\\": "database/factories/",
-                    "AcMarche\\Security\\Database\\Seeders\\": "database/seeders/"
+                    "AcMarche\\Security\\Database\\Seeders\\": "database/seeders/",
+                    "AcMarche\\Security\\Tests\\": "tests/"
                 }
             },
             "license": [
@@ -3220,16 +3224,16 @@
         },
         {
             "name": "laravel/nightwatch",
-            "version": "v1.24.4",
+            "version": "v1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/nightwatch.git",
-                "reference": "127e9bb9928f0fcf69b52b244053b393c90347c8"
+                "reference": "a195bd54f36218b95330599758af182e4b505294"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/nightwatch/zipball/127e9bb9928f0fcf69b52b244053b393c90347c8",
-                "reference": "127e9bb9928f0fcf69b52b244053b393c90347c8",
+                "url": "https://api.github.com/repos/laravel/nightwatch/zipball/a195bd54f36218b95330599758af182e4b505294",
+                "reference": "a195bd54f36218b95330599758af182e4b505294",
                 "shasum": ""
             },
             "require": {
@@ -3258,9 +3262,9 @@
                 "livewire/livewire": "^2.0|^3.0",
                 "mockery/mockery": "^1.0",
                 "mongodb/laravel-mongodb": "^4.0|^5.0",
-                "orchestra/testbench": "^8.0|^9.0|^10.0",
-                "orchestra/testbench-core": "^8.0|^9.0|^10.0",
-                "orchestra/workbench": "^8.0|^9.0|^10.0",
+                "orchestra/testbench": "^8.0|^9.0|^10.0|^11.0",
+                "orchestra/testbench-core": "^8.0|^9.0|^10.0|^11.0",
+                "orchestra/workbench": "^8.0|^9.0|^10.0|^11.0",
                 "phpstan/phpstan": "^1.0",
                 "phpunit/phpunit": "^10.0|^11.0|^12.0",
                 "singlestoredb/singlestoredb-laravel": "^1.0|^2.0",
@@ -3310,7 +3314,7 @@
                 "issues": "https://github.com/laravel/nightwatch/issues",
                 "source": "https://github.com/laravel/nightwatch"
             },
-            "time": "2026-03-18T23:25:05+00:00"
+            "time": "2026-03-31T05:51:44+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -4380,16 +4384,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v4.2.2",
+            "version": "v4.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "71c28888f99b4bfdaad89a07a104adbc3f98c04b"
+                "reference": "d07bcb6fd04037a90ca5187b7857c7349a8e6d1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/71c28888f99b4bfdaad89a07a104adbc3f98c04b",
-                "reference": "71c28888f99b4bfdaad89a07a104adbc3f98c04b",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/d07bcb6fd04037a90ca5187b7857c7349a8e6d1e",
+                "reference": "d07bcb6fd04037a90ca5187b7857c7349a8e6d1e",
                 "shasum": ""
             },
             "require": {
@@ -4444,7 +4448,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v4.2.2"
+                "source": "https://github.com/livewire/livewire/tree/v4.2.3"
             },
             "funding": [
                 {
@@ -4452,7 +4456,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-25T23:19:23+00:00"
+            "time": "2026-03-30T22:17:37+00:00"
         },
         {
             "name": "maatwebsite/excel",
@@ -13888,16 +13892,16 @@
         },
         {
             "name": "php-debugbar/php-debugbar",
-            "version": "v3.6.0",
+            "version": "v3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-debugbar/php-debugbar.git",
-                "reference": "31f7d2e7943a82e72a670335d408d967b05efa5a"
+                "reference": "2e1c66ba07183cf4134df479f6f246f820a463a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-debugbar/php-debugbar/zipball/31f7d2e7943a82e72a670335d408d967b05efa5a",
-                "reference": "31f7d2e7943a82e72a670335d408d967b05efa5a",
+                "url": "https://api.github.com/repos/php-debugbar/php-debugbar/zipball/2e1c66ba07183cf4134df479f6f246f820a463a8",
+                "reference": "2e1c66ba07183cf4134df479f6f246f820a463a8",
                 "shasum": ""
             },
             "require": {
@@ -13974,7 +13978,7 @@
             ],
             "support": {
                 "issues": "https://github.com/php-debugbar/php-debugbar/issues",
-                "source": "https://github.com/php-debugbar/php-debugbar/tree/v3.6.0"
+                "source": "https://github.com/php-debugbar/php-debugbar/tree/v3.6.1"
             },
             "funding": [
                 {
@@ -13986,7 +13990,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-29T17:26:18+00:00"
+            "time": "2026-03-30T18:25:29+00:00"
         },
         {
             "name": "php-debugbar/symfony-bridge",
