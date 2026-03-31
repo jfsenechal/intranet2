@@ -101,7 +101,7 @@ new class extends Component
                 @foreach ($this->getTabsWithModules() as $tabIndex => $tab)
                     @if ($tab->modules->isNotEmpty())
                         <div class="mb-5">
-                            <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                            <h3 class="mb-3 text-base font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
                                 {{ $tab->name }}
                             </h3>
                             <div class="grid grid-cols-4 gap-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10">
@@ -120,12 +120,12 @@ new class extends Component
                                             title="{{ $module->description }}"
                                         >
                                             <div
-                                                class="flex h-12 w-12 items-center justify-center rounded-2xl text-sm font-bold text-white shadow-sm transition group-hover:scale-110 group-hover:shadow-md"
+                                                class="flex h-12 w-12 items-center justify-center rounded-2xl text-base font-bold text-white shadow-sm transition group-hover:scale-110 group-hover:shadow-md"
                                                 style="background-color: {{ $module->color ?: $bgColor }}"
                                             >
                                                 {{ $initials }}
                                             </div>
-                                            <span class="max-w-full truncate text-center text-xs font-medium text-gray-700 dark:text-gray-300">
+                                            <span class="max-w-full text-center text-base font-medium text-gray-700 dark:text-gray-300">
                                                 {{ $module->name }}
                                             </span>
                                             @if ($module->is_external)
@@ -142,7 +142,7 @@ new class extends Component
                                             >
                                                 {{ $initials }}
                                             </div>
-                                            <span class="max-w-full truncate text-center text-xs font-medium text-gray-500 dark:text-gray-500">
+                                            <span class="max-w-full text-center text-base font-medium text-gray-500 dark:text-gray-500">
                                                 {{ $module->name }}
                                             </span>
                                         </div>
