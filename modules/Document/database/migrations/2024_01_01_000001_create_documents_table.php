@@ -50,13 +50,13 @@ return new class extends Migration
 
         if (Schema::connection('maria-document')->hasTable('categorie')) {
             Schema::connection('maria-document')->table('categorie', function (Blueprint $table) {
-                $table->rename('categories');
+                $table->rename('document_categories');
             });
-            Schema::connection('maria-document')->table('categories', function (Blueprint $table) {
+            Schema::connection('maria-document')->table('document_categories', function (Blueprint $table) {
                 $table->renameColumn('nom', 'name');
             });
-        } elseif (! Schema::connection('maria-document')->hasTable('categories')) {
-            Schema::connection('maria-document')->create('categories', function (Blueprint $table) {
+        } elseif (! Schema::connection('maria-document')->hasTable('document_categories')) {
+            Schema::connection('maria-document')->create('document_categories', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
                 $table->timestamps(false);
@@ -70,6 +70,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::connection('maria-document')->dropIfExists('documents');
-        Schema::connection('maria-document')->dropIfExists('categories');
+        Schema::connection('maria-document')->dropIfExists('document_categories');
     }
 };

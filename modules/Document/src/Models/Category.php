@@ -15,6 +15,8 @@ final class Category extends Model
 
     public $timestamps = false;
 
+    protected $table = 'document_categories';
+
     protected $connection = 'maria-document';
 
     protected $fillable = ['name'];
