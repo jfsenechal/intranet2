@@ -271,7 +271,7 @@ final class Action extends Model
                 $user = Auth::user();
                 $model->user_add = $user->username;
             }
-            if (!isset($model->validated)) {
+            if (! isset($model->validated)) {
                 $model->validated = false;
             }
         });

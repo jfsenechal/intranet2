@@ -31,7 +31,7 @@ final class FixCommand extends Command
 
     private function migrateTable(string $table): void
     {
-        if (!Schema::connection('maria-pst')->hasColumn($table, 'user_id')) {
+        if (! Schema::connection('maria-pst')->hasColumn($table, 'user_id')) {
             $this->warn('Table '.$table.' does not have user_id column, skipping.');
 
             return;

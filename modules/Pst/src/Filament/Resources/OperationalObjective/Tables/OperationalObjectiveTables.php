@@ -32,8 +32,6 @@ final class OperationalObjectiveTables
                         'actions',
                         'actions.leaderServices',
                         'actions.partnerServices',
-                        'actions.mandataries',
-                        'actions.users',
                         'actions.partners',
                         'actions.odds',
                     ])
