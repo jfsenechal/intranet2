@@ -25,7 +25,7 @@ final class DocumentPanelProvider extends PanelProvider
 
     public function panel(Panel $panel): Panel
     {
-        $path = $this->getPluginBasePath().'/../';
+        $path = $this->getPluginBasePath().'/../../';
 
         return $panel
             ->id('document-panel')

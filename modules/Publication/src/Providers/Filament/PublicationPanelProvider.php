@@ -25,7 +25,7 @@ final class PublicationPanelProvider extends PanelProvider
 
     public function panel(Panel $panel): Panel
     {
-        $path = $this->getPluginBasePath().'/../';
+        $path = $this->getPluginBasePath().'/../../';
 
         return $panel
             ->id('publication-panel')
