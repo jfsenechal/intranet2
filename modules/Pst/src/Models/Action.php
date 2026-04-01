@@ -174,10 +174,22 @@ final class Action extends Model
             'username',
             'id',
             'username'
-        )->tap(function ($query) {
-            // Handle cross-database join by explicitly specifying the database
-            $query->from(DB::raw('`intranet`.`users`'));
-        });
+        );
+    }
+
+    /**
+     * @return BelongsToMany<User, $this>
+     */
+    public function mandataries(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'action_mandatory',
+            'action_id',
+            'username',
+            'id',
+            'username'
+        ); // ->withPivot('permission')
     }
 
     /**
@@ -185,7 +197,7 @@ final class Action extends Model
      *
      * @return BelongsToMany<User>
      */
-    public function mandataries(): BelongsToMany
+    public function mandataries22(): BelongsToMany
     {
         return $this->belongsToMany(
             User::class,
@@ -259,7 +271,7 @@ final class Action extends Model
                 $user = Auth::user();
                 $model->user_add = $user->username;
             }
-            if (! isset($model->validated)) {
+            if (!isset($model->validated)) {
                 $model->validated = false;
             }
         });
