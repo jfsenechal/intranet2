@@ -9,7 +9,7 @@ use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 use Filament\Support\Icons\Heroicon;
 
-enum SharedStatus: string implements HasColor, HasLabel,HasIcon
+enum SharedStatus: string implements HasColor, HasIcon, HasLabel
 {
     case Yes = 'yes';
     case No = 'no';
@@ -34,7 +34,7 @@ enum SharedStatus: string implements HasColor, HasLabel,HasIcon
     {
         return match ($this) {
             self::Yes => Heroicon::CheckCircle->value,
-            self::No => Heroicon::PaperAirplane->value,//heroicon-o-cog-6-tooth
+            self::No => Heroicon::PaperAirplane->value,// heroicon-o-cog-6-tooth
         };
     }
 }

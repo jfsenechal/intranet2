@@ -6,6 +6,7 @@ namespace AcMarche\Pst\Providers\Filament;
 
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\App\Traits\PluginTrait;
+use AcMarche\Security\Repository\UserRepository;
 use Filament\Actions\Action;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -16,6 +17,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Platform;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -30,6 +32,7 @@ final class PstPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         $path = $this->getPluginBasePath().'/../../';
+        $moduleName = 'Pst '.UserRepository::departmentSelected();
 
         return $panel
             ->id('pst')
@@ -44,6 +47,10 @@ final class PstPanelProvider extends PanelProvider
             ])
             ->databaseNotifications()
             ->unsavedChangesAlerts()
+            ->renderHook(
+                PanelsRenderHook::TOPBAR_START,
+                fn (): string => view('app::filament.topbar-module-name', ['moduleName' => $moduleName])->render(),
+            )
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Pst\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Pst\\Filament\\Pages')

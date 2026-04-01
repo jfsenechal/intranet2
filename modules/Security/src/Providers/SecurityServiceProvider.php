@@ -36,5 +36,4 @@ final class SecurityServiceProvider extends ServiceProvider
     {
         return 'security';
     }
-
 }

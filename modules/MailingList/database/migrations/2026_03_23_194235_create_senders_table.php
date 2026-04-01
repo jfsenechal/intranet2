@@ -12,8 +12,8 @@ return new class() extends Migration
 
     public function up(): void
     {
-        //$connection = Schema::connection('maria-mailing-list')->getConnection();
-        //$connection->statement('SET FOREIGN_KEY_CHECKS=0');
+        // $connection = Schema::connection('maria-mailing-list')->getConnection();
+        // $connection->statement('SET FOREIGN_KEY_CHECKS=0');
         if (Schema::connection('maria-mailing-list')->hasTable('senders')) {
             return;
         }
@@ -28,6 +28,6 @@ return new class() extends Migration
             $table->timestamps();
         });
 
-        //$connection->statement('SET FOREIGN_KEY_CHECKS=1');
+        // $connection->statement('SET FOREIGN_KEY_CHECKS=1');
     }
 };

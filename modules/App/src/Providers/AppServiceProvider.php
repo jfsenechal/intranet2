@@ -35,5 +35,4 @@ final class AppServiceProvider extends ServiceProvider
     {
         return 'app';
     }
-
 }

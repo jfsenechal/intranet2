@@ -56,5 +56,4 @@ final class CourrierServiceProvider extends ServiceProvider
     {
         return 'courrier';
     }
-
 }

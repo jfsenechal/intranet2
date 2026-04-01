@@ -38,5 +38,4 @@ final class MailingListServiceProvider extends ServiceProvider
     {
         return 'mailing-list';
     }
-
 }
