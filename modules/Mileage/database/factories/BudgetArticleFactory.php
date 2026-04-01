@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Database\Factories;
 
+use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Mileage\Models\BudgetArticle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +23,7 @@ final class BudgetArticleFactory extends Factory
             'name' => fake()->unique()->numerify('BUDGET-####'),
             'functional_code' => fake()->numerify('###/###'),
             'economic_code' => fake()->numerify('######'),
-            'department' => fake()->randomElement(['ville', 'cpas']),
+            'department' => fake()->randomElement(DepartmentEnum::cases())->value,
         ];
     }
 }
