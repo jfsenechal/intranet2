@@ -17,7 +17,7 @@ final class ListStrategicObjectives extends ListRecords
 {
     protected static string $resource = StrategicObjectiveResource::class;
 
-    protected string $view = 'pst-view::filament.resources.strategic-objective-list';
+    protected string $view = 'pst::filament.resources.strategic-objective-list';
 
     public function getTitle(): string|Htmlable
     {
