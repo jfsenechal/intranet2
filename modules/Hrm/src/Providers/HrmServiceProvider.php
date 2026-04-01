@@ -121,9 +121,4 @@ final class HrmServiceProvider extends ServiceProvider
     {
         return 'hrm';
     }
-
-    protected function modulePath(): string
-    {
-        return __DIR__.'/../..';
-    }
 }

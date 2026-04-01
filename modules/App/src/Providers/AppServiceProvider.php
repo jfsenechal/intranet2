@@ -36,8 +36,4 @@ final class AppServiceProvider extends ServiceProvider
         return 'app';
     }
 
-    protected function modulePath(): string
-    {
-        return __DIR__.'/../..';
-    }
 }

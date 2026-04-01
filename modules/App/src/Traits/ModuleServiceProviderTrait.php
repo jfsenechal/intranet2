@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\App\Traits;
 
+use ReflectionClass;
+
 trait ModuleServiceProviderTrait
 {
     /**
@@ -14,7 +16,12 @@ trait ModuleServiceProviderTrait
     /**
      * The base path of the module (directory containing config/, database/, resources/, routes/).
      */
-    abstract protected function modulePath(): string;
+    protected function modulePath(): string
+    {
+        $reflector = new ReflectionClass(get_class($this));
+
+        return dirname($reflector->getFileName()).($path ?? '').'/../..';
+    }
 
     protected function registerModuleConfig(): void
     {
@@ -33,28 +40,40 @@ trait ModuleServiceProviderTrait
         $name = $this->moduleName();
         $path = $this->modulePath();
 
+        // Load migrations
         $this->loadMigrationsFrom($path.'/database/migrations');
+
+        // Load views (note: views are in views/ not resources/views/)
         $this->loadViewsFrom($path.'/resources/views', $name);
 
+        // Load routes
         if (file_exists($path.'/routes/web.php')) {
             $this->loadRoutesFrom($path.'/routes/web.php');
         }
 
+        // Publish config
         $this->publishes([
             $path."/config/{$name}.php" => config_path("{$name}.php"),
         ], "{$name}-config");
 
+        // Publish database config
         $this->publishes([
             $path.'/config/database.php' => config_path("{$name}-database.php"),
         ], "{$name}-database-config");
 
+        // Publish migrations
         $this->publishes([
             $path.'/database/migrations' => database_path('migrations'),
         ], "{$name}-migrations");
 
+        // Publish views
         $this->publishes([
             $path.'/resources/views' => resource_path("views/vendor/{$name}"),
         ], "{$name}-views");
+
+        $this->publishes([
+            $path.'/resources/assets' => public_path("vendor/{$name}"),
+        ], "{$name}-assets");
     }
 
     protected function registerDatabaseConnection(): void

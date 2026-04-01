@@ -29,32 +29,7 @@ final class SecurityServiceProvider extends ServiceProvider
                 MigrationRoleCommand::class,
             ]);
         }
-
-        // Custom boot without migrations (Security module has no migrations)
-        $path = $this->modulePath();
-        $name = $this->moduleName();
-
-        $this->loadViewsFrom($path.'/resources/views', $name);
-
-        if (file_exists($path.'/routes/web.php')) {
-            $this->loadRoutesFrom($path.'/routes/web.php');
-        }
-
-        $this->publishes([
-            $path."/config/{$name}.php" => config_path("{$name}.php"),
-        ], "{$name}-config");
-
-        $this->publishes([
-            $path.'/config/database.php' => config_path("{$name}-database.php"),
-        ], "{$name}-database-config");
-
-        $this->publishes([
-            $path.'/resources/views' => resource_path("views/vendor/{$name}"),
-        ], "{$name}-views");
-
-        $this->publishes([
-            $path.'/resources/assets' => public_path("vendor/{$name}"),
-        ], "{$name}-assets");
+        $this->bootModule();
     }
 
     protected function moduleName(): string
@@ -62,8 +37,4 @@ final class SecurityServiceProvider extends ServiceProvider
         return 'security';
     }
 
-    protected function modulePath(): string
-    {
-        return __DIR__.'/../..';
-    }
 }

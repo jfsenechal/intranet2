@@ -25,9 +25,4 @@ final class DocumentServiceProvider extends ServiceProvider
     {
         return 'document';
     }
-
-    protected function modulePath(): string
-    {
-        return __DIR__.'/../..';
-    }
 }

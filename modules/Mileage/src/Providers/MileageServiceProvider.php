@@ -25,9 +25,4 @@ final class MileageServiceProvider extends ServiceProvider
     {
         return 'mileage';
     }
-
-    protected function modulePath(): string
-    {
-        return __DIR__.'/../..';
-    }
 }

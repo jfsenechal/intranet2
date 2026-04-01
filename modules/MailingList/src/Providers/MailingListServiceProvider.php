@@ -23,40 +23,7 @@ final class MailingListServiceProvider extends ServiceProvider
     public function boot(): void
     {
         RegisterPolicies::register();
-
-        $path = $this->modulePath();
-        $name = $this->moduleName();
-
-        // Load migrations
-        $this->loadMigrationsFrom($path.'/database/migrations');
-
-        // Load views (note: views are in views/ not resources/views/)
-        $this->loadViewsFrom($path.'/views', 'mailing-list-view');
-
-        // Load routes
-        if (file_exists($path.'/routes/web.php')) {
-            $this->loadRoutesFrom($path.'/routes/web.php');
-        }
-
-        // Publish config
-        $this->publishes([
-            $path."/config/{$name}.php" => config_path("{$name}.php"),
-        ], "{$name}-config");
-
-        // Publish database config
-        $this->publishes([
-            $path.'/config/database.php' => config_path("{$name}-database.php"),
-        ], "{$name}-database-config");
-
-        // Publish migrations
-        $this->publishes([
-            $path.'/database/migrations' => database_path('migrations'),
-        ], "{$name}-migrations");
-
-        // Publish views
-        $this->publishes([
-            $path.'/views' => resource_path('views/vendor/mailing-list'),
-        ], "{$name}-views");
+        $this->bootModule();
 
         FilamentView::registerRenderHook(
             PanelsRenderHook::TOPBAR_START,
@@ -72,8 +39,4 @@ final class MailingListServiceProvider extends ServiceProvider
         return 'mailing-list';
     }
 
-    protected function modulePath(): string
-    {
-        return __DIR__.'/../..';
-    }
 }

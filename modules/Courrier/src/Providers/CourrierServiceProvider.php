@@ -57,8 +57,4 @@ final class CourrierServiceProvider extends ServiceProvider
         return 'courrier';
     }
 
-    protected function modulePath(): string
-    {
-        return __DIR__.'/../..';
-    }
 }
