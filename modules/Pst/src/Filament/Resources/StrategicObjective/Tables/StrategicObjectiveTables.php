@@ -27,8 +27,6 @@ final class StrategicObjectiveTables
                         'oos.actions',
                         'oos.actions.leaderServices',
                         'oos.actions.partnerServices',
-                        'oos.actions.mandataries',
-                        'oos.actions.users',
                         'oos.actions.partners',
                         'oos.actions.odds',
                     ])
