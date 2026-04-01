@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Console\Commands;
 
-use AcMarche\Pst\Enums\RoleEnum;
-use AcMarche\Security\Models\Role;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -15,21 +14,14 @@ final class FixCommand extends Command
 {
     protected $signature = 'pst:migration';
 
-    protected $description = 'Migrate action_user and action_mandatory tables from user_id to username';
+    protected $description = 'Migrate action_user, action_mandatory and service_user tables from user_id to username';
 
     public function handle(): int
     {
-        $adminRole = Role::factory()->create([
-            'name' => RoleEnum::ADMIN->value,
-        ]);
-        $adminRole = Role::factory()->create([
-            'name' => RoleEnum::MANDATAIRE->value,
-        ]);
-
-        $tables = ['action_user', 'action_mandatory'];
+        $tables = ['action_user', 'action_mandatory', 'service_user'];
 
         foreach ($tables as $table) {
-            // $this->migrateTable($table);
+            $this->migrateTable($table);
         }
 
         $this->info('Migration completed successfully.');
@@ -39,51 +31,82 @@ final class FixCommand extends Command
 
     private function migrateTable(string $table): void
     {
-        if (! Schema::hasColumn($table, 'user_id')) {
-            $this->warn("Table {$table} does not have user_id column, skipping.");
+        if (!Schema::connection('maria-pst')->hasColumn($table, 'user_id')) {
+            $this->warn('Table '.$table.' does not have user_id column, skipping.');
 
             return;
         }
 
-        if (Schema::hasColumn($table, 'username')) {
-            $this->warn("Table {$table} already has username column, skipping.");
+        if (Schema::connection('maria-pst')->hasColumn($table, 'username')) {
+            $this->warn('Table '.$table.' already has username column, skipping.');
 
             return;
         }
 
-        $this->info("Migrating {$table}...");
+        $this->info('Migrating '.$table.'...');
 
         // Add username column
-        Schema::table($table, function ($blueprint) {
-            $blueprint->string('username')->nullable()->after('action_id');
+        Schema::connection('maria-pst')->table($table, function ($blueprint) use ($table) {
+            // service_user doesn't have action_id, add after service_id instead
+            if ($table === 'service_user') {
+                $blueprint->string('username')->nullable()->after('service_id');
+            } else {
+                $blueprint->string('username')->nullable()->after('action_id');
+            }
         });
 
-        // Populate username from users table
-        DB::table($table)
-            ->join('users', "{$table}.user_id", '=', 'users.id')
-            ->update(["{$table}.username" => DB::raw('users.username')]);
+        // Populate username from users table in intranet database
+        DB::connection('maria-pst')->table($table)
+            ->join(DB::raw('`intranet`.`users`'), $table.'.user_id', '=', 'users.id')
+            ->update([$table.'.username' => DB::raw('users.username')]);
 
         // Remove orphaned rows where user no longer exists
-        $orphaned = DB::table($table)->whereNull('username')->count();
+        $orphaned = DB::connection('maria-pst')->table($table)->whereNull('username')->count();
         if ($orphaned > 0) {
-            $this->warn("Removing {$orphaned} orphaned rows from {$table} (user no longer exists).");
-            DB::table($table)->whereNull('username')->delete();
+            $this->warn('Removing '.$orphaned.' orphaned rows from '.$table.' (user no longer exists).');
+            DB::connection('maria-pst')->table($table)->whereNull('username')->delete();
         }
 
         // Drop old FK, unique index, and user_id column
-        Schema::table($table, function ($blueprint) use ($table) {
-            $blueprint->dropForeign(["{$table}_user_id_foreign"]);
-            $blueprint->dropUnique(["{$table}_action_id_user_id_unique"]);
-            $blueprint->dropColumn('user_id');
-        });
+        try {
+            Schema::connection('maria-pst')->table($table, function ($blueprint) use ($table) {
+                $blueprint->dropForeign($table.'_user_id_foreign');
+            });
+        } catch (Exception) {
+            // Foreign key may not exist
+        }
+
+        try {
+            Schema::connection('maria-pst')->table($table, function ($blueprint) use ($table) {
+                if ($table === 'service_user') {
+                    $blueprint->dropUnique($table.'_user_id_service_id_unique');
+                } else {
+                    $blueprint->dropUnique($table.'_action_id_user_id_unique');
+                }
+            });
+        } catch (Exception) {
+            // Unique constraint may not exist
+        }
+
+        try {
+            Schema::connection('maria-pst')->table($table, function ($blueprint) {
+                $blueprint->dropColumn('user_id');
+            });
+        } catch (Exception) {
+            $this->warn('user_id column may not exist in table '.$table.'.');
+        }
 
         // Make username non-nullable and add new unique constraint
-        Schema::table($table, function ($blueprint) {
+        Schema::connection('maria-pst')->table($table, function ($blueprint) use ($table) {
             $blueprint->string('username')->nullable(false)->change();
-            $blueprint->unique(['action_id', 'username']);
+            if ($table === 'service_user') {
+                $blueprint->unique(['service_id', 'username']);
+            } else {
+                $blueprint->unique(['action_id', 'username']);
+            }
         });
 
-        $count = DB::table($table)->count();
-        $this->info("Migrated {$table}: {$count} rows.");
+        $count = DB::connection('maria-pst')->table($table)->count();
+        $this->info('Migrated '.$table.': '.$count.' rows.');
     }
 }
