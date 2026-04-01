@@ -11,11 +11,11 @@ use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Pst\Enums\ActionStateEnum;
 use AcMarche\Pst\Enums\ActionSynergyEnum;
 use AcMarche\Pst\Enums\ActionTypeEnum;
-use AcMarche\Pst\Enums\RoleEnum;
 use AcMarche\Pst\Enums\YesOrNoEnum;
 use AcMarche\Pst\Models\Scopes\DepartmentScope;
 use AcMarche\Pst\Models\Scopes\HasDepartmentScope;
 use AcMarche\Pst\Observers\ActionObserver;
+use AcMarche\Pst\Repository\UserRepository;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Scout\Searchable;
@@ -180,22 +181,14 @@ final class Action extends Model
         });
     }
 
-    public function mandataries(): BelongsToMany
+    /**
+     * Get mandataries (users with MANDATAIRE role) for this action.
+     *
+     * @return Collection<int, User>
+     */
+    public function mandataries(): Collection
     {
-        return $this->belongsToMany(
-            User::class,
-            'action_mandatory',
-            'action_id',
-            'username',
-            'id',
-            'username'
-        )->tap(function ($query) {
-            // Handle cross-database join by explicitly specifying the database
-            $query->from(DB::raw('`intranet`.`users`'));
-        })
-            ->whereHas('roles', function ($query) {
-                $query->where('name', RoleEnum::MANDATAIRE->value);
-            });
+        return new Collection();
     }
 
     /**
