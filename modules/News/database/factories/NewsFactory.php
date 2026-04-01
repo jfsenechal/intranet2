@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Database\Factories;
 
+use AcMarche\News\Models\Category;
 use AcMarche\News\Models\News;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,9 +19,16 @@ final class NewsFactory extends Factory
      */
     public function definition(): array
     {
+        $name = fake()->words(3, asText: true);
+
         return [
-            'name' => fake()->name(),
+            'name' => $name,
+            'slug' => \Illuminate\Support\Str::slug($name),
             'content' => fake()->randomHtml(),
+            'end_date' => fake()->dateTimeBetween('+1 week', '+2 weeks'),
+            'department' => 'common',
+            'category_id' => Category::factory(),
+            'archive' => false,
         ];
     }
 }

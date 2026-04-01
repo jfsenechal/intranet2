@@ -20,4 +20,5 @@ uses(
     '../modules/Document/tests/Browser',
     '../modules/Mileage/tests/Feature',
     '../modules/Mileage/tests/Unit',
+    '../modules/News/tests/Feature',
 );
