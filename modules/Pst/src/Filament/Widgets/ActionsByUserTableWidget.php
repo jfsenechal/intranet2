@@ -8,7 +8,7 @@ use AcMarche\Pst\Filament\Resources\ActionPst\Tables\ActionTables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 
-final class ActionsTableWidget extends BaseWidget
+final class ActionsByUserTableWidget extends BaseWidget
 {
     protected int|string|array $columnSpan = 'full';
 
