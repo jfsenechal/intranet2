@@ -12,6 +12,8 @@ final class ServiceUser extends Model
 {
     protected $connection = 'maria-pst';
 
+    protected $table = 'service_user';
+
     protected $fillable = [
         'username',
         'service_id',

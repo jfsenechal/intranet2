@@ -12,6 +12,8 @@ final class ActionUser extends Model
 {
     protected $connection = 'maria-pst';
 
+    protected $table = 'action_user';
+
     protected $fillable = [
         'username',
         'action_id',
