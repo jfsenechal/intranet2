@@ -27,6 +27,21 @@ trait UserPstTrait
         return $this->belongsToMany(Action::class, 'action_user', 'username', 'action_id', 'username', 'id');
     }
 
+    /**
+     * @return Builder<Action>
+     */
+    public function actionsFromServices(): Builder
+    {
+        $serviceIds = $this->services()->select('services.id');
+
+        return Action::query()->where(
+            static function (Builder $query) use ($serviceIds): void {
+                $query->whereHas('leaderServices', fn ($q) => $q->whereIn('services.id', $serviceIds))
+                    ->orWhereHas('partnerServices', fn ($q) => $q->whereIn('services.id', $serviceIds));
+            }
+        );
+    }
+
     #[Scope]
     public function forSelectedDepartment(Builder $query): void
     {
