@@ -35,7 +35,7 @@ final class PstPanelProvider extends PanelProvider
         $moduleName = 'Pst '.UserRepository::departmentSelected();
 
         return $panel
-            ->id('pst')
+            ->id('pst-panel')
             ->path('pst')
             ->spa()
             ->resourceCreatePageRedirect('view')
