@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Database\Seeders;
 
+use AcMarche\Pst\Enums\RoleEnum;
+use AcMarche\Security\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -24,5 +26,12 @@ final class DatabaseSeeder extends Seeder
                 'username' => config('app.default_user.name'),
                 'is_administrator' => true,
             ]);
+        $adminRole = Role::factory()->create([
+            'name' => RoleEnum::ADMIN->value,
+        ]);
+        $adminRole = Role::factory()->create([
+            'name' => RoleEnum::MANDATAIRE->value,
+        ]);
+
     }
 }
