@@ -21,6 +21,8 @@ final class PstServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        $this->bootModule();
+
         RegisterPolicies::register();
 
         // Register commands
