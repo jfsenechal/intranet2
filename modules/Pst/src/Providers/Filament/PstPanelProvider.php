@@ -49,7 +49,7 @@ final class PstPanelProvider extends PanelProvider
             ->unsavedChangesAlerts()
             ->renderHook(
                 PanelsRenderHook::TOPBAR_START,
-                fn (): string => view('app-view::filament.topbar-module-name', ['moduleName' => $moduleName])->render(),
+                fn (): string => view('app::filament.topbar-module-name', ['moduleName' => $moduleName])->render(),
             )
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Pst\\Filament\\Resources')

@@ -20,9 +20,11 @@ final class PdfExport
 
         $fullPath = Storage::disk('public')->path($relativePath);
 
-        Pdf::html(view('pdf.action', [
-            'action' => $action,
-        ]))
+        Pdf::html(
+            view('pdf.action', [
+                'action' => $action,
+            ])->render()
+        )
             ->withBrowsershot(function (Browsershot $browsershot): void {
                 if ($path = config('pdf.node_modules_path')) {
                     $browsershot->setNodeModulePath($path);

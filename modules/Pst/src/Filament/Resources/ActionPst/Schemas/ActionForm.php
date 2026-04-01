@@ -80,7 +80,7 @@ final class ActionForm
                             ->label('Précédent')
                             ->color('secondary'),
                     )
-                    ->submitAction(view('pst-view::components.btn_add')),
+                    ->submitAction(view('pst::components.btn_add')),
             ]);
     }
 

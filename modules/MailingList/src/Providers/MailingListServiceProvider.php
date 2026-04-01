@@ -28,7 +28,7 @@ final class MailingListServiceProvider extends ServiceProvider
         FilamentView::registerRenderHook(
             PanelsRenderHook::TOPBAR_START,
             function (): View {
-                return view('mailing-list-view::filament.topbar');
+                return view('mailing-list::filament.topbar');
             },
             scopes: 'mailing-list',
         );

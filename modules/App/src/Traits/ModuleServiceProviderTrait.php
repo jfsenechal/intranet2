@@ -44,7 +44,7 @@ trait ModuleServiceProviderTrait
         $this->loadMigrationsFrom($path.'/database/migrations');
 
         // Load views (note: views are in views/ not resources/views/)
-        $this->loadViewsFrom($path.'/resources/views', $name.'-view');
+        $this->loadViewsFrom($path.'/resources/views', $name);
 
         // Load routes
         if (file_exists($path.'/routes/web.php')) {
@@ -69,7 +69,7 @@ trait ModuleServiceProviderTrait
         // Publish views
         $this->publishes([
             $path.'/resources/views' => resource_path("views/vendor/{$name}"),
-        ], "{$name}-view");
+        ], "{$name}");
 
         $this->publishes([
             $path.'/resources/assets' => public_path("vendor/{$name}"),

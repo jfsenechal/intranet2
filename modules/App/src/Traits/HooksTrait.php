@@ -14,7 +14,7 @@ trait HooksTrait
     {
         FilamentView::registerRenderHook(
             PanelsRenderHook::SIDEBAR_NAV_START,
-            fn (): View => view('app-view::filament.list-modules-button'),
+            fn (): View => view('app::filament.list-modules-button'),
         );
     }
 }

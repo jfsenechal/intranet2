@@ -81,6 +81,7 @@
         "maatwebsite/excel": "^3.1.67",
         "meilisearch/meilisearch-php": "^1.16",
         "spatie/laravel-pdf": "^2.1.1",
+        "spatie/browsershot": "^5.2.3",
         "secondnetwork/blade-tabler-icons": "^3.31",
         "stechstudio/filament-impersonate": "^4.0",
         "nunomaduro/essentials": "^1.2",
