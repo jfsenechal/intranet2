@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Laravel\Scout\Searchable;
 
 #[ObservedBy([ActionObserver::class])]
@@ -166,12 +167,32 @@ final class Action extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'action_user', 'action_id', 'username', 'id', 'username');
+        return $this->belongsToMany(
+            User::class,
+            'action_user',
+            'action_id',
+            'username',
+            'id',
+            'username'
+        )->tap(function ($query) {
+            // Handle cross-database join by explicitly specifying the database
+            $query->from(DB::raw('`intranet`.`users`'));
+        });
     }
 
     public function mandataries(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'action_mandatory', 'action_id', 'username', 'id', 'username')
+        return $this->belongsToMany(
+            User::class,
+            'action_mandatory',
+            'action_id',
+            'username',
+            'id',
+            'username'
+        )->tap(function ($query) {
+            // Handle cross-database join by explicitly specifying the database
+            $query->from(DB::raw('`intranet`.`users`'));
+        })
             ->whereHas('roles', function ($query) {
                 $query->where('name', RoleEnum::MANDATAIRE->value);
             });
