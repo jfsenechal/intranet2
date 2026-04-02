@@ -143,31 +143,25 @@ it('can delete a declaration', function () {
         ->assertNotified()
         ->assertRedirect();
 
-    assertDatabaseMissing($declaration);
+    $this->assertSoftDeleted($declaration);
 });
 
 it('validates the form data', function (array $data, array $errors) {
     $declaration = Declaration::factory()->create(['user_add' => 'aaguirre']);
     $newData = Declaration::factory()->make(['user_add' => 'aaguirre']);
+    BudgetArticle::factory()->create();
 
     livewire(EditDeclaration::class, ['record' => $declaration->id])
         ->fillForm([
-            'last_name' => $newData->last_name,
-            'first_name' => $newData->first_name,
-            'street' => $newData->street,
-            'postal_code' => $newData->postal_code,
-            'city' => $newData->city,
+            'budget_article' => BudgetArticle::first()->name,
             'iban' => $newData->iban,
             'car_license_plate1' => $newData->car_license_plate1,
-            'rate' => $newData->rate,
-            'rate_omnium' => $newData->rate_omnium,
             ...$data,
         ])
         ->call('save')
         ->assertHasFormErrors($errors)
         ->assertNotNotified();
 })->with([
-    '`last_name` is required' => [['last_name' => null], ['last_name' => 'required']],
     '`iban` is required' => [['iban' => null], ['iban' => 'required']],
     '`car_license_plate1` is required' => [['car_license_plate1' => null], ['car_license_plate1' => 'required']],
 ]);

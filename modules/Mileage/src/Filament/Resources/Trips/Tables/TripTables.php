@@ -21,14 +21,14 @@ final class TripTables
     {
         return $table
             ->defaultSort('departure_date', 'desc')
-            ->modifyQueryUsing(fn(Builder $query) => TripRepository::getByUser($query))
+            ->modifyQueryUsing(fn (Builder $query) => TripRepository::getByUser($query))
             ->defaultPaginationPageOption(50)
             ->columns([
                 Tables\Columns\TextColumn::make('departure_date')
                     ->label('Date')
                     ->dateTime('d/m/Y')
                     ->sortable()
-                    ->url(fn(Trip $record) => TripResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (Trip $record) => TripResource::getUrl('view', ['record' => $record->id])),
                 Tables\Columns\TextColumn::make('departure_location')
                     ->label('Départ')
                     ->searchable()
@@ -48,7 +48,7 @@ final class TripTables
                     ->toggleable(),
                 Tables\Columns\IconColumn::make('declared')
                     ->label('Déclaré')
-                    ->state(fn(Trip $record) => $record->isDeclared())
+                    ->state(fn (Trip $record) => $record->isDeclared())
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Créé le')
@@ -60,8 +60,8 @@ final class TripTables
                 Tables\Filters\TernaryFilter::make('declared')
                     ->label('Déclaré')
                     ->queries(
-                        true: fn($query) => $query->whereNotNull('declaration_id'),
-                        false: fn($query) => $query->whereNull('declaration_id'),
+                        true: fn ($query) => $query->whereNotNull('declaration_id'),
+                        false: fn ($query) => $query->whereNull('declaration_id'),
                     )
                     ->default(false),
                 Tables\Filters\SelectFilter::make('type_movement')

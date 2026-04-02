@@ -6,18 +6,23 @@ use AcMarche\News\Filament\Resources\Categories\Pages\CreateCategory;
 use AcMarche\News\Filament\Resources\Categories\Pages\EditCategory;
 use AcMarche\News\Filament\Resources\Categories\Pages\ListCategory;
 use AcMarche\News\Filament\Resources\Categories\Pages\ViewCategory;
+use AcMarche\News\Filament\Resources\Categories\RelationManagers\NewsRelationManager;
 use AcMarche\News\Models\Category;
+use AcMarche\News\Models\News;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\Testing\TestAction;
 use Filament\Facades\Filament;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
+    Mail::fake();
     Filament::setCurrentPanel(Filament::getPanel('news'));
+    auth()->user()->update(['is_administrator' => true]);
 
     // Register dummy routes to prevent URL generation errors in tests
     if (! Route::getRoutes()->getByName('filament.news.resources.categories.index')) {
@@ -62,7 +67,7 @@ it('can render the view page', function () {
 it('has column', function (string $column) {
     livewire(ListCategory::class)
         ->assertTableColumnExists($column);
-})->with(['name', 'color']);
+})->with(['name', 'color', 'news_count']);
 
 it('can render column', function (string $column) {
     livewire(ListCategory::class)
@@ -140,4 +145,54 @@ it('displays delete action on view page', function () {
         'record' => $category->id,
     ])
         ->assertActionExists('delete');
+});
+
+it('displays news count on list page', function () {
+    $category = Category::factory()->create();
+    News::factory(3)->create(['category_id' => $category->id]);
+
+    livewire(ListCategory::class)
+        ->loadTable()
+        ->assertCanSeeTableRecords([$category])
+        ->assertTableColumnStateSet('news_count', 3, $category);
+});
+
+it('can render the news relation manager on view page', function () {
+    $category = Category::factory()->create();
+
+    livewire(NewsRelationManager::class, [
+        'ownerRecord' => $category,
+        'pageClass' => ViewCategory::class,
+    ])
+        ->assertOk();
+});
+
+it('lists related news in the relation manager', function () {
+    $category = Category::factory()->create();
+    $news = News::factory(2)->create(['category_id' => $category->id]);
+    $otherNews = News::factory()->create();
+
+    livewire(NewsRelationManager::class, [
+        'ownerRecord' => $category,
+        'pageClass' => ViewCategory::class,
+    ])
+        ->loadTable()
+        ->assertCanSeeTableRecords($news)
+        ->assertCanNotSeeTableRecords([$otherNews]);
+});
+
+it('denies create action for regular user', function () {
+    auth()->user()->update(['is_administrator' => false]);
+
+    livewire(ListCategory::class)
+        ->assertActionHidden('create');
+});
+
+it('denies edit action for regular user', function () {
+    auth()->user()->update(['is_administrator' => false]);
+    $category = Category::factory()->create();
+
+    livewire(ListCategory::class)
+        ->loadTable()
+        ->assertTableActionHidden('edit', $category);
 });

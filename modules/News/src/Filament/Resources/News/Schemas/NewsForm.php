@@ -16,19 +16,6 @@ use Illuminate\Support\Str;
 
 final class NewsForm
 {
-    public static function configete(Schema $schema): Schema
-    {
-        return $schema
-            ->schema([
-                FileUpload::make('featured_image')
-                    ->label('Featured Image')
-                    ->image()
-                    ->disk('public')
-                    ->directory(config('news.uploads.featured_image'))
-                    ->columnSpanFull(),
-            ]);
-    }
-
     public static function configure(Schema $schema): Schema
     {
         return $schema
@@ -48,11 +35,6 @@ final class NewsForm
                                 ) : null
                             )
                             ->columnSpanFull(),
-                        Forms\Components\TextInput::make('slug')
-                            ->required()
-                            ->maxLength(255)
-                            ->unique(ignoreRecord: true)
-                            ->columnSpanFull(),
                         Forms\Components\RichEditor::make('content')
                             ->label('Contenu')
                             ->required()
@@ -60,7 +42,7 @@ final class NewsForm
                         FileUpload::make('medias')
                             ->label('Pièces jointes')
                             ->required()
-                            ->maxFiles(3)
+                            ->maxFiles(5)
                             ->disk('public')
                             ->directory(config('news.uploads.medias'))
                             // ->acceptedFileTypes(['image/jpeg', 'image/png', 'application/pdf'])
@@ -76,7 +58,7 @@ final class NewsForm
                             ->relationship('category', 'name')
                             ->required(),
                         Forms\Components\Select::make('department')
-                            ->label('Département')
+                            ->label('Pour qui ?')
                             ->default(DepartmentWithCommonEnum::COMMON->value)
                             ->options(DepartmentWithCommonEnum::class)
                             ->required()

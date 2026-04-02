@@ -32,6 +32,14 @@ final class Homepage extends Page
         return true;
     }
 
+    /**
+     * Get all tabs with their modules
+     */
+    public static function getTabsWithModules(): Collection
+    {
+        return MigrationHandler::getTabsWithModules();
+    }
+
     public function getTitle(): string|Htmlable
     {
         return 'Accueil ';
@@ -50,13 +58,5 @@ final class Homepage extends Page
     public function getColumns(): int|string|array
     {
         return 2;
-    }
-
-    /**
-     * Get all tabs with their modules
-     */
-    public static function getTabsWithModules(): Collection
-    {
-        return MigrationHandler::getTabsWithModules();
     }
 }

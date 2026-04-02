@@ -22,6 +22,7 @@ use function Pest\Livewire\livewire;
 beforeEach(function () {
     Mail::fake();
     Filament::setCurrentPanel(Filament::getPanel('news'));
+    auth()->user()->update(['is_administrator' => true]);
     $this->category = Category::factory()->create();
 
     // Register dummy routes to prevent URL generation errors in tests
@@ -52,7 +53,6 @@ it('can render the edit page', function () {
         ->assertOk()
         ->assertSchemaStateSet([
             'name' => $news->name,
-            'slug' => $news->slug,
         ]);
 });
 
@@ -103,7 +103,6 @@ it('can filter archived news', function () {
 it('can load the create form', function () {
     livewire(CreateNews::class)
         ->assertSchemaComponentExists('name')
-        ->assertSchemaComponentExists('slug')
         ->assertSchemaComponentExists('content')
         ->assertSchemaComponentExists('category_id');
 });
@@ -116,7 +115,6 @@ it('can load the edit form with data', function () {
     ])
         ->assertSchemaStateSet([
             'name' => $news->name,
-            'slug' => $news->slug,
         ]);
 });
 
@@ -162,7 +160,6 @@ it('validates the form data', function (array $data, array $errors) {
     livewire(CreateNews::class)
         ->fillForm([
             'name' => $newsData->name,
-            'slug' => $newsData->slug,
             'content' => $newsData->content,
             'category_id' => $this->category->id,
             'department' => 'common',
@@ -175,8 +172,6 @@ it('validates the form data', function (array $data, array $errors) {
 })->with([
     '`name` is required' => [['name' => null], ['name' => 'required']],
     '`name` is max 255 characters' => [['name' => Str::random(256)], ['name' => 'max']],
-    '`slug` is required' => [['slug' => null], ['slug' => 'required']],
-    '`slug` is max 255 characters' => [['slug' => Str::random(256)], ['slug' => 'max']],
     '`category_id` is required' => [['category_id' => null], ['category_id' => 'required']],
     '`department` is required' => [['department' => null], ['department' => 'required']],
     '`end_date` is required' => [['end_date' => null], ['end_date' => 'required']],

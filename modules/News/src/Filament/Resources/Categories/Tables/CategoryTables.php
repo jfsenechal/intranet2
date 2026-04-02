@@ -21,6 +21,7 @@ final class CategoryTables
         return $table
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
+            ->modifyQueryUsing(fn ($query) => $query->withCount('news'))
             ->columns([
                 TextColumn::make('name')
                     ->searchable()
@@ -40,8 +41,9 @@ final class CategoryTables
                 Tables\Columns\ColorColumn::make('color')
                     ->searchable()
                     ->label('Couleur'),
-                TextColumn::make('count_news')
-                    ->label('Actus'),
+                TextColumn::make('news_count')
+                    ->label('Actus')
+                    ->sortable(),
             ])
             ->filters([
                 //

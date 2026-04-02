@@ -8,6 +8,7 @@ use AcMarche\News\Filament\Resources\Categories\Pages\CreateCategory;
 use AcMarche\News\Filament\Resources\Categories\Pages\EditCategory;
 use AcMarche\News\Filament\Resources\Categories\Pages\ListCategory;
 use AcMarche\News\Filament\Resources\Categories\Pages\ViewCategory;
+use AcMarche\News\Filament\Resources\Categories\RelationManagers\NewsRelationManager;
 use AcMarche\News\Filament\Resources\Categories\Schemas\CategoryForm;
 use AcMarche\News\Filament\Resources\Categories\Tables\CategoryTables;
 use AcMarche\News\Models\Category;
@@ -39,7 +40,7 @@ final class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            NewsRelationManager::class,
         ];
     }
 

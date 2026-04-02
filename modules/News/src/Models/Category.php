@@ -7,7 +7,7 @@ namespace AcMarche\News\Models;
 use AcMarche\News\Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class Category extends Model
 {
@@ -20,11 +20,11 @@ final class Category extends Model
     protected $fillable = ['name', 'icon', 'color'];
 
     /**
-     * @return BelongsToMany<News>
+     * @return HasMany<News>
      */
-    public function news(): BelongsToMany
+    public function news(): HasMany
     {
-        return $this->belongsToMany(News::class);
+        return $this->hasMany(News::class);
     }
 
     // Model::automaticallyEagerLoadRelationships();
