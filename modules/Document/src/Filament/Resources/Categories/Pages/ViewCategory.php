@@ -23,6 +23,10 @@ final class ViewCategory extends ViewRecord
         return $schema->schema([]);
     }
 
+    /**
+     * Because infolist is defined with empty schema, we need to override this method
+     * @return bool
+     */
     public function hasInfolist(): bool
     {
         return true;
