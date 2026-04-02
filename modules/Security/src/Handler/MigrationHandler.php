@@ -13,6 +13,8 @@ use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Publication\Filament\Resources\Publications\PublicationResource;
 use AcMarche\Security\Filament\Resources\Users\UserResource;
 use AcMarche\Security\Models\Module;
+use AcMarche\Security\Repository\TabRepository;
+use Illuminate\Support\Collection;
 
 final class MigrationHandler
 {
@@ -39,5 +41,28 @@ final class MigrationHandler
             58 => ActionPstResource::getUrl('index', panel: 'pst-panel'),
             default => null,
         };
+    }
+    /**
+     * Get all tabs with their modules
+     */
+    public static function getTabsWithModules(): Collection
+    {
+        $tabs = TabRepository::getTabsWithModules();
+        foreach ($tabs as $tab) {
+            foreach ($tab->modules as $module) {
+                if ($module->is_external) {
+                    $module->migrated = true;
+                    continue;
+                }
+                if ($url = MigrationHandler::urlModule($module)) {
+                    $module->url = $url;
+                    $module->migrated = true;
+                } else {
+                    $module->migrated = false;
+                }
+            }
+        }
+
+        return $tabs;
     }
 }

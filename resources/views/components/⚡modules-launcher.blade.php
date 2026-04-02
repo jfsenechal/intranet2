@@ -1,31 +1,16 @@
 <?php
 
 use AcMarche\Security\Handler\MigrationHandler;
-use AcMarche\Security\Repository\TabRepository;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
-new class extends Component
-{
+new class extends Component {
+    /**
+     * Get all tabs with their modules
+     */
     public function getTabsWithModules(): Collection
     {
-        $tabs = TabRepository::getTabsWithModules();
-        foreach ($tabs as $tab) {
-            foreach ($tab->modules as $module) {
-                if (! $module->is_external) {
-                    if ($url = MigrationHandler::urlModule($module)) {
-                        $module->url = $url;
-                        $module->migrated = true;
-                    } else {
-                        $module->migrated = true;
-                    }
-                } else {
-                    $module->migrated = true;
-                }
-            }
-        }
-
-        return $tabs;
+        return MigrationHandler::getTabsWithModules();
     }
 };
 ?>
@@ -39,7 +24,7 @@ new class extends Component
             type="button"
             class="flex w-full items-center justify-center gap-2 rounded-lg bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:bg-purple-700 dark:hover:bg-purple-600"
         >
-            <x-filament::icon icon="heroicon-m-squares-2x2" class="h-5 w-5" />
+            <x-filament::icon icon="heroicon-m-squares-2x2" class="h-5 w-5"/>
             Modules
         </button>
     </div>
@@ -93,7 +78,7 @@ new class extends Component
                         x-on:click="open = false"
                         class="rounded-full p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800 dark:hover:text-gray-300"
                     >
-                        <x-filament::icon icon="heroicon-m-x-mark" class="h-5 w-5" />
+                        <x-filament::icon icon="heroicon-m-x-mark" class="h-5 w-5"/>
                     </button>
                 </div>
 
@@ -125,11 +110,13 @@ new class extends Component
                                             >
                                                 {{ $initials }}
                                             </div>
-                                            <span class="max-w-full text-center text-base font-medium text-gray-700 dark:text-gray-300">
+                                            <span
+                                                class="max-w-full text-center text-base font-medium text-gray-700 dark:text-gray-300">
                                                 {{ $module->name }}
                                             </span>
                                             @if ($module->is_external)
-                                                <x-filament::icon icon="heroicon-m-arrow-top-right-on-square" class="h-3 w-3 text-gray-400" />
+                                                <x-filament::icon icon="heroicon-m-arrow-top-right-on-square"
+                                                                  class="h-3 w-3 text-gray-400"/>
                                             @endif
                                         </a>
                                     @else
@@ -142,7 +129,8 @@ new class extends Component
                                             >
                                                 {{ $initials }}
                                             </div>
-                                            <span class="max-w-full text-center text-base font-medium text-gray-500 dark:text-gray-500">
+                                            <span
+                                                class="max-w-full text-center text-base font-medium text-gray-500 dark:text-gray-500">
                                                 {{ $module->name }}
                                             </span>
                                         </div>

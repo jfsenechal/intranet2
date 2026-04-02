@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Filament\Pages;
 
 use AcMarche\Security\Handler\MigrationHandler;
-use AcMarche\Security\Repository\TabRepository;
 use BackedEnum;
 use Filament\Pages\Page;
 use Filament\Support\Enums\Width;
@@ -56,24 +55,8 @@ final class Homepage extends Page
     /**
      * Get all tabs with their modules
      */
-    public function getTabsWithModules(): Collection
+    public static function getTabsWithModules(): Collection
     {
-        $tabs = TabRepository::getTabsWithModules();
-        foreach ($tabs as $tab) {
-            foreach ($tab->modules as $module) {
-                if (! $module->is_external) {
-                    if ($url = MigrationHandler::urlModule($module)) {
-                        $module->url = $url;
-                        $module->migrated = true;
-                    } else {
-                        $module->migrated = true;
-                    }
-                } else {
-                    $module->migrated = true;
-                }
-            }
-        }
-
-        return $tabs;
+        return MigrationHandler::getTabsWithModules();
     }
 }
