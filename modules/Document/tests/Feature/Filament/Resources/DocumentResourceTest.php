@@ -8,6 +8,7 @@ use AcMarche\Document\Filament\Resources\Documents\Pages\ListDocuments;
 use AcMarche\Document\Filament\Resources\Documents\Pages\ViewDocument;
 use AcMarche\Document\Models\Category;
 use AcMarche\Document\Models\Document;
+use AcMarche\Security\Models\Role;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -23,6 +24,8 @@ use function Pest\Livewire\livewire;
 beforeEach(function () {
     Filament::setCurrentPanel(Filament::getPanel('document-panel'));
     $this->user = User::factory()->create();
+    $role = Role::factory()->create(['name' => 'ROLE_DOCUMENT_ADMIN']);
+    $this->user->roles()->attach($role);
     $this->actingAs($this->user);
     Storage::fake('public');
 });
@@ -198,3 +201,58 @@ it('validates the form data', function (array $data, array $errors) {
     '`name` is max 255 characters' => [['name' => Str::random(256)], ['name' => 'max']],
     '`category_id` is required' => [['category_id' => null], ['category_id' => 'required']],
 ]);
+
+it('prevents a regular user from editing a document they do not own', function () {
+    $document = Document::factory()->create();
+    $document->update(['user_add' => 'other-user']);
+
+    $regularUser = User::factory()->create();
+    $this->actingAs($regularUser);
+
+    livewire(EditDocument::class, ['record' => $document->id])
+        ->assertForbidden();
+});
+
+it('prevents a regular user from deleting a document they do not own', function () {
+    $document = Document::factory()->create();
+    $document->update(['user_add' => 'other-user']);
+
+    $regularUser = User::factory()->create();
+    $this->actingAs($regularUser);
+
+    livewire(ViewDocument::class, ['record' => $document->id])
+        ->assertActionHidden(DeleteAction::class);
+});
+
+it('allows a document creator to edit their own document', function () {
+    $creator = User::factory()->create();
+    $this->actingAs($creator);
+    $document = Document::factory()->create(['user_add' => $creator->username]);
+    Storage::disk('public')->put($document->file_path, 'dummy content');
+
+    livewire(EditDocument::class, ['record' => $document->id])
+        ->assertOk()
+        ->fillForm([
+            'name' => 'Updated by creator',
+        ])
+        ->call('save')
+        ->assertHasNoFormErrors();
+
+    assertDatabaseHas(Document::class, [
+        'id' => $document->id,
+        'name' => 'Updated by creator',
+    ]);
+});
+
+it('allows a document creator to delete their own document', function () {
+    $creator = User::factory()->create();
+    $this->actingAs($creator);
+    $document = Document::factory()->create(['user_add' => $creator->username]);
+
+    livewire(ViewDocument::class, ['record' => $document->id])
+        ->callAction(DeleteAction::class)
+        ->assertNotified()
+        ->assertRedirect();
+
+    $this->assertSoftDeleted($document);
+});

@@ -7,6 +7,7 @@ use AcMarche\Document\Filament\Resources\Categories\Pages\EditCategory;
 use AcMarche\Document\Filament\Resources\Categories\Pages\ListCategory;
 use AcMarche\Document\Filament\Resources\Categories\Pages\ViewCategory;
 use AcMarche\Document\Models\Category;
+use AcMarche\Security\Models\Role;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -20,6 +21,8 @@ use function Pest\Livewire\livewire;
 beforeEach(function () {
     Filament::setCurrentPanel(Filament::getPanel('document-panel'));
     $this->user = User::factory()->create();
+    $role = Role::factory()->create(['name' => 'ROLE_DOCUMENT_ADMIN']);
+    $this->user->roles()->attach($role);
     $this->actingAs($this->user);
 });
 
@@ -157,3 +160,29 @@ it('validates the form data', function (array $data, array $errors) {
 })->with([
     '`name` is required' => [['name' => null], ['name' => 'required']],
 ]);
+
+it('prevents a regular user from creating a category', function () {
+    $regularUser = User::factory()->create();
+    $this->actingAs($regularUser);
+
+    livewire(CreateCategory::class)
+        ->assertForbidden();
+});
+
+it('prevents a regular user from editing a category', function () {
+    $regularUser = User::factory()->create();
+    $this->actingAs($regularUser);
+    $category = Category::factory()->create();
+
+    livewire(EditCategory::class, ['record' => $category->id])
+        ->assertForbidden();
+});
+
+it('prevents a regular user from deleting a category', function () {
+    $regularUser = User::factory()->create();
+    $this->actingAs($regularUser);
+    $category = Category::factory()->create();
+
+    livewire(ViewCategory::class, ['record' => $category->id])
+        ->assertActionHidden(DeleteAction::class);
+});
