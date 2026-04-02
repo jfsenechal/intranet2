@@ -114,28 +114,24 @@ it('can create a declaration via bulk action on trips', function () {
 
 it('can update a declaration', function () {
     $declaration = Declaration::factory()->create(['user_add' => 'aaguirre']);
-    $newData = Declaration::factory()->make(['user_add' => 'aaguirre']);
+    $budgetArticle = BudgetArticle::factory()->create();
+    $newIban = fake()->iban('BE');
+    $newPlate = fake()->bothify('?-???-###');
 
     livewire(EditDeclaration::class, ['record' => $declaration->id])
         ->fillForm([
-            'last_name' => $newData->last_name,
-            'first_name' => $newData->first_name,
-            'street' => $newData->street,
-            'postal_code' => $newData->postal_code,
-            'city' => $newData->city,
-            'iban' => $newData->iban,
-            'car_license_plate1' => $newData->car_license_plate1,
-            'rate' => $newData->rate,
-            'rate_omnium' => $newData->rate_omnium,
+            'budget_article' => $budgetArticle->name,
+            'iban' => $newIban,
+            'car_license_plate1' => $newPlate,
         ])
         ->call('save')
         ->assertNotified();
 
     assertDatabaseHas(Declaration::class, [
         'id' => $declaration->id,
-        'last_name' => $newData->last_name,
-        'first_name' => $newData->first_name,
-        'iban' => $newData->iban,
+        'budget_article' => $budgetArticle->name,
+        'iban' => $newIban,
+        'car_license_plate1' => $newPlate,
     ]);
 });
 
