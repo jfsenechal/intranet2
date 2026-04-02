@@ -46,13 +46,6 @@ final class DeclarationPolicy
      */
     public function create(User $user): bool
     {
-        if ($user->isAdministrator()) {
-            return true;
-        }
-        if ($user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value)) {
-            return true;
-        }
-
         return false;
     }
 
