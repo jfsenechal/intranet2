@@ -10,6 +10,7 @@ use App\Models\User;
 use Exception;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Database\Eloquent\Model;
 
 final class CreateUser extends CreateRecord
 {
@@ -21,7 +22,16 @@ final class CreateUser extends CreateRecord
     }
 
     /**
-     * Create PersonalInformation after creating/enrolling a user in the mileage system
+     * Find the existing user by username instead of inserting a new row.
+     * This page enrolls an existing user into the mileage module.
+     */
+    protected function handleRecordCreation(array $data): Model
+    {
+        return User::where('username', $data['username'])->firstOrFail();
+    }
+
+    /**
+     * Create PersonalInformation after enrolling a user in the mileage system.
      */
     protected function afterCreate(): void
     {

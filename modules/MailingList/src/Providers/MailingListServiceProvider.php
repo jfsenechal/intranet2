@@ -12,6 +12,8 @@ final class MailingListServiceProvider extends ServiceProvider
 {
     use ModuleServiceProviderTrait;
 
+    public static int $module_id = 61;
+
     public function register(): void
     {
         $this->registerModuleConfig();

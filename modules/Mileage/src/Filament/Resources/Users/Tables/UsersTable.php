@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Users\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use AcMarche\Mileage\Filament\Actions\RevokeAction;
+use AcMarche\Mileage\Providers\MileageServiceProvider;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -15,6 +15,7 @@ final class UsersTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->whereHas('roles', fn ($q) => $q->where('module_id', MileageServiceProvider::$module_id)))
             ->columns([
                 TextColumn::make('email')
                     ->label('Email address')
@@ -34,12 +35,8 @@ final class UsersTable
                 //
             ])
             ->recordActions([
+                RevokeAction::make(),
                 EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 }

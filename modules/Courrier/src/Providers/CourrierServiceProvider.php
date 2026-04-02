@@ -15,6 +15,8 @@ final class CourrierServiceProvider extends ServiceProvider
 {
     use ModuleServiceProviderTrait;
 
+    public static int $module_id = 16;
+
     public function register(): void
     {
         $this->registerModuleConfig();

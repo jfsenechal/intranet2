@@ -64,6 +64,8 @@ final class HrmServiceProvider extends ServiceProvider
 {
     use ModuleServiceProviderTrait;
 
+    public static int $module_id = 6;
+
     /**
      * @var array<class-string, class-string>
      */

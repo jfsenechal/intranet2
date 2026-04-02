@@ -14,6 +14,8 @@ final class SecurityServiceProvider extends ServiceProvider
 {
     use ModuleServiceProviderTrait;
 
+    public static int $module_id = 17;
+
     public function register(): void
     {
         $this->registerModuleConfig();

@@ -17,6 +17,17 @@ final class EditUser extends EditRecord
         return 'Modification de '.$this->record->fullNameAsString();
     }
 
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        unset($data['college_trip_date'], $data['omnium'], $data['roles']);
+
+        return $data;
+    }
+
     protected function getHeaderActions(): array
     {
         return [
