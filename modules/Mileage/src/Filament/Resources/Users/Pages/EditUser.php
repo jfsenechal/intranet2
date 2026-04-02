@@ -14,7 +14,7 @@ final class EditUser extends EditRecord
 
     public function getTitle(): string|Htmlable
     {
-        return 'Modification de '.$this->record->fullName();
+        return 'Modification de '.$this->record->fullNameAsString();
     }
 
     protected function getHeaderActions(): array

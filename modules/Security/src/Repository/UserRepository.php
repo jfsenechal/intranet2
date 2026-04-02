@@ -12,7 +12,7 @@ final class UserRepository
 {
     public static string $department_selected_key = 'department_selected';
 
-    public static function getUsersForSelectOrderByName(): array
+    public static function listLocalUsersForSelect(): array
     {
         return User::query()
             ->orderBy('last_name')
@@ -23,22 +23,12 @@ final class UserRepository
             ->all();
     }
 
-    public static function getUsersForSelect(): array
-    {
-        $users = [];
-        foreach (User::all() as $user) {
-            $users[$user->id] = $user->first_name.' '.$user->last_name;
-        }
-
-        return $users;
-    }
-
     public static function find(int $userId): ?User
     {
         return User::find($userId);
     }
 
-    public static function listUsersFromLdapForSelect(): array
+    public static function listLdapUsersForSelect(): array
     {
         $users = [];
         foreach (UserLdap::all() as $userLdap) {
@@ -69,39 +59,6 @@ final class UserRepository
         }
 
         return DepartmentEnum::VILLE->value;
-    }
-
-    public static function listUsersFromLdap(): array
-    {
-        $users = [];
-        foreach (User::all() as $userLdap) {
-            if (! $userLdap->getFirstAttribute('mail')) {
-                continue;
-            }
-            if (! self::isActif($userLdap)) {
-                continue;
-            }
-            $username = $userLdap->getFirstAttribute('samaccountname');
-            $users[$username] = $userLdap;
-        }
-
-        usort($users, function (UserLdap $a, UserLdap $b) {
-            return strcasecmp($a->getFirstAttribute('sn'), $b->getFirstAttribute('sn'));
-        });
-
-        return $users;
-    }
-
-    public static function listDepartmentOfCurrentUser(): array
-    {
-        $departments = [];
-        if (auth()->user()) {
-            foreach (auth()->user()->departments as $department) {
-                $departments[$department] = $department;
-            }
-        }
-
-        return $departments;
     }
 
     private static function isActif(UserLdap $userLdap): bool

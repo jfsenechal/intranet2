@@ -284,9 +284,14 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         });
     }
 
-    protected function fullName(): Attribute
+    public function fullName(): Attribute
     {
         return Attribute::get(fn () => $this->last_name.' '.$this->first_name);
+    }
+
+    public function fullNameAsString(): string
+    {
+        return $this->last_name.' '.$this->first_name;
     }
 
     /**

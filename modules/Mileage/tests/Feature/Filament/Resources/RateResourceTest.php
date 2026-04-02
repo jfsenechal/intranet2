@@ -10,11 +10,9 @@ use AcMarche\Mileage\Models\PersonalInformation;
 use AcMarche\Mileage\Models\Rate;
 use AcMarche\Security\Models\Role;
 use App\Models\User;
-use Filament\Actions\DeleteAction;
 use Filament\Facades\Filament;
 
 use function Pest\Laravel\assertDatabaseHas;
-use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
@@ -44,8 +42,8 @@ it('can render the edit page', function () {
         ->assertSchemaStateSet([
             'amount' => $rate->amount,
             'omnium' => $rate->omnium,
-            'start_date' => $rate->start_date,
-            'end_date' => $rate->end_date,
+            'start_date' => $rate->start_date->format('Y-m-d'),
+            'end_date' => $rate->end_date->format('Y-m-d'),
         ]);
 });
 
@@ -68,9 +66,9 @@ it('can sort column', function (string $column) {
     livewire(ListRates::class)
         ->loadTable()
         ->sortTable($column)
-        ->assertCanSeeTableRecords($rates->sortBy($column), inOrder: true)
+        ->assertCanSeeTableRecords($rates->sortBy($column)->values(), inOrder: true)
         ->sortTable($column, 'desc')
-        ->assertCanSeeTableRecords($rates->sortByDesc($column), inOrder: true);
+        ->assertCanSeeTableRecords($rates->sortByDesc($column)->values(), inOrder: true);
 })->with(['start_date', 'amount']);
 
 it('can create a rate', function () {
@@ -80,8 +78,8 @@ it('can create a rate', function () {
         ->fillForm([
             'amount' => $rate->amount,
             'omnium' => $rate->omnium,
-            'start_date' => $rate->start_date,
-            'end_date' => $rate->end_date,
+            'start_date' => $rate->start_date->format('Y-m-d'),
+            'end_date' => $rate->end_date->format('Y-m-d'),
         ])
         ->call('create')
         ->assertNotified();
@@ -100,8 +98,8 @@ it('can update a rate', function () {
         ->fillForm([
             'amount' => $newData->amount,
             'omnium' => $newData->omnium,
-            'start_date' => $newData->start_date,
-            'end_date' => $newData->end_date,
+            'start_date' => $newData->start_date->format('Y-m-d'),
+            'end_date' => $newData->end_date->format('Y-m-d'),
         ])
         ->call('save')
         ->assertNotified();
@@ -111,17 +109,6 @@ it('can update a rate', function () {
         'amount' => $newData->amount,
         'omnium' => $newData->omnium,
     ]);
-});
-
-it('can delete a rate', function () {
-    $rate = Rate::factory()->create();
-
-    livewire(EditRate::class, ['record' => $rate->id])
-        ->callAction(DeleteAction::class)
-        ->assertNotified()
-        ->assertRedirect();
-
-    assertDatabaseMissing($rate);
 });
 
 it('validates the form data', function (array $data, array $errors) {

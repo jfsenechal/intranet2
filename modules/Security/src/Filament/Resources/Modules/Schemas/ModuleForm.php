@@ -58,7 +58,7 @@ final class ModuleForm
         if (! $user?->id > 0) {
             $components[] = Forms\Components\Select::make('user')
                 ->label('Agent')
-                ->options(fn (UserRepository $repository): array => $repository->getUsersForSelect())
+                ->options(fn (UserRepository $repository): array => $repository->listLocalUsersForSelect())
                 ->searchable()
                 ->columnSpanFull();
         }

@@ -50,7 +50,7 @@ final class AddressBookForm
                 Select::make('sharedWithUsers')
                     ->label('Partager avec')
                     ->options(
-                        fn (): array => UserRepository::getUsersForSelectOrderByName()
+                        fn (): array => UserRepository::listLocalUsersForSelect()
                     )
                     ->multiple()
                     ->searchable()

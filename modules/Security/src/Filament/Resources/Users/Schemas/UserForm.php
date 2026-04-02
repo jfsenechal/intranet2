@@ -22,7 +22,7 @@ final class UserForm
             ->schema([
                 Select::make('username')
                     ->label('Nom')
-                    ->options(UserRepository::listUsersFromLdapForSelect())
+                    ->options(UserRepository::listLdapUsersForSelect())
                     ->searchable(),
             ]);
     }

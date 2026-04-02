@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace AcMarche\Mileage\Validator;
 
 use AcMarche\Mileage\Models\Rate;
+use Carbon\CarbonInterface;
 
 final class RateOverlapValidator
 {
-    public static function hasOverlappingRate(string $startDate, string $endDate, ?Rate $currentRecord): bool
+    public static function hasOverlappingRate(string|CarbonInterface $startDate, string|CarbonInterface $endDate, ?Rate $currentRecord): bool
     {
         $query = Rate::query()
             ->where(function ($query) use ($startDate, $endDate): void {
