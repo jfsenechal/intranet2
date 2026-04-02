@@ -77,32 +77,15 @@ describe('view', function () {
 });
 
 describe('create', function () {
-    test('admin cannot create personal information', function () {
-        $user = User::factory()->create();
-        $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
-        $user->roles()->attach($role);
+    test('user can create personal information when they have no record', function () {
+        $user = User::factory()->create(['username' => 'new_user']);
 
-        expect($this->policy->create($user))->toBeFalse();
+        expect($this->policy->create($user))->toBeTrue();
     });
 
-    test('ville role user cannot create personal information', function () {
-        $user = User::factory()->create();
-        $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
-        $user->roles()->attach($role);
-
-        expect($this->policy->create($user))->toBeFalse();
-    });
-
-    test('cpas role user cannot create personal information', function () {
-        $user = User::factory()->create();
-        $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value]);
-        $user->roles()->attach($role);
-
-        expect($this->policy->create($user))->toBeFalse();
-    });
-
-    test('user without role cannot create personal information', function () {
-        $user = User::factory()->create();
+    test('user cannot create personal information when they already have a record', function () {
+        $user = User::factory()->create(['username' => 'existing_user']);
+        PersonalInformation::factory()->create(['username' => 'existing_user']);
 
         expect($this->policy->create($user))->toBeFalse();
     });

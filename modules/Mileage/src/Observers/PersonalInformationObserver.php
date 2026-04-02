@@ -10,6 +10,6 @@ final class PersonalInformationObserver
 {
     public function creating(PersonalInformation $personalInformation): void
     {
-        $personalInformation->username = auth()->user()->username;
+        $personalInformation->username ??= auth()->user()->username;
     }
 }
