@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Mileage\Providers;
 
 use AcMarche\App\Traits\ModuleServiceProviderTrait;
+use AcMarche\Mileage\Console\Commands\MigrationCommand;
 use Illuminate\Support\ServiceProvider;
 
 final class MileageServiceProvider extends ServiceProvider
@@ -18,6 +19,12 @@ final class MileageServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // Register commands
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                MigrationCommand::class,
+            ]);
+        }
         $this->bootModule();
     }
 
