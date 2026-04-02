@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Handler;
 
+use AcMarche\Mileage\Providers\MileageServiceProvider;
 use AcMarche\Security\Models\Module;
 use AcMarche\Security\Repository\ModuleRepository;
 use AcMarche\Security\Repository\RoleRepository;
@@ -61,15 +62,11 @@ final class ModuleHandler
         $user->roles()->sync($allRoleIdsToSync);
     }
 
-    public static function revokeUser(Module|Model $module, Model|User $user): void
+    public static function revokeModuleFromUser( Model|User $user,int $moduleId): void
     {
-        $roleIdsToDetach = RoleRepository::findRolesByUserAndModule($user, $module);
-
-        if (! empty($roleIdsToDetach)) {
-            $user->roles()->detach($roleIdsToDetach);
-        }
-
-        $user->modules()->detach($module);
+        $user->roles()
+            ->where('module_id', $moduleId)
+            ->detach();
     }
 
     private static function addModuleAndRoles(Module $module, User $user, array $data)

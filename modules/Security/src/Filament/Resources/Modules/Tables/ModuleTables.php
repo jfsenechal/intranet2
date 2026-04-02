@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Modules\Tables;
 
+use AcMarche\Security\Filament\Actions\RevokeAction;
 use AcMarche\Security\Filament\Resources\Modules\ModuleResource;
 use AcMarche\Security\Handler\ModuleHandler;
 use AcMarche\Security\Models\Module;
 use App\Models\User;
-use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
@@ -30,14 +30,14 @@ final class ModuleTables
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->label('Intitulé')
-                    ->url(fn (Module $record) => ModuleResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn(Module $record) => ModuleResource::getUrl('view', ['record' => $record->id])),
                 Tables\Columns\IconColumn::make('is_public')
                     ->label('Accessible à tous')
-                    ->icon(fn (bool $state): ?Heroicon => $state ? Heroicon::CheckCircle : null)
+                    ->icon(fn(bool $state): ?Heroicon => $state ? Heroicon::CheckCircle : null)
                     ->color('success'),
                 Tables\Columns\IconColumn::make('is_external')
                     ->label('Url externe')
-                    ->icon(fn (bool $state): ?Heroicon => $state ? Heroicon::CheckCircle : null)
+                    ->icon(fn(bool $state): ?Heroicon => $state ? Heroicon::CheckCircle : null)
                     ->color('success'),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Description'),
@@ -64,7 +64,7 @@ final class ModuleTables
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->label('Intitulé')
-                    ->url(fn (Module $record) => ModuleResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn(Module $record) => ModuleResource::getUrl('view', ['record' => $record->id])),
                 Tables\Columns\TextColumn::make('roles.name')
                     ->label('Rôles'),
             ])
@@ -81,13 +81,9 @@ final class ModuleTables
             ])
             ->recordActions([
                 EditAction::make(),
-                Action::make('revoke')
-                    ->label('Révoquer')
-                    ->icon('tabler-user-minus')
-                    ->color('danger')
-                    ->requiresConfirmation()
+                RevokeAction::make()
                     ->action(function (Module $module) use ($ownerRecord) {
-                        ModuleHandler::revokeUser($module, $ownerRecord);
+                        ModuleHandler::revokeModuleFromUser($ownerRecord, $module->id);
                     }),
             ]);
     }

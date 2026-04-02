@@ -72,15 +72,4 @@ final class RoleRepository
             ->pluck('roles.id') // Use 'roles.id' to be explicit
             ->all();
     }
-
-    public static function findRolesByUserAndModule(User $user, Module $module): array
-    {
-        return $user->roles() // Accesses the roles currently assigned to the user
-            ->where('module_id', $module->id) // Filters these roles to only those belonging to the given module
-        // 'module_id' is a column on your 'roles' table
-            ->pluck('roles.id') // Get only the IDs of these roles.
-        // 'roles.id' is important to specify the 'id' column of the 'roles' table,
-        // not the pivot table's 'id' or another 'id'.
-            ->all();
-    }
 }

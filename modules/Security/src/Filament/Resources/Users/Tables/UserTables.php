@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Users\Tables;
 
+use AcMarche\Security\Filament\Actions\RevokeAction;
 use AcMarche\Security\Filament\Resources\Modules\Schemas\ModuleForm;
 use AcMarche\Security\Handler\ModuleHandler;
 use AcMarche\Security\Models\Module;
 use AcMarche\Security\Repository\RoleRepository;
 use App\Models\User;
 use Exception;
-use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
@@ -85,7 +85,7 @@ final class UserTables
                     ->searchable(),
                 Tables\Columns\TextColumn::make('roles.name')
                     ->label('Rôles')
-                    ->state(fn (Model|User $record): string => $record->rolesByModule($owner->id)
+                    ->state(fn(Model|User $record): string => $record->rolesByModule($owner->id)
                         ->pluck('name')->implode(', ')),
             ])
             ->headerActions([
@@ -113,7 +113,7 @@ final class UserTables
 
                         return $data;
                     })
-                    ->schema(fn (Schema $schema) => ModuleForm::addUserFromModule($schema, $owner))
+                    ->schema(fn(Schema $schema) => ModuleForm::addUserFromModule($schema, $owner))
                     ->action(function (array $data, Schema $schema) use ($owner) {
                         try {
                             ModuleHandler::syncUserRolesForModule($owner, $schema->getRecord(), $data);
@@ -126,13 +126,9 @@ final class UserTables
                                 ->title('Erreur '.$e->getMessage());
                         }
                     }),
-                Action::make('revoke')
-                    ->label('Révoquer')
-                    ->icon('tabler-user-minus')
-                    ->color('danger')
-                    ->requiresConfirmation()
+                RevokeAction::make()
                     ->action(function (User $user) use ($owner) {
-                        ModuleHandler::revokeUser($owner, $user);
+                        ModuleHandler::revokeModuleFromUser($user, $owner->id);
                     }),
             ]);
     }
