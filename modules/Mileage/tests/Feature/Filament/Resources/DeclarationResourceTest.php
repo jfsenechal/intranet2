@@ -33,11 +33,11 @@ it('can render the index page', function () {
         ->assertOk();
 });
 
-it('can render the create page', function () {
+it('cannot render the create page', function () {
     BudgetArticle::factory()->create();
 
     livewire(CreateDeclaration::class)
-        ->assertOk();
+        ->assertForbidden();
 });
 
 it('can render the view page', function () {
