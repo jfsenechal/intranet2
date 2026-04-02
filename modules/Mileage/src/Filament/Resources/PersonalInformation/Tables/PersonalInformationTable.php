@@ -25,7 +25,7 @@ final class PersonalInformationTable
                 TextColumn::make('iban')
                     ->label('Compte IBAN'),
                 TextColumn::make('car_license_plate1')
-                    ->label('Plaque d\'immatriculation 1'),
+                    ->label('Plaque d\'immatriculation'),
                 TextColumn::make('car_license_plate2')
                     ->label('Plaque d\'immatriculation 2')
                     ->toggleable(isToggledHiddenByDefault: true),

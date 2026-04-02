@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Mileage\Filament\Resources\PersonalInformation\Pages;
 
 use AcMarche\Mileage\Filament\Resources\PersonalInformation\PersonalInformationResource;
-use AcMarche\Mileage\Repository\PersonalInformationRepository;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ManageRecords;
 
@@ -13,13 +12,16 @@ final class ManagePersonalInformation extends ManageRecords
 {
     protected static string $resource = PersonalInformationResource::class;
 
+    protected static ?string $title = 'Mes informations personnelles';
+    protected ?string $subheading = 'Ces informations sont nécessaires à votre déclaration.';
+
     protected function getHeaderActions(): array
     {
-        $userHasRecord = PersonalInformationRepository::getByCurrentUser()->exists();
-
         return [
             CreateAction::make()
-                ->visible(! $userHasRecord),
+                ->label('Ajouter mes informations')
+                ->icon('tabler-plus')
+                ->createAnother(false),
         ];
     }
 }

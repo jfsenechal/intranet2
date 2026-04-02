@@ -10,6 +10,7 @@ use AcMarche\Mileage\Repository\PersonalInformationRepository;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\HtmlString;
 
 final class ListTrips extends ListRecords
 {
@@ -22,7 +23,7 @@ final class ListTrips extends ListRecords
 
     public function getSubheading(): string|Htmlable|null
     {
-        return 'Pour créer une nouvelle déclaration, cochez les déplacements non déclarés';
+        return new HtmlString('Pour créer une nouvelle déclaration, cochez les déplacements <strong>non déclarés</strong>');
     }
 
     protected function getHeaderActions(): array

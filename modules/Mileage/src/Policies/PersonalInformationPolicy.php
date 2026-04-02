@@ -39,7 +39,7 @@ final class PersonalInformationPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return ! PersonalInformation::where('username', $user->username)->exists();
     }
 
     /**
@@ -75,7 +75,7 @@ final class PersonalInformationPolicy
     }
 
     /**
-     * Check if user is linked to the action either directly or through services
+     * Check if the user is linked to the action either directly or through services
      */
     private function canWrite(User $user, PersonalInformation $personalInformation): bool
     {

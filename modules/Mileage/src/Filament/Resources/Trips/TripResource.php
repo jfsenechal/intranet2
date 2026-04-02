@@ -17,6 +17,9 @@ final class TripResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    protected static ?string $modelLabel = 'Déplacement';
+    protected static ?string $pluralModelLabel = 'Déplacements';
+
     public static function getNavigationIcon(): ?string
     {
         return 'heroicon-o-map';
