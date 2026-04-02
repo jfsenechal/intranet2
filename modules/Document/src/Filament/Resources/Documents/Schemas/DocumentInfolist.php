@@ -21,9 +21,11 @@ final class DocumentInfolist
                     ->columnSpanFull(),
                 TextEntry::make('content')
                     ->label('Description')
+                    ->hiddenLabel()
                     ->html()
                     ->columnSpanFull()
                     ->prose()
+                    ->extraAttributes(['class' => 'prose-lg'])
                     ->hidden(fn ($state): bool => blank($state)),
                 Flex::make([
                     TextEntry::make('file_size')
