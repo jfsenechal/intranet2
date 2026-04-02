@@ -36,7 +36,10 @@ final class CategoryTables
                         // Only render the tooltip if the column content exceeds the length limit.
                         return $state;
                     }),
-
+                TextColumn::make('documents_count')
+                    ->counts('documents')
+                    ->label('Documents')
+                    ->sortable(),
             ])
             ->filters([
             ])

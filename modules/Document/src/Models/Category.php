@@ -7,7 +7,7 @@ namespace AcMarche\Document\Models;
 use AcMarche\Document\Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class Category extends Model
 {
@@ -22,11 +22,11 @@ final class Category extends Model
     protected $fillable = ['name'];
 
     /**
-     * @return BelongsToMany<Document>
+     * @return HasMany<Document>
      */
-    public function documents(): BelongsToMany
+    public function documents(): HasMany
     {
-        return $this->belongsToMany(Document::class);
+        return $this->hasMany(Document::class);
     }
 
     // Model::automaticallyEagerLoadRelationships();

@@ -8,6 +8,7 @@ use AcMarche\Document\Filament\Resources\Categories\Pages\CreateCategory;
 use AcMarche\Document\Filament\Resources\Categories\Pages\EditCategory;
 use AcMarche\Document\Filament\Resources\Categories\Pages\ListCategory;
 use AcMarche\Document\Filament\Resources\Categories\Pages\ViewCategory;
+use AcMarche\Document\Filament\Resources\Categories\RelationManagers\DocumentsRelationManager;
 use AcMarche\Document\Filament\Resources\Categories\Schemas\CategoryForm;
 use AcMarche\Document\Filament\Resources\Categories\Tables\CategoryTables;
 use AcMarche\Document\Models\Category;
@@ -37,7 +38,7 @@ final class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            DocumentsRelationManager::class,
         ];
     }
 

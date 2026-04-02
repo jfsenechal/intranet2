@@ -6,7 +6,9 @@ use AcMarche\Document\Filament\Resources\Categories\Pages\CreateCategory;
 use AcMarche\Document\Filament\Resources\Categories\Pages\EditCategory;
 use AcMarche\Document\Filament\Resources\Categories\Pages\ListCategory;
 use AcMarche\Document\Filament\Resources\Categories\Pages\ViewCategory;
+use AcMarche\Document\Filament\Resources\Categories\RelationManagers\DocumentsRelationManager;
 use AcMarche\Document\Models\Category;
+use AcMarche\Document\Models\Document;
 use AcMarche\Security\Models\Role;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
@@ -64,7 +66,7 @@ it('can list categories', function () {
 it('has table columns', function (string $column) {
     livewire(ListCategory::class)
         ->assertTableColumnExists($column);
-})->with(['name']);
+})->with(['name', 'documents_count']);
 
 it('can sort by name', function () {
     $categories = Category::factory(5)->create();
@@ -160,6 +162,19 @@ it('validates the form data', function (array $data, array $errors) {
 })->with([
     '`name` is required' => [['name' => null], ['name' => 'required']],
 ]);
+
+it('can list documents in the relation manager', function () {
+    $category = Category::factory()->create();
+    $documents = Document::factory(3)->create(['category_id' => $category->id]);
+
+    livewire(DocumentsRelationManager::class, [
+        'ownerRecord' => $category,
+        'pageClass' => ViewCategory::class,
+    ])
+        ->assertOk()
+        ->loadTable()
+        ->assertCanSeeTableRecords($documents);
+});
 
 it('prevents a regular user from creating a category', function () {
     $regularUser = User::factory()->create();
