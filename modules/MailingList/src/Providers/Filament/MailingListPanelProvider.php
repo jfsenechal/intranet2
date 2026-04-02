@@ -15,7 +15,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Platform;
-use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -25,8 +24,8 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 final class MailingListPanelProvider extends PanelProvider
 {
-    use PluginTrait;
     use HooksTrait;
+    use PluginTrait;
 
     public function panel(Panel $panel): Panel
     {
@@ -45,10 +44,7 @@ final class MailingListPanelProvider extends PanelProvider
             ])
             ->unsavedChangesAlerts()
             ->databaseNotifications()
-            ->renderHook(
-                PanelsRenderHook::TOPBAR_START,
-                $this->currentModuleName($panel->getBrandName()),
-            )
+
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\MailingList\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\MailingList\\Filament\\Pages')

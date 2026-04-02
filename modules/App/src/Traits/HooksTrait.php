@@ -19,17 +19,8 @@ trait HooksTrait
         );
     }
 
-    public function currentModuleName(string $name): closure
+    public function currentModuleName22(string $name): closure
     {
-        return fn (): string => "zeze";
         return fn (): string => view('app::filament.topbar-module-name', ['moduleName' => $name])->render();
-
-        FilamentView::registerRenderHook(
-            PanelsRenderHook::TOPBAR_START,
-            function (): View {
-                return view('mailing-list::filament.topbar');
-            },
-            scopes: 'mailing-list',
-        );
     }
 }

@@ -13,7 +13,6 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -23,8 +22,8 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 final class MileagePanelProvider extends PanelProvider
 {
-    use PluginTrait;
     use HooksTrait;
+    use PluginTrait;
 
     public function panel(Panel $panel): Panel
     {
@@ -42,10 +41,7 @@ final class MileagePanelProvider extends PanelProvider
             ->resourceCreatePageRedirect('view')
             ->resourceEditPageRedirect('view')
             ->databaseNotifications()
-            ->renderHook(
-                PanelsRenderHook::TOPBAR_START,
-                $this->currentModuleName($panel->getBrandName()),
-            )
+
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Mileage\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Mileage\\Filament\\Pages')
             ->pages([
