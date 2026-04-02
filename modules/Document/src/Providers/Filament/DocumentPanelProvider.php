@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Providers\Filament;
 
+use AcMarche\App\Traits\HooksTrait;
 use AcMarche\App\Traits\PluginTrait;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -23,6 +24,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 final class DocumentPanelProvider extends PanelProvider
 {
     use PluginTrait;
+    use HooksTrait;
 
     public function panel(Panel $panel): Panel
     {
@@ -41,7 +43,7 @@ final class DocumentPanelProvider extends PanelProvider
             ->resourceEditPageRedirect('view')
             ->renderHook(
                 PanelsRenderHook::TOPBAR_START,
-                fn (): string => view('app::filament.topbar-module-name', ['moduleName' => 'Document'])->render(),
+                $this->currentModuleName($panel->brandName),
             )
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Document\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Document\\Filament\\Pages')

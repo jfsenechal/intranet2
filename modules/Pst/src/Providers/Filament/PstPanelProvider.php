@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Pst\Providers\Filament;
 
 use AcMarche\App\Enums\DepartmentEnum;
+use AcMarche\App\Traits\HooksTrait;
 use AcMarche\App\Traits\PluginTrait;
 use AcMarche\Security\Repository\UserRepository;
 use Filament\Actions\Action;
@@ -28,6 +29,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 final class PstPanelProvider extends PanelProvider
 {
     use PluginTrait;
+    use HooksTrait;
 
     public function panel(Panel $panel): Panel
     {
@@ -37,6 +39,7 @@ final class PstPanelProvider extends PanelProvider
         return $panel
             ->id('pst-panel')
             ->path('pst')
+            ->brandName('Pst')
             ->spa()
             ->resourceCreatePageRedirect('view')
             ->resourceEditPageRedirect('view')
@@ -49,7 +52,7 @@ final class PstPanelProvider extends PanelProvider
             ->unsavedChangesAlerts()
             ->renderHook(
                 PanelsRenderHook::TOPBAR_START,
-                fn (): string => view('app::filament.topbar-module-name', ['moduleName' => $moduleName])->render(),
+                $this->currentModuleName($panel->brandName),
             )
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Pst\\Filament\\Resources')

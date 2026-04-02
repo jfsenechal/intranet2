@@ -24,14 +24,6 @@ final class MailingListServiceProvider extends ServiceProvider
     {
         RegisterPolicies::register();
         $this->bootModule();
-
-        FilamentView::registerRenderHook(
-            PanelsRenderHook::TOPBAR_START,
-            function (): View {
-                return view('mailing-list::filament.topbar');
-            },
-            scopes: 'mailing-list',
-        );
     }
 
     protected function moduleName(): string

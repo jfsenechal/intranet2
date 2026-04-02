@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Providers\Filament;
 
+use AcMarche\App\Traits\HooksTrait;
 use AcMarche\App\Traits\PluginTrait;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -25,6 +26,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 final class MailingListPanelProvider extends PanelProvider
 {
     use PluginTrait;
+    use HooksTrait;
 
     public function panel(Panel $panel): Panel
     {
@@ -34,6 +36,7 @@ final class MailingListPanelProvider extends PanelProvider
             ->id('mailing-list')
             ->path('mailing-list')
             ->spa()
+            ->brandName('Mailing List')
             ->sidebarCollapsibleOnDesktop()
 //            ->topNavigation()
             ->colors([
@@ -44,7 +47,7 @@ final class MailingListPanelProvider extends PanelProvider
             ->databaseNotifications()
             ->renderHook(
                 PanelsRenderHook::TOPBAR_START,
-                fn (): string => view('app::filament.topbar-module-name', ['moduleName' => 'MailingList'])->render(),
+                $this->currentModuleName($panel->brandName),
             )
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\MailingList\\Filament\\Resources')
