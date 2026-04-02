@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Mileage\Filament\Resources\Users\Pages;
 
 use AcMarche\Mileage\Filament\Resources\Users\UserResource;
-use AcMarche\Security\Handler\ModuleHandler;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Contracts\Support\Htmlable;
@@ -29,8 +28,7 @@ final class ListUsers extends ListRecords
         return [
             CreateAction::make()
                 ->label('Ajouter un agent')
-                ->icon('tabler-plus')
-                ->action(fn() => ModuleHandler::addModuleFromUser()),
+                ->icon('tabler-plus'),
         ];
     }
 }

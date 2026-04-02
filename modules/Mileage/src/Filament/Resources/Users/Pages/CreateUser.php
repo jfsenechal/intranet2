@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace AcMarche\Mileage\Filament\Resources\Users\Pages;
 
 use AcMarche\Mileage\Filament\Resources\Users\UserResource;
+use AcMarche\Mileage\Providers\MileageServiceProvider;
 use AcMarche\Mileage\Service\PersonalInformationService;
+use AcMarche\Security\Handler\ModuleHandler;
 use App\Models\User;
 use Exception;
 use Filament\Notifications\Notification;
@@ -31,7 +33,7 @@ final class CreateUser extends CreateRecord
     }
 
     /**
-     * Create PersonalInformation after enrolling a user in the mileage system.
+     * Assign module roles and create PersonalInformation after enrolling a user.
      */
     protected function afterCreate(): void
     {
@@ -39,11 +41,12 @@ final class CreateUser extends CreateRecord
         $user = $this->record;
 
         try {
+            ModuleHandler::addModuleFromUser($user, MileageServiceProvider::$module_id, $this->data['roles'] ?? []);
             PersonalInformationService::createPersonalInformation($user, $this->data);
         } catch (Exception $e) {
             Notification::make()
                 ->warning()
-                ->title('Les données personnelles sont manquantes')
+                ->title('Erreur lors de l\'inscription')
                 ->body($e->getMessage())
                 ->persistent()
                 ->send();
