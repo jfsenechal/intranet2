@@ -7,12 +7,16 @@ use AcMarche\Mileage\Filament\Resources\Declarations\Pages\CreateDeclaration;
 use AcMarche\Mileage\Filament\Resources\Declarations\Pages\EditDeclaration;
 use AcMarche\Mileage\Filament\Resources\Declarations\Pages\ListDeclarations;
 use AcMarche\Mileage\Filament\Resources\Declarations\Pages\ViewDeclaration;
+use AcMarche\Mileage\Filament\Resources\Trips\Pages\ListTrips;
 use AcMarche\Mileage\Models\BudgetArticle;
 use AcMarche\Mileage\Models\Declaration;
 use AcMarche\Mileage\Models\PersonalInformation;
+use AcMarche\Mileage\Models\Rate;
+use AcMarche\Mileage\Models\Trip;
 use AcMarche\Security\Models\Role;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
+use Filament\Actions\Testing\TestAction;
 use Filament\Facades\Filament;
 
 use function Pest\Laravel\assertDatabaseHas;
@@ -84,32 +88,28 @@ it('can search declarations', function () {
         ->assertCanNotSeeTableRecords($declarations->where('last_name', '!=', $search));
 });
 
-it('can create a declaration', function () {
+it('can create a declaration via bulk action on trips', function () {
     $budgetArticle = BudgetArticle::factory()->create();
-    $declaration = Declaration::factory()->make(['user_add' => 'aaguirre']);
+    $rate = Rate::factory()->create([
+        'start_date' => now()->subMonth(),
+        'end_date' => now()->addMonth(),
+    ]);
+    $trips = Trip::factory(3)->create([
+        'user_add' => 'aaguirre',
+        'departure_date' => now(),
+        'declaration_id' => null,
+    ]);
 
-    livewire(CreateDeclaration::class)
-        ->fillForm([
-            'last_name' => $declaration->last_name,
-            'first_name' => $declaration->first_name,
-            'street' => $declaration->street,
-            'postal_code' => $declaration->postal_code,
-            'city' => $declaration->city,
-            'iban' => $declaration->iban,
-            'car_license_plate1' => $declaration->car_license_plate1,
-            'rate' => $declaration->rate,
-            'rate_omnium' => $declaration->rate_omnium,
-            'type_movement' => $declaration->type_movement,
-            'budget_article' => $budgetArticle->name,
+    livewire(ListTrips::class)
+        ->loadTable()
+        ->selectTableRecords($trips)
+        ->callAction(TestAction::make('create-declaration')->table()->bulk(), [
+            'budget_article_id' => $budgetArticle->id,
         ])
-        ->call('create')
         ->assertNotified();
 
-    assertDatabaseHas(Declaration::class, [
-        'last_name' => $declaration->last_name,
-        'first_name' => $declaration->first_name,
-        'iban' => $declaration->iban,
-    ]);
+    expect(Declaration::count())->toBe(1);
+    expect(Trip::whereNotNull('declaration_id')->count())->toBe(3);
 });
 
 it('can update a declaration', function () {
