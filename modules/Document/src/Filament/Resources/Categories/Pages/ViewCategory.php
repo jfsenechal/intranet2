@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Document\Filament\Resources\Categories\Pages;
 
 use AcMarche\Document\Filament\Resources\Categories\CategoryResource;
-use AcMarche\Document\Filament\Resources\Categories\Schemas\CategoryInfolist;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
@@ -21,7 +20,12 @@ final class ViewCategory extends ViewRecord
 
     public function infolist(Schema $schema): Schema
     {
-        return CategoryInfolist::configure($schema);
+        return $schema->schema([]);
+    }
+
+    public function hasInfolist(): bool
+    {
+        return true;
     }
 
     protected function getHeaderActions(): array
