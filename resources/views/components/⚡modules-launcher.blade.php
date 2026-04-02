@@ -22,7 +22,7 @@ new class extends Component {
             x-data
             @click="window.dispatchEvent(new CustomEvent('toggle-modules-launcher'))"
             type="button"
-            class="flex w-full items-center justify-center gap-2 rounded-lg bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:bg-purple-700 dark:hover:bg-purple-600"
+            class="flex w-full items-center justify-center gap-2 rounded-lg bg-pink-400 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:bg-purple-700 dark:hover:bg-purple-600"
         >
             <x-filament::icon icon="heroicon-m-squares-2x2" class="h-5 w-5"/>
             Modules
@@ -68,7 +68,7 @@ new class extends Component {
                 x-transition:leave="transition ease-in duration-150"
                 x-transition:leave-start="scale-100 opacity-100"
                 x-transition:leave-end="scale-95 opacity-0"
-                class="fixed top-20 left-4 right-4 z-50 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-2xl bg-white p-8 shadow-2xl ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-700"
+                class="fixed max-w-5xl top-20 left-4 right-4 z-50 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-2xl bg-white p-8 shadow-2xl ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-700"
                 style="display: none;"
             >
                 {{-- Header --}}
@@ -89,7 +89,7 @@ new class extends Component {
                             <h3 class="mb-3 text-base font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
                                 {{ $tab->name }}
                             </h3>
-                            <div class="grid grid-cols-4 gap-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10">
+                            <div class="grid grid-cols-4 gap-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-4">
                                 @foreach ($tab->modules as $moduleIndex => $module)
                                     @php
                                         $colorIndex = ($tabIndex * 3 + $moduleIndex) % count($colors);
