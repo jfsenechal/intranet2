@@ -271,6 +271,16 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         return $this->full_name;
     }
 
+    public function fullName(): Attribute
+    {
+        return Attribute::get(fn () => $this->last_name.' '.$this->first_name);
+    }
+
+    public function fullNameAsString(): string
+    {
+        return $this->last_name.' '.$this->first_name;
+    }
+
     protected static function boot(): void
     {
         parent::boot();
@@ -282,16 +292,6 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
                 unset($model->attributes['plainPassword']);
             }
         });
-    }
-
-    public function fullName(): Attribute
-    {
-        return Attribute::get(fn () => $this->last_name.' '.$this->first_name);
-    }
-
-    public function fullNameAsString(): string
-    {
-        return $this->last_name.' '.$this->first_name;
     }
 
     /**

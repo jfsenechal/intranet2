@@ -19,9 +19,9 @@ final class UsersTable
     {
         return $table
             ->modifyQueryUsing(
-                fn($query) => $query->whereHas(
+                fn ($query) => $query->whereHas(
                     'roles',
-                    fn($q) => $q->where('module_id', MileageServiceProvider::$module_id)
+                    fn ($q) => $q->where('module_id', MileageServiceProvider::$module_id)
                 )
             )
             ->columns([

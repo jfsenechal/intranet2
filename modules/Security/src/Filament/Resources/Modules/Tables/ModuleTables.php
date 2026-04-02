@@ -30,14 +30,14 @@ final class ModuleTables
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->label('Intitulé')
-                    ->url(fn(Module $record) => ModuleResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (Module $record) => ModuleResource::getUrl('view', ['record' => $record->id])),
                 Tables\Columns\IconColumn::make('is_public')
                     ->label('Accessible à tous')
-                    ->icon(fn(bool $state): ?Heroicon => $state ? Heroicon::CheckCircle : null)
+                    ->icon(fn (bool $state): ?Heroicon => $state ? Heroicon::CheckCircle : null)
                     ->color('success'),
                 Tables\Columns\IconColumn::make('is_external')
                     ->label('Url externe')
-                    ->icon(fn(bool $state): ?Heroicon => $state ? Heroicon::CheckCircle : null)
+                    ->icon(fn (bool $state): ?Heroicon => $state ? Heroicon::CheckCircle : null)
                     ->color('success'),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Description'),
@@ -64,7 +64,7 @@ final class ModuleTables
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->label('Intitulé')
-                    ->url(fn(Module $record) => ModuleResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (Module $record) => ModuleResource::getUrl('view', ['record' => $record->id])),
                 Tables\Columns\TextColumn::make('roles.name')
                     ->label('Rôles'),
             ])

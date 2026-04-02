@@ -85,7 +85,7 @@ final class UserTables
                     ->searchable(),
                 Tables\Columns\TextColumn::make('roles.name')
                     ->label('Rôles')
-                    ->state(fn(Model|User $record): string => $record->rolesByModule($owner->id)
+                    ->state(fn (Model|User $record): string => $record->rolesByModule($owner->id)
                         ->pluck('name')->implode(', ')),
             ])
             ->headerActions([
@@ -113,7 +113,7 @@ final class UserTables
 
                         return $data;
                     })
-                    ->schema(fn(Schema $schema) => ModuleForm::addUserFromModule($schema, $owner))
+                    ->schema(fn (Schema $schema) => ModuleForm::addUserFromModule($schema, $owner))
                     ->action(function (array $data, Schema $schema) use ($owner) {
                         try {
                             ModuleHandler::syncUserRolesForModule($owner, $schema->getRecord(), $data);
