@@ -43,7 +43,7 @@ final class DocumentPanelProvider extends PanelProvider
             ->resourceEditPageRedirect('view')
             ->renderHook(
                 PanelsRenderHook::TOPBAR_START,
-                $this->currentModuleName($panel->brandName),
+                $this->currentModuleName($panel->getBrandName()),
             )
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Document\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Document\\Filament\\Pages')

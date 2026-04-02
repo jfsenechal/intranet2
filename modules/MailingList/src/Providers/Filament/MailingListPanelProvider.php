@@ -36,7 +36,7 @@ final class MailingListPanelProvider extends PanelProvider
             ->id('mailing-list')
             ->path('mailing-list')
             ->spa()
-            ->brandName('Mailing List')
+            ->brandName('Carnets et liste de diffusion')
             ->sidebarCollapsibleOnDesktop()
 //            ->topNavigation()
             ->colors([
@@ -47,7 +47,7 @@ final class MailingListPanelProvider extends PanelProvider
             ->databaseNotifications()
             ->renderHook(
                 PanelsRenderHook::TOPBAR_START,
-                $this->currentModuleName($panel->brandName),
+                $this->currentModuleName($panel->getBrandName()),
             )
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\MailingList\\Filament\\Resources')

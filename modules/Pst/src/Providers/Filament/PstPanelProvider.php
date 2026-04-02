@@ -52,7 +52,7 @@ final class PstPanelProvider extends PanelProvider
             ->unsavedChangesAlerts()
             ->renderHook(
                 PanelsRenderHook::TOPBAR_START,
-                $this->currentModuleName($panel->brandName),
+                $this->currentModuleName($panel->getBrandName()),
             )
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Pst\\Filament\\Resources')

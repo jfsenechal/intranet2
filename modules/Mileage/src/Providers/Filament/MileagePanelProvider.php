@@ -44,7 +44,7 @@ final class MileagePanelProvider extends PanelProvider
             ->databaseNotifications()
             ->renderHook(
                 PanelsRenderHook::TOPBAR_START,
-                $this->currentModuleName($panel->brandName),
+                $this->currentModuleName($panel->getBrandName()),
             )
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Mileage\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Mileage\\Filament\\Pages')

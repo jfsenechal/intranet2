@@ -43,7 +43,7 @@ final class CourrierPanelProvider extends PanelProvider
             ->unsavedChangesAlerts()
             ->renderHook(
                 PanelsRenderHook::TOPBAR_START,
-                $this->currentModuleName($panel->brandName),
+                $this->currentModuleName($panel->getBrandName()),
             )
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Courrier\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Courrier\\Filament\\Pages')
