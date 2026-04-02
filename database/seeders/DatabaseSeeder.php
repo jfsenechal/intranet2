@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use AcMarche\Security\Database\Seeders\DatabaseSeeder as SecurityDatabaseSeeder;
-use AcMarche\Security\Models\Module;
 use AcMarche\Security\Models\Tab;
 use AcMarche\Security\Repository\ModuleRepository;
 use Illuminate\Database\Seeder;
@@ -33,18 +32,6 @@ final class DatabaseSeeder extends Seeder
                 $module->save();
             }
         }
-        $tab = Tab::firstOrCreate(['name' => 'Applications']);
-        Module::create(
-            [
-                'name' => 'Carnets et Mailing',
-                'tab_id' => $tab->id,
-                'url' => '/mailing-list',
-                'is_public' => true,
-                'description' => 'Carnets d\'adresses et liste de diffusion',
-                'icon' => 'heroicon-o-envelope',
-                'color' => '#000000',
-            ]
-        );
     }
 
     private function createTab(int $moduleId): ?Tab
@@ -73,6 +60,9 @@ final class DatabaseSeeder extends Seeder
 
             // Social & CPAS
             39, 52, 55, 58 => Tab::firstOrCreate(['name' => 'Social & CPAS']),
+
+            // Organisation
+            61 => Tab::firstOrCreate(['name' => 'Organisation']),
 
             default => null,
         };

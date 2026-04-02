@@ -13,6 +13,7 @@ final class ManagePersonalInformation extends ManageRecords
     protected static string $resource = PersonalInformationResource::class;
 
     protected static ?string $title = 'Mes informations personnelles';
+
     protected ?string $subheading = 'Ces informations sont nécessaires à votre déclaration.';
 
     protected function getHeaderActions(): array

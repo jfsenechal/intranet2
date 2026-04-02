@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace AcMarche\News\Policies;
 
 use AcMarche\News\Enums\RolesEnum;
-use AcMarche\News\Models\Category;
+use AcMarche\News\Models\News;
 use App\Models\User;
 
-// https://laravel.com/docs/12.x/authorization#creating-policies
-final class CategoryPolicy
+final class NewsPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -22,7 +21,7 @@ final class CategoryPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Category $category): bool
+    public function view(User $user, News $news): bool
     {
         return true;
     }
@@ -32,29 +31,29 @@ final class CategoryPolicy
      */
     public function create(User $user): bool
     {
-        return $this->hasRole($user);
+        return true;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Category $category): bool
+    public function update(User $user, News $news): bool
     {
-        return $this->hasRole($user);
+        return $this->hasRole($user, $news);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Category $category): bool
+    public function delete(User $user, News $news): bool
     {
-        return $this->hasRole($user);
+        return $this->hasRole($user, $news);
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Category $category): bool
+    public function restore(User $user, News $news): bool
     {
         return false;
     }
@@ -62,18 +61,22 @@ final class CategoryPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Category $category): bool
+    public function forceDelete(User $user, News $news): bool
     {
         return false;
     }
 
-    public function hasRole(User $user)
+    public function hasRole(User $user, News $news)
     {
         if ($user->isAdministrator()) {
             return true;
         }
 
         if ($user->hasOneOfThisRoles([RolesEnum::ROLE_NEWS_ADMIN->value])) {
+            return true;
+        }
+
+        if ($user->username === $news->user_add) {
             return true;
         }
 

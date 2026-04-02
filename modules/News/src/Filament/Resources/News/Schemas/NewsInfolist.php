@@ -27,6 +27,7 @@ final class NewsInfolist
                     ->icon('tabler-mail'),
                 TextEntry::make('content')
                     ->label(null)
+                    ->hiddenLabel()
                     ->html()
                     ->columnSpanFull()
                     ->prose(),

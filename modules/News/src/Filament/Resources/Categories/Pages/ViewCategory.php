@@ -17,6 +17,11 @@ final class ViewCategory extends ViewRecord
         return $this->record->name;
     }
 
+    protected function hasInfolist(): bool
+    {
+        return true;
+    }
+
     protected function getHeaderActions(): array
     {
         return [
