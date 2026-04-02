@@ -42,6 +42,7 @@ final class MigrationHandler
             default => null,
         };
     }
+
     /**
      * Get all tabs with their modules
      */
@@ -52,9 +53,10 @@ final class MigrationHandler
             foreach ($tab->modules as $module) {
                 if ($module->is_external) {
                     $module->migrated = true;
+
                     continue;
                 }
-                if ($url = MigrationHandler::urlModule($module)) {
+                if ($url = self::urlModule($module)) {
                     $module->url = $url;
                     $module->migrated = true;
                 } else {
