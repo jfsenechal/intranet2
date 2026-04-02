@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Users\Schemas;
 
+use AcMarche\Mileage\Providers\MileageServiceProvider;
 use AcMarche\Security\Filament\Resources\Modules\Schemas\ModuleForm;
 use AcMarche\Security\Repository\ModuleRepository;
 use AcMarche\Security\Repository\UserRepository;
@@ -17,7 +18,7 @@ final class UserForm
 {
     public static function configure(Schema $schema): Schema
     {
-        $mileageModule = ModuleRepository::find(13);
+        $mileageModule = ModuleRepository::find(MileageServiceProvider::$module_id);
 
         return $schema
             ->components([

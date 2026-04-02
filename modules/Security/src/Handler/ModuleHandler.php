@@ -26,20 +26,20 @@ final class ModuleHandler
         self::addModuleAndRoles($module, $user, $data);
     }
 
-    public static function addModuleFromUser(User $user, array $data): void
+    public static function addModuleFromUser(User $user, int $moduleId, array $rolesChecked): void
     {
-        if (! $module = ModuleRepository::find($data['module'])) {
+        if (! $module = ModuleRepository::find($moduleId)) {
             throw new Exception('Module not found');
         }
-        self::addModuleAndRoles($module, $user, $data);
+        self::addModuleAndRoles($module, $user, $rolesChecked);
     }
 
     /**
      * Updates a user's roles for a specific module.
      */
-    public static function syncUserRolesForModule(Module $module, User|Model $user, array $dataFromForm): void
+    public static function syncUserRolesForModule(Module $module, User|Model $user, array $rolesChecked): void
     {
-        $roleIdsToProcess = RoleRepository::findRolesByModuleAndRolesName($module, $dataFromForm);
+        $roleIdsToProcess = RoleRepository::findRolesByModuleAndRolesName($module, $rolesChecked);
 
         // 1. Get the IDs of the roles selected in the form that *actually belong* to the current module.
         // This filters $newRoleIdsFromForm to only include roles valid for $module.
