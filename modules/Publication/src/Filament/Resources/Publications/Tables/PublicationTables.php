@@ -19,11 +19,13 @@ final class PublicationTables
             ->columns([
                 TextColumn::make('name')
                     ->label('Nom')
+                    ->limit(120)
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('category.name')
                     ->label('Category')
                     ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('expire_date')
                     ->label('Date d\'expiration')
