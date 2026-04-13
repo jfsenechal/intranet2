@@ -85,7 +85,7 @@ final class ImapRepository
     /**
      * @throws ImapException
      */
-    public function findMessageByUid(string $uid): ?MessageInterface
+    public function findMessageByUid(int $uid): ?MessageInterface
     {
         $this->ensureConnected();
 
@@ -101,7 +101,7 @@ final class ImapRepository
     /**
      * @throws ImapException
      */
-    public function deleteMessage(string $uid): void
+    public function deleteMessage(int $uid): void
     {
         $message = $this->findMessageByUid($uid);
 
@@ -147,7 +147,7 @@ final class ImapRepository
     /**
      * @throws ImapException
      */
-    public function getAttachment(string $uid, int $attachmentIndex): Attachment
+    public function getAttachment(int $uid, int $attachmentIndex): Attachment
     {
         $this->ensureConnected();
 

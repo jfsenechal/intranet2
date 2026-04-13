@@ -40,7 +40,6 @@ final class CourrierPanelProvider extends PanelProvider
             ->resourceCreatePageRedirect('view')
             ->resourceEditPageRedirect('view')
             ->unsavedChangesAlerts()
-
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Courrier\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Courrier\\Filament\\Pages')
             ->pages([

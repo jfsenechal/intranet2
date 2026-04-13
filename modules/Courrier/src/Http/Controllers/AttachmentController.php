@@ -19,7 +19,7 @@ final class AttachmentController extends Controller
         private readonly ImapRepository $imapRepository
     ) {}
 
-    public function show(string $uid, int $index): StreamedResponse|Response
+    public function show(int $uid, int $index): StreamedResponse|Response
     {
         try {
             $attachment = $this->imapRepository->getAttachment($uid, $index);
@@ -30,7 +30,7 @@ final class AttachmentController extends Controller
         }
     }
 
-    public function preview(string $uid, int $index): StreamedResponse|Response
+    public function preview(int $uid, int $index): StreamedResponse|Response
     {
         try {
             $attachment = $this->imapRepository->getAttachment($uid, $index);

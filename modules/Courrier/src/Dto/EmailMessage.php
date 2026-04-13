@@ -10,7 +10,7 @@ final readonly class EmailMessage
      * @param  array<int, EmailAttachment>  $attachments
      */
     public function __construct(
-        public string $uid,
+        public int $uid,
         public string $date,
         public string $from,
         public string $fromEmail,

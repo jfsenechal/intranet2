@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\IncomingMails\Schemas;
 
-use AcMarche\Courrier\Models\Recipient;
-use AcMarche\Courrier\Models\Service;
-use Filament\Forms;
+use AcMarche\Courrier\Repository\RecipientRepository;
+use AcMarche\Courrier\Repository\ServiceRepository;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\View;
 use Filament\Schemas\Schema;
 
 final class IncomingMailForm
@@ -17,64 +22,97 @@ final class IncomingMailForm
     {
         return $schema
             ->columns(1)
-            ->components([
-                Flex::make([
-                    Section::make('Informations du courrier')
-                        ->schema([
-                            Forms\Components\TextInput::make('reference_number')
-                                ->label('Numéro de référence')
-                                ->required()
-                                ->maxLength(255),
-                            Forms\Components\DatePicker::make('mail_date')
-                                ->label('Date du courrier')
-                                ->required()
-                                ->default(now())
-                                ->native(false),
-                            Forms\Components\TextInput::make('sender')
-                                ->label('Expéditeur')
-                                ->required()
-                                ->maxLength(255),
-                            Forms\Components\RichEditor::make('description')
-                                ->label('Description')
-                                ->columnSpanFull(),
-                        ])
-                        ->columns(2)
-                        ->columnSpan(2),
-                    Section::make('Options')
-                        ->schema([
-                            Forms\Components\Toggle::make('is_notified')
-                                ->label('Notifié')
-                                ->default(false),
-                            Forms\Components\Toggle::make('is_registered')
-                                ->label('Recommandé')
-                                ->default(false),
-                            Forms\Components\Toggle::make('has_acknowledgment')
-                                ->label('Accusé de réception')
-                                ->default(false),
-                        ])
-                        ->grow(false),
-                ])->from('md'),
+            ->components(self::getComponents());
+    }
 
-                Section::make('Affectation')
-                    ->schema([
-                        Forms\Components\Select::make('services')
-                            ->label('Services')
-                            ->relationship('services', 'name')
-                            ->getOptionLabelFromRecordUsing(fn (Service $record) => $record->initials ? "{$record->name} ({$record->initials})" : $record->name)
-                            ->multiple()
-                            ->searchable()
-                            ->preload()
-                            ->pivotData(['is_primary' => false]),
-                        Forms\Components\Select::make('recipients')
-                            ->label('Destinataires')
-                            ->relationship('recipients', 'last_name')
-                            ->getOptionLabelFromRecordUsing(fn (Recipient $record) => "{$record->first_name} {$record->last_name}")
-                            ->multiple()
-                            ->searchable()
-                            ->preload()
-                            ->pivotData(['is_primary' => false]),
-                    ])
-                    ->columns(2),
-            ]);
+    public static function getComponents(): array
+    {
+
+        $components = [];
+
+        // Add preview section for images and PDFs
+        if ($isPreviewable) {
+            $components[] = Section::make('Aperçu')
+                ->schema([
+                    View::make('courrier::components.attachment-preview')
+                        ->viewData([
+                            'url' => $previewUrl,
+                            'contentType' => $contentType,
+                            'filename' => $filename,
+                        ]),
+                ])
+                ->collapsible();
+        }
+
+        // Add the form
+        $components[] = Flex::make([
+            Section::make('Informations du courrier')
+                ->schema([
+                    TextInput::make('reference_number')
+                        ->label('Numéro')
+                        ->required()
+                        ->maxLength(255),
+                    DatePicker::make('mail_date')
+                        ->label('Date du courrier')
+                        ->required()
+                        ->default(now())
+                        ->native(false),
+                    TextInput::make('sender')
+                        ->label('Expéditeur')
+                        ->required()
+                        ->maxLength(255),
+                    Textarea::make('description')
+                        ->label('Description')
+                        ->rows(4)
+                        ->columnSpanFull(),
+                ])
+                ->columns(2)
+                ->columnSpan(2),
+            Section::make('Options')
+                ->schema([
+                    Toggle::make('is_registered')
+                        ->label('Recommandé')
+                        ->default(false),
+                    Toggle::make('is_registered')
+                        ->label('Recommandé')
+                        ->default(false),
+                    Toggle::make('has_acknowledgment')
+                        ->label('Accusé de réception')
+                        ->default(false),
+                ])
+                ->grow(false),
+        ])->from('md');
+
+        // Add services and recipients
+        $components[] = Section::make('Affectation')
+            ->schema([
+                Select::make('primary_services')
+                    ->label('Services principaux')
+                    ->options(ServiceRepository::findAllActiveOrdered())
+                    ->multiple()
+                    ->searchable()
+                    ->preload(),
+                Select::make('secondary_services')
+                    ->label('Services secondaires')
+                    ->options(ServiceRepository::findAllActiveOrdered())
+                    ->multiple()
+                    ->searchable()
+                    ->preload(),
+                Select::make('primary_recipients')
+                    ->label('Destinataires principaux')
+                    ->options(RecipientRepository::getActiveForOptions())
+                    ->multiple()
+                    ->searchable()
+                    ->preload(),
+                Select::make('secondary_recipients')
+                    ->label('Destinataires secondaires')
+                    ->options(RecipientRepository::getActiveForOptions())
+                    ->multiple()
+                    ->searchable()
+                    ->preload(),
+            ])
+            ->columns(2);
+
+        return $components;
     }
 }

@@ -13,12 +13,12 @@ final class ImapException extends Exception
         return new self("IMAP connection failed: {$message}");
     }
 
-    public static function messageNotFound(string $uid): self
+    public static function messageNotFound(int $uid): self
     {
         return new self("Message with UID '{$uid}' not found");
     }
 
-    public static function attachmentNotFound(string $uid, int $index): self
+    public static function attachmentNotFound(int $uid, int $index): self
     {
         return new self("Attachment at index {$index} not found for message '{$uid}'");
     }

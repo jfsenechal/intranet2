@@ -20,7 +20,7 @@ final class IncomingMailHandler
      */
     public static function handleIncomingMailCreation(
         array $data,
-        string $uid,
+        int $uid,
         int $attachmentCount,
         int $attachmentIndex,
         string $attachmentFilename,
@@ -109,7 +109,7 @@ final class IncomingMailHandler
     private static function saveAttachment(
         ImapRepository $imapRepository,
         IncomingMail $incomingMail,
-        string $uid,
+        int $uid,
         int $attachmentIndex,
         string $filename,
         string $mime
