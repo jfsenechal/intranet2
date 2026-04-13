@@ -83,14 +83,20 @@ final class UserTables
                     ->label('Prénom')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Email')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('roles.name')
                     ->label('Rôles')
                     ->state(fn (Model|User $record): string => $record->rolesByModule($owner->id)
-                        ->pluck('name')->implode(', ')),
+                        ->pluck('name')->implode(', '))
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->headerActions([
                 CreateAction::make('create')
                     ->label('Ajouter un utilisateur')
+                    ->modalHeading('Ajouter un utilisateur au module')
                     ->icon('tabler-user-plus')
                     ->action(function (array $data) use ($owner) {
                         try {
@@ -107,6 +113,7 @@ final class UserTables
             ])
             ->recordActions([
                 EditAction::make()
+                    ->modalHeading('Modifier les rôles')
                     ->fillForm(function (User $record) use ($owner): array {
                         $roles = RoleRepository::findByModuleAndUser($owner, $record);
                         $data['roles'] = $roles->pluck('name')->toArray();
