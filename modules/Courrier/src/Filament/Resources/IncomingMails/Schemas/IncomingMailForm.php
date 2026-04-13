@@ -7,6 +7,7 @@ namespace AcMarche\Courrier\Filament\Resources\IncomingMails\Schemas;
 use AcMarche\Courrier\Repository\RecipientRepository;
 use AcMarche\Courrier\Repository\ServiceRepository;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -25,23 +26,45 @@ final class IncomingMailForm
             ->components(self::getComponents());
     }
 
-    public static function getComponents(): array
+    /**
+     * @param  array<string, mixed>|null  $imapPreview  IMAP preview context: ['url', 'contentType', 'filename']
+     */
+    public static function getComponents(?array $imapPreview = null): array
     {
-
         $components = [];
 
-        // Add preview section for images and PDFs
-        if ($isPreviewable) {
-            $components[] = Section::make('Aperçu')
+        if ($imapPreview !== null) {
+            // IMAP flow: show preview from IMAP server
+            $contentType = $imapPreview['contentType'] ?? '';
+            $isPreviewable = str_starts_with($contentType, 'image/')
+                || $contentType === 'application/pdf';
+
+            if ($isPreviewable) {
+                $components[] = Section::make('Aperçu')
+                    ->schema([
+                        View::make('courrier::components.attachment-preview')
+                            ->viewData([
+                                'url' => $imapPreview['url'],
+                                'contentType' => $contentType,
+                                'filename' => $imapPreview['filename'] ?? '',
+                            ]),
+                    ])
+                    ->collapsible();
+            }
+        } else {
+            // Manual flow: file upload with preview
+            $components[] = Section::make('Pièce jointe')
                 ->schema([
-                    View::make('courrier::components.attachment-preview')
-                        ->viewData([
-                            'url' => $previewUrl,
-                            'contentType' => $contentType,
-                            'filename' => $filename,
-                        ]),
-                ])
-                ->collapsible();
+                    FileUpload::make('attachment_file')
+                        ->label('Fichier')
+                        ->required()
+                        ->acceptedFileTypes(config('courrier.allowed_mime_types'))
+                        ->maxSize(config('courrier.max_file_size'))
+                        ->storeFiles(false)
+                        ->previewable()
+                        ->openable()
+                        ->imagePreviewHeight('250'),
+                ]);
         }
 
         // Add the form
@@ -70,9 +93,6 @@ final class IncomingMailForm
                 ->columnSpan(2),
             Section::make('Options')
                 ->schema([
-                    Toggle::make('is_registered')
-                        ->label('Recommandé')
-                        ->default(false),
                     Toggle::make('is_registered')
                         ->label('Recommandé')
                         ->default(false),
