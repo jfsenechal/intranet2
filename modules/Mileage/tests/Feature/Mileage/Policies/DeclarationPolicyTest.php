@@ -88,7 +88,7 @@ describe('create', function () {
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
 
-        expect($this->policy->create($user))->toBeTrue();
+        expect($this->policy->create($user))->toBeFalse();
     });
 
     test('ville role user cannot create declarations', function () {

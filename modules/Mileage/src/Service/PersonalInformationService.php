@@ -16,6 +16,10 @@ final class PersonalInformationService
     public static function createPersonalInformation(User $user, array $data): void
     {
         try {
+            if (empty($user->username)) {
+                throw new Exception('User must have a username');
+            }
+
             $existing = PersonalInformation::where('username', $user->username)->first();
 
             if ($existing) {
