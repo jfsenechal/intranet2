@@ -22,7 +22,7 @@ final class RoleRelationManager extends RelationManager
 
     public function isReadOnly(): bool
     {
-        return false;
+        return !auth()->user()->isAdministrator();
     }
 
     public function table(Table $table): Table

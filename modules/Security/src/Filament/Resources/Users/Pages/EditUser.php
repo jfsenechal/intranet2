@@ -24,4 +24,9 @@ final class EditUser extends EditRecord
             Actions\ViewAction::make()->icon('tabler-eye'),
         ];
     }
+
+    protected function getAllRelationManagers(): array
+    {
+        return [];
+    }
 }

@@ -55,6 +55,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         'email',
         'password',
         'is_administrator',
+        'news_attachment',
     ];
 
     /**
@@ -308,6 +309,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
             'app_authentication_recovery_codes' => 'encrypted:array',
             'departments' => 'array',
             'is_administrator' => 'boolean',
+            'news_attachment' => 'boolean',
         ];
     }
 }

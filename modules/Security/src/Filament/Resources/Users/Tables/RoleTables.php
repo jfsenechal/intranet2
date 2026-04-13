@@ -7,6 +7,7 @@ namespace AcMarche\Security\Filament\Resources\Users\Tables;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -24,7 +25,9 @@ final class RoleTables
                     ->label('Description'),
             ])
             ->headerActions([
-                CreateAction::make('create'),
+                CreateAction::make('create')
+                    ->label('Ajouter un rôle')
+                    ->icon(Heroicon::PlusCircle),
             ])
             ->recordActions([
                 EditAction::make(),
