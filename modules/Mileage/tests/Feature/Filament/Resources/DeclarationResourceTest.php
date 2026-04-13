@@ -24,10 +24,10 @@ use function Pest\Livewire\livewire;
 
 beforeEach(function () {
     Filament::setCurrentPanel(Filament::getPanel('mileage-panel'));
-    $this->user = User::factory()->create(['username' => 'aaguirre', 'is_administrator' => true]);
+    $this->user = User::factory()->create(['username' => 'jdupont', 'is_administrator' => true]);
     $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
     $this->user->roles()->attach($role);
-    PersonalInformation::factory()->create(['username' => 'aaguirre']);
+    PersonalInformation::factory()->create(['username' => 'jdupont']);
     $this->actingAs($this->user);
 });
 
@@ -44,14 +44,14 @@ it('cannot render the create page', function () {
 });
 
 it('can render the view page', function () {
-    $declaration = Declaration::factory()->create(['user_add' => 'aaguirre']);
+    $declaration = Declaration::factory()->create(['user_add' => 'jdupont']);
 
     livewire(ViewDeclaration::class, ['record' => $declaration->id])
         ->assertOk();
 });
 
 it('can render the edit page', function () {
-    $declaration = Declaration::factory()->create(['user_add' => 'aaguirre']);
+    $declaration = Declaration::factory()->create(['user_add' => 'jdupont']);
 
     livewire(EditDeclaration::class, ['record' => $declaration->id])
         ->assertOk()
@@ -63,7 +63,7 @@ it('can render the edit page', function () {
 });
 
 it('can list declarations', function () {
-    $declarations = Declaration::factory(3)->create(['user_add' => 'aaguirre']);
+    $declarations = Declaration::factory(3)->create(['user_add' => 'jdupont']);
 
     livewire(ListDeclarations::class)
         ->loadTable()
@@ -76,7 +76,7 @@ it('has table columns', function (string $column) {
 })->with(['last_name', 'first_name', 'type_movement']);
 
 it('can search declarations', function () {
-    $declarations = Declaration::factory(5)->create(['user_add' => 'aaguirre']);
+    $declarations = Declaration::factory(5)->create(['user_add' => 'jdupont']);
 
     $search = $declarations->first()->last_name;
 
@@ -94,7 +94,7 @@ it('can create a declaration via bulk action on trips', function () {
         'end_date' => now()->addMonth(),
     ]);
     $trips = Trip::factory(3)->create([
-        'user_add' => 'aaguirre',
+        'user_add' => 'jdupont',
         'departure_date' => now(),
         'declaration_id' => null,
     ]);
@@ -112,7 +112,7 @@ it('can create a declaration via bulk action on trips', function () {
 });
 
 it('can update a declaration', function () {
-    $declaration = Declaration::factory()->create(['user_add' => 'aaguirre']);
+    $declaration = Declaration::factory()->create(['user_add' => 'jdupont']);
     $budgetArticle = BudgetArticle::factory()->create();
     $newIban = fake()->iban('BE');
     $newPlate = fake()->bothify('?-???-###');
@@ -135,7 +135,7 @@ it('can update a declaration', function () {
 });
 
 it('can delete a declaration', function () {
-    $declaration = Declaration::factory()->create(['user_add' => 'aaguirre']);
+    $declaration = Declaration::factory()->create(['user_add' => 'jdupont']);
 
     livewire(EditDeclaration::class, ['record' => $declaration->id])
         ->callAction(DeleteAction::class)
@@ -146,8 +146,8 @@ it('can delete a declaration', function () {
 });
 
 it('validates the form data', function (array $data, array $errors) {
-    $declaration = Declaration::factory()->create(['user_add' => 'aaguirre']);
-    $newData = Declaration::factory()->make(['user_add' => 'aaguirre']);
+    $declaration = Declaration::factory()->create(['user_add' => 'jdupont']);
+    $newData = Declaration::factory()->make(['user_add' => 'jdupont']);
     BudgetArticle::factory()->create();
 
     livewire(EditDeclaration::class, ['record' => $declaration->id])

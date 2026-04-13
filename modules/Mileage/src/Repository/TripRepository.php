@@ -12,8 +12,6 @@ final class TripRepository
     {
         $user = auth()->user();
         $username = $user->username;
-        // todo remove
-        $username = 'aaguirre';
 
         return $query->where('user_add', '=', $username);
     }

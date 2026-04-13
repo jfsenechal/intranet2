@@ -13,6 +13,7 @@ use Filament\Forms;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
@@ -38,6 +39,9 @@ final class ModuleForm
                 Checkbox::make('is_external')
                     ->label('Externe')
                     ->helperText('Url externe'),
+                Checkbox::make('allow_multiple_roles')
+                    ->label('Allow multiple roles')
+                    ->helperText('Allow users to have multiple roles for this module'),
                 ColorPicker::make('color')
                     ->label('Couleur')
                     ->required(),
@@ -93,45 +97,66 @@ final class ModuleForm
 
         $components[] = self::rolesField($module, $user);
 
-        $schema->schema($components);
+        $schema
+            ->schema($components)
+            ->columns(1);
 
         return $schema;
     }
 
-    public static function rolesField(?Module $module, User|Model|null $user = null): CheckboxList
+    public static function rolesField(?Module $module, User|Model|null $user = null): CheckboxList|Radio
     {
-        return CheckboxList::make('roles')
-            ->label('Rôles')
-            ->options(function (callable $get) use ($module) {
-                if (! $module) {
-                    $moduleId = $get('module');
-                    if (! $moduleId) {
-                        return [];
-                    }
-                    $module = ModuleRepository::find($moduleId);
-                }
-                [$rolesName, $rolesDescription] = RoleRepository::getForSelect($module);
-
-                return $rolesName;
-            })
-            ->descriptions(function (callable $get) use ($module) {
-                if (! $module) {
-                    $moduleId = $get('module');
-                    if (! $moduleId) {
-                        return [];
-                    }
-                    $module = ModuleRepository::find($moduleId);
-                }
-                [$rolesName, $rolesDescription] = RoleRepository::getForSelect($module);
-
-                return $rolesDescription;
-            })
-            ->default(function () use ($module, $user) {
-                if (! $user || ! $module) {
+        $options = function (callable $get) use ($module) {
+            if (! $module) {
+                $moduleId = $get('module');
+                if (! $moduleId) {
                     return [];
                 }
+                $module = ModuleRepository::find($moduleId);
+            }
+            [$rolesName, $rolesDescription] = RoleRepository::getForSelect($module);
 
-                return $user->rolesByModule($module->id)->pluck('id')->toArray();
+            return $rolesName;
+        };
+
+        $descriptions = function (callable $get) use ($module) {
+            if (! $module) {
+                $moduleId = $get('module');
+                if (! $moduleId) {
+                    return [];
+                }
+                $module = ModuleRepository::find($moduleId);
+            }
+            [$rolesName, $rolesDescription] = RoleRepository::getForSelect($module);
+
+            return $rolesDescription;
+        };
+
+        if ($module?->allow_multiple_roles) {
+            return CheckboxList::make('roles')
+                ->label('Rôles')
+                ->options($options)
+                ->descriptions($descriptions)
+                ->columnSpanFull()
+                ->default(function () use ($module, $user) {
+                    if (! $user || ! $module) {
+                        return [];
+                    }
+
+                    return $user->rolesByModule($module->id)->pluck('id')->toArray();
+                });
+        }
+
+        return Radio::make('roles')
+            ->label('Rôle')
+            ->options($options)
+            ->descriptions($descriptions)
+            ->default(function () use ($module, $user) {
+                if (! $user || ! $module) {
+                    return null;
+                }
+
+                return $user->rolesByModule($module->id)->pluck('id')->first();
             });
     }
 }

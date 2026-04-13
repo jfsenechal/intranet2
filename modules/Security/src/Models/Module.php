@@ -32,11 +32,13 @@ final class Module extends Model
         'is_external',
         'icon',
         'color',
+        'allow_multiple_roles',
     ];
 
     protected $casts = [
         'is_public' => 'boolean',
         'is_external' => 'boolean',
+        'allow_multiple_roles' => 'boolean',
     ];
 
     public function roles(): HasMany

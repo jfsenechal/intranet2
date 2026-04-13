@@ -23,7 +23,7 @@ final class ModuleRepository
     public function getModulesForSelect(): array
     {
         $modules = [];
-        foreach (Module::all() as $module) {
+        foreach (Module::query()->orderBy('name')->get() as $module) {
             $modules[$module->id] = $module->name;
         }
 

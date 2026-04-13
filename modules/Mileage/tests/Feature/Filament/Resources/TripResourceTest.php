@@ -20,10 +20,10 @@ use function Pest\Livewire\livewire;
 
 beforeEach(function () {
     Filament::setCurrentPanel(Filament::getPanel('mileage-panel'));
-    $this->user = User::factory()->create(['username' => 'aaguirre', 'is_administrator' => true]);
+    $this->user = User::factory()->create(['username' => 'jdupont', 'is_administrator' => true]);
     $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
     $this->user->roles()->attach($role);
-    PersonalInformation::factory()->create(['username' => 'aaguirre']);
+    PersonalInformation::factory()->create(['username' => 'jdupont']);
     $this->actingAs($this->user);
 });
 
@@ -38,14 +38,14 @@ it('can render the create page', function () {
 });
 
 it('can render the view page', function () {
-    $trip = Trip::factory()->create(['user_add' => 'aaguirre']);
+    $trip = Trip::factory()->create(['user_add' => 'jdupont']);
 
     livewire(ViewTrip::class, ['record' => $trip->id])
         ->assertOk();
 });
 
 it('can list trips', function () {
-    $trips = Trip::factory(3)->create(['user_add' => 'aaguirre']);
+    $trips = Trip::factory(3)->create(['user_add' => 'jdupont']);
 
     livewire(ListTrips::class)
         ->loadTable()
@@ -58,7 +58,7 @@ it('has table columns', function (string $column) {
 })->with(['departure_date', 'departure_location', 'distance', 'type_movement']);
 
 it('can sort column', function (string $column) {
-    $trips = Trip::factory(5)->create(['user_add' => 'aaguirre']);
+    $trips = Trip::factory(5)->create(['user_add' => 'jdupont']);
 
     livewire(ListTrips::class)
         ->loadTable()
@@ -69,7 +69,7 @@ it('can sort column', function (string $column) {
 })->with(['departure_date', 'distance']);
 
 it('can search trips', function () {
-    $trips = Trip::factory(5)->create(['user_add' => 'aaguirre']);
+    $trips = Trip::factory(5)->create(['user_add' => 'jdupont']);
 
     $search = $trips->first()->departure_location;
 
@@ -81,7 +81,7 @@ it('can search trips', function () {
 });
 
 it('can create a trip', function () {
-    $trip = Trip::factory()->make(['user_add' => 'aaguirre']);
+    $trip = Trip::factory()->make(['user_add' => 'jdupont']);
 
     livewire(CreateTrip::class)
         ->fillForm([
@@ -99,7 +99,7 @@ it('can create a trip', function () {
 });
 
 it('validates the form data', function (array $data, array $errors) {
-    $trip = Trip::factory()->make(['user_add' => 'aaguirre']);
+    $trip = Trip::factory()->make(['user_add' => 'jdupont']);
 
     livewire(CreateTrip::class)
         ->fillForm([
@@ -118,7 +118,7 @@ it('validates the form data', function (array $data, array $errors) {
 ]);
 
 it('can bulk delete trips', function () {
-    $trips = Trip::factory(3)->create(['user_add' => 'aaguirre']);
+    $trips = Trip::factory(3)->create(['user_add' => 'jdupont']);
 
     livewire(ListTrips::class)
         ->loadTable()
