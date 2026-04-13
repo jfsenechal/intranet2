@@ -67,7 +67,7 @@ final class ModuleForm
                 ->columnSpanFull();
         }
 
-        $components[] = self::rolesField($module);
+        $components[] = self::rolesField($module, $user);
 
         $schema->components($components);
 
@@ -132,31 +132,24 @@ final class ModuleForm
             return $rolesDescription;
         };
 
+        $userRoles = ($user && $module)
+            ? $user->rolesByModule($module->id)->pluck('name')
+            : collect();
+
         if ($module?->allow_multiple_roles) {
+
             return CheckboxList::make('roles')
                 ->label('Rôles')
                 ->options($options)
                 ->descriptions($descriptions)
                 ->columnSpanFull()
-                ->default(function () use ($module, $user) {
-                    if (! $user || ! $module) {
-                        return [];
-                    }
-
-                    return $user->rolesByModule($module->id)->pluck('id')->toArray();
-                });
+                ->afterStateHydrated(fn (CheckboxList $component) => $component->state($userRoles->toArray()));
         }
 
         return Radio::make('roles')
             ->label('Rôle')
             ->options($options)
             ->descriptions($descriptions)
-            ->default(function () use ($module, $user) {
-                if (! $user || ! $module) {
-                    return null;
-                }
-
-                return $user->rolesByModule($module->id)->pluck('id')->first();
-            });
+            ->afterStateHydrated(fn (Radio $component) => $component->state($userRoles->first()));
     }
 }

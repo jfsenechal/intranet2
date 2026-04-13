@@ -73,7 +73,7 @@ final class ModuleTables
             ])
             ->headerActions([
                 CreateAction::make('create')
-                    ->label('Ajouter un new module')
+                    ->label('Ajouter un module')
                     ->icon('tabler-plus')
                     ->action(function (array $data) use ($ownerRecord) {
                         ModuleHandler::addModuleFromUser($ownerRecord, $data);
