@@ -70,6 +70,8 @@ echo "DB seed done."
 php artisan intranet:migration-role
 echo "Migration role done."
 php artisan mileage:migration
-echo "Migration mileage done."
+echo "Migration done."
 php artisan pst:migration
-echo "Pst mileage done."
+echo "Pst done."
+php artisan courrier:migration
+echo "Courrier done."

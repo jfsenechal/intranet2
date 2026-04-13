@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use AcMarche\App\Enums\DepartmentEnum;
+use AcMarche\Courrier\Models\UserCourrierTrait;
 use AcMarche\MailingList\Models\UserMailingListTrait;
 use AcMarche\Pst\Models\UserPstTrait;
 use AcMarche\Security\Ldap\UserLdap;
@@ -32,7 +33,7 @@ use Laravel\Scout\Searchable;
 final class User extends Authenticatable implements FilamentUser, HasAppAuthentication, HasAppAuthenticationRecovery, HasName
 {
     use HasApiTokens, HasFactory, Impersonate, Notifiable, Searchable;
-    use UserMailingListTrait, UserPstTrait;
+    use UserCourrierTrait, UserMailingListTrait,UserPstTrait;
 
     /**
      * The attributes that are mass assignable.
