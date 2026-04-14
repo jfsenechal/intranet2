@@ -27,7 +27,7 @@ final class IncomingMailForm
     }
 
     /**
-     * @param  array<string, mixed>|null  $imapPreview  IMAP preview context: ['url', 'contentType', 'filename']
+     * @param array<string, mixed>|null $imapPreview IMAP preview context: ['url', 'contentType', 'filename']
      */
     public static function getComponents(?array $imapPreview = null): array
     {
@@ -93,10 +93,13 @@ final class IncomingMailForm
             Section::make('Options')
                 ->schema([
                     Toggle::make('is_registered')
-                        ->label('Recommandé')
+                        ->label('Recommandé ?')
                         ->default(false),
                     Toggle::make('has_acknowledgment')
-                        ->label('Accusé de réception')
+                        ->label('Accusé de réception ?')
+                        ->default(false),
+                    Toggle::make('is_notified')
+                        ->label('Notifié')
                         ->default(false),
                 ])
                 ->grow(false),
