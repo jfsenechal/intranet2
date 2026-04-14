@@ -78,7 +78,6 @@ final class SyncCommand extends Command
                     'first_name' => $firstName,
                     'username' => $username,
                     'email' => $email,
-                    'is_active' => true,
                 ]);
             }
             $this->line("Created recipient: {$firstName} {$lastName}");
@@ -87,7 +86,6 @@ final class SyncCommand extends Command
         if ($recipient instanceof Recipient && ! $this->isActive($model)) {
             if (! $dryRun) {
                 $recipient->update([
-                    'is_active' => false,
                     'email' => 'noemail@marche.be',
                 ]);
             }

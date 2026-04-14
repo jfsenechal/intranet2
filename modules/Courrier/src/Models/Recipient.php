@@ -75,7 +75,6 @@ final class Recipient extends Model
     protected function casts(): array
     {
         return [
-            'is_active' => 'boolean',
             'receives_attachments' => 'boolean',
         ];
     }

@@ -11,6 +11,6 @@ final class ServiceRepository
 {
     public static function findAllActiveOrdered(): Collection
     {
-        return Service::query()->orderBy('name')->where('is_active', true)->pluck('name', 'id');
+        return Service::query()->orderBy('name')->pluck('name', 'id');
     }
 }

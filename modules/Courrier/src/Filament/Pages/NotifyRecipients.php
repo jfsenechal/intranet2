@@ -76,7 +76,7 @@ final class NotifyRecipients extends Page implements HasForms, HasTable
 
         $incomingMailRepository = new IncomingMailRepository();
         $mailDate = Carbon::parse($this->mail_date);
-        $recipients = RecipientRepository::getActiveAndWithEmail();
+        $recipients = RecipientRepository::getWithEmail();
 
         $preview = [];
 

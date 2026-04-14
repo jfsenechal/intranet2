@@ -24,16 +24,8 @@ final class RecipientFactory extends Factory
             'first_name' => $firstName,
             'username' => Str::lower($firstName[0].$lastName),
             'email' => fake()->unique()->safeEmail(),
-            'is_active' => true,
             'receives_attachments' => fake()->boolean(30),
         ];
-    }
-
-    public function inactive(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'is_active' => false,
-        ]);
     }
 
     public function withSupervisor(?Recipient $supervisor = null): static

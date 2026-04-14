@@ -135,12 +135,11 @@ final class MergeCommand extends Command
 
             if (! $this->dryRun) {
                 DB::insert(
-                    "INSERT INTO {$target}.services (slugname, name, initials, is_active, department) VALUES (?, ?, ?, ?, ?)",
+                    "INSERT INTO {$target}.services (slugname, name, initials, department) VALUES (?, ?, ?, ?)",
                     [
                         $slug.'-'.$department,
                         $service->name,
                         $service->initials,
-                        $service->is_active,
                         $department,
                     ]
                 );
@@ -194,7 +193,7 @@ final class MergeCommand extends Command
 
             if (! $this->dryRun) {
                 DB::insert(
-                    "INSERT INTO {$target}.recipients (supervisor_id, slug, last_name, first_name, username, email, is_active, receives_attachments) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                    "INSERT INTO {$target}.recipients (supervisor_id, slug, last_name, first_name, username, email, receives_attachments) VALUES (?, ?, ?, ?, ?, ?, ?)",
                     [
                         $newSupervisorId,
                         $recipient->slug.'-'.$department,
@@ -202,7 +201,6 @@ final class MergeCommand extends Command
                         $recipient->first_name,
                         $recipient->username,
                         $recipient->email,
-                        $recipient->is_active,
                         $recipient->receives_attachments,
                     ]
                 );

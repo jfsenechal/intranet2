@@ -20,15 +20,7 @@ final class ServiceFactory extends Factory
             'slug' => Str::slug($name),
             'name' => $name,
             'initials' => Str::upper(Str::substr($name, 0, 3)),
-            'is_active' => true,
             'department' => null,
         ];
-    }
-
-    public function inactive(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'is_active' => false,
-        ]);
     }
 }

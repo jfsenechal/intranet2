@@ -34,7 +34,7 @@ final class ServiceForm
                             ->hiddenLabel()
                             ->relationship(
                                 titleAttribute: 'last_name',
-                                modifyQueryUsing: fn (Builder $query) => RecipientRepository::queryActiveOrderByLastName(
+                                modifyQueryUsing: fn (Builder $query) => RecipientRepository::queryOrderByLastName(
                                     $query
                                 )
                             )

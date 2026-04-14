@@ -130,13 +130,13 @@ final class IncomingMailForm
                     ->preload(),
                 Select::make('primary_recipients')
                     ->label('Destinataires principaux')
-                    ->options(RecipientRepository::getActiveForOptions())
+                    ->options(RecipientRepository::getForOptions())
                     ->multiple()
                     ->searchable()
                     ->preload(),
                 Select::make('secondary_recipients')
                     ->label('Destinataires secondaires')
-                    ->options(RecipientRepository::getActiveForOptions())
+                    ->options(RecipientRepository::getForOptions())
                     ->multiple()
                     ->searchable()
                     ->preload(),

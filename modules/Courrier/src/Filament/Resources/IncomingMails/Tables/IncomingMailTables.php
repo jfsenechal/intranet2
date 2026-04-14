@@ -56,7 +56,7 @@ final class IncomingMailTables
                     ->label('Notifié')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_registered')
-                    ->label('Reco')
+                    ->label('Recom')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('has_acknowledgment')
                     ->label('AR')

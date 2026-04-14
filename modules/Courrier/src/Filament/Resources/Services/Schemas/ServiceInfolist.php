@@ -35,9 +35,6 @@ final class ServiceInfolist
                                     ->label('Nom'),
                                 TextEntry::make('email')
                                     ->label('Email'),
-                                IconEntry::make('is_active')
-                                    ->label('Actif')
-                                    ->boolean(),
                             ])
                             ->columns(3)
                             ->contained(false),

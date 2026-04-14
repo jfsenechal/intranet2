@@ -10,27 +10,24 @@ use Illuminate\Support\Collection;
 
 final class RecipientRepository
 {
-    public static function getActiveForOptions(): Collection
+    public static function getForOptions(): Collection
     {
         return Recipient::query()
             ->orderBy('last_name')
-            ->where('is_active', true)
             ->get()
             ->mapWithKeys(fn (Recipient $r) => [$r->id => "{$r->first_name} {$r->last_name}"]);
     }
 
-    public static function getActiveAndWithEmail(): Collection
+    public static function getWithEmail(): Collection
     {
         return Recipient::query()
-            ->where('is_active', true)
             ->whereNotNull('email')
             ->with('services')
             ->get();
     }
 
-    public static function queryActiveOrderByLastName(Builder $builder): Builder
+    public static function queryOrderByLastName(Builder $builder): Builder
     {
-        return $builder->where('is_active', true)
-            ->orderBy('last_name');
+        return $builder->orderBy('last_name');
     }
 }

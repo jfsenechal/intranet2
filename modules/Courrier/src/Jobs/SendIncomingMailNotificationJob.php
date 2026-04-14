@@ -29,7 +29,6 @@ final class SendIncomingMailNotificationJob implements ShouldQueue
     public function handle(): void
     {
         $recipients = Recipient::query()
-            ->where('is_active', true)
             ->whereNotNull('email')
             ->get();
 

@@ -10,7 +10,6 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables;
-use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
 final class ServiceTables
@@ -25,7 +24,7 @@ final class ServiceTables
                     ->label('Nom')
                     ->searchable()
                     ->sortable()
-                    ->url(fn (Service $record) => ServiceResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn(Service $record) => ServiceResource::getUrl('view', ['record' => $record->id])),
                 Tables\Columns\TextColumn::make('initials')
                     ->label('Initiales')
                     ->searchable(),
@@ -34,8 +33,11 @@ final class ServiceTables
                     ->counts('recipients')
                     ->badge()
                     ->color('gray'),
+                Tables\Columns\TextColumn::make('department.name')
+                    ->label('Département')
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([ ])
+            ->filters([])
             ->recordActions([
                 EditAction::make(),
             ])
