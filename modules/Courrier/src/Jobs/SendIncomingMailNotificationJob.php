@@ -76,8 +76,8 @@ final class SendIncomingMailNotificationJob implements ShouldQueue
                     $q->where('recipients.id', $recipient->id);
                 })
                     ->orWhereHas('services', function ($q) use ($recipient): void {
-                        $serviceIds = $recipient->services()->pluck('services.id');
-                        $q->whereIn('services.id', $serviceIds);
+                        $serviceIds = $recipient->services()->pluck('courrier_services.id');
+                        $q->whereIn('courrier_services.id', $serviceIds);
                     });
             })
             ->get();

@@ -22,7 +22,7 @@ return new class extends Migration
         } elseif (! Schema::connection('maria-courrier')->hasTable('recipient_service')) {
             Schema::connection('maria-courrier')->create('recipient_service', function (Blueprint $table): void {
                 $table->foreignId('recipient_id')->constrained('recipients')->cascadeOnDelete();
-                $table->foreignId('service_id')->constrained('services')->cascadeOnDelete();
+                $table->foreignId('service_id')->constrained('courrier_services')->cascadeOnDelete();
                 $table->primary(['service_id', 'recipient_id']);
             });
         }

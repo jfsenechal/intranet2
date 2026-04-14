@@ -126,7 +126,7 @@ final class MergeCommand extends Command
     {
         $this->info('  - Merging services...');
 
-        $services = DB::select("SELECT * FROM {$source}.services");
+        $services = DB::select("SELECT * FROM {$source}.courrier_services");
 
         foreach ($services as $service) {
             $oldId = $service->id;
@@ -135,7 +135,7 @@ final class MergeCommand extends Command
 
             if (! $this->dryRun) {
                 DB::insert(
-                    "INSERT INTO {$target}.services (slugname, name, initials, department) VALUES (?, ?, ?, ?)",
+                    "INSERT INTO {$target}.courrier_services (slugname, name, initials, department) VALUES (?, ?, ?, ?)",
                     [
                         $slug.'-'.$department,
                         $service->name,

@@ -28,7 +28,7 @@ return new class extends Migration
             Schema::connection('maria-courrier')->create('incoming_mail_service', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('incoming_mail_id')->constrained('incoming_mails')->cascadeOnDelete();
-                $table->foreignId('service_id')->constrained('services')->cascadeOnDelete();
+                $table->foreignId('service_id')->constrained('courrier_services')->cascadeOnDelete();
                 $table->boolean('is_primary')->default(true);
 
                 $table->index(['incoming_mail_id', 'service_id']);

@@ -55,13 +55,4 @@ return new class extends Migration
             $table->timestamps(false);
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('news');
-        Schema::dropIfExists('category');
-    }
 };

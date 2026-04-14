@@ -117,7 +117,7 @@ final class IncomingMailPolicy
      */
     private function isMemberOfLinkedService(User $user, IncomingMail $incomingMail): bool
     {
-        $serviceIds = $incomingMail->services()->pluck('services.id');
+        $serviceIds = $incomingMail->services()->pluck('courrier_services.id');
 
         if ($serviceIds->isEmpty()) {
             return false;
@@ -125,7 +125,7 @@ final class IncomingMailPolicy
 
         return Recipient::query()
             ->where('username', $user->username)
-            ->whereHas('services', fn ($query) => $query->whereIn('services.id', $serviceIds))
+            ->whereHas('services', fn ($query) => $query->whereIn('courrier_services.id', $serviceIds))
             ->exists();
     }
 }

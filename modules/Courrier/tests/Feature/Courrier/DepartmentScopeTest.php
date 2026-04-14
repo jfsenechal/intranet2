@@ -5,6 +5,7 @@ declare(strict_types=1);
 use AcMarche\Courrier\Enums\DepartmentCourrierEnum;
 use AcMarche\Courrier\Enums\RolesEnum;
 use AcMarche\Courrier\Models\IncomingMail;
+use AcMarche\Courrier\Models\Service;
 use AcMarche\Security\Models\Role;
 use App\Models\User;
 
@@ -148,6 +149,24 @@ describe('Department Global Scope on IncomingMail', function () {
     });
 });
 
+describe('Department Global Scope on Service', function () {
+    test('filters services by authenticated user department', function () {
+        $user = User::factory()->create();
+        $role = Role::factory()->create(['name' => RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN->value]);
+        $user->roles()->attach($role);
+
+        Service::factory()->create(['department' => DepartmentCourrierEnum::VILLE->value]);
+        $cpasService = Service::factory()->create(['department' => DepartmentCourrierEnum::CPAS->value]);
+
+        $this->actingAs($user);
+
+        $services = Service::all();
+
+        expect($services)->toHaveCount(1)
+            ->and($services->first()->id)->toBe($cpasService->id);
+    });
+});
+
 describe('Department Auto-Assignment on IncomingMail', function () {
     test('auto-assigns department when user has single admin role', function () {
         $user = User::factory()->create();
@@ -200,5 +219,38 @@ describe('Department Auto-Assignment on IncomingMail', function () {
         ]);
 
         expect($mail->department)->toBe(DepartmentCourrierEnum::CPAS->value);
+    });
+});
+
+describe('Department Auto-Assignment on Service', function () {
+    test('auto-assigns department when user has single admin role', function () {
+        $user = User::factory()->create();
+        $role = Role::factory()->create(['name' => RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN->value]);
+        $user->roles()->attach($role);
+
+        $this->actingAs($user);
+
+        $service = Service::create([
+            'name' => 'Test Service',
+            'slugname' => 'test-service',
+        ]);
+
+        expect($service->department)->toBe(DepartmentCourrierEnum::CPAS->value);
+    });
+
+    test('does not auto-assign department when user has multiple admin roles', function () {
+        $user = User::factory()->create();
+        $villeRole = Role::factory()->create(['name' => RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN->value]);
+        $bgmRole = Role::factory()->create(['name' => RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_ADMIN->value]);
+        $user->roles()->attach([$villeRole->id, $bgmRole->id]);
+
+        $this->actingAs($user);
+
+        $service = Service::create([
+            'name' => 'Test Service 2',
+            'slugname' => 'test-service-2',
+        ]);
+
+        expect($service->department)->toBeNull();
     });
 });

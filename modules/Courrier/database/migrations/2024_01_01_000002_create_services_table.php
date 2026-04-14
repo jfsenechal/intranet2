@@ -15,16 +15,16 @@ return new class extends Migration
     {
         if (Schema::connection('maria-courrier')->hasTable('service')) {
             Schema::connection('maria-courrier')->table('service', function (Blueprint $table) {
-                $table->rename('services');
+                $table->rename('courrier_services');
             });
-            Schema::connection('maria-courrier')->table('services', function (Blueprint $table) {
+            Schema::connection('maria-courrier')->table('courrier_services', function (Blueprint $table) {
                 $table->renameColumn('nom', 'name');
                 $table->removeColumn('actif');
                 $table->enum('department', DepartmentCourrierEnum::toArray())
                     ->nullable();
             });
-        } elseif (! Schema::connection('maria-courrier')->hasTable('services')) {
-            Schema::connection('maria-courrier')->create('services', function (Blueprint $table): void {
+        } elseif (! Schema::connection('maria-courrier')->hasTable('courrier_services')) {
+            Schema::connection('maria-courrier')->create('courrier_services', function (Blueprint $table): void {
                 $table->id();
                 $table->string('slugname', 70)->unique();
                 $table->string('name');
@@ -33,11 +33,10 @@ return new class extends Migration
                     ->nullable();
             });
         }
-
     }
 
     public function down(): void
     {
-        Schema::connection('maria-courrier')->dropIfExists('services');
+        Schema::connection('maria-courrier')->dropIfExists('courrier_services');
     }
 };

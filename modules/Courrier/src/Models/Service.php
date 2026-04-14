@@ -20,6 +20,8 @@ final class Service extends Model
 
     public $timestamps = false;
 
+    protected $table = 'courrier_services';
+
     protected $connection = 'maria-courrier';
 
     protected $fillable = [
