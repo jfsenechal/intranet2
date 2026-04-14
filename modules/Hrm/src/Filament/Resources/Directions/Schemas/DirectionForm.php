@@ -24,11 +24,7 @@ final class DirectionForm
                             ->required()
                             ->maxLength(100)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', Str::slug($state))),
-                        Forms\Components\TextInput::make('slug')
-                            ->label('Slug')
-                            ->required()
-                            ->maxLength(80),
+                          ,
                         Forms\Components\TextInput::make('abbreviation')
                             ->label('Abreviation')
                             ->maxLength(255),

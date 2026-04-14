@@ -58,11 +58,7 @@ final class EmployerResource extends Resource
                             ->required()
                             ->maxLength(150)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, Set $set) => $set('slug', Str::slug($state))),
-                        Forms\Components\TextInput::make('slug')
-                            ->label('Slug')
-                            ->required()
-                            ->maxLength(200),
+                            ,
                         Forms\Components\Select::make('parent_id')
                             ->label('Employeur parent')
                             ->relationship('parent', 'name')

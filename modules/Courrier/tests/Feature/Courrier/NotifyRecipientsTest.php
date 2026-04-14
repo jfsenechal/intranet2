@@ -91,12 +91,11 @@ describe('NotifyRecipients Page Display', function () {
 });
 
 describe('SendIncomingMailNotificationJob', function () {
-    test('job dispatches mail to active recipients', function () {
+    test('job dispatches mail to recipients', function () {
         Mail::fake();
         Queue::fake();
 
         $recipient = Recipient::factory()->create([
-            'is_active' => true,
             'email' => 'test@example.com',
         ]);
 
@@ -111,29 +110,10 @@ describe('SendIncomingMailNotificationJob', function () {
         Queue::assertPushed(SendIncomingMailNotificationJob::class);
     });
 
-    test('job does not send to inactive recipients', function () {
-        Mail::fake();
-
-        $recipient = Recipient::factory()->inactive()->create([
-            'email' => 'inactive@example.com',
-        ]);
-
-        IncomingMail::factory()->create([
-            'mail_date' => now(),
-            'is_notified' => false,
-        ]);
-
-        $job = new SendIncomingMailNotificationJob(now());
-        $job->handle();
-
-        Mail::assertNothingQueued();
-    });
-
     test('job does not send to recipients without email', function () {
         Mail::fake();
 
         Recipient::factory()->create([
-            'is_active' => true,
             'email' => null,
         ]);
 
@@ -156,7 +136,6 @@ describe('SendIncomingMailNotificationJob', function () {
         $user->addRole($role);
 
         $recipient = Recipient::factory()->create([
-            'is_active' => true,
             'email' => 'index@example.com',
             'username' => 'indexuser',
         ]);
@@ -179,12 +158,10 @@ describe('SendIncomingMailNotificationJob', function () {
         Mail::fake();
 
         $recipient = Recipient::factory()->create([
-            'is_active' => true,
             'email' => 'regular@example.com',
         ]);
 
         $otherRecipient = Recipient::factory()->create([
-            'is_active' => true,
             'email' => 'other@example.com',
         ]);
 
@@ -215,7 +192,6 @@ describe('SendIncomingMailNotificationJob', function () {
 
         $service = Service::factory()->create();
         $recipient = Recipient::factory()->create([
-            'is_active' => true,
             'email' => 'service@example.com',
         ]);
         $recipient->services()->attach($service->id);
@@ -238,7 +214,6 @@ describe('SendIncomingMailNotificationJob', function () {
         Mail::fake();
 
         $recipient = Recipient::factory()->create([
-            'is_active' => true,
             'email' => 'test@example.com',
         ]);
 
@@ -258,7 +233,6 @@ describe('SendIncomingMailNotificationJob', function () {
         Mail::fake();
 
         $recipient = Recipient::factory()->receivesAttachments()->create([
-            'is_active' => true,
             'email' => 'attachments@example.com',
         ]);
 
@@ -280,7 +254,6 @@ describe('SendIncomingMailNotificationJob', function () {
         Mail::fake();
 
         $recipient = Recipient::factory()->create([
-            'is_active' => true,
             'email' => 'noattachments@example.com',
             'receives_attachments' => false,
         ]);

@@ -10,13 +10,15 @@ use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Str;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 #[UseFactory(ServiceFactory::class)]
 final class Service extends Model
 {
     use HasDepartmentScope;
     use HasFactory;
+    use HasSlug;
 
     public $timestamps = false;
 
@@ -42,13 +44,11 @@ final class Service extends Model
         return $this->belongsToMany(Recipient::class, 'recipient_service');
     }
 
-    protected static function booted(): void
+    public function getSlugOptions(): SlugOptions
     {
-        self::creating(function (Service $service): void {
-            if (empty($service->slugname)) {
-                $service->slugname = Str::slug($service->name);
-            }
-        });
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slugname');
     }
 
     protected static function newFactory(): ServiceFactory

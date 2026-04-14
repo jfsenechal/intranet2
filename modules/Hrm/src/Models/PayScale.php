@@ -17,7 +17,7 @@ final class PayScale extends Model
     protected $table = 'pay_scales';
 
     protected $fillable = [
-        'title',
+        'name',
         'description',
         'employer_id',
     ];

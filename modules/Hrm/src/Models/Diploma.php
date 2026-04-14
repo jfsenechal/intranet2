@@ -18,7 +18,7 @@ final class Diploma extends Model
 
     protected $fillable = [
         'employee_id',
-        'title',
+        'name',
         'certificate_file',
         'user_add',
         'updated_by',

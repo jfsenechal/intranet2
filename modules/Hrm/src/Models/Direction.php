@@ -8,23 +8,34 @@ use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 final class Direction extends Model
 {
     use HasUserAdd;
+    use HasSlug;
 
     protected $connection = 'maria-hrm';
 
     protected $table = 'directions';
 
     protected $fillable = [
-        'title',
+        'name',
         'slug',
         'director',
         'abbreviation',
         'employer_id',
         'user_add',
     ];
+
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom(['name'])
+            ->saveSlugsTo('slug');
+    }
 
     /**
      * @return BelongsTo<Employer>

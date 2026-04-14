@@ -15,7 +15,7 @@ final class HrDocument extends Model
 
     protected $fillable = [
         'employee_id',
-        'title',
+        'name',
         'file_name',
         'mime',
         'notes',

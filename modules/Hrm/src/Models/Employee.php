@@ -9,10 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 final class Employee extends Model
 {
     use HasUserAdd;
+    use HasSlug;
 
     protected $connection = 'maria-hrm';
 
@@ -193,6 +196,12 @@ final class Employee extends Model
         return $this->hasMany(Sms::class);
     }
 
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom(['last_name','first_name'])
+            ->saveSlugsTo('slug');
+    }
     protected static function booted(): void
     {
         self::bootHasUser();
@@ -200,9 +209,6 @@ final class Employee extends Model
         self::creating(function (Employee $employee) {
             if (empty($employee->uuid)) {
                 $employee->uuid = (string) Str::uuid();
-            }
-            if (empty($employee->slug)) {
-                $employee->slug = Str::slug($employee->last_name.'-'.$employee->first_name);
             }
         });
     }

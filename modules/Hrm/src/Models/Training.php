@@ -18,7 +18,7 @@ final class Training extends Model
 
     protected $fillable = [
         'employee_id',
-        'title',
+        'name',
         'description',
         'start_date',
         'end_date',

@@ -17,7 +17,7 @@ final class Prerequisite extends Model
     protected $table = 'prerequisites';
 
     protected $fillable = [
-        'title',
+        'name',
         'profession',
         'description',
         'user',

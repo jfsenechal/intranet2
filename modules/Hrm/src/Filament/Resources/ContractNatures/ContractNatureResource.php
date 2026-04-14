@@ -56,12 +56,7 @@ final class ContractNatureResource extends Resource
                             ->label('Nom')
                             ->required()
                             ->maxLength(50)
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', Str::slug($state))),
-                        Forms\Components\TextInput::make('slug')
-                            ->label('Slug')
-                            ->required()
-                            ->maxLength(75),
+                            ->live(onBlur: true)                           ,
                         Forms\Components\TextInput::make('description')
                             ->label('Description')
                             ->maxLength(255)

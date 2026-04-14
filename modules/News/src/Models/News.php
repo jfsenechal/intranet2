@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 #[ObservedBy([NewsObserver::class])]
 final class News extends Model
@@ -21,6 +23,8 @@ final class News extends Model
     use HasFactory;
     use HasUserAdd;
     use Prunable;
+    use HasSlug;
+
     // use SoftDeletes;
 
     protected $connection = 'maria-news';
@@ -41,6 +45,13 @@ final class News extends Model
         'category_id',
         'medias',
     ];
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom(['title'])
+            ->saveSlugsTo('slug');
+    }
 
     /**
      * @return BelongsTo<Category>

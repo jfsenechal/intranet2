@@ -58,11 +58,7 @@ final class ContractTypeResource extends Resource
                             ->required()
                             ->maxLength(50)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, Set $set) => $set('slug', Str::slug($state))),
-                        Forms\Components\TextInput::make('slug')
-                            ->label('Slug')
-                            ->required()
-                            ->maxLength(75),
+                            ,
                         Forms\Components\TextInput::make('description')
                             ->label('Description')
                             ->maxLength(255)

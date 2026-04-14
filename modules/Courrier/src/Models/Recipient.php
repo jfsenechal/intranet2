@@ -12,11 +12,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 #[UseFactory(RecipientFactory::class)]
 final class Recipient extends Model
 {
     use HasFactory;
+    use HasSlug;
 
     public $timestamps = false;
 
@@ -32,6 +35,12 @@ final class Recipient extends Model
         'receives_attachments',
     ];
 
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom(['last_name','first_name'])
+            ->saveSlugsTo('slug');
+    }
     public function supervisor(): BelongsTo
     {
         return $this->belongsTo(self::class, 'supervisor_id');
@@ -56,15 +65,6 @@ final class Recipient extends Model
     public function getFullNameAttribute(): string
     {
         return "{$this->first_name} {$this->last_name}";
-    }
-
-    protected static function booted(): void
-    {
-        self::creating(function (Recipient $recipient): void {
-            if (empty($recipient->slug)) {
-                $recipient->slug = Str::slug($recipient->last_name.'_'.$recipient->first_name);
-            }
-        });
     }
 
     protected static function newFactory(): RecipientFactory

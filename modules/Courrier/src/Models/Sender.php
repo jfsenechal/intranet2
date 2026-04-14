@@ -12,12 +12,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 #[UseFactory(SenderFactory::class)]
 #[ScopedBy([DepartmentScope::class])]
 final class Sender extends Model
 {
     use HasFactory;
+    use HasSlug;
 
     public $timestamps = false;
 
@@ -29,6 +32,13 @@ final class Sender extends Model
         'department',
     ];
 
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom(['last_name','first_name'])
+            ->saveSlugsTo('slug');
+    }
+
     public function incomingMails(): BelongsToMany
     {
         return $this->belongsToMany(IncomingMail::class, 'incoming_mail_service')
@@ -38,15 +48,6 @@ final class Sender extends Model
     public function recipients(): BelongsToMany
     {
         return $this->belongsToMany(Recipient::class, 'recipient_service');
-    }
-
-    protected static function booted(): void
-    {
-        self::creating(function (Service $service): void {
-            if (empty($service->slug)) {
-                $service->slug = Str::slug($service->name);
-            }
-        });
     }
 
     protected static function newFactory(): SenderFactory
