@@ -18,6 +18,11 @@ final class ListServices extends ListRecords
         return $this->getAllTableRecordsCount().' services';
     }
 
+    public function getSubheading(): string|Htmlable|null
+    {
+        return 'Services ou groupes de destinataires';
+    }
+
     protected function getHeaderActions(): array
     {
         return [

@@ -12,6 +12,11 @@ final class ListRecipients extends ListRecords
 {
     protected static string $resource = RecipientResource::class;
 
+    public function getSubheading(): string|Htmlable
+    {
+        return 'La liste des destinataires est synchronisée avec le système informique';
+    }
+
     public function getTitle(): string|Htmlable
     {
         return $this->getAllTableRecordsCount().' destinataires';

@@ -34,17 +34,8 @@ final class ServiceTables
                     ->counts('recipients')
                     ->badge()
                     ->color('gray'),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->label('Actif')
-                    ->boolean(),
             ])
-            ->filters([
-                TernaryFilter::make('is_active')
-                    ->label('Actif')
-                    ->placeholder('Tous')
-                    ->trueLabel('Actifs uniquement')
-                    ->falseLabel('Inactifs uniquement'),
-            ])
+            ->filters([ ])
             ->recordActions([
                 EditAction::make(),
             ])

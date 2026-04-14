@@ -22,9 +22,6 @@ final class ServiceInfolist
                             ->label('Nom'),
                         TextEntry::make('initials')
                             ->label('Initiales'),
-                        IconEntry::make('is_active')
-                            ->label('Actif')
-                            ->boolean(),
                     ])
                     ->columns(3),
 

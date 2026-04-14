@@ -25,10 +25,6 @@ final class ServiceForm
                 Forms\Components\TextInput::make('initials')
                     ->label('Initiales')
                     ->maxLength(255),
-                Forms\Components\Toggle::make('is_active')
-                    ->label('Actif')
-                    ->default(true),
-
                 Section::make('Membres du service')
                     ->description('Sélectionnez les destinataires qui font partie de ce service')
                     ->schema([

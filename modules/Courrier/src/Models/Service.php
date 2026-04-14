@@ -26,7 +26,6 @@ final class Service extends Model
         'slug',
         'name',
         'initials',
-        'is_active',
         'department',
     ];
 

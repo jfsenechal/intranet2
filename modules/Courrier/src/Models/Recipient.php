@@ -29,7 +29,6 @@ final class Recipient extends Model
         'first_name',
         'username',
         'email',
-        'is_active',
         'receives_attachments',
     ];
 

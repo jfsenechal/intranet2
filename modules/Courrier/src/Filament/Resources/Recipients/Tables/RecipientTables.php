@@ -10,8 +10,6 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables;
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
 final class RecipientTables
@@ -33,32 +31,21 @@ final class RecipientTables
                     ->sortable(),
                 Tables\Columns\TextColumn::make('username')
                     ->label('Utilisateur')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('email')
                     ->label('Email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('supervisor.full_name')
                     ->label('Superviseur')
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->label('Actif')
-                    ->boolean(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('receives_attachments')
                     ->label('PJ')
-                    ->boolean(),
+                    ->boolean()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([
-                TernaryFilter::make('is_active')
-                    ->label('Actif')
-                    ->placeholder('Tous')
-                    ->trueLabel('Actifs uniquement')
-                    ->falseLabel('Inactifs uniquement'),
-                SelectFilter::make('supervisor_id')
-                    ->label('Superviseur')
-                    ->relationship('supervisor', 'last_name')
-                    ->searchable()
-                    ->preload(),
-            ])
+            ->filters([])
             ->recordActions([
                 EditAction::make(),
             ])
