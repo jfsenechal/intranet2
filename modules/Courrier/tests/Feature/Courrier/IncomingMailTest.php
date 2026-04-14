@@ -125,8 +125,7 @@ describe('Service Model', function () {
 
         expect($service)->toBeInstanceOf(Service::class)
             ->and($service->name)->toBe('Service Travaux')
-            ->and($service->initials)->toBe('ST')
-            ->and($service->is_active)->toBeTrue();
+            ->and($service->initials)->toBe('ST');
     });
 
     test('generates slug automatically', function () {
@@ -136,12 +135,6 @@ describe('Service Model', function () {
         ]);
 
         expect($service->slugname)->toBe('cabinet-du-bourgmestre');
-    });
-
-    test('can create inactive service', function () {
-        $service = Service::factory()->inactive()->create();
-
-        expect($service->is_active)->toBeFalse();
     });
 });
 
@@ -157,7 +150,7 @@ describe('Recipient Model', function () {
             ->and($recipient->first_name)->toBe('Jean')
             ->and($recipient->last_name)->toBe('Dupont')
             ->and($recipient->email)->toBe('jean.dupont@test.com')
-            ->and($recipient->is_active)->toBeTrue();
+            ;
     });
 
     test('generates slug automatically', function () {
@@ -195,12 +188,6 @@ describe('Recipient Model', function () {
         $subordinate2 = Recipient::factory()->create(['supervisor_id' => $supervisor->id]);
 
         expect($supervisor->subordinates)->toHaveCount(2);
-    });
-
-    test('can create inactive recipient', function () {
-        $recipient = Recipient::factory()->inactive()->create();
-
-        expect($recipient->is_active)->toBeFalse();
     });
 
     test('can create recipient who receives attachments', function () {

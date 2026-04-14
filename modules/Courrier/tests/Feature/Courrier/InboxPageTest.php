@@ -43,7 +43,7 @@ describe('Inbox Page Access', function () {
 
     test('guest cannot access inbox page', function () {
         $this->get(Inbox::getUrl())
-            ->assertRedirect();
+            ->assertForbidden();
     });
 });
 

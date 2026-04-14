@@ -14,10 +14,10 @@ describe('IncomingMail Creation From Attachment', function () {
     });
 
     test('can create incoming mail with services and recipients', function () {
-        $primaryService = Service::factory()->create(['is_active' => true]);
-        $secondaryService = Service::factory()->create(['is_active' => true]);
-        $primaryRecipient = Recipient::factory()->create(['is_active' => true]);
-        $secondaryRecipient = Recipient::factory()->create(['is_active' => true]);
+        $primaryService = Service::factory()->create([]);
+        $secondaryService = Service::factory()->create([]);
+        $primaryRecipient = Recipient::factory()->create([]);
+        $secondaryRecipient = Recipient::factory()->create([]);
 
         $mail = IncomingMail::create([
             'reference_number' => 'TEST-2024-002',
@@ -54,8 +54,8 @@ describe('IncomingMail Creation From Attachment', function () {
     });
 
     test('can create incoming mail with only primary services and recipients', function () {
-        $primaryService = Service::factory()->create(['is_active' => true]);
-        $primaryRecipient = Recipient::factory()->create(['is_active' => true]);
+        $primaryService = Service::factory()->create([]);
+        $primaryRecipient = Recipient::factory()->create([]);
 
         $mail = IncomingMail::create([
             'reference_number' => 'TEST-2024-003',
