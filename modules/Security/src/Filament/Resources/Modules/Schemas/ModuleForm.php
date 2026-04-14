@@ -51,6 +51,10 @@ final class ModuleForm
                 TextInput::make('description')
                     ->maxLength(255)
                     ->columnSpanFull(),
+                TextInput::make('description_role')
+                    ->maxLength(255)
+                    ->helperText('Quelques explications sur l\'attribution des roles')
+                    ->columnSpanFull(),
             ]);
     }
 

@@ -24,6 +24,9 @@ final class ModuleInfolist
                                 ->label('Description')
                                 ->hiddenLabel()
                                 ->columnSpanFull(),
+                            TextEntry::make('description_role')
+                                ->label('Description rôle')
+                                ->columnSpanFull(),
                             TextEntry::make('roles.name')
                                 ->label('Rôles')
                                 ->badge()

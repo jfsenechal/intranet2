@@ -25,4 +25,23 @@ enum RolesEnum: string
     {
         return array_values(self::cases());
     }
+
+    public static function getAdminRoles(): array
+    {
+        return [
+            self::ROLE_INDICATEUR_BOURGMESTRE_ADMIN,
+            self::ROLE_INDICATEUR_VILLE_ADMIN,
+            self::ROLE_INDICATEUR_CPAS_ADMIN,
+        ];
+    }
+
+    public function getDepartment(): ?DepartmentCourrierEnum
+    {
+        return match ($this) {
+            self::ROLE_INDICATEUR_BOURGMESTRE_ADMIN => DepartmentCourrierEnum::BGM,
+            self::ROLE_INDICATEUR_VILLE_ADMIN => DepartmentCourrierEnum::VILLE,
+            self::ROLE_INDICATEUR_CPAS_ADMIN => DepartmentCourrierEnum::CPAS,
+            default => null,
+        };
+    }
 }

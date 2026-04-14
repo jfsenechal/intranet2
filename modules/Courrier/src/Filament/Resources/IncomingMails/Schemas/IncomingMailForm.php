@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\IncomingMails\Schemas;
 
+use AcMarche\Courrier\Filament\Components\DepartmentField;
 use AcMarche\Courrier\Repository\RecipientRepository;
 use AcMarche\Courrier\Repository\ServiceRepository;
 use Filament\Forms\Components\DatePicker;
@@ -27,7 +28,7 @@ final class IncomingMailForm
     }
 
     /**
-     * @param array<string, mixed>|null $imapPreview IMAP preview context: ['url', 'contentType', 'filename']
+     * @param  array<string, mixed>|null  $imapPreview  IMAP preview context: ['url', 'contentType', 'filename']
      */
     public static function getComponents(?array $imapPreview = null): array
     {
@@ -104,6 +105,13 @@ final class IncomingMailForm
                 ])
                 ->grow(false),
         ])->from('md');
+
+        // Add department field
+        $departmentFields = DepartmentField::make();
+        if ($departmentFields !== []) {
+            $components[] = Section::make('Département')
+                ->schema($departmentFields);
+        }
 
         // Add services and recipients
         $components[] = Section::make('Affectation')

@@ -76,6 +76,15 @@ final class IncomingMail extends Model
     protected static function booted(): void
     {
         self::bootHasUser();
+
+        self::creating(function (IncomingMail $model): void {
+            if (empty($model->department)) {
+                $departments = DepartmentScope::getCurrentUserDepartments();
+                if (count($departments) === 1) {
+                    $model->department = $departments[0]->value;
+                }
+            }
+        });
     }
 
     protected static function newFactory(): IncomingMailFactory

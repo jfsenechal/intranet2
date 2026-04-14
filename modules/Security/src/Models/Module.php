@@ -27,6 +27,7 @@ final class Module extends Model
         'name',
         'url',
         'description',
+        'description_role',
         'extern',
         'is_public',
         'is_external',

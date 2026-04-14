@@ -34,13 +34,16 @@ final class ModuleTables
                 Tables\Columns\IconColumn::make('is_public')
                     ->label('Accessible à tous')
                     ->icon(fn (bool $state): ?Heroicon => $state ? Heroicon::CheckCircle : null)
-                    ->color('success'),
+                    ->color('success')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('is_external')
                     ->label('Url externe')
                     ->icon(fn (bool $state): ?Heroicon => $state ? Heroicon::CheckCircle : null)
-                    ->color('success'),
+                    ->color('success')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('description')
-                    ->label('Description'),
+                    ->label('Description')
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -74,10 +77,7 @@ final class ModuleTables
             ->headerActions([
                 CreateAction::make('create')
                     ->label('Ajouter un module')
-                    ->icon('tabler-plus')
-                    ->action(function (array $data) use ($ownerRecord) {
-                        ModuleHandler::addModuleFromUser($ownerRecord, $data);
-                    }),
+                    ->icon('tabler-plus'),
             ])
             ->recordActions([
                 EditAction::make(),

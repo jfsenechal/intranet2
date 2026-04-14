@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Services\Schemas;
 
+use AcMarche\Courrier\Filament\Components\DepartmentField;
 use AcMarche\Courrier\Models\Recipient;
 use AcMarche\Courrier\Repository\RecipientRepository;
 use Filament\Forms;
@@ -25,6 +26,7 @@ final class ServiceForm
                 Forms\Components\TextInput::make('initials')
                     ->label('Initiales')
                     ->maxLength(255),
+                ...DepartmentField::make(),
                 Section::make('Membres du service')
                     ->description('Sélectionnez les destinataires qui font partie de ce service')
                     ->schema([
