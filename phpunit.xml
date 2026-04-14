@@ -20,6 +20,9 @@
         <testsuite name="Document">
             <directory>modules/Document/tests</directory>
         </testsuite>
+        <testsuite name="Courrier">
+            <directory>modules/Courrier/tests</directory>
+        </testsuite>
     </testsuites>
     <source>
         <include>

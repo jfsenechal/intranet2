@@ -132,10 +132,10 @@ describe('Service Model', function () {
     test('generates slug automatically', function () {
         $service = Service::factory()->create([
             'name' => 'Cabinet du Bourgmestre',
-            'slug' => null,
+            'slugname' => null,
         ]);
 
-        expect($service->slug)->toBe('cabinet-du-bourgmestre');
+        expect($service->slugname)->toBe('cabinet-du-bourgmestre');
     });
 
     test('can create inactive service', function () {

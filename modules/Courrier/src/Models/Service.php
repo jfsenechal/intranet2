@@ -23,7 +23,7 @@ final class Service extends Model
     protected $connection = 'maria-courrier';
 
     protected $fillable = [
-        'slug',
+        'slugname',
         'name',
         'initials',
         'department',
@@ -43,8 +43,8 @@ final class Service extends Model
     protected static function booted(): void
     {
         self::creating(function (Service $service): void {
-            if (empty($service->slug)) {
-                $service->slug = Str::slug($service->name);
+            if (empty($service->slugname)) {
+                $service->slugname = Str::slug($service->name);
             }
         });
     }

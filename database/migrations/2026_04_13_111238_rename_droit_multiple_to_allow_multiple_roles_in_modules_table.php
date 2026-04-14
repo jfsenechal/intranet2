@@ -10,8 +10,14 @@ return new class() extends Migration
 {
     public function up(): void
     {
-        Schema::table('modules', function (Blueprint $table) {
-            $table->renameColumn('droit_multiple', 'allow_multiple_roles');
-        });
+        if (Schema::hasColumn('modules', 'droit_multiple')) {
+            Schema::table('modules', function (Blueprint $table) {
+                $table->renameColumn('droit_multiple', 'allow_multiple_roles');
+            });
+        } elseif (! Schema::hasColumn('modules', 'allow_multiple_roles')) {
+            Schema::table('modules', function (Blueprint $table) {
+                $table->boolean('allow_multiple_roles')->default(false);
+            });
+        }
     }
 };

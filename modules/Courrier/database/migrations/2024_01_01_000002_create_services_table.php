@@ -26,7 +26,7 @@ return new class extends Migration
         } elseif (! Schema::connection('maria-courrier')->hasTable('services')) {
             Schema::connection('maria-courrier')->create('services', function (Blueprint $table): void {
                 $table->id();
-                $table->string('slug', 70)->unique();
+                $table->string('slugname', 70)->unique();
                 $table->string('name');
                 $table->string('initials')->nullable();
                 $table->enum('department', DepartmentCourrierEnum::toArray())

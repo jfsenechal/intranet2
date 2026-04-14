@@ -17,7 +17,7 @@ final class ServiceFactory extends Factory
         $name = fake()->unique()->company();
 
         return [
-            'slug' => Str::slug($name),
+            'slugname' => Str::slug($name),
             'name' => $name,
             'initials' => Str::upper(Str::substr($name, 0, 3)),
             'department' => null,
