@@ -52,7 +52,7 @@ final class IncomingMailForm
                     ->collapsible();
             }
         } else {
-            // Manual flow: file upload with preview
+            // Manual flow: file upload with client-side preview
             $components[] = Section::make('Pièce jointe')
                 ->schema([
                     FileUpload::make('attachment_file')
@@ -61,9 +61,8 @@ final class IncomingMailForm
                         ->acceptedFileTypes(config('courrier.allowed_mime_types'))
                         ->maxSize(config('courrier.max_file_size'))
                         ->storeFiles(false)
-                        ->previewable()
-                        ->openable()
-                        ->imagePreviewHeight('250'),
+                        ->previewable(false),
+                    View::make('courrier::components.upload-preview'),
                 ]);
         }
 
