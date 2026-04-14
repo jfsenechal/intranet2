@@ -19,7 +19,7 @@ return new class extends Migration
             });
             Schema::connection('maria-courrier')->table('services', function (Blueprint $table) {
                 $table->renameColumn('nom', 'name');
-                $table->renameColumn('actif', 'is_active');
+                $table->removeColumn('actif');
                 $table->enum('department', DepartmentCourrierEnum::toArray())
                     ->nullable();
             });
@@ -29,7 +29,6 @@ return new class extends Migration
                 $table->string('slug', 70)->unique();
                 $table->string('name');
                 $table->string('initials')->nullable();
-                $table->boolean('is_active')->default(true);
                 $table->enum('department', DepartmentCourrierEnum::toArray())
                     ->nullable();
             });

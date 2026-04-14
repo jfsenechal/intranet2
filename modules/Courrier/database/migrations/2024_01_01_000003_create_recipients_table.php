@@ -19,11 +19,11 @@ return new class extends Migration
             Schema::connection('maria-courrier')->table('recipients', function (Blueprint $table) {
                 $table->renameColumn('nom', 'last_name');
                 $table->renameColumn('prenom', 'first_name');
-                $table->renameColumn('actif', 'is_active');
+                $table->removeColumn('actif');
                 $table->renameColumn('tuteur_id', 'supervisor_id');
                 $table->renameColumn('slugname', 'slug');
                 $table->renameColumn('attach', 'receives_attachments');
-                $table->boolean('is_active')->default(true)->change();
+                $table->removeColumn('is_active');
                 $table->boolean('receives_attachments')->default(false)->change();
             });
 
@@ -36,7 +36,6 @@ return new class extends Migration
                 $table->string('first_name');
                 $table->string('username');
                 $table->string('email');
-                $table->boolean('is_active')->default(true);
                 $table->boolean('receives_attachments')->default(false);
             });
         }

@@ -27,9 +27,4 @@ return new class extends Migration
             });
         }
     }
-
-    public function down(): void
-    {
-        Schema::connection('maria-courrier')->dropIfExists('recipient_service');
-    }
 };
