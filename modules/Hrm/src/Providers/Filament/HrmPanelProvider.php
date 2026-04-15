@@ -41,7 +41,6 @@ final class HrmPanelProvider extends PanelProvider
             ->resourceCreatePageRedirect('view')
             ->resourceEditPageRedirect('view')
             ->databaseNotifications()
-
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Hrm\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Hrm\\Filament\\Pages')
             ->pages([])
