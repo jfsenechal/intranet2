@@ -37,7 +37,7 @@ return [
         ],
     ],
     'storage' => [
-        'disk' => env('COURRIER_DISK', 'public'),
+        'disk' => env('COURRIER_DISK', 'private'),
         'directory' => env('COURRIER_DIRECTORY', 'courrier'),
     ],
 

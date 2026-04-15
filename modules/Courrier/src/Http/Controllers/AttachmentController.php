@@ -17,7 +17,8 @@ final class AttachmentController extends Controller
 {
     public function __construct(
         private readonly ImapRepository $imapRepository
-    ) {}
+    ) {
+    }
 
     public function show(int $uid, int $index): StreamedResponse|Response
     {
@@ -44,7 +45,7 @@ final class AttachmentController extends Controller
                     return;
                 }
 
-                while (! $stream->eof()) {
+                while (!$stream->eof()) {
                     fwrite($outputStream, $stream->read(8192));
                     flush();
                 }
@@ -65,15 +66,32 @@ final class AttachmentController extends Controller
 
     public function download(Attachment $attachment): BinaryFileResponse|Response
     {
-        $path = "courrier/attachments/{$attachment->file_name}";
+        $p = config('courrier.storage.directory', 'courrier');
+        $path = $p."/attachments/{$attachment->file_name}";
 
-        if (! Storage::disk('local')->exists($path)) {
+        if (!Storage::disk('local')->exists($path)) {
             return response('Fichier non trouvé', 404);
         }
 
         $fullPath = Storage::disk('local')->path($path);
 
         return response()->download($fullPath, $attachment->file_name, [
+            'Content-Type' => $attachment->mime,
+        ]);
+    }
+
+    public function previewStored(Attachment $attachment): BinaryFileResponse|Response
+    {
+        $p = config('courrier.storage.directory', 'courrier');
+        $path = $p."/attachments/{$attachment->file_name}";
+
+        if (!Storage::disk('local')->exists($path)) {
+            return response('Fichier non trouvé', 404);
+        }
+
+        $fullPath = Storage::disk('local')->path($path);
+
+        return response()->file($fullPath, [
             'Content-Type' => $attachment->mime,
         ]);
     }

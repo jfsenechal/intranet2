@@ -16,4 +16,8 @@ Route::middleware(['web', 'auth'])->prefix('courrier')->name('courrier.')->group
     // Saved attachment download route
     Route::get('attachments/download/{attachment}', [AttachmentController::class, 'download'])
         ->name('attachments.download');
+
+    // Saved attachment inline preview route
+    Route::get('attachments/preview/{attachment}', [AttachmentController::class, 'previewStored'])
+        ->name('attachments.preview-stored');
 });

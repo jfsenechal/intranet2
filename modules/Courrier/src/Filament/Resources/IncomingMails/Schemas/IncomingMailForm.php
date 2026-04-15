@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Courrier\Filament\Resources\IncomingMails\Schemas;
 
 use AcMarche\Courrier\Filament\Components\DepartmentField;
+use AcMarche\Courrier\Models\IncomingMail;
 use AcMarche\Courrier\Models\Sender;
 use AcMarche\Courrier\Repository\RecipientRepository;
 use AcMarche\Courrier\Repository\ServiceRepository;
@@ -57,11 +58,15 @@ final class IncomingMailForm
             }
         } else {
             // Manual flow: file upload with client-side preview
+            // Show existing attachment preview when editing
             $components[] = Section::make('Pièce jointe')
                 ->schema([
+                    View::make('courrier::components.attachment-preview')
+                        ->viewData(fn (?IncomingMail $record): array => self::getExistingAttachmentPreviewData($record))
+                        ->visible(fn (?IncomingMail $record): bool => $record?->attachments->isNotEmpty() ?? false),
                     FileUpload::make('attachment_file')
-                        ->label('Fichier')
-                        ->required()
+                        ->label(fn (?IncomingMail $record): string => $record ? 'Remplacer le fichier' : 'Fichier')
+                        ->required(fn (?IncomingMail $record): bool => $record === null)
                         ->acceptedFileTypes(config('courrier.allowed_mime_types'))
                         ->maxSize(config('courrier.max_file_size'))
                         ->storeFiles(false)
@@ -156,5 +161,23 @@ final class IncomingMailForm
             ->columns(2);
 
         return $components;
+    }
+
+    /**
+     * @return array{url: string, contentType: string, filename: string}
+     */
+    private static function getExistingAttachmentPreviewData(?IncomingMail $record): array
+    {
+        $attachment = $record?->attachments->first();
+
+        if (! $attachment) {
+            return ['url' => '', 'contentType' => '', 'filename' => ''];
+        }
+
+        return [
+            'url' => route('courrier.attachments.preview-stored', $attachment),
+            'contentType' => $attachment->mime ?? '',
+            'filename' => $attachment->file_name,
+        ];
     }
 }
