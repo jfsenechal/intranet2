@@ -128,8 +128,8 @@ final class IncomingMailHandler
             );
 
             // Save to storage
-            $path = "courrier/attachments/{$storedFilename}";
-            Storage::disk('local')->put($path, $stream->getContents());
+            $path = config('courrier.storage.directory')."/attachments/{$storedFilename}";
+            Storage::disk(config('courrier.storage.disk'))->put($path, $stream->getContents());
 
             // Create attachment record
             Attachment::create([

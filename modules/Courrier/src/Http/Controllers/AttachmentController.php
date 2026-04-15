@@ -17,8 +17,7 @@ final class AttachmentController extends Controller
 {
     public function __construct(
         private readonly ImapRepository $imapRepository
-    ) {
-    }
+    ) {}
 
     public function show(int $uid, int $index): StreamedResponse|Response
     {
@@ -45,7 +44,7 @@ final class AttachmentController extends Controller
                     return;
                 }
 
-                while (!$stream->eof()) {
+                while (! $stream->eof()) {
                     fwrite($outputStream, $stream->read(8192));
                     flush();
                 }
@@ -66,32 +65,28 @@ final class AttachmentController extends Controller
 
     public function download(Attachment $attachment): BinaryFileResponse|Response
     {
-        $p = config('courrier.storage.directory', 'courrier');
-        $path = $p."/attachments/{$attachment->file_name}";
+        $disk = Storage::disk(config('courrier.storage.disk'));
+        $path = config('courrier.storage.directory')."/attachments/{$attachment->file_name}";
 
-        if (!Storage::disk('local')->exists($path)) {
+        if (! $disk->exists($path)) {
             return response('Fichier non trouvé', 404);
         }
 
-        $fullPath = Storage::disk('local')->path($path);
-
-        return response()->download($fullPath, $attachment->file_name, [
+        return response()->download($disk->path($path), $attachment->file_name, [
             'Content-Type' => $attachment->mime,
         ]);
     }
 
     public function previewStored(Attachment $attachment): BinaryFileResponse|Response
     {
-        $p = config('courrier.storage.directory', 'courrier');
-        $path = $p."/attachments/{$attachment->file_name}";
+        $disk = Storage::disk(config('courrier.storage.disk'));
+        $path = config('courrier.storage.directory')."/attachments/{$attachment->file_name}";
 
-        if (!Storage::disk('local')->exists($path)) {
+        if (! $disk->exists($path)) {
             return response('Fichier non trouvé', 404);
         }
 
-        $fullPath = Storage::disk('local')->path($path);
-
-        return response()->file($fullPath, [
+        return response()->file($disk->path($path), [
             'Content-Type' => $attachment->mime,
         ]);
     }

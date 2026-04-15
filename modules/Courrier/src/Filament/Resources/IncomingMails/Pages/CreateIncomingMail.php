@@ -104,8 +104,8 @@ final class CreateIncomingMail extends CreateRecord
             $extension
         );
 
-        $path = "courrier/attachments/{$storedFilename}";
-        Storage::disk('local')->put($path, $file->readStream());
+        $path = config('courrier.storage.directory')."/attachments/{$storedFilename}";
+        Storage::disk(config('courrier.storage.disk'))->put($path, $file->readStream());
 
         Attachment::create([
             'incoming_mail_id' => $this->record->id,
