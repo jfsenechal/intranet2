@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace AcMarche\Courrier\Filament\Resources\IncomingMails\Schemas;
 
 use AcMarche\Courrier\Filament\Components\DepartmentField;
+use AcMarche\Courrier\Models\Sender;
 use AcMarche\Courrier\Repository\RecipientRepository;
 use AcMarche\Courrier\Repository\ServiceRepository;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
@@ -14,6 +16,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Flex;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\View;
 use Filament\Schemas\Schema;
@@ -80,10 +83,19 @@ final class IncomingMailForm
                         ->required()
                         ->default(now())
                         ->native(false),
-                    TextInput::make('sender')
-                        ->label('Expéditeur')
-                        ->required()
-                        ->maxLength(255),
+                    Grid::make(2)
+                        ->schema([
+                            TextInput::make('sender')
+                                ->label('Expéditeur')
+                                ->required()
+                                ->maxLength(255)
+                                ->datalist(Sender::query()->pluck('name')->toArray())
+                                ->columnSpan(1),
+                            Checkbox::make('save_sender')
+                                ->label('Enregistrer l\'expéditeur')
+                                ->inline()
+                                ->columnSpan(1),
+                        ]),
                     Textarea::make('description')
                         ->label('Description')
                         ->rows(4)

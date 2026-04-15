@@ -6,6 +6,7 @@ namespace AcMarche\Courrier\Filament\Resources\IncomingMails\Pages;
 
 use AcMarche\Courrier\Filament\Resources\IncomingMails\IncomingMailResource;
 use AcMarche\Courrier\Models\Attachment;
+use AcMarche\Courrier\Models\Sender;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -27,6 +28,8 @@ final class CreateIncomingMail extends CreateRecord
     /** @var array<int> */
     private array $secondaryRecipients = [];
 
+    private bool $saveSender = false;
+
     public function canCreateAnother(): bool
     {
         return false;
@@ -47,6 +50,7 @@ final class CreateIncomingMail extends CreateRecord
         $this->secondaryServices = $data['secondary_services'] ?? [];
         $this->primaryRecipients = $data['primary_recipients'] ?? [];
         $this->secondaryRecipients = $data['secondary_recipients'] ?? [];
+        $this->saveSender = (bool) ($data['save_sender'] ?? false);
 
         unset(
             $data['attachment_file'],
@@ -54,6 +58,7 @@ final class CreateIncomingMail extends CreateRecord
             $data['secondary_services'],
             $data['primary_recipients'],
             $data['secondary_recipients'],
+            $data['save_sender'],
         );
 
         return $data;
@@ -61,6 +66,11 @@ final class CreateIncomingMail extends CreateRecord
 
     protected function afterCreate(): void
     {
+        // Save sender to senders table if checkbox was checked
+        if ($this->saveSender && $this->record->sender) {
+            Sender::firstOrCreate(['name' => $this->record->sender]);
+        }
+
         // Attach services and recipients via pivot tables
         foreach ($this->primaryServices as $serviceId) {
             $this->record->services()->attach($serviceId, ['is_primary' => true]);
