@@ -6,6 +6,7 @@ use AcMarche\Courrier\Models\IncomingMail;
 use AcMarche\Courrier\Models\Recipient;
 use AcMarche\Courrier\Models\Service;
 use App\Models\User;
+use Carbon\CarbonImmutable;
 
 describe('IncomingMail Model', function () {
     test('can create an incoming mail', function () {
@@ -54,7 +55,7 @@ describe('IncomingMail Model', function () {
             'mail_date' => '2024-01-15',
         ]);
 
-        expect($mail->mail_date)->toBeInstanceOf(Illuminate\Support\Carbon::class);
+        expect($mail->mail_date)->toBeInstanceOf(CarbonImmutable::class);
     });
 
     test('soft deletes work correctly', function () {
@@ -149,8 +150,7 @@ describe('Recipient Model', function () {
         expect($recipient)->toBeInstanceOf(Recipient::class)
             ->and($recipient->first_name)->toBe('Jean')
             ->and($recipient->last_name)->toBe('Dupont')
-            ->and($recipient->email)->toBe('jean.dupont@test.com')
-            ;
+            ->and($recipient->email)->toBe('jean.dupont@test.com');
     });
 
     test('generates slug automatically', function () {
@@ -160,7 +160,7 @@ describe('Recipient Model', function () {
             'slug' => null,
         ]);
 
-        expect($recipient->slug)->toBe('dupont_jean');
+        expect($recipient->slug)->toBe('dupont-jean');
     });
 
     test('has full name accessor', function () {

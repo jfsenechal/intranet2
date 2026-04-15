@@ -43,7 +43,7 @@ final class NotifyRecipients extends Page implements HasForms, HasTable
 
     public static function canAccess(array $parameters = []): bool
     {
-        return Gate::check('courrier-index');
+        return Gate::check('courrier-administrator');
     }
 
     public function mount(): void

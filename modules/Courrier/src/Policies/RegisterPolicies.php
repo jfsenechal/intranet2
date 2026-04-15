@@ -23,5 +23,16 @@ final class RegisterPolicies
                 RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_INDEX->value,
             ]);
         });
+        Gate::define('courrier-administrator', function (User $user) {
+            if ($user?->isAdministrator()) {
+                return true;
+            }
+
+            return $user->hasOneOfThisRoles([
+                RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN->value,
+                RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN->value,
+                RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_ADMIN->value,
+            ]);
+        });
     }
 }

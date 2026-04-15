@@ -11,9 +11,12 @@ use AcMarche\Courrier\Models\Recipient;
 use AcMarche\Courrier\Models\Service;
 use AcMarche\Security\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Queue;
+
+use function Pest\Livewire\livewire;
 
 beforeEach(function () {
     Filament::setCurrentPanel(Filament::getPanel('courrier-panel'));
@@ -48,7 +51,7 @@ describe('NotifyRecipients Page Access', function () {
 
     test('guest cannot access notify recipients page', function () {
         $this->get(NotifyRecipients::getUrl())
-            ->assertRedirect();
+            ->assertForbidden();
     });
 });
 
@@ -70,23 +73,27 @@ describe('NotifyRecipients Page Display', function () {
             'is_notified' => false,
         ]);
 
-        $this->actingAs($admin)
-            ->get(NotifyRecipients::getUrl())
-            ->assertSee('TEST-2024-001');
+        $this->actingAs($admin);
+
+        livewire(NotifyRecipients::class)
+            ->loadTable()
+            ->assertCanSeeTableRecords([$mail]);
     });
 
     test('notify recipients page does not show already notified mails', function () {
         $admin = User::factory()->create(['is_administrator' => true]);
 
-        IncomingMail::factory()->create([
+        $notifiedMail = IncomingMail::factory()->create([
             'reference_number' => 'NOTIFIED-001',
             'mail_date' => now(),
             'is_notified' => true,
         ]);
 
-        $this->actingAs($admin)
-            ->get(NotifyRecipients::getUrl())
-            ->assertDontSee('NOTIFIED-001');
+        $this->actingAs($admin);
+
+        livewire(NotifyRecipients::class)
+            ->loadTable()
+            ->assertCanNotSeeTableRecords([$notifiedMail]);
     });
 });
 
@@ -105,7 +112,7 @@ describe('SendIncomingMailNotificationJob', function () {
         ]);
         $mail->recipients()->attach($recipient->id, ['is_primary' => true]);
 
-        SendIncomingMailNotificationJob::dispatch(now());
+        SendIncomingMailNotificationJob::dispatch(Carbon::now());
 
         Queue::assertPushed(SendIncomingMailNotificationJob::class);
     });
@@ -122,7 +129,7 @@ describe('SendIncomingMailNotificationJob', function () {
             'is_notified' => false,
         ]);
 
-        $job = new SendIncomingMailNotificationJob(now());
+        $job = new SendIncomingMailNotificationJob(Carbon::now());
         $job->handle();
 
         Mail::assertNothingQueued();
@@ -146,7 +153,7 @@ describe('SendIncomingMailNotificationJob', function () {
             'is_notified' => false,
         ]);
 
-        $job = new SendIncomingMailNotificationJob(now());
+        $job = new SendIncomingMailNotificationJob(Carbon::now());
         $job->handle();
 
         Mail::assertQueued(IncomingMailNotification::class, function ($mail) use ($recipient) {
@@ -179,7 +186,7 @@ describe('SendIncomingMailNotificationJob', function () {
         ]);
         $unassignedMail->recipients()->attach($otherRecipient->id, ['is_primary' => true]);
 
-        $job = new SendIncomingMailNotificationJob(now());
+        $job = new SendIncomingMailNotificationJob(Carbon::now());
         $job->handle();
 
         Mail::assertQueued(IncomingMailNotification::class, function ($mail) use ($recipient) {
@@ -202,7 +209,7 @@ describe('SendIncomingMailNotificationJob', function () {
         ]);
         $mail->services()->attach($service->id, ['is_primary' => true]);
 
-        $job = new SendIncomingMailNotificationJob(now());
+        $job = new SendIncomingMailNotificationJob(Carbon::now());
         $job->handle();
 
         Mail::assertQueued(IncomingMailNotification::class, function ($mailable) use ($recipient) {
@@ -223,7 +230,7 @@ describe('SendIncomingMailNotificationJob', function () {
         ]);
         $mail->recipients()->attach($recipient->id, ['is_primary' => true]);
 
-        $job = new SendIncomingMailNotificationJob(now());
+        $job = new SendIncomingMailNotificationJob(Carbon::now());
         $job->handle();
 
         expect($mail->fresh()->is_notified)->toBeTrue();
@@ -242,7 +249,7 @@ describe('SendIncomingMailNotificationJob', function () {
         ]);
         $mail->recipients()->attach($recipient->id, ['is_primary' => true]);
 
-        $job = new SendIncomingMailNotificationJob(now());
+        $job = new SendIncomingMailNotificationJob(Carbon::now());
         $job->handle();
 
         Mail::assertQueued(IncomingMailNotification::class, function ($mailable) {
@@ -264,7 +271,7 @@ describe('SendIncomingMailNotificationJob', function () {
         ]);
         $mail->recipients()->attach($recipient->id, ['is_primary' => true]);
 
-        $job = new SendIncomingMailNotificationJob(now());
+        $job = new SendIncomingMailNotificationJob(Carbon::now());
         $job->handle();
 
         Mail::assertQueued(IncomingMailNotification::class, function ($mailable) {

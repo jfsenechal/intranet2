@@ -12,6 +12,18 @@ final class EditIncomingMail extends EditRecord
 {
     protected static string $resource = IncomingMailResource::class;
 
+    /** @var array<int> */
+    private array $primaryServices = [];
+
+    /** @var array<int> */
+    private array $secondaryServices = [];
+
+    /** @var array<int> */
+    private array $primaryRecipients = [];
+
+    /** @var array<int> */
+    private array $secondaryRecipients = [];
+
     public function getTitle(): string
     {
         return 'Modifier le courrier';
@@ -23,5 +35,59 @@ final class EditIncomingMail extends EditRecord
             Actions\ViewAction::make(),
             Actions\DeleteAction::make(),
         ];
+    }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $data['primary_services'] = $this->record->services()->wherePivot('is_primary', true)->pluck('services.id')->toArray();
+        $data['secondary_services'] = $this->record->services()->wherePivot('is_primary', false)->pluck('services.id')->toArray();
+        $data['primary_recipients'] = $this->record->recipients()->wherePivot('is_primary', true)->pluck('recipients.id')->toArray();
+        $data['secondary_recipients'] = $this->record->recipients()->wherePivot('is_primary', false)->pluck('recipients.id')->toArray();
+
+        return $data;
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $this->primaryServices = $data['primary_services'] ?? [];
+        $this->secondaryServices = $data['secondary_services'] ?? [];
+        $this->primaryRecipients = $data['primary_recipients'] ?? [];
+        $this->secondaryRecipients = $data['secondary_recipients'] ?? [];
+
+        unset(
+            $data['primary_services'],
+            $data['secondary_services'],
+            $data['primary_recipients'],
+            $data['secondary_recipients'],
+        );
+
+        return $data;
+    }
+
+    protected function afterSave(): void
+    {
+        // Sync services
+        $services = [];
+        foreach ($this->primaryServices as $serviceId) {
+            $services[$serviceId] = ['is_primary' => true];
+        }
+        foreach ($this->secondaryServices as $serviceId) {
+            $services[$serviceId] = ['is_primary' => false];
+        }
+        $this->record->services()->sync($services);
+
+        // Sync recipients
+        $recipients = [];
+        foreach ($this->primaryRecipients as $recipientId) {
+            $recipients[$recipientId] = ['is_primary' => true];
+        }
+        foreach ($this->secondaryRecipients as $recipientId) {
+            $recipients[$recipientId] = ['is_primary' => false];
+        }
+        $this->record->recipients()->sync($recipients);
     }
 }

@@ -97,6 +97,6 @@ final class SendIncomingMailNotificationJob implements ShouldQueue
             return false;
         }
 
-        return Gate::check('courrier-index', ['user' => $user]);
+        return Gate::forUser($user)->check('courrier-index');
     }
 }

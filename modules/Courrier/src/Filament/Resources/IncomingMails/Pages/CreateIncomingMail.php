@@ -15,6 +15,18 @@ final class CreateIncomingMail extends CreateRecord
 {
     protected static string $resource = IncomingMailResource::class;
 
+    /** @var array<int> */
+    private array $primaryServices = [];
+
+    /** @var array<int> */
+    private array $secondaryServices = [];
+
+    /** @var array<int> */
+    private array $primaryRecipients = [];
+
+    /** @var array<int> */
+    private array $secondaryRecipients = [];
+
     public function canCreateAnother(): bool
     {
         return false;
@@ -31,13 +43,42 @@ final class CreateIncomingMail extends CreateRecord
      */
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        unset($data['attachment_file']);
+        $this->primaryServices = $data['primary_services'] ?? [];
+        $this->secondaryServices = $data['secondary_services'] ?? [];
+        $this->primaryRecipients = $data['primary_recipients'] ?? [];
+        $this->secondaryRecipients = $data['secondary_recipients'] ?? [];
+
+        unset(
+            $data['attachment_file'],
+            $data['primary_services'],
+            $data['secondary_services'],
+            $data['primary_recipients'],
+            $data['secondary_recipients'],
+        );
 
         return $data;
     }
 
     protected function afterCreate(): void
     {
+        // Attach services and recipients via pivot tables
+        foreach ($this->primaryServices as $serviceId) {
+            $this->record->services()->attach($serviceId, ['is_primary' => true]);
+        }
+
+        foreach ($this->secondaryServices as $serviceId) {
+            $this->record->services()->attach($serviceId, ['is_primary' => false]);
+        }
+
+        foreach ($this->primaryRecipients as $recipientId) {
+            $this->record->recipients()->attach($recipientId, ['is_primary' => true]);
+        }
+
+        foreach ($this->secondaryRecipients as $recipientId) {
+            $this->record->recipients()->attach($recipientId, ['is_primary' => false]);
+        }
+
+        // Handle file attachment
         $file = $this->data['attachment_file'] ?? null;
 
         if (! $file instanceof TemporaryUploadedFile) {
