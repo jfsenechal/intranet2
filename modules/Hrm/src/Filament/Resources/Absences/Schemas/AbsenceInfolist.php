@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Absences\Schemas;
 
-use App\Models\User;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Flex;
-use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -20,27 +19,22 @@ final class AbsenceInfolist
             ->columns(1)
             ->components([
                 Flex::make([
-                    Grid::make(1)
-                        ->schema(self::content()),
-                    Grid::make(1)
-                        ->schema([
-                            Section::make('Etat')
-                                ->label(null)
-                                ->schema(self::side()),
-
-                        ])
+                    Section::make(
+                        self::content()
+                    ),
+                    Section::make(
+                        self::side()
+                    )
                         ->grow(false),
                 ])
-                    ->from('md')
-                    ->columnSpanFull(),
-
+                    ->from('md'),
             ]);
     }
 
     private static function content(): array
     {
         return [
-            Section::make('Période')
+            Fieldset::make('Période')
                 ->columns(4)
                 ->schema([
                     TextEntry::make('start_date')
@@ -56,7 +50,7 @@ final class AbsenceInfolist
                         ->label('Date de clôture')
                         ->date('d/m/Y'),
                 ]),
-            Section::make('Motif')
+            Fieldset::make('Motif')
                 ->columns(2)
                 ->schema([
                     TextEntry::make('reason')
