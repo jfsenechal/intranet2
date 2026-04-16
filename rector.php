@@ -18,6 +18,7 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_FACTORIES,
     ])
     ->withComposerBased(laravel: true/** other options */)
+    ->withImportNames()
     ->withSkip([
         AddOverrideAttributeToOverriddenMethodsRector::class,
     ])

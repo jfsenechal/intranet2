@@ -15,19 +15,17 @@ use Laravel\Scout\Searchable;
  * Objectif de développement durable
  */
 #[UseFactory(OddFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'icon',
+    'color',
+    'description',
+    'position',
+])]
 final class Odd extends Model
 {
     use HasFactory, Searchable;
-
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'name',
-        'icon',
-        'color',
-        'description',
-        'position',
-    ];
 
     /**
      * Get the indexable data array for the model.

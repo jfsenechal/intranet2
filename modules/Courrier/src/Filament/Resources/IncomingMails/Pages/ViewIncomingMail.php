@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 final class ViewIncomingMail extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = IncomingMailResource::class;
 
     public function getTitle(): string

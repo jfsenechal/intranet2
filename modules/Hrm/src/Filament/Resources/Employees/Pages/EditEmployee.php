@@ -10,6 +10,7 @@ use Filament\Resources\Pages\EditRecord;
 
 final class EditEmployee extends EditRecord
 {
+    #[\Override]
     protected static string $resource = EmployeeResource::class;
 
     protected function getHeaderActions(): array

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 final class CreateEmail extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = EmailResource::class;
 
     protected function handleRecordCreation(array $data): Model

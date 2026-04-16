@@ -26,7 +26,7 @@ final class RecipientForm
                     ->label('Superviseur')
                     ->helperText('Le superviseur sera automatiquement mis en copie. Utilisé par le CPAS')
                     ->relationship('supervisor', 'last_name')
-                    ->getOptionLabelFromRecordUsing(fn (Recipient $record) => "{$record->first_name} {$record->last_name}")
+                    ->getOptionLabelFromRecordUsing(fn (Recipient $record): string => "{$record->first_name} {$record->last_name}")
                     ->searchable()
                     ->preload()
                     ->nullable()

@@ -24,7 +24,7 @@ final class LdapAuthService
         }
         if ($user) {
             $userLdap = UserLdap::where('sAMAccountName', '=', $user->username)->first();
-            if (! $userLdap) {
+            if (!$userLdap instanceof \LdapRecord\Models\Model) {
 
                 return null;
             }
@@ -35,7 +35,7 @@ final class LdapAuthService
             }
             $message = $connection->getLdapConnection()->getDiagnosticMessage();
 
-            if (mb_strpos($message, '532') !== false) {
+            if (mb_strpos((string) $message, '532') !== false) {
                 // "Your password has expired.";
                 return null;
             }

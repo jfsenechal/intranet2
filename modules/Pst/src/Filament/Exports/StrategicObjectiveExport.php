@@ -46,7 +46,7 @@ final class StrategicObjectiveExport implements FromCollection, ShouldAutoSize, 
             'row'
         )->plural($export->successful_rows).' exported.';
 
-        if ($failedRowsCount = $export->getFailedRowsCount()) {
+        if (($failedRowsCount = $export->getFailedRowsCount()) !== 0) {
             $body .= ' '.number_format($failedRowsCount).' '.str('row')->plural($failedRowsCount).' failed to export.';
         }
 
@@ -114,34 +114,22 @@ final class StrategicObjectiveExport implements FromCollection, ShouldAutoSize, 
                     $ligne++;
                     $type = $action->type?->name ?? null;
                     $mandataires = $action->mandataries ?? new Collection();
-                    $mandatairesNames = $mandataires->map(function (User $user) {
-                        return $user->last_name.' '.$user->first_name;
-                    });
+                    $mandatairesNames = $mandataires->map(fn(User $user) => $user->last_name.' '.$user->first_name);
                     $agents = $action->users ?? new Collection();
-                    $agentsNames = $agents->map(function (User $user) {
-                        return $user->last_name.' '.$user->first_name;
-                    });
+                    $agentsNames = $agents->map(fn(User $user) => $user->last_name.' '.$user->first_name);
 
                     $servicesPorteurs = $action->leaderServices ?? new Collection();
-                    $servicesPorteursNames = $servicesPorteurs->map(function (Service $service) {
-                        return $service->name;
-                    });
+                    $servicesPorteursNames = $servicesPorteurs->map(fn(Service $service) => $service->name);
 
                     $servicesPartenaires = $action->partnerServices ?? new Collection();
-                    $servicesPartenairesNames = $servicesPartenaires->map(function (Service $service) {
-                        return $service->name;
-                    });
+                    $servicesPartenairesNames = $servicesPartenaires->map(fn(Service $service) => $service->name);
 
                     $partenaires = $action->partners ?? new Collection();
-                    $partenairesNames = $partenaires->map(function (Partner $partner) {
-                        return $partner->name;
-                    });
+                    $partenairesNames = $partenaires->map(fn(Partner $partner) => $partner->name);
 
                     $etatavancement = $action->state?->value ?? null;
                     $odds = $action->odds ?? new Collection();
-                    $oddsNames = $odds->map(function (Odd $odd) {
-                        return $odd->name;
-                    });
+                    $oddsNames = $odds->map(fn(Odd $odd) => $odd->name);
                     $roadmap = $action->roadmap?->value ?? null;
                     $synergie = $action->synergie?->value ?? null;
 

@@ -9,5 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreatePrerequisite extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = PrerequisiteResource::class;
 }

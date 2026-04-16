@@ -21,6 +21,7 @@ final class MigrationCommand extends Command
      *
      * @var string
      */
+    #[\Override]
     protected $signature = 'courrier:migration {--dry-run : Run without making changes}';
 
     /**
@@ -28,6 +29,7 @@ final class MigrationCommand extends Command
      *
      * @var string
      */
+    #[\Override]
     protected $description = 'Migrate user_id to username in incoming_mail_recipient table';
 
     /**

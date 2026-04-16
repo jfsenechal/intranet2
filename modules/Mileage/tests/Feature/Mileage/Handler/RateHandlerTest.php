@@ -5,8 +5,8 @@ declare(strict_types=1);
 use AcMarche\Mileage\Models\Rate;
 use AcMarche\Mileage\Validator\RateOverlapValidator;
 
-describe('hasOverlappingRate', function () {
-    test('detects overlap when new range starts before existing range ends', function () {
+describe('hasOverlappingRate', function (): void {
+    test('detects overlap when new range starts before existing range ends', function (): void {
         // Existing rate: 2024-01-01 to 2024-06-30
         Rate::factory()->create([
             'start_date' => '2024-01-01',
@@ -19,7 +19,7 @@ describe('hasOverlappingRate', function () {
         expect($hasOverlap)->toBeTrue();
     });
 
-    test('detects overlap when new range ends after existing range starts', function () {
+    test('detects overlap when new range ends after existing range starts', function (): void {
         // Existing rate: 2024-06-01 to 2024-12-31
         Rate::factory()->create([
             'start_date' => '2024-06-01',
@@ -32,7 +32,7 @@ describe('hasOverlappingRate', function () {
         expect($hasOverlap)->toBeTrue();
     });
 
-    test('detects overlap when new range is completely inside existing range', function () {
+    test('detects overlap when new range is completely inside existing range', function (): void {
         // Existing rate: 2024-01-01 to 2024-12-31
         Rate::factory()->create([
             'start_date' => '2024-01-01',
@@ -45,7 +45,7 @@ describe('hasOverlappingRate', function () {
         expect($hasOverlap)->toBeTrue();
     });
 
-    test('detects overlap when new range completely contains existing range', function () {
+    test('detects overlap when new range completely contains existing range', function (): void {
         // Existing rate: 2024-03-01 to 2024-06-30
         Rate::factory()->create([
             'start_date' => '2024-03-01',
@@ -58,7 +58,7 @@ describe('hasOverlappingRate', function () {
         expect($hasOverlap)->toBeTrue();
     });
 
-    test('detects overlap when ranges share the same start date', function () {
+    test('detects overlap when ranges share the same start date', function (): void {
         // Existing rate: 2024-01-01 to 2024-06-30
         Rate::factory()->create([
             'start_date' => '2024-01-01',
@@ -71,7 +71,7 @@ describe('hasOverlappingRate', function () {
         expect($hasOverlap)->toBeTrue();
     });
 
-    test('detects overlap when ranges share the same end date', function () {
+    test('detects overlap when ranges share the same end date', function (): void {
         // Existing rate: 2024-01-01 to 2024-06-30
         Rate::factory()->create([
             'start_date' => '2024-01-01',
@@ -84,7 +84,7 @@ describe('hasOverlappingRate', function () {
         expect($hasOverlap)->toBeTrue();
     });
 
-    test('detects overlap when new range starts on existing end date', function () {
+    test('detects overlap when new range starts on existing end date', function (): void {
         // Existing rate: 2024-01-01 to 2024-06-30
         Rate::factory()->create([
             'start_date' => '2024-01-01',
@@ -97,7 +97,7 @@ describe('hasOverlappingRate', function () {
         expect($hasOverlap)->toBeTrue();
     });
 
-    test('detects overlap when new range ends after existing start date', function () {
+    test('detects overlap when new range ends after existing start date', function (): void {
         // Existing rate: 2024-06-01 to 2024-12-31
         Rate::factory()->create([
             'start_date' => '2024-06-01',
@@ -110,7 +110,7 @@ describe('hasOverlappingRate', function () {
         expect($hasOverlap)->toBeTrue();
     });
 
-    test('no overlap when new range is completely before existing range', function () {
+    test('no overlap when new range is completely before existing range', function (): void {
         // Existing rate: 2024-06-01 to 2024-12-31
         Rate::factory()->create([
             'start_date' => '2024-06-01',
@@ -123,7 +123,7 @@ describe('hasOverlappingRate', function () {
         expect($hasOverlap)->toBeFalse();
     });
 
-    test('no overlap when new range is completely after existing range', function () {
+    test('no overlap when new range is completely after existing range', function (): void {
         // Existing rate: 2024-01-01 to 2024-06-30
         Rate::factory()->create([
             'start_date' => '2024-01-01',
@@ -136,13 +136,13 @@ describe('hasOverlappingRate', function () {
         expect($hasOverlap)->toBeFalse();
     });
 
-    test('no overlap when no rates exist', function () {
+    test('no overlap when no rates exist', function (): void {
         $hasOverlap = RateOverlapValidator::hasOverlappingRate('2024-01-01', '2024-12-31', null);
 
         expect($hasOverlap)->toBeFalse();
     });
 
-    test('ignores current record when editing', function () {
+    test('ignores current record when editing', function (): void {
         // Create a rate
         $existingRate = Rate::factory()->create([
             'start_date' => '2024-01-01',
@@ -155,7 +155,7 @@ describe('hasOverlappingRate', function () {
         expect($hasOverlap)->toBeFalse();
     });
 
-    test('detects overlap with other rates when editing', function () {
+    test('detects overlap with other rates when editing', function (): void {
         // Create two rates
         Rate::factory()->create([
             'start_date' => '2024-01-01',
@@ -173,7 +173,7 @@ describe('hasOverlappingRate', function () {
         expect($hasOverlap)->toBeTrue();
     });
 
-    test('allows adjacent ranges without gap', function () {
+    test('allows adjacent ranges without gap', function (): void {
         // Existing rate: 2024-01-01 to 2024-06-30
         Rate::factory()->create([
             'start_date' => '2024-01-01',

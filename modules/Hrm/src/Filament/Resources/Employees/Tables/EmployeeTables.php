@@ -31,7 +31,7 @@ final class EmployeeTables
                     ->label('Nom')
                     ->searchable()
                     ->sortable()
-                    ->url(fn (Employee $record) => EmployeeResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (Employee $record): string => EmployeeResource::getUrl('view', ['record' => $record->id])),
                 Tables\Columns\TextColumn::make('first_name')
                     ->label('Prenom')
                     ->searchable()

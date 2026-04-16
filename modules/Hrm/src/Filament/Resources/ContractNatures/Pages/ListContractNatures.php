@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 final class ListContractNatures extends ListRecords
 {
+    #[\Override]
     protected static string $resource = ContractNatureResource::class;
 
     protected function getHeaderActions(): array

@@ -10,8 +10,10 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateOperationalObjective extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = OperationalObjectiveResource::class;
 
+    #[\Override]
     protected static bool $canCreateAnother = false;
 
     public function getTitle(): string

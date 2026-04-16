@@ -10,6 +10,7 @@ use Filament\Resources\Pages\EditRecord;
 
 final class EditHealthInsurance extends EditRecord
 {
+    #[\Override]
     protected static string $resource = HealthInsuranceResource::class;
 
     protected function getHeaderActions(): array

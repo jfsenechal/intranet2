@@ -8,8 +8,12 @@ use AcMarche\News\Models\Category;
 use AcMarche\News\Models\News;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\News\Models\News>
+ */
 final class NewsFactory extends Factory
 {
+    #[\Override]
     protected $model = News::class;
 
     /**

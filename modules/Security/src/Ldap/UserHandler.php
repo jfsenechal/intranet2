@@ -19,7 +19,7 @@ final class UserHandler
         if (User::where('username', $username)->first()) {
             throw new Exception('Utilisateur déjà existant');
         }
-        if ($userLdap = UserLdap::query()->findBy('sAMAccountName', $username)) {
+        if (($userLdap = UserLdap::query()->findBy('sAMAccountName', $username)) instanceof \LdapRecord\Models\Model) {
             $dataUser = User::generateDataFromLdap($userLdap);
             $dataUser['username'] = $username;
             $dataUser['password'] = Str::password();

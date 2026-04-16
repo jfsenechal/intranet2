@@ -11,5 +11,6 @@ use Filament\Tables\Columns\Column;
  */
 final class ProgressColumn extends Column
 {
+    #[\Override]
     protected string $view = 'tables.columns.progress-column';
 }

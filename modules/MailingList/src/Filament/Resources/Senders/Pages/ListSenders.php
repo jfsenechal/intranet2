@@ -11,6 +11,7 @@ use Filament\Support\Icons\Heroicon;
 
 final class ListSenders extends ListRecords
 {
+    #[\Override]
     protected static string $resource = SenderResource::class;
 
     protected function getHeaderActions(): array

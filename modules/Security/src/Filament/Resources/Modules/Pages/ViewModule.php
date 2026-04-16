@@ -13,6 +13,7 @@ use Filament\Schemas\Schema;
 
 final class ViewModule extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = ModuleResource::class;
 
     public function getTitle(): string

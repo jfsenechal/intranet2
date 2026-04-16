@@ -17,23 +17,23 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('mailing-list'));
     $this->user = User::factory()->create();
     $this->actingAs($this->user);
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     livewire(ListSenders::class)
         ->assertOk();
 });
 
-it('can render the create page', function () {
+it('can render the create page', function (): void {
     livewire(CreateSender::class)
         ->assertOk();
 });
 
-it('can render the edit page', function () {
+it('can render the edit page', function (): void {
     $sender = Sender::factory()->create(['username' => $this->user->username]);
 
     livewire(EditSender::class, ['record' => $sender->id])
@@ -44,7 +44,7 @@ it('can render the edit page', function () {
         ]);
 });
 
-it('can list senders', function () {
+it('can list senders', function (): void {
     $senders = Sender::factory(3)->create(['username' => $this->user->username]);
 
     livewire(ListSenders::class)
@@ -52,12 +52,12 @@ it('can list senders', function () {
         ->assertCanSeeTableRecords($senders);
 });
 
-it('has table columns', function (string $column) {
+it('has table columns', function (string $column): void {
     livewire(ListSenders::class)
         ->assertTableColumnExists($column);
 })->with(['name', 'email', 'created_at', 'updated_at']);
 
-it('can sort column', function (string $column) {
+it('can sort column', function (string $column): void {
     $senders = Sender::factory(5)->create(['username' => $this->user->username]);
 
     livewire(ListSenders::class)
@@ -68,7 +68,7 @@ it('can sort column', function (string $column) {
         ->assertCanSeeTableRecords($senders->sortByDesc($column), inOrder: true);
 })->with(['name', 'email']);
 
-it('can search senders', function () {
+it('can search senders', function (): void {
     $senders = Sender::factory(5)->create(['username' => $this->user->username]);
 
     $search = $senders->first()->name;
@@ -80,7 +80,7 @@ it('can search senders', function () {
         ->assertCanNotSeeTableRecords($senders->where('name', '!=', $search));
 });
 
-it('can create a sender', function () {
+it('can create a sender', function (): void {
     $sender = Sender::factory()->make();
 
     livewire(CreateSender::class)
@@ -98,7 +98,7 @@ it('can create a sender', function () {
     ]);
 });
 
-it('can create a sender with footer', function () {
+it('can create a sender with footer', function (): void {
     livewire(CreateSender::class)
         ->fillForm([
             'name' => 'Test Sender',
@@ -114,7 +114,7 @@ it('can create a sender with footer', function () {
     ]);
 });
 
-it('can update a sender', function () {
+it('can update a sender', function (): void {
     $sender = Sender::factory()->create(['username' => $this->user->username]);
     $newData = Sender::factory()->make();
 
@@ -133,7 +133,7 @@ it('can update a sender', function () {
     ]);
 });
 
-it('can delete a sender', function () {
+it('can delete a sender', function (): void {
     $sender = Sender::factory()->create(['username' => $this->user->username]);
 
     livewire(EditSender::class, ['record' => $sender->id])
@@ -144,7 +144,7 @@ it('can delete a sender', function () {
     assertDatabaseMissing($sender);
 });
 
-it('can bulk delete senders', function () {
+it('can bulk delete senders', function (): void {
     $senders = Sender::factory(3)->create(['username' => $this->user->username]);
 
     livewire(ListSenders::class)
@@ -158,7 +158,7 @@ it('can bulk delete senders', function () {
     $senders->each(fn (Sender $sender) => assertDatabaseMissing($sender));
 });
 
-it('validates the form data', function (array $data, array $errors) {
+it('validates the form data', function (array $data, array $errors): void {
     $sender = Sender::factory()->create(['username' => $this->user->username]);
     $newData = Sender::factory()->make();
 

@@ -44,24 +44,24 @@ final class ActionTables
             ]);
     }
 
-    public static function actionsInline(Table $table, int $limit = 120): Table
+    public static function actionsInline(Table $table): Table
     {
         return $table
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
-            ->recordUrl(fn (Action $record) => ActionPstResource::getUrl('view', [$record]))
+            ->recordUrl(fn (Action $record): string => ActionPstResource::getUrl('view', [$record]))
             ->columns(self::getColumns())
             ->filters([
                 //
             ]);
     }
 
-    public static function actionsForWidget(Table $table, int $limit = 120): Table
+    public static function actionsForWidget(Table $table): Table
     {
         return $table
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
-            ->recordUrl(fn (Action $record) => ActionPstResource::getUrl('view', [$record]))
+            ->recordUrl(fn (Action $record): string => ActionPstResource::getUrl('view', [$record]))
             ->columns([
                 TextColumn::make('id')
                     ->sortable()
@@ -71,7 +71,7 @@ final class ActionTables
                     ->sortable()
                     ->label('Intitulé')
                     ->limit(95)
-                    ->url(fn (Action $record) => ActionPstResource::getUrl('view', ['record' => $record->id]))
+                    ->url(fn (Action $record): string => ActionPstResource::getUrl('view', ['record' => $record->id]))
                     ->tooltip(function (TextColumn $column): ?string {
                         $state = $column->getState();
 
@@ -111,7 +111,7 @@ final class ActionTables
             ->expandableLimitedList()
             ->formatStateUsing(
                 fn ($state, Action $record) => $record->mandataries->map(
-                    fn ($user) => $user->first_name.' '.$user->last_name
+                    fn ($user): string => $user->first_name.' '.$user->last_name
                 )->join(', ')
             )
             ->toggleable(isToggledHiddenByDefault: true);
@@ -122,7 +122,7 @@ final class ActionTables
             ->limitList(2)
             ->expandableLimitedList()
             ->formatStateUsing(
-                fn ($state, Action $record) => $record->users->map(fn ($user) => $user->first_name.' '.$user->last_name
+                fn ($state, Action $record) => $record->users->map(fn ($user): string => $user->first_name.' '.$user->last_name
                 )->join(', ')
             )
             ->toggleable(isToggledHiddenByDefault: true);
@@ -169,14 +169,14 @@ final class ActionTables
 
         $columns[] = TextColumn::make('validated')
             ->label('Validé')
-            ->formatStateUsing(fn ($state) => $state ? 'Oui' : 'Non')
+            ->formatStateUsing(fn ($state): string => $state ? 'Oui' : 'Non')
             ->toggleable(isToggledHiddenByDefault: true);
 
         return $table
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->persistFiltersInSession()
-            ->recordUrl(fn (Action $record) => ActionPstResource::getUrl('view', [$record]))
+            ->recordUrl(fn (Action $record): string => ActionPstResource::getUrl('view', [$record]))
             ->columns($columns)
             ->filters(self::getFilters())
             ->filtersFormColumns(3)
@@ -192,7 +192,7 @@ final class ActionTables
                     'operationalObjective',
                     'name',
                     modifyQueryUsing: fn (Builder $query) => $query
-                        ->where(function (Builder $query) {
+                        ->where(function (Builder $query): void {
                             $query->forSelectedDepartment()
                                 ->orWhereNull('department');
                         })
@@ -203,15 +203,15 @@ final class ActionTables
                 ->label('État d\'avancement')
                 ->options(
                     collect(ActionStateEnum::cases())
-                        ->mapWithKeys(fn (ActionStateEnum $action) => [$action->value => $action->getLabel()])
-                        ->toArray()
+                        ->mapWithKeys(fn (ActionStateEnum $action): array => [$action->value => $action->getLabel()])
+                        ->all()
                 ),
             SelectFilter::make('type')
                 ->label('Type')
                 ->options(
                     collect(ActionTypeEnum::cases())
-                        ->mapWithKeys(fn (ActionTypeEnum $action) => [$action->value => $action->getLabel()])
-                        ->toArray()
+                        ->mapWithKeys(fn (ActionTypeEnum $action): array => [$action->value => $action->getLabel()])
+                        ->all()
                 ),
             SelectFilter::make('scope')
                 ->label('Volet')
@@ -223,23 +223,21 @@ final class ActionTables
                 ->label('Agents')
                 ->relationship('users', 'last_name')
                 //  ->modifyQueryUsing(fn(Builder $query) => $query->orderBy('last_name', 'asc'))
-                ->getOptionLabelFromRecordUsing(fn ($record) => $record->first_name.' '.$record->last_name)
+                ->getOptionLabelFromRecordUsing(fn ($record): string => $record->first_name.' '.$record->last_name)
                 ->searchable(['first_name', 'last_name']),
             SelectFilter::make('services')
                 ->label('Services')
                 ->options(fn () => Service::query()->orderBy('name')->pluck('name', 'id'))
                 ->multiple()
                 ->searchable()
-                ->query(function (Builder $query, array $data): Builder {
-                    return $query->when(
-                        $data['values'],
-                        fn (Builder $query, array $services): Builder => $query->where(
-                            fn (Builder $query) => $query
-                                ->whereHas('leaderServices', fn (Builder $q) => $q->whereIn('services.id', $services))
-                                ->orWhereHas('partnerServices', fn (Builder $q) => $q->whereIn('services.id', $services))
-                        )
-                    );
-                }),
+                ->query(fn(Builder $query, array $data): Builder => $query->when(
+                    $data['values'],
+                    fn (Builder $query, array $services): Builder => $query->where(
+                        fn (Builder $query) => $query
+                            ->whereHas('leaderServices', fn (Builder $q) => $q->whereIn('services.id', $services))
+                            ->orWhereHas('partnerServices', fn (Builder $q) => $q->whereIn('services.id', $services))
+                    )
+                )),
             TrashedFilter::make()
                 ->label('Supprimées')
                 ->visible(fn (): bool => auth()->user()?->hasOneOfThisRoles([RoleEnum::ADMIN->value]) ?? false),
@@ -263,7 +261,7 @@ final class ActionTables
                 ->label('Numéro'),
             TextColumn::make('oo')
                 ->label('Oo')
-                ->state(fn () => 'Oo')
+                ->state(fn (): string => 'Oo')
                 ->tooltip(function (TextColumn $column): ?string {
                     $record = $column->getRecord();
 
@@ -275,7 +273,7 @@ final class ActionTables
                 ->sortable()
                 ->label('Intitulé')
                 ->limit(95)
-                ->url(fn (Action $record) => ActionPstResource::getUrl('view', ['record' => $record->id]))
+                ->url(fn (Action $record): string => ActionPstResource::getUrl('view', ['record' => $record->id]))
                 ->tooltip(function (TextColumn $column): ?string {
                     $state = $column->getState();
 
@@ -287,14 +285,14 @@ final class ActionTables
                 }),
             TextColumn::make('state')
                 ->label('État d\'avancement')
-                ->formatStateUsing(fn (ActionStateEnum $state) => $state->getLabel() ?? 'Unknown')
+                ->formatStateUsing(fn (ActionStateEnum $state): string => $state->getLabel() ?? 'Unknown')
                 ->toggleable(),
             TextColumn::make('isInternal')
                 ->label('Interne')
-                ->state(fn (Action $record) => $record->isInternal() ? 'Oui' : 'Non')
+                ->state(fn (Action $record): string => $record->isInternal() ? 'Oui' : 'Non')
                 ->toggleable(),
             TextColumn::make('type')
-                ->formatStateUsing(fn (ActionTypeEnum $state) => $state->getLabel() ?? 'Unknown')
+                ->formatStateUsing(fn (ActionTypeEnum $state): string => $state->getLabel() ?? 'Unknown')
                 ->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('synergy')
                 ->label(ActionSynergyEnum::getTitle())
@@ -320,7 +318,7 @@ final class ActionTables
                 ->expandableLimitedList()
                 ->formatStateUsing(
                     fn ($state, Action $record) => $record->users->map(
-                        fn ($user) => $user->first_name.' '.$user->last_name
+                        fn ($user): string => $user->first_name.' '.$user->last_name
                     )->join(', ')
                 )
                 ->toggleable(isToggledHiddenByDefault: true),

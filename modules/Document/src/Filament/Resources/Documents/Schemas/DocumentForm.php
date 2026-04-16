@@ -40,7 +40,7 @@ final class DocumentForm
                             ->previewable(false)
                             ->downloadable()
                             ->maxSize(10240)
-                            ->afterStateUpdated(function ($state, Set $set) {
+                            ->afterStateUpdated(function ($state, Set $set): void {
                                 if ($state instanceof TemporaryUploadedFile) {
                                     $set('file_name', $state->getFilename());
                                     $set('file_mime', $state->getMimeType());

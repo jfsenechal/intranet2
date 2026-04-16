@@ -17,9 +17,10 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class ViewDeclaration extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = DeclarationResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Déclaration num '.$this->record->id.' ('.$this->record->type_movement.')';
     }

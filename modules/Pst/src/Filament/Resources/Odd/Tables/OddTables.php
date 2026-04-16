@@ -20,7 +20,7 @@ final class OddTables
         return $table
             ->defaultSort('id')
             ->paginated(false)
-            ->recordUrl(fn (Odd $record) => OddResource::getUrl('view', [$record]))
+            ->recordUrl(fn (Odd $record): string => OddResource::getUrl('view', [$record]))
             ->columns([
                 Stack::make([
                     Tables\Columns\ImageColumn::make('odd_image')

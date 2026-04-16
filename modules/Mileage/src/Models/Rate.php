@@ -10,18 +10,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 #[UseFactory(RateFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mileage')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'amount',
+    'omnium',
+    'start_date',
+    'end_date',
+])]
 final class Rate extends Model
 {
     use HasFactory;
-
-    protected $connection = 'maria-mileage';
-
-    protected $fillable = [
-        'amount',
-        'omnium',
-        'start_date',
-        'end_date',
-    ];
 
     protected function casts(): array
     {

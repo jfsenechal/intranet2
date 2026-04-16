@@ -11,6 +11,7 @@ use Filament\Support\Icons\Heroicon;
 
 final class EditAddressBook extends EditRecord
 {
+    #[\Override]
     protected static string $resource = AddressBookResource::class;
 
     protected function getHeaderActions(): array

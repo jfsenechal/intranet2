@@ -17,6 +17,7 @@ final class MeiliServerCommand extends Command
      *
      * @var string
      */
+    #[\Override]
     protected $signature = 'app:meili-server {indexName} {--reset : Reset and create index} {--dump : Run without making changes} {--tasks : Run without making changes} {--api : Run without making changes}';
 
     /**
@@ -24,6 +25,7 @@ final class MeiliServerCommand extends Command
      *
      * @var string
      */
+    #[\Override]
     protected $description = 'Create and reset index';
 
     /**
@@ -78,11 +80,9 @@ final class MeiliServerCommand extends Command
             $t = [$result['uid'], $result['status'], $result['type'], $result['startedAt']];
             $t['error'] = null;
             $t['url'] = null;
-            if ($result['status'] === 'failed') {
-                if (isset($result['error'])) {
-                    $t['error'] = $result['error']['message'];
-                    $t['link'] = $result['error']['link'];
-                }
+            if ($result['status'] === 'failed' && isset($result['error'])) {
+                $t['error'] = $result['error']['message'];
+                $t['link'] = $result['error']['link'];
             }
             $data[] = $t;
         }

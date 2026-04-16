@@ -43,7 +43,7 @@ trait UserPstTrait
     }
 
     #[Scope]
-    public function forSelectedDepartment(Builder $query): void
+    protected function forSelectedDepartment(Builder $query): void
     {
         $department = UserRepository::departmentSelected();
         $query->whereJsonContains('departments', $department);

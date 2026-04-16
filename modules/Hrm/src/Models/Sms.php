@@ -7,23 +7,21 @@ namespace AcMarche\Hrm\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'employee_id',
+    'phone_number',
+    'message',
+    'reminder_date',
+    'other_reminder_date',
+    'sent_at',
+    'result',
+    'updated_by',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'sms')]
 final class Sms extends Model
 {
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'sms';
-
-    protected $fillable = [
-        'employee_id',
-        'phone_number',
-        'message',
-        'reminder_date',
-        'other_reminder_date',
-        'sent_at',
-        'result',
-        'updated_by',
-    ];
-
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
     /**
      * @return BelongsTo<Employee>
      */

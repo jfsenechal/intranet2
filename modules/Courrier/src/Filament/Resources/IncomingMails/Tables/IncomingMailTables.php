@@ -26,7 +26,7 @@ final class IncomingMailTables
                 Tables\Columns\TextColumn::make('reference_number')
                     ->searchable()
                     ->label('Référence')
-                    ->url(fn (IncomingMail $record) => IncomingMailResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (IncomingMail $record): string => IncomingMailResource::getUrl('view', ['record' => $record->id])),
                 Tables\Columns\TextColumn::make('mail_date')
                     ->date('d/m/Y')
                     ->sortable()

@@ -12,8 +12,10 @@ use Filament\Tables\Table;
 
 final class DocumentsRelationManager extends RelationManager
 {
+    #[\Override]
     protected static string $relationship = 'documents';
 
+    #[\Override]
     protected static ?string $title = 'Documents';
 
     public function isReadOnly(): bool
@@ -29,7 +31,7 @@ final class DocumentsRelationManager extends RelationManager
                 TextColumn::make('name')
                     ->label('Intitulé')
                     ->searchable()
-                    ->url(fn (Document $record) => DocumentResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (Document $record): string => DocumentResource::getUrl('view', ['record' => $record->id])),
             ])
             ->filters([])
             ->recordActions([])

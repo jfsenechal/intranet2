@@ -29,7 +29,7 @@ final class DatabaseSeeder extends Seeder
         $adminAddressBooks = AddressBook::factory(3)->create(['username' => $admin->username]);
         foreach ($adminAddressBooks as $addressBook) {
             $addressBook->contacts()->attach(
-                $adminContacts->random(rand(5, 10))->pluck('id')
+                $adminContacts->random(random_int(5, 10))->pluck('id')
             );
         }
 
@@ -46,7 +46,7 @@ final class DatabaseSeeder extends Seeder
 
             foreach ($addressBooks as $addressBook) {
                 $addressBook->contacts()->attach(
-                    $contacts->random(rand(3, 7))->pluck('id')
+                    $contacts->random(random_int(3, 7))->pluck('id')
                 );
             }
 

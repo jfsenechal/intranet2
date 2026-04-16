@@ -15,7 +15,7 @@ final class Handler extends ExceptionHandler
 {
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
+        $this->reportable(function (Throwable $e): void {
             $this->sendErrorMail($e);
         });
     }
@@ -26,7 +26,7 @@ final class Handler extends ExceptionHandler
             return;
         }
 
-        $email = config('MAIL_IT_ADDRESS', null);
+        $email = config('MAIL_IT_ADDRESS');
 
         if ($email) {
             $body = "An error occurred: \n".$exception->getMessage()."\n".$exception->getTraceAsString();

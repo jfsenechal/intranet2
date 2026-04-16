@@ -9,6 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateBudgetArticle extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = BudgetArticleResource::class;
 
     public function canCreateAnother(): bool

@@ -11,9 +11,10 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class ListDeclarations extends ListRecords
 {
+    #[\Override]
     protected static string $resource = DeclarationResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Mes déclarations';
     }

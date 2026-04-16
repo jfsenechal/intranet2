@@ -10,8 +10,10 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 final class ActionsByServicesTableWidget extends BaseWidget
 {
+    #[\Override]
     protected int|string|array $columnSpan = 'full';
 
+    #[\Override]
     protected static ?int $sort = 2;
 
     public function table(Table $table): Table
@@ -23,6 +25,6 @@ final class ActionsByServicesTableWidget extends BaseWidget
                 auth()->user()->actionsFromServices()
             );
 
-        return ActionTables::actionsForWidget($table, limit: 60);
+        return ActionTables::actionsForWidget($table);
     }
 }

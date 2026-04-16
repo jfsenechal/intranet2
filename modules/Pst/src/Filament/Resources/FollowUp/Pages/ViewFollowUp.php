@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ViewRecord;
 
 final class ViewFollowUp extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = FollowUpResource::class;
 
     public function getTitle(): string

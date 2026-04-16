@@ -22,7 +22,7 @@ use Filament\Facades\Filament;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('mileage-panel'));
     $this->user = User::factory()->create(['username' => 'jdupont', 'is_administrator' => true]);
     $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
@@ -31,26 +31,26 @@ beforeEach(function () {
     $this->actingAs($this->user);
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     livewire(ListDeclarations::class)
         ->assertOk();
 });
 
-it('cannot render the create page', function () {
+it('cannot render the create page', function (): void {
     BudgetArticle::factory()->create();
 
     livewire(CreateDeclaration::class)
         ->assertForbidden();
 });
 
-it('can render the view page', function () {
+it('can render the view page', function (): void {
     $declaration = Declaration::factory()->create(['user_add' => 'jdupont']);
 
     livewire(ViewDeclaration::class, ['record' => $declaration->id])
         ->assertOk();
 });
 
-it('can render the edit page', function () {
+it('can render the edit page', function (): void {
     $declaration = Declaration::factory()->create(['user_add' => 'jdupont']);
 
     livewire(EditDeclaration::class, ['record' => $declaration->id])
@@ -62,7 +62,7 @@ it('can render the edit page', function () {
         ]);
 });
 
-it('can list declarations', function () {
+it('can list declarations', function (): void {
     $declarations = Declaration::factory(3)->create(['user_add' => 'jdupont']);
 
     livewire(ListDeclarations::class)
@@ -70,12 +70,12 @@ it('can list declarations', function () {
         ->assertCanSeeTableRecords($declarations);
 });
 
-it('has table columns', function (string $column) {
+it('has table columns', function (string $column): void {
     livewire(ListDeclarations::class)
         ->assertTableColumnExists($column);
 })->with(['last_name', 'first_name', 'type_movement']);
 
-it('can search declarations', function () {
+it('can search declarations', function (): void {
     $declarations = Declaration::factory(5)->create(['user_add' => 'jdupont']);
 
     $search = $declarations->first()->last_name;
@@ -87,7 +87,7 @@ it('can search declarations', function () {
         ->assertCanNotSeeTableRecords($declarations->where('last_name', '!=', $search));
 });
 
-it('can create a declaration via bulk action on trips', function () {
+it('can create a declaration via bulk action on trips', function (): void {
     $budgetArticle = BudgetArticle::factory()->create();
     $rate = Rate::factory()->create([
         'start_date' => now()->subMonth(),
@@ -111,7 +111,7 @@ it('can create a declaration via bulk action on trips', function () {
     expect(Trip::whereNotNull('declaration_id')->count())->toBe(3);
 });
 
-it('can update a declaration', function () {
+it('can update a declaration', function (): void {
     $declaration = Declaration::factory()->create(['user_add' => 'jdupont']);
     $budgetArticle = BudgetArticle::factory()->create();
     $newIban = fake()->iban('BE');
@@ -134,7 +134,7 @@ it('can update a declaration', function () {
     ]);
 });
 
-it('can delete a declaration', function () {
+it('can delete a declaration', function (): void {
     $declaration = Declaration::factory()->create(['user_add' => 'jdupont']);
 
     livewire(EditDeclaration::class, ['record' => $declaration->id])
@@ -145,7 +145,7 @@ it('can delete a declaration', function () {
     $this->assertSoftDeleted($declaration);
 });
 
-it('validates the form data', function (array $data, array $errors) {
+it('validates the form data', function (array $data, array $errors): void {
     $declaration = Declaration::factory()->create(['user_add' => 'jdupont']);
     $newData = Declaration::factory()->make(['user_add' => 'jdupont']);
     BudgetArticle::factory()->create();

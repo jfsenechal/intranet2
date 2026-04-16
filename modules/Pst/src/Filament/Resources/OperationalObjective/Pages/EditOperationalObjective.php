@@ -10,6 +10,7 @@ use Filament\Resources\Pages\EditRecord;
 
 final class EditOperationalObjective extends EditRecord
 {
+    #[\Override]
     protected static string $resource = OperationalObjectiveResource::class;
 
     /**

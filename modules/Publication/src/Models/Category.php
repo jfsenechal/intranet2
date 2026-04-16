@@ -9,21 +9,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-publication')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'url',
+    'wpCategoryId',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'publication_categories')]
 final class Category extends Model
 {
     use HasFactory;
 
+    #[\Override]
     public $timestamps = false;
-
-    protected $table = 'publication_categories';
-
-    protected $connection = 'maria-publication';
-
-    protected $fillable = [
-        'name',
-        'url',
-        'wpCategoryId',
-    ];
 
     public function publications(): HasMany
     {

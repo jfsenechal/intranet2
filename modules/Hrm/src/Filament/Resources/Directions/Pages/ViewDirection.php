@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ViewRecord;
 
 final class ViewDirection extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = DirectionResource::class;
 
     protected function getHeaderActions(): array

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 final class ViewDocument extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = DocumentResource::class;
 
     public function getTitle(): string

@@ -11,23 +11,21 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'slug',
+    'director',
+    'abbreviation',
+    'employer_id',
+    'user_add',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'directions')]
 final class Direction extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
     use HasUserAdd;
     use HasSlug;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'directions';
-
-    protected $fillable = [
-        'name',
-        'slug',
-        'director',
-        'abbreviation',
-        'employer_id',
-        'user_add',
-    ];
 
 
     public function getSlugOptions(): SlugOptions

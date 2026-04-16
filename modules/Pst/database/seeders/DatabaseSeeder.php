@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 
 final class DatabaseSeeder extends Seeder
 {
-    protected static ?string $password;
+    private static ?string $password;
 
     /**
      * Seed the application's database.
@@ -56,7 +56,7 @@ final class DatabaseSeeder extends Seeder
         }
     }
 
-    public function services()
+    public function services(): array
     {
         return [
             'ADT',

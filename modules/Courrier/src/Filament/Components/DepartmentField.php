@@ -24,7 +24,7 @@ final class DepartmentField
                     ->label('Département')
                     ->options(
                         collect($departments)
-                            ->mapWithKeys(fn (DepartmentCourrierEnum $d) => [$d->value => $d->value])
+                            ->mapWithKeys(fn (DepartmentCourrierEnum $d): array => [$d->value => $d->value])
                             ->all()
                     )
                     ->required(),

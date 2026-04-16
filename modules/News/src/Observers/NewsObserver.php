@@ -35,7 +35,7 @@ final class NewsObserver
     /**
      * Handle the News "updated" event.
      */
-    public function updated(News $news): void
+    public function updated(): void
     {
         // ...
     }
@@ -43,7 +43,7 @@ final class NewsObserver
     /**
      * Handle the News "deleted" event.
      */
-    public function deleted(News $news): void
+    public function deleted(): void
     {
         // ...
     }
@@ -51,7 +51,7 @@ final class NewsObserver
     /**
      * Handle the News "restored" event.
      */
-    public function restored(News $news): void
+    public function restored(): void
     {
         // ...
     }
@@ -59,7 +59,7 @@ final class NewsObserver
     /**
      * Handle the News "forceDeleted" event.
      */
-    public function forceDeleted(News $news): void
+    public function forceDeleted(): void
     {
         // ...
     }

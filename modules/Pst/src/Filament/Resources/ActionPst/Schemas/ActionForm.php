@@ -46,7 +46,7 @@ final class ActionForm
                             fn (
                                 Action|Model|null $record = null,
                                 ?string $operation = null
-                            ) => $operation === 'create' || ($record !== null && Gate::check(
+                            ): bool => $operation === 'create' || ($record !== null && Gate::check(
                                 'teams-edit',
                                 [
                                     $record,
@@ -72,11 +72,11 @@ final class ActionForm
                 ])
                     ->skippable()
                     ->nextAction(
-                        fn (Action $action) => $action
+                        fn (Action $action): \Filament\Actions\Action => $action
                             ->label('Suivant')
                             ->color('success'),
                     )->previousAction(
-                        fn (Action $action) => $action
+                        fn (Action $action): \Filament\Actions\Action => $action
                             ->label('Précédent')
                             ->color('secondary'),
                     )
@@ -94,7 +94,7 @@ final class ActionForm
                         ->orderBy('last_name')
                         ->orderBy('first_name')
                         ->get()
-                        ->mapWithKeys(fn ($user) => [$user->username => "{$user->last_name} {$user->first_name}"]))
+                        ->mapWithKeys(fn ($user): array => [$user->username => "{$user->last_name} {$user->first_name}"]))
                     ->multiple()
                     ->searchable()
                     ->required(),
@@ -118,7 +118,7 @@ final class ActionForm
                             ->label('Intitulé')
                             ->required()
                             ->readOnly(
-                                fn (?string $operation = null) => $operation === 'edit' && ! auth()->user()->hasRole(
+                                fn (?string $operation = null): bool => $operation === 'edit' && ! auth()->user()->hasRole(
                                     RoleEnum::ADMIN->value
                                 )
                             )
@@ -139,7 +139,7 @@ final class ActionForm
                             name: 'operationalObjective',
                             titleAttribute: 'name',
                             modifyQueryUsing: fn (Builder $query) => $query
-                                ->where(function (Builder $query) {
+                                ->where(function (Builder $query): void {
                                     $query->forSelectedDepartment()
                                         ->orWhereNull('department');
                                 })
@@ -147,13 +147,13 @@ final class ActionForm
                         )
                         ->searchable(['name'])
                         ->disabled(
-                            fn (?string $operation = null) => $operation === 'edit' && ! auth()->user()->hasRole(
+                            fn (?string $operation = null): bool => $operation === 'edit' && ! auth()->user()->hasRole(
                                 RoleEnum::ADMIN->value
                             )
                         )
                         ->preload()
                         ->required()
-                        ->visible(fn () => $owner === null)
+                        ->visible(fn (): bool => !$owner instanceof \Illuminate\Database\Eloquent\Model)
                         ->columnSpanFull(),
                 ]),
             Section::make('Progression')
@@ -175,7 +175,7 @@ final class ActionForm
                         ->default(ActionTypeEnum::PST->value)
                         ->options(ActionTypeEnum::class)
                         ->disabled(
-                            fn (?string $operation = null) => $operation === 'edit' && ! auth()->user()->hasRole(
+                            fn (?string $operation = null): bool => $operation === 'edit' && ! auth()->user()->hasRole(
                                 RoleEnum::ADMIN->value
                             )
                         )
@@ -226,7 +226,7 @@ final class ActionForm
                                 ->orderBy('first_name'),
                         )
                         ->getOptionLabelFromRecordUsing(
-                            fn (Model $record) => "{$record->first_name} {$record->last_name}"
+                            fn (Model $record): string => "{$record->first_name} {$record->last_name}"
                         )
                         ->searchable(['first_name', 'last_name'])
                         ->multiple()
@@ -240,7 +240,7 @@ final class ActionForm
                                 ->orderBy('first_name'),
                         )
                         ->getOptionLabelFromRecordUsing(
-                            fn (Model $record) => "{$record->first_name} {$record->last_name}"
+                            fn (Model $record): string => "{$record->first_name} {$record->last_name}"
                         )
                         ->searchable(['first_name', 'last_name'])
                         ->multiple(),
@@ -286,7 +286,7 @@ final class ActionForm
                 )
                 ->searchable(['actions.id', 'actions.name'])
                 ->getOptionLabelFromRecordUsing(
-                    fn (Model $record) => "{$record->id}. {$record->name}"
+                    fn (Model $record): string => "{$record->id}. {$record->name}"
                 )
                 ->multiple(),
         ];
@@ -320,7 +320,7 @@ final class ActionForm
                 ->label('Odds')
                 ->relationship(name: 'odds')
                 ->getOptionLabelFromRecordUsing(
-                    fn (Model $record) => "{$record->id}. {$record->name}"
+                    fn (Model $record): string => "{$record->id}. {$record->name}"
                 )
                 ->multiple()
                 ->preload(),

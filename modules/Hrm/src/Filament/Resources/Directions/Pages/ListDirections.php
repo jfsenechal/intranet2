@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 final class ListDirections extends ListRecords
 {
+    #[\Override]
     protected static string $resource = DirectionResource::class;
 
     protected function getHeaderActions(): array

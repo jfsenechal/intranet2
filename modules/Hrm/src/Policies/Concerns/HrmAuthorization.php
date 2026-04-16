@@ -74,11 +74,17 @@ trait HrmAuthorization
 
     protected function hasReadAccess(User $user): bool
     {
-        return $this->canReadCpas($user) || $this->canReadVille($user);
+        if ($this->canReadCpas($user)) {
+            return true;
+        }
+        return (bool) $this->canReadVille($user);
     }
 
     protected function hasWriteAccess(User $user): bool
     {
-        return $this->canManageCpas($user) || $this->canManageVille($user);
+        if ($this->canManageCpas($user)) {
+            return true;
+        }
+        return (bool) $this->canManageVille($user);
     }
 }

@@ -21,10 +21,8 @@ trait TracksHistoryTrait
 
         // Get the dirty fields and run them through the custom function, then insert them into the history table
         $this->getUpdated($model)
-            ->map(function ($value, $field) use ($func) {
-                return call_user_func_array($func, [$value, $field]);
-            })
-            ->each(function ($fields) use ($id) {
+            ->map(fn($value, $field) => call_user_func_array($func, [$value, $field]))
+            ->each(function ($fields) use ($id): void {
                 History::create(
                     [
                         'action_id' => $id,
@@ -90,13 +88,9 @@ trait TracksHistoryTrait
 
     protected function getUpdated($model): Collection
     {
-        return collect($model->getDirty())->filter(function ($value, $key) {
-            // We don't care if timestamps are dirty, we're not tracking those
-            return ! in_array($key, ['created_at', 'updated_at']);
-        })->mapWithKeys(function ($value, $key) {
+        return collect($model->getDirty())->reject(fn($value, $key): bool => in_array($key, ['created_at', 'updated_at']))->mapWithKeys(
             // Take the field names and convert them into human readable strings for the description of the action
             // e.g. first_name -> first name
-            return [str_replace('_', ' ', $key) => $value];
-        });
+            fn($value, $key) => [str_replace('_', ' ', $key) => $value]);
     }
 }

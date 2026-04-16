@@ -7,8 +7,12 @@ namespace AcMarche\Security\Database\Factories;
 use AcMarche\Security\Models\Module;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Security\Models\Module>
+ */
 final class ModuleFactory extends Factory
 {
+    #[\Override]
     protected $model = Module::class;
 
     /**

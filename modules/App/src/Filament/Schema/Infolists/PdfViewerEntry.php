@@ -14,17 +14,18 @@ use Throwable;
 
 final class PdfViewerEntry extends ViewEntry
 {
+    #[\Override]
     protected string $view = 'app::filament.components.pdf-viewer-entry';
 
-    protected string $minHeight = '50svh';
+    private string $minHeight = '50svh';
 
-    protected string|Closure $fileUrl = '';
+    private string|Closure $fileUrl = '';
 
-    protected string|Closure|null $disk = null;
+    private string|Closure|null $disk = null;
 
-    protected string|Closure $visibility = 'public';
+    private string|Closure $visibility = 'public';
 
-    protected bool|Closure $shouldCheckFileExistence = true;
+    private bool|Closure $shouldCheckFileExistence = true;
 
     public function minHeight(string $minHeight): self
     {
@@ -64,7 +65,7 @@ final class PdfViewerEntry extends ViewEntry
 
     public function getFileUrl(?string $state = null): ?string
     {
-        if (empty($state)) {
+        if (in_array($state, [null, '', '0'], true)) {
             return $this->evaluate($this->fileUrl);
         }
 
@@ -80,7 +81,7 @@ final class PdfViewerEntry extends ViewEntry
                 if (! $storage->exists($state)) {
                     return null;
                 }
-            } catch (UnableToCheckFileExistence $exception) {
+            } catch (UnableToCheckFileExistence) {
                 return null;
             }
         }
@@ -91,7 +92,7 @@ final class PdfViewerEntry extends ViewEntry
                     $state,
                     now()->addMinutes(60),
                 );
-            } catch (Throwable $exception) {
+            } catch (Throwable) {
                 // This driver does not support creating temporary URLs.
             }
         }
@@ -131,7 +132,7 @@ final class PdfViewerEntry extends ViewEntry
     /**
      * @return null|string|void
      */
-    public function getRoute(string $file)
+    public function getRoute(string $file): ?string
     {
         return $this->getFileUrl($file);
     }

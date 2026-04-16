@@ -11,9 +11,10 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class ListNews extends ListRecords
 {
+    #[\Override]
     protected static string $resource = NewsResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' actualités';
     }

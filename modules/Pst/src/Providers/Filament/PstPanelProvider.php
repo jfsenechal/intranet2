@@ -33,7 +33,7 @@ final class PstPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         $path = $this->getPluginBasePath().'/../../';
-        $moduleName = 'Pst '.UserRepository::departmentSelected();
+        UserRepository::departmentSelected();
 
         return $panel
             ->id('pst-panel')
@@ -69,7 +69,7 @@ final class PstPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
-                VerifyCsrfToken::class,
+                \Illuminate\Foundation\Http\Middleware\PreventRequestForgery::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
@@ -85,14 +85,14 @@ final class PstPanelProvider extends PanelProvider
             ->userMenuItems([
                 Action::make('view-ville')
                     ->label('Ville')
-                    ->url(fn () => route('select.department', ['department' => DepartmentEnum::VILLE->value]))
+                    ->url(fn (): string => route('select.department', ['department' => DepartmentEnum::VILLE->value]))
                     ->icon('tabler-switch')
-                    ->visible(fn () => count(auth()->user()->departments) > 1),
+                    ->visible(fn (): bool => count(auth()->user()->departments) > 1),
                 Action::make('view-cpas')
                     ->label('Cpas')
-                    ->url(fn () => route('select.department', ['department' => DepartmentEnum::CPAS->value]))
+                    ->url(fn (): string => route('select.department', ['department' => DepartmentEnum::CPAS->value]))
                     ->icon('tabler-switch')
-                    ->visible(fn () => count(auth()->user()->departments) > 1),
+                    ->visible(fn (): bool => count(auth()->user()->departments) > 1),
             ]);
     }
 }

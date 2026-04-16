@@ -14,6 +14,7 @@ use Illuminate\Support\HtmlString;
 
 final class ListActionsAsGoogleSheet extends ListRecords
 {
+    #[\Override]
     protected static string $resource = ActionPstResource::class;
 
     public function getLayout(): string
@@ -21,12 +22,12 @@ final class ListActionsAsGoogleSheet extends ListRecords
         return self::$layout ?? 'filament-panels::components.layout.base';
     }
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' actions';
     }
 
-    public function getSubheading(): string|Htmlable|null
+    public function getSubheading(): \Illuminate\Contracts\Support\Htmlable
     {
         return new HtmlString(
             '<div class="flex items-center gap-2">'.

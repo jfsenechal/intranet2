@@ -16,11 +16,13 @@ use Filament\Tables\Table;
 
 final class UserResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = User::class;
 
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-users';
 
-    public static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): string
     {
         return NavigationGroupEnum::SETTINGS->getLabel();
     }

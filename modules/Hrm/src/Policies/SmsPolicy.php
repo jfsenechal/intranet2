@@ -17,7 +17,7 @@ final class SmsPolicy
         return $this->hasAnyHrmRole($user);
     }
 
-    public function view(User $user, Sms $sms): bool
+    public function view(User $user): bool
     {
         return $this->hasReadAccess($user);
     }
@@ -27,22 +27,22 @@ final class SmsPolicy
         return $this->hasWriteAccess($user);
     }
 
-    public function update(User $user, Sms $sms): bool
+    public function update(User $user): bool
     {
         return $this->hasWriteAccess($user);
     }
 
-    public function delete(User $user, Sms $sms): bool
+    public function delete(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function restore(User $user, Sms $sms): bool
+    public function restore(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function forceDelete(User $user, Sms $sms): bool
+    public function forceDelete(): bool
     {
         return false;
     }

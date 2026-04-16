@@ -11,9 +11,10 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class EditTrip extends EditRecord
 {
+    #[\Override]
     protected static string $resource = TripResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return "Modification d'un déplacement";
     }

@@ -18,6 +18,7 @@ final class SyncUserCommand extends Command
      *
      * @var string
      */
+    #[\Override]
     protected $signature = 'intranet:sync-users';
 
     /**
@@ -25,6 +26,7 @@ final class SyncUserCommand extends Command
      *
      * @var string
      */
+    #[\Override]
     protected $description = 'Sync users with ldap';
 
     /**

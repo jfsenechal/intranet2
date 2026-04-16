@@ -12,7 +12,7 @@ final class RegisterPolicies
 {
     public static function register(): void
     {
-        Gate::define('courrier-index', function (User $user) {
+        Gate::define('courrier-index', function (User $user): bool {
             if ($user?->isAdministrator()) {
                 return true;
             }
@@ -23,7 +23,7 @@ final class RegisterPolicies
                 RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_INDEX->value,
             ]);
         });
-        Gate::define('courrier-administrator', function (User $user) {
+        Gate::define('courrier-administrator', function (User $user): bool {
             if ($user?->isAdministrator()) {
                 return true;
             }

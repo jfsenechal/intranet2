@@ -66,12 +66,6 @@ final class FilamentColorRepository
     public static function findConstantByValue(string $value): ?array
     {
         $reflection = new ReflectionClass(Color::class);
-        foreach ($reflection->getConstants() as $name => $colors) {
-            if ($name === ucfirst($value)) {
-                return $colors;
-            }
-        }
-
-        return null;
+        return $reflection->getConstants()[ucfirst($value)] ?? null;
     }
 }

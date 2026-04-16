@@ -11,9 +11,10 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class ListOperationalObjectives extends ListRecords
 {
+    #[\Override]
     protected static string $resource = OperationalObjectiveResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' Objectifs Opérationnels (OO)';
     }

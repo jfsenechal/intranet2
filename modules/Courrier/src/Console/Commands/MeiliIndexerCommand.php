@@ -18,6 +18,7 @@ final class MeiliIndexerCommand extends Command
      *
      * @var string
      */
+    #[\Override]
     protected $signature = 'courrier:meili-indexer {date?}';
 
     /**
@@ -25,6 +26,7 @@ final class MeiliIndexerCommand extends Command
      *
      * @var string
      */
+    #[\Override]
     protected $description = 'Update index';
 
     /**

@@ -26,7 +26,7 @@ final class ServiceTables
                     ->label('Intitule')
                     ->searchable()
                     ->sortable()
-                    ->url(fn (Service $record) => ServiceResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (Service $record): string => ServiceResource::getUrl('view', ['record' => $record->id])),
                 Tables\Columns\TextColumn::make('abbreviation')
                     ->label('Abreviation')
                     ->searchable()

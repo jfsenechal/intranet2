@@ -12,17 +12,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 // https://github.com/lukas-frey/filament-icon-picker
 #[UseFactory(TabFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'icon',
+])]
 final class Tab extends Model
 {
     use HasFactory;
 
+    #[\Override]
     public $timestamps = false;
 
-    protected $fillable = [
-        'name',
-        'icon',
-    ];
-
+    #[\Override]
     protected $casts = [
     ];
 

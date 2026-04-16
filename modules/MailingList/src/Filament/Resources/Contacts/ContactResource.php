@@ -18,18 +18,25 @@ use Filament\Tables\Table;
 
 final class ContactResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Contact::class;
 
+    #[\Override]
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
+    #[\Override]
     protected static ?int $navigationSort = 3;
 
+    #[\Override]
     protected static ?string $navigationLabel = 'Contacts';
 
+    #[\Override]
     protected static ?string $modelLabel = 'contact';
 
+    #[\Override]
     protected static ?string $pluralModelLabel = 'contacts';
 
+    #[\Override]
     protected static ?string $recordTitleAttribute = 'email';
 
     public static function getGloballySearchableAttributes(): array

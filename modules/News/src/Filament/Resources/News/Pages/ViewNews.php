@@ -14,6 +14,7 @@ use Filament\Support\Colors\Color;
 
 final class ViewNews extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = NewsResource::class;
 
     public function getTitle(): string
@@ -35,7 +36,7 @@ final class ViewNews extends ViewRecord
                 ->icon('tabler-archive')
                 ->label('Archiver')
                 ->color(Color::Slate)
-                ->action(fn (News $news) => $news->archive = true),
+                ->action(fn (News $news): true => $news->archive = true),
             Actions\DeleteAction::make()
                 ->icon('tabler-trash'),
             Actions\RestoreAction::make(),

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 final class UserRelationManager extends RelationManager
 {
+    #[\Override]
     protected static string $relationship = 'users';
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string

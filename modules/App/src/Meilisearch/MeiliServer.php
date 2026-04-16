@@ -13,7 +13,7 @@ final class MeiliServer
 
     public function __construct(private readonly string $indexName) {}
 
-    public static function createKey($id): string
+    public static function createKey(string $id): string
     {
         return self::indexName.'-'.$id;
     }
@@ -24,7 +24,7 @@ final class MeiliServer
     public function createIndex(string $indexName, string $primaryKey = 'id'): array
     {
         $this->init($indexName);
-        $this->client->deleteTasks((new DeleteTasksQuery())->setStatuses(['failed', 'canceled', 'succeeded']));
+        $this->client->deleteTasks(new DeleteTasksQuery()->setStatuses(['failed', 'canceled', 'succeeded']));
         $this->client->deleteIndex($this->indexName);
 
         return $this->client->createIndex($this->indexName, ['primaryKey' => $primaryKey]);

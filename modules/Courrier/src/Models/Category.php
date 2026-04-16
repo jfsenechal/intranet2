@@ -11,18 +11,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[UseFactory(CategoryFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-courrier')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'color',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'courrier_categories')]
 final class Category extends Model
 {
     use HasFactory;
-
-    protected $table = 'courrier_categories';
-
-    protected $connection = 'maria-courrier';
-
-    protected $fillable = [
-        'name',
-        'color',
-    ];
 
     public function incomingMails(): HasMany
     {

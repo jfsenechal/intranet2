@@ -11,6 +11,7 @@ use Filament\Resources\Pages\EditRecord;
 
 final class EditIncomingMail extends EditRecord
 {
+    #[\Override]
     protected static string $resource = IncomingMailResource::class;
 
     /** @var array<int> */

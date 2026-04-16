@@ -6,11 +6,12 @@ namespace AcMarche\Courrier\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'incoming_mail_service')]
 final class IncomingMailService extends Pivot
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    #[\Override]
     public $timestamps = false;
-
-    protected $table = 'incoming_mail_service';
 
     protected function casts(): array
     {

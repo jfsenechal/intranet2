@@ -10,6 +10,7 @@ use Filament\Resources\Pages\EditRecord;
 
 final class EditFollowUp extends EditRecord
 {
+    #[\Override]
     protected static string $resource = FollowUpResource::class;
 
     protected function getHeaderActions(): array

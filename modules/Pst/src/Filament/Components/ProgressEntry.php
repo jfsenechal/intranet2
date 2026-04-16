@@ -8,5 +8,6 @@ use Filament\Infolists\Components\Entry;
 
 final class ProgressEntry extends Entry
 {
+    #[\Override]
     protected string $view = 'components.progress-entry';
 }

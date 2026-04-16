@@ -21,12 +21,16 @@ use UnitEnum;
 
 final class UserResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = User::class;
 
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-users';
 
+    #[\Override]
     protected static string|UnitEnum|null $navigationGroup = NavigationGroupEnum::Settings;
 
+    #[\Override]
     protected static ?string $recordTitleAttribute = 'fullName';
 
     public static function getModelLabel(): string

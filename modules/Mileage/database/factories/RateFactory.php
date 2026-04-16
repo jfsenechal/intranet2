@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 final class RateFactory extends Factory
 {
+    #[\Override]
     protected $model = Rate::class;
 
     /**

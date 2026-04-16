@@ -8,19 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'description',
+    'employer_id',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'pay_scales')]
 final class PayScale extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    #[\Override]
     public $timestamps = false;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'pay_scales';
-
-    protected $fillable = [
-        'name',
-        'description',
-        'employer_id',
-    ];
 
     /**
      * @return BelongsTo<Employer>

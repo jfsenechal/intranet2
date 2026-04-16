@@ -12,21 +12,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 
 #[UseFactory(MediaFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'action_id',
+    'uuid',
+    'file_name',
+    'mime_type',
+    'disk',
+    'size',
+])]
 final class Media extends Model
 {
     use HasFactory, Notifiable;
-
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'name',
-        'action_id',
-        'uuid',
-        'file_name',
-        'mime_type',
-        'disk',
-        'size',
-    ];
 
     /**
      * @return BelongsTo<Action>

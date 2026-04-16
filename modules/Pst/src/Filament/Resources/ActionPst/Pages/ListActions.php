@@ -16,9 +16,10 @@ use Illuminate\Database\Eloquent\Builder;
 
 final class ListActions extends ListRecords
 {
+    #[\Override]
     protected static string $resource = ActionPstResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' actions';
     }
@@ -52,11 +53,9 @@ final class ListActions extends ListRecords
                             ->validated()
                             ->count()
                     )
-                    ->modifyQueryUsing(function (Builder $query) use ($actionStateEnum): Builder {
-                        return $query
-                            ->where('state', $actionStateEnum->value)
-                            ->validated();
-                    })
+                    ->modifyQueryUsing(fn(Builder $query): Builder => $query
+                        ->where('state', $actionStateEnum->value)
+                        ->validated())
                     ->label($actionStateEnum->getLabel())
                     ->badgeColor($actionStateEnum->getColor())
                     ->icon($actionStateEnum->getIcon());

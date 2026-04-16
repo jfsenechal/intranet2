@@ -23,6 +23,7 @@ final class ViewAction extends ViewRecord
 {
     use CanPaginateViewRecordTrait;
 
+    #[\Override]
     protected static string $resource = ActionPstResource::class;
 
     public function getTitle(): string
@@ -60,8 +61,8 @@ final class ViewAction extends ViewRecord
                 ActionAction::make('rapport')
                     ->label('Export en pdf')
                     ->icon('tabler-pdf')
-                    ->url(fn (ActionModel $record) => route('export.action', $record))
-                    ->action(function () {
+                    ->url(fn (ActionModel $record): string => route('export.action', $record))
+                    ->action(function (): void {
                         Notification::make()
                             ->title('Pdf exporté')
                             ->success()

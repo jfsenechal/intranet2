@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 final class ListEmployers extends ListRecords
 {
+    #[\Override]
     protected static string $resource = EmployerResource::class;
 
     protected function getHeaderActions(): array

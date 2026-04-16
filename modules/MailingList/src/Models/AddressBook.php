@@ -17,16 +17,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[UseFactory(AddressBookFactory::class)]
 #[ScopedBy(OwnerScope::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mailing-list')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'username',
+    'name',
+])]
 final class AddressBook extends Model
 {
     use HasFactory;
-
-    protected $connection = 'maria-mailing-list';
-
-    protected $fillable = [
-        'username',
-        'name',
-    ];
 
     /**
      * @return BelongsTo<User, $this>

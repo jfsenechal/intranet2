@@ -23,7 +23,7 @@ trait ActionEditPolicyTrait
         }
 
         return $action->leaderServices()
-            ->whereHas('users', function ($query) use ($user) {
+            ->whereHas('users', function ($query) use ($user): void {
                 $query->where('service_user.username', $user->username);
             })
             ->exists();

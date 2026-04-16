@@ -17,12 +17,16 @@ use Illuminate\Database\Eloquent\Model;
 
 final class OperationalObjectiveResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = OperationalObjective::class;
 
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = 'tabler-target';
 
+    #[\Override]
     protected static ?string $recordTitleAttribute = 'name';
 
+    #[\Override]
     protected static ?int $navigationSort = 2;
 
     public static function getModelLabel(): string

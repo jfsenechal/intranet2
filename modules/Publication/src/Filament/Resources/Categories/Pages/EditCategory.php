@@ -11,6 +11,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class EditCategory extends EditRecord
 {
+    #[\Override]
     protected static string $resource = CategoryResource::class;
 
     public function getTitle(): string|Htmlable

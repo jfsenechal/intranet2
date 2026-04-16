@@ -14,14 +14,15 @@ use Illuminate\Support\HtmlString;
 
 final class ListTrips extends ListRecords
 {
+    #[\Override]
     protected static string $resource = TripResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Liste de mes déplacements';
     }
 
-    public function getSubheading(): string|Htmlable|null
+    public function getSubheading(): \Illuminate\Contracts\Support\Htmlable
     {
         return new HtmlString('Pour créer une nouvelle déclaration, cochez les déplacements <strong>non déclarés</strong>');
     }
@@ -35,8 +36,8 @@ final class ListTrips extends ListRecords
                 ->label('Nouveau déplacement')
                 ->icon('tabler-plus')
                 ->disabled(! $userHasPersonalInfo)
-                ->tooltip(! $userHasPersonalInfo ? 'Vous devez d\'abord compléter vos informations personnelles' : null)
-                ->url(! $userHasPersonalInfo ? PersonalInformationResource::getUrl('index') : null),
+                ->tooltip($userHasPersonalInfo ? null : 'Vous devez d\'abord compléter vos informations personnelles')
+                ->url($userHasPersonalInfo ? null : PersonalInformationResource::getUrl('index')),
         ];
     }
 }

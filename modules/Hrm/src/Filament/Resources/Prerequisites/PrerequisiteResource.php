@@ -18,13 +18,16 @@ use UnitEnum;
 
 final class PrerequisiteResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Prerequisite::class;
 
+    #[\Override]
     protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
+    #[\Override]
     protected static ?int $navigationSort = 7;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-clipboard-document-check';
     }

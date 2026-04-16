@@ -9,5 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateFollowUp extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = FollowUpResource::class;
 }

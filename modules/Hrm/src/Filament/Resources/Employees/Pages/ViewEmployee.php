@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ViewRecord;
 
 final class ViewEmployee extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = EmployeeResource::class;
 
     protected function getHeaderActions(): array

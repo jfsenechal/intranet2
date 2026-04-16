@@ -14,13 +14,16 @@ use UnitEnum;
 
 final class ServiceResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Service::class;
 
+    #[\Override]
     protected static string|null|UnitEnum $navigationGroup = 'Organisation';
 
+    #[\Override]
     protected static ?int $navigationSort = 2;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-building-library';
     }

@@ -12,8 +12,7 @@ final class InboxForm
         int $uid,
         int $index,
         string $contentType,
-        string $filename,
-        bool $isPreviewable
+        string $filename
     ): array {
 
         $previewUrl = route('courrier.attachments.preview', ['uid' => $uid, 'index' => $index]);

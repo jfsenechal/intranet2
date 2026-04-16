@@ -7,8 +7,12 @@ namespace AcMarche\Pst\Database\Factories;
 use AcMarche\Pst\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Pst\Models\Service>
+ */
 final class ServiceFactory extends Factory
 {
+    #[\Override]
     protected $model = Service::class;
 
     /**

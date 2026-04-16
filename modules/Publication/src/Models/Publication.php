@@ -10,19 +10,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-publication')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'category_id',
+    'name',
+    'url',
+    'expire_date',
+])]
 final class Publication extends Model
 {
     use HasFactory;
     use HasUserAdd;
-
-    protected $connection = 'maria-publication';
-
-    protected $fillable = [
-        'category_id',
-        'name',
-        'url',
-        'expire_date',
-    ];
 
     public function category(): BelongsTo
     {

@@ -13,8 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 
 final class CreateAction extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = ActionPstResource::class;
 
+    #[\Override]
     protected static ?string $title = 'Ajouter une action';
 
     /**
@@ -39,7 +41,7 @@ final class CreateAction extends CreateRecord
     protected function afterCreate(): void
     {
         if ($this->record->validated === false) {
-            ActionProcessed::dispatch($this->record);
+            event(new \AcMarche\Pst\Events\ActionProcessed($this->record));
         }
     }
 }

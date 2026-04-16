@@ -13,19 +13,17 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
 #[UseFactory(PartnerFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'phone',
+    'email',
+    'initials',
+    'description',
+])]
 final class Partner extends Model
 {
     use HasFactory, Notifiable, Searchable;
-
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'name',
-        'phone',
-        'email',
-        'initials',
-        'description',
-    ];
 
     /**
      * Get the indexable data array for the model.

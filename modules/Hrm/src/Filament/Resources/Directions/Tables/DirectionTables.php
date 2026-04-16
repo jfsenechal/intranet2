@@ -25,7 +25,7 @@ final class DirectionTables
                     ->label('Intitule')
                     ->searchable()
                     ->sortable()
-                    ->url(fn (Direction $record) => DirectionResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (Direction $record): string => DirectionResource::getUrl('view', ['record' => $record->id])),
                 Tables\Columns\TextColumn::make('abbreviation')
                     ->label('Abreviation')
                     ->searchable()

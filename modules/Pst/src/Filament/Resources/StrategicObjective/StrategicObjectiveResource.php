@@ -18,12 +18,16 @@ use Illuminate\Database\Eloquent\Model;
 
 final class StrategicObjectiveResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = StrategicObjective::class;
 
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    #[\Override]
     protected static ?int $navigationSort = 1;
 
+    #[\Override]
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getModelLabel(): string

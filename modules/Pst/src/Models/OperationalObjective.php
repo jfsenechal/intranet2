@@ -17,19 +17,17 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
 #[UseFactory(OperationalObjectiveFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'position',
+    'strategic_objective_id',
+    'department',
+    'scope',
+])]
 final class OperationalObjective extends Model
 {
     use HasDepartmentScope, HasFactory, Notifiable, Searchable;
-
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'name',
-        'position',
-        'strategic_objective_id',
-        'department',
-        'scope',
-    ];
 
     /**
      * Get the indexable data array for the model.
@@ -82,7 +80,7 @@ final class OperationalObjective extends Model
 
     protected static function booted(): void
     {
-        self::saving(function (OperationalObjective $model) {
+        self::saving(function (OperationalObjective $model): void {
             if ($model->scope === ActionScopeEnum::INTERNAL) {
                 $model->department = null;
             }

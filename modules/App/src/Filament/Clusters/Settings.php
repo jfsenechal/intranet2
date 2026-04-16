@@ -9,5 +9,6 @@ use Filament\Clusters\Cluster;
 
 final class Settings extends Cluster
 {
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-squares-2x2';
 }

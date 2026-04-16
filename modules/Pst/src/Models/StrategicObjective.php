@@ -16,19 +16,18 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
 #[UseFactory(StrategicObjectiveFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'position',
+    'department',
+    'scope',
+])]
 final class StrategicObjective extends Model
 {
     use HasDepartmentScope, HasFactory, Notifiable, Searchable;
 
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'name',
-        'position',
-        'department',
-        'scope',
-    ];
-
+    #[\Override]
     protected $casts = [
         'scope' => ActionScopeEnum::class,
         'department' => DepartmentEnum::class,

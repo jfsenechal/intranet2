@@ -11,6 +11,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class EditBudgetArticle extends EditRecord
 {
+    #[\Override]
     protected static string $resource = BudgetArticleResource::class;
 
     public function getTitle(): string|Htmlable

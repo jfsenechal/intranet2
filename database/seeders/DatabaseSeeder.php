@@ -27,7 +27,7 @@ final class DatabaseSeeder extends Seeder
         $repository = new ModuleRepository();
         foreach ($repository->getModulesWithoutTab() as $module) {
             $tab = $this->createTab($module->id);
-            if ($tab) {
+            if ($tab instanceof Tab) {
                 $module->tab_id = $tab->id;
                 $module->save();
             }

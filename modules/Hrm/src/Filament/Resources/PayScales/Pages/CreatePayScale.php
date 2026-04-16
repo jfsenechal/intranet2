@@ -9,5 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreatePayScale extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = PayScaleResource::class;
 }

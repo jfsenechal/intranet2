@@ -20,7 +20,7 @@ use Livewire\Livewire;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('pst'));
     $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     $this->adminUser = User::factory()->create();
@@ -29,18 +29,18 @@ beforeEach(function () {
     $this->actingAs($this->adminUser);
 });
 
-describe('page rendering', function () {
-    it('can render the index page', function () {
+describe('page rendering', function (): void {
+    it('can render the index page', function (): void {
         Livewire::test(ListPartners::class)
             ->assertOk();
     });
 
-    it('can render the create page', function () {
+    it('can render the create page', function (): void {
         Livewire::test(CreatePartner::class)
             ->assertOk();
     });
 
-    it('can render the view page', function () {
+    it('can render the view page', function (): void {
         $record = Partner::factory()->create();
 
         Livewire::test(ViewPartner::class, [
@@ -49,7 +49,7 @@ describe('page rendering', function () {
             ->assertOk();
     });
 
-    it('can render the edit page', function () {
+    it('can render the edit page', function (): void {
         $record = Partner::factory()->create();
 
         Livewire::test(EditPartner::class, [
@@ -62,13 +62,13 @@ describe('page rendering', function () {
     });
 });
 
-describe('table columns', function () {
-    it('has column', function (string $column) {
+describe('table columns', function (): void {
+    it('has column', function (string $column): void {
         Livewire::test(ListPartners::class)
             ->assertTableColumnExists($column);
     })->with(['name', 'initials', 'email', 'phone']);
 
-    it('can render column', function (string $column) {
+    it('can render column', function (string $column): void {
         Partner::factory()->create();
 
         Livewire::test(ListPartners::class)
@@ -76,7 +76,7 @@ describe('table columns', function () {
             ->assertCanRenderTableColumn($column);
     })->with(['name', 'email', 'phone']);
 
-    it('can sort by name', function () {
+    it('can sort by name', function (): void {
         $records = Partner::factory(3)->create();
 
         Livewire::test(ListPartners::class)
@@ -85,7 +85,7 @@ describe('table columns', function () {
             ->assertCanSeeTableRecords($records->sortBy('name'), inOrder: true);
     });
 
-    it('can search by name', function () {
+    it('can search by name', function (): void {
         $records = Partner::factory(3)->create();
         $searchRecord = $records->first();
 
@@ -96,8 +96,8 @@ describe('table columns', function () {
     });
 });
 
-describe('crud operations', function () {
-    it('can create a partner', function () {
+describe('crud operations', function (): void {
+    it('can create a partner', function (): void {
         $newData = Partner::factory()->make();
 
         Livewire::test(CreatePartner::class)
@@ -116,7 +116,7 @@ describe('crud operations', function () {
         ]);
     });
 
-    it('can update a partner', function () {
+    it('can update a partner', function (): void {
         $record = Partner::factory()->create();
         $newData = Partner::factory()->make();
 
@@ -135,7 +135,7 @@ describe('crud operations', function () {
         ]);
     });
 
-    it('can delete a partner', function () {
+    it('can delete a partner', function (): void {
         $record = Partner::factory()->create();
 
         Livewire::test(ViewPartner::class, [
@@ -148,7 +148,7 @@ describe('crud operations', function () {
         assertDatabaseMissing($record);
     });
 
-    it('can bulk delete partners', function () {
+    it('can bulk delete partners', function (): void {
         $records = Partner::factory(3)->create();
 
         Livewire::test(ListPartners::class)
@@ -163,8 +163,8 @@ describe('crud operations', function () {
     });
 });
 
-describe('form validation', function () {
-    it('validates the form data on create', function (array $data, array $errors) {
+describe('form validation', function (): void {
+    it('validates the form data on create', function (array $data, array $errors): void {
         $newData = Partner::factory()->make();
 
         Livewire::test(CreatePartner::class)
@@ -182,7 +182,7 @@ describe('form validation', function () {
         '`initials` is max 30 characters' => [['initials' => Str::random(31)], ['initials' => 'max']],
     ]);
 
-    it('validates the form data on edit', function (array $data, array $errors) {
+    it('validates the form data on edit', function (array $data, array $errors): void {
         $record = Partner::factory()->create();
 
         Livewire::test(EditPartner::class, [
@@ -202,28 +202,28 @@ describe('form validation', function () {
     ]);
 });
 
-describe('form fields', function () {
-    it('has name field', function () {
+describe('form fields', function (): void {
+    it('has name field', function (): void {
         Livewire::test(CreatePartner::class)
             ->assertFormFieldExists('name');
     });
 
-    it('has initials field', function () {
+    it('has initials field', function (): void {
         Livewire::test(CreatePartner::class)
             ->assertFormFieldExists('initials');
     });
 
-    it('has email field', function () {
+    it('has email field', function (): void {
         Livewire::test(CreatePartner::class)
             ->assertFormFieldExists('email');
     });
 
-    it('has phone field', function () {
+    it('has phone field', function (): void {
         Livewire::test(CreatePartner::class)
             ->assertFormFieldExists('phone');
     });
 
-    it('has description field', function () {
+    it('has description field', function (): void {
         Livewire::test(CreatePartner::class)
             ->assertFormFieldExists('description');
     });

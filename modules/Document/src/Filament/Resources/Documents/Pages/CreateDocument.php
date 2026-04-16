@@ -9,6 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateDocument extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = DocumentResource::class;
 
     public function canCreateAnother(): bool

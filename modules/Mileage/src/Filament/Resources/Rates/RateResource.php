@@ -14,13 +14,16 @@ use UnitEnum;
 
 final class RateResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Rate::class;
 
+    #[\Override]
     protected static string|null|UnitEnum $navigationGroup = 'Paramètres';
 
+    #[\Override]
     protected static ?int $navigationSort = 5;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-currency-euro';
     }

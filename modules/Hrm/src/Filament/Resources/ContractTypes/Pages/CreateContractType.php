@@ -9,5 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateContractType extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = ContractTypeResource::class;
 }

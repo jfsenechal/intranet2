@@ -12,13 +12,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 
 #[UseFactory(FollowUpFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable(['content', 'user_add'])]
 final class FollowUp extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['content', 'user_add'];
-
-    protected $connection = 'maria-pst';
 
     /**
      * Get the action that owns the followup
@@ -30,7 +28,7 @@ final class FollowUp extends Model
 
     protected static function booted(): void
     {
-        self::creating(function (self $model) {
+        self::creating(function (self $model): void {
             if (Auth::check()) {
                 $model->user_add = Auth::user()->username;
             }

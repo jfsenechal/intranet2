@@ -10,6 +10,7 @@ use Filament\Resources\Pages\EditRecord;
 
 final class EditOdd extends EditRecord
 {
+    #[\Override]
     protected static string $resource = OddResource::class;
 
     protected function getHeaderActions(): array

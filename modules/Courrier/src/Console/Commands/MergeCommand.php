@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 final class MergeCommand extends Command
 {
+    #[\Override]
     protected $signature = 'courrier:merge
         {--dry-run : Run without making changes}
         {--target=indicateur_ville : Target database name}';
 
+    #[\Override]
     protected $description = 'Merge indicateur_cpas and indicateur_bgm databases into the target database with department field';
 
     private bool $dryRun = false;
@@ -305,8 +307,10 @@ final class MergeCommand extends Command
         foreach ($pivots as $pivot) {
             $newMailId = $this->idMappings[$department]['incoming_mails'][$pivot->incoming_mail_id] ?? null;
             $newServiceId = $this->idMappings[$department]['services'][$pivot->service_id] ?? null;
-
-            if ($newMailId === null || $newServiceId === null) {
+            if ($newMailId === null) {
+                continue;
+            }
+            if ($newServiceId === null) {
                 continue;
             }
 
@@ -330,8 +334,10 @@ final class MergeCommand extends Command
         foreach ($pivots as $pivot) {
             $newMailId = $this->idMappings[$department]['incoming_mails'][$pivot->incoming_mail_id] ?? null;
             $newRecipientId = $this->idMappings[$department]['recipients'][$pivot->recipient_id] ?? null;
-
-            if ($newMailId === null || $newRecipientId === null) {
+            if ($newMailId === null) {
+                continue;
+            }
+            if ($newRecipientId === null) {
                 continue;
             }
 
@@ -355,8 +361,10 @@ final class MergeCommand extends Command
         foreach ($pivots as $pivot) {
             $newRecipientId = $this->idMappings[$department]['recipients'][$pivot->recipient_id] ?? null;
             $newServiceId = $this->idMappings[$department]['services'][$pivot->service_id] ?? null;
-
-            if ($newRecipientId === null || $newServiceId === null) {
+            if ($newRecipientId === null) {
+                continue;
+            }
+            if ($newServiceId === null) {
                 continue;
             }
 

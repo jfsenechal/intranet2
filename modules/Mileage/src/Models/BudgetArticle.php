@@ -12,21 +12,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[UseFactory(BudgetArticleFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mileage')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'functional_code',
+    'economic_code',
+    'department',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'budget_articles')]
 final class BudgetArticle extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
-    protected $connection = 'maria-mileage';
-
-    protected $table = 'budget_articles';
-
-    protected $fillable = [
-        'name',
-        'functional_code',
-        'economic_code',
-        'department',
-    ];
 
     /**
      * @return HasMany<Declaration>

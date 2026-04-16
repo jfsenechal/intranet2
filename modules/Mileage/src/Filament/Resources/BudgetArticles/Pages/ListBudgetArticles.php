@@ -11,9 +11,10 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class ListBudgetArticles extends ListRecords
 {
+    #[\Override]
     protected static string $resource = BudgetArticleResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Liste des articles budgétaires';
     }

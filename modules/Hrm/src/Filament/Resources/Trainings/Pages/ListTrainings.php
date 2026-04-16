@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 final class ListTrainings extends ListRecords
 {
+    #[\Override]
     protected static string $resource = TrainingResource::class;
 
     protected function getHeaderActions(): array

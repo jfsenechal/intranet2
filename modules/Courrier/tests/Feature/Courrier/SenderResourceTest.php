@@ -13,14 +13,14 @@ use Filament\Facades\Filament;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('courrier-panel'));
     $this->admin = User::factory()->create(['is_administrator' => true]);
     $this->actingAs($this->admin);
 });
 
-describe('Sender Resource', function () {
-    test('can list senders', function () {
+describe('Sender Resource', function (): void {
+    test('can list senders', function (): void {
         $senders = Sender::factory()->count(3)->create();
 
         livewire(ListSenders::class)
@@ -28,7 +28,7 @@ describe('Sender Resource', function () {
             ->assertCanSeeTableRecords($senders);
     });
 
-    test('can create a sender', function () {
+    test('can create a sender', function (): void {
         livewire(CreateSender::class)
             ->fillForm([
                 'name' => 'Test Expéditeur',
@@ -41,14 +41,14 @@ describe('Sender Resource', function () {
         ]);
     });
 
-    test('can view a sender', function () {
+    test('can view a sender', function (): void {
         $sender = Sender::factory()->create();
 
         livewire(ViewSender::class, ['record' => $sender->getRouteKey()])
             ->assertSuccessful();
     });
 
-    test('can edit a sender', function () {
+    test('can edit a sender', function (): void {
         $sender = Sender::factory()->create();
 
         livewire(EditSender::class, ['record' => $sender->getRouteKey()])
@@ -64,7 +64,7 @@ describe('Sender Resource', function () {
         ]);
     });
 
-    test('name is required', function () {
+    test('name is required', function (): void {
         livewire(CreateSender::class)
             ->fillForm([
                 'name' => null,

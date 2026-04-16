@@ -17,23 +17,23 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('mailing-list'));
     $this->user = User::factory()->create();
     $this->actingAs($this->user);
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     livewire(ListContacts::class)
         ->assertOk();
 });
 
-it('can render the create page', function () {
+it('can render the create page', function (): void {
     livewire(CreateContact::class)
         ->assertOk();
 });
 
-it('can render the edit page', function () {
+it('can render the edit page', function (): void {
     $contact = Contact::factory()->create(['username' => $this->user->username]);
 
     livewire(EditContact::class, ['record' => $contact->id])
@@ -45,7 +45,7 @@ it('can render the edit page', function () {
         ]);
 });
 
-it('can list contacts', function () {
+it('can list contacts', function (): void {
     $contacts = Contact::factory(3)->create(['username' => $this->user->username]);
 
     livewire(ListContacts::class)
@@ -53,12 +53,12 @@ it('can list contacts', function () {
         ->assertCanSeeTableRecords($contacts);
 });
 
-it('has table columns', function (string $column) {
+it('has table columns', function (string $column): void {
     livewire(ListContacts::class)
         ->assertTableColumnExists($column);
 })->with(['last_name', 'first_name', 'email', 'phone', 'created_at', 'updated_at']);
 
-it('can sort column', function (string $column) {
+it('can sort column', function (string $column): void {
     $contacts = Contact::factory(5)->create(['username' => $this->user->username]);
 
     livewire(ListContacts::class)
@@ -69,7 +69,7 @@ it('can sort column', function (string $column) {
         ->assertCanSeeTableRecords($contacts->sortByDesc($column), inOrder: true);
 })->with(['last_name', 'first_name', 'email']);
 
-it('can search contacts', function () {
+it('can search contacts', function (): void {
     $contacts = Contact::factory(5)->create(['username' => $this->user->username]);
 
     $search = $contacts->first()->last_name;
@@ -81,7 +81,7 @@ it('can search contacts', function () {
         ->assertCanNotSeeTableRecords($contacts->where('last_name', '!=', $search));
 });
 
-it('can create a contact', function () {
+it('can create a contact', function (): void {
     $contact = Contact::factory()->make();
 
     livewire(CreateContact::class)
@@ -102,7 +102,7 @@ it('can create a contact', function () {
     ]);
 });
 
-it('can update a contact', function () {
+it('can update a contact', function (): void {
     $contact = Contact::factory()->create(['username' => $this->user->username]);
     $newData = Contact::factory()->make();
 
@@ -123,7 +123,7 @@ it('can update a contact', function () {
     ]);
 });
 
-it('can delete a contact', function () {
+it('can delete a contact', function (): void {
     $contact = Contact::factory()->create(['username' => $this->user->username]);
 
     livewire(EditContact::class, ['record' => $contact->id])
@@ -134,7 +134,7 @@ it('can delete a contact', function () {
     assertDatabaseMissing($contact);
 });
 
-it('can bulk delete contacts', function () {
+it('can bulk delete contacts', function (): void {
     $contacts = Contact::factory(3)->create(['username' => $this->user->username]);
 
     livewire(ListContacts::class)
@@ -148,7 +148,7 @@ it('can bulk delete contacts', function () {
     $contacts->each(fn (Contact $contact) => assertDatabaseMissing($contact));
 });
 
-it('validates unique email', function () {
+it('validates unique email', function (): void {
     $existing = Contact::factory()->create(['username' => $this->user->username]);
 
     livewire(CreateContact::class)
@@ -161,7 +161,7 @@ it('validates unique email', function () {
         ->assertHasFormErrors(['email' => 'unique']);
 });
 
-it('validates the form data', function (array $data, array $errors) {
+it('validates the form data', function (array $data, array $errors): void {
     $contact = Contact::factory()->create(['username' => $this->user->username]);
     $newData = Contact::factory()->make();
 

@@ -12,18 +12,18 @@ trait HasUserAdd
 {
     public static function bootHasUser(): void
     {
-        static::creating(function (Model $model) {
+        static::creating(function (Model $model): void {
             if (Auth::check()) {
                 $user = Auth::user();
                 $model->user_add = $user->username;
             }
         });
 
-        static::updating(function (Model $model) {
+        static::updating(function (Model $model): void {
             //
         });
 
-        static::deleting(function (Model $model) {
+        static::deleting(function (Model $model): void {
             if (in_array(SoftDeletes::class, class_uses($model))) {
                 //
             }

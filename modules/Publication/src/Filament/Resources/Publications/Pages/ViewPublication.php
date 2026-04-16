@@ -12,6 +12,7 @@ use Filament\Support\Colors\Color;
 
 final class ViewPublication extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = PublicationResource::class;
 
     public function getTitle(): string

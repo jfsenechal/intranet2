@@ -16,9 +16,10 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class ListUsers extends ListRecords
 {
+    #[\Override]
     protected static string $resource = UserResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' agents';
     }
@@ -31,15 +32,15 @@ final class ListUsers extends ListRecords
                 ->icon('tabler-user-plus')
                 ->modal()
                 ->modalHeading('Importer un agent de la LDAP')
-                ->schema(fn (Schema $schema) => UserForm::add($schema))
-                ->action(function (array $data) {
+                ->schema(fn (Schema $schema): \Filament\Schemas\Schema => UserForm::add($schema))
+                ->action(function (array $data): void {
                     try {
                         $user = UserHandler::createUserFromLdap($data);
                         Notification::make()
                             ->success()
                             ->title('Utilisateur ajouté')
                             ->send();
-                        if ($user) {
+                        if ($user instanceof \App\Models\User) {
                             $this->redirect(UserResource::getUrl('view', ['record' => $user], panel: 'security-panel'));
                         }
                     } catch (Exception $exception) {

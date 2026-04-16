@@ -8,17 +8,16 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'username',
+    'action_id',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'action_user')]
 final class ActionUser extends Model
 {
-    protected $connection = 'maria-pst';
-
-    protected $table = 'action_user';
-
-    protected $fillable = [
-        'username',
-        'action_id',
-    ];
-
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    #[\Override]
     protected $casts = [
     ];
 

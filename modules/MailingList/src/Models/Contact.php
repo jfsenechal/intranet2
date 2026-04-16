@@ -16,26 +16,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[UseFactory(ContactFactory::class)]
 #[ScopedBy(OwnerScope::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mailing-list')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'username',
+    'last_name',
+    'first_name',
+    'email',
+    'description',
+    'phone',
+])]
 final class Contact extends Model
 {
     /** @use HasFactory<ContactFactory> */
     use HasFactory;
-
-    protected $connection = 'maria-mailing-list';
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'username',
-        'last_name',
-        'first_name',
-        'email',
-        'description',
-        'phone',
-    ];
 
     /**
      * @return BelongsToMany<AddressBook, $this>

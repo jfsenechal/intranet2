@@ -9,6 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateService extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = ServiceResource::class;
 
     public function canCreateAnother(): bool

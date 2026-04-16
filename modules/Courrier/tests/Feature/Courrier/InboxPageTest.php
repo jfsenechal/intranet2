@@ -10,12 +10,12 @@ use DirectoryTree\ImapEngine\Laravel\ImapManager;
 use DirectoryTree\ImapEngine\Testing\FakeMailbox;
 use Filament\Facades\Filament;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('courrier-panel'));
 });
 
-describe('Inbox Page Access', function () {
-    test('admin user can access inbox page', function () {
+describe('Inbox Page Access', function (): void {
+    test('admin user can access inbox page', function (): void {
         $admin = User::factory()->create(['is_administrator' => true]);
 
         $this->actingAs($admin)
@@ -23,7 +23,7 @@ describe('Inbox Page Access', function () {
             ->assertSuccessful();
     });
 
-    test('user with ROLE_INDICATEUR_VILLE_ADMIN can access inbox page', function () {
+    test('user with ROLE_INDICATEUR_VILLE_ADMIN can access inbox page', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN->value]);
         $user->addRole($role);
@@ -33,7 +33,7 @@ describe('Inbox Page Access', function () {
             ->assertSuccessful();
     });
 
-    test('regular user cannot access inbox page', function () {
+    test('regular user cannot access inbox page', function (): void {
         $user = User::factory()->create();
 
         $this->actingAs($user)
@@ -41,14 +41,14 @@ describe('Inbox Page Access', function () {
             ->assertForbidden();
     });
 
-    test('guest cannot access inbox page', function () {
+    test('guest cannot access inbox page', function (): void {
         $this->get(Inbox::getUrl())
             ->assertForbidden();
     });
 });
 
-describe('Inbox Page Display', function () {
-    test('inbox page displays correct title', function () {
+describe('Inbox Page Display', function (): void {
+    test('inbox page displays correct title', function (): void {
         $admin = User::factory()->create(['is_administrator' => true]);
 
         $this->actingAs($admin)
@@ -56,10 +56,10 @@ describe('Inbox Page Display', function () {
             ->assertSee('Boite mail');
     });
 
-    test('inbox page handles IMAP connection errors gracefully', function () {
+    test('inbox page handles IMAP connection errors gracefully', function (): void {
         // Swap the mailbox with a fake that will return empty
         $fakeMailbox = new FakeMailbox;
-        $manager = app(ImapManager::class);
+        $manager = resolve(ImapManager::class);
         $manager->swap('indicateur_ville', $fakeMailbox);
 
         $admin = User::factory()->create(['is_administrator' => true]);
@@ -70,8 +70,8 @@ describe('Inbox Page Display', function () {
     });
 });
 
-describe('Inbox Page canAccess method', function () {
-    test('canAccess returns true for administrator', function () {
+describe('Inbox Page canAccess method', function (): void {
+    test('canAccess returns true for administrator', function (): void {
         $admin = User::factory()->create(['is_administrator' => true]);
 
         $this->actingAs($admin);
@@ -79,7 +79,7 @@ describe('Inbox Page canAccess method', function () {
         expect(Inbox::canAccess())->toBeTrue();
     });
 
-    test('canAccess returns true for user with correct role', function () {
+    test('canAccess returns true for user with correct role', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN->value]);
         $user->addRole($role);
@@ -89,7 +89,7 @@ describe('Inbox Page canAccess method', function () {
         expect(Inbox::canAccess())->toBeTrue();
     });
 
-    test('canAccess returns false for user without correct role', function () {
+    test('canAccess returns false for user without correct role', function (): void {
         $user = User::factory()->create();
 
         $this->actingAs($user);

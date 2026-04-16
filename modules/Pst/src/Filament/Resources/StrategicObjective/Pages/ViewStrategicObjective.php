@@ -11,6 +11,7 @@ use Filament\Schemas\Schema;
 
 final class ViewStrategicObjective extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = StrategicObjectiveResource::class;
 
     public function getTitle(): string

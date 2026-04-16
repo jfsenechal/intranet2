@@ -13,6 +13,7 @@ use Filament\Schemas\Schema;
 
 final class ViewOperationalObjective extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = OperationalObjectiveResource::class;
 
     public function getTitle(): string

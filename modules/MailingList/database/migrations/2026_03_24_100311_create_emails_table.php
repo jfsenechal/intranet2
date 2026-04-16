@@ -15,7 +15,7 @@ return new class() extends Migration
         if (Schema::connection('maria-mailing-list')->hasTable('emails')) {
             return;
         }
-        Schema::create('emails', function (Blueprint $table) {
+        Schema::create('emails', function (Blueprint $table): void {
             $table->id();
             $table->string('username')->index();
             $table->foreignId('sender_id')->constrained()->cascadeOnDelete();

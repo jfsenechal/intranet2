@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 final class LastCampaignsWidget extends TableWidget
 {
+    #[\Override]
     protected int|string|array $columnSpan = 'full';
 
     public function table(Table $table): Table

@@ -12,10 +12,13 @@ use Filament\Tables\Table;
 
 final class FollowUpsRelationManager extends RelationManager
 {
+    #[\Override]
     protected static string $relationship = 'followups';
 
+    #[\Override]
     protected static ?string $title = 'Suivi';
 
+    #[\Override]
     protected static ?string $label = 'Suivi';
 
     public function isReadOnly(): bool

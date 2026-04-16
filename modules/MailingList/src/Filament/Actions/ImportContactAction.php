@@ -11,7 +11,7 @@ use Filament\Support\Icons\Heroicon;
 
 final class ImportContactAction
 {
-    public static function make(): Action
+    public static function make(): \Filament\Actions\ImportAction
     {
         return
             ImportAction::make()

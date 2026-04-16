@@ -15,7 +15,7 @@ use Filament\Facades\Filament;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('mileage-panel'));
     $this->user = User::factory()->create(['is_administrator' => true]);
     $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
@@ -24,17 +24,17 @@ beforeEach(function () {
     $this->actingAs($this->user);
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     livewire(ListRates::class)
         ->assertOk();
 });
 
-it('can render the create page', function () {
+it('can render the create page', function (): void {
     livewire(CreateRate::class)
         ->assertOk();
 });
 
-it('can render the edit page', function () {
+it('can render the edit page', function (): void {
     $rate = Rate::factory()->create();
 
     livewire(EditRate::class, ['record' => $rate->id])
@@ -47,7 +47,7 @@ it('can render the edit page', function () {
         ]);
 });
 
-it('can list rates', function () {
+it('can list rates', function (): void {
     $rates = Rate::factory(3)->create();
 
     livewire(ListRates::class)
@@ -55,12 +55,12 @@ it('can list rates', function () {
         ->assertCanSeeTableRecords($rates);
 });
 
-it('has table columns', function (string $column) {
+it('has table columns', function (string $column): void {
     livewire(ListRates::class)
         ->assertTableColumnExists($column);
 })->with(['start_date', 'end_date', 'amount', 'omnium']);
 
-it('can sort column', function (string $column) {
+it('can sort column', function (string $column): void {
     $rates = Rate::factory(5)->create();
 
     livewire(ListRates::class)
@@ -71,7 +71,7 @@ it('can sort column', function (string $column) {
         ->assertCanSeeTableRecords($rates->sortByDesc($column)->values(), inOrder: true);
 })->with(['start_date', 'amount']);
 
-it('can create a rate', function () {
+it('can create a rate', function (): void {
     $rate = Rate::factory()->make();
 
     livewire(CreateRate::class)
@@ -90,7 +90,7 @@ it('can create a rate', function () {
     ]);
 });
 
-it('can update a rate', function () {
+it('can update a rate', function (): void {
     $rate = Rate::factory()->create();
     $newData = Rate::factory()->make();
 
@@ -111,7 +111,7 @@ it('can update a rate', function () {
     ]);
 });
 
-it('validates the form data', function (array $data, array $errors) {
+it('validates the form data', function (array $data, array $errors): void {
     $rate = Rate::factory()->create();
     $newData = Rate::factory()->make();
 

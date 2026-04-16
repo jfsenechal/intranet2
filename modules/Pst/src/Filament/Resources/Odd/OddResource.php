@@ -18,14 +18,19 @@ use Illuminate\Database\Eloquent\Model;
 // todo try https://github.com/LaravelDaily/FilamentExamples-Projects/tree/main/tables/table-reorderable-position
 final class OddResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Odd::class;
 
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = 'tabler-trees';
 
+    #[\Override]
     protected static ?int $navigationSort = 3;
 
+    #[\Override]
     protected static ?string $recordTitleAttribute = 'name';
 
+    #[\Override]
     protected static ?string $navigationLabel = 'Développement durable (ODD)';
 
     public static function getModelLabel(): string

@@ -14,11 +14,11 @@ final class TripAttributeResolver
     {
         $rate = Rate::query()
             ->where('start_date', '<=', $trip->departure_date)
-            ->where(function ($query) use ($trip) {
+            ->where(function ($query) use ($trip): void {
                 $query->where('end_date', '>=', $trip->departure_date)
                     ->orWhereNull('end_date');
             })
-            ->orderBy('start_date', 'desc')
+            ->latest('start_date')
             ->first();
 
         if ($rate) {

@@ -19,17 +19,13 @@ final class BudgetArticlePolicy
         if ($user->isAdministrator()) {
             return true;
         }
-        if ($user->hasOneOfThisRoles(RolesEnum::getRoles())) {
-            return true;
-        }
-
-        return false;
+        return $user->hasOneOfThisRoles(RolesEnum::getRoles());
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, BudgetArticle $budgetArticle): bool
+    public function view(): bool
     {
         return true;
     }
@@ -42,47 +38,35 @@ final class BudgetArticlePolicy
         if ($user->isAdministrator()) {
             return true;
         }
-        if ($user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value)) {
-            return true;
-        }
-
-        return false;
+        return $user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value);
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, BudgetArticle $budgetArticle): bool
+    public function update(User $user): bool
     {
         if ($user->isAdministrator()) {
             return true;
         }
-        if ($user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value)) {
-            return true;
-        }
-
-        return false;
+        return $user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, BudgetArticle $budgetArticle): bool
+    public function delete(User $user): bool
     {
         if ($user->isAdministrator()) {
             return true;
         }
-        if ($user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value)) {
-            return true;
-        }
-
-        return false;
+        return $user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value);
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, BudgetArticle $budgetArticle): bool
+    public function restore(): bool
     {
         return false;
     }
@@ -90,7 +74,7 @@ final class BudgetArticlePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(BudgetArticle $user, BudgetArticle $budgetArticle): bool
+    public function forceDelete(): bool
     {
         return false;
     }

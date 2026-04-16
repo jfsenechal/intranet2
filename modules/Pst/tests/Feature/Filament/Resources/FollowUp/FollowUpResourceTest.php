@@ -21,7 +21,7 @@ use Livewire\Livewire;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('pst'));
     $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     $this->adminUser = User::factory()->create();
@@ -38,18 +38,18 @@ beforeEach(function () {
     ]);
 });
 
-describe('page rendering', function () {
-    it('can render the index page', function () {
+describe('page rendering', function (): void {
+    it('can render the index page', function (): void {
         Livewire::test(ListFollowUps::class)
             ->assertOk();
     });
 
-    it('can render the create page', function () {
+    it('can render the create page', function (): void {
         Livewire::test(CreateFollowUp::class)
             ->assertOk();
     });
 
-    it('can render the view page', function () {
+    it('can render the view page', function (): void {
         $record = FollowUp::factory()->create([
             'action_id' => $this->action->id,
         ]);
@@ -60,7 +60,7 @@ describe('page rendering', function () {
             ->assertOk();
     });
 
-    it('can render the edit page', function () {
+    it('can render the edit page', function (): void {
         $record = FollowUp::factory()->create([
             'action_id' => $this->action->id,
         ]);
@@ -72,8 +72,8 @@ describe('page rendering', function () {
     });
 });
 
-describe('relation manager', function () {
-    it('can render the FollowUpsRelationManager', function () {
+describe('relation manager', function (): void {
+    it('can render the FollowUpsRelationManager', function (): void {
         FollowUp::factory(3)->create([
             'action_id' => $this->action->id,
         ]);
@@ -85,7 +85,7 @@ describe('relation manager', function () {
             ->assertOk();
     });
 
-    it('can list followups in relation manager', function () {
+    it('can list followups in relation manager', function (): void {
         $followups = FollowUp::factory(3)->create([
             'action_id' => $this->action->id,
         ]);
@@ -98,7 +98,7 @@ describe('relation manager', function () {
             ->assertCanSeeTableRecords($followups);
     });
 
-    it('can create a followup through relation manager', function () {
+    it('can create a followup through relation manager', function (): void {
         Livewire::test(FollowUpsRelationManager::class, [
             'ownerRecord' => $this->action,
             'pageClass' => ViewAction::class,
@@ -114,7 +114,7 @@ describe('relation manager', function () {
         ]);
     });
 
-    it('can edit a followup through relation manager', function () {
+    it('can edit a followup through relation manager', function (): void {
         $followup = FollowUp::factory()->create([
             'action_id' => $this->action->id,
             'content' => '<p>Original content</p>',
@@ -135,7 +135,7 @@ describe('relation manager', function () {
         ]);
     });
 
-    it('can delete a followup through relation manager', function () {
+    it('can delete a followup through relation manager', function (): void {
         $followup = FollowUp::factory()->create([
             'action_id' => $this->action->id,
         ]);
@@ -150,7 +150,7 @@ describe('relation manager', function () {
         assertDatabaseMissing($followup);
     });
 
-    it('validates content is required in relation manager', function () {
+    it('validates content is required in relation manager', function (): void {
         $initialCount = FollowUp::count();
 
         Livewire::test(FollowUpsRelationManager::class, [
@@ -166,13 +166,13 @@ describe('relation manager', function () {
     });
 });
 
-describe('form fields', function () {
-    it('has content field', function () {
+describe('form fields', function (): void {
+    it('has content field', function (): void {
         Livewire::test(CreateFollowUp::class)
             ->assertFormFieldExists('content');
     });
 
-    it('has icon field', function () {
+    it('has icon field', function (): void {
         Livewire::test(CreateFollowUp::class)
             ->assertFormFieldExists('icon');
     });

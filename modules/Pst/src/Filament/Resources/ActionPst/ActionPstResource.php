@@ -24,18 +24,24 @@ use Illuminate\Support\Collection;
 // https://filamentphp.com/content/leandrocfe-navigating-filament-pages-with-previous-and-next-buttons
 final class ActionPstResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Action::class;
 
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = 'tabler-bolt';
 
     // required for global search
+    #[\Override]
     protected static ?string $recordTitleAttribute = 'name';
 
     // Scout handles term splitting
+    #[\Override]
     protected static ?bool $shouldSplitGlobalSearchTerms = false;
 
+    #[\Override]
     protected static ?int $navigationSort = 4;
 
+    #[\Override]
     protected static ?string $navigationLabel = 'Liste des actions';
 
     public static function shouldRegisterNavigation(): bool

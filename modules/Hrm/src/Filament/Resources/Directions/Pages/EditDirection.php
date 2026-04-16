@@ -10,6 +10,7 @@ use Filament\Resources\Pages\EditRecord;
 
 final class EditDirection extends EditRecord
 {
+    #[\Override]
     protected static string $resource = DirectionResource::class;
 
     protected function getHeaderActions(): array

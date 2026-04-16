@@ -11,6 +11,7 @@ use Filament\Support\Icons\Heroicon;
 
 final class EditSender extends EditRecord
 {
+    #[\Override]
     protected static string $resource = SenderResource::class;
 
     protected function getHeaderActions(): array

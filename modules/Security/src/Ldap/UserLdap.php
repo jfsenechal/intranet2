@@ -11,6 +11,7 @@ final class UserLdap extends Model
     /**
      * The object classes of the LDAP model.
      */
+    #[\Override]
     public static array $objectClasses = [
         'top',
         'person',

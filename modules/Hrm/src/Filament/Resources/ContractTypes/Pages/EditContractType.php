@@ -10,6 +10,7 @@ use Filament\Resources\Pages\EditRecord;
 
 final class EditContractType extends EditRecord
 {
+    #[\Override]
     protected static string $resource = ContractTypeResource::class;
 
     protected function getHeaderActions(): array

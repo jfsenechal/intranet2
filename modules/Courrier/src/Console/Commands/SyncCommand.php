@@ -12,8 +12,10 @@ use LdapRecord\Models\Model;
 
 final class SyncCommand extends Command
 {
+    #[\Override]
     protected $signature = 'courrier:sync {--dry-run : Run without making changes}';
 
+    #[\Override]
     protected $description = 'Sync recipients with users ldap';
 
     public function handle(): int
@@ -45,7 +47,7 @@ final class SyncCommand extends Command
         return self::SUCCESS;
     }
 
-    protected function syncRecipient(Model $model, bool $dryRun): void
+    private function syncRecipient(Model $model, bool $dryRun): void
     {
         $email = $model->getFirstAttribute('mail');
         $lastName = $model->getFirstAttribute('sn');
@@ -123,7 +125,7 @@ final class SyncCommand extends Command
         $this->info('Cleaning recipients not in LDAP...');
 
         $employes = UserLdap::all();
-        $ldapUsernames = $employes->map(fn (Model $e) => $e->getFirstAttribute('sAMAccountName'))->filter()->toArray();
+        $ldapUsernames = $employes->map(fn (Model $e): mixed => $e->getFirstAttribute('sAMAccountName'))->filter()->toArray();
 
         if (count($ldapUsernames) <= 100) {
             $this->warn('Not enough LDAP users found, skipping cleanup for safety.');

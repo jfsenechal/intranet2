@@ -28,7 +28,7 @@ final class DeclarationTables
                     ->label('Nom')
                     ->searchable()
                     ->sortable()
-                    ->url(fn (Declaration $record) => DeclarationResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (Declaration $record): string => DeclarationResource::getUrl('view', ['record' => $record->id])),
                 Tables\Columns\TextColumn::make('first_name')
                     ->label('Prénom')
                     ->searchable()

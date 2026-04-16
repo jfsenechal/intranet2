@@ -15,27 +15,28 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 // https://github.com/lukas-frey/filament-icon-picker
 #[UseFactory(ModuleFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'url',
+    'description',
+    'description_role',
+    'extern',
+    'is_public',
+    'is_external',
+    'icon',
+    'color',
+    'allow_multiple_roles',
+])]
 final class Module extends Model
 {
     use HasFactory;
 
+    #[\Override]
     public $timestamps = false;
 
     public bool $migrated = false;
 
-    protected $fillable = [
-        'name',
-        'url',
-        'description',
-        'description_role',
-        'extern',
-        'is_public',
-        'is_external',
-        'icon',
-        'color',
-        'allow_multiple_roles',
-    ];
-
+    #[\Override]
     protected $casts = [
         'is_public' => 'boolean',
         'is_external' => 'boolean',

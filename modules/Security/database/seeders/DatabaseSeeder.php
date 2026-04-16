@@ -29,7 +29,7 @@ final class DatabaseSeeder extends Seeder
         $adminRole = Role::factory()->create([
             'name' => RoleEnum::ADMIN->value,
         ]);
-        $adminRole = Role::factory()->create([
+        Role::factory()->create([
             'name' => RoleEnum::MANDATAIRE->value,
         ]);
 

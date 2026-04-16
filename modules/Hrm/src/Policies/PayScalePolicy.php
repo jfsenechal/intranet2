@@ -17,7 +17,7 @@ final class PayScalePolicy
         return $this->hasAnyHrmRole($user);
     }
 
-    public function view(User $user, PayScale $payScale): bool
+    public function view(User $user): bool
     {
         return $this->hasReadAccess($user);
     }
@@ -27,22 +27,22 @@ final class PayScalePolicy
         return $this->isAdmin($user);
     }
 
-    public function update(User $user, PayScale $payScale): bool
+    public function update(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function delete(User $user, PayScale $payScale): bool
+    public function delete(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function restore(User $user, PayScale $payScale): bool
+    public function restore(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function forceDelete(User $user, PayScale $payScale): bool
+    public function forceDelete(): bool
     {
         return false;
     }

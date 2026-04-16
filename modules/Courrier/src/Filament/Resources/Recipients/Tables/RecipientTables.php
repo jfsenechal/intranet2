@@ -24,7 +24,7 @@ final class RecipientTables
                     ->label('Nom')
                     ->searchable()
                     ->sortable()
-                    ->url(fn (Recipient $record) => RecipientResource::getUrl('edit', ['record' => $record->id])),
+                    ->url(fn (Recipient $record): string => RecipientResource::getUrl('edit', ['record' => $record->id])),
                 Tables\Columns\TextColumn::make('first_name')
                     ->label('Prénom')
                     ->searchable()

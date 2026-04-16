@@ -20,12 +20,16 @@ use UnitEnum;
 
 final class PartnerResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Partner::class;
 
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = Heroicon::OutlinedUserGroup;
 
+    #[\Override]
     protected static string|UnitEnum|null $navigationGroup = NavigationGroupEnum::Settings;
 
+    #[\Override]
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getNavigationLabel(): string

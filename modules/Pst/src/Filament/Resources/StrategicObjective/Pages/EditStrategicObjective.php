@@ -10,6 +10,7 @@ use Filament\Resources\Pages\EditRecord;
 
 final class EditStrategicObjective extends EditRecord
 {
+    #[\Override]
     protected static string $resource = StrategicObjectiveResource::class;
 
     // force remove when edit

@@ -13,13 +13,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 #[UseFactory(RoleFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable(['name', 'description', 'label', 'module_id'])]
 final class Role extends Model
 {
     use HasFactory;
 
+    #[\Override]
     public $timestamps = false;
-
-    protected $fillable = ['name', 'description', 'label', 'module_id'];
 
     public function module(): BelongsTo
     {

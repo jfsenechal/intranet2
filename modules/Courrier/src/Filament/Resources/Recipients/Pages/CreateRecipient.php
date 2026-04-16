@@ -9,6 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateRecipient extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = RecipientResource::class;
 
     public function getTitle(): string

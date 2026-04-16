@@ -14,16 +14,22 @@ use Filament\Tables\Table;
 
 final class PublicationResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Publication::class;
 
+    #[\Override]
     protected static ?int $navigationSort = 1;
 
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-newspaper';
 
+    #[\Override]
     protected static ?string $navigationLabel = 'Publications';
 
+    #[\Override]
     protected static ?string $modelLabel = 'Publication';
 
+    #[\Override]
     protected static ?string $pluralModelLabel = 'Publications';
 
     public static function form(Schema $schema): Schema

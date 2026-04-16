@@ -9,5 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateDirection extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = DirectionResource::class;
 }

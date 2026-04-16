@@ -17,7 +17,7 @@ final class TabRepository
     public static function getTabsWithModules(): Collection
     {
         return Tab::with([
-            'modules' => function ($query) {
+            'modules' => function ($query): void {
                 $query->orderBy('name');
             },
         ])

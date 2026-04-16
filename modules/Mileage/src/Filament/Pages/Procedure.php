@@ -9,18 +9,21 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class Procedure extends Page
 {
+    #[\Override]
     protected string $view = 'mileage::filament.pages.mileage-procedure';
 
+    #[\Override]
     protected static ?int $navigationSort = 4;
 
+    #[\Override]
     protected static ?string $navigationLabel = 'Procédure';
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'tabler-info-circle';
     }
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Procédure';
     }

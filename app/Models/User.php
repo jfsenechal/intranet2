@@ -30,54 +30,42 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
 
 #[UseFactory(UserFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'first_name',
+    'last_name',
+    'phone',
+    'extension',
+    'mobile',
+    'username',
+    'uuid',
+    'departments',
+    'mandatory',
+    'color_primary',
+    'color_secondary',
+    'email',
+    'password',
+    'is_administrator',
+    'news_attachment',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Hidden([
+    'password',
+    'remember_token',
+    'app_authentication_secret',
+    'app_authentication_recovery_codes',
+])]
 final class User extends Authenticatable implements FilamentUser, HasAppAuthentication, HasAppAuthenticationRecovery, HasName
 {
     use HasApiTokens, HasFactory, Impersonate, Notifiable, Searchable;
     use UserCourrierTrait, UserMailingListTrait,UserPstTrait;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name',
-        'first_name',
-        'last_name',
-        'phone',
-        'extension',
-        'mobile',
-        'username',
-        'uuid',
-        'departments',
-        'mandatory',
-        'color_primary',
-        'color_secondary',
-        'email',
-        'password',
-        'is_administrator',
-        'news_attachment',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-        'app_authentication_secret',
-        'app_authentication_recovery_codes',
-    ];
 
     public static function generateDataFromLdap(UserLdap $userLdap): array
     {
         $email = $userLdap->getFirstAttribute('mail');
 
         $department = match (true) {
-            str_contains($email, 'cpas.marche') => DepartmentEnum::CPAS->value,
-            str_contains($email, 'ac.marche') => DepartmentEnum::VILLE->value,
+            str_contains((string) $email, 'cpas.marche') => DepartmentEnum::CPAS->value,
+            str_contains((string) $email, 'ac.marche') => DepartmentEnum::VILLE->value,
             default => DepartmentEnum::VILLE->value,
         };
 
@@ -201,13 +189,6 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
-        if ($panel->getId() === 'admin') {
-            return $this->is_administrator;
-        }
-
-        return true; // todo check !
-
-        return $this->hasModule($panel->getId());
     }
 
     public function isAdministrator(): bool
@@ -273,9 +254,9 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         return $this->full_name;
     }
 
-    public function fullName(): Attribute
+    protected function fullName(): Attribute
     {
-        return Attribute::get(fn () => $this->last_name.' '.$this->first_name);
+        return Attribute::get(fn (): string => $this->last_name.' '.$this->first_name);
     }
 
     public function fullNameAsString(): string
@@ -287,7 +268,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
     {
         parent::boot();
 
-        self::saving(function ($model) {
+        self::saving(function ($model): void {
             // Unset the field so it doesn't save to the database
             if (isset($model->attributes['plainPassword'])) {
                 $model->plainPassword = $model->attributes['plainPassword'];

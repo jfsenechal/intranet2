@@ -9,6 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateRate extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = RateResource::class;
 
     public function canCreateAnother(): bool

@@ -17,7 +17,7 @@ final class ApplicationPolicy
         return $this->hasAnyHrmRole($user);
     }
 
-    public function view(User $user, Application $application): bool
+    public function view(User $user): bool
     {
         return $this->hasReadAccess($user);
     }
@@ -27,22 +27,22 @@ final class ApplicationPolicy
         return $this->hasWriteAccess($user);
     }
 
-    public function update(User $user, Application $application): bool
+    public function update(User $user): bool
     {
         return $this->hasWriteAccess($user);
     }
 
-    public function delete(User $user, Application $application): bool
+    public function delete(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function restore(User $user, Application $application): bool
+    public function restore(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function forceDelete(User $user, Application $application): bool
+    public function forceDelete(): bool
     {
         return false;
     }

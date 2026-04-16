@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 final class ListServices extends ListRecords
 {
+    #[\Override]
     protected static string $resource = ServiceResource::class;
 
     protected function getHeaderActions(): array

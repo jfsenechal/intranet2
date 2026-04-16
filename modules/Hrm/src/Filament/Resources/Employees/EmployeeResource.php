@@ -14,13 +14,16 @@ use UnitEnum;
 
 final class EmployeeResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Employee::class;
 
+    #[\Override]
     protected static string|null|UnitEnum $navigationGroup = 'Personnel';
 
+    #[\Override]
     protected static ?int $navigationSort = 1;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-users';
     }

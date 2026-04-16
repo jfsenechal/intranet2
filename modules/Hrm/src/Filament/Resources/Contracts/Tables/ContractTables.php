@@ -25,10 +25,10 @@ final class ContractTables
             ->columns([
                 Tables\Columns\TextColumn::make('employee.last_name')
                     ->label('Agent')
-                    ->formatStateUsing(fn (Contract $record) => $record->employee->last_name.' '.$record->employee->first_name)
+                    ->formatStateUsing(fn (Contract $record): string => $record->employee->last_name.' '.$record->employee->first_name)
                     ->searchable(['last_name', 'first_name'])
                     ->sortable()
-                    ->url(fn (Contract $record) => ContractResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (Contract $record): string => ContractResource::getUrl('view', ['record' => $record->id])),
                 Tables\Columns\TextColumn::make('employer.name')
                     ->label('Employeur')
                     ->sortable()

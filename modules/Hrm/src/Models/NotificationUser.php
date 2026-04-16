@@ -7,18 +7,17 @@ namespace AcMarche\Hrm\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'notification_id',
+    'user',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'notification_users')]
 final class NotificationUser extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    #[\Override]
     public $timestamps = false;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'notification_users';
-
-    protected $fillable = [
-        'notification_id',
-        'user',
-    ];
 
     /**
      * @return BelongsTo<HrNotification>

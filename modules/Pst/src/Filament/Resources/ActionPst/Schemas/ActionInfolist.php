@@ -47,7 +47,7 @@ final class ActionInfolist
             ]);
     }
 
-    private static function odd(): Component
+    private static function odd(): \Filament\Infolists\Components\TextEntry
     {
         return TextEntry::make('odds')
             ->label('Objectifs de développement durable')
@@ -59,7 +59,7 @@ final class ActionInfolist
             ->badge();
     }
 
-    private static function budget(): Component
+    private static function budget(): \Filament\Schemas\Components\Fieldset
     {
         return Fieldset::make('budget')
             ->label('Financement')
@@ -85,14 +85,14 @@ final class ActionInfolist
                 ->html()
                 ->prose()
                 ->columnSpanFull()
-                ->visible(fn (?string $state) => $state !== null && $state !== ''),
+                ->visible(fn (?string $state): bool => $state !== null && $state !== ''),
 
             TextEntry::make('note')
                 ->label('Notes')
                 ->html()
                 ->prose()
                 ->columnSpanFull()
-                ->visible(fn (?string $state) => $state !== null && $state !== ''),
+                ->visible(fn (?string $state): bool => $state !== null && $state !== ''),
 
             Fieldset::make('team')
                 ->label('Équipe')
@@ -157,22 +157,22 @@ final class ActionInfolist
                 ->schema([
                     TextEntry::make('type')
                         ->label('Type')
-                        ->formatStateUsing(fn (ActionTypeEnum $state) => $state->getLabel())
-                        ->icon(fn (ActionTypeEnum $state) => $state->getIcon())
-                        ->color(fn (ActionTypeEnum $state) => $state->getColor())
+                        ->formatStateUsing(fn (ActionTypeEnum $state): string => $state->getLabel())
+                        ->icon(fn (ActionTypeEnum $state): ?string => $state->getIcon())
+                        ->color(fn (ActionTypeEnum $state): string|array|null => $state->getColor())
                         ->badge(),
                     IconEntry::make('scope')
                         ->label('Interne')
-                        ->formatStateUsing(fn (?ActionScopeEnum $state) => $state?->getLabel() ?? '-')
+                        ->formatStateUsing(fn (?ActionScopeEnum $state): string => $state?->getLabel() ?? '-')
                         ->boolean()
                         ->size(IconSize::Medium),
                     TextEntry::make('synergy')
                         ->label(ActionSynergyEnum::getTitle())
                         ->helperText(ActionSynergyEnum::getDescription())
-                        ->formatStateUsing(fn (?ActionSynergyEnum $state) => $state?->getLabel() ?? '-'),
+                        ->formatStateUsing(fn (?ActionSynergyEnum $state): string => $state?->getLabel() ?? '-'),
                     TextEntry::make('roadmap')
                         ->label('Feuille de route')
-                        ->formatStateUsing(fn (?ActionRoadmapEnum $state) => $state?->getLabel() ?? '-')
+                        ->formatStateUsing(fn (?ActionRoadmapEnum $state): string => $state?->getLabel() ?? '-')
                         ->badge()
                         ->color('gray'),
                 ]),
@@ -182,15 +182,15 @@ final class ActionInfolist
                 ->schema([
                     TextEntry::make('state')
                         ->label('État')
-                        ->formatStateUsing(fn (ActionStateEnum $state) => $state->getLabel())
-                        ->icon(fn (ActionStateEnum $state) => $state->getIcon())
-                        ->color(fn (ActionStateEnum $state) => $state->getColor())
+                        ->formatStateUsing(fn (ActionStateEnum $state): string => $state->getLabel())
+                        ->icon(fn (ActionStateEnum $state): string => $state->getIcon())
+                        ->color(fn (ActionStateEnum $state): string|array|null => $state->getColor())
                         ->badge(),
                     ProgressEntry::make('state_percentage')
                         ->label('Progression'),
                     TextEntry::make('due_date')
                         ->label('Échéance')
-                        ->visible(fn (?DateTimeImmutable $date) => $date instanceof DateTimeImmutable)
+                        ->visible(fn (?DateTimeImmutable $date): bool => $date instanceof DateTimeImmutable)
                         ->date()
                         ->icon('heroicon-o-calendar')
                         ->color('danger'),

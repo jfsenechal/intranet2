@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 final class ListPayScales extends ListRecords
 {
+    #[\Override]
     protected static string $resource = PayScaleResource::class;
 
     protected function getHeaderActions(): array

@@ -7,8 +7,12 @@ namespace AcMarche\Mileage\Database\Factories;
 use AcMarche\Mileage\Models\Declaration;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Mileage\Models\Declaration>
+ */
 final class DeclarationFactory extends Factory
 {
+    #[\Override]
     protected $model = Declaration::class;
 
     /**

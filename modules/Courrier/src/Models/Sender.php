@@ -16,20 +16,19 @@ use Spatie\Sluggable\SlugOptions;
 
 #[UseFactory(SenderFactory::class)]
 #[ScopedBy([DepartmentScope::class])]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-courrier')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'slug',
+    'name',
+    'department',
+])]
 final class Sender extends Model
 {
     use HasFactory;
     use HasSlug;
 
+    #[\Override]
     public $timestamps = false;
-
-    protected $connection = 'maria-courrier';
-
-    protected $fillable = [
-        'slug',
-        'name',
-        'department',
-    ];
 
     public function getSlugOptions(): SlugOptions
     {

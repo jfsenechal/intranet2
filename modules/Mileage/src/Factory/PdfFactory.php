@@ -9,7 +9,7 @@ use AcMarche\Mileage\Models\Declaration;
 use AcMarche\Mileage\Service\ExportDataAggregator;
 use Spatie\LaravelPdf\Facades\Pdf;
 
-final class PdfFactory
+final readonly class PdfFactory
 {
     private ExportDataAggregator $exportHandler;
 

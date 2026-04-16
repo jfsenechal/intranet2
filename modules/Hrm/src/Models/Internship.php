@@ -8,26 +8,24 @@ use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'employee_id',
+    'employer_id',
+    'direction_id',
+    'service_id',
+    'start_date',
+    'end_date',
+    'reminder_date',
+    'notes',
+    'user_add',
+    'updated_by',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'internships')]
 final class Internship extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
     use HasUserAdd;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'internships';
-
-    protected $fillable = [
-        'employee_id',
-        'employer_id',
-        'direction_id',
-        'service_id',
-        'start_date',
-        'end_date',
-        'reminder_date',
-        'notes',
-        'user_add',
-        'updated_by',
-    ];
 
     /**
      * @return BelongsTo<Employee>

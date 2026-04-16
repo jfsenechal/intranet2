@@ -9,5 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateJobFunction extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = JobFunctionResource::class;
 }

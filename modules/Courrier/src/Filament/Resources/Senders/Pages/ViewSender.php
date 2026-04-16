@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ViewRecord;
 
 final class ViewSender extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = SenderResource::class;
 
     public function getTitle(): string

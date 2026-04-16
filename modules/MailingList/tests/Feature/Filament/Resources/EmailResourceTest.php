@@ -21,24 +21,24 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('mailing-list'));
     $this->user = User::factory()->create();
     $this->actingAs($this->user);
     $this->sender = Sender::factory()->create(['username' => $this->user->username]);
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     livewire(ListEmails::class)
         ->assertOk();
 });
 
-it('can render the create page', function () {
+it('can render the create page', function (): void {
     livewire(CreateEmail::class)
         ->assertOk();
 });
 
-it('can render the edit page', function () {
+it('can render the edit page', function (): void {
     $email = Email::factory()->create([
         'username' => $this->user->username,
         'sender_id' => $this->sender->id,
@@ -51,7 +51,7 @@ it('can render the edit page', function () {
         ]);
 });
 
-it('can create an email with contacts', function () {
+it('can create an email with contacts', function (): void {
     $contacts = Contact::factory(3)->create(['username' => $this->user->username]);
 
     livewire(CreateEmail::class)
@@ -74,7 +74,7 @@ it('can create an email with contacts', function () {
     expect(EmailRecipient::count())->toBe(3);
 });
 
-it('can create an email with address book', function () {
+it('can create an email with address book', function (): void {
     $addressBook = AddressBook::factory()->create(['username' => $this->user->username]);
     $contacts = Contact::factory(5)->create(['username' => $this->user->username]);
     $addressBook->contacts()->attach($contacts->pluck('id'));
@@ -94,7 +94,7 @@ it('can create an email with address book', function () {
     expect($email->recipients)->toHaveCount(5);
 });
 
-it('deduplicates contacts from multiple sources', function () {
+it('deduplicates contacts from multiple sources', function (): void {
     $addressBook = AddressBook::factory()->create(['username' => $this->user->username]);
     $contacts = Contact::factory(3)->create(['username' => $this->user->username]);
     $addressBook->contacts()->attach($contacts->pluck('id'));
@@ -114,7 +114,7 @@ it('deduplicates contacts from multiple sources', function () {
     expect($email->total_count)->toBe(3);
 });
 
-it('can update an email', function () {
+it('can update an email', function (): void {
     $email = Email::factory()->create([
         'username' => $this->user->username,
         'sender_id' => $this->sender->id,
@@ -133,7 +133,7 @@ it('can update an email', function () {
     ]);
 });
 
-it('can delete an email', function () {
+it('can delete an email', function (): void {
     $email = Email::factory()->create([
         'username' => $this->user->username,
         'sender_id' => $this->sender->id,
@@ -147,7 +147,7 @@ it('can delete an email', function () {
     assertDatabaseMissing($email);
 });
 
-it('can dispatch send action', function () {
+it('can dispatch send action', function (): void {
     Bus::fake();
 
     $email = Email::factory()->create([
@@ -171,14 +171,14 @@ it('can dispatch send action', function () {
         ->callAction('send')
         ->assertNotified();
 
-    Bus::assertBatched(fn ($batch) => $batch->jobs->count() === 2);
+    Bus::assertBatched(fn ($batch): bool => $batch->jobs->count() === 2);
 
     $email->refresh();
     expect($email->status)->toBe(EmailStatus::Sending);
     expect($email->batch_id)->not->toBeNull();
 });
 
-it('prevents sending with no recipients', function () {
+it('prevents sending with no recipients', function (): void {
     $email = Email::factory()->create([
         'username' => $this->user->username,
         'sender_id' => $this->sender->id,
@@ -194,7 +194,7 @@ it('prevents sending with no recipients', function () {
     expect($email->status)->toBe(EmailStatus::Draft);
 });
 
-it('hides send action for sent emails', function () {
+it('hides send action for sent emails', function (): void {
     $email = Email::factory()->sent()->create([
         'username' => $this->user->username,
         'sender_id' => $this->sender->id,
@@ -204,7 +204,7 @@ it('hides send action for sent emails', function () {
         ->assertActionHidden('send');
 });
 
-it('validates required fields', function (array $data, array $errors) {
+it('validates required fields', function (array $data, array $errors): void {
     livewire(CreateEmail::class)
         ->fillForm([
             'sender_id' => $this->sender->id,
@@ -220,7 +220,7 @@ it('validates required fields', function (array $data, array $errors) {
     '`sender_id` is required' => [['sender_id' => null], ['sender_id' => 'required']],
 ]);
 
-it('has table columns', function (string $column) {
+it('has table columns', function (string $column): void {
     livewire(ListEmails::class)
         ->assertTableColumnExists($column);
 })->with(['subject', 'sender.name', 'status', 'created_at', 'updated_at']);

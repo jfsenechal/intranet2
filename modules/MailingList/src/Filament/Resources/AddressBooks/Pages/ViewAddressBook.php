@@ -17,6 +17,7 @@ use Filament\Support\Icons\Heroicon;
 
 final class ViewAddressBook extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = AddressBookResource::class;
 
     public function getTitle(): string

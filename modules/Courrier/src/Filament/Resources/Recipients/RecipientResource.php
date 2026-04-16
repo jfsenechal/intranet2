@@ -14,13 +14,16 @@ use UnitEnum;
 
 final class RecipientResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Recipient::class;
 
+    #[\Override]
     protected static ?int $navigationSort = 4;
 
+    #[\Override]
     protected static string|null|UnitEnum $navigationGroup = 'Paramètres';
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-users';
     }

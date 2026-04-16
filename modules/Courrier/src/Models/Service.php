@@ -14,24 +14,22 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 #[UseFactory(ServiceFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-courrier')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'slugname',
+    'name',
+    'initials',
+    'department',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'courrier_services')]
 final class Service extends Model
 {
     use HasDepartmentScope;
     use HasFactory;
     use HasSlug;
 
+    #[\Override]
     public $timestamps = false;
-
-    protected $table = 'courrier_services';
-
-    protected $connection = 'maria-courrier';
-
-    protected $fillable = [
-        'slugname',
-        'name',
-        'initials',
-        'department',
-    ];
 
     public function incomingMails(): BelongsToMany
     {

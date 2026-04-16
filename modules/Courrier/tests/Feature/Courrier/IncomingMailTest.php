@@ -8,8 +8,8 @@ use AcMarche\Courrier\Models\Service;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 
-describe('IncomingMail Model', function () {
-    test('can create an incoming mail', function () {
+describe('IncomingMail Model', function (): void {
+    test('can create an incoming mail', function (): void {
         $mail = IncomingMail::factory()->create([
             'reference_number' => 'TEST-2024-001',
             'sender' => 'Test Sender',
@@ -24,7 +24,7 @@ describe('IncomingMail Model', function () {
             ->and($mail->description)->toBe('Test Description');
     });
 
-    test('has correct default boolean values', function () {
+    test('has correct default boolean values', function (): void {
         $mail = IncomingMail::factory()->create();
 
         expect($mail->is_notified)->toBeBool()
@@ -32,25 +32,25 @@ describe('IncomingMail Model', function () {
             ->and($mail->has_acknowledgment)->toBeBool();
     });
 
-    test('can create with notified state', function () {
+    test('can create with notified state', function (): void {
         $mail = IncomingMail::factory()->notified()->create();
 
         expect($mail->is_notified)->toBeTrue();
     });
 
-    test('can create with registered state', function () {
+    test('can create with registered state', function (): void {
         $mail = IncomingMail::factory()->registered()->create();
 
         expect($mail->is_registered)->toBeTrue();
     });
 
-    test('can create with acknowledgment state', function () {
+    test('can create with acknowledgment state', function (): void {
         $mail = IncomingMail::factory()->withAcknowledgment()->create();
 
         expect($mail->has_acknowledgment)->toBeTrue();
     });
 
-    test('casts date correctly', function () {
+    test('casts date correctly', function (): void {
         $mail = IncomingMail::factory()->create([
             'mail_date' => '2024-01-15',
         ]);
@@ -58,7 +58,7 @@ describe('IncomingMail Model', function () {
         expect($mail->mail_date)->toBeInstanceOf(CarbonImmutable::class);
     });
 
-    test('soft deletes work correctly', function () {
+    test('soft deletes work correctly', function (): void {
         $mail = IncomingMail::factory()->create();
         $mailId = $mail->id;
 
@@ -69,8 +69,8 @@ describe('IncomingMail Model', function () {
     });
 });
 
-describe('IncomingMail Relationships', function () {
-    test('can attach services to incoming mail', function () {
+describe('IncomingMail Relationships', function (): void {
+    test('can attach services to incoming mail', function (): void {
         $mail = IncomingMail::factory()->create();
         $service = Service::factory()->create();
 
@@ -81,7 +81,7 @@ describe('IncomingMail Relationships', function () {
             ->and($mail->services->first()->pivot->is_primary)->toBeTrue();
     });
 
-    test('can attach recipients to incoming mail', function () {
+    test('can attach recipients to incoming mail', function (): void {
         $mail = IncomingMail::factory()->create();
         $recipient = Recipient::factory()->create();
 
@@ -92,7 +92,7 @@ describe('IncomingMail Relationships', function () {
             ->and($mail->recipients->first()->pivot->is_primary)->toBeFalse();
     });
 
-    test('can get primary service', function () {
+    test('can get primary service', function (): void {
         $mail = IncomingMail::factory()->create();
         $primaryService = Service::factory()->create();
         $secondaryService = Service::factory()->create();
@@ -104,7 +104,7 @@ describe('IncomingMail Relationships', function () {
             ->and($mail->primaryService->first()->id)->toBe($primaryService->id);
     });
 
-    test('can get primary recipient', function () {
+    test('can get primary recipient', function (): void {
         $mail = IncomingMail::factory()->create();
         $primaryRecipient = Recipient::factory()->create();
         $secondaryRecipient = Recipient::factory()->create();
@@ -117,8 +117,8 @@ describe('IncomingMail Relationships', function () {
     });
 });
 
-describe('Service Model', function () {
-    test('can create a service', function () {
+describe('Service Model', function (): void {
+    test('can create a service', function (): void {
         $service = Service::factory()->create([
             'name' => 'Service Travaux',
             'initials' => 'ST',
@@ -129,7 +129,7 @@ describe('Service Model', function () {
             ->and($service->initials)->toBe('ST');
     });
 
-    test('generates slug automatically', function () {
+    test('generates slug automatically', function (): void {
         $service = Service::factory()->create([
             'name' => 'Cabinet du Bourgmestre',
             'slugname' => null,
@@ -139,8 +139,8 @@ describe('Service Model', function () {
     });
 });
 
-describe('Recipient Model', function () {
-    test('can create a recipient', function () {
+describe('Recipient Model', function (): void {
+    test('can create a recipient', function (): void {
         $recipient = Recipient::factory()->create([
             'first_name' => 'Jean',
             'last_name' => 'Dupont',
@@ -153,7 +153,7 @@ describe('Recipient Model', function () {
             ->and($recipient->email)->toBe('jean.dupont@test.com');
     });
 
-    test('generates slug automatically', function () {
+    test('generates slug automatically', function (): void {
         $recipient = Recipient::factory()->create([
             'first_name' => 'Jean',
             'last_name' => 'Dupont',
@@ -163,7 +163,7 @@ describe('Recipient Model', function () {
         expect($recipient->slug)->toBe('dupont-jean');
     });
 
-    test('has full name accessor', function () {
+    test('has full name accessor', function (): void {
         $recipient = Recipient::factory()->create([
             'first_name' => 'Jean',
             'last_name' => 'Dupont',
@@ -172,7 +172,7 @@ describe('Recipient Model', function () {
         expect($recipient->full_name)->toBe('Jean Dupont');
     });
 
-    test('can have a supervisor', function () {
+    test('can have a supervisor', function (): void {
         $supervisor = Recipient::factory()->create();
         $recipient = Recipient::factory()->create([
             'supervisor_id' => $supervisor->id,
@@ -182,7 +182,7 @@ describe('Recipient Model', function () {
             ->and($recipient->supervisor->id)->toBe($supervisor->id);
     });
 
-    test('can have subordinates', function () {
+    test('can have subordinates', function (): void {
         $supervisor = Recipient::factory()->create();
         $subordinate1 = Recipient::factory()->create(['supervisor_id' => $supervisor->id]);
         $subordinate2 = Recipient::factory()->create(['supervisor_id' => $supervisor->id]);
@@ -190,7 +190,7 @@ describe('Recipient Model', function () {
         expect($supervisor->subordinates)->toHaveCount(2);
     });
 
-    test('can create recipient who receives attachments', function () {
+    test('can create recipient who receives attachments', function (): void {
         $recipient = Recipient::factory()->receivesAttachments()->create();
 
         expect($recipient->receives_attachments)->toBeTrue();

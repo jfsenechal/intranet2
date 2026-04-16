@@ -13,25 +13,24 @@ use Illuminate\Database\Eloquent\Model;
 
 #[UseFactory(PersonalInformationFactory::class)]
 #[ObservedBy([PersonalInformationObserver::class])]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mileage')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'car_license_plate1',
+    'car_license_plate2',
+    'postal_code',
+    'street',
+    'city',
+    'college_trip_date',
+    'username',
+    'iban',
+    'omnium',
+])]
 final class PersonalInformation extends Model
 {
     use HasFactory;
 
+    #[\Override]
     public $timestamps = false;
-
-    protected $connection = 'maria-mileage';
-
-    protected $fillable = [
-        'car_license_plate1',
-        'car_license_plate2',
-        'postal_code',
-        'street',
-        'city',
-        'college_trip_date',
-        'username',
-        'iban',
-        'omnium',
-    ];
 
     protected function casts(): array
     {

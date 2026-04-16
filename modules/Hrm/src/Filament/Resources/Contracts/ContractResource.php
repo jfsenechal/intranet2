@@ -14,13 +14,16 @@ use UnitEnum;
 
 final class ContractResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Contract::class;
 
+    #[\Override]
     protected static string|null|UnitEnum $navigationGroup = 'Personnel';
 
+    #[\Override]
     protected static ?int $navigationSort = 2;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-document-duplicate';
     }

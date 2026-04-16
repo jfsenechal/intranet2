@@ -17,14 +17,14 @@ use Illuminate\Support\Str;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('mileage-panel'));
 
     // Register dummy routes to prevent URL generation errors in tests
     if (! Route::getRoutes()->getByName('filament.mileage-panel.resources.budget-articles.index')) {
-        Route::get('/budget-articles', fn () => '')->name('filament.mileage-panel.resources.budget-articles.index');
-        Route::get('/budget-articles/create', fn () => '')->name('filament.mileage-panel.resources.budget-articles.create');
-        Route::get('/budget-articles/{record}/edit', fn () => '')->name('filament.mileage-panel.resources.budget-articles.edit');
+        Route::get('/budget-articles', fn (): string => '')->name('filament.mileage-panel.resources.budget-articles.index');
+        Route::get('/budget-articles/create', fn (): string => '')->name('filament.mileage-panel.resources.budget-articles.create');
+        Route::get('/budget-articles/{record}/edit', fn (): string => '')->name('filament.mileage-panel.resources.budget-articles.edit');
     }
 
     $this->user = User::factory()->create(['is_administrator' => true]);
@@ -34,17 +34,17 @@ beforeEach(function () {
     $this->actingAs($this->user);
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     livewire(ListBudgetArticles::class)
         ->assertOk();
 });
 
-it('can render the create page', function () {
+it('can render the create page', function (): void {
     livewire(CreateBudgetArticle::class)
         ->assertOk();
 });
 
-it('can render the edit page', function () {
+it('can render the edit page', function (): void {
     $budgetArticle = BudgetArticle::factory()->create();
 
     livewire(EditBudgetArticle::class, ['record' => $budgetArticle->id])
@@ -56,7 +56,7 @@ it('can render the edit page', function () {
         ]);
 });
 
-it('can list budget articles', function () {
+it('can list budget articles', function (): void {
     $articles = BudgetArticle::factory(5)->create();
 
     livewire(ListBudgetArticles::class)
@@ -64,17 +64,17 @@ it('can list budget articles', function () {
         ->assertCanSeeTableRecords($articles);
 });
 
-it('has table columns', function (string $column) {
+it('has table columns', function (string $column): void {
     livewire(ListBudgetArticles::class)
         ->assertTableColumnExists($column);
 })->with(['name', 'department', 'functional_code', 'economic_code']);
 
-it('can render table column', function (string $column) {
+it('can render table column', function (string $column): void {
     livewire(ListBudgetArticles::class)
         ->assertCanRenderTableColumn($column);
 })->with(['name', 'department', 'functional_code', 'economic_code']);
 
-it('can sort by name', function () {
+it('can sort by name', function (): void {
     $articles = BudgetArticle::factory(3)->create();
 
     livewire(ListBudgetArticles::class)
@@ -83,7 +83,7 @@ it('can sort by name', function () {
         ->assertCanSeeTableRecords($articles->sortBy('name'), inOrder: true);
 });
 
-it('can search budget articles by name', function () {
+it('can search budget articles by name', function (): void {
     $article1 = BudgetArticle::factory()->create(['name' => 'Budget Article One']);
     $article2 = BudgetArticle::factory()->create(['name' => 'Budget Article Two']);
 
@@ -94,7 +94,7 @@ it('can search budget articles by name', function () {
         ->assertCanNotSeeTableRecords([$article2]);
 });
 
-it('can create a budget article', function () {
+it('can create a budget article', function (): void {
     $article = BudgetArticle::factory()->make();
 
     livewire(CreateBudgetArticle::class)
@@ -113,7 +113,7 @@ it('can create a budget article', function () {
     ]);
 });
 
-it('can update a budget article', function () {
+it('can update a budget article', function (): void {
     $article = BudgetArticle::factory()->create();
     $newData = BudgetArticle::factory()->make();
 
@@ -134,7 +134,7 @@ it('can update a budget article', function () {
     ]);
 });
 
-it('validates the form data', function (array $data, array $errors) {
+it('validates the form data', function (array $data, array $errors): void {
     $article = BudgetArticle::factory()->create();
     $newData = BudgetArticle::factory()->make();
 

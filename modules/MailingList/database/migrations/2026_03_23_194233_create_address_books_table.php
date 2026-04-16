@@ -15,7 +15,7 @@ return new class() extends Migration
         if (Schema::connection('maria-mailing-list')->hasTable('address_books')) {
             return;
         }
-        Schema::create('address_books', function (Blueprint $table) {
+        Schema::create('address_books', function (Blueprint $table): void {
             $table->id();
             $table->string('username')->index();
             $table->string('name');

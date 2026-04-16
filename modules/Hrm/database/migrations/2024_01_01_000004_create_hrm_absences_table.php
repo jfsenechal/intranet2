@@ -13,10 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection($this->connection)->hasTable('absence')) {
-            Schema::connection($this->connection)->table('absence', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('absence', function (Blueprint $table): void {
                 $table->rename('absences');
             });
-            Schema::connection($this->connection)->table('absences', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('absences', function (Blueprint $table): void {
                 $table->renameColumn('employe_id', 'employee_id');
                 $table->renameColumn('date_debut', 'start_date');
                 $table->renameColumn('date_fin', 'end_date');
@@ -34,7 +34,7 @@ return new class extends Migration
                 $table->renameColumn('dossier_agent', 'agent_file');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('absences')) {
-            Schema::connection($this->connection)->create('absences', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('absences', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id');
                 $table->date('start_date')->nullable();

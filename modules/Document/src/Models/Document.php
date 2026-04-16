@@ -14,24 +14,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[ObservedBy([DocumentObserver::class])]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-document')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'content',
+    'file_path',
+    'file_name',
+    'file_size',
+    'file_mime',
+    'user_add',
+    'category_id',
+])]
 final class Document extends Model
 {
     use HasFactory;
     use HasUserAdd;
     use SoftDeletes;
-
-    protected $connection = 'maria-document';
-
-    protected $fillable = [
-        'name',
-        'content',
-        'file_path',
-        'file_name',
-        'file_size',
-        'file_mime',
-        'user_add',
-        'category_id',
-    ];
 
     /**
      * @return BelongsTo<Category>

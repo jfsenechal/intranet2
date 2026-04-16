@@ -11,9 +11,10 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class EditUser extends EditRecord
 {
+    #[\Override]
     protected static string $resource = UserResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getRecord()->last_name.' '.$this->getRecord()->first_name;
     }

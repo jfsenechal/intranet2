@@ -18,6 +18,7 @@ final class MigrationCommand extends Command
      *
      * @var string
      */
+    #[\Override]
     protected $signature = 'mileage:migration {--dry-run : Run without making changes}';
 
     /**
@@ -25,6 +26,7 @@ final class MigrationCommand extends Command
      *
      * @var string
      */
+    #[\Override]
     protected $description = 'Fetch all profiles from the old intranet database and migrate them to the new database';
 
     /**

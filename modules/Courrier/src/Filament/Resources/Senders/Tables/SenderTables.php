@@ -25,7 +25,7 @@ final class SenderTables
                     ->searchable()
                     ->label('Nom')
                     ->limit(120)
-                    ->url(fn (Sender $record) => SenderResource::getUrl('view', ['record' => $record->id]))
+                    ->url(fn (Sender $record): string => SenderResource::getUrl('view', ['record' => $record->id]))
                     ->tooltip(function (TextColumn $column): ?string {
                         $state = $column->getState();
 

@@ -13,11 +13,13 @@ use Filament\Tables\Table;
 
 final class NewsResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = News::class;
 
+    #[\Override]
     protected static ?int $navigationSort = 1;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-newspaper';
     }

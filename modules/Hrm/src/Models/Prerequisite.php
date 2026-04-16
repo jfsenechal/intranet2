@@ -8,21 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'profession',
+    'description',
+    'user',
+    'employer_id',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'prerequisites')]
 final class Prerequisite extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    #[\Override]
     public $timestamps = false;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'prerequisites';
-
-    protected $fillable = [
-        'name',
-        'profession',
-        'description',
-        'user',
-        'employer_id',
-    ];
 
     /**
      * @return BelongsTo<Employer>

@@ -38,7 +38,7 @@ final class RoleRepository
     {
         return Role::query()
             ->where('module_id', $module->id) // Filter roles by the given module
-            ->whereHas('users', function ($query) use ($user) { // Further filter: role must have the given user
+            ->whereHas('users', function ($query) use ($user): void { // Further filter: role must have the given user
                 $query->where('users.id', $user->id); // Eloquent is smart enough to join 'role_user'
             })
             ->get();
@@ -65,7 +65,7 @@ final class RoleRepository
     public static function findRolesByUserAndNotModule(User $user, Module $module): array
     {
         return $user->roles()
-            ->where(function ($query) use ($module) {
+            ->where(function ($query) use ($module): void {
                 $query->where('roles.module_id', '!=', $module->id)
                     ->orWhereNull('roles.module_id'); // In case some roles aren't module-specific
             })

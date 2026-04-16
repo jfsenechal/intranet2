@@ -9,5 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateHealthInsurance extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = HealthInsuranceResource::class;
 }

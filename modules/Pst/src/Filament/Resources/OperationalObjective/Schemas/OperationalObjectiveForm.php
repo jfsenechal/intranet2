@@ -36,7 +36,7 @@ final class OperationalObjectiveForm
                                 'strategicObjective',
                                 'name',
                                 modifyQueryUsing: fn (Builder $query) => $query
-                                    ->where(function (Builder $query) {
+                                    ->where(function (Builder $query): void {
                                         $query->forSelectedDepartment()
                                             ->orWhereNull('department');
                                     })

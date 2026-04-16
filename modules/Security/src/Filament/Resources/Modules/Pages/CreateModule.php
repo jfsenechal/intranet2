@@ -9,6 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateModule extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = ModuleResource::class;
 
     public function canCreateAnother(): bool

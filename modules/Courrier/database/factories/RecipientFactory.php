@@ -8,8 +8,12 @@ use AcMarche\Courrier\Models\Recipient;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Courrier\Models\Recipient>
+ */
 final class RecipientFactory extends Factory
 {
+    #[\Override]
     protected $model = Recipient::class;
 
     public function definition(): array
@@ -30,14 +34,14 @@ final class RecipientFactory extends Factory
 
     public function withSupervisor(?Recipient $supervisor = null): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'supervisor_id' => $supervisor?->id ?? Recipient::factory(),
         ]);
     }
 
     public function receivesAttachments(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'receives_attachments' => true,
         ]);
     }

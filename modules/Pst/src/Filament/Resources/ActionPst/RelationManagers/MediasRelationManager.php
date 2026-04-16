@@ -12,6 +12,7 @@ use Filament\Tables\Table;
 
 final class MediasRelationManager extends RelationManager
 {
+    #[\Override]
     protected static string $relationship = 'medias';
 
     public function form(Schema $schema): Schema

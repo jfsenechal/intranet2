@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 final class PersonalInformationFactory extends Factory
 {
+    #[\Override]
     protected $model = PersonalInformation::class;
 
     /**

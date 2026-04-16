@@ -15,20 +15,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[UseFactory(SenderFactory::class)]
 #[ScopedBy(OwnerScope::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mailing-list')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'username',
+    'name',
+    'email',
+    'footer',
+    'logo',
+])]
 final class Sender extends Model
 {
     /** @use HasFactory<SenderFactory> */
     use HasFactory;
-
-    protected $connection = 'maria-mailing-list';
-
-    protected $fillable = [
-        'username',
-        'name',
-        'email',
-        'footer',
-        'logo',
-    ];
 
     /**
      * @return BelongsTo<User, $this>

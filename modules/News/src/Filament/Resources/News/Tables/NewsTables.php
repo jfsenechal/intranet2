@@ -25,7 +25,7 @@ use Illuminate\Support\Str;
 
 final class NewsTables
 {
-    public static function configure(Table $table)
+    public static function configure(Table $table): \Filament\Tables\Table
     {
         return $table
             ->defaultSort('created_at', 'desc')
@@ -40,7 +40,7 @@ final class NewsTables
                         ->size('md')
                         ->description(fn (News $record): string => Str::limit($record->content, 250, ' (...)'), position: 'below')
                         ->color(Color::Green)
-                        ->url(fn (News $record) => NewsResource::getUrl('view', ['record' => $record->id]))
+                        ->url(fn (News $record): string => NewsResource::getUrl('view', ['record' => $record->id]))
                         ->tooltip(function (TextColumn $column): ?string {
                             $state = $column->getState();
 
@@ -71,17 +71,15 @@ final class NewsTables
                             DatePicker::make('created_from')->label('Entre le'),
                             DatePicker::make('created_until')->label('Et le'),
                         ]),
-                    ])->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when(
-                                $data['created_from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
-                            )
-                            ->when(
-                                $data['created_until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
-                            );
-                    }),
+                    ])->query(fn(Builder $query, array $data): Builder => $query
+                        ->when(
+                            $data['created_from'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                        )
+                        ->when(
+                            $data['created_until'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                        )),
             ], layout: FiltersLayout::AboveContent)->filtersFormWidth(Width::FourExtraLarge)
             ->recordActions([
                 ViewAction::make()

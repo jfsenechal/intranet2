@@ -7,8 +7,12 @@ namespace AcMarche\Pst\Database\Factories;
 use AcMarche\Pst\Models\Partner;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Pst\Models\Partner>
+ */
 final class PartnerFactory extends Factory
 {
+    #[\Override]
     protected $model = Partner::class;
 
     /**

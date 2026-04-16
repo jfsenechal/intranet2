@@ -17,29 +17,29 @@ use Illuminate\Support\Str;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('publication-panel'));
 
     // Register dummy routes to prevent URL generation errors in tests
     if (! Route::getRoutes()->getByName('filament.publication-panel.resources.categories.index')) {
-        Route::get('/categories', fn () => '')->name('filament.publication-panel.resources.categories.index');
-        Route::get('/categories/create', fn () => '')->name('filament.publication-panel.resources.categories.create');
-        Route::get('/categories/{record}/edit', fn () => '')->name('filament.publication-panel.resources.categories.edit');
-        Route::get('/categories/{record}', fn () => '')->name('filament.publication-panel.resources.categories.view');
+        Route::get('/categories', fn (): string => '')->name('filament.publication-panel.resources.categories.index');
+        Route::get('/categories/create', fn (): string => '')->name('filament.publication-panel.resources.categories.create');
+        Route::get('/categories/{record}/edit', fn (): string => '')->name('filament.publication-panel.resources.categories.edit');
+        Route::get('/categories/{record}', fn (): string => '')->name('filament.publication-panel.resources.categories.view');
     }
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     livewire(ListCategories::class)
         ->assertOk();
 });
 
-it('can render the create page', function () {
+it('can render the create page', function (): void {
     livewire(CreateCategory::class)
         ->assertOk();
 });
 
-it('can render the edit page', function () {
+it('can render the edit page', function (): void {
     $category = Category::factory()->create();
 
     livewire(EditCategory::class, [
@@ -51,7 +51,7 @@ it('can render the edit page', function () {
         ]);
 });
 
-it('can render the view page', function () {
+it('can render the view page', function (): void {
     $category = Category::factory()->create();
 
     livewire(ViewCategory::class, [
@@ -60,24 +60,24 @@ it('can render the view page', function () {
         ->assertOk();
 });
 
-it('has column', function (string $column) {
+it('has column', function (string $column): void {
     livewire(ListCategories::class)
         ->assertTableColumnExists($column);
 })->with(['name', 'publications_count']);
 
-it('can render column', function (string $column) {
+it('can render column', function (string $column): void {
     livewire(ListCategories::class)
         ->assertCanRenderTableColumn($column);
 })->with(['name', 'publications_count']);
 
-it('can load the create form', function () {
+it('can load the create form', function (): void {
     livewire(CreateCategory::class)
         ->assertSchemaComponentExists('name')
         ->assertSchemaComponentExists('url')
         ->assertSchemaComponentExists('wpCategoryId');
 });
 
-it('can load the edit form with data', function () {
+it('can load the edit form with data', function (): void {
     $category = Category::factory()->create();
 
     livewire(EditCategory::class, [
@@ -88,7 +88,7 @@ it('can load the edit form with data', function () {
         ]);
 });
 
-it('can delete a category', function () {
+it('can delete a category', function (): void {
     $category = Category::factory()->create();
 
     livewire(ViewCategory::class, [
@@ -101,7 +101,7 @@ it('can delete a category', function () {
     assertDatabaseMissing(Category::class, ['id' => $category->id]);
 });
 
-it('can bulk delete categories', function () {
+it('can bulk delete categories', function (): void {
     $categories = Category::factory(5)->create();
 
     livewire(ListCategories::class)
@@ -115,7 +115,7 @@ it('can bulk delete categories', function () {
     $categories->each(fn (Category $category) => assertDatabaseMissing(Category::class, ['id' => $category->id]));
 });
 
-it('can search categories by name', function () {
+it('can search categories by name', function (): void {
     $category1 = Category::factory()->create(['name' => 'Development']);
     $category2 = Category::factory()->create(['name' => 'Design']);
 
@@ -126,7 +126,7 @@ it('can search categories by name', function () {
         ->assertCanNotSeeTableRecords([$category2]);
 });
 
-it('displays table actions on list page', function () {
+it('displays table actions on list page', function (): void {
     $category = Category::factory()->create();
 
     livewire(ListCategories::class)
@@ -135,7 +135,7 @@ it('displays table actions on list page', function () {
         ->assertTableActionExists('view');
 });
 
-it('displays delete action on view page', function () {
+it('displays delete action on view page', function (): void {
     $category = Category::factory()->create();
 
     livewire(ViewCategory::class, [
@@ -144,7 +144,7 @@ it('displays delete action on view page', function () {
         ->assertActionExists('delete');
 });
 
-it('validates the form data', function (array $data, array $errors) {
+it('validates the form data', function (array $data, array $errors): void {
     livewire(CreateCategory::class)
         ->fillForm($data)
         ->call('create')

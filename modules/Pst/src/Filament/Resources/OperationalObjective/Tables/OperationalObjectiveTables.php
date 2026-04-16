@@ -36,7 +36,7 @@ final class OperationalObjectiveTables
                         'actions.odds',
                     ])
             )
-            ->recordUrl(fn (OperationalObjective $record) => OperationalObjectiveResource::getUrl('view', [$record]))
+            ->recordUrl(fn (OperationalObjective $record): string => OperationalObjectiveResource::getUrl('view', [$record]))
             ->columns([
                 TextColumn::make('position')
                     ->label('Numéro')
@@ -47,7 +47,7 @@ final class OperationalObjectiveTables
                     ->sortable(),
                 TextColumn::make('os')
                     ->label('Os')
-                    ->state(fn () => 'Os')
+                    ->state(fn (): string => 'Os')
                     ->tooltip(function (TextColumn $column): ?string {
                         $record = $column->getRecord();
 
@@ -57,9 +57,9 @@ final class OperationalObjectiveTables
                 TextColumn::make('name')
                     ->label('Nom')
                     ->searchable()
-                    ->icon(fn (OperationalObjective $record) => $record->isInternal() ? Heroicon::LightBulb : false)
+                    ->icon(fn (OperationalObjective $record): \Filament\Support\Icons\Heroicon|false => $record->isInternal() ? Heroicon::LightBulb : false)
                     ->iconPosition(IconPosition::After)
-                    ->suffix(fn (OperationalObjective $record) => $record->isInternal() ? '(Interne)' : '')
+                    ->suffix(fn (OperationalObjective $record): string => $record->isInternal() ? '(Interne)' : '')
                     ->sortable()
                     ->limit(85)
                     ->tooltip(function (TextColumn $column): ?string {
@@ -78,7 +78,7 @@ final class OperationalObjectiveTables
                     ->sortable(),
                 TextColumn::make('isInternal')
                     ->label('Interne')
-                    ->state(fn (OperationalObjective $record) => $record->isInternal() ? 'Oui' : 'Non')
+                    ->state(fn (OperationalObjective $record): string => $record->isInternal() ? 'Oui' : 'Non')
                     ->toggleable(),
                 TextColumn::make('created_at')
                     ->dateTime()

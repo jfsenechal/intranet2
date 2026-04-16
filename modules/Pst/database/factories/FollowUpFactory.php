@@ -7,8 +7,12 @@ namespace AcMarche\Pst\Database\Factories;
 use AcMarche\Pst\Models\FollowUp;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Pst\Models\FollowUp>
+ */
 final class FollowUpFactory extends Factory
 {
+    #[\Override]
     protected $model = FollowUp::class;
 
     public function definition(): array

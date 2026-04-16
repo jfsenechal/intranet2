@@ -17,7 +17,7 @@ use function Spatie\LaravelPdf\Support\pdf;
 final class PdfExportController extends Controller
 {
     // todo try
-    public function exprotTiti(Action $action)
+    public function exprotTiti(Action $action): \Spatie\LaravelPdf\PdfBuilder
     {
         return pdf()
             ->view('pdf.action', ['action' => $action])
@@ -43,7 +43,7 @@ final class PdfExportController extends Controller
             ])
             ->send();
 
-        return redirect()->back()->with('success', 'PDF exported successfully');
+        return back()->with('success', 'PDF exported successfully');
     }
 
     public function download(string $path): StreamedResponse

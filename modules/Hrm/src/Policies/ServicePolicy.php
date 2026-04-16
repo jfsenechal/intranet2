@@ -17,7 +17,7 @@ final class ServicePolicy
         return $this->hasAnyHrmRole($user);
     }
 
-    public function view(User $user, Service $service): bool
+    public function view(User $user): bool
     {
         return $this->hasReadAccess($user);
     }
@@ -27,22 +27,22 @@ final class ServicePolicy
         return $this->isAdmin($user);
     }
 
-    public function update(User $user, Service $service): bool
+    public function update(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function delete(User $user, Service $service): bool
+    public function delete(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function restore(User $user, Service $service): bool
+    public function restore(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function forceDelete(User $user, Service $service): bool
+    public function forceDelete(): bool
     {
         return false;
     }

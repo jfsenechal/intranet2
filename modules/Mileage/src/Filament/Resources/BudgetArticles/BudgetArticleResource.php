@@ -14,13 +14,16 @@ use UnitEnum;
 
 final class BudgetArticleResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = BudgetArticle::class;
 
+    #[\Override]
     protected static string|null|UnitEnum $navigationGroup = 'Paramètres';
 
+    #[\Override]
     protected static ?int $navigationSort = 6;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'tabler-book-2';
     }

@@ -12,6 +12,7 @@ use Filament\Schemas\Schema;
 
 final class EditDeclaration extends EditRecord
 {
+    #[\Override]
     protected static string $resource = DeclarationResource::class;
 
     public function form(Schema $schema): Schema

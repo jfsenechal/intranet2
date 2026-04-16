@@ -8,8 +8,12 @@ use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Pst\Models\OperationalObjective;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Pst\Models\OperationalObjective>
+ */
 final class OperationalObjectiveFactory extends Factory
 {
+    #[\Override]
     protected $model = OperationalObjective::class;
 
     public function definition(): array

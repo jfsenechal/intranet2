@@ -34,12 +34,12 @@ final class ServiceForm
                             ->hiddenLabel()
                             ->relationship(
                                 titleAttribute: 'last_name',
-                                modifyQueryUsing: fn (Builder $query) => RecipientRepository::queryOrderByLastName(
+                                modifyQueryUsing: fn (Builder $query): \Illuminate\Database\Eloquent\Builder => RecipientRepository::queryOrderByLastName(
                                     $query
                                 )
                             )
                             ->getOptionLabelFromRecordUsing(
-                                fn (Recipient $record) => "{$record->first_name} {$record->last_name}"
+                                fn (Recipient $record): string => "{$record->first_name} {$record->last_name}"
                             )
                             ->columns(3)
                             ->searchable(),

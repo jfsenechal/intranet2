@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::connection('maria-mileage')->create('personal_information', function (Blueprint $table) {
+        Schema::connection('maria-mileage')->create('personal_information', function (Blueprint $table): void {
             $table->id();
             $table->string('car_license_plate1')->nullable();
             $table->string('car_license_plate2')->nullable();

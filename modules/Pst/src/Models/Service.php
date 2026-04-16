@@ -16,17 +16,15 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Scout\Searchable;
 
 #[UseFactory(ServiceFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'initials',
+])]
 final class Service extends Model
 {
     use HasFactory, Notifiable;
     use Searchable;
-
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'name',
-        'initials',
-    ];
 
     /**
      * Get the indexable data array for the model.
@@ -59,7 +57,7 @@ final class Service extends Model
             'username',
             'id',
             'username'
-        )->tap(function ($query) {
+        )->tap(function ($query): void {
             // Handle cross-database join by explicitly specifying the database
             $query->from(DB::raw('`intranet`.`users`'));
         });

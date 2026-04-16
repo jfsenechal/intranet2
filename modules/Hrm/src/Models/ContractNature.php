@@ -8,20 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'slug',
+    'description',
+    'employer_id',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'contract_natures')]
 final class ContractNature extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    #[\Override]
     public $timestamps = false;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'contract_natures';
-
-    protected $fillable = [
-        'name',
-        'slug',
-        'description',
-        'employer_id',
-    ];
 
     /**
      * @return BelongsTo<Employer>

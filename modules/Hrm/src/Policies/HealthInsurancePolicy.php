@@ -17,7 +17,7 @@ final class HealthInsurancePolicy
         return $this->hasAnyHrmRole($user);
     }
 
-    public function view(User $user, HealthInsurance $healthInsurance): bool
+    public function view(User $user): bool
     {
         return $this->hasReadAccess($user);
     }
@@ -27,22 +27,22 @@ final class HealthInsurancePolicy
         return $this->isAdmin($user);
     }
 
-    public function update(User $user, HealthInsurance $healthInsurance): bool
+    public function update(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function delete(User $user, HealthInsurance $healthInsurance): bool
+    public function delete(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function restore(User $user, HealthInsurance $healthInsurance): bool
+    public function restore(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function forceDelete(User $user, HealthInsurance $healthInsurance): bool
+    public function forceDelete(): bool
     {
         return false;
     }

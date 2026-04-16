@@ -11,9 +11,10 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class ListCategories extends ListRecords
 {
+    #[\Override]
     protected static string $resource = CategoryResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' catégories';
     }

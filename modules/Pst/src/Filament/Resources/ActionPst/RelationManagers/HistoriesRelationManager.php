@@ -16,10 +16,13 @@ use Filament\Tables\Table;
 
 final class HistoriesRelationManager extends RelationManager
 {
+    #[\Override]
     protected static string $relationship = 'histories';
 
+    #[\Override]
     protected static ?string $title = 'Historique';
 
+    #[\Override]
     protected static ?string $label = 'Historique';
 
     public function isReadOnly(): bool

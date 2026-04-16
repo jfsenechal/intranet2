@@ -19,14 +19,19 @@ use UnitEnum;
 
 final class ServiceResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Service::class;
 
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = 'tabler-users-group';
 
+    #[\Override]
     protected static string|UnitEnum|null $navigationGroup = NavigationGroupEnum::Settings;
 
+    #[\Override]
     protected static ?string $recordTitleAttribute = 'name';
 
+    #[\Override]
     protected static ?bool $shouldSplitGlobalSearchTerms = false;
 
     public static function form(Schema $schema): Schema

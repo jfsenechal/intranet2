@@ -15,6 +15,7 @@ use Filament\Schemas\Schema;
 
 final class ViewService extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = ServiceResource::class;
 
     public function getTitle(): string

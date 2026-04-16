@@ -17,14 +17,14 @@ return new class() extends Migration
         if (Schema::hasTable('actions')) {
             return;
         }
-        Schema::table('strategic_objectives', function (Blueprint $table) {
+        Schema::table('strategic_objectives', function (Blueprint $table): void {
             $table->string('scope')->default(ActionScopeEnum::EXTERNAL->value)->after('is_internal');
         });
 
         DB::table('strategic_objectives')->where('is_internal', true)->update(['scope' => ActionScopeEnum::INTERNAL->value]);
         DB::table('strategic_objectives')->where('is_internal', false)->update(['scope' => ActionScopeEnum::EXTERNAL->value]);
 
-        Schema::table('strategic_objectives', function (Blueprint $table) {
+        Schema::table('strategic_objectives', function (Blueprint $table): void {
             $table->dropColumn('is_internal');
         });
     }

@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ViewRecord;
 
 final class ViewTraining extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = TrainingResource::class;
 
     protected function getHeaderActions(): array

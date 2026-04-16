@@ -13,6 +13,7 @@ use STS\FilamentImpersonate\Actions\Impersonate;
 
 final class ViewUser extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = UserResource::class;
 
     public function getTitle(): string
@@ -36,8 +37,6 @@ final class ViewUser extends ViewRecord
 
     protected function getAllRelationManagers(): array
     {
-        $relations = $this->getResource()::getRelations();
-
-        return $relations;
+        return $this->getResource()::getRelations();
     }
 }

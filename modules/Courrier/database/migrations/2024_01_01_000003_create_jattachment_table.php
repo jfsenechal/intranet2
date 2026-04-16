@@ -13,10 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection('maria-courrier')->hasTable('attachement')) {
-            Schema::connection('maria-courrier')->table('attachement', function (Blueprint $table) {
+            Schema::connection('maria-courrier')->table('attachement', function (Blueprint $table): void {
                 $table->rename('attachments');
             });
-            Schema::connection('maria-courrier')->table('attachments', function (Blueprint $table) {
+            Schema::connection('maria-courrier')->table('attachments', function (Blueprint $table): void {
                 $table->renameColumn('updatedAt', 'updated_at');
                 $table->renameColumn('courrier_id', 'incoming_mail_id');
             });

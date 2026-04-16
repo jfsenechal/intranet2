@@ -77,7 +77,7 @@ final class InboxInfolist
             $contentType = $attachment['content_type'] ?? 'application/octet-stream';
             $extension = $attachment['extension'] ?? '';
 
-            $isPreviewable = str_starts_with($contentType, 'image/')
+            $isPreviewable = str_starts_with((string) $contentType, 'image/')
                 || $contentType === 'application/pdf';
 
             $shouldAutoOpen = $attachmentCount === 1;

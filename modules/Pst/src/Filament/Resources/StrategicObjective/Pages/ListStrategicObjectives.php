@@ -15,11 +15,13 @@ use Maatwebsite\Excel\Facades\Excel;
 
 final class ListStrategicObjectives extends ListRecords
 {
+    #[\Override]
     protected static string $resource = StrategicObjectiveResource::class;
 
+    #[\Override]
     protected string $view = 'pst::filament.resources.strategic-objective-list';
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' objectifs stratégiques (OS)';
     }

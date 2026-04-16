@@ -11,6 +11,7 @@ use Filament\Support\Icons\Heroicon;
 
 final class ListContacts extends ListRecords
 {
+    #[\Override]
     protected static string $resource = ContactResource::class;
 
     protected function getHeaderActions(): array

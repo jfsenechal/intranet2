@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 final class PartnerForm
 {
-    public static function configure(Schema $schema, Model|Partner|null $record = null): Schema
+    public static function configure(Schema $schema): Schema
     {
         return $schema
             //  ->fill($record->attributesToArray())

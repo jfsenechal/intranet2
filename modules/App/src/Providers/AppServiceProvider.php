@@ -20,7 +20,6 @@ final class AppServiceProvider extends ServiceProvider
 
         Panel::configureUsing(function (Panel $panel): void {
             if ($panel->getId() !== 'admin') {
-                return;
             }
         });
     }

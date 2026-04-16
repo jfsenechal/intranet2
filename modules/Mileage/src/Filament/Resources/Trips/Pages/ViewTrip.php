@@ -11,6 +11,7 @@ use Filament\Resources\Pages\ViewRecord;
 
 final class ViewTrip extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = TripResource::class;
 
     public function getTitle(): string
@@ -23,9 +24,9 @@ final class ViewTrip extends ViewRecord
         return [
             Actions\EditAction::make()
                 ->icon('tabler-edit')
-                ->disabled(fn (Trip $trip) => $trip->isDeclared())
+                ->disabled(fn (Trip $trip): bool => $trip->isDeclared())
                 ->tooltip(
-                    fn (Trip $trip) => $trip->isDeclared() ? 'Ce déplacement est déjà lié à une déclaration' : null
+                    fn (Trip $trip): ?string => $trip->isDeclared() ? 'Ce déplacement est déjà lié à une déclaration' : null
                 ),
             Actions\DeleteAction::make()
                 ->icon('tabler-trash'),

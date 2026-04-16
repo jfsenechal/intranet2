@@ -14,6 +14,7 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 final class CreateIncomingMail extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = IncomingMailResource::class;
 
     /** @var array<int> */

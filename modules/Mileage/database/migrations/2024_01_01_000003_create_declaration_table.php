@@ -14,10 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection('maria-mileage')->hasTable('declaration')) {
-            Schema::connection('maria-mileage')->table('declaration', function (Blueprint $table) {
+            Schema::connection('maria-mileage')->table('declaration', function (Blueprint $table): void {
                 $table->rename('declarations');
             });
-            Schema::connection('maria-mileage')->table('declarations', function (Blueprint $table) {
+            Schema::connection('maria-mileage')->table('declarations', function (Blueprint $table): void {
                 $table->renameColumn('plaque1', 'car_license_plate1');
                 $table->renameColumn('plaque2', 'car_license_plate2');
                 $table->renameColumn('nom', 'last_name');
@@ -36,7 +36,7 @@ return new class extends Migration
                 $table->softDeletes();
             });
         } else {
-            Schema::connection('maria-mileage')->create('declarations', function (Blueprint $table) {
+            Schema::connection('maria-mileage')->create('declarations', function (Blueprint $table): void {
                 $table->id();
                 $table->boolean('omnium')->default(false);
                 $table->string('iban');

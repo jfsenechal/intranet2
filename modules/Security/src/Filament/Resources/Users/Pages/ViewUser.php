@@ -12,6 +12,7 @@ use Filament\Schemas\Schema;
 
 final class ViewUser extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = UserResource::class;
 
     public function getTitle(): string

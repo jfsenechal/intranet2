@@ -98,7 +98,7 @@ final class UserTables
                     ->label('Ajouter un utilisateur')
                     ->modalHeading('Ajouter un utilisateur au module')
                     ->icon('tabler-user-plus')
-                    ->action(function (array $data) use ($owner) {
+                    ->action(function (array $data) use ($owner): void {
                         try {
                             ModuleHandler::addUserFromModule($owner, $data);
                             Notification::make()
@@ -120,8 +120,8 @@ final class UserTables
 
                         return $data;
                     })
-                    ->schema(fn (Schema $schema) => ModuleForm::addUserFromModule($schema, $owner))
-                    ->action(function (array $data, Schema $schema) use ($owner) {
+                    ->schema(fn (Schema $schema): \Filament\Schemas\Schema => ModuleForm::addUserFromModule($schema, $owner))
+                    ->action(function (array $data, Schema $schema) use ($owner): void {
                         try {
                             ModuleHandler::syncUserRolesForModule($owner, $schema->getRecord(), $data);
                             Notification::make()
@@ -134,7 +134,7 @@ final class UserTables
                         }
                     }),
                 RevokeAction::make()
-                    ->action(function (User $user) use ($owner) {
+                    ->action(function (User $user) use ($owner): void {
                         ModuleHandler::revokeModuleFromUser($user, $owner->id);
                     }),
             ]);

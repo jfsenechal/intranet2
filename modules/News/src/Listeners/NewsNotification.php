@@ -13,18 +13,8 @@ use Symfony\Component\Mime\Address;
 
 final class NewsNotification
 {
-    public function handle(NewsProcessed $event): void
+    public function handle(): void
     {
         // $this->sendMail($event->news());
-    }
-
-    private function sendMail(News $news): void
-    {
-        try {
-            Mail::to(new Address('jf@marche.be'))
-                ->send(new NewsEmail($news));
-        } catch (Exception $e) {
-            dd($e->getMessage());
-        }
     }
 }

@@ -7,8 +7,12 @@ namespace AcMarche\Document\Database\Factories;
 use AcMarche\Document\Models\Document;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Document\Models\Document>
+ */
 final class DocumentFactory extends Factory
 {
+    #[\Override]
     protected $model = Document::class;
 
     /**

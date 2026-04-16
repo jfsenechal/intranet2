@@ -17,24 +17,22 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[UseFactory(EmailFactory::class)]
 #[ScopedBy(OwnerScope::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mailing-list')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'username',
+    'sender_id',
+    'subject',
+    'body',
+    'attachments',
+    'status',
+    'batch_id',
+    'sent_count',
+    'total_count',
+])]
 final class Email extends Model
 {
     /** @use HasFactory<EmailFactory> */
     use HasFactory;
-
-    protected $connection = 'maria-mailing-list';
-
-    protected $fillable = [
-        'username',
-        'sender_id',
-        'subject',
-        'body',
-        'attachments',
-        'status',
-        'batch_id',
-        'sent_count',
-        'total_count',
-    ];
 
     /**
      * @return BelongsTo<User, $this>

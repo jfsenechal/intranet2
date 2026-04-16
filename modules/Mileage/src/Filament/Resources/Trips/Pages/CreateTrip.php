@@ -12,6 +12,7 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateTrip extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = TripResource::class;
 
     public function mount(): void

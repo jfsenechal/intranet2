@@ -43,7 +43,7 @@ final class CourrierServiceProvider extends ServiceProvider
     /**
      * Register IMAP mailboxes for the courrier module.
      */
-    protected function registerImapMailboxes(): void
+    private function registerImapMailboxes(): void
     {
         Imap::register('imap_ville', [
             'host' => config('courrier.imap.ville.host'),

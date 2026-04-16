@@ -21,14 +21,16 @@ use function Laravel\Prompts\text;
 #[AsCommand(name: 'intranet:create-user')]
 final class CreateUserCommand extends Command
 {
+    #[\Override]
     protected $description = 'Create a new user';
 
+    #[\Override]
     protected $name = 'intranet:create-user';
 
     /**
      * @var array{'name': string | null, 'email': string | null, 'password': string | null}
      */
-    protected array $options;
+    private array $options;
 
     public function handle(): int
     {
@@ -76,7 +78,7 @@ final class CreateUserCommand extends Command
     /**
      * @return array{'name': string, 'email': string, 'password': string}
      */
-    protected function getUserData(): array
+    private function getUserData(): array
     {
         return [
             'name' => $this->options['name'] ?? text(
@@ -109,7 +111,7 @@ final class CreateUserCommand extends Command
         ];
     }
 
-    protected function createUser(): Model&Authenticatable
+    private function createUser(): Model&Authenticatable
     {
         /** @var Model & Authenticatable $user */
         $user = self::getUserModel()::query()->create($this->getUserData());
@@ -117,7 +119,7 @@ final class CreateUserCommand extends Command
         return $user;
     }
 
-    protected function sendSuccessMessage(Model&Authenticatable $user): void
+    private function sendSuccessMessage(Model&Authenticatable $user): void
     {
         $loginUrl = Filament::getLoginUrl();
 
@@ -128,12 +130,12 @@ final class CreateUserCommand extends Command
         );
     }
 
-    protected function getAuthGuard(): Guard
+    private function getAuthGuard(): Guard
     {
         return Filament::auth();
     }
 
-    protected function getUserProvider(): UserProvider
+    private function getUserProvider(): UserProvider
     {
         return $this->getAuthGuard()->getProvider();
     }
@@ -141,7 +143,7 @@ final class CreateUserCommand extends Command
     /**
      * @return class-string<Model & Authenticatable>
      */
-    protected function getUserModel(): string
+    private function getUserModel(): string
     {
         /** @var EloquentUserProvider $provider */
         $provider = $this->getUserProvider();

@@ -10,6 +10,7 @@ use Filament\Resources\Pages\EditRecord;
 
 final class EditService extends EditRecord
 {
+    #[\Override]
     protected static string $resource = ServiceResource::class;
 
     protected function getHeaderActions(): array

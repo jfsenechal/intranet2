@@ -9,5 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateDeclaration extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = DeclarationResource::class;
 }

@@ -18,26 +18,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[UseFactory(IncomingMailFactory::class)]
 #[ScopedBy([DepartmentScope::class])]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-courrier')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'category_id',
+    'reference_number',
+    'sender',
+    'description',
+    'mail_date',
+    'is_notified',
+    'is_registered',
+    'has_acknowledgment',
+    'user_add',
+    'department',
+])]
 final class IncomingMail extends Model
 {
     use HasFactory;
     use HasUserAdd;
     use SoftDeletes;
-
-    protected $connection = 'maria-courrier';
-
-    protected $fillable = [
-        'category_id',
-        'reference_number',
-        'sender',
-        'description',
-        'mail_date',
-        'is_notified',
-        'is_registered',
-        'has_acknowledgment',
-        'user_add',
-        'department',
-    ];
 
     public function category(): BelongsTo
     {

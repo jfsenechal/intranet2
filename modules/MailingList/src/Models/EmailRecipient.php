@@ -12,22 +12,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[UseFactory(EmailRecipientFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mailing-list')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'email_id',
+    'contact_id',
+    'email_address',
+    'name',
+    'status',
+    'error',
+    'sent_at',
+])]
 final class EmailRecipient extends Model
 {
     /** @use HasFactory<EmailRecipientFactory> */
     use HasFactory;
-
-    protected $connection = 'maria-mailing-list';
-
-    protected $fillable = [
-        'email_id',
-        'contact_id',
-        'email_address',
-        'name',
-        'status',
-        'error',
-        'sent_at',
-    ];
 
     /**
      * @return BelongsTo<Email, $this>

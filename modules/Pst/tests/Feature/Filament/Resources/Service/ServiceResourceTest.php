@@ -25,7 +25,7 @@ use Livewire\Livewire;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('pst'));
     $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     $this->adminUser = User::factory()->create();
@@ -34,18 +34,18 @@ beforeEach(function () {
     $this->actingAs($this->adminUser);
 });
 
-describe('page rendering', function () {
-    it('can render the index page', function () {
+describe('page rendering', function (): void {
+    it('can render the index page', function (): void {
         Livewire::test(ListServices::class)
             ->assertOk();
     });
 
-    it('can render the create page', function () {
+    it('can render the create page', function (): void {
         Livewire::test(CreateService::class)
             ->assertOk();
     });
 
-    it('can render the view page', function () {
+    it('can render the view page', function (): void {
         $record = Service::factory()->create();
 
         Livewire::test(ViewService::class, [
@@ -54,7 +54,7 @@ describe('page rendering', function () {
             ->assertOk();
     });
 
-    it('can render the edit page', function () {
+    it('can render the edit page', function (): void {
         $record = Service::factory()->create();
 
         Livewire::test(EditService::class, [
@@ -67,13 +67,13 @@ describe('page rendering', function () {
     });
 });
 
-describe('table columns', function () {
-    it('has column', function (string $column) {
+describe('table columns', function (): void {
+    it('has column', function (string $column): void {
         Livewire::test(ListServices::class)
             ->assertTableColumnExists($column);
     })->with(['name', 'initials', 'users_count']);
 
-    it('can render column', function (string $column) {
+    it('can render column', function (string $column): void {
         Service::factory()->create();
 
         Livewire::test(ListServices::class)
@@ -81,7 +81,7 @@ describe('table columns', function () {
             ->assertCanRenderTableColumn($column);
     })->with(['name']);
 
-    it('can render toggleable column hidden by default', function (string $column) {
+    it('can render toggleable column hidden by default', function (string $column): void {
         Service::factory()->create();
 
         Livewire::test(ListServices::class)
@@ -90,7 +90,7 @@ describe('table columns', function () {
             ->assertCanRenderTableColumn($column);
     })->with(['users_count']);
 
-    it('can sort by name', function () {
+    it('can sort by name', function (): void {
         $records = Service::factory(3)->create();
 
         Livewire::test(ListServices::class)
@@ -99,7 +99,7 @@ describe('table columns', function () {
             ->assertCanSeeTableRecords($records->sortBy('name'), inOrder: true);
     });
 
-    it('can search by name', function () {
+    it('can search by name', function (): void {
         $records = Service::factory(3)->create();
         $searchRecord = $records->first();
 
@@ -110,8 +110,8 @@ describe('table columns', function () {
     });
 });
 
-describe('crud operations', function () {
-    it('can create a service', function () {
+describe('crud operations', function (): void {
+    it('can create a service', function (): void {
         $newData = Service::factory()->make();
 
         Livewire::test(CreateService::class)
@@ -129,7 +129,7 @@ describe('crud operations', function () {
         ]);
     });
 
-    it('can create a service with users', function () {
+    it('can create a service with users', function (): void {
         $newData = Service::factory()->make();
 
         Livewire::test(CreateService::class)
@@ -144,7 +144,7 @@ describe('crud operations', function () {
         expect($service)->not->toBeNull();
     });
 
-    it('can update a service', function () {
+    it('can update a service', function (): void {
         $record = Service::factory()->create();
         $newData = Service::factory()->make();
 
@@ -163,7 +163,7 @@ describe('crud operations', function () {
         ]);
     });
 
-    it('can delete a service', function () {
+    it('can delete a service', function (): void {
         $record = Service::factory()->create();
 
         Livewire::test(ViewService::class, [
@@ -176,7 +176,7 @@ describe('crud operations', function () {
         assertDatabaseMissing($record);
     });
 
-    it('can bulk delete services', function () {
+    it('can bulk delete services', function (): void {
         $records = Service::factory(3)->create();
 
         Livewire::test(ListServices::class)
@@ -191,8 +191,8 @@ describe('crud operations', function () {
     });
 });
 
-describe('form validation', function () {
-    it('validates the form data on create', function (array $data, array $errors) {
+describe('form validation', function (): void {
+    it('validates the form data on create', function (array $data, array $errors): void {
         $newData = Service::factory()->make();
 
         Livewire::test(CreateService::class)
@@ -209,7 +209,7 @@ describe('form validation', function () {
         '`initials` is max 30 characters' => [['initials' => Str::random(31)], ['initials' => 'max']],
     ]);
 
-    it('validates the form data on edit', function (array $data, array $errors) {
+    it('validates the form data on edit', function (array $data, array $errors): void {
         $record = Service::factory()->create();
 
         Livewire::test(EditService::class, [
@@ -228,25 +228,25 @@ describe('form validation', function () {
     ]);
 });
 
-describe('form fields', function () {
-    it('has name field', function () {
+describe('form fields', function (): void {
+    it('has name field', function (): void {
         Livewire::test(CreateService::class)
             ->assertFormFieldExists('name');
     });
 
-    it('has initials field', function () {
+    it('has initials field', function (): void {
         Livewire::test(CreateService::class)
             ->assertFormFieldExists('initials');
     });
 
-    it('has users field', function () {
+    it('has users field', function (): void {
         Livewire::test(CreateService::class)
             ->assertFormFieldExists('users');
     });
 });
 
-describe('department-filtered action counts', function () {
-    it('counts only actions matching selected department', function () {
+describe('department-filtered action counts', function (): void {
+    it('counts only actions matching selected department', function (): void {
         $service = Service::factory()->create();
         $strategicObjective = StrategicObjective::factory()->create();
         $operationalObjective = OperationalObjective::factory()->create([
@@ -274,7 +274,7 @@ describe('department-filtered action counts', function () {
         expect($service->leadingActionsForDepartment()->count())->toBe(1);
     });
 
-    it('filters leading and partnering actions by selected department', function () {
+    it('filters leading and partnering actions by selected department', function (): void {
         $service = Service::factory()->create();
         $strategicObjective = StrategicObjective::factory()->create();
         $operationalObjective = OperationalObjective::factory()->create([

@@ -11,30 +11,28 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'slug',
+    'abbreviation',
+    'direction_id',
+    'employer_id',
+    'address',
+    'postal_code',
+    'city',
+    'email',
+    'phone',
+    'gsm',
+    'notes',
+    'user_add',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'services')]
 final class Service extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
     use HasUserAdd;
     use HasSlug;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'services';
-
-    protected $fillable = [
-        'name',
-        'slug',
-        'abbreviation',
-        'direction_id',
-        'employer_id',
-        'address',
-        'postal_code',
-        'city',
-        'email',
-        'phone',
-        'gsm',
-        'notes',
-        'user_add',
-    ];
 
     public function getSlugOptions(): SlugOptions
     {

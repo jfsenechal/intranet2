@@ -11,6 +11,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class EditPartner extends EditRecord
 {
+    #[\Override]
     protected static string $resource = PartnerResource::class;
 
     public function getTitle(): string|Htmlable

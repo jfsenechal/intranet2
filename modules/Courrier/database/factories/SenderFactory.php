@@ -8,8 +8,12 @@ use AcMarche\Courrier\Models\Sender;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Courrier\Models\Sender>
+ */
 final class SenderFactory extends Factory
 {
+    #[\Override]
     protected $model = Sender::class;
 
     public function definition(): array

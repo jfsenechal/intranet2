@@ -10,6 +10,7 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateStrategicObjective extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = StrategicObjectiveResource::class;
 
     /**

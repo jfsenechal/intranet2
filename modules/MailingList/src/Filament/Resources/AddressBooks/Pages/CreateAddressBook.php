@@ -9,6 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateAddressBook extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = AddressBookResource::class;
 
     public function getTitle(): string

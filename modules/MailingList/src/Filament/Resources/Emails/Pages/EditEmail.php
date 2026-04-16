@@ -11,6 +11,7 @@ use Filament\Resources\Pages\EditRecord;
 
 final class EditEmail extends EditRecord
 {
+    #[\Override]
     protected static string $resource = EmailResource::class;
 
     protected function mutateFormDataBeforeSave(array $data): array

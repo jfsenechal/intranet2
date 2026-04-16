@@ -7,7 +7,7 @@ use AcMarche\Mileage\Dto\DeclarationSummary;
 use AcMarche\Mileage\Models\Declaration;
 use AcMarche\Mileage\Models\Trip;
 
-beforeEach(function () {
+beforeEach(function (): void {
     $this->declaration = Declaration::factory()->create([
         'rate' => 0.40,
         'rate_omnium' => 0.02,
@@ -15,8 +15,8 @@ beforeEach(function () {
     ]);
 });
 
-describe('calculate', function () {
-    test('returns a DeclarationSummary with all calculated values', function () {
+describe('calculate', function (): void {
+    test('returns a DeclarationSummary with all calculated values', function (): void {
         Trip::factory()->create([
             'declaration_id' => $this->declaration->id,
             'distance' => 100,
@@ -47,8 +47,8 @@ describe('calculate', function () {
     });
 });
 
-describe('calculateTotalKilometers', function () {
-    test('sums all trip distances', function () {
+describe('calculateTotalKilometers', function (): void {
+    test('sums all trip distances', function (): void {
         Trip::factory()->create([
             'declaration_id' => $this->declaration->id,
             'distance' => 100,
@@ -71,7 +71,7 @@ describe('calculateTotalKilometers', function () {
         expect($calculator->calculateTotalKilometers())->toBe(225);
     });
 
-    test('returns zero when no trips exist', function () {
+    test('returns zero when no trips exist', function (): void {
         $this->declaration->load('trips');
 
         $calculator = new DeclarationCalculator($this->declaration);
@@ -80,8 +80,8 @@ describe('calculateTotalKilometers', function () {
     });
 });
 
-describe('calculateTotalMileageAllowance', function () {
-    test('multiplies total kilometers by rate', function () {
+describe('calculateTotalMileageAllowance', function (): void {
+    test('multiplies total kilometers by rate', function (): void {
         $this->declaration->load('trips');
 
         $calculator = new DeclarationCalculator($this->declaration);
@@ -90,7 +90,7 @@ describe('calculateTotalMileageAllowance', function () {
             ->and($calculator->calculateTotalMileageAllowance(250))->toBe(100.00);
     });
 
-    test('rounds to 2 decimal places', function () {
+    test('rounds to 2 decimal places', function (): void {
         $declaration = Declaration::factory()->create([
             'rate' => 0.42,
         ]);
@@ -104,8 +104,8 @@ describe('calculateTotalMileageAllowance', function () {
     });
 });
 
-describe('calculateTotalOmnium', function () {
-    test('returns zero when omnium is false', function () {
+describe('calculateTotalOmnium', function (): void {
+    test('returns zero when omnium is false', function (): void {
         $this->declaration->load('trips');
 
         $calculator = new DeclarationCalculator($this->declaration);
@@ -113,7 +113,7 @@ describe('calculateTotalOmnium', function () {
         expect($calculator->calculateTotalOmnium(100))->toBe(0.00);
     });
 
-    test('calculates omnium when omnium is true', function () {
+    test('calculates omnium when omnium is true', function (): void {
         $declaration = Declaration::factory()->create([
             'rate_omnium' => 0.02,
             'omnium' => true,
@@ -127,8 +127,8 @@ describe('calculateTotalOmnium', function () {
     });
 });
 
-describe('calculateTotalRefund', function () {
-    test('subtracts omnium from mileage allowance', function () {
+describe('calculateTotalRefund', function (): void {
+    test('subtracts omnium from mileage allowance', function (): void {
         $this->declaration->load('trips');
 
         $calculator = new DeclarationCalculator($this->declaration);
@@ -137,7 +137,7 @@ describe('calculateTotalRefund', function () {
             ->and($calculator->calculateTotalRefund(50.00, 5.00))->toBe(45.00);
     });
 
-    test('handles zero omnium', function () {
+    test('handles zero omnium', function (): void {
         $this->declaration->load('trips');
 
         $calculator = new DeclarationCalculator($this->declaration);
@@ -146,8 +146,8 @@ describe('calculateTotalRefund', function () {
     });
 });
 
-describe('calculateMealExpense', function () {
-    test('sums all trip meal expenses', function () {
+describe('calculateMealExpense', function (): void {
+    test('sums all trip meal expenses', function (): void {
         Trip::factory()->create([
             'declaration_id' => $this->declaration->id,
             'meal_expense' => 15.50,
@@ -165,7 +165,7 @@ describe('calculateMealExpense', function () {
         expect($calculator->calculateMealExpense())->toBe(35.75);
     });
 
-    test('returns zero when no meal expenses', function () {
+    test('returns zero when no meal expenses', function (): void {
         Trip::factory()->create([
             'declaration_id' => $this->declaration->id,
             'meal_expense' => null,
@@ -179,8 +179,8 @@ describe('calculateMealExpense', function () {
     });
 });
 
-describe('calculateTrainExpense', function () {
-    test('sums all trip train expenses', function () {
+describe('calculateTrainExpense', function (): void {
+    test('sums all trip train expenses', function (): void {
         Trip::factory()->create([
             'declaration_id' => $this->declaration->id,
             'train_expense' => 30.00,
@@ -198,7 +198,7 @@ describe('calculateTrainExpense', function () {
         expect($calculator->calculateTrainExpense())->toBe(75.50);
     });
 
-    test('returns zero when no train expenses', function () {
+    test('returns zero when no train expenses', function (): void {
         Trip::factory()->create([
             'declaration_id' => $this->declaration->id,
             'train_expense' => null,
@@ -212,8 +212,8 @@ describe('calculateTrainExpense', function () {
     });
 });
 
-describe('calculateTotalExpense', function () {
-    test('sums meal and train expenses', function () {
+describe('calculateTotalExpense', function (): void {
+    test('sums meal and train expenses', function (): void {
         $this->declaration->load('trips');
 
         $calculator = new DeclarationCalculator($this->declaration);
@@ -224,8 +224,8 @@ describe('calculateTotalExpense', function () {
     });
 });
 
-describe('DeclarationSummary toArray', function () {
-    test('returns array representation of summary', function () {
+describe('DeclarationSummary toArray', function (): void {
+    test('returns array representation of summary', function (): void {
         $summary = new DeclarationSummary(
             totalKilometers: 150,
             totalMileageAllowance: 60.00,

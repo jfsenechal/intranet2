@@ -22,7 +22,7 @@ final class UsersTable
         return $table
             ->defaultPaginationPageOption(50)
             ->defaultSort('last_name')
-            ->recordUrl(fn (User $record) => UserResource::getUrl('view', [$record]))
+            ->recordUrl(fn (User $record): string => UserResource::getUrl('view', [$record]))
             ->columns([
                 TextColumn::make('last_name')
                     ->label('Nom')

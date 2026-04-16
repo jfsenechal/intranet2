@@ -18,7 +18,7 @@ return new class() extends Migration
             return;
         }
         Schema::connection('maria-mailing-list')->dropIfExists('senders');
-        Schema::connection('maria-mailing-list')->create('senders', function (Blueprint $table) {
+        Schema::connection('maria-mailing-list')->create('senders', function (Blueprint $table): void {
             $table->id();
             $table->string('username')->index();
             $table->string('name');

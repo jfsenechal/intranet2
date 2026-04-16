@@ -25,7 +25,7 @@ use Livewire\Livewire;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('pst'));
     $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     $this->adminUser = User::factory()->create();
@@ -36,18 +36,18 @@ beforeEach(function () {
     $this->strategicObjective = StrategicObjective::factory()->create();
 });
 
-describe('page rendering', function () {
-    it('can render the index page', function () {
+describe('page rendering', function (): void {
+    it('can render the index page', function (): void {
         Livewire::test(ListOperationalObjectives::class)
             ->assertOk();
     });
 
-    it('can render the create page', function () {
+    it('can render the create page', function (): void {
         Livewire::test(CreateOperationalObjective::class)
             ->assertOk();
     });
 
-    it('can render the view page', function () {
+    it('can render the view page', function (): void {
         $record = OperationalObjective::factory()->create([
             'strategic_objective_id' => $this->strategicObjective->id,
         ]);
@@ -58,7 +58,7 @@ describe('page rendering', function () {
             ->assertOk();
     });
 
-    it('can render the edit page', function () {
+    it('can render the edit page', function (): void {
         $record = OperationalObjective::factory()->create([
             'strategic_objective_id' => $this->strategicObjective->id,
         ]);
@@ -73,13 +73,13 @@ describe('page rendering', function () {
     });
 });
 
-describe('table columns', function () {
-    it('has column', function (string $column) {
+describe('table columns', function (): void {
+    it('has column', function (string $column): void {
         Livewire::test(ListOperationalObjectives::class)
             ->assertTableColumnExists($column);
     })->with(['position', 'name', 'actions_count', 'created_at', 'updated_at']);
 
-    it('can render column', function (string $column) {
+    it('can render column', function (string $column): void {
         OperationalObjective::factory()->create([
             'strategic_objective_id' => $this->strategicObjective->id,
         ]);
@@ -89,7 +89,7 @@ describe('table columns', function () {
             ->assertCanRenderTableColumn($column);
     })->with(['position', 'name', 'actions_count']);
 
-    it('can sort by name', function () {
+    it('can sort by name', function (): void {
         $records = OperationalObjective::factory(3)->create([
             'strategic_objective_id' => $this->strategicObjective->id,
         ]);
@@ -100,7 +100,7 @@ describe('table columns', function () {
             ->assertCanSeeTableRecords($records->sortBy('name'), inOrder: true);
     });
 
-    it('can search by name', function () {
+    it('can search by name', function (): void {
         $records = OperationalObjective::factory(3)->create([
             'strategic_objective_id' => $this->strategicObjective->id,
         ]);
@@ -113,8 +113,8 @@ describe('table columns', function () {
     });
 });
 
-describe('crud operations', function () {
-    it('can create an operational objective', function () {
+describe('crud operations', function (): void {
+    it('can create an operational objective', function (): void {
         $newData = OperationalObjective::factory()->make();
 
         Livewire::test(CreateOperationalObjective::class)
@@ -136,7 +136,7 @@ describe('crud operations', function () {
         ]);
     });
 
-    it('can update an operational objective', function () {
+    it('can update an operational objective', function (): void {
         $record = OperationalObjective::factory()->create([
             'strategic_objective_id' => $this->strategicObjective->id,
         ]);
@@ -158,7 +158,7 @@ describe('crud operations', function () {
         ]);
     });
 
-    it('can delete an operational objective', function () {
+    it('can delete an operational objective', function (): void {
         $record = OperationalObjective::factory()->create([
             'strategic_objective_id' => $this->strategicObjective->id,
         ]);
@@ -173,7 +173,7 @@ describe('crud operations', function () {
         assertDatabaseMissing($record);
     });
 
-    it('can bulk delete operational objectives', function () {
+    it('can bulk delete operational objectives', function (): void {
         $records = OperationalObjective::factory(3)->create([
             'strategic_objective_id' => $this->strategicObjective->id,
         ]);
@@ -190,8 +190,8 @@ describe('crud operations', function () {
     });
 });
 
-describe('form validation', function () {
-    it('validates the form data on create', function (array $data, array $errors) {
+describe('form validation', function (): void {
+    it('validates the form data on create', function (array $data, array $errors): void {
         $newData = OperationalObjective::factory()->make();
 
         Livewire::test(CreateOperationalObjective::class)
@@ -209,7 +209,7 @@ describe('form validation', function () {
         '`strategic_objective_id` is required' => [['strategic_objective_id' => null], ['strategic_objective_id' => 'required']],
     ]);
 
-    it('validates the form data on edit', function (array $data, array $errors) {
+    it('validates the form data on edit', function (array $data, array $errors): void {
         $record = OperationalObjective::factory()->create([
             'strategic_objective_id' => $this->strategicObjective->id,
         ]);
@@ -230,20 +230,20 @@ describe('form validation', function () {
     ]);
 });
 
-describe('form fields', function () {
-    it('has name field', function () {
+describe('form fields', function (): void {
+    it('has name field', function (): void {
         Livewire::test(CreateOperationalObjective::class)
             ->assertFormFieldExists('name');
     });
 
-    it('has strategic_objective_id field', function () {
+    it('has strategic_objective_id field', function (): void {
         Livewire::test(CreateOperationalObjective::class)
             ->assertFormFieldExists('strategic_objective_id');
     });
 });
 
-describe('relation manager', function () {
-    it('can render the ActionsRelationManager', function () {
+describe('relation manager', function (): void {
+    it('can render the ActionsRelationManager', function (): void {
         $record = OperationalObjective::factory()->create([
             'strategic_objective_id' => $this->strategicObjective->id,
         ]);
@@ -258,7 +258,7 @@ describe('relation manager', function () {
             ->assertOk();
     });
 
-    it('can list actions in relation manager', function () {
+    it('can list actions in relation manager', function (): void {
         $record = OperationalObjective::factory()->create([
             'strategic_objective_id' => $this->strategicObjective->id,
         ]);

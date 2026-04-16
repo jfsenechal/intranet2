@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 
 final class CreateUser extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = UserResource::class;
 
     public function getTitle(): string

@@ -14,7 +14,7 @@ final class IncomingMailPolicy
     /**
      * Perform pre-authorization checks.
      */
-    public function before(User $user, string $ability): ?bool
+    public function before(User $user): ?bool
     {
         if ($user->isAdministrator()) {
             return true;
@@ -26,7 +26,7 @@ final class IncomingMailPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(): bool
     {
         return true;
     }
@@ -39,12 +39,7 @@ final class IncomingMailPolicy
         if ($this->isRecipientOfMail($user, $incomingMail)) {
             return true;
         }
-
-        if ($this->isMemberOfLinkedService($user, $incomingMail)) {
-            return true;
-        }
-
-        return false;
+        return $this->isMemberOfLinkedService($user, $incomingMail);
     }
 
     /**
@@ -58,7 +53,7 @@ final class IncomingMailPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, IncomingMail $incomingMail): bool
+    public function update(User $user): bool
     {
         return $this->isAdministrator($user);
     }
@@ -66,7 +61,7 @@ final class IncomingMailPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, IncomingMail $incomingMail): bool
+    public function delete(User $user): bool
     {
         return $this->isAdministrator($user);
     }
@@ -74,7 +69,7 @@ final class IncomingMailPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, IncomingMail $incomingMail): bool
+    public function restore(): bool
     {
         return false;
     }
@@ -82,24 +77,20 @@ final class IncomingMailPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, IncomingMail $incomingMail): bool
+    public function forceDelete(): bool
     {
         return false;
     }
 
     private function isAdministrator(User $user): bool
     {
-        if ($user->hasOneOfThisRoles(
+        return $user->hasOneOfThisRoles(
             [
                 RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN,
                 RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN,
                 RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_ADMIN,
             ]
-        )) {
-            return true;
-        }
-
-        return false;
+        );
     }
 
     /**

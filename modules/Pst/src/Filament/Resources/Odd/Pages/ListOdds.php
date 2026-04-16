@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 final class ListOdds extends ListRecords
 {
+    #[\Override]
     protected static string $resource = OddResource::class;
 
     public function getModelLabel(): string

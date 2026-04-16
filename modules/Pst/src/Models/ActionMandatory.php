@@ -8,15 +8,15 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'username',
+    'action_id',
+])]
 final class ActionMandatory extends Model
 {
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'username',
-        'action_id',
-    ];
-
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    #[\Override]
     protected $casts = [
     ];
 

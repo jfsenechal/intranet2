@@ -14,6 +14,10 @@ use function chr;
 
 final class MeiliIndexer
 {
+    public $courrierRepository;
+    public $courrierDestinataireRepository;
+    public $courrierServiceRepository;
+    public $ocr;
     use MeiliTrait;
 
     private string $primaryKey = 'id';
@@ -21,11 +25,11 @@ final class MeiliIndexer
     public static function cleandata($data): string
     {
         $data = preg_replace('#&nbsp;#', ' ', (string) $data);
-        $data = preg_replace('#&amp;#', ' ', $data); // &
-        $data = preg_replace('#&#', ' ', $data);
-        $data = preg_replace('#<#', '', $data);
-        $data = preg_replace('#’#', "'", $data);
-        $data = preg_replace(["#\(#", "#\)#"], '', $data);
+        $data = preg_replace('#&amp;#', ' ', (string) $data); // &
+        $data = preg_replace('#&#', ' ', (string) $data);
+        $data = preg_replace('#<#', '', (string) $data);
+        $data = preg_replace('#’#', "'", (string) $data);
+        $data = preg_replace(["#\(#", "#\)#"], '', (string) $data);
         $special_chars = [
             '?',
             '[',
@@ -114,8 +118,8 @@ final class MeiliIndexer
         $document['id'] = $courrier->getId();
         $document['idSearch'] = MeiliServer::createKey($courrier->getId());
         $document['numero'] = $courrier->numero;
-        $document['description'] = $this->cleandata($courrier->description);
-        $document['expediteur'] = $this->cleandata($courrier->expediteur);
+        $document['description'] = self::cleandata($courrier->description);
+        $document['expediteur'] = self::cleandata($courrier->expediteur);
         $document['destinataires'] = $destinatairesId;
         $document['services'] = $servicesId;
         $document['original'] = $original; // pour affichage
@@ -123,7 +127,7 @@ final class MeiliIndexer
         $document['recommande'] = $courrier->recommande;
         $document['date_courrier'] = $courrier->date_courrier->format('Y-m-d');
         $date = $courrier->date_courrier;
-        $dateCourrier = Carbon::createFromDate(
+        $dateCourrier = \Illuminate\Support\Facades\Date::createFromDate(
             $date->format('Y'),
             $date->format('m'),
             $date->format('d'),
@@ -133,7 +137,7 @@ final class MeiliIndexer
         $content = '';
         $ocrFile = $this->ocr->ocrFile($courrier);
         if (file_exists($ocrFile)) {
-            $content = $this->cleandata(file_get_contents($ocrFile));
+            $content = self::cleandata(file_get_contents($ocrFile));
         }
         $document['content'] = $content;
 
@@ -153,10 +157,5 @@ final class MeiliIndexer
         $this->init(config('courrier.meilisearch.index_name'));
         $index = $this->client->index($this->indexName);
         $index->deleteDocument(MeiliServer::createKey($id));
-    }
-
-    private static function createKey(int $id): string
-    {
-        return 'courrier-'.$id;
     }
 }

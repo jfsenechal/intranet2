@@ -14,11 +14,13 @@ use Filament\Tables\Table;
 
 final class DeclarationResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Declaration::class;
 
+    #[\Override]
     protected static ?int $navigationSort = 2;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-document-duplicate';
     }

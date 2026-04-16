@@ -32,8 +32,7 @@ final class DeclarationRepository
     {
         return Declaration::query()
             ->with('trips')
-            ->where('user_add', $username)
-            ->orderBy('created_at', 'desc')
+            ->where('user_add', $username)->latest()
             ->get();
     }
 
@@ -106,8 +105,8 @@ final class DeclarationRepository
         return Declaration::query()
             ->with('trips')
             ->whereYear('created_at', $year)
-            ->when($departments, function ($query, $departments) {
-                $query->where(function ($q) use ($departments) {
+            ->when($departments, function ($query, $departments): void {
+                $query->where(function ($q) use ($departments): void {
                     foreach ($departments as $department) {
                         // Handle both plain text and JSON array formats
                         $q->orWhere('departments', $department)

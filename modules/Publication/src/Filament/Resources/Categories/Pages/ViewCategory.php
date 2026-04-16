@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ViewRecord;
 
 final class ViewCategory extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = CategoryResource::class;
 
     public function getTitle(): string

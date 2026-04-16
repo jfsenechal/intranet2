@@ -7,17 +7,16 @@ namespace AcMarche\Hrm\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'health_insurances')]
 final class HealthInsurance extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    #[\Override]
     public $timestamps = false;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'health_insurances';
-
-    protected $fillable = [
-        'name',
-    ];
 
     /**
      * @return HasMany<Employee>

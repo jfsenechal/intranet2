@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 final class ListContractTypes extends ListRecords
 {
+    #[\Override]
     protected static string $resource = ContractTypeResource::class;
 
     protected function getHeaderActions(): array

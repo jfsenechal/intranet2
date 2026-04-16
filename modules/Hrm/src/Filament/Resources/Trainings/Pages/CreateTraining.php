@@ -9,5 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateTraining extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = TrainingResource::class;
 }

@@ -8,18 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'slug',
+    'parent_id',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'employers')]
 final class Employer extends Model
 {
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'employers';
-
-    protected $fillable = [
-        'name',
-        'slug',
-        'parent_id',
-    ];
-
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
     /**
      * @return BelongsTo<Employer>
      */

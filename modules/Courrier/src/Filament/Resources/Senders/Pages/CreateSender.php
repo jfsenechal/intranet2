@@ -9,6 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateSender extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = SenderResource::class;
 
     public function canCreateAnother(): bool

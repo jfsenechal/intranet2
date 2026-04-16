@@ -8,8 +8,12 @@ use AcMarche\Courrier\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Courrier\Models\Service>
+ */
 final class ServiceFactory extends Factory
 {
+    #[\Override]
     protected $model = Service::class;
 
     public function definition(): array

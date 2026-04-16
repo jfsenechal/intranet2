@@ -14,13 +14,16 @@ use UnitEnum;
 
 final class DirectionResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Direction::class;
 
+    #[\Override]
     protected static string|null|UnitEnum $navigationGroup = 'Organisation';
 
+    #[\Override]
     protected static ?int $navigationSort = 1;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-building-office';
     }

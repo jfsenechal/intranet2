@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ViewRecord;
 
 final class ViewContract extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = ContractResource::class;
 
     protected function getHeaderActions(): array

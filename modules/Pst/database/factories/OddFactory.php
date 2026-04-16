@@ -7,8 +7,12 @@ namespace AcMarche\Pst\Database\Factories;
 use AcMarche\Pst\Models\Odd;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Pst\Models\Odd>
+ */
 final class OddFactory extends Factory
 {
+    #[\Override]
     protected $model = Odd::class;
 
     /**

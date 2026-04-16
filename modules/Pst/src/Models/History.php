@@ -12,13 +12,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 
 #[UseFactory(HistoryFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable(['action_id', 'body', 'property', 'old_value', 'new_value', 'user_add'])]
 final class History extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['action_id', 'body', 'property', 'old_value', 'new_value', 'user_add'];
-
-    protected $connection = 'maria-pst';
 
     /**
      * Get the action that owns the followup
@@ -30,7 +28,7 @@ final class History extends Model
 
     protected static function booted(): void
     {
-        self::creating(function (self $model) {
+        self::creating(function (self $model): void {
             if (Auth::check()) {
                 $model->user_add = Auth::user()->username;
             }

@@ -10,6 +10,7 @@ use Filament\Resources\Pages\EditRecord;
 
 final class EditPrerequisite extends EditRecord
 {
+    #[\Override]
     protected static string $resource = PrerequisiteResource::class;
 
     protected function getHeaderActions(): array

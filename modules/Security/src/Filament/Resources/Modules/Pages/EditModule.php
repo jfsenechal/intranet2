@@ -11,6 +11,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class EditModule extends EditRecord
 {
+    #[\Override]
     protected static string $resource = ModuleResource::class;
 
     public function getTitle(): string|Htmlable

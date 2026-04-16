@@ -18,33 +18,29 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 #[ObservedBy([NewsObserver::class])]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-news')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'title',
+    'slug',
+    'excerpt',
+    'content',
+    'author',
+    'category',
+    'name',
+    'content',
+    'end_date',
+    'archive',
+    'user_add',
+    'department',
+    'category_id',
+    'medias',
+])]
 final class News extends Model
 {
     use HasFactory;
     use HasUserAdd;
     use Prunable;
     use HasSlug;
-
-    // use SoftDeletes;
-
-    protected $connection = 'maria-news';
-
-    protected $fillable = [
-        'title',
-        'slug',
-        'excerpt',
-        'content',
-        'author',
-        'category',
-        'name',
-        'content',
-        'end_date',
-        'archive',
-        'user_add',
-        'department',
-        'category_id',
-        'medias',
-    ];
 
     public function getSlugOptions(): SlugOptions
     {
@@ -64,8 +60,6 @@ final class News extends Model
     public function prunable(): Builder
     {
         return self::query()->where('published_at', '<', now()->subDays(720));
-        // Console Kernel.php
-        $schedule->command('news:prune')->daily();
     }
 
     protected static function booted(): void

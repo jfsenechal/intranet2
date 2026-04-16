@@ -18,13 +18,16 @@ use UnitEnum;
 
 final class PayScaleResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = PayScale::class;
 
+    #[\Override]
     protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
+    #[\Override]
     protected static ?int $navigationSort = 6;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-scale';
     }

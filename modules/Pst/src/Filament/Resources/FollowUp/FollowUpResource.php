@@ -14,10 +14,13 @@ use Filament\Tables\Table;
 
 final class FollowUpResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = FollowUp::class;
 
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    #[\Override]
     protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Schema $schema): Schema

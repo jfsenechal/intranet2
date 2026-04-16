@@ -13,10 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection($this->connection)->hasTable('evaluation')) {
-            Schema::connection($this->connection)->table('evaluation', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('evaluation', function (Blueprint $table): void {
                 $table->rename('evaluations');
             });
-            Schema::connection($this->connection)->table('evaluations', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('evaluations', function (Blueprint $table): void {
                 $table->renameColumn('employe_id', 'employee_id');
                 $table->renameColumn('date_evaluation', 'evaluation_date');
                 $table->renameColumn('date_prochaine', 'next_evaluation_date');
@@ -30,7 +30,7 @@ return new class extends Migration
                 $table->renameColumn('updateBy', 'updated_by');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('evaluations')) {
-            Schema::connection($this->connection)->create('evaluations', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('evaluations', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id');
                 $table->foreignId('direction_id')->nullable();

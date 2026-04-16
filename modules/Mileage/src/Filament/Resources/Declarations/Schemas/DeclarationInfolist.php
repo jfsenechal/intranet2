@@ -202,7 +202,7 @@ final class DeclarationInfolist
         if (self::canDetachTrip()) {
             $schema[] = TextEntry::make('id')
                 ->hiddenLabel()
-                ->formatStateUsing(fn () => '')
+                ->formatStateUsing(fn (): string => '')
                 ->afterContent(
                     Action::make('detach')
                         ->label('Détacher')
@@ -233,7 +233,9 @@ final class DeclarationInfolist
         if ($user === null) {
             return false;
         }
-
-        return $user->isAdministrator() || $user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value);
+        if ($user->isAdministrator()) {
+            return true;
+        }
+        return (bool) $user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value);
     }
 }

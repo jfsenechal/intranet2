@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 final class TripFactory extends Factory
 {
+    #[\Override]
     protected $model = Trip::class;
 
     /**

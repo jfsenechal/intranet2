@@ -16,7 +16,7 @@ return new class extends Migration
     public function up(): void
     {
         if (! Schema::connection('maria-news')->hasColumn('news', 'name')) {
-            Schema::connection('maria-news')->table('news', function (Blueprint $table) {
+            Schema::connection('maria-news')->table('news', function (Blueprint $table): void {
                 // Rename old columns to new Laravel convention names
                 $table->renameColumn('titre', 'name');
                 $table->renameColumn('categorie_id', 'category_id');
@@ -45,10 +45,10 @@ return new class extends Migration
         }
 
         if (! Schema::connection('maria-news')->hasTable('categories')) {
-            Schema::connection('maria-news')->table('categorie', function (Blueprint $table) {
+            Schema::connection('maria-news')->table('categorie', function (Blueprint $table): void {
                 $table->rename('categories');
             });
-            Schema::connection('maria-news')->table('categories', function (Blueprint $table) {
+            Schema::connection('maria-news')->table('categories', function (Blueprint $table): void {
                 $table->renameColumn('nom', 'name');
                 $table->renameColumn('couleur', 'color');
                 $table->renameColumn('icone', 'icon');

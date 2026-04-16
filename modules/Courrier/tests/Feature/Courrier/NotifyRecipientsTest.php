@@ -18,12 +18,12 @@ use Illuminate\Support\Facades\Queue;
 
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('courrier-panel'));
 });
 
-describe('NotifyRecipients Page Access', function () {
-    test('admin user can access notify recipients page', function () {
+describe('NotifyRecipients Page Access', function (): void {
+    test('admin user can access notify recipients page', function (): void {
         $admin = User::factory()->create(['is_administrator' => true]);
 
         $this->actingAs($admin)
@@ -31,7 +31,7 @@ describe('NotifyRecipients Page Access', function () {
             ->assertSuccessful();
     });
 
-    test('user with ROLE_INDICATEUR_VILLE_ADMIN can access notify recipients page', function () {
+    test('user with ROLE_INDICATEUR_VILLE_ADMIN can access notify recipients page', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN->value]);
         $user->addRole($role);
@@ -41,7 +41,7 @@ describe('NotifyRecipients Page Access', function () {
             ->assertSuccessful();
     });
 
-    test('regular user cannot access notify recipients page', function () {
+    test('regular user cannot access notify recipients page', function (): void {
         $user = User::factory()->create();
 
         $this->actingAs($user)
@@ -49,14 +49,14 @@ describe('NotifyRecipients Page Access', function () {
             ->assertForbidden();
     });
 
-    test('guest cannot access notify recipients page', function () {
+    test('guest cannot access notify recipients page', function (): void {
         $this->get(NotifyRecipients::getUrl())
             ->assertForbidden();
     });
 });
 
-describe('NotifyRecipients Page Display', function () {
-    test('notify recipients page displays correct title', function () {
+describe('NotifyRecipients Page Display', function (): void {
+    test('notify recipients page displays correct title', function (): void {
         $admin = User::factory()->create(['is_administrator' => true]);
 
         $this->actingAs($admin)
@@ -64,7 +64,7 @@ describe('NotifyRecipients Page Display', function () {
             ->assertSee('Notifier les destinataires');
     });
 
-    test('notify recipients page shows incoming mails for selected date', function () {
+    test('notify recipients page shows incoming mails for selected date', function (): void {
         $admin = User::factory()->create(['is_administrator' => true]);
 
         $mail = IncomingMail::factory()->create([
@@ -80,7 +80,7 @@ describe('NotifyRecipients Page Display', function () {
             ->assertCanSeeTableRecords([$mail]);
     });
 
-    test('notify recipients page does not show already notified mails', function () {
+    test('notify recipients page does not show already notified mails', function (): void {
         $admin = User::factory()->create(['is_administrator' => true]);
 
         $notifiedMail = IncomingMail::factory()->create([
@@ -97,8 +97,8 @@ describe('NotifyRecipients Page Display', function () {
     });
 });
 
-describe('SendIncomingMailNotificationJob', function () {
-    test('job dispatches mail to recipients', function () {
+describe('SendIncomingMailNotificationJob', function (): void {
+    test('job dispatches mail to recipients', function (): void {
         Mail::fake();
         Queue::fake();
 
@@ -112,12 +112,12 @@ describe('SendIncomingMailNotificationJob', function () {
         ]);
         $mail->recipients()->attach($recipient->id, ['is_primary' => true]);
 
-        SendIncomingMailNotificationJob::dispatch(Carbon::now());
+        dispatch(new \AcMarche\Courrier\Jobs\SendIncomingMailNotificationJob(\Illuminate\Support\Facades\Date::now()));
 
         Queue::assertPushed(SendIncomingMailNotificationJob::class);
     });
 
-    test('job does not send to recipients without email', function () {
+    test('job does not send to recipients without email', function (): void {
         Mail::fake();
 
         Recipient::factory()->create([
@@ -129,13 +129,13 @@ describe('SendIncomingMailNotificationJob', function () {
             'is_notified' => false,
         ]);
 
-        $job = new SendIncomingMailNotificationJob(Carbon::now());
+        $job = new SendIncomingMailNotificationJob(\Illuminate\Support\Facades\Date::now());
         $job->handle();
 
         Mail::assertNothingQueued();
     });
 
-    test('recipient with index role receives all mails', function () {
+    test('recipient with index role receives all mails', function (): void {
         Mail::fake();
 
         $user = User::factory()->create(['username' => 'indexuser']);
@@ -153,15 +153,13 @@ describe('SendIncomingMailNotificationJob', function () {
             'is_notified' => false,
         ]);
 
-        $job = new SendIncomingMailNotificationJob(Carbon::now());
+        $job = new SendIncomingMailNotificationJob(\Illuminate\Support\Facades\Date::now());
         $job->handle();
 
-        Mail::assertQueued(IncomingMailNotification::class, function ($mail) use ($recipient) {
-            return $mail->hasTo($recipient->email) && $mail->incomingMails->count() === 1;
-        });
+        Mail::assertQueued(IncomingMailNotification::class, fn($mail) => $mail->hasTo($recipient->email) && $mail->incomingMails->count() === 1);
     });
 
-    test('regular recipient only receives mails where they are assigned', function () {
+    test('regular recipient only receives mails where they are assigned', function (): void {
         Mail::fake();
 
         $recipient = Recipient::factory()->create([
@@ -186,15 +184,13 @@ describe('SendIncomingMailNotificationJob', function () {
         ]);
         $unassignedMail->recipients()->attach($otherRecipient->id, ['is_primary' => true]);
 
-        $job = new SendIncomingMailNotificationJob(Carbon::now());
+        $job = new SendIncomingMailNotificationJob(\Illuminate\Support\Facades\Date::now());
         $job->handle();
 
-        Mail::assertQueued(IncomingMailNotification::class, function ($mail) use ($recipient) {
-            return $mail->hasTo($recipient->email) && $mail->incomingMails->count() === 1;
-        });
+        Mail::assertQueued(IncomingMailNotification::class, fn($mail) => $mail->hasTo($recipient->email) && $mail->incomingMails->count() === 1);
     });
 
-    test('recipient receives mails through service membership', function () {
+    test('recipient receives mails through service membership', function (): void {
         Mail::fake();
 
         $service = Service::factory()->create();
@@ -209,15 +205,13 @@ describe('SendIncomingMailNotificationJob', function () {
         ]);
         $mail->services()->attach($service->id, ['is_primary' => true]);
 
-        $job = new SendIncomingMailNotificationJob(Carbon::now());
+        $job = new SendIncomingMailNotificationJob(\Illuminate\Support\Facades\Date::now());
         $job->handle();
 
-        Mail::assertQueued(IncomingMailNotification::class, function ($mailable) use ($recipient) {
-            return $mailable->hasTo($recipient->email);
-        });
+        Mail::assertQueued(IncomingMailNotification::class, fn($mailable) => $mailable->hasTo($recipient->email));
     });
 
-    test('mail is marked as notified after sending', function () {
+    test('mail is marked as notified after sending', function (): void {
         Mail::fake();
 
         $recipient = Recipient::factory()->create([
@@ -230,13 +224,13 @@ describe('SendIncomingMailNotificationJob', function () {
         ]);
         $mail->recipients()->attach($recipient->id, ['is_primary' => true]);
 
-        $job = new SendIncomingMailNotificationJob(Carbon::now());
+        $job = new SendIncomingMailNotificationJob(\Illuminate\Support\Facades\Date::now());
         $job->handle();
 
         expect($mail->fresh()->is_notified)->toBeTrue();
     });
 
-    test('attachments are included when recipient has receives_attachments flag', function () {
+    test('attachments are included when recipient has receives_attachments flag', function (): void {
         Mail::fake();
 
         $recipient = Recipient::factory()->receivesAttachments()->create([
@@ -249,15 +243,13 @@ describe('SendIncomingMailNotificationJob', function () {
         ]);
         $mail->recipients()->attach($recipient->id, ['is_primary' => true]);
 
-        $job = new SendIncomingMailNotificationJob(Carbon::now());
+        $job = new SendIncomingMailNotificationJob(\Illuminate\Support\Facades\Date::now());
         $job->handle();
 
-        Mail::assertQueued(IncomingMailNotification::class, function ($mailable) {
-            return $mailable->includeAttachments === true;
-        });
+        Mail::assertQueued(IncomingMailNotification::class, fn($mailable) => $mailable->includeAttachments === true);
     });
 
-    test('attachments are not included when recipient does not have receives_attachments flag', function () {
+    test('attachments are not included when recipient does not have receives_attachments flag', function (): void {
         Mail::fake();
 
         $recipient = Recipient::factory()->create([
@@ -271,17 +263,15 @@ describe('SendIncomingMailNotificationJob', function () {
         ]);
         $mail->recipients()->attach($recipient->id, ['is_primary' => true]);
 
-        $job = new SendIncomingMailNotificationJob(Carbon::now());
+        $job = new SendIncomingMailNotificationJob(\Illuminate\Support\Facades\Date::now());
         $job->handle();
 
-        Mail::assertQueued(IncomingMailNotification::class, function ($mailable) {
-            return $mailable->includeAttachments === false;
-        });
+        Mail::assertQueued(IncomingMailNotification::class, fn($mailable) => $mailable->includeAttachments === false);
     });
 });
 
-describe('IncomingMailNotification Mailable', function () {
-    test('mailable has correct subject', function () {
+describe('IncomingMailNotification Mailable', function (): void {
+    test('mailable has correct subject', function (): void {
         $recipient = Recipient::factory()->create();
         $mails = collect([IncomingMail::factory()->create()]);
 
@@ -290,7 +280,7 @@ describe('IncomingMailNotification Mailable', function () {
         expect($mailable->envelope()->subject)->toBe('Notification de courriers entrants');
     });
 
-    test('mailable uses correct view', function () {
+    test('mailable uses correct view', function (): void {
         $recipient = Recipient::factory()->create();
         $mails = collect([IncomingMail::factory()->create()]);
 
@@ -299,7 +289,7 @@ describe('IncomingMailNotification Mailable', function () {
         expect($mailable->content()->html)->toBe('courrier::mail.incoming-mail-notification');
     });
 
-    test('mailable returns empty attachments when includeAttachments is false', function () {
+    test('mailable returns empty attachments when includeAttachments is false', function (): void {
         $recipient = Recipient::factory()->create();
         $mails = collect([IncomingMail::factory()->create()]);
 

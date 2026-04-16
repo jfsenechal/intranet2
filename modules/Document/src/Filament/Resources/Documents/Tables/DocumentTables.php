@@ -25,7 +25,7 @@ final class DocumentTables
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->label('Intitulé')
-                    ->url(fn (Document $record) => DocumentResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (Document $record): string => DocumentResource::getUrl('view', ['record' => $record->id])),
                 Tables\Columns\TextColumn::make('category.name')
                     ->searchable()
                     ->label('Catégorie'),

@@ -16,24 +16,23 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 #[UseFactory(RecipientFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-courrier')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'supervisor_id',
+    'slug',
+    'last_name',
+    'first_name',
+    'username',
+    'email',
+    'receives_attachments',
+])]
 final class Recipient extends Model
 {
     use HasFactory;
     use HasSlug;
 
+    #[\Override]
     public $timestamps = false;
-
-    protected $connection = 'maria-courrier';
-
-    protected $fillable = [
-        'supervisor_id',
-        'slug',
-        'last_name',
-        'first_name',
-        'username',
-        'email',
-        'receives_attachments',
-    ];
 
     public function getSlugOptions(): SlugOptions
     {
@@ -62,7 +61,7 @@ final class Recipient extends Model
         return $this->belongsToMany(Service::class, 'recipient_service');
     }
 
-    public function getFullNameAttribute(): string
+    protected function getFullNameAttribute(): string
     {
         return "{$this->first_name} {$this->last_name}";
     }

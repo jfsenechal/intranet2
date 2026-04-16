@@ -9,21 +9,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'title',
+    'object_id',
+    'object_type',
+    'employer_id',
+    'user_add',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'hr_notifications')]
 final class HrNotification extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
     use HasUserAdd;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'hr_notifications';
-
-    protected $fillable = [
-        'title',
-        'object_id',
-        'object_type',
-        'employer_id',
-        'user_add',
-    ];
 
     /**
      * @return BelongsTo<Employer>

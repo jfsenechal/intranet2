@@ -18,7 +18,7 @@ trait ModuleServiceProviderTrait
      */
     protected function modulePath(): string
     {
-        $reflector = new ReflectionClass(get_class($this));
+        $reflector = new ReflectionClass($this::class);
 
         return dirname($reflector->getFileName()).($path ?? '').'/../..';
     }

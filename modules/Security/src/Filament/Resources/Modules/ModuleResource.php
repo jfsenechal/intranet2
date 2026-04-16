@@ -20,11 +20,13 @@ use Filament\Tables\Table;
 
 final class ModuleResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Module::class;
 
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): string
     {
         return NavigationGroupEnum::SETTINGS->getLabel();
     }

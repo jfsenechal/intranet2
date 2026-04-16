@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 final class ListIncomingMails extends ListRecords
 {
+    #[\Override]
     protected static string $resource = IncomingMailResource::class;
 
     protected function getHeaderActions(): array

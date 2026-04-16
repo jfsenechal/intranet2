@@ -19,12 +19,16 @@ use Filament\Tables\Table;
 
 final class CategoryResource extends Resource
 {
+    #[\Override]
     protected static ?string $model = Category::class;
 
+    #[\Override]
     protected static ?int $navigationSort = 2;
 
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    #[\Override]
     protected static ?string $navigationLabel = 'Catégories';
 
     public static function form(Schema $schema): Schema

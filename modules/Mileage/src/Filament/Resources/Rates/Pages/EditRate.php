@@ -11,9 +11,10 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class EditRate extends EditRecord
 {
+    #[\Override]
     protected static string $resource = RateResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return "Modification d'un tarif";
     }

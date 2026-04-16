@@ -14,32 +14,30 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[UseFactory(DeclarationFactory::class)]
+#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mileage')]
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'omnium',
+    'iban',
+    'car_license_plate1',
+    'car_license_plate2',
+    'last_name',
+    'first_name',
+    'street',
+    'postal_code',
+    'city',
+    'rate',
+    'rate_omnium',
+    'user_add',
+    'type_movement',
+    'college_date',
+    'budget_article',
+    'departments',
+])]
 final class Declaration extends Model
 {
     use HasFactory;
     use HasUserAdd;
     use SoftDeletes;
-
-    protected $connection = 'maria-mileage';
-
-    protected $fillable = [
-        'omnium',
-        'iban',
-        'car_license_plate1',
-        'car_license_plate2',
-        'last_name',
-        'first_name',
-        'street',
-        'postal_code',
-        'city',
-        'rate',
-        'rate_omnium',
-        'user_add',
-        'type_movement',
-        'college_date',
-        'budget_article',
-        'departments',
-    ];
 
     /**
      * @return BelongsTo<BudgetArticle, Declaration>

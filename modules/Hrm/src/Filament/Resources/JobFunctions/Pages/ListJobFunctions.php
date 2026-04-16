@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ListRecords;
 
 final class ListJobFunctions extends ListRecords
 {
+    #[\Override]
     protected static string $resource = JobFunctionResource::class;
 
     protected function getHeaderActions(): array

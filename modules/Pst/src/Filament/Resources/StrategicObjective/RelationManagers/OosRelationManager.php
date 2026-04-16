@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 final class OosRelationManager extends RelationManager
 {
+    #[\Override]
     protected static string $relationship = 'oos';
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string

@@ -59,7 +59,7 @@ final class NewsForm
                             ->suffixIcon('tabler-ladder'),
                         Forms\Components\DatePicker::make('end_date')
                             ->label('Date de fin de publication')
-                            ->default(Carbon::make('now')->add('2 weeks'))
+                            ->default(\Illuminate\Support\Facades\Date::make('now')->add('2 weeks'))
                             ->required()
                             ->suffixIcon('tabler-calendar-stats'),
 

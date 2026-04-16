@@ -16,6 +16,7 @@ use Filament\Schemas\Schema;
 
 final class ViewPartner extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = PartnerResource::class;
 
     public function getTitle(): string

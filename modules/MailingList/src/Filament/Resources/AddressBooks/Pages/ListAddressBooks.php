@@ -12,6 +12,7 @@ use Filament\Support\Icons\Heroicon;
 
 final class ListAddressBooks extends ListRecords
 {
+    #[\Override]
     protected static string $resource = AddressBookResource::class;
 
     protected function getHeaderActions(): array

@@ -11,14 +11,15 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class ListServices extends ListRecords
 {
+    #[\Override]
     protected static string $resource = ServiceResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' services';
     }
 
-    public function getSubheading(): string|Htmlable|null
+    public function getSubheading(): string
     {
         return 'Services ou groupes de destinataires';
     }

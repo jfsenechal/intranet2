@@ -14,12 +14,16 @@ use Illuminate\Support\Collection;
 
 final class Homepage extends Page
 {
+    #[\Override]
     protected static string|null|BackedEnum $navigationIcon = Heroicon::DocumentText;
 
+    #[\Override]
     protected string $view = 'filament.pages.home';
 
+    #[\Override]
     protected static ?string $navigationLabel = 'Accueil';
 
+    #[\Override]
     protected static ?int $navigationSort = 1;
 
     public static function getNavigationLabel(): string
@@ -40,7 +44,7 @@ final class Homepage extends Page
         return MigrationHandler::getTabsWithModules();
     }
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Accueil ';
     }
@@ -50,12 +54,12 @@ final class Homepage extends Page
         return self::$layout ?? 'filament-panels::components.layout.base';
     }
 
-    public function getMaxContentWidth(): Width|null|string
+    public function getMaxContentWidth(): \Filament\Support\Enums\Width
     {
         return Width::Screen;
     }
 
-    public function getColumns(): int|string|array
+    public function getColumns(): int
     {
         return 2;
     }

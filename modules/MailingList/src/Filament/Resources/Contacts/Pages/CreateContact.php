@@ -9,7 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateContact extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = ContactResource::class;
 
+    #[\Override]
     protected static ?string $title = 'Nouveau contact';
 }

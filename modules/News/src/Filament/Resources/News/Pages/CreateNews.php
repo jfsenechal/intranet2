@@ -10,6 +10,7 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateNews extends CreateRecord
 {
+    #[\Override]
     protected static string $resource = NewsResource::class;
 
     public function canCreateAnother(): bool
@@ -24,6 +25,6 @@ final class CreateNews extends CreateRecord
 
     protected function afterCreate(): void
     {
-        NewsProcessed::dispatch($this->record);
+        event(new \AcMarche\News\Events\NewsProcessed($this->record));
     }
 }

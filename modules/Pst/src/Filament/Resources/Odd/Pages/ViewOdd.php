@@ -13,6 +13,7 @@ use Filament\Schemas\Schema;
 
 final class ViewOdd extends ViewRecord
 {
+    #[\Override]
     protected static string $resource = OddResource::class;
 
     public function getTitle(): string

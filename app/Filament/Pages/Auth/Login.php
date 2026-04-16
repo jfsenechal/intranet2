@@ -29,12 +29,12 @@ final class Login extends BasePage
         }
     }
 
-    public function getHeading(): string|Htmlable|null
+    public function getHeading(): string
     {
         return 'Bienvenue sur l\'intranet';
     }
 
-    public function getSubheading(): string|Htmlable|null
+    public function getSubheading(): string
     {
         return 'Bon travail 🐿🌷';
     }
@@ -51,7 +51,7 @@ final class Login extends BasePage
 
         $data = $this->form->getState();
 
-        if (! $user = LdapAuthService::checkPassword($data['email'], $data['password'])) {
+        if (!($user = LdapAuthService::checkPassword($data['email'], $data['password'])) instanceof \App\Models\User) {
             $this->throwFailureValidationException();
         } else {
             Filament::auth()->login($user, true);
@@ -76,13 +76,13 @@ final class Login extends BasePage
 
         session()->regenerate();
 
-        return app(LoginResponse::class);
+        return resolve(LoginResponse::class);
     }
 
     /**
      * remove type email
      */
-    protected function getEmailFormComponent(): Component
+    protected function getEmailFormComponent(): \Filament\Forms\Components\TextInput
     {
         return TextInput::make('email')
             ->label('Nom d\'utilisateur')

@@ -22,7 +22,7 @@ final class ContractForm
                         Forms\Components\Select::make('employee_id')
                             ->label('Agent')
                             ->relationship('employee', 'last_name')
-                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->last_name.' '.$record->first_name)
+                            ->getOptionLabelFromRecordUsing(fn ($record): string => $record->last_name.' '.$record->first_name)
                             ->searchable()
                             ->preload()
                             ->required(),
@@ -97,7 +97,7 @@ final class ContractForm
                         Forms\Components\Select::make('replaces_id')
                             ->label('Remplace')
                             ->relationship('replaces', 'last_name')
-                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->last_name.' '.$record->first_name)
+                            ->getOptionLabelFromRecordUsing(fn ($record): string => $record->last_name.' '.$record->first_name)
                             ->searchable()
                             ->preload(),
                     ]),
