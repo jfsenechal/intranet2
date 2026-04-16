@@ -39,15 +39,13 @@ final class DeclarationFactory
 
         // Get all rates ordered by start_date
         $rates = Rate::query()
-            ->orderBy('start_date')
+            ->oldest('start_date')
             ->get();
 
         // Group trips by type_movement and rate
-        $groupedTrips = $trips->groupBy(function (Trip $trip) use ($rates) {
-            $rate = $rates->first(function (Rate $rate) use ($trip) {
-                return $trip->departure_date >= $rate->start_date
-                    && $trip->departure_date <= $rate->end_date;
-            });
+        $groupedTrips = $trips->groupBy(function (Trip $trip) use ($rates): string {
+            $rate = $rates->first(fn (Rate $rate): bool => $trip->departure_date >= $rate->start_date
+                && $trip->departure_date <= $rate->end_date);
 
             $rateId = $rate?->id ?? 'no_rate';
             $typeMovement = $trip->type_movement ?? 'unknown';

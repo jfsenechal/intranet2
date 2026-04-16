@@ -9,9 +9,11 @@ use AcMarche\MailingList\Models\Email;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
 use Illuminate\Database\Eloquent\Builder;
+use Override;
 
 final class LastCampaignsWidget extends TableWidget
 {
+    #[Override]
     protected int|string|array $columnSpan = 'full';
 
     public function table(Table $table): Table

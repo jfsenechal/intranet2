@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\OperationalObjective\Pages;
 
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\OperationalObjectiveResource;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\RelationManagers\ActionsRelationManager;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\StrategicObjectiveResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
+use Override;
 
 final class ViewOperationalObjective extends ViewRecord
 {
+    #[Override]
     protected static string $resource = OperationalObjectiveResource::class;
 
     public function getTitle(): string
@@ -44,9 +48,9 @@ final class ViewOperationalObjective extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

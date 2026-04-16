@@ -79,7 +79,7 @@ final class ImapRepository
 
         return collect($messages)
             ->map(fn (MessageInterface $message): EmailMessage => $this->mapToEmailMessage($message))
-            ->toArray();
+            ->all();
     }
 
     /**
@@ -105,7 +105,7 @@ final class ImapRepository
     {
         $message = $this->findMessageByUid($uid);
 
-        if (! $message) {
+        if (! $message instanceof MessageInterface) {
             throw ImapException::messageNotFound($uid);
         }
 
@@ -153,7 +153,7 @@ final class ImapRepository
 
         $message = $this->findMessageByUid($uid);
 
-        if (! $message) {
+        if (! $message instanceof MessageInterface) {
             throw ImapException::messageNotFound($uid);
         }
 
@@ -236,7 +236,7 @@ final class ImapRepository
             $this->connect();
         }
 
-        if (! $this->mailbox) {
+        if (! $this->mailbox instanceof MailboxInterface) {
             throw ImapException::notConnected();
         }
     }
@@ -270,12 +270,12 @@ final class ImapRepository
                 contentType: $attachment->contentType(),
                 extension: $attachment->extension(),
             ))
-            ->toArray();
+            ->all();
     }
 
     private function formatAddress(?Address $address): string
     {
-        if (! $address) {
+        if (! $address instanceof Address) {
             return '';
         }
 

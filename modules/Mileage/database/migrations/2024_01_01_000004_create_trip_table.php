@@ -16,10 +16,10 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection('maria-mileage')->hasTable('deplacement')) {
-            Schema::connection('maria-mileage')->table('deplacement', function (Blueprint $table) {
+            Schema::connection('maria-mileage')->table('deplacement', function (Blueprint $table): void {
                 $table->rename('trips');
             });
-            Schema::connection('maria-mileage')->table('trips', function (Blueprint $table) {
+            Schema::connection('maria-mileage')->table('trips', function (Blueprint $table): void {
                 $table->renameColumn('distance', 'distance');
                 $table->renameColumn('date_depart', 'departure_date');
                 $table->renameColumn('tarif', 'rate');
@@ -38,7 +38,7 @@ return new class extends Migration
                 $table->softDeletes();
             });
         } else {
-            Schema::connection('maria-mileage')->create('trips', function (Blueprint $table) {
+            Schema::connection('maria-mileage')->create('trips', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignIdFor(Declaration::class)->nullable()->constrained('declarations')->onDelete('set null');
                 $table->foreignIdFor(User::class)->nullable()->constrained('users')->onDelete('set null');

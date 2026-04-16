@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace AcMarche\Mileage\Filament\Resources\Trips\Pages;
 
 use AcMarche\Mileage\Filament\Resources\Trips\TripResource;
-use Filament\Actions;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditTrip extends EditRecord
 {
+    #[Override]
     protected static string $resource = TripResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return "Modification d'un déplacement";
     }
@@ -21,7 +22,7 @@ final class EditTrip extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

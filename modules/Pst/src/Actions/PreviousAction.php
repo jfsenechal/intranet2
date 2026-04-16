@@ -18,7 +18,7 @@ final class PreviousAction extends Action
             ->tooltip("Previous {$this->getRecordTitle()}");
     }
 
-    public static function getDefaultName(): ?string
+    public static function getDefaultName(): string
     {
         return 'previous';
     }

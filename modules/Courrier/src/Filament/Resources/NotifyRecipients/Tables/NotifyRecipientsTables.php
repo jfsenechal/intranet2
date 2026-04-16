@@ -38,7 +38,7 @@ final class NotifyRecipientsTables
                     ->state(function (IncomingMail $record): string {
                         $services = $record->services->where('pivot.is_primary', true)->pluck('name');
                         $recipients = $record->recipients->where('pivot.is_primary', true)->map(
-                            fn ($r) => "{$r->first_name} {$r->last_name}"
+                            fn ($r): string => "{$r->first_name} {$r->last_name}"
                         );
 
                         return $services->merge($recipients)->implode(', ');

@@ -40,10 +40,15 @@ final class CourrierServiceProvider extends ServiceProvider
         $this->registerImapMailboxes();
     }
 
+    protected function moduleName(): string
+    {
+        return 'courrier';
+    }
+
     /**
      * Register IMAP mailboxes for the courrier module.
      */
-    protected function registerImapMailboxes(): void
+    private function registerImapMailboxes(): void
     {
         Imap::register('imap_ville', [
             'host' => config('courrier.imap.ville.host'),
@@ -52,10 +57,5 @@ final class CourrierServiceProvider extends ServiceProvider
             'password' => config('courrier.imap.ville.password'),
             'encryption' => config('courrier.imap.ville.encryption', 'ssl'),
         ]);
-    }
-
-    protected function moduleName(): string
-    {
-        return 'courrier';
     }
 }

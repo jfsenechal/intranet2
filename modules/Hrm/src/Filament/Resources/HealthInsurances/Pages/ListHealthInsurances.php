@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\HealthInsurances\Pages;
 
 use AcMarche\Hrm\Filament\Resources\HealthInsurances\HealthInsuranceResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Override;
 
 final class ListHealthInsurances extends ListRecords
 {
+    #[Override]
     protected static string $resource = HealthInsuranceResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter une mutuelle')
                 ->icon('tabler-plus'),
         ];

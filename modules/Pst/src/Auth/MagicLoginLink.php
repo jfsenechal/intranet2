@@ -13,7 +13,7 @@ final class MagicLoginLink extends Notification
 {
     use Queueable;
 
-    public function __construct(#[SensitiveParameter] protected string $token) {}
+    public function __construct(#[SensitiveParameter] private string $token) {}
 
     /**
      * Get the notification's delivery channels.

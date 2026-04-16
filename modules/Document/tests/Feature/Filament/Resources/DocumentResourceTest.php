@@ -21,7 +21,7 @@ use Illuminate\Support\Str;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('document-panel'));
     $this->user = User::factory()->create();
     $role = Role::factory()->create(['name' => 'ROLE_DOCUMENT_ADMIN']);
@@ -30,17 +30,17 @@ beforeEach(function () {
     Storage::fake('public');
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     livewire(ListDocuments::class)
         ->assertOk();
 });
 
-it('can render the create page', function () {
+it('can render the create page', function (): void {
     livewire(CreateDocument::class)
         ->assertOk();
 });
 
-it('can render the edit page', function () {
+it('can render the edit page', function (): void {
     $document = Document::factory()->create();
 
     livewire(EditDocument::class, ['record' => $document->id])
@@ -51,14 +51,14 @@ it('can render the edit page', function () {
         ]);
 });
 
-it('can render the view page', function () {
+it('can render the view page', function (): void {
     $document = Document::factory()->create();
 
     livewire(ViewDocument::class, ['record' => $document->id])
         ->assertOk();
 });
 
-it('can list documents', function () {
+it('can list documents', function (): void {
     $documents = Document::factory(3)->create();
 
     livewire(ListDocuments::class)
@@ -66,12 +66,12 @@ it('can list documents', function () {
         ->assertCanSeeTableRecords($documents);
 });
 
-it('has table columns', function (string $column) {
+it('has table columns', function (string $column): void {
     livewire(ListDocuments::class)
         ->assertTableColumnExists($column);
 })->with(['name', 'category.name']);
 
-it('can sort by name', function () {
+it('can sort by name', function (): void {
     $documents = Document::factory(5)->create();
 
     livewire(ListDocuments::class)
@@ -82,7 +82,7 @@ it('can sort by name', function () {
         ->assertCanSeeTableRecords($documents);
 });
 
-it('can search documents by name', function () {
+it('can search documents by name', function (): void {
     $documents = Document::factory(5)->create();
 
     $search = $documents->first()->name;
@@ -94,7 +94,7 @@ it('can search documents by name', function () {
         ->assertCanNotSeeTableRecords($documents->where('name', '!=', $search));
 });
 
-it('can filter documents by category', function () {
+it('can filter documents by category', function (): void {
     $categoryA = Category::factory()->create();
     $categoryB = Category::factory()->create();
 
@@ -108,7 +108,7 @@ it('can filter documents by category', function () {
         ->assertCanNotSeeTableRecords($documentsB);
 });
 
-it('can create a document', function () {
+it('can create a document', function (): void {
     $category = Category::factory()->create();
     $file = UploadedFile::fake()->create('test.pdf', 1024, 'application/pdf');
 
@@ -128,7 +128,7 @@ it('can create a document', function () {
     ]);
 });
 
-it('can update a document', function () {
+it('can update a document', function (): void {
     $document = Document::factory()->create();
     Storage::disk('public')->put($document->file_path, 'dummy content');
     $newCategory = Category::factory()->create();
@@ -148,7 +148,7 @@ it('can update a document', function () {
     ]);
 });
 
-it('can delete a document', function () {
+it('can delete a document', function (): void {
     $document = Document::factory()->create();
 
     livewire(EditDocument::class, ['record' => $document->id])
@@ -159,7 +159,7 @@ it('can delete a document', function () {
     $this->assertSoftDeleted($document);
 });
 
-it('can bulk delete documents', function () {
+it('can bulk delete documents', function (): void {
     $documents = Document::factory(3)->create();
 
     livewire(ListDocuments::class)
@@ -173,7 +173,7 @@ it('can bulk delete documents', function () {
     $documents->each(fn (Document $document) => $this->assertSoftDeleted($document));
 });
 
-it('can delete a document from view page', function () {
+it('can delete a document from view page', function (): void {
     $document = Document::factory()->create();
 
     livewire(ViewDocument::class, ['record' => $document->id])
@@ -184,7 +184,7 @@ it('can delete a document from view page', function () {
     $this->assertSoftDeleted($document);
 });
 
-it('validates the form data', function (array $data, array $errors) {
+it('validates the form data', function (array $data, array $errors): void {
     $document = Document::factory()->create();
 
     livewire(EditDocument::class, ['record' => $document->id])
@@ -202,7 +202,7 @@ it('validates the form data', function (array $data, array $errors) {
     '`category_id` is required' => [['category_id' => null], ['category_id' => 'required']],
 ]);
 
-it('prevents a regular user from editing a document they do not own', function () {
+it('prevents a regular user from editing a document they do not own', function (): void {
     $document = Document::factory()->create();
     $document->update(['user_add' => 'other-user']);
 
@@ -213,7 +213,7 @@ it('prevents a regular user from editing a document they do not own', function (
         ->assertForbidden();
 });
 
-it('prevents a regular user from deleting a document they do not own', function () {
+it('prevents a regular user from deleting a document they do not own', function (): void {
     $document = Document::factory()->create();
     $document->update(['user_add' => 'other-user']);
 
@@ -224,7 +224,7 @@ it('prevents a regular user from deleting a document they do not own', function 
         ->assertActionHidden(DeleteAction::class);
 });
 
-it('allows a document creator to edit their own document', function () {
+it('allows a document creator to edit their own document', function (): void {
     $creator = User::factory()->create();
     $this->actingAs($creator);
     $document = Document::factory()->create(['user_add' => $creator->username]);
@@ -244,7 +244,7 @@ it('allows a document creator to edit their own document', function () {
     ]);
 });
 
-it('allows a document creator to delete their own document', function () {
+it('allows a document creator to delete their own document', function (): void {
     $creator = User::factory()->create();
     $this->actingAs($creator);
     $document = Document::factory()->create(['user_add' => $creator->username]);

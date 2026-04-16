@@ -5,17 +5,21 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Pages;
 
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
-use Filament\Actions;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
+use Filament\Support\Icons\Heroicon;
+use Override;
 
 final class ViewTraining extends ViewRecord
 {
+    #[Override]
     protected static string $resource = TrainingResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make(),
+            EditAction::make()
+                ->icon(Heroicon::Pencil),
         ];
     }
 }

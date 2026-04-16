@@ -10,9 +10,11 @@ use AcMarche\MailingList\Models\Contact;
 use AcMarche\MailingList\Models\Email;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 final class CreateEmail extends CreateRecord
 {
+    #[Override]
     protected static string $resource = EmailResource::class;
 
     protected function handleRecordCreation(array $data): Model

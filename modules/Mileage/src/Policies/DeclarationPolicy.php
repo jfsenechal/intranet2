@@ -19,11 +19,8 @@ final class DeclarationPolicy
         if ($user->isAdministrator()) {
             return true;
         }
-        if ($user->hasOneOfThisRoles(RolesEnum::getRoles())) {
-            return true;
-        }
 
-        return false;
+        return $user->hasOneOfThisRoles(RolesEnum::getRoles());
     }
 
     /**
@@ -44,7 +41,7 @@ final class DeclarationPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(): bool
     {
         return false;
     }
@@ -67,22 +64,19 @@ final class DeclarationPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Declaration $declaration): bool
+    public function delete(User $user): bool
     {
         if ($user->isAdministrator()) {
             return true;
         }
-        if ($user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value)) {
-            return true;
-        }
 
-        return false;
+        return $user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value);
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Declaration $declaration): bool
+    public function restore(): bool
     {
         return false;
     }
@@ -90,7 +84,7 @@ final class DeclarationPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Declaration $declaration): bool
+    public function forceDelete(): bool
     {
         return false;
     }

@@ -8,6 +8,7 @@ use AcMarche\Security\Ldap\UserLdap;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Override;
 use Str;
 use Symfony\Component\Console\Command\Command as SfCommand;
 
@@ -18,6 +19,7 @@ final class SyncUserCommand extends Command
      *
      * @var string
      */
+    #[Override]
     protected $signature = 'intranet:sync-users';
 
     /**
@@ -25,6 +27,7 @@ final class SyncUserCommand extends Command
      *
      * @var string
      */
+    #[Override]
     protected $description = 'Sync users with ldap';
 
     /**

@@ -18,7 +18,7 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('mileage-panel'));
     $this->user = User::factory()->create(['username' => 'jdupont', 'is_administrator' => true]);
     $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
@@ -27,24 +27,24 @@ beforeEach(function () {
     $this->actingAs($this->user);
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     livewire(ListTrips::class)
         ->assertOk();
 });
 
-it('can render the create page', function () {
+it('can render the create page', function (): void {
     livewire(CreateTrip::class)
         ->assertOk();
 });
 
-it('can render the view page', function () {
+it('can render the view page', function (): void {
     $trip = Trip::factory()->create(['user_add' => 'jdupont']);
 
     livewire(ViewTrip::class, ['record' => $trip->id])
         ->assertOk();
 });
 
-it('can list trips', function () {
+it('can list trips', function (): void {
     $trips = Trip::factory(3)->create(['user_add' => 'jdupont']);
 
     livewire(ListTrips::class)
@@ -52,12 +52,12 @@ it('can list trips', function () {
         ->assertCanSeeTableRecords($trips);
 });
 
-it('has table columns', function (string $column) {
+it('has table columns', function (string $column): void {
     livewire(ListTrips::class)
         ->assertTableColumnExists($column);
 })->with(['departure_date', 'departure_location', 'distance', 'type_movement']);
 
-it('can sort column', function (string $column) {
+it('can sort column', function (string $column): void {
     $trips = Trip::factory(5)->create(['user_add' => 'jdupont']);
 
     livewire(ListTrips::class)
@@ -68,7 +68,7 @@ it('can sort column', function (string $column) {
         ->assertCanSeeTableRecords($trips->sortByDesc($column), inOrder: true);
 })->with(['departure_date', 'distance']);
 
-it('can search trips', function () {
+it('can search trips', function (): void {
     $trips = Trip::factory(5)->create(['user_add' => 'jdupont']);
 
     $search = $trips->first()->departure_location;
@@ -80,7 +80,7 @@ it('can search trips', function () {
         ->assertCanNotSeeTableRecords($trips->where('departure_location', '!=', $search));
 });
 
-it('can create a trip', function () {
+it('can create a trip', function (): void {
     $trip = Trip::factory()->make(['user_add' => 'jdupont']);
 
     livewire(CreateTrip::class)
@@ -98,7 +98,7 @@ it('can create a trip', function () {
     ]);
 });
 
-it('validates the form data', function (array $data, array $errors) {
+it('validates the form data', function (array $data, array $errors): void {
     $trip = Trip::factory()->make(['user_add' => 'jdupont']);
 
     livewire(CreateTrip::class)
@@ -117,7 +117,7 @@ it('validates the form data', function (array $data, array $errors) {
     '`content` is required' => [['content' => null], ['content' => 'required']],
 ]);
 
-it('can bulk delete trips', function () {
+it('can bulk delete trips', function (): void {
     $trips = Trip::factory(3)->create(['user_add' => 'jdupont']);
 
     livewire(ListTrips::class)

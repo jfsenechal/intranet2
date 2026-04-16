@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace AcMarche\Courrier\Filament\Resources\Recipients\Pages;
 
 use AcMarche\Courrier\Filament\Resources\Recipients\RecipientResource;
-use Filament\Actions;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditRecipient extends EditRecord
 {
+    #[Override]
     protected static string $resource = RecipientResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getRecord()->last_name.' '.$this->getRecord()->first_name;
     }
@@ -21,7 +22,7 @@ final class EditRecipient extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

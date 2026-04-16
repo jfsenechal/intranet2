@@ -12,13 +12,13 @@ use AcMarche\Mileage\Models\Trip;
 use AcMarche\Security\Models\Role;
 use App\Models\User;
 
-beforeEach(function () {
+beforeEach(function (): void {
     $this->user = User::factory()->create(['username' => 'testuser']);
     $this->budgetArticle = BudgetArticle::factory()->create();
 });
 
-describe('handleTrips', function () {
-    test('creates declarations from trips grouped by type_movement and rate', function () {
+describe('handleTrips', function (): void {
+    test('creates declarations from trips grouped by type_movement and rate', function (): void {
         // Create personal information for the user
         $personalInfo = PersonalInformation::factory()->create([
             'username' => $this->user->username,
@@ -108,7 +108,7 @@ describe('handleTrips', function () {
             ->and($trip1->declaration_id)->toBe($trip2->declaration_id);
     });
 
-    test('returns empty collection when trips array is empty', function () {
+    test('returns empty collection when trips array is empty', function (): void {
         $personalInfo = PersonalInformation::factory()->create([
             'username' => $this->user->username,
         ]);
@@ -118,7 +118,7 @@ describe('handleTrips', function () {
         expect($declarations)->toBeEmpty();
     });
 
-    test('skips trips without matching rate', function () {
+    test('skips trips without matching rate', function (): void {
         $personalInfo = PersonalInformation::factory()->create([
             'username' => $this->user->username,
         ]);
@@ -141,7 +141,7 @@ describe('handleTrips', function () {
         expect($declarations)->toBeEmpty();
     });
 
-    test('includes departments for admin role', function () {
+    test('includes departments for admin role', function (): void {
         $adminRole = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $this->user->roles()->attach($adminRole);
 
@@ -164,7 +164,7 @@ describe('handleTrips', function () {
         $declarations = DeclarationFactory::handleTrips([$trip], $this->user, $personalInfo, $this->budgetArticle);
 
         $declaration = $declarations->first();
-        $departments = json_decode($declaration->departments, true);
+        $departments = json_decode((string) $declaration->departments, true);
 
         expect($departments)->toHaveCount(3)
             ->and($departments)->toContain(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value)
@@ -172,7 +172,7 @@ describe('handleTrips', function () {
             ->and($departments)->toContain(RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value);
     });
 
-    test('includes only ville department for ville role', function () {
+    test('includes only ville department for ville role', function (): void {
         $villeRole = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $this->user->roles()->attach($villeRole);
 
@@ -195,13 +195,13 @@ describe('handleTrips', function () {
         $declarations = DeclarationFactory::handleTrips([$trip], $this->user, $personalInfo, $this->budgetArticle);
 
         $declaration = $declarations->first();
-        $departments = json_decode($declaration->departments, true);
+        $departments = json_decode((string) $declaration->departments, true);
 
         expect($departments)->toHaveCount(1)
             ->and($departments)->toContain(RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value);
     });
 
-    test('includes only cpas department for cpas role', function () {
+    test('includes only cpas department for cpas role', function (): void {
         $cpasRole = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value]);
         $this->user->roles()->attach($cpasRole);
 
@@ -224,13 +224,13 @@ describe('handleTrips', function () {
         $declarations = DeclarationFactory::handleTrips([$trip], $this->user, $personalInfo, $this->budgetArticle);
 
         $declaration = $declarations->first();
-        $departments = json_decode($declaration->departments, true);
+        $departments = json_decode((string) $declaration->departments, true);
 
         expect($departments)->toHaveCount(1)
             ->and($departments)->toContain(RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value);
     });
 
-    test('handles multiple departments for user with multiple roles', function () {
+    test('handles multiple departments for user with multiple roles', function (): void {
         $villeRole = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $cpasRole = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value]);
         $this->user->roles()->attach([$villeRole->id, $cpasRole->id]);
@@ -254,14 +254,14 @@ describe('handleTrips', function () {
         $declarations = DeclarationFactory::handleTrips([$trip], $this->user, $personalInfo, $this->budgetArticle);
 
         $declaration = $declarations->first();
-        $departments = json_decode($declaration->departments, true);
+        $departments = json_decode((string) $declaration->departments, true);
 
         expect($departments)->toHaveCount(2)
             ->and($departments)->toContain(RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value)
             ->and($departments)->toContain(RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value);
     });
 
-    test('groups trips by both type_movement and rate period', function () {
+    test('groups trips by both type_movement and rate period', function (): void {
         $personalInfo = PersonalInformation::factory()->create([
             'username' => $this->user->username,
         ]);

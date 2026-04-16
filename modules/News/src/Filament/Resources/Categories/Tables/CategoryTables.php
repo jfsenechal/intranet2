@@ -10,7 +10,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -27,7 +27,7 @@ final class CategoryTables
                     ->searchable()
                     ->label('Intitulé')
                     ->limit(120)
-                    ->url(fn (Category $record) => CategoryResource::getUrl('view', ['record' => $record->id]))
+                    ->url(fn (Category $record): string => CategoryResource::getUrl('view', ['record' => $record->id]))
                     ->tooltip(function (TextColumn $column): ?string {
                         $state = $column->getState();
 
@@ -38,7 +38,7 @@ final class CategoryTables
                         // Only render the tooltip if the column content exceeds the length limit.
                         return $state;
                     }),
-                Tables\Columns\ColorColumn::make('color')
+                ColorColumn::make('color')
                     ->searchable()
                     ->label('Couleur'),
                 TextColumn::make('news_count')

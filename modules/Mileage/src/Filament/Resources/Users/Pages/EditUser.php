@@ -6,13 +6,14 @@ namespace AcMarche\Mileage\Filament\Resources\Users\Pages;
 
 use AcMarche\Mileage\Filament\Resources\Users\UserResource;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditUser extends EditRecord
 {
+    #[Override]
     protected static string $resource = UserResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Modification de '.$this->record->fullNameAsString();
     }

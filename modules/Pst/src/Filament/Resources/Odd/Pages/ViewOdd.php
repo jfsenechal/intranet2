@@ -6,13 +6,16 @@ namespace AcMarche\Pst\Filament\Resources\Odd\Pages;
 
 use AcMarche\Pst\Filament\Resources\Odd\OddResource;
 use AcMarche\Pst\Filament\Resources\Odd\RelationManagers\ActionsRelationManager;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
+use Override;
 
 final class ViewOdd extends ViewRecord
 {
+    #[Override]
     protected static string $resource = OddResource::class;
 
     public function getTitle(): string
@@ -33,9 +36,9 @@ final class ViewOdd extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

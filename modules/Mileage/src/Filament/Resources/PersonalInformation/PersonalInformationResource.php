@@ -16,19 +16,26 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Override;
 
 final class PersonalInformationResource extends Resource
 {
+    #[Override]
     protected static ?string $model = PersonalInformation::class;
 
+    #[Override]
     protected static ?int $navigationSort = 3;
 
+    #[Override]
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    #[Override]
     protected static ?string $recordTitleAttribute = 'username';
 
+    #[Override]
     protected static ?string $modelLabel = 'Mes informations personnelles';
 
+    #[Override]
     protected static ?string $navigationLabel = 'Mes informations personnelles';
 
     public static function form(Schema $schema): Schema

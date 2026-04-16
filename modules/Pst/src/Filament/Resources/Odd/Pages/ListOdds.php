@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace AcMarche\Pst\Filament\Resources\Odd\Pages;
 
 use AcMarche\Pst\Filament\Resources\Odd\OddResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Override;
 
 final class ListOdds extends ListRecords
 {
+    #[Override]
     protected static string $resource = OddResource::class;
 
     public function getModelLabel(): string
@@ -20,7 +22,7 @@ final class ListOdds extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter un ODD')
                 ->icon('tabler-plus'),
         ];

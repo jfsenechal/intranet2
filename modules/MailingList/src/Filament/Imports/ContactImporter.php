@@ -10,9 +10,11 @@ use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
 use Filament\Forms\Components\Select;
+use Override;
 
 final class ContactImporter extends Importer
 {
+    #[Override]
     protected static ?string $model = Contact::class;
 
     /**
@@ -62,7 +64,7 @@ final class ContactImporter extends Importer
     {
         $body = 'L\'import de contacts est terminé. '.number_format($import->successful_rows).' '.str('ligne')->plural($import->successful_rows).' importée(s).';
 
-        if ($failedRowsCount = $import->getFailedRowsCount()) {
+        if (($failedRowsCount = $import->getFailedRowsCount()) !== 0) {
             $body .= ' '.number_format($failedRowsCount).' '.str('ligne')->plural($failedRowsCount).' en échec.';
         }
 

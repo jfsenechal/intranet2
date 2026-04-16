@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Mileage\Enums;
+namespace AcMarche\Hrm\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 use Illuminate\Contracts\Support\Htmlable;

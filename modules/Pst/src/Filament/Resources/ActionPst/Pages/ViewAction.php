@@ -11,18 +11,21 @@ use AcMarche\Pst\Filament\Resources\ActionPst\Schemas\ActionInfolist;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\OperationalObjectiveResource;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\StrategicObjectiveResource;
 use AcMarche\Pst\Models\Action as ActionModel;
-use Filament\Actions;
 use Filament\Actions\Action as ActionAction;
 use Filament\Actions\ActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Size;
+use Override;
 
 final class ViewAction extends ViewRecord
 {
     use CanPaginateViewRecordTrait;
 
+    #[Override]
     protected static string $resource = ActionPstResource::class;
 
     public function getTitle(): string
@@ -52,7 +55,7 @@ final class ViewAction extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
             //  PreviousAction::make(),
             //  NextAction::make(),
@@ -60,15 +63,15 @@ final class ViewAction extends ViewRecord
                 ActionAction::make('rapport')
                     ->label('Export en pdf')
                     ->icon('tabler-pdf')
-                    ->url(fn (ActionModel $record) => route('export.action', $record))
-                    ->action(function () {
+                    ->url(fn (ActionModel $record): string => route('export.action', $record))
+                    ->action(function (): void {
                         Notification::make()
                             ->title('Pdf exporté')
                             ->success()
                             ->send();
                     }),
                 ReminderAction::createAction($this->record),
-                Actions\DeleteAction::make()
+                DeleteAction::make()
                     ->label('Supprimer l\'action')
                     ->icon('tabler-trash'),
             ]

@@ -7,11 +7,14 @@ namespace AcMarche\Pst\Filament\Widgets;
 use AcMarche\Pst\Filament\Resources\ActionPst\Tables\ActionTables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
+use Override;
 
 final class ActionsByServicesTableWidget extends BaseWidget
 {
+    #[Override]
     protected int|string|array $columnSpan = 'full';
 
+    #[Override]
     protected static ?int $sort = 2;
 
     public function table(Table $table): Table
@@ -23,6 +26,6 @@ final class ActionsByServicesTableWidget extends BaseWidget
                 auth()->user()->actionsFromServices()
             );
 
-        return ActionTables::actionsForWidget($table, limit: 60);
+        return ActionTables::actionsForWidget($table);
     }
 }

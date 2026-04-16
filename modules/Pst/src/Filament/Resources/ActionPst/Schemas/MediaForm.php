@@ -31,7 +31,7 @@ final class MediaForm
                     ->directory(config('pst.uploads.medias'))
                     ->downloadable()
                     ->maxSize(10240)
-                    ->afterStateUpdated(function ($state, Set $set) {
+                    ->afterStateUpdated(function ($state, Set $set): void {
                         if ($state instanceof TemporaryUploadedFile) {
                             $set('mime_type', $state->getMimeType());
                             $set('size', $state->getSize());

@@ -28,7 +28,7 @@ final class CreateDeclarationAction
                         ->required()
                         ->searchable(),
                 ])
-                ->action(function (Collection $records, array $data) {
+                ->action(function (Collection $records, array $data): void {
                     $budgetArticle = BudgetArticle::find($data['budget_article_id']);
 
                     $personalInformation = PersonalInformationRepository::getByCurrentUser()->first();

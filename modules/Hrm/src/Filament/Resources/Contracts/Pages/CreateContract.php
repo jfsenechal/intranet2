@@ -6,8 +6,10 @@ namespace AcMarche\Hrm\Filament\Resources\Contracts\Pages;
 
 use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateContract extends CreateRecord
 {
+    #[Override]
     protected static string $resource = ContractResource::class;
 }

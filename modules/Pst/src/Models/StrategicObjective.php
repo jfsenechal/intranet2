@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Database\Factories\StrategicObjectiveFactory;
 use AcMarche\Pst\Enums\ActionScopeEnum;
@@ -14,21 +16,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
+use Override;
 
 #[UseFactory(StrategicObjectiveFactory::class)]
+#[Connection('maria-pst')]
+#[Fillable([
+    'name',
+    'position',
+    'department',
+    'scope',
+])]
 final class StrategicObjective extends Model
 {
     use HasDepartmentScope, HasFactory, Notifiable, Searchable;
 
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'name',
-        'position',
-        'department',
-        'scope',
-    ];
-
+    #[Override]
     protected $casts = [
         'scope' => ActionScopeEnum::class,
         'department' => DepartmentEnum::class,

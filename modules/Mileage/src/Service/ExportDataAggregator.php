@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Service;
 
+use AcMarche\Mileage\Models\Declaration;
 use AcMarche\Mileage\Repository\DeclarationRepository;
 use Illuminate\Support\Collection;
 
@@ -53,12 +54,7 @@ final class ExportDataAggregator
     /**
      * Get data for user export.
      *
-     * @return array{
-     *     declaration: \AcMarche\Mileage\Models\Declaration|null,
-     *     months: array<int, string>,
-     *     years: array<int>,
-     *     deplacements: array{interne: array<int, array<int, int>>, externe: array<int, array<int, int>>}
-     * }
+     * @return array{declaration: Declaration|null, months: array<int, string>, years: array<int>, deplacements: array{interne: array<int, array<int, int>>, externe: array<int, array<int, int>>}}
      */
     public function byUser(string $username): array
     {

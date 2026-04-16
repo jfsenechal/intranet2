@@ -17,7 +17,7 @@ final class OwnerScope implements Scope
         $username = $currentUser->username;
         $table = $model->getTable();
 
-        $builder->where(function (Builder $query) use ($table, $username) {
+        $builder->where(function (Builder $query) use ($table, $username): void {
             // Show items owned by the user
             $query->where($table.'.username', '=', $username);
 

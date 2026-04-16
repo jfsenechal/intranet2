@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\OperationalObjective\Pages;
 
+use Filament\Actions\ViewAction;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\OperationalObjectiveResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Override;
 
 final class EditOperationalObjective extends EditRecord
 {
+    #[Override]
     protected static string $resource = OperationalObjectiveResource::class;
 
     /**
@@ -23,7 +26,7 @@ final class EditOperationalObjective extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

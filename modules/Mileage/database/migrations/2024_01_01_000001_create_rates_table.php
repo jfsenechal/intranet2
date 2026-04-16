@@ -14,16 +14,16 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection('maria-mileage')->hasTable('tarif')) {
-            Schema::connection('maria-mileage')->table('tarif', function (Blueprint $table) {
+            Schema::connection('maria-mileage')->table('tarif', function (Blueprint $table): void {
                 $table->rename('rates');
             });
-            Schema::connection('maria-mileage')->table('rates', function (Blueprint $table) {
+            Schema::connection('maria-mileage')->table('rates', function (Blueprint $table): void {
                 $table->renameColumn('montant', 'amount');
                 $table->renameColumn('date_debut', 'start_date');
                 $table->renameColumn('date_fin', 'end_date');
             });
         } else {
-            Schema::connection('maria-mileage')->create('rates', function (Blueprint $table) {
+            Schema::connection('maria-mileage')->create('rates', function (Blueprint $table): void {
                 $table->id();
                 $table->decimal('amount', 10, 2);
                 $table->decimal('omnium', 10, 2);

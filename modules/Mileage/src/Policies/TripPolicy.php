@@ -18,11 +18,8 @@ final class TripPolicy
         if ($user->isAdministrator()) {
             return true;
         }
-        if ($user->hasOneOfThisRoles(RolesEnum::getRoles())) {
-            return true;
-        }
 
-        return false;
+        return $user->hasOneOfThisRoles(RolesEnum::getRoles());
     }
 
     /**
@@ -49,17 +46,13 @@ final class TripPolicy
             return true;
         }
 
-        if ($user->hasOneOfThisRoles(RolesEnum::getRoles())) {
-            return true;
-        }
-
-        return false;
+        return $user->hasOneOfThisRoles(RolesEnum::getRoles());
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Trip $trip): bool
+    public function update(): bool
     {
         return false;
     }
@@ -86,7 +79,7 @@ final class TripPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Trip $trip): bool
+    public function restore(): bool
     {
         return false;
     }
@@ -94,7 +87,7 @@ final class TripPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Trip $trip): bool
+    public function forceDelete(): bool
     {
         return false;
     }

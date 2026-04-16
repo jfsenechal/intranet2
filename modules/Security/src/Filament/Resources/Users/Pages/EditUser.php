@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Users\Pages;
 
+use Filament\Actions\ViewAction;
 use AcMarche\Security\Filament\Resources\Users\UserResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditUser extends EditRecord
 {
+    #[Override]
     protected static string $resource = UserResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getRecord()->last_name.' '.$this->getRecord()->first_name;
     }
@@ -21,7 +23,7 @@ final class EditUser extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()->icon('tabler-eye'),
+            ViewAction::make()->icon('tabler-eye'),
         ];
     }
 

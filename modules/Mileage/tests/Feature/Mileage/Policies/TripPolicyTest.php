@@ -9,12 +9,12 @@ use AcMarche\Mileage\Policies\TripPolicy;
 use AcMarche\Security\Models\Role;
 use App\Models\User;
 
-beforeEach(function () {
+beforeEach(function (): void {
     $this->policy = new TripPolicy();
 });
 
-describe('viewAny', function () {
-    test('admin can view any trips', function () {
+describe('viewAny', function (): void {
+    test('admin can view any trips', function (): void {
         $user = User::factory()->create(['username' => 'admin']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -22,7 +22,7 @@ describe('viewAny', function () {
         expect($this->policy->viewAny($user))->toBeTrue();
     });
 
-    test('ville role user can view any trips', function () {
+    test('ville role user can view any trips', function (): void {
         $user = User::factory()->create(['username' => 'ville_user']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -30,7 +30,7 @@ describe('viewAny', function () {
         expect($this->policy->viewAny($user))->toBeTrue();
     });
 
-    test('cpas role user can view any trips', function () {
+    test('cpas role user can view any trips', function (): void {
         $user = User::factory()->create(['username' => 'cpas_user']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value]);
         $user->roles()->attach($role);
@@ -38,15 +38,15 @@ describe('viewAny', function () {
         expect($this->policy->viewAny($user))->toBeTrue();
     });
 
-    test('user without role cannot view any trips', function () {
+    test('user without role cannot view any trips', function (): void {
         $user = User::factory()->create();
 
         expect($this->policy->viewAny($user))->toBeFalse();
     });
 });
 
-describe('view', function () {
-    test('admin can view any trip', function () {
+describe('view', function (): void {
+    test('admin can view any trip', function (): void {
         $user = User::factory()->create(['username' => 'admin']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -62,7 +62,7 @@ describe('view', function () {
         expect($this->policy->view($user, $trip))->toBeTrue();
     });
 
-    test('owner can view their own trip', function () {
+    test('owner can view their own trip', function (): void {
         $user = User::factory()->create(['username' => 'owner']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -80,7 +80,7 @@ describe('view', function () {
         expect($this->policy->view($user, $trip))->toBeTrue();
     });
 
-    test('non-owner cannot view others trip', function () {
+    test('non-owner cannot view others trip', function (): void {
         $user = User::factory()->create(['username' => 'user1']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -99,7 +99,7 @@ describe('view', function () {
         expect($this->policy->view($user, $trip))->toBeFalse();
     });
 
-    test('user without role cannot view any trip', function () {
+    test('user without role cannot view any trip', function (): void {
         $user = User::factory()->create(['username' => 'no_role']);
 
         $otherUser = User::factory()->create(['username' => 'owner']);
@@ -117,8 +117,8 @@ describe('view', function () {
     });
 });
 
-describe('create', function () {
-    test('admin can create trips', function () {
+describe('create', function (): void {
+    test('admin can create trips', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -126,7 +126,7 @@ describe('create', function () {
         expect($this->policy->create($user))->toBeTrue();
     });
 
-    test('ville role user can create trips', function () {
+    test('ville role user can create trips', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -134,7 +134,7 @@ describe('create', function () {
         expect($this->policy->create($user))->toBeTrue();
     });
 
-    test('cpas role user can create trips', function () {
+    test('cpas role user can create trips', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value]);
         $user->roles()->attach($role);
@@ -142,15 +142,15 @@ describe('create', function () {
         expect($this->policy->create($user))->toBeTrue();
     });
 
-    test('user without role cannot create trips', function () {
+    test('user without role cannot create trips', function (): void {
         $user = User::factory()->create();
 
         expect($this->policy->create($user))->toBeFalse();
     });
 });
 
-describe('update', function () {
-    test('admin cannot update any trip', function () {
+describe('update', function (): void {
+    test('admin cannot update any trip', function (): void {
         $user = User::factory()->create(['username' => 'admin']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -166,7 +166,7 @@ describe('update', function () {
         expect($this->policy->update($user, $trip))->toBeFalse();
     });
 
-    test('owner cannot update their own trip', function () {
+    test('owner cannot update their own trip', function (): void {
         $user = User::factory()->create(['username' => 'owner']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -184,7 +184,7 @@ describe('update', function () {
         expect($this->policy->update($user, $trip))->toBeFalse();
     });
 
-    test('non-owner cannot update others trip', function () {
+    test('non-owner cannot update others trip', function (): void {
         $user = User::factory()->create(['username' => 'user1']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -204,8 +204,8 @@ describe('update', function () {
     });
 });
 
-describe('delete', function () {
-    test('admin can delete any trip', function () {
+describe('delete', function (): void {
+    test('admin can delete any trip', function (): void {
         $user = User::factory()->create(['username' => 'admin']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -221,7 +221,7 @@ describe('delete', function () {
         expect($this->policy->delete($user, $trip))->toBeTrue();
     });
 
-    test('owner cannot delete their own trip declared', function () {
+    test('owner cannot delete their own trip declared', function (): void {
         $user = User::factory()->create(['username' => 'owner']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -239,7 +239,7 @@ describe('delete', function () {
         expect($this->policy->delete($user, $trip))->toBeFalse();
     });
 
-    test('owner can delete their own trip not declared', function () {
+    test('owner can delete their own trip not declared', function (): void {
         $user = User::factory()->create(['username' => 'owner']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -255,7 +255,7 @@ describe('delete', function () {
         expect($this->policy->delete($user, $trip))->toBeTrue();
     });
 
-    test('non-owner cannot delete others trip', function () {
+    test('non-owner cannot delete others trip', function (): void {
         $user = User::factory()->create(['username' => 'user1']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -275,8 +275,8 @@ describe('delete', function () {
     });
 });
 
-describe('restore', function () {
-    test('restore always returns false', function () {
+describe('restore', function (): void {
+    test('restore always returns false', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -288,8 +288,8 @@ describe('restore', function () {
     });
 });
 
-describe('forceDelete', function () {
-    test('forceDelete always returns false', function () {
+describe('forceDelete', function (): void {
+    test('forceDelete always returns false', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);

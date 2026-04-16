@@ -22,7 +22,7 @@ use Livewire\Livewire;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('pst'));
     $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     $this->adminUser = User::factory()->create();
@@ -31,18 +31,18 @@ beforeEach(function () {
     $this->actingAs($this->adminUser);
 });
 
-describe('page rendering', function () {
-    it('can render the index page', function () {
+describe('page rendering', function (): void {
+    it('can render the index page', function (): void {
         Livewire::test(ListOdds::class)
             ->assertOk();
     });
 
-    it('can render the create page', function () {
+    it('can render the create page', function (): void {
         Livewire::test(CreateOdd::class)
             ->assertForbidden();
     });
 
-    it('can render the view page', function () {
+    it('can render the view page', function (): void {
         $record = Odd::factory()->create();
 
         Livewire::test(ViewOdd::class, [
@@ -51,7 +51,7 @@ describe('page rendering', function () {
             ->assertOk();
     });
 
-    it('can render the edit page', function () {
+    it('can render the edit page', function (): void {
         $record = Odd::factory()->create();
 
         Livewire::test(EditOdd::class, [
@@ -64,18 +64,18 @@ describe('page rendering', function () {
     });
 });
 
-describe('crud operations', function () {
-    it('can create an odd', function () {
+describe('crud operations', function (): void {
+    it('can create an odd', function (): void {
         Livewire::test(CreateOdd::class)
             ->assertForbidden();
     });
 
-    it('can create an odd with color', function () {
+    it('can create an odd with color', function (): void {
         Livewire::test(CreateOdd::class)
             ->assertForbidden();
     });
 
-    it('can update an odd', function () {
+    it('can update an odd', function (): void {
         $record = Odd::factory()->create(['position' => 1]);
         $newData = Odd::factory()->make();
 
@@ -94,7 +94,7 @@ describe('crud operations', function () {
         ]);
     });
 
-    it('cannot delete an odd', function () {
+    it('cannot delete an odd', function (): void {
         $record = Odd::factory()->create(['position' => 1]);
 
         Livewire::test(EditOdd::class, [
@@ -107,7 +107,7 @@ describe('crud operations', function () {
         ]);
     });
 
-    it('can delete an odd', function () {
+    it('can delete an odd', function (): void {
         $record = Odd::factory()->create(['position' => 1]);
 
         Livewire::test(ViewOdd::class, [
@@ -121,8 +121,8 @@ describe('crud operations', function () {
     });
 });
 
-describe('form validation', function () {
-    it('validates the form data on edit', function (array $data, array $errors) {
+describe('form validation', function (): void {
+    it('validates the form data on edit', function (array $data, array $errors): void {
         $record = Odd::factory()->create(['position' => 1]);
 
         Livewire::test(EditOdd::class, [
@@ -142,8 +142,8 @@ describe('form validation', function () {
     ]);
 });
 
-describe('relation manager', function () {
-    it('can render the ActionsRelationManager', function () {
+describe('relation manager', function (): void {
+    it('can render the ActionsRelationManager', function (): void {
         $record = Odd::factory()->create(['position' => 1]);
         $strategicObjective = StrategicObjective::factory()->create();
         $operationalObjective = OperationalObjective::factory()->create([
@@ -161,7 +161,7 @@ describe('relation manager', function () {
             ->assertOk();
     });
 
-    it('can list actions in relation manager', function () {
+    it('can list actions in relation manager', function (): void {
         $record = Odd::factory()->create(['position' => 1]);
         $strategicObjective = StrategicObjective::factory()->create();
         $operationalObjective = OperationalObjective::factory()->create([

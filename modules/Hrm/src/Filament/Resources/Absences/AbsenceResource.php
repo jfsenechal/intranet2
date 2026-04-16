@@ -5,22 +5,27 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\Absences;
 
 use AcMarche\Hrm\Filament\Resources\Absences\Schemas\AbsenceForm;
+use AcMarche\Hrm\Filament\Resources\Absences\Schemas\AbsenceInfolist;
 use AcMarche\Hrm\Filament\Resources\Absences\Tables\AbsenceTables;
 use AcMarche\Hrm\Models\Absence;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class AbsenceResource extends Resource
 {
+    #[Override]
     protected static ?string $model = Absence::class;
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Personnel';
 
-    protected static ?int $navigationSort = 3;
+    #[Override]
+    protected static ?int $navigationSort = 2;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-calendar-days';
     }
@@ -43,6 +48,11 @@ final class AbsenceResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return AbsenceForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return AbsenceInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table

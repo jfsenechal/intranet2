@@ -7,18 +7,19 @@ namespace AcMarche\Mileage\Filament\Resources\Users\Pages;
 use AcMarche\Mileage\Filament\Resources\Users\UserResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListUsers extends ListRecords
 {
+    #[Override]
     protected static string $resource = UserResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Liste des agents';
     }
 
-    public function getSubheading(): string|Htmlable|null
+    public function getSubheading(): string
     {
         return 'Liste des agents ayant accès au module "Frais de déplacement"';
     }

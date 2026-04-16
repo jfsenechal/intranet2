@@ -10,7 +10,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 final class DirectionTables
@@ -18,27 +18,27 @@ final class DirectionTables
     public static function configure(Table $table): Table
     {
         return $table
-            ->defaultSort('title')
+            ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('name')
                     ->label('Intitule')
                     ->searchable()
                     ->sortable()
-                    ->url(fn (Direction $record) => DirectionResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('abbreviation')
+                    ->url(fn (Direction $record): string => DirectionResource::getUrl('view', ['record' => $record->id])),
+                TextColumn::make('abbreviation')
                     ->label('Abreviation')
                     ->searchable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('director')
+                TextColumn::make('director')
                     ->label('Directeur')
                     ->searchable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('employer.name')
+                TextColumn::make('employer.name')
                     ->label('Employeur')
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('services_count')
+                TextColumn::make('services_count')
                     ->label('Services')
                     ->counts('services')
                     ->sortable(),

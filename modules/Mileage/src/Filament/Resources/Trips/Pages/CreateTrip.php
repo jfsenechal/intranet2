@@ -9,9 +9,11 @@ use AcMarche\Mileage\Filament\Resources\Trips\TripResource;
 use AcMarche\Mileage\Repository\PersonalInformationRepository;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateTrip extends CreateRecord
 {
+    #[Override]
     protected static string $resource = TripResource::class;
 
     public function mount(): void

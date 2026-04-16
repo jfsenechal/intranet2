@@ -16,7 +16,7 @@ return new class() extends Migration
         if (Schema::hasTable('actions')) {
             return;
         }
-        Schema::table('actions', function (Blueprint $table) {
+        Schema::table('actions', function (Blueprint $table): void {
             $table->boolean('validated')->default(false)->after('to_validate');
         });
 
@@ -24,7 +24,7 @@ return new class() extends Migration
         DB::table('actions')->where('to_validate', true)->update(['validated' => false]);
         DB::table('actions')->where('to_validate', false)->update(['validated' => true]);
 
-        Schema::table('actions', function (Blueprint $table) {
+        Schema::table('actions', function (Blueprint $table): void {
             $table->dropColumn('to_validate');
         });
     }

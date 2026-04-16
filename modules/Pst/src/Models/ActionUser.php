@@ -4,21 +4,26 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Override;
 
+#[Connection('maria-pst')]
+#[Fillable([
+    'username',
+    'action_id',
+])]
+#[Table(name: 'action_user')]
 final class ActionUser extends Model
 {
-    protected $connection = 'maria-pst';
+    use HasFactory;
 
-    protected $table = 'action_user';
-
-    protected $fillable = [
-        'username',
-        'action_id',
-    ];
-
+    #[Override]
     protected $casts = [
     ];
 

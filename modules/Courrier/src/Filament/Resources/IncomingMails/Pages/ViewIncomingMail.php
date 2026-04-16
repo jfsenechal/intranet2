@@ -7,14 +7,18 @@ namespace AcMarche\Courrier\Filament\Resources\IncomingMails\Pages;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\IncomingMailResource;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\Schemas\IncomingMailInfolist;
 use AcMarche\Courrier\Models\IncomingMail;
-use Filament\Actions;
+use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 use Filament\Support\Colors\Color;
 use Illuminate\Support\Facades\Storage;
+use Override;
 
 final class ViewIncomingMail extends ViewRecord
 {
+    #[Override]
     protected static string $resource = IncomingMailResource::class;
 
     public function getTitle(): string
@@ -30,20 +34,20 @@ final class ViewIncomingMail extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\Action::make('download')
+            Action::make('download')
                 ->label('Télécharger la pièce jointe')
                 ->icon('tabler-download')
                 ->color(Color::Green)
             //   ->url(fn (IncomingMail $record) => Storage::disk('public')->url($record->attachment_path))
             //    ->visible(fn (IncomingMail $record): bool => ! blank($record->attachment_path)),
             ,
-            Actions\Action::make('back')
+            Action::make('back')
                 ->label('Retour à la liste')
                 ->icon('tabler-list')
                 ->url(IncomingMailResource::getUrl('index')),
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

@@ -11,9 +11,11 @@ use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Override;
 
 final class CreateIncomingMail extends CreateRecord
 {
+    #[Override]
     protected static string $resource = IncomingMailResource::class;
 
     /** @var array<int> */

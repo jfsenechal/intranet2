@@ -17,7 +17,7 @@ return new class() extends Migration
         if (Schema::hasTable('actions')) {
             return;
         }
-        Schema::table('operational_objectives', function (Blueprint $table) {
+        Schema::table('operational_objectives', function (Blueprint $table): void {
             $table->string('scope')->after('department')->default(ActionScopeEnum::EXTERNAL->value);
         });
 

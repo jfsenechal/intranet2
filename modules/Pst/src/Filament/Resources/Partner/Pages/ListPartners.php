@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Partner\Pages;
 
+use Filament\Actions\CreateAction;
 use AcMarche\Pst\Filament\Resources\Partner\PartnerResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListPartners extends ListRecords
 {
+    #[Override]
     protected static string $resource = PartnerResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' partenaires';
     }
@@ -21,7 +23,7 @@ final class ListPartners extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter un partenaire')
                 ->icon('tabler-plus'),
         ];

@@ -5,17 +5,21 @@ declare(strict_types=1);
 namespace AcMarche\Pst\Filament\Resources\ActionPst\RelationManagers;
 
 use AcMarche\Pst\Filament\Resources\FollowUp\Tables\FollowUpTables;
-use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class FollowUpsRelationManager extends RelationManager
 {
+    #[Override]
     protected static string $relationship = 'followups';
 
+    #[Override]
     protected static ?string $title = 'Suivi';
 
+    #[Override]
     protected static ?string $label = 'Suivi';
 
     public function isReadOnly(): bool
@@ -27,7 +31,7 @@ final class FollowUpsRelationManager extends RelationManager
     {
         return $schema
             ->schema([
-                Forms\Components\RichEditor::make('content')
+                RichEditor::make('content')
                     ->label('Contenu')
                     ->required()
                     ->columnSpanFull(),

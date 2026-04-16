@@ -13,10 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection('maria-courrier')->hasTable('courrier_service')) {
-            Schema::connection('maria-courrier')->table('courrier_service', function (Blueprint $table) {
+            Schema::connection('maria-courrier')->table('courrier_service', function (Blueprint $table): void {
                 $table->rename('incoming_mail_service');
             });
-            Schema::connection('maria-courrier')->table('incoming_mail_service', function (Blueprint $table) {
+            Schema::connection('maria-courrier')->table('incoming_mail_service', function (Blueprint $table): void {
                 $table->renameColumn('courrier_id', 'incoming_mail_id');
                 $table->renameColumn('principal', 'is_primary');
                 // $table->foreignId('incoming_mail_id')->constrained('incoming_mails')->cascadeOnDelete();

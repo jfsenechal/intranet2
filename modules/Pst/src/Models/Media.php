@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\Pst\Database\Factories\MediaFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,21 +14,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 
 #[UseFactory(MediaFactory::class)]
+#[Connection('maria-pst')]
+#[Fillable([
+    'name',
+    'action_id',
+    'uuid',
+    'file_name',
+    'mime_type',
+    'disk',
+    'size',
+])]
 final class Media extends Model
 {
     use HasFactory, Notifiable;
-
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'name',
-        'action_id',
-        'uuid',
-        'file_name',
-        'mime_type',
-        'disk',
-        'size',
-    ];
 
     /**
      * @return BelongsTo<Action>

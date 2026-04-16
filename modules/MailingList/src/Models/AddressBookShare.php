@@ -5,18 +5,21 @@ declare(strict_types=1);
 namespace AcMarche\MailingList\Models;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[Connection('maria-mailing-list')]
+#[Fillable([
+    'address_book_id',
+    'username',
+    'permission',
+])]
 final class AddressBookShare extends Model
 {
-    protected $connection = 'maria-mailing-list';
-
-    protected $fillable = [
-        'address_book_id',
-        'username',
-        'permission',
-    ];
+    use HasFactory;
 
     /**
      * @return BelongsTo<AddressBook, $this>

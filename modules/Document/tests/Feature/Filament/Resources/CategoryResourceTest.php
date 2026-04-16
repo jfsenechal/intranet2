@@ -20,7 +20,7 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('document-panel'));
     $this->user = User::factory()->create();
     $role = Role::factory()->create(['name' => 'ROLE_DOCUMENT_ADMIN']);
@@ -28,17 +28,17 @@ beforeEach(function () {
     $this->actingAs($this->user);
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     livewire(ListCategory::class)
         ->assertOk();
 });
 
-it('can render the create page', function () {
+it('can render the create page', function (): void {
     livewire(CreateCategory::class)
         ->assertOk();
 });
 
-it('can render the edit page', function () {
+it('can render the edit page', function (): void {
     $category = Category::factory()->create();
 
     livewire(EditCategory::class, ['record' => $category->id])
@@ -48,14 +48,14 @@ it('can render the edit page', function () {
         ]);
 });
 
-it('can render the view page', function () {
+it('can render the view page', function (): void {
     $category = Category::factory()->create();
 
     livewire(ViewCategory::class, ['record' => $category->id])
         ->assertOk();
 });
 
-it('can list categories', function () {
+it('can list categories', function (): void {
     $categories = Category::factory(3)->create();
 
     livewire(ListCategory::class)
@@ -63,12 +63,12 @@ it('can list categories', function () {
         ->assertCanSeeTableRecords($categories);
 });
 
-it('has table columns', function (string $column) {
+it('has table columns', function (string $column): void {
     livewire(ListCategory::class)
         ->assertTableColumnExists($column);
 })->with(['name', 'documents_count']);
 
-it('can sort by name', function () {
+it('can sort by name', function (): void {
     $categories = Category::factory(5)->create();
 
     livewire(ListCategory::class)
@@ -79,7 +79,7 @@ it('can sort by name', function () {
         ->assertCanSeeTableRecords($categories);
 });
 
-it('can search categories', function () {
+it('can search categories', function (): void {
     $categories = Category::factory(5)->create();
 
     $search = $categories->first()->name;
@@ -91,7 +91,7 @@ it('can search categories', function () {
         ->assertCanNotSeeTableRecords($categories->where('name', '!=', $search));
 });
 
-it('can create a category', function () {
+it('can create a category', function (): void {
     $category = Category::factory()->make();
 
     livewire(CreateCategory::class)
@@ -106,7 +106,7 @@ it('can create a category', function () {
     ]);
 });
 
-it('can update a category', function () {
+it('can update a category', function (): void {
     $category = Category::factory()->create();
     $newData = Category::factory()->make();
 
@@ -123,7 +123,7 @@ it('can update a category', function () {
     ]);
 });
 
-it('can delete a category from view page', function () {
+it('can delete a category from view page', function (): void {
     $category = Category::factory()->create();
 
     livewire(ViewCategory::class, ['record' => $category->id])
@@ -134,7 +134,7 @@ it('can delete a category from view page', function () {
     assertDatabaseMissing($category);
 });
 
-it('can bulk delete categories', function () {
+it('can bulk delete categories', function (): void {
     $categories = Category::factory(3)->create();
 
     livewire(ListCategory::class)
@@ -148,7 +148,7 @@ it('can bulk delete categories', function () {
     $categories->each(fn (Category $category) => assertDatabaseMissing($category));
 });
 
-it('validates the form data', function (array $data, array $errors) {
+it('validates the form data', function (array $data, array $errors): void {
     $category = Category::factory()->create();
 
     livewire(EditCategory::class, ['record' => $category->id])
@@ -163,7 +163,7 @@ it('validates the form data', function (array $data, array $errors) {
     '`name` is required' => [['name' => null], ['name' => 'required']],
 ]);
 
-it('can list documents in the relation manager', function () {
+it('can list documents in the relation manager', function (): void {
     $category = Category::factory()->create();
     $documents = Document::factory(3)->create(['category_id' => $category->id]);
 
@@ -176,7 +176,7 @@ it('can list documents in the relation manager', function () {
         ->assertCanSeeTableRecords($documents);
 });
 
-it('prevents a regular user from creating a category', function () {
+it('prevents a regular user from creating a category', function (): void {
     $regularUser = User::factory()->create();
     $this->actingAs($regularUser);
 
@@ -184,7 +184,7 @@ it('prevents a regular user from creating a category', function () {
         ->assertForbidden();
 });
 
-it('prevents a regular user from editing a category', function () {
+it('prevents a regular user from editing a category', function (): void {
     $regularUser = User::factory()->create();
     $this->actingAs($regularUser);
     $category = Category::factory()->create();
@@ -193,7 +193,7 @@ it('prevents a regular user from editing a category', function () {
         ->assertForbidden();
 });
 
-it('prevents a regular user from deleting a category', function () {
+it('prevents a regular user from deleting a category', function (): void {
     $regularUser = User::factory()->create();
     $this->actingAs($regularUser);
     $category = Category::factory()->create();

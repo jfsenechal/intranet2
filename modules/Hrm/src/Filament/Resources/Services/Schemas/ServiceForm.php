@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Services\Schemas;
 
-use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Str;
 
 final class ServiceForm
 {
@@ -19,20 +20,20 @@ final class ServiceForm
                 Section::make('Informations')
                     ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('title')
+                        TextInput::make('name')
                             ->label('Intitule')
                             ->required()
                             ->maxLength(100)
                             ->live(onBlur: true),
-                        Forms\Components\TextInput::make('abbreviation')
+                        TextInput::make('abbreviation')
                             ->label('Abreviation')
                             ->maxLength(255),
-                        Forms\Components\Select::make('direction_id')
+                        Select::make('direction_id')
                             ->label('Direction')
-                            ->relationship('direction', 'title')
+                            ->relationship('direction', 'name')
                             ->searchable()
                             ->preload(),
-                        Forms\Components\Select::make('employer_id')
+                        Select::make('employer_id')
                             ->label('Employeur')
                             ->relationship('employer', 'name')
                             ->searchable()
@@ -41,32 +42,32 @@ final class ServiceForm
                 Section::make('Coordonnees')
                     ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('address')
+                        TextInput::make('address')
                             ->label('Adresse')
                             ->maxLength(100)
                             ->columnSpanFull(),
-                        Forms\Components\TextInput::make('postal_code')
+                        TextInput::make('postal_code')
                             ->label('Code postal')
                             ->numeric(),
-                        Forms\Components\TextInput::make('city')
+                        TextInput::make('city')
                             ->label('Ville')
                             ->maxLength(100),
-                        Forms\Components\TextInput::make('email')
+                        TextInput::make('email')
                             ->label('Email')
                             ->email()
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('phone')
+                        TextInput::make('phone')
                             ->label('Telephone')
                             ->tel()
                             ->maxLength(150),
-                        Forms\Components\TextInput::make('gsm')
+                        TextInput::make('gsm')
                             ->label('GSM')
                             ->tel()
                             ->maxLength(150),
                     ]),
                 Section::make('Remarques')
                     ->schema([
-                        Forms\Components\RichEditor::make('notes')
+                        RichEditor::make('notes')
                             ->label('Remarques')
                             ->columnSpanFull(),
                     ]),

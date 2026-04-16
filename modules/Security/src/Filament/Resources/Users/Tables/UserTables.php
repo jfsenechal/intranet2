@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Users\Tables;
 
+use Filament\Tables\Columns\TextColumn;
 use AcMarche\Security\Filament\Actions\RevokeAction;
 use AcMarche\Security\Filament\Resources\Modules\Schemas\ModuleForm;
 use AcMarche\Security\Handler\ModuleHandler;
@@ -31,26 +32,26 @@ final class UserTables
             ->defaultPaginationPageOption(50)
             ->defaultSort('last_name')
             ->columns([
-                Tables\Columns\TextColumn::make('last_name')
+                TextColumn::make('last_name')
                     ->label('Nom')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('first_name')
+                TextColumn::make('first_name')
                     ->label('Prénom')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('phone')
+                TextColumn::make('email'),
+                TextColumn::make('phone')
                     ->label('Téléphone')
                     ->icon('tabler-phone')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('extension')
+                TextColumn::make('extension')
                     ->label('Extension')
                     ->icon('tabler-device-landline-phone'),
-                Tables\Columns\TextColumn::make('username')
+                TextColumn::make('username')
                     ->label('Nom d\'utilisateur')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -75,19 +76,19 @@ final class UserTables
             ->defaultPaginationPageOption(50)
             ->defaultSort('last_name')
             ->columns([
-                Tables\Columns\TextColumn::make('last_name')
+                TextColumn::make('last_name')
                     ->label('Nom')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('first_name')
+                TextColumn::make('first_name')
                     ->label('Prénom')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email')
+                TextColumn::make('email')
                     ->label('Email')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('roles.name')
+                TextColumn::make('roles.name')
                     ->label('Rôles')
                     ->state(fn (Model|User $record): string => $record->rolesByModule($owner->id)
                         ->pluck('name')->implode(', '))
@@ -98,7 +99,7 @@ final class UserTables
                     ->label('Ajouter un utilisateur')
                     ->modalHeading('Ajouter un utilisateur au module')
                     ->icon('tabler-user-plus')
-                    ->action(function (array $data) use ($owner) {
+                    ->action(function (array $data) use ($owner): void {
                         try {
                             ModuleHandler::addUserFromModule($owner, $data);
                             Notification::make()
@@ -120,8 +121,8 @@ final class UserTables
 
                         return $data;
                     })
-                    ->schema(fn (Schema $schema) => ModuleForm::addUserFromModule($schema, $owner))
-                    ->action(function (array $data, Schema $schema) use ($owner) {
+                    ->schema(fn (Schema $schema): Schema => ModuleForm::addUserFromModule($schema, $owner))
+                    ->action(function (array $data, Schema $schema) use ($owner): void {
                         try {
                             ModuleHandler::syncUserRolesForModule($owner, $schema->getRecord(), $data);
                             Notification::make()
@@ -134,7 +135,7 @@ final class UserTables
                         }
                     }),
                 RevokeAction::make()
-                    ->action(function (User $user) use ($owner) {
+                    ->action(function (User $user) use ($owner): void {
                         ModuleHandler::revokeModuleFromUser($user, $owner->id);
                     }),
             ]);

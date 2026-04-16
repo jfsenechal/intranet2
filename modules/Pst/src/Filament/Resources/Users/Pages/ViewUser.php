@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Users\Pages;
 
+use Filament\Actions\EditAction;
 use AcMarche\Pst\Filament\Resources\Users\Schemas\UserInfolist;
 use AcMarche\Pst\Filament\Resources\Users\UserResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
+use Override;
 use STS\FilamentImpersonate\Actions\Impersonate;
 
 final class ViewUser extends ViewRecord
 {
+    #[Override]
     protected static string $resource = UserResource::class;
 
     public function getTitle(): string
@@ -28,7 +31,7 @@ final class ViewUser extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
             Impersonate::make(),
         ];
@@ -36,8 +39,6 @@ final class ViewUser extends ViewRecord
 
     protected function getAllRelationManagers(): array
     {
-        $relations = $this->getResource()::getRelations();
-
-        return $relations;
+        return $this->getResource()::getRelations();
     }
 }

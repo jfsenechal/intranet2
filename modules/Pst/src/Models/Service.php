@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\Pst\Database\Factories\ServiceFactory;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
@@ -16,17 +18,15 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Scout\Searchable;
 
 #[UseFactory(ServiceFactory::class)]
+#[Connection('maria-pst')]
+#[Fillable([
+    'name',
+    'initials',
+])]
 final class Service extends Model
 {
     use HasFactory, Notifiable;
     use Searchable;
-
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'name',
-        'initials',
-    ];
 
     /**
      * Get the indexable data array for the model.
@@ -59,7 +59,7 @@ final class Service extends Model
             'username',
             'id',
             'username'
-        )->tap(function ($query) {
+        )->tap(function ($query): void {
             // Handle cross-database join by explicitly specifying the database
             $query->from(DB::raw('`intranet`.`users`'));
         });

@@ -78,9 +78,7 @@ final class InboxTables
                         $record['uid'],
                         0,
                         $record['attachments'][0]['content_type'] ?? 'application/octet-stream',
-                        $record['attachments'][0]['filename'] ?? 'Sans nom',
-                        str_starts_with($record['attachments'][0]['content_type'] ?? '', 'image/')
-                            || ($record['attachments'][0]['content_type'] ?? '') === 'application/pdf'
+                        $record['attachments'][0]['filename'] ?? 'Sans nom'
                     ))
                     ->action(function (array $data, array $record): void {
                         IncomingMailHandler::handleIncomingMailCreation(

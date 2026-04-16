@@ -7,9 +7,11 @@ namespace AcMarche\News\Filament\Resources\News\Pages;
 use AcMarche\News\Events\NewsProcessed;
 use AcMarche\News\Filament\Resources\News\NewsResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateNews extends CreateRecord
 {
+    #[Override]
     protected static string $resource = NewsResource::class;
 
     public function canCreateAnother(): bool
@@ -24,6 +26,6 @@ final class CreateNews extends CreateRecord
 
     protected function afterCreate(): void
     {
-        NewsProcessed::dispatch($this->record);
+        event(new NewsProcessed($this->record));
     }
 }

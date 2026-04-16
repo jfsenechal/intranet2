@@ -16,14 +16,14 @@ return new class() extends Migration
         if (Schema::hasTable('actions')) {
             return;
         }
-        Schema::table('strategic_objectives', function (Blueprint $table) {
+        Schema::table('strategic_objectives', function (Blueprint $table): void {
             $table->enum('synergy', ActionSynergyEnum::toArray())->nullable(false)->default(ActionSynergyEnum::NO)->change();
         });
 
-        Schema::table('operational_objectives', function (Blueprint $table) {
+        Schema::table('operational_objectives', function (Blueprint $table): void {
             $table->enum('synergy', ActionSynergyEnum::toArray())->nullable(false)->default(ActionSynergyEnum::NO)->change();
         });
-        Schema::table('actions', function (Blueprint $table) {
+        Schema::table('actions', function (Blueprint $table): void {
             $table->enum('synergy', ActionSynergyEnum::toArray())->nullable(false)->default(ActionSynergyEnum::NO)->change();
         });
     }

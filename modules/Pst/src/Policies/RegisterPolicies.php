@@ -14,7 +14,7 @@ final class RegisterPolicies
 
     public static function register(): void
     {
-        Gate::define('teams-edit', function (User $user, Action $action, string $operation) {
+        Gate::define('teams-edit', function (User $user, Action $action, string $operation): bool {
 
             if ($operation === 'create') {
                 return true;

@@ -14,10 +14,10 @@ return new class extends Migration
     {
         // Stages/Internships
         if (Schema::connection($this->connection)->hasTable('stage')) {
-            Schema::connection($this->connection)->table('stage', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('stage', function (Blueprint $table): void {
                 $table->rename('internships');
             });
-            Schema::connection($this->connection)->table('internships', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('internships', function (Blueprint $table): void {
                 $table->renameColumn('employe_id', 'employee_id');
                 $table->renameColumn('employeur_id', 'employer_id');
                 $table->renameColumn('date_debut', 'start_date');
@@ -30,7 +30,7 @@ return new class extends Migration
                 $table->renameColumn('updateBy', 'updated_by');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('internships')) {
-            Schema::connection($this->connection)->create('internships', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('internships', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id');
                 $table->foreignId('employer_id')->nullable();
@@ -48,10 +48,10 @@ return new class extends Migration
 
         // Candidatures
         if (Schema::connection($this->connection)->hasTable('candidature')) {
-            Schema::connection($this->connection)->table('candidature', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('candidature', function (Blueprint $table): void {
                 $table->rename('applications');
             });
-            Schema::connection($this->connection)->table('applications', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('applications', function (Blueprint $table): void {
                 $table->renameColumn('employeur_id', 'employer_id');
                 $table->renameColumn('employe_id', 'employee_id');
                 $table->renameColumn('date_reception', 'received_at');
@@ -68,7 +68,7 @@ return new class extends Migration
                 $table->renameColumn('updateBy', 'updated_by');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('applications')) {
-            Schema::connection($this->connection)->create('applications', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('applications', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id');
                 $table->foreignId('employer_id')->nullable();
@@ -88,13 +88,13 @@ return new class extends Migration
 
         // Deadlines (Echeances)
         if (Schema::connection($this->connection)->hasTable('echeance')) {
-            Schema::connection($this->connection)->table('echeance', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('echeance', function (Blueprint $table): void {
                 $table->rename('deadlines');
             });
-            Schema::connection($this->connection)->table('deadlines', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('deadlines', function (Blueprint $table): void {
                 $table->renameColumn('employeur_id', 'employer_id');
                 $table->renameColumn('employe_id', 'employee_id');
-                $table->renameColumn('intitule', 'title');
+                $table->renameColumn('intitule', 'name');
                 $table->renameColumn('date_debut', 'start_date');
                 $table->renameColumn('date_fin', 'end_date');
                 $table->renameColumn('date_rappel', 'reminder_date');
@@ -106,13 +106,13 @@ return new class extends Migration
                 $table->renameColumn('updateBy', 'updated_by');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('deadlines')) {
-            Schema::connection($this->connection)->create('deadlines', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('deadlines', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id')->nullable();
                 $table->foreignId('employer_id')->nullable();
                 $table->foreignId('direction_id')->nullable();
                 $table->foreignId('service_id')->nullable();
-                $table->string('title', 250);
+                $table->string('name', 250);
                 $table->longText('note')->nullable();
                 $table->date('start_date')->nullable();
                 $table->date('end_date')->nullable();
@@ -127,12 +127,12 @@ return new class extends Migration
 
         // HR Documents
         if (Schema::connection($this->connection)->hasTable('document')) {
-            Schema::connection($this->connection)->table('document', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('document', function (Blueprint $table): void {
                 $table->rename('hr_documents');
             });
-            Schema::connection($this->connection)->table('hr_documents', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('hr_documents', function (Blueprint $table): void {
                 $table->renameColumn('employe_id', 'employee_id');
-                $table->renameColumn('intitule', 'title');
+                $table->renameColumn('intitule', 'name');
                 $table->renameColumn('fileName', 'file_name');
                 $table->renameColumn('remarques', 'notes');
                 $table->renameColumn('created', 'created_at');
@@ -140,10 +140,10 @@ return new class extends Migration
                 $table->renameColumn('updateBy', 'updated_by');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('hr_documents')) {
-            Schema::connection($this->connection)->create('hr_documents', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('hr_documents', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id')->nullable();
-                $table->string('title', 255);
+                $table->string('name', 255);
                 $table->string('file_name', 255);
                 $table->string('mime', 255);
                 $table->longText('notes')->nullable();
@@ -154,10 +154,10 @@ return new class extends Migration
 
         // Valorisations
         if (Schema::connection($this->connection)->hasTable('valorisation')) {
-            Schema::connection($this->connection)->table('valorisation', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('valorisation', function (Blueprint $table): void {
                 $table->rename('valorizations');
             });
-            Schema::connection($this->connection)->table('valorizations', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('valorizations', function (Blueprint $table): void {
                 $table->renameColumn('employe_id', 'employee_id');
                 $table->renameColumn('employeur', 'employer_name');
                 $table->renameColumn('duree', 'duration');
@@ -168,7 +168,7 @@ return new class extends Migration
                 $table->renameColumn('updateBy', 'updated_by');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('valorizations')) {
-            Schema::connection($this->connection)->create('valorizations', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('valorizations', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id')->nullable();
                 $table->string('employer_name', 150);
@@ -183,10 +183,10 @@ return new class extends Migration
 
         // Telework
         if (Schema::connection($this->connection)->hasTable('teletravail')) {
-            Schema::connection($this->connection)->table('teletravail', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('teletravail', function (Blueprint $table): void {
                 $table->rename('teleworks');
             });
-            Schema::connection($this->connection)->table('teleworks', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('teleworks', function (Blueprint $table): void {
                 $table->renameColumn('accord_reglement', 'regulation_agreement');
                 $table->renameColumn('rue', 'street');
                 $table->renameColumn('localite', 'locality');
@@ -208,7 +208,7 @@ return new class extends Migration
                 $table->renameColumn('updateBy', 'updated_by');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('teleworks')) {
-            Schema::connection($this->connection)->create('teleworks', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('teleworks', function (Blueprint $table): void {
                 $table->id();
                 $table->uuid('uuid')->unique();
                 $table->boolean('regulation_agreement');
@@ -236,7 +236,7 @@ return new class extends Migration
 
         // SMS
         if (Schema::connection($this->connection)->hasTable('sms')) {
-            Schema::connection($this->connection)->table('sms', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('sms', function (Blueprint $table): void {
                 $table->renameColumn('employe_id', 'employee_id');
                 $table->renameColumn('numero', 'phone_number');
                 $table->renameColumn('date_rappel', 'reminder_date');
@@ -247,7 +247,7 @@ return new class extends Migration
                 $table->renameColumn('updateBy', 'updated_by');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('sms')) {
-            Schema::connection($this->connection)->create('sms', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('sms', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id')->nullable();
                 $table->string('phone_number', 12);
@@ -263,10 +263,10 @@ return new class extends Migration
 
         // Operators
         if (Schema::connection($this->connection)->hasTable('operateur')) {
-            Schema::connection($this->connection)->table('operateur', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('operateur', function (Blueprint $table): void {
                 $table->rename('operators');
             });
-            Schema::connection($this->connection)->table('operators', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('operators', function (Blueprint $table): void {
                 $table->renameColumn('employeur_id', 'employer_id');
                 $table->renameColumn('nom', 'name');
                 $table->renameColumn('slugname', 'slug');
@@ -291,7 +291,7 @@ return new class extends Migration
                 $table->renameColumn('updated', 'updated_at');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('operators')) {
-            Schema::connection($this->connection)->create('operators', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('operators', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('service_id')->nullable();
                 $table->foreignId('employer_id')->nullable();
@@ -322,19 +322,19 @@ return new class extends Migration
 
         // Notifications
         if (Schema::connection($this->connection)->hasTable('notification')) {
-            Schema::connection($this->connection)->table('notification', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('notification', function (Blueprint $table): void {
                 $table->rename('hr_notifications');
             });
-            Schema::connection($this->connection)->table('hr_notifications', function (Blueprint $table) {
-                $table->renameColumn('intitule', 'title');
+            Schema::connection($this->connection)->table('hr_notifications', function (Blueprint $table): void {
+                $table->renameColumn('intitule', 'name');
                 $table->renameColumn('user', 'user_add');
                 $table->renameColumn('created', 'created_at');
                 $table->renameColumn('updated', 'updated_at');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('hr_notifications')) {
-            Schema::connection($this->connection)->create('hr_notifications', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('hr_notifications', function (Blueprint $table): void {
                 $table->id();
-                $table->string('title', 250);
+                $table->string('name', 250);
                 $table->integer('object_id');
                 $table->string('object_type', 100);
                 $table->foreignId('employer_id')->nullable();
@@ -345,25 +345,11 @@ return new class extends Migration
 
         // Notification Users
         if (! Schema::connection($this->connection)->hasTable('notification_users')) {
-            Schema::connection($this->connection)->create('notification_users', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('notification_users', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('notification_id');
                 $table->string('user', 255);
             });
         }
-    }
-
-    public function down(): void
-    {
-        Schema::connection($this->connection)->dropIfExists('notification_users');
-        Schema::connection($this->connection)->dropIfExists('hr_notifications');
-        Schema::connection($this->connection)->dropIfExists('operators');
-        Schema::connection($this->connection)->dropIfExists('sms');
-        Schema::connection($this->connection)->dropIfExists('teleworks');
-        Schema::connection($this->connection)->dropIfExists('valorizations');
-        Schema::connection($this->connection)->dropIfExists('hr_documents');
-        Schema::connection($this->connection)->dropIfExists('deadlines');
-        Schema::connection($this->connection)->dropIfExists('applications');
-        Schema::connection($this->connection)->dropIfExists('internships');
     }
 };

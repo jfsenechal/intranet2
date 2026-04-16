@@ -8,13 +8,13 @@ use AcMarche\Mileage\Models\Trip;
 use AcMarche\Mileage\Service\TripAttributeResolver;
 use App\Models\User;
 
-beforeEach(function () {
+beforeEach(function (): void {
     $this->handler = new TripAttributeResolver();
     $this->user = User::factory()->create();
 });
 
-describe('setRate', function () {
-    test('sets rate and omnium from matching rate period', function () {
+describe('setRate', function (): void {
+    test('sets rate and omnium from matching rate period', function (): void {
         $rate = Rate::factory()->create([
             'amount' => 0.44,
             'omnium' => 0.03,
@@ -35,7 +35,7 @@ describe('setRate', function () {
             ->and($trip->omnium)->toBe('0.03');
     });
 
-    test('uses most recent rate when multiple rates match', function () {
+    test('uses most recent rate when multiple rates match', function (): void {
         // Create older rate
         Rate::factory()->create([
             'amount' => 0.35,
@@ -68,7 +68,7 @@ describe('setRate', function () {
 
     // Note: end_date is now required in the database schema, so null end_date is not supported
 
-    test('does not set rate when no matching rate exists', function () {
+    test('does not set rate when no matching rate exists', function (): void {
         Rate::factory()->create([
             'amount' => 0.40,
             'omnium' => 0.03,
@@ -89,7 +89,7 @@ describe('setRate', function () {
             ->and($trip->omnium)->toBeNull();
     });
 
-    test('handles trip at start of rate period', function () {
+    test('handles trip at start of rate period', function (): void {
         $rate = Rate::factory()->create([
             'amount' => 0.40,
             'omnium' => 0.03,
@@ -110,7 +110,7 @@ describe('setRate', function () {
             ->and($trip->omnium)->toBe('0.03');
     });
 
-    test('handles trip at end of rate period', function () {
+    test('handles trip at end of rate period', function (): void {
         $rate = Rate::factory()->create([
             'amount' => 0.40,
             'omnium' => 0.03,
@@ -131,7 +131,7 @@ describe('setRate', function () {
             ->and($trip->omnium)->toBe('0.03');
     });
 
-    test('does not match trip before rate start_date', function () {
+    test('does not match trip before rate start_date', function (): void {
         Rate::factory()->create([
             'amount' => 0.40,
             'omnium' => 0.03,
@@ -152,7 +152,7 @@ describe('setRate', function () {
             ->and($trip->omnium)->toBeNull();
     });
 
-    test('does not match trip after rate end_date', function () {
+    test('does not match trip after rate end_date', function (): void {
         Rate::factory()->create([
             'amount' => 0.40,
             'omnium' => 0.03,
@@ -174,8 +174,8 @@ describe('setRate', function () {
     });
 });
 
-describe('setTypeOfMovement', function () {
-    test('sets type to EXTERNAL when arrival_date is present', function () {
+describe('setTypeOfMovement', function (): void {
+    test('sets type to EXTERNAL when arrival_date is present', function (): void {
         $trip = Trip::factory()->create([
             'user_id' => $this->user->id,
             'departure_date' => '2024-06-15',
@@ -188,7 +188,7 @@ describe('setTypeOfMovement', function () {
         expect($trip->type_movement)->toBe(TypeMovementEnum::EXTERNAL->value);
     });
 
-    test('sets type to INTERNAL when arrival_date is null', function () {
+    test('sets type to INTERNAL when arrival_date is null', function (): void {
         $trip = Trip::factory()->create([
             'user_id' => $this->user->id,
             'departure_date' => '2024-06-15',
@@ -201,7 +201,7 @@ describe('setTypeOfMovement', function () {
         expect($trip->type_movement)->toBe(TypeMovementEnum::INTERNAL->value);
     });
 
-    test('overwrites existing type_movement when arrival_date is present', function () {
+    test('overwrites existing type_movement when arrival_date is present', function (): void {
         $trip = Trip::factory()->create([
             'user_id' => $this->user->id,
             'departure_date' => '2024-06-15',
@@ -214,7 +214,7 @@ describe('setTypeOfMovement', function () {
         expect($trip->type_movement)->toBe(TypeMovementEnum::EXTERNAL->value);
     });
 
-    test('overwrites existing type_movement when arrival_date is null', function () {
+    test('overwrites existing type_movement when arrival_date is null', function (): void {
         $trip = Trip::factory()->create([
             'user_id' => $this->user->id,
             'departure_date' => '2024-06-15',

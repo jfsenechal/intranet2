@@ -13,9 +13,11 @@ use Exception;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 final class CreateUser extends CreateRecord
 {
+    #[Override]
     protected static string $resource = UserResource::class;
 
     public function getTitle(): string

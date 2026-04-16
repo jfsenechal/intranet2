@@ -4,23 +4,30 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Recipients;
 
+use AcMarche\Courrier\Filament\Resources\Recipients\Pages\CreateRecipient;
+use AcMarche\Courrier\Filament\Resources\Recipients\Pages\EditRecipient;
+use AcMarche\Courrier\Filament\Resources\Recipients\Pages\ListRecipients;
 use AcMarche\Courrier\Filament\Resources\Recipients\Schemas\RecipientForm;
 use AcMarche\Courrier\Filament\Resources\Recipients\Tables\RecipientTables;
 use AcMarche\Courrier\Models\Recipient;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class RecipientResource extends Resource
 {
+    #[Override]
     protected static ?string $model = Recipient::class;
 
+    #[Override]
     protected static ?int $navigationSort = 4;
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Paramètres';
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-users';
     }
@@ -53,9 +60,9 @@ final class RecipientResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRecipients::route('/'),
-            'create' => Pages\CreateRecipient::route('/create'),
-            'edit' => Pages\EditRecipient::route('/{record}/edit'),
+            'index' => ListRecipients::route('/'),
+            'create' => CreateRecipient::route('/create'),
+            'edit' => EditRecipient::route('/{record}/edit'),
         ];
     }
 }

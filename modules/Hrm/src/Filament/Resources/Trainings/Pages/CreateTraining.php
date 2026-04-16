@@ -6,8 +6,10 @@ namespace AcMarche\Hrm\Filament\Resources\Trainings\Pages;
 
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateTraining extends CreateRecord
 {
+    #[Override]
     protected static string $resource = TrainingResource::class;
 }

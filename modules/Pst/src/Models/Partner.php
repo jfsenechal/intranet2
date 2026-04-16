@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\Pst\Database\Factories\PartnerFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,19 +15,17 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
 #[UseFactory(PartnerFactory::class)]
+#[Connection('maria-pst')]
+#[Fillable([
+    'name',
+    'phone',
+    'email',
+    'initials',
+    'description',
+])]
 final class Partner extends Model
 {
     use HasFactory, Notifiable, Searchable;
-
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'name',
-        'phone',
-        'email',
-        'initials',
-        'description',
-    ];
 
     /**
      * Get the indexable data array for the model.

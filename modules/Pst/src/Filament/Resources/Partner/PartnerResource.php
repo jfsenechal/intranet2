@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Partner;
 
+use AcMarche\Pst\Filament\Resources\Partner\Pages\ListPartners;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\CreatePartner;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\ViewPartner;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\EditPartner;
 use AcMarche\Pst\Enums\NavigationGroupEnum;
 use AcMarche\Pst\Filament\Resources\Partner\Schemas\PartnerForm;
 use AcMarche\Pst\Filament\Resources\Partner\Tables\PartnerTables;
@@ -16,16 +20,21 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 use UnitEnum;
 
 final class PartnerResource extends Resource
 {
+    #[Override]
     protected static ?string $model = Partner::class;
 
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = Heroicon::OutlinedUserGroup;
 
+    #[Override]
     protected static string|UnitEnum|null $navigationGroup = NavigationGroupEnum::Settings;
 
+    #[Override]
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getNavigationLabel(): string
@@ -58,10 +67,10 @@ final class PartnerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPartners::route('/'),
-            'create' => Pages\CreatePartner::route('/create'),
-            'view' => Pages\ViewPartner::route('/{record}'),
-            'edit' => Pages\EditPartner::route('/{record}/edit'),
+            'index' => ListPartners::route('/'),
+            'create' => CreatePartner::route('/create'),
+            'view' => ViewPartner::route('/{record}'),
+            'edit' => EditPartner::route('/{record}/edit'),
         ];
     }
 

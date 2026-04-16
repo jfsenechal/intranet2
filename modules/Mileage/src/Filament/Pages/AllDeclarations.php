@@ -16,19 +16,23 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Override;
 use UnitEnum;
 
 final class AllDeclarations extends ListRecords
 {
+    #[Override]
     protected static string $resource = DeclarationResource::class;
 
+    #[Override]
     protected static ?int $navigationSort = 3;
 
+    #[Override]
     protected static ?string $navigationLabel = 'Toutes les déclarations';
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Administration';
 
     /**
@@ -44,7 +48,7 @@ final class AllDeclarations extends ListRecords
         return 'Toutes les déclarations';
     }
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'tabler-list-check';
     }
@@ -59,7 +63,7 @@ final class AllDeclarations extends ListRecords
         return $user?->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value) ?? false;
     }
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Toutes les déclarations';
     }
@@ -79,7 +83,7 @@ final class AllDeclarations extends ListRecords
                     ->label('Nom')
                     ->searchable()
                     ->sortable()
-                    ->url(fn (Declaration $record) => DeclarationResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (Declaration $record): string => DeclarationResource::getUrl('view', ['record' => $record->id])),
                 TextColumn::make('first_name')
                     ->label('Prénom')
                     ->searchable()
@@ -136,21 +140,19 @@ final class AllDeclarations extends ListRecords
                         DatePicker::make('created_until')
                             ->label('Créé jusqu\'à'),
                     ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when(
-                                $data['created_from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
-                            )
-                            ->when(
-                                $data['created_until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
-                            );
-                    }),
+                    ->query(fn (Builder $query, array $data): Builder => $query
+                        ->when(
+                            $data['created_from'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                        )
+                        ->when(
+                            $data['created_until'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                        )),
             ])
             ->recordActions([
                 ViewAction::make()
-                    ->url(fn (Declaration $record) => DeclarationResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (Declaration $record): string => DeclarationResource::getUrl('view', ['record' => $record->id])),
             ]);
     }
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Courrier\Policies;
 
 use AcMarche\Courrier\Enums\RolesEnum;
-use AcMarche\Courrier\Models\Recipient;
 use App\Models\User;
 
 final class RecipientPolicy
@@ -13,7 +12,7 @@ final class RecipientPolicy
     /**
      * Perform pre-authorization checks.
      */
-    public function before(User $user, string $ability): ?bool
+    public function before(User $user): bool
     {
         if ($user->isAdministrator()) {
             return true;
@@ -33,7 +32,7 @@ final class RecipientPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Recipient $recipient): bool
+    public function view(User $user): bool
     {
         return $this->isAdministrator($user);
     }
@@ -49,7 +48,7 @@ final class RecipientPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Recipient $recipient): bool
+    public function update(User $user): bool
     {
         return $this->isAdministrator($user);
     }
@@ -57,7 +56,7 @@ final class RecipientPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Recipient $recipient): bool
+    public function delete(User $user): bool
     {
         return $this->isAdministrator($user);
     }
@@ -65,7 +64,7 @@ final class RecipientPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Recipient $recipient): bool
+    public function restore(): bool
     {
         return false;
     }
@@ -73,7 +72,7 @@ final class RecipientPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Recipient $recipient): bool
+    public function forceDelete(): bool
     {
         return false;
     }
@@ -83,16 +82,13 @@ final class RecipientPolicy
         if ($user->isAdministrator()) {
             return true;
         }
-        if ($user->hasOneOfThisRoles(
-            [
-                RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN,
-                RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN,
-                RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_ADMIN,
-            ]
-        )) {
-            return true;
-        }
 
-        return false;
+        return $user->hasOneOfThisRoles(
+            [
+                RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN->value,
+                RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN->value,
+                RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_ADMIN->value,
+            ]
+        );
     }
 }

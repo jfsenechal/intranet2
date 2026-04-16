@@ -6,8 +6,10 @@ namespace AcMarche\Hrm\Filament\Resources\Prerequisites\Pages;
 
 use AcMarche\Hrm\Filament\Resources\Prerequisites\PrerequisiteResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreatePrerequisite extends CreateRecord
 {
+    #[Override]
     protected static string $resource = PrerequisiteResource::class;
 }

@@ -10,11 +10,14 @@ use AcMarche\Security\Repository\UserRepository;
 use Filament\Facades\Filament;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 final class CreateAction extends CreateRecord
 {
+    #[Override]
     protected static string $resource = ActionPstResource::class;
 
+    #[Override]
     protected static ?string $title = 'Ajouter une action';
 
     /**
@@ -39,7 +42,7 @@ final class CreateAction extends CreateRecord
     protected function afterCreate(): void
     {
         if ($this->record->validated === false) {
-            ActionProcessed::dispatch($this->record);
+            event(new ActionProcessed($this->record));
         }
     }
 }

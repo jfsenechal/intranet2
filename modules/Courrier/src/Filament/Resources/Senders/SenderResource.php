@@ -15,20 +15,27 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class SenderResource extends Resource
 {
+    #[Override]
     protected static ?string $model = Sender::class;
 
+    #[Override]
     protected static ?int $navigationSort = 7;
 
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-paper-airplane';
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Paramètres';
 
+    #[Override]
     protected static ?string $modelLabel = 'Expéditeur';
 
+    #[Override]
     protected static ?string $pluralModelLabel = 'Expéditeurs';
 
     public static function form(Schema $schema): Schema

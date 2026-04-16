@@ -13,13 +13,17 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Override;
 
 final class HistoriesRelationManager extends RelationManager
 {
+    #[Override]
     protected static string $relationship = 'histories';
 
+    #[Override]
     protected static ?string $title = 'Historique';
 
+    #[Override]
     protected static ?string $label = 'Historique';
 
     public function isReadOnly(): bool

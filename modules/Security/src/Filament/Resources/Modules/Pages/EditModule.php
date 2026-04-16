@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Modules\Pages;
 
+use Filament\Actions\ViewAction;
 use AcMarche\Security\Filament\Resources\Modules\ModuleResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditModule extends EditRecord
 {
+    #[Override]
     protected static string $resource = ModuleResource::class;
 
     public function getTitle(): string|Htmlable
@@ -21,7 +24,7 @@ final class EditModule extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

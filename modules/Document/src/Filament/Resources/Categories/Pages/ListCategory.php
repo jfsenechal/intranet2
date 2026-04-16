@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace AcMarche\Document\Filament\Resources\Categories\Pages;
 
 use AcMarche\Document\Filament\Resources\Categories\CategoryResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListCategory extends ListRecords
 {
+    #[Override]
     protected static string $resource = CategoryResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' catégories';
     }
@@ -21,7 +22,7 @@ final class ListCategory extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter une catégorie')
                 ->icon('tabler-plus'),
         ];

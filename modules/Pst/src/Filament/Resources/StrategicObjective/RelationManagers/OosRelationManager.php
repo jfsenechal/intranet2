@@ -8,9 +8,11 @@ use AcMarche\Pst\Filament\Resources\OperationalObjective\Tables\OperationalObjec
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 final class OosRelationManager extends RelationManager
 {
+    #[Override]
     protected static string $relationship = 'oos';
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string

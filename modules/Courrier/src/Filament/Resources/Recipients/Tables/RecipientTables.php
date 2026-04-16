@@ -9,7 +9,8 @@ use AcMarche\Courrier\Models\Recipient;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 final class RecipientTables
@@ -20,27 +21,27 @@ final class RecipientTables
             ->defaultSort('last_name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('last_name')
+                TextColumn::make('last_name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable()
-                    ->url(fn (Recipient $record) => RecipientResource::getUrl('edit', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('first_name')
+                    ->url(fn (Recipient $record): string => RecipientResource::getUrl('edit', ['record' => $record->id])),
+                TextColumn::make('first_name')
                     ->label('Prénom')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('username')
+                TextColumn::make('username')
                     ->label('Utilisateur')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('email')
+                TextColumn::make('email')
                     ->label('Email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('supervisor.full_name')
+                TextColumn::make('supervisor.full_name')
                     ->label('Superviseur')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\IconColumn::make('receives_attachments')
+                IconColumn::make('receives_attachments')
                     ->label('PJ')
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),

@@ -41,12 +41,10 @@ final class AddressBookForm
                             ContactForm::columns()
                         ),
                     ])
-                    ->createOptionUsing(function (array $data): int {
-                        return Contact::query()->create([
-                            ...$data,
-                            'username' => auth()->user()?->username,
-                        ])->getKey();
-                    }),
+                    ->createOptionUsing(fn (array $data): int => Contact::query()->create([
+                        ...$data,
+                        'username' => auth()->user()?->username,
+                    ])->getKey()),
                 Select::make('sharedWithUsers')
                     ->label('Partager avec')
                     ->options(
@@ -55,7 +53,7 @@ final class AddressBookForm
                     ->multiple()
                     ->searchable()
                     ->afterStateHydrated(function (Select $component, ?AddressBook $record): void {
-                        if ($record) {
+                        if ($record instanceof AddressBook) {
                             $component->state(
                                 AddressBookRepository::getSharingAddressBookByAddressBook($record)
                             );

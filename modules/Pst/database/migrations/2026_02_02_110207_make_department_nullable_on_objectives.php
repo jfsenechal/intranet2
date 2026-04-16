@@ -15,11 +15,11 @@ return new class() extends Migration
         if (Schema::hasTable('actions')) {
             return;
         }
-        Schema::table('strategic_objectives', function (Blueprint $table) {
+        Schema::table('strategic_objectives', function (Blueprint $table): void {
             $table->string('department')->nullable()->change();
         });
 
-        Schema::table('operational_objectives', function (Blueprint $table) {
+        Schema::table('operational_objectives', function (Blueprint $table): void {
             $table->string('department')->nullable()->change();
         });
     }

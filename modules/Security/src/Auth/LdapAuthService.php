@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Auth;
 
+use LdapRecord\Models\Model;
+use LdapRecord\Auth\PasswordRequiredException;
+use LdapRecord\Auth\UsernameRequiredException;
+use LdapRecord\ContainerException;
 use AcMarche\Security\Ldap\UserLdap;
 use App\Models\User;
 use LdapRecord\Container;
@@ -11,9 +15,9 @@ use LdapRecord\Container;
 final class LdapAuthService
 {
     /**
-     * @throws \LdapRecord\Auth\PasswordRequiredException
-     * @throws \LdapRecord\Auth\UsernameRequiredException
-     * @throws \LdapRecord\ContainerException
+     * @throws PasswordRequiredException
+     * @throws UsernameRequiredException
+     * @throws ContainerException
      */
     public static function checkPassword(string $username, string $password): ?User
     {
@@ -24,7 +28,7 @@ final class LdapAuthService
         }
         if ($user) {
             $userLdap = UserLdap::where('sAMAccountName', '=', $user->username)->first();
-            if (! $userLdap) {
+            if (! $userLdap instanceof Model) {
 
                 return null;
             }
@@ -35,7 +39,7 @@ final class LdapAuthService
             }
             $message = $connection->getLdapConnection()->getDiagnosticMessage();
 
-            if (mb_strpos($message, '532') !== false) {
+            if (mb_strpos((string) $message, '532') !== false) {
                 // "Your password has expired.";
                 return null;
             }

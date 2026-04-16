@@ -4,20 +4,27 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News;
 
+use AcMarche\News\Filament\Resources\News\Pages\CreateNews;
+use AcMarche\News\Filament\Resources\News\Pages\EditNews;
+use AcMarche\News\Filament\Resources\News\Pages\ListNews;
+use AcMarche\News\Filament\Resources\News\Pages\ViewNews;
 use AcMarche\News\Filament\Resources\News\Schemas\NewsForm;
 use AcMarche\News\Filament\Resources\News\Tables\NewsTables;
 use AcMarche\News\Models\News;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class NewsResource extends Resource
 {
+    #[Override]
     protected static ?string $model = News::class;
 
+    #[Override]
     protected static ?int $navigationSort = 1;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-newspaper';
     }
@@ -40,10 +47,10 @@ final class NewsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListNews::route('/'),
-            'create' => Pages\CreateNews::route('/create'),
-            'edit' => Pages\EditNews::route('/{record}/edit'),
-            'view' => Pages\ViewNews::route('/{record}'),
+            'index' => ListNews::route('/'),
+            'create' => CreateNews::route('/create'),
+            'edit' => EditNews::route('/{record}/edit'),
+            'view' => ViewNews::route('/{record}'),
         ];
     }
 }

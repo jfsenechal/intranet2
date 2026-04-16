@@ -17,10 +17,10 @@ return new class extends Migration
          * Before for a foreign key
          */
         if (Schema::connection('maria-courrier')->hasTable('categorie')) {
-            Schema::connection('maria-courrier')->table('categorie', function (Blueprint $table) {
+            Schema::connection('maria-courrier')->table('categorie', function (Blueprint $table): void {
                 $table->rename('courrier_categories');
             });
-            Schema::connection('maria-courrier')->table('courrier_categories', function (Blueprint $table) {
+            Schema::connection('maria-courrier')->table('courrier_categories', function (Blueprint $table): void {
                 $table->renameColumn('nom', 'name');
                 $table->renameColumn('couleur', 'color');
                 $table->string('color', 7)->default('#6b7280')->change();
@@ -35,10 +35,10 @@ return new class extends Migration
         }
 
         if (Schema::connection('maria-courrier')->hasTable('courrier')) {
-            Schema::connection('maria-courrier')->table('courrier', function (Blueprint $table) {
+            Schema::connection('maria-courrier')->table('courrier', function (Blueprint $table): void {
                 $table->rename('incoming_mails');
             });
-            Schema::connection('maria-courrier')->table('incoming_mails', function (Blueprint $table) {
+            Schema::connection('maria-courrier')->table('incoming_mails', function (Blueprint $table): void {
                 $table->renameColumn('numero', 'reference_number');
                 $table->renameColumn('expediteur', 'sender');
                 $table->renameColumn('date_courrier', 'mail_date');

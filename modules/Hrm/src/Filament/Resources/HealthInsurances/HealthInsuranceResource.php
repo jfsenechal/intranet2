@@ -4,27 +4,37 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\HealthInsurances;
 
+use AcMarche\Hrm\Filament\Resources\HealthInsurances\Pages\CreateHealthInsurance;
+use AcMarche\Hrm\Filament\Resources\HealthInsurances\Pages\EditHealthInsurance;
+use AcMarche\Hrm\Filament\Resources\HealthInsurances\Pages\ListHealthInsurances;
+use AcMarche\Hrm\Filament\Resources\HealthInsurances\Pages\ViewHealthInsurance;
 use AcMarche\Hrm\Models\HealthInsurance;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class HealthInsuranceResource extends Resource
 {
+    #[Override]
     protected static ?string $model = HealthInsurance::class;
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
+    #[Override]
     protected static ?int $navigationSort = 5;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-heart';
     }
@@ -50,10 +60,23 @@ final class HealthInsuranceResource extends Resource
             ->components([
                 Section::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->label('Nom')
                             ->required()
                             ->maxLength(100),
+                    ]),
+            ]);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->columns(1)
+            ->components([
+                Section::make()
+                    ->schema([
+                        TextEntry::make('name')
+                            ->label('Nom'),
                     ]),
             ]);
     }
@@ -64,19 +87,21 @@ final class HealthInsuranceResource extends Resource
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('employees_count')
+                TextColumn::make('employees_count')
                     ->label('Employés')
                     ->counts('employees')
                     ->sortable(),
             ])
             ->filters([])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
@@ -87,9 +112,10 @@ final class HealthInsuranceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListHealthInsurances::route('/'),
-            'create' => Pages\CreateHealthInsurance::route('/create'),
-            'edit' => Pages\EditHealthInsurance::route('/{record}/edit'),
+            'index' => ListHealthInsurances::route('/'),
+            'create' => CreateHealthInsurance::route('/create'),
+            'view' => ViewHealthInsurance::route('/{record}/view'),
+            'edit' => EditHealthInsurance::route('/{record}/edit'),
         ];
     }
 }

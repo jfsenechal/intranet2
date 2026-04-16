@@ -4,27 +4,37 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\JobFunctions;
 
+use AcMarche\Hrm\Filament\Resources\JobFunctions\Pages\CreateJobFunction;
+use AcMarche\Hrm\Filament\Resources\JobFunctions\Pages\EditJobFunction;
+use AcMarche\Hrm\Filament\Resources\JobFunctions\Pages\ListJobFunctions;
+use AcMarche\Hrm\Filament\Resources\JobFunctions\Pages\ViewJobFunction;
 use AcMarche\Hrm\Models\JobFunction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class JobFunctionResource extends Resource
 {
+    #[Override]
     protected static ?string $model = JobFunction::class;
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
+    #[Override]
     protected static ?int $navigationSort = 1;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-briefcase';
     }
@@ -50,10 +60,23 @@ final class JobFunctionResource extends Resource
             ->components([
                 Section::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->label('Nom')
                             ->required()
                             ->maxLength(150),
+                    ]),
+            ]);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->columns(1)
+            ->components([
+                Section::make()
+                    ->schema([
+                        TextEntry::make('name')
+                            ->label('Nom'),
                     ]),
             ]);
     }
@@ -64,15 +87,17 @@ final class JobFunctionResource extends Resource
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable(),
             ])
             ->filters([])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
@@ -83,9 +108,10 @@ final class JobFunctionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListJobFunctions::route('/'),
-            'create' => Pages\CreateJobFunction::route('/create'),
-            'edit' => Pages\EditJobFunction::route('/{record}/edit'),
+            'index' => ListJobFunctions::route('/'),
+            'create' => CreateJobFunction::route('/create'),
+            'view' => ViewJobFunction::route('/{record}/view'),
+            'edit' => EditJobFunction::route('/{record}/edit'),
         ];
     }
 }

@@ -13,7 +13,7 @@ use Livewire\Livewire;
 
 use function Pest\Laravel\assertDatabaseHas;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('pst'));
     $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     $this->adminUser = User::factory()->create();
@@ -22,12 +22,12 @@ beforeEach(function () {
     $this->actingAs($this->adminUser);
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     Livewire::test(ListUsers::class)
         ->assertOk();
 });
 
-it('can render the edit page', function () {
+it('can render the edit page', function (): void {
     $user = User::factory()->create();
 
     Livewire::test(EditUser::class, [
@@ -39,18 +39,18 @@ it('can render the edit page', function () {
         ]);
 });
 
-it('has column', function (string $column) {
+it('has column', function (string $column): void {
     Livewire::test(ListUsers::class)
         ->assertTableColumnExists($column);
 })->with(['first_name', 'last_name', 'email', 'created_at']);
 
-it('can render column', function (string $column) {
+it('can render column', function (string $column): void {
     Livewire::test(ListUsers::class)
         ->loadTable()
         ->assertCanRenderTableColumn($column);
 })->with(['first_name', 'last_name', 'email']);
 
-it('can sort column', function (string $column) {
+it('can sort column', function (string $column): void {
     $records = User::factory(5)->create();
 
     Livewire::test(ListUsers::class)
@@ -61,7 +61,7 @@ it('can sort column', function (string $column) {
         ->assertCanSeeTableRecords($records->sortByDesc($column), inOrder: true);
 })->with(['last_name']);
 
-it('can search column', function (string $column) {
+it('can search column', function (string $column): void {
     $records = User::factory(5)->create();
 
     $value = $records->first()->{$column};
@@ -73,7 +73,7 @@ it('can search column', function (string $column) {
         ->assertCanNotSeeTableRecords($records->where($column, '!=', $value));
 })->with(['last_name']);
 
-it('can update a user', function () {
+it('can update a user', function (): void {
     $user = User::factory()->create();
 
     Livewire::test(EditUser::class, [
@@ -91,7 +91,7 @@ it('can update a user', function () {
     ]);
 });
 
-it('validates the form data', function (array $data, array $errors) {
+it('validates the form data', function (array $data, array $errors): void {
     $user = User::factory()->create();
 
     Livewire::test(EditUser::class, [

@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\PayScales\Pages;
 
 use AcMarche\Hrm\Filament\Resources\PayScales\PayScaleResource;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Override;
 
 final class EditPayScale extends EditRecord
 {
+    #[Override]
     protected static string $resource = PayScaleResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

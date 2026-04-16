@@ -16,10 +16,10 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection('maria-publication')->hasTable('publication')) {
-            Schema::connection('maria-publication')->table('publication', function (Blueprint $table) {
+            Schema::connection('maria-publication')->table('publication', function (Blueprint $table): void {
                 $table->rename('publications');
             });
-            Schema::connection('maria-publication')->table('publications', function (Blueprint $table) {
+            Schema::connection('maria-publication')->table('publications', function (Blueprint $table): void {
                 $table->renameColumn('title', 'name');
                 $table->renameColumn('createdAt', 'created_at');
                 $table->renameColumn('updatedAt', 'updated_at');
@@ -27,7 +27,7 @@ return new class extends Migration
                 $table->softDeletes();
             });
         } else {
-            Schema::connection('maria-publication')->create('publications', function (Blueprint $table) {
+            Schema::connection('maria-publication')->create('publications', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('category_id')->nullable()->constrained('publication_categories')->nullOnDelete();
                 $table->string('name');
@@ -40,11 +40,11 @@ return new class extends Migration
         }
 
         if (Schema::connection('maria-publication')->hasTable('category')) {
-            Schema::connection('maria-publication')->table('category', function (Blueprint $table) {
+            Schema::connection('maria-publication')->table('category', function (Blueprint $table): void {
                 $table->rename('publication_categories');
             });
         } elseif (! Schema::connection('maria-publication')->hasTable('publication_categories')) {
-            Schema::connection('maria-publication')->create('publication_categories', function (Blueprint $table) {
+            Schema::connection('maria-publication')->create('publication_categories', function (Blueprint $table): void {
                 $table->id();
                 $table->string('name');
                 $table->string('url')->nullable();

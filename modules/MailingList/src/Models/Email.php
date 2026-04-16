@@ -8,6 +8,8 @@ use AcMarche\MailingList\Database\Factories\EmailFactory;
 use AcMarche\MailingList\Enums\EmailStatus;
 use AcMarche\MailingList\Repositories\OwnerScope;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,24 +19,22 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[UseFactory(EmailFactory::class)]
 #[ScopedBy(OwnerScope::class)]
+#[Connection('maria-mailing-list')]
+#[Fillable([
+    'username',
+    'sender_id',
+    'subject',
+    'body',
+    'attachments',
+    'status',
+    'batch_id',
+    'sent_count',
+    'total_count',
+])]
 final class Email extends Model
 {
     /** @use HasFactory<EmailFactory> */
     use HasFactory;
-
-    protected $connection = 'maria-mailing-list';
-
-    protected $fillable = [
-        'username',
-        'sender_id',
-        'subject',
-        'body',
-        'attachments',
-        'status',
-        'batch_id',
-        'sent_count',
-        'total_count',
-    ];
 
     /**
      * @return BelongsTo<User, $this>

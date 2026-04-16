@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace AcMarche\MailingList\Filament\Actions;
 
 use AcMarche\MailingList\Filament\Imports\ContactImporter;
-use Filament\Actions\Action;
 use Filament\Actions\ImportAction;
 use Filament\Support\Icons\Heroicon;
 
 final class ImportContactAction
 {
-    public static function make(): Action
+    public static function make(): ImportAction
     {
         return
             ImportAction::make()

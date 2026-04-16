@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Tables;
 
-use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
 use AcMarche\Hrm\Models\Training;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
@@ -23,40 +23,42 @@ final class TrainingTables
             ->defaultSort('start_date', 'desc')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('employee.last_name')
+                TextColumn::make('employee.last_name')
                     ->label('Agent')
-                    ->formatStateUsing(fn (Training $record) => $record->employee->last_name.' '.$record->employee->first_name)
+                    ->formatStateUsing(
+                        fn(Training $record): string => $record->employee->last_name.' '.$record->employee->first_name
+                    )
                     ->searchable(['last_name', 'first_name'])
-                    ->sortable()
-                    ->url(fn (Training $record) => TrainingResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('title')
+                    ->sortable(),
+                TextColumn::make('name')
                     ->label('Intitule')
                     ->searchable()
                     ->sortable()
                     ->limit(40),
-                Tables\Columns\TextColumn::make('training_type')
+                TextColumn::make('training_type')
                     ->label('Type')
                     ->badge()
-                    ->toggleable(),
-                Tables\Columns\TextColumn::make('start_date')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('start_date')
                     ->label('Debut')
                     ->date('d/m/Y')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
-                Tables\Columns\TextColumn::make('end_date')
+                TextColumn::make('end_date')
                     ->label('Fin')
                     ->date('d/m/Y')
                     ->sortable()
-                    ->toggleable(),
-                Tables\Columns\TextColumn::make('duration_hours')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('duration_hours')
                     ->label('Duree')
                     ->suffix('h')
                     ->sortable()
-                    ->toggleable(),
-                Tables\Columns\IconColumn::make('certificate_received')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                IconColumn::make('certificate_received')
                     ->label('Attestation')
                     ->boolean()
                     ->toggleable(),
-                Tables\Columns\IconColumn::make('is_closed')
+                IconColumn::make('is_closed')
                     ->label('Cloture')
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -84,6 +86,7 @@ final class TrainingTables
                 ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

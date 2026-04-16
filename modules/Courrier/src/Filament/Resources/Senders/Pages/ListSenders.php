@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace AcMarche\Courrier\Filament\Resources\Senders\Pages;
 
 use AcMarche\Courrier\Filament\Resources\Senders\SenderResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListSenders extends ListRecords
 {
+    #[Override]
     protected static string $resource = SenderResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' expéditeurs';
     }
@@ -21,7 +22,7 @@ final class ListSenders extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter un expéditeur')
                 ->icon('tabler-plus'),
         ];

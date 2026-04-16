@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\FollowUp;
 
+use AcMarche\Pst\Filament\Resources\FollowUp\Pages\CreateFollowUp;
+use AcMarche\Pst\Filament\Resources\FollowUp\Pages\EditFollowUp;
+use AcMarche\Pst\Filament\Resources\FollowUp\Pages\ListFollowUps;
+use AcMarche\Pst\Filament\Resources\FollowUp\Pages\ViewFollowUp;
 use AcMarche\Pst\Filament\Resources\FollowUp\Schemas\FollowUpForm;
 use AcMarche\Pst\Filament\Resources\FollowUp\Tables\FollowUpTables;
 use AcMarche\Pst\Models\FollowUp;
@@ -11,13 +15,17 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class FollowUpResource extends Resource
 {
+    #[Override]
     protected static ?string $model = FollowUp::class;
 
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    #[Override]
     protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Schema $schema): Schema
@@ -40,10 +48,10 @@ final class FollowUpResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListFollowUps::route('/'),
-            'create' => Pages\CreateFollowUp::route('/create'),
-            'view' => Pages\ViewFollowUp::route('/{record}'),
-            'edit' => Pages\EditFollowUp::route('/{record}/edit'),
+            'index' => ListFollowUps::route('/'),
+            'create' => CreateFollowUp::route('/create'),
+            'view' => ViewFollowUp::route('/{record}'),
+            'edit' => EditFollowUp::route('/{record}/edit'),
         ];
     }
 }

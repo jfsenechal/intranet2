@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\OperationalObjective\Schemas;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\ToggleButtons;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Security\Repository\UserRepository;
@@ -25,18 +28,18 @@ final class OperationalObjectiveForm
                     ->columns(1)
                     ->columnSpanFull()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->required()
                             ->label('Intitulé')
                             ->placeholder('Saisissez l\'intitulé de l\'objectif opérationnel')
                             ->prefixIcon('tabler-file-text')
                             ->maxLength(255),
-                        Forms\Components\Select::make('strategic_objective_id')
+                        Select::make('strategic_objective_id')
                             ->relationship(
                                 'strategicObjective',
                                 'name',
                                 modifyQueryUsing: fn (Builder $query) => $query
-                                    ->where(function (Builder $query) {
+                                    ->where(function (Builder $query): void {
                                         $query->forSelectedDepartment()
                                             ->orWhereNull('department');
                                     })
@@ -55,14 +58,14 @@ final class OperationalObjectiveForm
                     ->schema([
                         Grid::make(3)
                             ->schema([
-                                Forms\Components\ToggleButtons::make('department')
+                                ToggleButtons::make('department')
                                     ->label('Département')
                                     ->required()
                                     ->default(UserRepository::departmentSelected())
                                     ->options(DepartmentEnum::class)
                                     ->enum(DepartmentEnum::class)
                                     ->grouped(),
-                                Forms\Components\ToggleButtons::make('scope')
+                                ToggleButtons::make('scope')
                                     ->label('Volet')
                                     ->required()
                                     ->options(ActionScopeEnum::class)

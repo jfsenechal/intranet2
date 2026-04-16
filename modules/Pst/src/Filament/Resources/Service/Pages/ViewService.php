@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Service\Pages;
 
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Pst\Filament\Resources\Service\RelationManagers\ActionsRelationManager;
 use AcMarche\Pst\Filament\Resources\Service\ServiceResource;
 use App\Models\User;
@@ -12,9 +14,11 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Schema;
+use Override;
 
 final class ViewService extends ViewRecord
 {
+    #[Override]
     protected static string $resource = ServiceResource::class;
 
     public function getTitle(): string
@@ -39,9 +43,9 @@ final class ViewService extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

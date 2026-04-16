@@ -7,6 +7,8 @@ namespace AcMarche\MailingList\Models;
 use AcMarche\MailingList\Database\Factories\ContactFactory;
 use AcMarche\MailingList\Repositories\OwnerScope;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,26 +18,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[UseFactory(ContactFactory::class)]
 #[ScopedBy(OwnerScope::class)]
+#[Connection('maria-mailing-list')]
+#[Fillable([
+    'username',
+    'last_name',
+    'first_name',
+    'email',
+    'description',
+    'phone',
+])]
 final class Contact extends Model
 {
     /** @use HasFactory<ContactFactory> */
     use HasFactory;
-
-    protected $connection = 'maria-mailing-list';
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'username',
-        'last_name',
-        'first_name',
-        'email',
-        'description',
-        'phone',
-    ];
 
     /**
      * @return BelongsToMany<AddressBook, $this>

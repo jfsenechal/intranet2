@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace AcMarche\Pst\Filament\Resources\FollowUp\Pages;
 
 use AcMarche\Pst\Filament\Resources\FollowUp\FollowUpResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListFollowUps extends ListRecords
 {
+    #[Override]
     protected static string $resource = FollowUpResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' suivis';
     }
@@ -21,7 +22,7 @@ final class ListFollowUps extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter un suivi')
                 ->icon('tabler-plus'),
         ];

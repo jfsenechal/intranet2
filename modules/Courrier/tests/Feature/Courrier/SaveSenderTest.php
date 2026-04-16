@@ -12,12 +12,12 @@ use Illuminate\Http\UploadedFile;
 
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('courrier-panel'));
 });
 
-describe('Save Sender from IncomingMail form', function () {
-    test('creating incoming mail with save_sender checked saves sender to senders table', function () {
+describe('Save Sender from IncomingMail form', function (): void {
+    test('creating incoming mail with save_sender checked saves sender to senders table', function (): void {
         $admin = User::factory()->create(['is_administrator' => true]);
         $this->actingAs($admin);
 
@@ -36,7 +36,7 @@ describe('Save Sender from IncomingMail form', function () {
         expect(Sender::where('name', 'Nouvelle Entreprise SA')->exists())->toBeTrue();
     });
 
-    test('creating incoming mail without save_sender does not save sender', function () {
+    test('creating incoming mail without save_sender does not save sender', function (): void {
         $admin = User::factory()->create(['is_administrator' => true]);
         $this->actingAs($admin);
 
@@ -55,7 +55,7 @@ describe('Save Sender from IncomingMail form', function () {
         expect(Sender::where('name', 'Entreprise Non Sauvée')->exists())->toBeFalse();
     });
 
-    test('save_sender does not create duplicate if sender already exists', function () {
+    test('save_sender does not create duplicate if sender already exists', function (): void {
         $admin = User::factory()->create(['is_administrator' => true]);
         $this->actingAs($admin);
 
@@ -76,7 +76,7 @@ describe('Save Sender from IncomingMail form', function () {
         expect(Sender::where('name', 'Existing Sender')->count())->toBe(1);
     });
 
-    test('editing incoming mail with save_sender checked saves sender to senders table', function () {
+    test('editing incoming mail with save_sender checked saves sender to senders table', function (): void {
         $admin = User::factory()->create(['is_administrator' => true]);
         $this->actingAs($admin);
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Database\Factories\ActionFactory;
 use AcMarche\Pst\Enums\ActionRoadmapEnum;
@@ -32,38 +34,38 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Scout\Searchable;
+use Override;
 
 #[ObservedBy([ActionObserver::class])]
 #[UseFactory(ActionFactory::class)]
 #[ScopedBy([DepartmentScope::class])]
+#[Connection('maria-pst')]
+#[Fillable([
+    'name',
+    'state',
+    'state_percentage',
+    'type',
+    'roadmap',
+    'note',
+    'department',
+    'due_date',
+    'description',
+    'evaluation_indicator',
+    'work_plan',
+    'budget_estimate',
+    'financing_mode',
+    'operational_objective_id',
+    'user_add',
+    'synergy',
+    'position',
+    'validated',
+    'scope',
+])]
 final class Action extends Model
 {
     use HasDepartmentScope, HasFactory, Notifiable, Searchable, SoftDeletes;
 
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'name',
-        'state',
-        'state_percentage',
-        'type',
-        'roadmap',
-        'note',
-        'department',
-        'due_date',
-        'description',
-        'evaluation_indicator',
-        'work_plan',
-        'budget_estimate',
-        'financing_mode',
-        'operational_objective_id',
-        'user_add',
-        'synergy',
-        'position',
-        'validated',
-        'scope',
-    ];
-
+    #[Override]
     protected $casts = [
         'medias' => 'array',
         'due_date' => 'datetime',
@@ -206,11 +208,11 @@ final class Action extends Model
             'username',
             'id',
             'username'
-        )->tap(function ($query) {
+        )->tap(function ($query): void {
             // Handle cross-database join by explicitly specifying the database
             $query->from(DB::raw('`intranet`.`users`'));
         })
-            ->whereIn('id', function ($subquery) {
+            ->whereIn('id', function ($subquery): void {
                 $subquery
                     ->select('intranet.users.id')
                     ->from(DB::raw('`intranet`.`users`'))
@@ -266,7 +268,7 @@ final class Action extends Model
 
     protected static function booted(): void
     {
-        self::creating(function (self $model) {
+        self::creating(function (self $model): void {
             if (Auth::check()) {
                 $user = Auth::user();
                 $model->user_add = $user->username;

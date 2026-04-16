@@ -15,9 +15,11 @@ use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Override;
 
 final class ViewEmail extends ViewRecord
 {
+    #[Override]
     protected static string $resource = EmailResource::class;
 
     public function getTitle(): string

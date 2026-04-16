@@ -8,12 +8,12 @@ use AcMarche\Mileage\Policies\DeclarationPolicy;
 use AcMarche\Security\Models\Role;
 use App\Models\User;
 
-beforeEach(function () {
+beforeEach(function (): void {
     $this->policy = new DeclarationPolicy();
 });
 
-describe('viewAny', function () {
-    test('admin can view any declarations', function () {
+describe('viewAny', function (): void {
+    test('admin can view any declarations', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -21,7 +21,7 @@ describe('viewAny', function () {
         expect($this->policy->viewAny($user))->toBeTrue();
     });
 
-    test('ville role user can view any declarations', function () {
+    test('ville role user can view any declarations', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -29,7 +29,7 @@ describe('viewAny', function () {
         expect($this->policy->viewAny($user))->toBeTrue();
     });
 
-    test('cpas role user can view any declarations', function () {
+    test('cpas role user can view any declarations', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value]);
         $user->roles()->attach($role);
@@ -37,15 +37,15 @@ describe('viewAny', function () {
         expect($this->policy->viewAny($user))->toBeTrue();
     });
 
-    test('user without role cannot view any declarations', function () {
+    test('user without role cannot view any declarations', function (): void {
         $user = User::factory()->create();
 
         expect($this->policy->viewAny($user))->toBeFalse();
     });
 });
 
-describe('view', function () {
-    test('admin can view any declaration', function () {
+describe('view', function (): void {
+    test('admin can view any declaration', function (): void {
         $user = User::factory()->create(['username' => 'admin']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -55,7 +55,7 @@ describe('view', function () {
         expect($this->policy->view($user, $declaration))->toBeTrue();
     });
 
-    test('owner can view their own declaration', function () {
+    test('owner can view their own declaration', function (): void {
         $user = User::factory()->create(['username' => 'owner']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -68,7 +68,7 @@ describe('view', function () {
         expect($this->policy->view($user, $declaration))->toBeTrue();
     });
 
-    test('non-owner cannot view others declaration', function () {
+    test('non-owner cannot view others declaration', function (): void {
         $user = User::factory()->create(['username' => 'user1']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -82,8 +82,8 @@ describe('view', function () {
     });
 });
 
-describe('create', function () {
-    test('admin can create declarations', function () {
+describe('create', function (): void {
+    test('admin can create declarations', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -91,7 +91,7 @@ describe('create', function () {
         expect($this->policy->create($user))->toBeFalse();
     });
 
-    test('ville role user cannot create declarations', function () {
+    test('ville role user cannot create declarations', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -99,7 +99,7 @@ describe('create', function () {
         expect($this->policy->create($user))->toBeFalse();
     });
 
-    test('cpas role user cannot create declarations', function () {
+    test('cpas role user cannot create declarations', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value]);
         $user->roles()->attach($role);
@@ -107,15 +107,15 @@ describe('create', function () {
         expect($this->policy->create($user))->toBeFalse();
     });
 
-    test('user without role cannot create declarations', function () {
+    test('user without role cannot create declarations', function (): void {
         $user = User::factory()->create();
 
         expect($this->policy->create($user))->toBeFalse();
     });
 });
 
-describe('update', function () {
-    test('admin can update any declaration', function () {
+describe('update', function (): void {
+    test('admin can update any declaration', function (): void {
         $user = User::factory()->create(['username' => 'admin']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -125,7 +125,7 @@ describe('update', function () {
         expect($this->policy->update($user, $declaration))->toBeTrue();
     });
 
-    test('owner can update their own declaration', function () {
+    test('owner can update their own declaration', function (): void {
         $user = User::factory()->create(['username' => 'owner']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -138,7 +138,7 @@ describe('update', function () {
         expect($this->policy->update($user, $declaration))->toBeTrue();
     });
 
-    test('non-owner cannot update others declaration', function () {
+    test('non-owner cannot update others declaration', function (): void {
         $user = User::factory()->create(['username' => 'user1']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -152,8 +152,8 @@ describe('update', function () {
     });
 });
 
-describe('delete', function () {
-    test('admin can delete any declaration', function () {
+describe('delete', function (): void {
+    test('admin can delete any declaration', function (): void {
         $user = User::factory()->create(['username' => 'admin']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -163,7 +163,7 @@ describe('delete', function () {
         expect($this->policy->delete($user, $declaration))->toBeTrue();
     });
 
-    test('owner can delete their own declaration', function () {
+    test('owner can delete their own declaration', function (): void {
         $user = User::factory()->create(['username' => 'owner']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -176,7 +176,7 @@ describe('delete', function () {
         expect($this->policy->delete($user, $declaration))->toBeFalse();
     });
 
-    test('non-owner cannot delete others declaration', function () {
+    test('non-owner cannot delete others declaration', function (): void {
         $user = User::factory()->create(['username' => 'user1']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -190,8 +190,8 @@ describe('delete', function () {
     });
 });
 
-describe('restore', function () {
-    test('restore always returns false', function () {
+describe('restore', function (): void {
+    test('restore always returns false', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -202,8 +202,8 @@ describe('restore', function () {
     });
 });
 
-describe('forceDelete', function () {
-    test('forceDelete always returns false', function () {
+describe('forceDelete', function (): void {
+    test('forceDelete always returns false', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);

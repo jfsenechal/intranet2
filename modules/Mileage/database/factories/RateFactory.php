@@ -6,12 +6,14 @@ namespace AcMarche\Mileage\Database\Factories;
 
 use AcMarche\Mileage\Models\Rate;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Mileage\Models\Rate>
+ * @extends Factory<Rate>
  */
 final class RateFactory extends Factory
 {
+    #[Override]
     protected $model = Rate::class;
 
     /**

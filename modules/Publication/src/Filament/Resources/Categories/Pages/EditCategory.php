@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Publication\Filament\Resources\Categories\Pages;
 
+use Filament\Actions\ViewAction;
 use AcMarche\Publication\Filament\Resources\Categories\CategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditCategory extends EditRecord
 {
+    #[Override]
     protected static string $resource = CategoryResource::class;
 
     public function getTitle(): string|Htmlable
@@ -21,7 +24,7 @@ final class EditCategory extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

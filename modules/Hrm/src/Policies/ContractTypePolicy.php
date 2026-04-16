@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Policies;
 
-use AcMarche\Hrm\Models\ContractType;
 use AcMarche\Hrm\Policies\Concerns\HrmAuthorization;
 use App\Models\User;
 
@@ -17,7 +16,7 @@ final class ContractTypePolicy
         return $this->hasAnyHrmRole($user);
     }
 
-    public function view(User $user, ContractType $contractType): bool
+    public function view(User $user): bool
     {
         return $this->hasReadAccess($user);
     }
@@ -27,22 +26,22 @@ final class ContractTypePolicy
         return $this->isAdmin($user);
     }
 
-    public function update(User $user, ContractType $contractType): bool
+    public function update(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function delete(User $user, ContractType $contractType): bool
+    public function delete(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function restore(User $user, ContractType $contractType): bool
+    public function restore(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function forceDelete(User $user, ContractType $contractType): bool
+    public function forceDelete(): bool
     {
         return false;
     }

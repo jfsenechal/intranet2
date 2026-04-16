@@ -4,23 +4,32 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Trainings;
 
+use AcMarche\Hrm\Filament\Resources\Trainings\Pages\CreateTraining;
+use AcMarche\Hrm\Filament\Resources\Trainings\Pages\EditTraining;
+use AcMarche\Hrm\Filament\Resources\Trainings\Pages\ListTrainings;
+use AcMarche\Hrm\Filament\Resources\Trainings\Pages\ViewTraining;
 use AcMarche\Hrm\Filament\Resources\Trainings\Schemas\TrainingForm;
+use AcMarche\Hrm\Filament\Resources\Trainings\Schemas\TrainingInfolist;
 use AcMarche\Hrm\Filament\Resources\Trainings\Tables\TrainingTables;
 use AcMarche\Hrm\Models\Training;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class TrainingResource extends Resource
 {
+    #[Override]
     protected static ?string $model = Training::class;
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Personnel';
 
-    protected static ?int $navigationSort = 4;
+    #[Override]
+    protected static ?int $navigationSort = 5;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-academic-cap';
     }
@@ -45,6 +54,11 @@ final class TrainingResource extends Resource
         return TrainingForm::configure($schema);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return TrainingInfolist::configure($schema);
+    }
+
     public static function table(Table $table): Table
     {
         return TrainingTables::configure($table);
@@ -53,10 +67,10 @@ final class TrainingResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTrainings::route('/'),
-            'create' => Pages\CreateTraining::route('/create'),
-            'view' => Pages\ViewTraining::route('/{record}/view'),
-            'edit' => Pages\EditTraining::route('/{record}/edit'),
+            'index' => ListTrainings::route('/'),
+            'create' => CreateTraining::route('/create'),
+            'view' => ViewTraining::route('/{record}/view'),
+            'edit' => EditTraining::route('/{record}/edit'),
         ];
     }
 }

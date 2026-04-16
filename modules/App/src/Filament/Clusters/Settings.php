@@ -6,8 +6,10 @@ namespace AcMarche\App\Filament\Clusters;
 
 use BackedEnum;
 use Filament\Clusters\Cluster;
+use Override;
 
 final class Settings extends Cluster
 {
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-squares-2x2';
 }

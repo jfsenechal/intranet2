@@ -8,18 +8,21 @@ use AcMarche\Mileage\Factory\PdfFactory;
 use AcMarche\Mileage\Filament\Resources\Declarations\DeclarationResource;
 use AcMarche\Mileage\Filament\Resources\Declarations\Schemas\DeclarationInfolist;
 use AcMarche\Mileage\Models\Declaration;
-use Filament\Actions;
+use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 use Filament\Support\Colors\Color;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ViewDeclaration extends ViewRecord
 {
+    #[Override]
     protected static string $resource = DeclarationResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Déclaration num '.$this->record->id.' ('.$this->record->type_movement.')';
     }
@@ -32,7 +35,7 @@ final class ViewDeclaration extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\Action::make('download')
+            Action::make('download')
                 ->label('Télécharger')
                 ->icon('tabler-download')
                 ->color(Color::Green)
@@ -50,13 +53,13 @@ final class ViewDeclaration extends ViewRecord
                         'Content-Type' => 'application/pdf',
                     ]);
                 }),
-            Actions\Action::make('back')
+            Action::make('back')
                 ->label('Retour à la liste')
                 ->icon('tabler-list')
                 ->url(DeclarationResource::getUrl('index')),
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

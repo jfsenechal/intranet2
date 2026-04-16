@@ -6,12 +6,14 @@ namespace AcMarche\Mileage\Database\Factories;
 
 use AcMarche\Mileage\Models\PersonalInformation;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Mileage\Models\PersonalInformation>
+ * @extends Factory<PersonalInformation>
  */
 final class PersonalInformationFactory extends Factory
 {
+    #[Override]
     protected $model = PersonalInformation::class;
 
     /**

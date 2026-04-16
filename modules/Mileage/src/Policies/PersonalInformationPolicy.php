@@ -19,11 +19,8 @@ final class PersonalInformationPolicy
         if ($user->isAdministrator()) {
             return true;
         }
-        if ($user->hasOneOfThisRoles(RolesEnum::getRoles())) {
-            return true;
-        }
 
-        return false;
+        return $user->hasOneOfThisRoles(RolesEnum::getRoles());
     }
 
     /**
@@ -53,7 +50,7 @@ final class PersonalInformationPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, PersonalInformation $personalInformation): bool
+    public function delete(): bool
     {
         return false;
     }
@@ -61,7 +58,7 @@ final class PersonalInformationPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, PersonalInformation $personalInformation): bool
+    public function restore(): bool
     {
         return false;
     }
@@ -69,7 +66,7 @@ final class PersonalInformationPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, PersonalInformation $personalInformation): bool
+    public function forceDelete(): bool
     {
         return false;
     }

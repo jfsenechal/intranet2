@@ -9,16 +9,18 @@ use AcMarche\Pst\Enums\RoleEnum;
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Pst\Models\Action;
 use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
+use Override;
 
 final class ListActions extends ListRecords
 {
+    #[Override]
     protected static string $resource = ActionPstResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' actions';
     }
@@ -52,11 +54,9 @@ final class ListActions extends ListRecords
                             ->validated()
                             ->count()
                     )
-                    ->modifyQueryUsing(function (Builder $query) use ($actionStateEnum): Builder {
-                        return $query
-                            ->where('state', $actionStateEnum->value)
-                            ->validated();
-                    })
+                    ->modifyQueryUsing(fn (Builder $query): Builder => $query
+                        ->where('state', $actionStateEnum->value)
+                        ->validated())
                     ->label($actionStateEnum->getLabel())
                     ->badgeColor($actionStateEnum->getColor())
                     ->icon($actionStateEnum->getIcon());
@@ -68,7 +68,7 @@ final class ListActions extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter une action')
                 ->icon('tabler-plus'),
             Actions\Action::make('list-sheet')

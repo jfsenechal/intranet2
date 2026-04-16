@@ -12,14 +12,9 @@ use AcMarche\Document\Models\Document;
 final class DocumentObserver
 {
     /**
-     * Handle the Document "created" event.
-     */
-    public function created(Document $document): void {}
-
-    /**
      * Handle the Document "updated" event.
      */
-    public function updated(Document $document): void
+    public function updated(): void
     {
         // ...
     }
@@ -27,7 +22,7 @@ final class DocumentObserver
     /**
      * Handle the Document "deleted" event.
      */
-    public function deleted(Document $document): void
+    public function deleted(): void
     {
         // ...
     }
@@ -35,7 +30,7 @@ final class DocumentObserver
     /**
      * Handle the Document "restored" event.
      */
-    public function restored(Document $document): void
+    public function restored(): void
     {
         // ...
     }
@@ -43,7 +38,7 @@ final class DocumentObserver
     /**
      * Handle the Document "forceDeleted" event.
      */
-    public function forceDeleted(Document $document): void
+    public function forceDeleted(): void
     {
         // ...
     }

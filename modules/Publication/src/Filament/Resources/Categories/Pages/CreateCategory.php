@@ -6,9 +6,11 @@ namespace AcMarche\Publication\Filament\Resources\Categories\Pages;
 
 use AcMarche\Publication\Filament\Resources\Categories\CategoryResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateCategory extends CreateRecord
 {
+    #[Override]
     protected static string $resource = CategoryResource::class;
 
     public function canCreateAnother(): bool

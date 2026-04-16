@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Policies;
 
-use AcMarche\Hrm\Models\Valorization;
 use AcMarche\Hrm\Policies\Concerns\HrmAuthorization;
 use App\Models\User;
 
@@ -17,9 +16,13 @@ final class ValorizationPolicy
         return $this->hasAnyHrmRole($user);
     }
 
-    public function view(User $user, Valorization $valorization): bool
+    public function view(User $user): bool
     {
-        return $this->hasReadAccess($user) || $this->isDirectionHead($user);
+        if ($this->hasReadAccess($user)) {
+            return true;
+        }
+
+        return $this->isDirectionHead($user);
     }
 
     public function create(User $user): bool
@@ -27,22 +30,22 @@ final class ValorizationPolicy
         return $this->hasWriteAccess($user);
     }
 
-    public function update(User $user, Valorization $valorization): bool
+    public function update(User $user): bool
     {
         return $this->hasWriteAccess($user);
     }
 
-    public function delete(User $user, Valorization $valorization): bool
+    public function delete(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function restore(User $user, Valorization $valorization): bool
+    public function restore(User $user): bool
     {
         return $this->isAdmin($user);
     }
 
-    public function forceDelete(User $user, Valorization $valorization): bool
+    public function forceDelete(): bool
     {
         return false;
     }

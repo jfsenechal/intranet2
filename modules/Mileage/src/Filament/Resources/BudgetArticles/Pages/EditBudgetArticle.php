@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace AcMarche\Mileage\Filament\Resources\BudgetArticles\Pages;
 
 use AcMarche\Mileage\Filament\Resources\BudgetArticles\BudgetArticleResource;
-use Filament\Actions;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditBudgetArticle extends EditRecord
 {
+    #[Override]
     protected static string $resource = BudgetArticleResource::class;
 
     public function getTitle(): string|Htmlable
@@ -21,7 +23,7 @@ final class EditBudgetArticle extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

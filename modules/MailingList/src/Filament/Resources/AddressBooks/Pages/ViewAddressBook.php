@@ -14,9 +14,11 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Override;
 
 final class ViewAddressBook extends ViewRecord
 {
+    #[Override]
     protected static string $resource = AddressBookResource::class;
 
     public function getTitle(): string

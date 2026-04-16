@@ -15,9 +15,9 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Override;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use UnitEnum;
 
@@ -34,15 +34,19 @@ final class AnnualExport extends Page implements HasForms
 
     public int $totalKilometers = 0;
 
+    #[Override]
     protected static ?int $navigationSort = 5;
 
+    #[Override]
     protected static ?string $navigationLabel = 'Export annuel';
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Administration';
 
+    #[Override]
     protected string $view = 'mileage::filament.pages.annual-export';
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'tabler-file-export';
     }
@@ -57,7 +61,7 @@ final class AnnualExport extends Page implements HasForms
         return $user?->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value) ?? false;
     }
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Export annuel des déclarations';
     }

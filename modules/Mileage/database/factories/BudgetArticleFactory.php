@@ -7,9 +7,14 @@ namespace AcMarche\Mileage\Database\Factories;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Mileage\Models\BudgetArticle;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
+/**
+ * @extends Factory<BudgetArticle>
+ */
 final class BudgetArticleFactory extends Factory
 {
+    #[Override]
     protected $model = BudgetArticle::class;
 
     /**

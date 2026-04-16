@@ -10,9 +10,11 @@ use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\View\View;
+use Override;
 
 final class ListEmails extends ListRecords
 {
+    #[Override]
     protected static string $resource = EmailResource::class;
 
     protected function getHeaderActions(): array

@@ -6,9 +6,14 @@ namespace AcMarche\Security\Database\Factories;
 
 use AcMarche\Security\Models\Tab;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
+/**
+ * @extends Factory<Tab>
+ */
 final class TabFactory extends Factory
 {
+    #[Override]
     protected $model = Tab::class;
 
     /**

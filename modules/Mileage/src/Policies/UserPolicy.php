@@ -6,7 +6,6 @@ namespace AcMarche\Mileage\Policies;
 
 // https://laravel.com/docs/12.x/authorization#creating-policies
 use AcMarche\Mileage\Enums\RolesEnum;
-use AcMarche\Mileage\Models\BudgetArticle;
 use App\Models\User;
 
 final class UserPolicy
@@ -22,7 +21,7 @@ final class UserPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, BudgetArticle $budgetArticle): bool
+    public function view(User $user): bool
     {
 
         return $this->canWrite($user);
@@ -40,7 +39,7 @@ final class UserPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, BudgetArticle $budgetArticle): bool
+    public function update(User $user): bool
     {
 
         return $this->canWrite($user);
@@ -49,7 +48,7 @@ final class UserPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, BudgetArticle $budgetArticle): bool
+    public function delete(User $user): bool
     {
         return $this->canWrite($user);
     }
@@ -57,7 +56,7 @@ final class UserPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, BudgetArticle $budgetArticle): bool
+    public function restore(): bool
     {
         return false;
     }
@@ -65,7 +64,7 @@ final class UserPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(BudgetArticle $user, BudgetArticle $budgetArticle): bool
+    public function forceDelete(): bool
     {
         return false;
     }
@@ -75,10 +74,7 @@ final class UserPolicy
         if ($user->isAdministrator()) {
             return true;
         }
-        if ($user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value)) {
-            return true;
-        }
 
-        return false;
+        return $user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value);
     }
 }

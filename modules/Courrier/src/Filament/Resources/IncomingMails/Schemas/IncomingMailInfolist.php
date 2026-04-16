@@ -76,7 +76,7 @@ final class IncomingMailInfolist
                             ->schema([
                                 TextEntry::make('file_name')
                                     ->label('Fichier')
-                                    ->url(fn ($record) => route('courrier.attachments.download', $record))
+                                    ->url(fn ($record): string => route('courrier.attachments.download', $record))
                                     ->openUrlInNewTab()
                                     ->icon('heroicon-o-arrow-down-tray')
                                     ->color('primary'),

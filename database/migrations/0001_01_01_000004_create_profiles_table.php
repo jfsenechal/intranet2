@@ -14,10 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::hasTable('profile')) {
-            Schema::table('profile', function (Blueprint $table) {
+            Schema::table('profile', function (Blueprint $table): void {
                 $table->rename('profiles');
             });
-            Schema::table('profiles', function (Blueprint $table) {
+            Schema::table('profiles', function (Blueprint $table): void {
                 $table->renameColumn('plaque1', 'car_license_plate1');
                 $table->renameColumn('plaque2', 'car_license_plate2');
                 $table->renameColumn('rue', 'street');

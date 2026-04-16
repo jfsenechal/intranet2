@@ -6,9 +6,11 @@ namespace AcMarche\Document\Filament\Resources\Documents\Pages;
 
 use AcMarche\Document\Filament\Resources\Documents\DocumentResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateDocument extends CreateRecord
 {
+    #[Override]
     protected static string $resource = DocumentResource::class;
 
     public function canCreateAnother(): bool

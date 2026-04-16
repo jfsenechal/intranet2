@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Document\Policies;
 
 use AcMarche\Document\Enums\RolesEnum;
-use AcMarche\Document\Models\Category;
 use App\Models\User;
 
 final class CategoryPolicy
@@ -13,7 +12,7 @@ final class CategoryPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(): bool
     {
         return true;
     }
@@ -21,7 +20,7 @@ final class CategoryPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Category $category): bool
+    public function view(): bool
     {
         return true;
     }
@@ -37,7 +36,7 @@ final class CategoryPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Category $category): bool
+    public function update(User $user): bool
     {
         return $this->isAdministrator($user);
     }
@@ -45,7 +44,7 @@ final class CategoryPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Category $category): bool
+    public function delete(User $user): bool
     {
         return $this->isAdministrator($user);
     }
@@ -53,7 +52,7 @@ final class CategoryPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Category $category): bool
+    public function restore(): bool
     {
         return false;
     }
@@ -61,7 +60,7 @@ final class CategoryPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Category $category): bool
+    public function forceDelete(): bool
     {
         return false;
     }
@@ -71,14 +70,11 @@ final class CategoryPolicy
         if ($user->isAdministrator()) {
             return true;
         }
-        if ($user->hasOneOfThisRoles(
+
+        return $user->hasOneOfThisRoles(
             [
                 RolesEnum::ROLE_DOCUMENT_ADMIN->value,
             ]
-        )) {
-            return true;
-        }
-
-        return false;
+        );
     }
 }

@@ -13,6 +13,14 @@ final class MeiliServer
 {
     use MeiliTrait;
 
+    public $courrierRepository;
+
+    public $courrierDestinataireRepository;
+
+    public $courrierServiceRepository;
+
+    public $ocr;
+
     private string $primaryKey = 'idSearch';
 
     private ?Indexes $index = null;
@@ -31,7 +39,7 @@ final class MeiliServer
     public function createIndex(): array
     {
         $this->init();
-        $this->client->deleteTasks((new DeleteTasksQuery())->setStatuses(['failed', 'canceled', 'succeeded']));
+        $this->client->deleteTasks(new DeleteTasksQuery()->setStatuses(['failed', 'canceled', 'succeeded']));
         $this->client->deleteIndex($this->indexName);
 
         return $this->client->createIndex($this->indexName, ['primaryKey' => $this->primaryKey]);
@@ -116,7 +124,7 @@ final class MeiliServer
         }
         $document = [];
         $document['id'] = $action->getId();
-        $document['idSearch'] = self::createKey($action->getId());
+        $document['idSearch'] = $this->createKey($action->getId());
         $document['numero'] = $action->numero;
         $document['description'] = Cleaner::cleandata($action->description);
         $document['expediteur'] = Cleaner::cleandata($action->expediteur);
@@ -156,7 +164,7 @@ final class MeiliServer
     {
         $this->init();
         $index = $this->client->index($this->indexName);
-        $index->deleteDocument(self::createKey($id));
+        $index->deleteDocument($this->createKey($id));
     }
 
     public function dump(): array
@@ -166,7 +174,7 @@ final class MeiliServer
         return $this->client->createDump();
     }
 
-    private static function createKey(int $id): string
+    private function createKey(int $id): string
     {
         return 'pst-'.$id;
     }

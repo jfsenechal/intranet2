@@ -26,7 +26,7 @@ return new class extends Migration
         if (Schema::hasTable('strategic_objectives')) {
             return;
         }
-        Schema::create('strategic_objectives', function (Blueprint $table) {
+        Schema::create('strategic_objectives', function (Blueprint $table): void {
             $table->id();
             $table->string('name');
             $table->enum('department', DepartmentEnum::toArray())
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('operational_objectives', function (Blueprint $table) {
+        Schema::create('operational_objectives', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(StrategicObjective::class)->constrained('strategic_objectives')->cascadeOnDelete();
             $table->string('name');
@@ -46,7 +46,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('actions', function (Blueprint $table) {
+        Schema::create('actions', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(OperationalObjective::class)
                 ->constrained('operational_objectives')
@@ -72,7 +72,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('partners', function (Blueprint $table) {
+        Schema::create('partners', function (Blueprint $table): void {
             $table->id();
             $table->string('name')->nullable(false);
             $table->string('initials')->nullable();
@@ -82,14 +82,14 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table): void {
             $table->id();
             $table->string('name');
             $table->string('initials')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('odds', function (Blueprint $table) {
+        Schema::create('odds', function (Blueprint $table): void {
             $table->id();
             $table->string('name');
             $table->string('icon')->nullable();
@@ -100,7 +100,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('follow_ups', function (Blueprint $table) {
+        Schema::create('follow_ups', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(Action::class)->constrained()->cascadeOnDelete();
             $table->text('content');
@@ -109,7 +109,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('histories', function (Blueprint $table) {
+        Schema::create('histories', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(Action::class)->constrained()->cascadeOnDelete();
             $table->string('property')->nullable();
@@ -120,7 +120,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('media', function (Blueprint $table) {
+        Schema::create('media', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(Action::class)->constrained()->cascadeOnDelete();
             $table->uuid()->nullable()->unique();
@@ -132,56 +132,56 @@ return new class extends Migration
             $table->nullableTimestamps();
         });
 
-        Schema::create('action_user', function (Blueprint $table) {
+        Schema::create('action_user', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(Action::class)->constrained()->cascadeOnDelete();
             $table->string('username');
             $table->unique(['action_id', 'username']);
         });
 
-        Schema::create('action_mandatory', function (Blueprint $table) {
+        Schema::create('action_mandatory', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(Action::class)->constrained()->cascadeOnDelete();
             $table->string('username');
             $table->unique(['action_id', 'username']);
         });
 
-        Schema::create('action_partner', function (Blueprint $table) {
+        Schema::create('action_partner', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(Action::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Partner::class)->constrained()->cascadeOnDelete();
             $table->unique(['action_id', 'partner_id']);
         });
 
-        Schema::create('action_service_leader', function (Blueprint $table) {
+        Schema::create('action_service_leader', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(Action::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Service::class)->constrained()->cascadeOnDelete();
             $table->unique(['action_id', 'service_id']);
         });
 
-        Schema::create('action_service_partner', function (Blueprint $table) {
+        Schema::create('action_service_partner', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(Action::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Service::class)->constrained()->cascadeOnDelete();
             $table->unique(['action_id', 'service_id']);
         });
 
-        Schema::create('action_related', function (Blueprint $table) {
+        Schema::create('action_related', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(Action::class, 'action_id')->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Action::class, 'related_action_id')->constrained()->cascadeOnDelete();
             $table->unique(['action_id', 'related_action_id']);
         });
 
-        Schema::create('action_odd', function (Blueprint $table) {
+        Schema::create('action_odd', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(Action::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Odd::class)->constrained()->cascadeOnDelete();
             $table->unique(['action_id', 'odd_id']);
         });
 
-        Schema::create('service_user', function (Blueprint $table) {
+        Schema::create('service_user', function (Blueprint $table): void {
             $table->id();
             $table->string('username');
             $table->foreignIdFor(Service::class)->constrained()->cascadeOnDelete();

@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\StrategicObjective\Pages;
 
+use Filament\Actions\ViewAction;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\StrategicObjectiveResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Override;
 
 final class EditStrategicObjective extends EditRecord
 {
+    #[Override]
     protected static string $resource = StrategicObjectiveResource::class;
 
     // force remove when edit
@@ -29,7 +32,7 @@ final class EditStrategicObjective extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

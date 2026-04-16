@@ -10,7 +10,8 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
@@ -23,42 +24,42 @@ final class IncomingMailTables
             ->defaultSort('mail_date', 'desc')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('reference_number')
+                TextColumn::make('reference_number')
                     ->searchable()
                     ->label('Référence')
-                    ->url(fn (IncomingMail $record) => IncomingMailResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('mail_date')
+                    ->url(fn (IncomingMail $record): string => IncomingMailResource::getUrl('view', ['record' => $record->id])),
+                TextColumn::make('mail_date')
                     ->date('d/m/Y')
                     ->sortable()
                     ->label('Date'),
-                Tables\Columns\TextColumn::make('sender')
+                TextColumn::make('sender')
                     ->searchable()
                     ->label('Expéditeur'),
-                Tables\Columns\TextColumn::make('description')
+                TextColumn::make('description')
                     ->searchable()
                     ->label('Description')
                     ->html()
                     ->limit(80),
-                Tables\Columns\TextColumn::make('services.name')
+                TextColumn::make('services.name')
                     ->label('Services')
                     ->badge()
                     ->separator(',')
                     ->limitList(2)
                     ->expandableLimitedList(),
-                Tables\Columns\TextColumn::make('recipients.full_name')
+                TextColumn::make('recipients.full_name')
                     ->label('Destinataires')
                     ->badge()
                     ->color('gray')
                     ->separator(',')
                     ->limitList(2)
                     ->expandableLimitedList(),
-                Tables\Columns\IconColumn::make('is_notified')
+                IconColumn::make('is_notified')
                     ->label('Notifié')
                     ->boolean(),
-                Tables\Columns\IconColumn::make('is_registered')
+                IconColumn::make('is_registered')
                     ->label('Recom')
                     ->boolean(),
-                Tables\Columns\IconColumn::make('has_acknowledgment')
+                IconColumn::make('has_acknowledgment')
                     ->label('AR')
                     ->boolean(),
             ])

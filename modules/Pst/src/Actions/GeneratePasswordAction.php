@@ -17,7 +17,7 @@ final class GeneratePasswordAction extends Action
 
         $this->icon('heroicon-s-key')
             ->color('info')
-            ->action(function (Set $set) {
+            ->action(function (Set $set): void {
                 $password = Str::password();
 
                 $set('password', $password);
@@ -30,7 +30,7 @@ final class GeneratePasswordAction extends Action
             });
     }
 
-    public static function getDefaultName(): ?string
+    public static function getDefaultName(): string
     {
         return 'generatePassword';
     }

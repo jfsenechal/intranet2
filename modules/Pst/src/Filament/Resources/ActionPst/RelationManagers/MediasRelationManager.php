@@ -9,9 +9,11 @@ use AcMarche\Pst\Filament\Resources\ActionPst\Tables\MediaTables;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class MediasRelationManager extends RelationManager
 {
+    #[Override]
     protected static string $relationship = 'medias';
 
     public function form(Schema $schema): Schema

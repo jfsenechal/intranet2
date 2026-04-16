@@ -21,7 +21,7 @@ use Livewire\Livewire;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('pst'));
     $adminRole = Role::factory()->create(['name' => RoleEnum::ADMIN->value]);
     $this->adminUser = User::factory()->create();
@@ -30,18 +30,18 @@ beforeEach(function () {
     $this->actingAs($this->adminUser);
 });
 
-describe('page rendering', function () {
-    it('can render the index page', function () {
+describe('page rendering', function (): void {
+    it('can render the index page', function (): void {
         Livewire::test(ListStrategicObjectives::class)
             ->assertOk();
     });
 
-    it('can render the create page', function () {
+    it('can render the create page', function (): void {
         Livewire::test(CreateStrategicObjective::class)
             ->assertOk();
     });
 
-    it('can render the view page', function () {
+    it('can render the view page', function (): void {
         $record = StrategicObjective::factory()->create();
 
         Livewire::test(ViewStrategicObjective::class, [
@@ -50,7 +50,7 @@ describe('page rendering', function () {
             ->assertOk();
     });
 
-    it('can render the edit page', function () {
+    it('can render the edit page', function (): void {
         $record = StrategicObjective::factory()->create();
 
         Livewire::test(EditStrategicObjective::class, [
@@ -64,8 +64,8 @@ describe('page rendering', function () {
     });
 });
 
-describe('list view', function () {
-    it('displays record position and name', function () {
+describe('list view', function (): void {
+    it('displays record position and name', function (): void {
         $record = StrategicObjective::factory()->create([
             'scope' => ActionScopeEnum::EXTERNAL,
         ]);
@@ -74,7 +74,7 @@ describe('list view', function () {
             ->assertSeeHtml("{$record->position}. {$record->name}");
     });
 
-    it('displays operational objectives count badge', function () {
+    it('displays operational objectives count badge', function (): void {
         $record = StrategicObjective::factory()->create([
             'scope' => ActionScopeEnum::EXTERNAL,
         ]);
@@ -86,7 +86,7 @@ describe('list view', function () {
             ->assertSeeHtml('3 Oos');
     });
 
-    it('displays internal badge for internal records', function () {
+    it('displays internal badge for internal records', function (): void {
         StrategicObjective::factory()->create([
             'scope' => ActionScopeEnum::INTERNAL,
         ]);
@@ -95,7 +95,7 @@ describe('list view', function () {
             ->assertSeeHtml('Interne');
     });
 
-    it('does not display internal badge for external records', function () {
+    it('does not display internal badge for external records', function (): void {
         StrategicObjective::factory()->create(['scope' => ActionScopeEnum::EXTERNAL]);
 
         Livewire::test(ListStrategicObjectives::class)
@@ -103,8 +103,8 @@ describe('list view', function () {
     });
 });
 
-describe('crud operations', function () {
-    it('can create a strategic objective', function () {
+describe('crud operations', function (): void {
+    it('can create a strategic objective', function (): void {
         $newData = StrategicObjective::factory()->make();
 
         Livewire::test(CreateStrategicObjective::class)
@@ -123,7 +123,7 @@ describe('crud operations', function () {
         ]);
     });
 
-    it('can update a strategic objective', function () {
+    it('can update a strategic objective', function (): void {
         $record = StrategicObjective::factory()->create();
         $newData = StrategicObjective::factory()->make();
 
@@ -146,7 +146,7 @@ describe('crud operations', function () {
         ]);
     });
 
-    it('can delete a strategic objective', function () {
+    it('can delete a strategic objective', function (): void {
         $record = StrategicObjective::factory()->create();
 
         Livewire::test(ViewStrategicObjective::class, [
@@ -161,8 +161,8 @@ describe('crud operations', function () {
 
 });
 
-describe('form validation', function () {
-    it('validates the form data on create', function (array $data, array $errors) {
+describe('form validation', function (): void {
+    it('validates the form data on create', function (array $data, array $errors): void {
         $newData = StrategicObjective::factory()->make();
 
         Livewire::test(CreateStrategicObjective::class)
@@ -181,7 +181,7 @@ describe('form validation', function () {
         '`position` must be numeric' => [['position' => 'abc'], ['position' => 'numeric']],
     ]);
 
-    it('validates the form data on edit', function (array $data, array $errors) {
+    it('validates the form data on edit', function (array $data, array $errors): void {
         $record = StrategicObjective::factory()->create();
 
         Livewire::test(EditStrategicObjective::class, [
@@ -202,15 +202,15 @@ describe('form validation', function () {
     ]);
 });
 
-describe('form fields', function () {
-    it('has scope field', function () {
+describe('form fields', function (): void {
+    it('has scope field', function (): void {
         Livewire::test(CreateStrategicObjective::class)
             ->assertFormFieldExists('scope');
     });
 });
 
-describe('relation manager', function () {
-    it('can render the OosRelationManager', function () {
+describe('relation manager', function (): void {
+    it('can render the OosRelationManager', function (): void {
         $record = StrategicObjective::factory()->create();
         OperationalObjective::factory(3)->create([
             'strategic_objective_id' => $record->id,
@@ -223,7 +223,7 @@ describe('relation manager', function () {
             ->assertOk();
     });
 
-    it('can list operational objectives in relation manager', function () {
+    it('can list operational objectives in relation manager', function (): void {
         $record = StrategicObjective::factory()->create();
         $oos = OperationalObjective::factory(3)->create([
             'strategic_objective_id' => $record->id,

@@ -5,36 +5,38 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Models;
 
 use AcMarche\Security\Models\HasUserAdd;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
+#[Connection('maria-hrm')]
+#[Fillable([
+    'name',
+    'slug',
+    'abbreviation',
+    'direction_id',
+    'employer_id',
+    'address',
+    'postal_code',
+    'city',
+    'email',
+    'phone',
+    'gsm',
+    'notes',
+    'user_add',
+])]
+#[Table(name: 'services')]
 final class Service extends Model
 {
-    use HasUserAdd;
+    use HasFactory;
     use HasSlug;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'services';
-
-    protected $fillable = [
-        'name',
-        'slug',
-        'abbreviation',
-        'direction_id',
-        'employer_id',
-        'address',
-        'postal_code',
-        'city',
-        'email',
-        'phone',
-        'gsm',
-        'notes',
-        'user_add',
-    ];
+    use HasUserAdd;
 
     public function getSlugOptions(): SlugOptions
     {
@@ -42,6 +44,7 @@ final class Service extends Model
             ->generateSlugsFrom(['name'])
             ->saveSlugsTo('slug');
     }
+
     /**
      * @return BelongsTo<Direction>
      */

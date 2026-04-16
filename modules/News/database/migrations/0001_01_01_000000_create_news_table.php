@@ -20,7 +20,7 @@ return new class extends Migration
             return;
         }
 
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('news', function (Blueprint $table): void {
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
@@ -47,7 +47,7 @@ return new class extends Migration
             }*/
         });
 
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table): void {
             $table->id();
             $table->string('name');
             $table->string('color');

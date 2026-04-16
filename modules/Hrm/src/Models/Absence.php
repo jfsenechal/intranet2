@@ -5,35 +5,37 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Models;
 
 use AcMarche\Security\Models\HasUserAdd;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[Connection('maria-hrm')]
+#[Fillable([
+    'employee_id',
+    'start_date',
+    'end_date',
+    'reminder_date',
+    'closed_date',
+    'has_resumed',
+    'notes',
+    'ssa',
+    'reason',
+    'clock_updated',
+    'encore',
+    'is_closed',
+    'acropole',
+    'agent_file',
+    'user_add',
+    'updated_by',
+])]
+#[Table(name: 'absences')]
 final class Absence extends Model
 {
+    use HasFactory;
     use HasUserAdd;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'absences';
-
-    protected $fillable = [
-        'employee_id',
-        'start_date',
-        'end_date',
-        'reminder_date',
-        'closed_date',
-        'has_resumed',
-        'notes',
-        'ssa',
-        'reason',
-        'clock_updated',
-        'encore',
-        'is_closed',
-        'acropole',
-        'agent_file',
-        'user_add',
-        'updated_by',
-    ];
 
     /**
      * @return BelongsTo<Employee>
@@ -56,6 +58,11 @@ final class Absence extends Model
             'reminder_date' => 'date',
             'closed_date' => 'date',
             'is_closed' => 'boolean',
+            'certimed' => 'boolean',
+            'has_resumed' => 'boolean',
+            'clock_updated' => 'boolean',
+            'acropole' => 'boolean',
+            'agent_file' => 'boolean',
         ];
     }
 }

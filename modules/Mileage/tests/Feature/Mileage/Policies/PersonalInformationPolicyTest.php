@@ -8,12 +8,12 @@ use AcMarche\Mileage\Policies\PersonalInformationPolicy;
 use AcMarche\Security\Models\Role;
 use App\Models\User;
 
-beforeEach(function () {
+beforeEach(function (): void {
     $this->policy = new PersonalInformationPolicy();
 });
 
-describe('viewAny', function () {
-    test('admin can view any personal information', function () {
+describe('viewAny', function (): void {
+    test('admin can view any personal information', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -21,7 +21,7 @@ describe('viewAny', function () {
         expect($this->policy->viewAny($user))->toBeTrue();
     });
 
-    test('ville role user can view any personal information', function () {
+    test('ville role user can view any personal information', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -29,7 +29,7 @@ describe('viewAny', function () {
         expect($this->policy->viewAny($user))->toBeTrue();
     });
 
-    test('cpas role user can view any personal information', function () {
+    test('cpas role user can view any personal information', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value]);
         $user->roles()->attach($role);
@@ -37,15 +37,15 @@ describe('viewAny', function () {
         expect($this->policy->viewAny($user))->toBeTrue();
     });
 
-    test('user without role cannot view any personal information', function () {
+    test('user without role cannot view any personal information', function (): void {
         $user = User::factory()->create();
 
         expect($this->policy->viewAny($user))->toBeFalse();
     });
 });
 
-describe('view', function () {
-    test('admin can view any personal information', function () {
+describe('view', function (): void {
+    test('admin can view any personal information', function (): void {
         $user = User::factory()->create(['username' => 'admin']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -55,7 +55,7 @@ describe('view', function () {
         expect($this->policy->view($user, $personalInfo))->toBeTrue();
     });
 
-    test('owner can view their own personal information', function () {
+    test('owner can view their own personal information', function (): void {
         $user = User::factory()->create(['username' => 'owner']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -65,7 +65,7 @@ describe('view', function () {
         expect($this->policy->view($user, $personalInfo))->toBeTrue();
     });
 
-    test('non-owner cannot view others personal information', function () {
+    test('non-owner cannot view others personal information', function (): void {
         $user = User::factory()->create(['username' => 'user1']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -76,14 +76,14 @@ describe('view', function () {
     });
 });
 
-describe('create', function () {
-    test('user can create personal information when they have no record', function () {
+describe('create', function (): void {
+    test('user can create personal information when they have no record', function (): void {
         $user = User::factory()->create(['username' => 'new_user']);
 
         expect($this->policy->create($user))->toBeTrue();
     });
 
-    test('user cannot create personal information when they already have a record', function () {
+    test('user cannot create personal information when they already have a record', function (): void {
         $user = User::factory()->create(['username' => 'existing_user']);
         PersonalInformation::factory()->create(['username' => 'existing_user']);
 
@@ -91,8 +91,8 @@ describe('create', function () {
     });
 });
 
-describe('update', function () {
-    test('admin can update any personal information', function () {
+describe('update', function (): void {
+    test('admin can update any personal information', function (): void {
         $user = User::factory()->create(['username' => 'admin']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -102,7 +102,7 @@ describe('update', function () {
         expect($this->policy->update($user, $personalInfo))->toBeTrue();
     });
 
-    test('owner can update their own personal information', function () {
+    test('owner can update their own personal information', function (): void {
         $user = User::factory()->create(['username' => 'owner']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -112,7 +112,7 @@ describe('update', function () {
         expect($this->policy->update($user, $personalInfo))->toBeTrue();
     });
 
-    test('non-owner cannot update others personal information', function () {
+    test('non-owner cannot update others personal information', function (): void {
         $user = User::factory()->create(['username' => 'user1']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -123,8 +123,8 @@ describe('update', function () {
     });
 });
 
-describe('delete', function () {
-    test('admin cannot delete any personal information', function () {
+describe('delete', function (): void {
+    test('admin cannot delete any personal information', function (): void {
         $user = User::factory()->create(['username' => 'admin']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -134,7 +134,7 @@ describe('delete', function () {
         expect($this->policy->delete($user, $personalInfo))->toBeFalse();
     });
 
-    test('owner cannot delete their own personal information', function () {
+    test('owner cannot delete their own personal information', function (): void {
         $user = User::factory()->create(['username' => 'owner']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -144,7 +144,7 @@ describe('delete', function () {
         expect($this->policy->delete($user, $personalInfo))->toBeFalse();
     });
 
-    test('non-owner cannot delete others personal information', function () {
+    test('non-owner cannot delete others personal information', function (): void {
         $user = User::factory()->create(['username' => 'user1']);
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -155,8 +155,8 @@ describe('delete', function () {
     });
 });
 
-describe('restore', function () {
-    test('restore always returns false', function () {
+describe('restore', function (): void {
+    test('restore always returns false', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -167,8 +167,8 @@ describe('restore', function () {
     });
 });
 
-describe('forceDelete', function () {
-    test('forceDelete always returns false', function () {
+describe('forceDelete', function (): void {
+    test('forceDelete always returns false', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);

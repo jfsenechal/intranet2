@@ -38,7 +38,7 @@ final class PersonalInformationService
                 'college_trip_date' => $data['college_trip_date'] ?? null,
             ]);
         } catch (Exception $e) {
-            throw new Exception("Error creating PersonalInformation for user {$user->username}: {$e->getMessage()}");
+            throw new Exception("Error creating PersonalInformation for user {$user->username}: {$e->getMessage()}", $e->getCode(), $e);
         }
     }
 }

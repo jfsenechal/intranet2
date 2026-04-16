@@ -4,20 +4,25 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
+#[Connection('maria-hrm')]
+#[Fillable([
+    'name',
+    'holiday_date',
+])]
+#[Table(name: 'public_holidays')]
 final class PublicHoliday extends Model
 {
+    use HasFactory;
+
+    #[Override]
     public $timestamps = false;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'public_holidays';
-
-    protected $fillable = [
-        'title',
-        'holiday_date',
-    ];
 
     protected function casts(): array
     {

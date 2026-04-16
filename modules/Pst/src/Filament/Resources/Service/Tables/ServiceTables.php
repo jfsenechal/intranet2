@@ -19,7 +19,7 @@ final class ServiceTables
         return $table
             ->defaultPaginationPageOption(50)
             ->defaultSort('name')
-            ->recordUrl(fn (Service $record) => ServiceResource::getUrl('view', [$record]))
+            ->recordUrl(fn (Service $record): string => ServiceResource::getUrl('view', [$record]))
             ->columns([
                 TextColumn::make('name')
                     ->searchable()

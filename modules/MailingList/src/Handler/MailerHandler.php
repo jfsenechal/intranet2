@@ -41,7 +41,7 @@ final class MailerHandler
             ->get();
 
         $jobs = $pendingRecipients->map(
-            fn ($recipient) => new SendEmailJob($email, $recipient)
+            fn ($recipient): SendEmailJob => new SendEmailJob($email, $recipient)
         )->all();
 
         $batch = Bus::batch($jobs)
@@ -74,14 +74,14 @@ final class MailerHandler
 
         $contacts = collect();
 
-        if (! empty($addressBookIds)) {
+        if ($addressBookIds !== []) {
             $addressBookContacts = Contact::query()
                 ->whereHas('addressBooks', fn ($query) => $query->whereIn('address_books.id', $addressBookIds))
                 ->get();
             $contacts = $contacts->merge($addressBookContacts);
         }
 
-        if (! empty($contactIds)) {
+        if ($contactIds !== []) {
             $individualContacts = Contact::query()
                 ->whereIn('id', $contactIds)
                 ->get();

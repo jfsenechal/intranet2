@@ -6,7 +6,7 @@ namespace AcMarche\Mileage\Filament\Resources\BudgetArticles\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 final class BudgetArticleTables
@@ -17,22 +17,22 @@ final class BudgetArticleTables
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('department')
+                TextColumn::make('department')
                     ->label('Département')
                     ->searchable()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('functional_code')
+                TextColumn::make('functional_code')
                     ->label('Code fonctionnel')
                     ->searchable()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('economic_code')
+                TextColumn::make('economic_code')
                     ->label('Code économique')
                     ->searchable()
                     ->sortable(),

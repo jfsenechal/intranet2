@@ -6,9 +6,14 @@ namespace AcMarche\Pst\Database\Factories;
 
 use AcMarche\Pst\Models\Action;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
+/**
+ * @extends Factory<Action>
+ */
 final class ActionFactory extends Factory
 {
+    #[Override]
     protected $model = Action::class;
 
     /**

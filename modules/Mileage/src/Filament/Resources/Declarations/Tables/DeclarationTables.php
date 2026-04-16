@@ -11,7 +11,7 @@ use AcMarche\Mileage\Repository\DeclarationRepository;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -24,33 +24,33 @@ final class DeclarationTables
             ->defaultPaginationPageOption(50)
             ->modifyQueryUsing(fn (Builder $query) => DeclarationRepository::getByUser($query)->with('trips'))
             ->columns([
-                Tables\Columns\TextColumn::make('last_name')
+                TextColumn::make('last_name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable()
-                    ->url(fn (Declaration $record) => DeclarationResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('first_name')
+                    ->url(fn (Declaration $record): string => DeclarationResource::getUrl('view', ['record' => $record->id])),
+                TextColumn::make('first_name')
                     ->label('Prénom')
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('car_license_plate1')
+                TextColumn::make('car_license_plate1')
                     ->label('Plaque')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('type_movement')
+                TextColumn::make('type_movement')
                     ->label('Type')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label('Créé le')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('trips_count')
+                TextColumn::make('trips_count')
                     ->label('Déplacements')
                     ->counts('trips')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('totalKilometers')
+                TextColumn::make('totalKilometers')
                     ->label('Nombre de km')
                     ->state(function (Declaration $record): float {
                         $record->loadMissing('trips');
@@ -59,7 +59,7 @@ final class DeclarationTables
                         return $calculator->calculate()->totalKilometers;
                     })
                     ->suffix('km'),
-                Tables\Columns\TextColumn::make('totalRefund')
+                TextColumn::make('totalRefund')
                     ->label('Total à rembourser')
                     ->state(function (Declaration $record): float {
                         $record->loadMissing('trips');

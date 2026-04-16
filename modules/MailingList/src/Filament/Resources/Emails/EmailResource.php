@@ -16,21 +16,29 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Override;
 
 final class EmailResource extends Resource
 {
+    #[Override]
     protected static ?string $model = Email::class;
 
+    #[Override]
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
 
+    #[Override]
     protected static ?int $navigationSort = 1;
 
+    #[Override]
     protected static ?string $navigationLabel = 'E-mails';
 
+    #[Override]
     protected static ?string $modelLabel = 'e-mail';
 
+    #[Override]
     protected static ?string $pluralModelLabel = 'e-mails';
 
+    #[Override]
     protected static ?string $recordTitleAttribute = 'subject';
 
     public static function getGloballySearchableAttributes(): array

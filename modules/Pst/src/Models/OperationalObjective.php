@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Database\Factories\OperationalObjectiveFactory;
 use AcMarche\Pst\Enums\ActionScopeEnum;
@@ -17,19 +19,17 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
 #[UseFactory(OperationalObjectiveFactory::class)]
+#[Connection('maria-pst')]
+#[Fillable([
+    'name',
+    'position',
+    'strategic_objective_id',
+    'department',
+    'scope',
+])]
 final class OperationalObjective extends Model
 {
     use HasDepartmentScope, HasFactory, Notifiable, Searchable;
-
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'name',
-        'position',
-        'strategic_objective_id',
-        'department',
-        'scope',
-    ];
 
     /**
      * Get the indexable data array for the model.
@@ -82,7 +82,7 @@ final class OperationalObjective extends Model
 
     protected static function booted(): void
     {
-        self::saving(function (OperationalObjective $model) {
+        self::saving(function (OperationalObjective $model): void {
             if ($model->scope === ActionScopeEnum::INTERNAL) {
                 $model->department = null;
             }

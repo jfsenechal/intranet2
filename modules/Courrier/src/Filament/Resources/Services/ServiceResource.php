@@ -14,17 +14,21 @@ use AcMarche\Courrier\Models\Service;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class ServiceResource extends Resource
 {
+    #[Override]
     protected static ?string $model = Service::class;
 
+    #[Override]
     protected static ?int $navigationSort = 5;
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Paramètres';
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-building-office';
     }

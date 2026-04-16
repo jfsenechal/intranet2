@@ -13,11 +13,14 @@ use AcMarche\Pst\Models\StrategicObjective;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
+use Override;
 
 final class MeiliCommand extends Command
 {
+    #[Override]
     protected $signature = 'pst:meili {--flush : Flush all indexes before importing}';
 
+    #[Override]
     protected $description = 'Import all searchable models into Scout (Meilisearch)';
 
     /**
@@ -41,12 +44,12 @@ final class MeiliCommand extends Command
             $modelName = class_basename($model);
 
             if ($this->option('flush')) {
-                $this->components->task("Flushing {$modelName}", function () use ($model) {
+                $this->components->task("Flushing {$modelName}", function () use ($model): void {
                     Artisan::call('scout:flush', ['model' => $model]);
                 });
             }
 
-            $this->components->task("Importing {$modelName}", function () use ($model) {
+            $this->components->task("Importing {$modelName}", function () use ($model): void {
                 Artisan::call('scout:import', ['model' => $model]);
             });
         }

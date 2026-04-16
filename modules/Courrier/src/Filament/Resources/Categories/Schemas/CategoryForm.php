@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Categories\Schemas;
 
-use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 final class CategoryForm
@@ -13,7 +13,7 @@ final class CategoryForm
     {
         return $schema
             ->components([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->label('Nom')
                     ->required(),
             ]);

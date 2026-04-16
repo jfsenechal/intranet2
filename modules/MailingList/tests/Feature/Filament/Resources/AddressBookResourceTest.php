@@ -16,23 +16,23 @@ use Illuminate\Support\Str;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('mailing-list'));
     $this->user = User::factory()->create();
     $this->actingAs($this->user);
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     livewire(ListAddressBooks::class)
         ->assertOk();
 });
 
-it('can render the create page', function () {
+it('can render the create page', function (): void {
     livewire(CreateAddressBook::class)
         ->assertOk();
 });
 
-it('can render the edit page', function () {
+it('can render the edit page', function (): void {
     $addressBook = AddressBook::factory()->create(['username' => $this->user->username]);
 
     livewire(EditAddressBook::class, ['record' => $addressBook->id])
@@ -42,14 +42,14 @@ it('can render the edit page', function () {
         ]);
 });
 
-it('can render the view page', function () {
+it('can render the view page', function (): void {
     $addressBook = AddressBook::factory()->create(['username' => $this->user->username]);
 
     livewire(ViewAddressBook::class, ['record' => $addressBook->id])
         ->assertOk();
 });
 
-it('can list address books', function () {
+it('can list address books', function (): void {
     $addressBooks = AddressBook::factory(3)->create(['username' => $this->user->username]);
 
     livewire(ListAddressBooks::class)
@@ -57,12 +57,12 @@ it('can list address books', function () {
         ->assertCanSeeTableRecords($addressBooks);
 });
 
-it('has table columns', function (string $column) {
+it('has table columns', function (string $column): void {
     livewire(ListAddressBooks::class)
         ->assertTableColumnExists($column);
 })->with(['name', 'created_at', 'updated_at']);
 
-it('can sort by name', function () {
+it('can sort by name', function (): void {
     $addressBooks = AddressBook::factory(5)->create(['username' => $this->user->username]);
 
     livewire(ListAddressBooks::class)
@@ -73,7 +73,7 @@ it('can sort by name', function () {
         ->assertCanSeeTableRecords($addressBooks->sortByDesc('name'), inOrder: true);
 });
 
-it('can search address books', function () {
+it('can search address books', function (): void {
     $addressBooks = AddressBook::factory(5)->create(['username' => $this->user->username]);
 
     $search = $addressBooks->first()->name;
@@ -85,7 +85,7 @@ it('can search address books', function () {
         ->assertCanNotSeeTableRecords($addressBooks->where('name', '!=', $search));
 });
 
-it('can create an address book', function () {
+it('can create an address book', function (): void {
     livewire(CreateAddressBook::class)
         ->fillForm([
             'name' => 'My Address Book',
@@ -99,7 +99,7 @@ it('can create an address book', function () {
     ]);
 });
 
-it('can create an address book with contacts', function () {
+it('can create an address book with contacts', function (): void {
     $contacts = Contact::factory(3)->create(['username' => $this->user->username]);
 
     livewire(CreateAddressBook::class)
@@ -114,7 +114,7 @@ it('can create an address book with contacts', function () {
     expect($addressBook->contacts)->toHaveCount(3);
 });
 
-it('can create an address book with shared users', function () {
+it('can create an address book with shared users', function (): void {
     $otherUser = User::factory()->create();
 
     livewire(CreateAddressBook::class)
@@ -134,7 +134,7 @@ it('can create an address book with shared users', function () {
     )->toBeTrue();
 });
 
-it('can update an address book', function () {
+it('can update an address book', function (): void {
     $addressBook = AddressBook::factory()->create(['username' => $this->user->username]);
 
     livewire(EditAddressBook::class, ['record' => $addressBook->id])
@@ -150,7 +150,7 @@ it('can update an address book', function () {
     ]);
 });
 
-it('can view address book with contacts', function () {
+it('can view address book with contacts', function (): void {
     $addressBook = AddressBook::factory()->create(['username' => $this->user->username]);
     $contacts = Contact::factory(2)->create(['username' => $this->user->username]);
     $addressBook->contacts()->attach($contacts->pluck('id'));
@@ -159,7 +159,7 @@ it('can view address book with contacts', function () {
         ->assertOk();
 });
 
-it('validates the form data', function (array $data, array $errors) {
+it('validates the form data', function (array $data, array $errors): void {
     $addressBook = AddressBook::factory()->create(['username' => $this->user->username]);
 
     livewire(EditAddressBook::class, ['record' => $addressBook->id])

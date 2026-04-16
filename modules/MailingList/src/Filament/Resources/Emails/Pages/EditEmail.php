@@ -8,9 +8,11 @@ use AcMarche\MailingList\Filament\Resources\Emails\EmailResource;
 use AcMarche\MailingList\Handler\MailerHandler;
 use AcMarche\MailingList\Models\Email;
 use Filament\Resources\Pages\EditRecord;
+use Override;
 
 final class EditEmail extends EditRecord
 {
+    #[Override]
     protected static string $resource = EmailResource::class;
 
     protected function mutateFormDataBeforeSave(array $data): array

@@ -8,13 +8,15 @@ use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Pst\Models\Service;
 use AcMarche\Pst\Models\TracksHistoryTrait;
 use App\Models\User;
-use Filament\Actions;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
+use Override;
 
 final class EditAction extends EditRecord
 {
     use TracksHistoryTrait;
 
+    #[Override]
     protected static string $resource = ActionPstResource::class;
 
     /**
@@ -41,7 +43,7 @@ final class EditAction extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }
@@ -67,25 +69,25 @@ final class EditAction extends EditRecord
                 'old' => $this->oldRelationshipIds['users'],
                 'new' => $record->users()->pluck('users.username')->toArray(),
                 'label' => 'agent pilote',
-                'getDisplayName' => fn (string $username): string => $this->getUserDisplayName($username),
+                'getDisplayName' => $this->getUserDisplayName(...),
             ],
             'leaderServices' => [
                 'old' => $this->oldRelationshipIds['leaderServices'],
                 'new' => $record->leaderServices()->pluck('services.id')->toArray(),
                 'label' => 'service porteur',
-                'getDisplayName' => fn (int $id): string => $this->getServiceDisplayName($id),
+                'getDisplayName' => $this->getServiceDisplayName(...),
             ],
             'partnerServices' => [
                 'old' => $this->oldRelationshipIds['partnerServices'],
                 'new' => $record->partnerServices()->pluck('services.id')->toArray(),
                 'label' => 'service partenaire',
-                'getDisplayName' => fn (int $id): string => $this->getServiceDisplayName($id),
+                'getDisplayName' => $this->getServiceDisplayName(...),
             ],
             'mandataries' => [
                 'old' => $this->oldRelationshipIds['mandataries'],
                 'new' => $record->mandataries()->pluck('users.username')->toArray(),
                 'label' => 'mandataire',
-                'getDisplayName' => fn (string $username): string => $this->getUserDisplayName($username),
+                'getDisplayName' => $this->getUserDisplayName(...),
             ],
         ];
 

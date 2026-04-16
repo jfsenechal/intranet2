@@ -69,7 +69,7 @@ final class HrmServiceProvider extends ServiceProvider
     /**
      * @var array<class-string, class-string>
      */
-    protected array $policies = [
+    private array $policies = [
         Absence::class => AbsencePolicy::class,
         Application::class => ApplicationPolicy::class,
         Contract::class => ContractPolicy::class,
@@ -109,18 +109,18 @@ final class HrmServiceProvider extends ServiceProvider
         $this->registerPolicies();
     }
 
+    protected function moduleName(): string
+    {
+        return 'hrm';
+    }
+
     /**
      * Register the policies for the module.
      */
-    protected function registerPolicies(): void
+    private function registerPolicies(): void
     {
         foreach ($this->policies as $model => $policy) {
             Gate::policy($model, $policy);
         }
-    }
-
-    protected function moduleName(): string
-    {
-        return 'hrm';
     }
 }

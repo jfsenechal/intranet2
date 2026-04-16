@@ -9,7 +9,7 @@ use AcMarche\Courrier\Models\Service;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 final class ServiceTables
@@ -20,20 +20,20 @@ final class ServiceTables
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable()
-                    ->url(fn(Service $record) => ServiceResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('initials')
+                    ->url(fn (Service $record): string => ServiceResource::getUrl('view', ['record' => $record->id])),
+                TextColumn::make('initials')
                     ->label('Initiales')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('recipients_count')
+                TextColumn::make('recipients_count')
                     ->label('Destinataires')
                     ->counts('recipients')
                     ->badge()
                     ->color('gray'),
-                Tables\Columns\TextColumn::make('department.name')
+                TextColumn::make('department.name')
                     ->label('Département')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

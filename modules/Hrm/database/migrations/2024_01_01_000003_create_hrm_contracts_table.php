@@ -13,10 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection($this->connection)->hasTable('contrat')) {
-            Schema::connection($this->connection)->table('contrat', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('contrat', function (Blueprint $table): void {
                 $table->rename('contracts');
             });
-            Schema::connection($this->connection)->table('contracts', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('contracts', function (Blueprint $table): void {
                 $table->renameColumn('employeur_id', 'employer_id');
                 $table->renameColumn('employe_id', 'employee_id');
                 $table->renameColumn('date_debut', 'start_date');
@@ -42,7 +42,7 @@ return new class extends Migration
                 $table->renameColumn('file2Name', 'file2_name');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('contracts')) {
-            Schema::connection($this->connection)->create('contracts', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('contracts', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id');
                 $table->foreignId('employer_id');
@@ -71,10 +71,5 @@ return new class extends Migration
                 $table->timestamps();
             });
         }
-    }
-
-    public function down(): void
-    {
-        Schema::connection($this->connection)->dropIfExists('contracts');
     }
 };

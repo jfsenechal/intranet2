@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\StrategicObjective;
 
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\ListStrategicObjectives;
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\CreateStrategicObjective;
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\ViewStrategicObjective;
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\EditStrategicObjective;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\RelationManagers\OosRelationManager;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\Schemas\StrategicObjectiveForm;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\Tables\StrategicObjectiveTables;
@@ -15,15 +19,20 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 final class StrategicObjectiveResource extends Resource
 {
+    #[Override]
     protected static ?string $model = StrategicObjective::class;
 
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    #[Override]
     protected static ?int $navigationSort = 1;
 
+    #[Override]
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getModelLabel(): string
@@ -51,10 +60,10 @@ final class StrategicObjectiveResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListStrategicObjectives::route('/'),
-            'create' => Pages\CreateStrategicObjective::route('/create'),
-            'view' => Pages\ViewStrategicObjective::route('/{record}'),
-            'edit' => Pages\EditStrategicObjective::route('/{record}/edit'),
+            'index' => ListStrategicObjectives::route('/'),
+            'create' => CreateStrategicObjective::route('/create'),
+            'view' => ViewStrategicObjective::route('/{record}'),
+            'edit' => EditStrategicObjective::route('/{record}/edit'),
         ];
     }
 

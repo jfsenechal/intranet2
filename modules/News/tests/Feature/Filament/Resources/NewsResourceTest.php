@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Mail::fake();
     Filament::setCurrentPanel(Filament::getPanel('news'));
     auth()->user()->update(['is_administrator' => true]);
@@ -27,24 +27,24 @@ beforeEach(function () {
 
     // Register dummy routes to prevent URL generation errors in tests
     if (! Route::getRoutes()->getByName('filament.news.resources.news.index')) {
-        Route::get('/news', fn () => '')->name('filament.news.resources.news.index');
-        Route::get('/news/create', fn () => '')->name('filament.news.resources.news.create');
-        Route::get('/news/{record}/edit', fn () => '')->name('filament.news.resources.news.edit');
-        Route::get('/news/{record}', fn () => '')->name('filament.news.resources.news.view');
+        Route::get('/news', fn (): string => '')->name('filament.news.resources.news.index');
+        Route::get('/news/create', fn (): string => '')->name('filament.news.resources.news.create');
+        Route::get('/news/{record}/edit', fn (): string => '')->name('filament.news.resources.news.edit');
+        Route::get('/news/{record}', fn (): string => '')->name('filament.news.resources.news.view');
     }
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     livewire(ListNews::class)
         ->assertOk();
 });
 
-it('can render the create page', function () {
+it('can render the create page', function (): void {
     livewire(CreateNews::class)
         ->assertOk();
 });
 
-it('can render the edit page', function () {
+it('can render the edit page', function (): void {
     $news = News::factory()->create();
 
     livewire(EditNews::class, [
@@ -56,7 +56,7 @@ it('can render the edit page', function () {
         ]);
 });
 
-it('can render the view page', function () {
+it('can render the view page', function (): void {
     $news = News::factory()->create();
 
     livewire(ViewNews::class, [
@@ -65,17 +65,17 @@ it('can render the view page', function () {
         ->assertOk();
 });
 
-it('has column', function (string $column) {
+it('has column', function (string $column): void {
     livewire(ListNews::class)
         ->assertTableColumnExists($column);
 })->with(['name', 'category.name']);
 
-it('can render column', function (string $column) {
+it('can render column', function (string $column): void {
     livewire(ListNews::class)
         ->assertCanRenderTableColumn($column);
 })->with(['name', 'category.name']);
 
-it('can filter by category', function () {
+it('can filter by category', function (): void {
     $cat1 = Category::factory()->create();
     $cat2 = Category::factory()->create();
 
@@ -89,7 +89,7 @@ it('can filter by category', function () {
         ->assertCanNotSeeTableRecords([$news2]);
 });
 
-it('can filter archived news', function () {
+it('can filter archived news', function (): void {
     $archived = News::factory()->create(['archive' => true]);
     $notArchived = News::factory()->create(['archive' => false]);
 
@@ -100,14 +100,14 @@ it('can filter archived news', function () {
         ->assertCanNotSeeTableRecords([$archived]);
 });
 
-it('can load the create form', function () {
+it('can load the create form', function (): void {
     livewire(CreateNews::class)
         ->assertSchemaComponentExists('name')
         ->assertSchemaComponentExists('content')
         ->assertSchemaComponentExists('category_id');
 });
 
-it('can load the edit form with data', function () {
+it('can load the edit form with data', function (): void {
     $news = News::factory()->create();
 
     livewire(EditNews::class, [
@@ -118,7 +118,7 @@ it('can load the edit form with data', function () {
         ]);
 });
 
-it('can delete a news item', function () {
+it('can delete a news item', function (): void {
     $news = News::factory()->create();
 
     livewire(ViewNews::class, [
@@ -131,7 +131,7 @@ it('can delete a news item', function () {
     assertDatabaseMissing($news);
 });
 
-it('can bulk delete news items', function () {
+it('can bulk delete news items', function (): void {
     $newsItems = News::factory(5)->create();
 
     livewire(ListNews::class)
@@ -145,7 +145,7 @@ it('can bulk delete news items', function () {
     $newsItems->each(fn (News $news) => assertDatabaseMissing($news));
 });
 
-it('archive action exists on view page', function () {
+it('archive action exists on view page', function (): void {
     $news = News::factory()->create(['archive' => false]);
 
     livewire(ViewNews::class, [
@@ -154,7 +154,7 @@ it('archive action exists on view page', function () {
         ->assertActionExists('archive');
 });
 
-it('validates the form data', function (array $data, array $errors) {
+it('validates the form data', function (array $data, array $errors): void {
     $newsData = News::factory()->make();
 
     livewire(CreateNews::class)

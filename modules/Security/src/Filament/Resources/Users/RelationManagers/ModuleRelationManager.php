@@ -10,9 +10,11 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 final class ModuleRelationManager extends RelationManager
 {
+    #[Override]
     protected static string $relationship = 'modules';
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string

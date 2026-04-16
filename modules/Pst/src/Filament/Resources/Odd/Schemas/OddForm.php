@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Odd\Schemas;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -14,11 +18,11 @@ final class OddForm
     {
         return $schema
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
-                Forms\Components\FileUpload::make('icon')
+                FileUpload::make('icon')
                     ->label('Icône')
                     ->disk('public')
                     ->directory(config('pst.uploads.odds_icons'))
@@ -26,13 +30,13 @@ final class OddForm
                     ->maxFiles(1)
                     ->image(),
                 Section::make()->schema([
-                    Forms\Components\ColorPicker::make('color')
+                    ColorPicker::make('color')
                         ->label('Couleur'),
-                    Forms\Components\TextInput::make('position')
+                    TextInput::make('position')
                         ->required()
                         ->numeric(),
                 ]),
-                Forms\Components\Textarea::make('description')
+                Textarea::make('description')
                     ->maxLength(255)
                     ->columnSpanFull(),
             ]);

@@ -10,7 +10,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
@@ -22,11 +22,11 @@ final class DocumentTables
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable()
                     ->label('Intitulé')
-                    ->url(fn (Document $record) => DocumentResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('category.name')
+                    ->url(fn (Document $record): string => DocumentResource::getUrl('view', ['record' => $record->id])),
+                TextColumn::make('category.name')
                     ->searchable()
                     ->label('Catégorie'),
             ])

@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[Connection('maria-hrm')]
+#[Fillable([
+    'name',
+    'slug',
+    'parent_id',
+])]
+#[Table(name: 'employers')]
 final class Employer extends Model
 {
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'employers';
-
-    protected $fillable = [
-        'name',
-        'slug',
-        'parent_id',
-    ];
+    use HasFactory;
 
     /**
      * @return BelongsTo<Employer>

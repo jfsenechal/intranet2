@@ -13,12 +13,12 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection($this->connection)->hasTable('formation')) {
-            Schema::connection($this->connection)->table('formation', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('formation', function (Blueprint $table): void {
                 $table->rename('trainings');
             });
-            Schema::connection($this->connection)->table('trainings', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('trainings', function (Blueprint $table): void {
                 $table->renameColumn('employe_id', 'employee_id');
-                $table->renameColumn('intitule', 'title');
+                $table->renameColumn('intitule', 'name');
                 $table->renameColumn('date_debut', 'start_date');
                 $table->renameColumn('date_fin', 'end_date');
                 $table->renameColumn('date_college', 'college_date');
@@ -37,10 +37,10 @@ return new class extends Migration
                 $table->renameColumn('updateBy', 'updated_by');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('trainings')) {
-            Schema::connection($this->connection)->create('trainings', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('trainings', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id');
-                $table->string('title', 150);
+                $table->string('name', 150);
                 $table->longText('description')->nullable();
                 $table->date('start_date')->nullable();
                 $table->date('end_date')->nullable();
@@ -59,10 +59,5 @@ return new class extends Migration
                 $table->timestamps();
             });
         }
-    }
-
-    public function down(): void
-    {
-        Schema::connection($this->connection)->dropIfExists('trainings');
     }
 };

@@ -6,9 +6,11 @@ namespace AcMarche\Security\Filament\Resources\Users\Pages;
 
 use AcMarche\Security\Filament\Resources\Users\UserResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateUser extends CreateRecord
 {
+    #[Override]
     protected static string $resource = UserResource::class;
 
     public function getTitle(): string

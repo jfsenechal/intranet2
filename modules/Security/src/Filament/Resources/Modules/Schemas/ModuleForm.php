@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Modules\Schemas;
 
+use Filament\Forms\Components\Select;
 use AcMarche\Security\Models\Module;
 use AcMarche\Security\Repository\ModuleRepository;
 use AcMarche\Security\Repository\RoleRepository;
@@ -64,7 +65,7 @@ final class ModuleForm
         $components = [];
 
         if (! $user?->id > 0) {
-            $components[] = Forms\Components\Select::make('user')
+            $components[] = Select::make('user')
                 ->label('Agent')
                 ->options(fn (UserRepository $repository): array => $repository->listLocalUsersForSelect())
                 ->searchable()
@@ -88,11 +89,11 @@ final class ModuleForm
         $components = [];
         if (! $module?->id > 0) {
             $components[] =
-                Forms\Components\Select::make('module')
+                Select::make('module')
                     ->label('Module')
-                    ->options(fn (ModuleRepository $repository) => $repository->getModulesForSelect())
+                    ->options(fn (ModuleRepository $repository): array => $repository->getModulesForSelect())
                     ->reactive()
-                    ->afterStateUpdated(function (Set $set) {
+                    ->afterStateUpdated(function (Set $set): void {
                         // Optional: clear roles selection when module changes
                         $set('roles', []);
                     })
@@ -111,7 +112,7 @@ final class ModuleForm
     public static function rolesField(?Module $module, User|Model|null $user = null): CheckboxList|Radio
     {
         $options = function (callable $get) use ($module) {
-            if (! $module) {
+            if (! $module instanceof Module) {
                 $moduleId = $get('module');
                 if (! $moduleId) {
                     return [];
@@ -124,7 +125,7 @@ final class ModuleForm
         };
 
         $descriptions = function (callable $get) use ($module) {
-            if (! $module) {
+            if (! $module instanceof Module) {
                 $moduleId = $get('module');
                 if (! $moduleId) {
                     return [];
@@ -147,13 +148,13 @@ final class ModuleForm
                 ->options($options)
                 ->descriptions($descriptions)
                 ->columnSpanFull()
-                ->afterStateHydrated(fn (CheckboxList $component) => $component->state($userRoles->toArray()));
+                ->afterStateHydrated(fn (CheckboxList $component): CheckboxList => $component->state($userRoles->toArray()));
         }
 
         return Radio::make('roles')
             ->label('Rôle')
             ->options($options)
             ->descriptions($descriptions)
-            ->afterStateHydrated(fn (Radio $component) => $component->state($userRoles->first()));
+            ->afterStateHydrated(fn (Radio $component): Radio => $component->state($userRoles->first()));
     }
 }

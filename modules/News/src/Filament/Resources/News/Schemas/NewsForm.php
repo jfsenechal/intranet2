@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace AcMarche\News\Filament\Resources\News\Schemas;
 
 use AcMarche\Security\Constant\DepartmentWithCommonEnum;
-use Carbon\Carbon;
-use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Date;
 
 final class NewsForm
 {
@@ -23,13 +24,13 @@ final class NewsForm
             ->schema([
                 Flex::make([
                     Section::make([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->label('Titre')
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
                             ->columnSpanFull(),
-                        Forms\Components\RichEditor::make('content')
+                        RichEditor::make('content')
                             ->label('Contenu')
                             ->required()
                             ->columnSpanFull(),
@@ -47,19 +48,19 @@ final class NewsForm
                             ->maxSize(10240),
                     ]),
                     Section::make([
-                        Forms\Components\Select::make('category_id')
+                        Select::make('category_id')
                             ->label('Catégorie')
                             ->relationship('category', 'name')
                             ->required(),
-                        Forms\Components\Select::make('department')
+                        Select::make('department')
                             ->label('Pour qui ?')
                             ->default(DepartmentWithCommonEnum::COMMON->value)
                             ->options(DepartmentWithCommonEnum::class)
                             ->required()
                             ->suffixIcon('tabler-ladder'),
-                        Forms\Components\DatePicker::make('end_date')
+                        DatePicker::make('end_date')
                             ->label('Date de fin de publication')
-                            ->default(Carbon::make('now')->add('2 weeks'))
+                            ->default(Date::make('now')->add('2 weeks'))
                             ->required()
                             ->suffixIcon('tabler-calendar-stats'),
 

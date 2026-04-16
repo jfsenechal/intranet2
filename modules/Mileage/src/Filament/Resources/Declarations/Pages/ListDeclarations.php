@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace AcMarche\Mileage\Filament\Resources\Declarations\Pages;
 
 use AcMarche\Mileage\Filament\Resources\Declarations\DeclarationResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListDeclarations extends ListRecords
 {
+    #[Override]
     protected static string $resource = DeclarationResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Mes déclarations';
     }
@@ -21,7 +22,7 @@ final class ListDeclarations extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Nouvelle déclaration')
                 ->icon('tabler-plus'),
         ];

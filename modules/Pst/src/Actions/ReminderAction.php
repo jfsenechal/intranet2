@@ -33,7 +33,7 @@ final class ReminderAction
             ->fillForm([
                 'recipients' => $defaultRecipients,
             ])
-            ->action(function (array $data, ActionModel $action) {
+            ->action(function (array $data, ActionModel $action): void {
                 $emails = User::query()
                     ->whereIn('username', $data['recipients'])
                     ->pluck('email')

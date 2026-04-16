@@ -16,13 +16,17 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class CategoryResource extends Resource
 {
+    #[Override]
     protected static ?string $model = Category::class;
 
+    #[Override]
     protected static ?int $navigationSort = 2;
 
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Schema $schema): Schema

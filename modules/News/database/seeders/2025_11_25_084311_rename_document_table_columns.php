@@ -15,7 +15,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::connection('maria-document')->table('documents', function (Blueprint $table) {
+        Schema::connection('maria-document')->table('documents', function (Blueprint $table): void {
             // Rename old columns to new Laravel convention names
             $table->renameColumn('titre', 'title');
             $table->renameColumn('categorie_id', 'category_id');

@@ -8,12 +8,15 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Override;
 use Symfony\Component\Console\Command\Command as SfCommand;
 
 final class FixCommand extends Command
 {
+    #[Override]
     protected $signature = 'pst:migration';
 
+    #[Override]
     protected $description = 'Migrate action_user, action_mandatory and service_user tables from user_id to username';
 
     public function handle(): int
@@ -46,7 +49,7 @@ final class FixCommand extends Command
         $this->info('Migrating '.$table.'...');
 
         // Add username column
-        Schema::connection('maria-pst')->table($table, function ($blueprint) use ($table) {
+        Schema::connection('maria-pst')->table($table, function ($blueprint) use ($table): void {
             // service_user doesn't have action_id, add after service_id instead
             if ($table === 'service_user') {
                 $blueprint->string('username')->nullable()->after('service_id');
@@ -69,7 +72,7 @@ final class FixCommand extends Command
 
         // Drop old FK, unique index, and user_id column
         try {
-            Schema::connection('maria-pst')->table($table, function ($blueprint) use ($table) {
+            Schema::connection('maria-pst')->table($table, function ($blueprint) use ($table): void {
                 $blueprint->dropForeign($table.'_user_id_foreign');
             });
         } catch (Exception) {
@@ -77,7 +80,7 @@ final class FixCommand extends Command
         }
 
         try {
-            Schema::connection('maria-pst')->table($table, function ($blueprint) use ($table) {
+            Schema::connection('maria-pst')->table($table, function ($blueprint) use ($table): void {
                 if ($table === 'service_user') {
                     $blueprint->dropUnique($table.'_user_id_service_id_unique');
                 } else {
@@ -89,7 +92,7 @@ final class FixCommand extends Command
         }
 
         try {
-            Schema::connection('maria-pst')->table($table, function ($blueprint) {
+            Schema::connection('maria-pst')->table($table, function ($blueprint): void {
                 $blueprint->dropColumn('user_id');
             });
         } catch (Exception) {
@@ -97,7 +100,7 @@ final class FixCommand extends Command
         }
 
         // Make username non-nullable and add new unique constraint
-        Schema::connection('maria-pst')->table($table, function ($blueprint) use ($table) {
+        Schema::connection('maria-pst')->table($table, function ($blueprint) use ($table): void {
             $blueprint->string('username')->nullable(false)->change();
             if ($table === 'service_user') {
                 $blueprint->unique(['service_id', 'username']);

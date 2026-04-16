@@ -18,29 +18,29 @@ use Illuminate\Support\Str;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Livewire\livewire;
 
-beforeEach(function () {
+beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('publication-panel'));
 
     // Register dummy routes to prevent URL generation errors in tests
     if (! Route::getRoutes()->getByName('filament.publication-panel.resources.publications.index')) {
-        Route::get('/publications', fn () => '')->name('filament.publication-panel.resources.publications.index');
-        Route::get('/publications/create', fn () => '')->name('filament.publication-panel.resources.publications.create');
-        Route::get('/publications/{record}/edit', fn () => '')->name('filament.publication-panel.resources.publications.edit');
-        Route::get('/publications/{record}', fn () => '')->name('filament.publication-panel.resources.publications.view');
+        Route::get('/publications', fn (): string => '')->name('filament.publication-panel.resources.publications.index');
+        Route::get('/publications/create', fn (): string => '')->name('filament.publication-panel.resources.publications.create');
+        Route::get('/publications/{record}/edit', fn (): string => '')->name('filament.publication-panel.resources.publications.edit');
+        Route::get('/publications/{record}', fn (): string => '')->name('filament.publication-panel.resources.publications.view');
     }
 });
 
-it('can render the index page', function () {
+it('can render the index page', function (): void {
     livewire(ListPublications::class)
         ->assertOk();
 });
 
-it('can render the create page', function () {
+it('can render the create page', function (): void {
     livewire(CreatePublication::class)
         ->assertOk();
 });
 
-it('can render the edit page', function () {
+it('can render the edit page', function (): void {
     $publication = Publication::factory()->create();
 
     livewire(EditPublication::class, [
@@ -53,7 +53,7 @@ it('can render the edit page', function () {
         ]);
 });
 
-it('can render the view page', function () {
+it('can render the view page', function (): void {
     $publication = Publication::factory()->create();
 
     livewire(ViewPublication::class, [
@@ -62,17 +62,17 @@ it('can render the view page', function () {
         ->assertOk();
 });
 
-it('has column', function (string $column) {
+it('has column', function (string $column): void {
     livewire(ListPublications::class)
         ->assertTableColumnExists($column);
 })->with(['name', 'category.name', 'expire_date']);
 
-it('can render column', function (string $column) {
+it('can render column', function (string $column): void {
     livewire(ListPublications::class)
         ->assertCanRenderTableColumn($column);
 })->with(['name', 'category.name', 'expire_date']);
 
-it('can load the create form', function () {
+it('can load the create form', function (): void {
     livewire(CreatePublication::class)
         ->assertSchemaComponentExists('name')
         ->assertSchemaComponentExists('url')
@@ -80,7 +80,7 @@ it('can load the create form', function () {
         ->assertSchemaComponentExists('expire_date');
 });
 
-it('can load the edit form with data', function () {
+it('can load the edit form with data', function (): void {
     $publication = Publication::factory()->create();
 
     livewire(EditPublication::class, [
@@ -92,7 +92,7 @@ it('can load the edit form with data', function () {
         ]);
 });
 
-it('can delete a publication', function () {
+it('can delete a publication', function (): void {
     $publication = Publication::factory()->create();
 
     livewire(ViewPublication::class, [
@@ -105,7 +105,7 @@ it('can delete a publication', function () {
     assertDatabaseMissing(Publication::class, ['id' => $publication->id]);
 });
 
-it('can bulk delete publications', function () {
+it('can bulk delete publications', function (): void {
     $publications = Publication::factory(5)->create();
 
     livewire(ListPublications::class)
@@ -119,7 +119,7 @@ it('can bulk delete publications', function () {
     $publications->each(fn (Publication $publication) => assertDatabaseMissing(Publication::class, ['id' => $publication->id]));
 });
 
-it('can search publications by name', function () {
+it('can search publications by name', function (): void {
     $publication1 = Publication::factory()->create(['name' => 'Lorem ipsum dolor']);
     $publication2 = Publication::factory()->create(['name' => 'Consectetur adipiscing']);
 
@@ -130,7 +130,7 @@ it('can search publications by name', function () {
         ->assertCanNotSeeTableRecords([$publication2]);
 });
 
-it('can filter by category', function () {
+it('can filter by category', function (): void {
     $cat1 = Category::factory()->create();
     $cat2 = Category::factory()->create();
 
@@ -144,7 +144,7 @@ it('can filter by category', function () {
         ->assertCanNotSeeTableRecords([$pub2]);
 });
 
-it('displays table actions on list page', function () {
+it('displays table actions on list page', function (): void {
     $publication = Publication::factory()->create();
 
     livewire(ListPublications::class)
@@ -153,7 +153,7 @@ it('displays table actions on list page', function () {
         ->assertTableActionExists('view');
 });
 
-it('displays delete action on view page', function () {
+it('displays delete action on view page', function (): void {
     $publication = Publication::factory()->create();
 
     livewire(ViewPublication::class, [
@@ -162,7 +162,7 @@ it('displays delete action on view page', function () {
         ->assertActionExists('delete');
 });
 
-it('validates the form data', function (array $data, array $errors) {
+it('validates the form data', function (array $data, array $errors): void {
     livewire(CreatePublication::class)
         ->fillForm($data)
         ->call('create')

@@ -6,6 +6,8 @@ namespace AcMarche\Mileage\Models;
 
 use AcMarche\Mileage\Database\Factories\DeclarationFactory;
 use AcMarche\Security\Models\HasUserAdd;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,32 +16,30 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[UseFactory(DeclarationFactory::class)]
+#[Connection('maria-mileage')]
+#[Fillable([
+    'omnium',
+    'iban',
+    'car_license_plate1',
+    'car_license_plate2',
+    'last_name',
+    'first_name',
+    'street',
+    'postal_code',
+    'city',
+    'rate',
+    'rate_omnium',
+    'user_add',
+    'type_movement',
+    'college_date',
+    'budget_article',
+    'departments',
+])]
 final class Declaration extends Model
 {
     use HasFactory;
     use HasUserAdd;
     use SoftDeletes;
-
-    protected $connection = 'maria-mileage';
-
-    protected $fillable = [
-        'omnium',
-        'iban',
-        'car_license_plate1',
-        'car_license_plate2',
-        'last_name',
-        'first_name',
-        'street',
-        'postal_code',
-        'city',
-        'rate',
-        'rate_omnium',
-        'user_add',
-        'type_movement',
-        'college_date',
-        'budget_article',
-        'departments',
-    ];
 
     /**
      * @return BelongsTo<BudgetArticle, Declaration>

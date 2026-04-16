@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Users;
 
+use AcMarche\Pst\Filament\Resources\Users\Pages\ViewUser;
 use AcMarche\Pst\Enums\NavigationGroupEnum;
 use AcMarche\Pst\Filament\Resources\Users\Pages\EditUser;
 use AcMarche\Pst\Filament\Resources\Users\Pages\ListUsers;
@@ -17,16 +18,21 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Override;
 use UnitEnum;
 
 final class UserResource extends Resource
 {
+    #[Override]
     protected static ?string $model = User::class;
 
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-users';
 
+    #[Override]
     protected static string|UnitEnum|null $navigationGroup = NavigationGroupEnum::Settings;
 
+    #[Override]
     protected static ?string $recordTitleAttribute = 'fullName';
 
     public static function getModelLabel(): string
@@ -48,7 +54,7 @@ final class UserResource extends Resource
     {
         return [
             'index' => ListUsers::route('/'),
-            'view' => Pages\ViewUser::route('/{record}'),
+            'view' => ViewUser::route('/{record}'),
             'edit' => EditUser::route('/{record}/edit'),
         ];
     }

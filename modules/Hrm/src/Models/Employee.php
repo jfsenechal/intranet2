@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Models;
 
 use AcMarche\Security\Models\HasUserAdd;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,69 +16,62 @@ use Illuminate\Support\Str;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
+#[Connection('maria-hrm')]
+#[Fillable([
+    'uuid',
+    'uid',
+    'username',
+    'slug',
+    'civility',
+    'last_name',
+    'first_name',
+    'job_title',
+    'birth_date',
+    'show_birthday',
+    'email',
+    'professional_email',
+    'private_phone',
+    'private_mobile',
+    'address',
+    'postal_code',
+    'city',
+    'national_registry_number',
+    'hired_at',
+    'left_at',
+    'salary_seniority_date',
+    'scale_seniority_date',
+    'reminder_date',
+    'status',
+    'notes',
+    'photo',
+    'pay_scale_id',
+    'pay_scale_code',
+    'local_unit',
+    'allowance',
+    'health_insurance_id',
+    'insurance_affiliation',
+    'intern_type',
+    'prerequisite_id',
+    'is_archived',
+    'candidate_received_at',
+    'candidate_mail_reference',
+    'candidate_diploma_level',
+    'candidate_diploma_nature',
+    'candidate_file_name',
+    'candidate_mail_sent_at',
+    'candidate_mail_count',
+    'candidate_priority',
+    'candidate_service_id',
+    'saved_employer_id',
+    'user_add',
+    'updated_by',
+])]
+#[Table(name: 'employees')]
 final class Employee extends Model
 {
-    use HasUserAdd;
+    use HasFactory;
     use HasSlug;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'employees';
-
-    protected $fillable = [
-        'uuid',
-        'uid',
-        'username',
-        'slug',
-        'civility',
-        'last_name',
-        'first_name',
-        'job_title',
-        'birth_date',
-        'show_birthday',
-        'email',
-        'professional_email',
-        'private_phone',
-        'private_mobile',
-        'address',
-        'postal_code',
-        'city',
-        'national_registry_number',
-        'hired_at',
-        'left_at',
-        'salary_seniority_date',
-        'scale_seniority_date',
-        'reminder_date',
-        'status',
-        'notes',
-        'photo',
-        'pay_scale_id',
-        'pay_scale_code',
-        'local_unit',
-        'allowance',
-        'health_insurance_id',
-        'insurance_affiliation',
-        'intern_type',
-        'prerequisite_id',
-        'is_archived',
-        'candidate_received_at',
-        'candidate_mail_reference',
-        'candidate_diploma_level',
-        'candidate_diploma_nature',
-        'candidate_file_name',
-        'candidate_mail_sent_at',
-        'candidate_mail_count',
-        'candidate_priority',
-        'candidate_service_id',
-        'saved_employer_id',
-        'user_add',
-        'updated_by',
-    ];
-
-    public function getFullNameAttribute(): string
-    {
-        return $this->last_name.' '.$this->first_name;
-    }
+    use HasUserAdd;
 
     /**
      * @return BelongsTo<PayScale>
@@ -199,18 +196,24 @@ final class Employee extends Model
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom(['last_name','first_name'])
+            ->generateSlugsFrom(['last_name', 'first_name'])
             ->saveSlugsTo('slug');
     }
+
     protected static function booted(): void
     {
         self::bootHasUser();
 
-        self::creating(function (Employee $employee) {
+        self::creating(function (Employee $employee): void {
             if (empty($employee->uuid)) {
                 $employee->uuid = (string) Str::uuid();
             }
         });
+    }
+
+    protected function getFullNameAttribute(): string
+    {
+        return $this->last_name.' '.$this->first_name;
     }
 
     protected function casts(): array

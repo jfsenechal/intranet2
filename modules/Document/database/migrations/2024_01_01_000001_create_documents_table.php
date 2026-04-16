@@ -17,10 +17,10 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection('maria-document')->hasTable('document')) {
-            Schema::connection('maria-document')->table('document', function (Blueprint $table) {
+            Schema::connection('maria-document')->table('document', function (Blueprint $table): void {
                 $table->rename('documents');
             });
-            Schema::connection('maria-document')->table('documents', function (Blueprint $table) {
+            Schema::connection('maria-document')->table('documents', function (Blueprint $table): void {
                 $table->renameColumn('titre', 'name');
                 $table->renameColumn('categorie_id', 'category_id');
                 $table->renameColumn('user', 'user_add');
@@ -49,14 +49,14 @@ return new class extends Migration
         }
 
         if (Schema::connection('maria-document')->hasTable('categorie')) {
-            Schema::connection('maria-document')->table('categorie', function (Blueprint $table) {
+            Schema::connection('maria-document')->table('categorie', function (Blueprint $table): void {
                 $table->rename('document_categories');
             });
-            Schema::connection('maria-document')->table('document_categories', function (Blueprint $table) {
+            Schema::connection('maria-document')->table('document_categories', function (Blueprint $table): void {
                 $table->renameColumn('nom', 'name');
             });
         } elseif (! Schema::connection('maria-document')->hasTable('document_categories')) {
-            Schema::connection('maria-document')->create('document_categories', function (Blueprint $table) {
+            Schema::connection('maria-document')->create('document_categories', function (Blueprint $table): void {
                 $table->id();
                 $table->string('name');
                 $table->timestamps(false);

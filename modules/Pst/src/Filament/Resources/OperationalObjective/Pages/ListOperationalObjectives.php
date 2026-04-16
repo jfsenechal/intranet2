@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\OperationalObjective\Pages;
 
+use Filament\Actions\CreateAction;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\OperationalObjectiveResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListOperationalObjectives extends ListRecords
 {
+    #[Override]
     protected static string $resource = OperationalObjectiveResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' Objectifs Opérationnels (OO)';
     }
@@ -21,7 +23,7 @@ final class ListOperationalObjectives extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter un objectif opérationnel')
                 ->icon('tabler-plus'),
         ];

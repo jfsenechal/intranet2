@@ -11,9 +11,11 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Override;
 
 final class NewsRelationManager extends RelationManager
 {
+    #[Override]
     protected static string $relationship = 'news';
 
     public function table(Table $table): Table
@@ -26,7 +28,7 @@ final class NewsRelationManager extends RelationManager
                     ->label('Intitulé')
                     ->limit(80)
                     ->searchable()
-                    ->url(fn (News $record) => NewsResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn (News $record): string => NewsResource::getUrl('view', ['record' => $record->id])),
                 IconColumn::make('archive')
                     ->label('Archivé')
                     ->boolean(),

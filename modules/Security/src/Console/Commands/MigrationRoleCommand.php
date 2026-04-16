@@ -7,6 +7,7 @@ namespace AcMarche\Security\Console\Commands;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Override;
 use Symfony\Component\Console\Command\Command as SfCommand;
 
 final class MigrationRoleCommand extends Command
@@ -16,6 +17,7 @@ final class MigrationRoleCommand extends Command
      *
      * @var string
      */
+    #[Override]
     protected $signature = 'intranet:migration-role';
 
     /**
@@ -23,6 +25,7 @@ final class MigrationRoleCommand extends Command
      *
      * @var string
      */
+    #[Override]
     protected $description = 'Du vieux intranet vers le nouveau';
 
     /**
@@ -57,7 +60,7 @@ final class MigrationRoleCommand extends Command
                 continue;
             }
             if (! empty($fosGroup->roles)) {
-                $rolesArray = json_decode($fosGroup->roles, true);
+                $rolesArray = json_decode((string) $fosGroup->roles, true);
                 if (is_array($rolesArray)) {
                     $totalRoles += count($rolesArray);
                 }
@@ -84,7 +87,7 @@ final class MigrationRoleCommand extends Command
                 continue;
             }
 
-            $rolesArray = json_decode($fosGroup->roles, true);
+            $rolesArray = json_decode((string) $fosGroup->roles, true);
 
             if (! is_array($rolesArray)) {
                 $errors[] = "Invalid JSON in group ID {$fosGroup->id}";
@@ -178,7 +181,7 @@ final class MigrationRoleCommand extends Command
                 continue;
             }
 
-            $rolesArray = json_decode($fosGroup->roles, true);
+            $rolesArray = json_decode((string) $fosGroup->roles, true);
 
             if (! is_array($rolesArray)) {
                 $errors[] = "Invalid JSON in group ID {$fosGroup->id} for user {$userGroup->user_id}";

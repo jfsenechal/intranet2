@@ -8,12 +8,12 @@ use AcMarche\Mileage\Policies\RatePolicy;
 use AcMarche\Security\Models\Role;
 use App\Models\User;
 
-beforeEach(function () {
+beforeEach(function (): void {
     $this->policy = new RatePolicy();
 });
 
-describe('viewAny', function () {
-    test('admin can view any rates', function () {
+describe('viewAny', function (): void {
+    test('admin can view any rates', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -21,7 +21,7 @@ describe('viewAny', function () {
         expect($this->policy->viewAny($user))->toBeTrue();
     });
 
-    test('ville role user can view any rates', function () {
+    test('ville role user can view any rates', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -29,7 +29,7 @@ describe('viewAny', function () {
         expect($this->policy->viewAny($user))->toBeTrue();
     });
 
-    test('cpas role user can view any rates', function () {
+    test('cpas role user can view any rates', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value]);
         $user->roles()->attach($role);
@@ -37,22 +37,22 @@ describe('viewAny', function () {
         expect($this->policy->viewAny($user))->toBeTrue();
     });
 
-    test('user without role cannot view any rates', function () {
+    test('user without role cannot view any rates', function (): void {
         $user = User::factory()->create();
 
         expect($this->policy->viewAny($user))->toBeFalse();
     });
 });
 
-describe('view', function () {
-    test('any user can view a rate', function () {
+describe('view', function (): void {
+    test('any user can view a rate', function (): void {
         $user = User::factory()->create();
         $rate = Rate::factory()->create();
 
         expect($this->policy->view($user, $rate))->toBeTrue();
     });
 
-    test('user with role can view a rate', function () {
+    test('user with role can view a rate', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -63,8 +63,8 @@ describe('view', function () {
     });
 });
 
-describe('create', function () {
-    test('admin can create rates', function () {
+describe('create', function (): void {
+    test('admin can create rates', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -72,7 +72,7 @@ describe('create', function () {
         expect($this->policy->create($user))->toBeTrue();
     });
 
-    test('ville role user cannot create rates', function () {
+    test('ville role user cannot create rates', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -80,7 +80,7 @@ describe('create', function () {
         expect($this->policy->create($user))->toBeFalse();
     });
 
-    test('cpas role user cannot create rates', function () {
+    test('cpas role user cannot create rates', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value]);
         $user->roles()->attach($role);
@@ -88,15 +88,15 @@ describe('create', function () {
         expect($this->policy->create($user))->toBeFalse();
     });
 
-    test('user without role cannot create rates', function () {
+    test('user without role cannot create rates', function (): void {
         $user = User::factory()->create();
 
         expect($this->policy->create($user))->toBeFalse();
     });
 });
 
-describe('update', function () {
-    test('admin can update rates', function () {
+describe('update', function (): void {
+    test('admin can update rates', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -106,7 +106,7 @@ describe('update', function () {
         expect($this->policy->update($user, $rate))->toBeTrue();
     });
 
-    test('ville role user cannot update rates', function () {
+    test('ville role user cannot update rates', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -116,7 +116,7 @@ describe('update', function () {
         expect($this->policy->update($user, $rate))->toBeFalse();
     });
 
-    test('cpas role user cannot update rates', function () {
+    test('cpas role user cannot update rates', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value]);
         $user->roles()->attach($role);
@@ -126,7 +126,7 @@ describe('update', function () {
         expect($this->policy->update($user, $rate))->toBeFalse();
     });
 
-    test('user without role cannot update rates', function () {
+    test('user without role cannot update rates', function (): void {
         $user = User::factory()->create();
         $rate = Rate::factory()->create();
 
@@ -134,8 +134,8 @@ describe('update', function () {
     });
 });
 
-describe('delete', function () {
-    test('admin can delete rates', function () {
+describe('delete', function (): void {
+    test('admin can delete rates', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -145,7 +145,7 @@ describe('delete', function () {
         expect($this->policy->delete($user, $rate))->toBeTrue();
     });
 
-    test('ville role user cannot delete rates', function () {
+    test('ville role user cannot delete rates', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_VILLE->value]);
         $user->roles()->attach($role);
@@ -155,7 +155,7 @@ describe('delete', function () {
         expect($this->policy->delete($user, $rate))->toBeFalse();
     });
 
-    test('cpas role user cannot delete rates', function () {
+    test('cpas role user cannot delete rates', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_CPAS->value]);
         $user->roles()->attach($role);
@@ -165,7 +165,7 @@ describe('delete', function () {
         expect($this->policy->delete($user, $rate))->toBeFalse();
     });
 
-    test('user without role cannot delete rates', function () {
+    test('user without role cannot delete rates', function (): void {
         $user = User::factory()->create();
         $rate = Rate::factory()->create();
 
@@ -173,8 +173,8 @@ describe('delete', function () {
     });
 });
 
-describe('restore', function () {
-    test('restore always returns false', function () {
+describe('restore', function (): void {
+    test('restore always returns false', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);
@@ -185,8 +185,8 @@ describe('restore', function () {
     });
 });
 
-describe('forceDelete', function () {
-    test('forceDelete always returns false', function () {
+describe('forceDelete', function (): void {
+    test('forceDelete always returns false', function (): void {
         $user = User::factory()->create();
         $role = Role::factory()->create(['name' => RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value]);
         $user->roles()->attach($role);

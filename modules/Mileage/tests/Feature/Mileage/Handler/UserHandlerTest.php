@@ -6,12 +6,12 @@ use AcMarche\Mileage\Models\PersonalInformation;
 use AcMarche\Mileage\Service\PersonalInformationService;
 use App\Models\User;
 
-beforeEach(function () {
+beforeEach(function (): void {
     $this->user = User::factory()->create(['username' => 'testuser']);
 });
 
-describe('createPersonalInformation', function () {
-    test('creates personal information for user', function () {
+describe('createPersonalInformation', function (): void {
+    test('creates personal information for user', function (): void {
         $data = [
             'omnium' => true,
             'college_trip_date' => '2024-06-15',
@@ -27,7 +27,7 @@ describe('createPersonalInformation', function () {
             ->and($personalInfo->college_trip_date)->toBe('2024-06-15');
     });
 
-    test('creates personal information with default values', function () {
+    test('creates personal information with default values', function (): void {
         $data = [];
 
         PersonalInformationService::createPersonalInformation($this->user, $data);
@@ -40,7 +40,7 @@ describe('createPersonalInformation', function () {
             ->and($personalInfo->college_trip_date)->toBeNull();
     });
 
-    test('creates personal information with omnium false', function () {
+    test('creates personal information with omnium false', function (): void {
         $data = [
             'omnium' => false,
             'college_trip_date' => '2024-01-10',
@@ -55,7 +55,7 @@ describe('createPersonalInformation', function () {
             ->and($personalInfo->college_trip_date)->toBe('2024-01-10');
     });
 
-    test('updates existing personal information', function () {
+    test('updates existing personal information', function (): void {
         // Create initial personal information
         $existing = PersonalInformation::factory()->create([
             'username' => $this->user->username,
@@ -81,7 +81,7 @@ describe('createPersonalInformation', function () {
             ->and($personalInfo->college_trip_date)->toBe('2024-12-31');
     });
 
-    test('updates only omnium and college_trip_date', function () {
+    test('updates only omnium and college_trip_date', function (): void {
         // Create initial personal information with other fields
         $existing = PersonalInformation::factory()->create([
             'username' => $this->user->username,
@@ -114,7 +114,7 @@ describe('createPersonalInformation', function () {
             ->and($personalInfo->car_license_plate1)->toBe('1-ABC-123');
     });
 
-    test('handles null college_trip_date', function () {
+    test('handles null college_trip_date', function (): void {
         $data = [
             'omnium' => true,
             'college_trip_date' => null,
@@ -129,7 +129,7 @@ describe('createPersonalInformation', function () {
             ->and($personalInfo->college_trip_date)->toBeNull();
     });
 
-    test('handles updating to null college_trip_date', function () {
+    test('handles updating to null college_trip_date', function (): void {
         $existing = PersonalInformation::factory()->create([
             'username' => $this->user->username,
             'omnium' => false,
@@ -149,7 +149,7 @@ describe('createPersonalInformation', function () {
             ->and($personalInfo->college_trip_date)->toBeNull();
     });
 
-    test('throws exception when creation fails', function () {
+    test('throws exception when creation fails', function (): void {
         // Mock a database issue by using an invalid connection
         $invalidUser = new User(['username' => null]);
 
@@ -161,7 +161,7 @@ describe('createPersonalInformation', function () {
         PersonalInformationService::createPersonalInformation($invalidUser, $data);
     })->throws(Exception::class);
 
-    test('creates personal information for multiple users', function () {
+    test('creates personal information for multiple users', function (): void {
         $user1 = User::factory()->create(['username' => 'user1']);
         $user2 = User::factory()->create(['username' => 'user2']);
 

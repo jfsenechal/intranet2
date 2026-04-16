@@ -4,35 +4,35 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Partner\Schemas;
 
-use AcMarche\Pst\Models\Partner;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms;
 use Filament\Schemas\Schema;
-use Illuminate\Database\Eloquent\Model;
 
 final class PartnerForm
 {
-    public static function configure(Schema $schema, Model|Partner|null $record = null): Schema
+    public static function configure(Schema $schema): Schema
     {
         return $schema
             //  ->fill($record->attributesToArray())
             ->columns(2)
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('initials')
+                TextInput::make('initials')
                     ->default(null)
                     ->maxLength(30),
-                Forms\Components\TextInput::make('phone')
+                TextInput::make('phone')
                     ->label('Téléphone')
                     ->tel()
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('email')
+                TextInput::make('email')
                     ->email()
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\Textarea::make('description')
+                Textarea::make('description')
                     ->columnSpanFull(),
             ]);
     }

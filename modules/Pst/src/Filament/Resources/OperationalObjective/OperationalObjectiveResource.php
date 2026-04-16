@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\OperationalObjective;
 
+use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\ListOperationalObjectives;
+use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\CreateOperationalObjective;
+use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\ViewOperationalObjective;
+use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\EditOperationalObjective;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\Schemas\OperationalObjectiveForm;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\Tables\OperationalObjectiveTables;
 use AcMarche\Pst\Models\OperationalObjective;
@@ -14,15 +18,20 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 final class OperationalObjectiveResource extends Resource
 {
+    #[Override]
     protected static ?string $model = OperationalObjective::class;
 
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'tabler-target';
 
+    #[Override]
     protected static ?string $recordTitleAttribute = 'name';
 
+    #[Override]
     protected static ?int $navigationSort = 2;
 
     public static function getModelLabel(): string
@@ -43,10 +52,10 @@ final class OperationalObjectiveResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOperationalObjectives::route('/'),
-            'create' => Pages\CreateOperationalObjective::route('/create'),
-            'view' => Pages\ViewOperationalObjective::route('/{record}'),
-            'edit' => Pages\EditOperationalObjective::route('/{record}/edit'),
+            'index' => ListOperationalObjectives::route('/'),
+            'create' => CreateOperationalObjective::route('/create'),
+            'view' => ViewOperationalObjective::route('/{record}'),
+            'edit' => EditOperationalObjective::route('/{record}/edit'),
         ];
     }
 

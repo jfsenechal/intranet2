@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employees\Tables;
 
-use AcMarche\Hrm\Filament\Resources\Employees\EmployeeResource;
-use AcMarche\Hrm\Models\Employee;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
@@ -23,24 +22,21 @@ final class EmployeeTables
             ->defaultSort('last_name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\ImageColumn::make('photo')
-                    ->label('')
-                    ->circular()
-                    ->size(40),
-                Tables\Columns\TextColumn::make('last_name')
+                TextColumn::make('last_name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable()
-                    ->url(fn (Employee $record) => EmployeeResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('first_name')
+                    ->limit(70),
+                TextColumn::make('first_name')
                     ->label('Prenom')
                     ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('job_title')
+                    ->sortable()
+                    ->limit(70),
+                TextColumn::make('job_title')
                     ->label('Fonction')
                     ->searchable()
-                    ->toggleable(),
-                Tables\Columns\TextColumn::make('status')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('status')
                     ->label('Statut')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
@@ -49,17 +45,18 @@ final class EmployeeTables
                         'terminated' => 'danger',
                         'suspended' => 'warning',
                         default => 'gray',
-                    }),
-                Tables\Columns\TextColumn::make('hired_at')
+                    })
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('hired_at')
                     ->label('Entree')
                     ->date('d/m/Y')
                     ->sortable()
-                    ->toggleable(),
-                Tables\Columns\TextColumn::make('email')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('email')
                     ->label('Email')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\IconColumn::make('is_archived')
+                IconColumn::make('is_archived')
                     ->label('Archive')
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -83,6 +80,7 @@ final class EmployeeTables
                 ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

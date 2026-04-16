@@ -7,10 +7,15 @@ namespace AcMarche\Security\Database\Factories;
 use AcMarche\Security\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
+/**
+ * @extends Factory<Role>
+ */
 #[UseModel(Role::class)]
 final class RoleFactory extends Factory
 {
+    #[Override]
     protected $model = Role::class;
 
     /**

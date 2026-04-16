@@ -8,6 +8,7 @@ use AcMarche\App\Meilisearch\MeiliTrait;
 use AcMarche\Courrier\Search\MeiliIndexer;
 use DateTimeImmutable;
 use Illuminate\Console\Command;
+use Override;
 
 final class MeiliIndexerCommand extends Command
 {
@@ -18,6 +19,7 @@ final class MeiliIndexerCommand extends Command
      *
      * @var string
      */
+    #[Override]
     protected $signature = 'courrier:meili-indexer {date?}';
 
     /**
@@ -25,6 +27,7 @@ final class MeiliIndexerCommand extends Command
      *
      * @var string
      */
+    #[Override]
     protected $description = 'Update index';
 
     /**

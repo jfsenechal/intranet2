@@ -15,7 +15,7 @@ return new class extends Migration
     {
         $hasColumn = fn (string $column): bool => Schema::hasColumn('users', $column);
 
-        Schema::table('users', function (Blueprint $table) use ($hasColumn) {
+        Schema::table('users', function (Blueprint $table) use ($hasColumn): void {
             if ($hasColumn('departement')) {
                 $table->dropColumn('departement');
             }

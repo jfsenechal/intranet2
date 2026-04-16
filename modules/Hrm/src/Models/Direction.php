@@ -5,30 +5,31 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Models;
 
 use AcMarche\Security\Models\HasUserAdd;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
+#[Connection('maria-hrm')]
+#[Fillable([
+    'name',
+    'slug',
+    'director',
+    'abbreviation',
+    'employer_id',
+    'user_add',
+])]
+#[Table(name: 'directions')]
 final class Direction extends Model
 {
-    use HasUserAdd;
+    use HasFactory;
     use HasSlug;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'directions';
-
-    protected $fillable = [
-        'name',
-        'slug',
-        'director',
-        'abbreviation',
-        'employer_id',
-        'user_add',
-    ];
-
+    use HasUserAdd;
 
     public function getSlugOptions(): SlugOptions
     {

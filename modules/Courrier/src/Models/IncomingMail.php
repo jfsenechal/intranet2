@@ -7,6 +7,8 @@ namespace AcMarche\Courrier\Models;
 use AcMarche\Courrier\Database\Factories\IncomingMailFactory;
 use AcMarche\Courrier\Repository\DepartmentScope;
 use AcMarche\Security\Models\HasUserAdd;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,26 +20,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[UseFactory(IncomingMailFactory::class)]
 #[ScopedBy([DepartmentScope::class])]
+#[Connection('maria-courrier')]
+#[Fillable([
+    'category_id',
+    'reference_number',
+    'sender',
+    'description',
+    'mail_date',
+    'is_notified',
+    'is_registered',
+    'has_acknowledgment',
+    'user_add',
+    'department',
+])]
 final class IncomingMail extends Model
 {
     use HasFactory;
     use HasUserAdd;
     use SoftDeletes;
-
-    protected $connection = 'maria-courrier';
-
-    protected $fillable = [
-        'category_id',
-        'reference_number',
-        'sender',
-        'description',
-        'mail_date',
-        'is_notified',
-        'is_registered',
-        'has_acknowledgment',
-        'user_add',
-        'department',
-    ];
 
     public function category(): BelongsTo
     {

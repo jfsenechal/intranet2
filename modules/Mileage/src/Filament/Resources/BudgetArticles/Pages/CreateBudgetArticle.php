@@ -6,9 +6,11 @@ namespace AcMarche\Mileage\Filament\Resources\BudgetArticles\Pages;
 
 use AcMarche\Mileage\Filament\Resources\BudgetArticles\BudgetArticleResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateBudgetArticle extends CreateRecord
 {
+    #[Override]
     protected static string $resource = BudgetArticleResource::class;
 
     public function canCreateAnother(): bool

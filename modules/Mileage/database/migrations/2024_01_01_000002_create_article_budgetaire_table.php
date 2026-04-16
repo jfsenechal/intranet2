@@ -14,10 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection('maria-mileage')->hasTable('article_budgetaire')) {
-            Schema::connection('maria-mileage')->table('article_budgetaire', function (Blueprint $table) {
+            Schema::connection('maria-mileage')->table('article_budgetaire', function (Blueprint $table): void {
                 $table->rename('budget_articles');
             });
-            Schema::connection('maria-mileage')->table('budget_articles', function (Blueprint $table) {
+            Schema::connection('maria-mileage')->table('budget_articles', function (Blueprint $table): void {
                 $table->renameColumn('nom', 'name');
                 $table->renameColumn('fonctionnel', 'functional_code');
                 $table->renameColumn('economique', 'economic_code');
@@ -27,7 +27,7 @@ return new class extends Migration
                 $table->softDeletes();
             });
         } else {
-            Schema::connection('maria-mileage')->create('budget_articles', function (Blueprint $table) {
+            Schema::connection('maria-mileage')->create('budget_articles', function (Blueprint $table): void {
                 $table->id();
                 $table->string('name');
                 $table->string('functional_code');

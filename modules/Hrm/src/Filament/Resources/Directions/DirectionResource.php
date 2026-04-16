@@ -4,23 +4,32 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Directions;
 
+use AcMarche\Hrm\Filament\Resources\Directions\Pages\CreateDirection;
+use AcMarche\Hrm\Filament\Resources\Directions\Pages\EditDirection;
+use AcMarche\Hrm\Filament\Resources\Directions\Pages\ListDirections;
+use AcMarche\Hrm\Filament\Resources\Directions\Pages\ViewDirection;
 use AcMarche\Hrm\Filament\Resources\Directions\Schemas\DirectionForm;
+use AcMarche\Hrm\Filament\Resources\Directions\Schemas\DirectionInfolist;
 use AcMarche\Hrm\Filament\Resources\Directions\Tables\DirectionTables;
 use AcMarche\Hrm\Models\Direction;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class DirectionResource extends Resource
 {
+    #[Override]
     protected static ?string $model = Direction::class;
 
-    protected static string|null|UnitEnum $navigationGroup = 'Organisation';
+    #[Override]
+    protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
-    protected static ?int $navigationSort = 1;
+    #[Override]
+    protected static ?int $navigationSort = 6;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-building-office';
     }
@@ -45,6 +54,11 @@ final class DirectionResource extends Resource
         return DirectionForm::configure($schema);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return DirectionInfolist::configure($schema);
+    }
+
     public static function table(Table $table): Table
     {
         return DirectionTables::configure($table);
@@ -53,10 +67,10 @@ final class DirectionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDirections::route('/'),
-            'create' => Pages\CreateDirection::route('/create'),
-            'view' => Pages\ViewDirection::route('/{record}/view'),
-            'edit' => Pages\EditDirection::route('/{record}/edit'),
+            'index' => ListDirections::route('/'),
+            'create' => CreateDirection::route('/create'),
+            'view' => ViewDirection::route('/{record}/view'),
+            'edit' => EditDirection::route('/{record}/edit'),
         ];
     }
 }

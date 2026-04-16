@@ -5,43 +5,45 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Models;
 
 use AcMarche\Security\Models\HasUserAdd;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[Connection('maria-hrm')]
+#[Fillable([
+    'employee_id',
+    'employer_id',
+    'direction_id',
+    'service_id',
+    'contract_nature_id',
+    'contract_type_id',
+    'pay_scale_id',
+    'replaces_id',
+    'college',
+    'is_replacement',
+    'start_date',
+    'end_date',
+    'reminder_date',
+    'is_closed',
+    'is_amendment',
+    'is_suspended',
+    'job_title',
+    'status',
+    'work_regime',
+    'hourly_regime',
+    'file1_name',
+    'file2_name',
+    'user_add',
+    'updated_by',
+])]
+#[Table(name: 'contracts')]
 final class Contract extends Model
 {
+    use HasFactory;
     use HasUserAdd;
-
-    protected $connection = 'maria-hrm';
-
-    protected $table = 'contracts';
-
-    protected $fillable = [
-        'employee_id',
-        'employer_id',
-        'direction_id',
-        'service_id',
-        'contract_nature_id',
-        'contract_type_id',
-        'pay_scale_id',
-        'replaces_id',
-        'college',
-        'is_replacement',
-        'start_date',
-        'end_date',
-        'reminder_date',
-        'is_closed',
-        'is_amendment',
-        'is_suspended',
-        'job_title',
-        'status',
-        'work_regime',
-        'hourly_regime',
-        'file1_name',
-        'file2_name',
-        'user_add',
-        'updated_by',
-    ];
 
     /**
      * @return BelongsTo<Employee>

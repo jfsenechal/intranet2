@@ -51,7 +51,7 @@ final class EmailInfolist
                                     TextEntry::make('email_address'),
                                     TextEntry::make('status')
                                         ->badge()
-                                        ->formatStateUsing(fn (RecipientStatus $state) => $state->getLabel()),
+                                        ->formatStateUsing(fn (RecipientStatus $state): string => $state->getLabel()),
                                 ])
                                 ->columns(3)
                                 ->columnSpanFull(),

@@ -14,10 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection('maria-courrier')->hasTable('expediteur')) {
-            Schema::connection('maria-courrier')->table('expediteur', function (Blueprint $table) {
+            Schema::connection('maria-courrier')->table('expediteur', function (Blueprint $table): void {
                 $table->rename('senders');
             });
-            Schema::connection('maria-courrier')->table('senders', function (Blueprint $table) {
+            Schema::connection('maria-courrier')->table('senders', function (Blueprint $table): void {
                 $table->renameColumn('nom', 'name');
                 $table->renameColumn('slugname', 'slug');
                 $table->enum('department', DepartmentCourrierEnum::toArray())

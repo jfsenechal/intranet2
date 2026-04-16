@@ -10,7 +10,6 @@ use AcMarche\Courrier\Jobs\SendIncomingMailNotificationJob;
 use AcMarche\Courrier\Repository\IncomingMailRepository;
 use AcMarche\Courrier\Repository\RecipientRepository;
 use BackedEnum;
-use Carbon\Carbon;
 use Filament\Actions\Action;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -20,8 +19,9 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
-use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Gate;
+use Override;
 use UnitEnum;
 
 final class NotifyRecipients extends Page implements HasForms, HasTable
@@ -31,14 +31,19 @@ final class NotifyRecipients extends Page implements HasForms, HasTable
 
     public ?string $mail_date = null;
 
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'tabler-mail-forward';
 
+    #[Override]
     protected static ?int $navigationSort = 3;
 
+    #[Override]
     protected static ?string $navigationLabel = 'Notifier les destinataires';
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Courrier';
 
+    #[Override]
     protected string $view = 'courrier::filament.pages.notify-recipients';
 
     public static function canAccess(array $parameters = []): bool
@@ -51,7 +56,7 @@ final class NotifyRecipients extends Page implements HasForms, HasTable
         $this->mail_date = now()->format('Y-m-d');
     }
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Notifier les destinataires';
     }
@@ -75,7 +80,7 @@ final class NotifyRecipients extends Page implements HasForms, HasTable
         }
 
         $incomingMailRepository = new IncomingMailRepository();
-        $mailDate = Carbon::parse($this->mail_date);
+        $mailDate = Date::parse($this->mail_date);
         $recipients = RecipientRepository::getWithEmail();
 
         $preview = [];
@@ -121,9 +126,7 @@ final class NotifyRecipients extends Page implements HasForms, HasTable
                         return;
                     }
 
-                    SendIncomingMailNotificationJob::dispatch(
-                        Carbon::parse($this->mail_date)
-                    );
+                    dispatch(new SendIncomingMailNotificationJob(Date::parse($this->mail_date)));
 
                     Notification::make()
                         ->title('Notifications en cours d\'envoi')

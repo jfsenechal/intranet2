@@ -16,8 +16,8 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Auth;
+use Override;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use UnitEnum;
 
@@ -42,15 +42,19 @@ final class UserExport extends Page implements HasForms
 
     public string $selectedUsername = '';
 
+    #[Override]
     protected static ?int $navigationSort = 6;
 
+    #[Override]
     protected static ?string $navigationLabel = 'Export par utilisateur';
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Administration';
 
+    #[Override]
     protected string $view = 'mileage::filament.pages.user-export';
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'tabler-user-check';
     }
@@ -65,7 +69,7 @@ final class UserExport extends Page implements HasForms
         return $user?->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value) ?? false;
     }
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Export des déclarations par utilisateur';
     }

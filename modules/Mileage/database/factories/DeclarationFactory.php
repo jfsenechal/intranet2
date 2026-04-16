@@ -6,9 +6,14 @@ namespace AcMarche\Mileage\Database\Factories;
 
 use AcMarche\Mileage\Models\Declaration;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
+/**
+ * @extends Factory<Declaration>
+ */
 final class DeclarationFactory extends Factory
 {
+    #[Override]
     protected $model = Declaration::class;
 
     /**

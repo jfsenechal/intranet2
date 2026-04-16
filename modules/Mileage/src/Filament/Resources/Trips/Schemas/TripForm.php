@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Trips\Schemas;
 
-use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -16,16 +18,16 @@ final class TripForm
             ->schema([
                 Section::make('Informations du déplacement')
                     ->schema([
-                        Forms\Components\TextInput::make('distance')
+                        TextInput::make('distance')
                             ->label('Distance (km)(Aller,Retour)')
                             ->required()
                             ->numeric()
                             ->suffix('km'),
-                        Forms\Components\DateTimePicker::make('departure_date')
+                        DateTimePicker::make('departure_date')
                             ->label('Date du déplacement')
                             ->date()
                             ->required(),
-                        Forms\Components\Textarea::make('content')
+                        Textarea::make('content')
                             ->label('Détail des courses')
                             ->helperText('Maximum 80 caractères')
                             ->maxLength(80)
@@ -39,22 +41,22 @@ final class TripForm
                     ->iconColor('warning')
                     ->description('Si vous avez quitté la zone 6900')
                     ->schema([
-                        Forms\Components\TextInput::make('departure_location')
+                        TextInput::make('departure_location')
                             ->label('Lieu de départ')
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('arrival_location')
+                        TextInput::make('arrival_location')
                             ->label('Lieu d\'arrivée')
                             ->maxLength(255),
-                        Forms\Components\DateTimePicker::make('arrival_date')
+                        DateTimePicker::make('arrival_date')
                             ->label('Date/heure d\'arrivée'),
-                        Forms\Components\TextInput::make('meal_expense')
+                        TextInput::make('meal_expense')
                             ->label('Frais de repas')
                             ->helperText('Max 12,30 euros')
                             ->numeric()
                             ->maxValue(12.3)
                             ->step(0.01)
                             ->prefix('€'),
-                        Forms\Components\TextInput::make('train_expense')
+                        TextInput::make('train_expense')
                             ->label('Frais de train ou de parking')
                             ->helperText('<!> Souche')
                             ->numeric()

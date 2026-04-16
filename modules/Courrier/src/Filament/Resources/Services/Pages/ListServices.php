@@ -5,20 +5,21 @@ declare(strict_types=1);
 namespace AcMarche\Courrier\Filament\Resources\Services\Pages;
 
 use AcMarche\Courrier\Filament\Resources\Services\ServiceResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListServices extends ListRecords
 {
+    #[Override]
     protected static string $resource = ServiceResource::class;
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return $this->getAllTableRecordsCount().' services';
     }
 
-    public function getSubheading(): string|Htmlable|null
+    public function getSubheading(): string
     {
         return 'Services ou groupes de destinataires';
     }
@@ -26,7 +27,7 @@ final class ListServices extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter un service')
                 ->icon('tabler-plus'),
         ];

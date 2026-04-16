@@ -8,14 +8,14 @@ use AcMarche\MailingList\Models\Contact;
 use AcMarche\MailingList\Models\ContactShare;
 use App\Models\User;
 
-beforeEach(function () {
+beforeEach(function (): void {
     $this->currentUser = User::factory()->create();
     $this->otherUser = User::factory()->create();
     $this->anotherUser = User::factory()->create();
 });
 
-describe('Contact OwnerScope', function () {
-    it('shows only contacts owned by the current user', function () {
+describe('Contact OwnerScope', function (): void {
+    it('shows only contacts owned by the current user', function (): void {
         Contact::factory(2)->create(['username' => $this->currentUser->username]);
         Contact::factory(2)->create(['username' => $this->otherUser->username]);
 
@@ -26,7 +26,7 @@ describe('Contact OwnerScope', function () {
         expect($contacts->pluck('username')->unique()->all())->toBe([$this->currentUser->username]);
     });
 
-    it('shows contacts shared with the current user', function () {
+    it('shows contacts shared with the current user', function (): void {
         $ownedContact = Contact::factory()->create(['username' => $this->currentUser->username]);
         $sharedContact = Contact::factory()->create(['username' => $this->otherUser->username]);
         $notSharedContact = Contact::factory()->create(['username' => $this->anotherUser->username]);
@@ -46,7 +46,7 @@ describe('Contact OwnerScope', function () {
         );
     });
 
-    it('does not show contacts not owned or shared with the user', function () {
+    it('does not show contacts not owned or shared with the user', function (): void {
         Contact::factory()->create(['username' => $this->otherUser->username]);
         Contact::factory()->create(['username' => $this->anotherUser->username]);
 
@@ -56,7 +56,7 @@ describe('Contact OwnerScope', function () {
         expect($contacts)->toHaveCount(0);
     });
 
-    it('shows multiple shared contacts', function () {
+    it('shows multiple shared contacts', function (): void {
         $ownedContact = Contact::factory()->create(['username' => $this->currentUser->username]);
         $sharedContact1 = Contact::factory()->create(['username' => $this->otherUser->username]);
         $sharedContact2 = Contact::factory()->create(['username' => $this->otherUser->username]);
@@ -80,8 +80,8 @@ describe('Contact OwnerScope', function () {
     });
 });
 
-describe('AddressBook OwnerScope', function () {
-    it('shows only address books owned by the current user', function () {
+describe('AddressBook OwnerScope', function (): void {
+    it('shows only address books owned by the current user', function (): void {
         AddressBook::factory(2)->create(['username' => $this->currentUser->username]);
         AddressBook::factory(2)->create(['username' => $this->otherUser->username]);
 
@@ -92,7 +92,7 @@ describe('AddressBook OwnerScope', function () {
         expect($addressBooks->pluck('username')->unique()->all())->toBe([$this->currentUser->username]);
     });
 
-    it('shows address books shared with the current user', function () {
+    it('shows address books shared with the current user', function (): void {
         $ownedBook = AddressBook::factory()->create(['username' => $this->currentUser->username]);
         $sharedBook = AddressBook::factory()->create(['username' => $this->otherUser->username]);
         $notSharedBook = AddressBook::factory()->create(['username' => $this->anotherUser->username]);
@@ -112,7 +112,7 @@ describe('AddressBook OwnerScope', function () {
         );
     });
 
-    it('does not show address books not owned or shared with the user', function () {
+    it('does not show address books not owned or shared with the user', function (): void {
         AddressBook::factory()->create(['username' => $this->otherUser->username]);
         AddressBook::factory()->create(['username' => $this->anotherUser->username]);
 
@@ -122,7 +122,7 @@ describe('AddressBook OwnerScope', function () {
         expect($addressBooks)->toHaveCount(0);
     });
 
-    it('shows multiple shared address books', function () {
+    it('shows multiple shared address books', function (): void {
         $ownedBook = AddressBook::factory()->create(['username' => $this->currentUser->username]);
         $sharedBook1 = AddressBook::factory()->create(['username' => $this->otherUser->username]);
         $sharedBook2 = AddressBook::factory()->create(['username' => $this->otherUser->username]);

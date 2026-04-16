@@ -7,44 +7,41 @@ namespace AcMarche\News\Models;
 use AcMarche\News\Database\Factories\NewsFactory;
 use AcMarche\News\Observers\NewsObserver;
 use AcMarche\Security\Models\HasUserAdd;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 #[ObservedBy([NewsObserver::class])]
+#[Connection('maria-news')]
+#[Fillable([
+    'title',
+    'slug',
+    'excerpt',
+    'content',
+    'author',
+    'category',
+    'name',
+    'content',
+    'end_date',
+    'archive',
+    'user_add',
+    'department',
+    'category_id',
+    'medias',
+])]
 final class News extends Model
 {
     use HasFactory;
+    use HasSlug;
     use HasUserAdd;
     use Prunable;
-    use HasSlug;
-
-    // use SoftDeletes;
-
-    protected $connection = 'maria-news';
-
-    protected $fillable = [
-        'title',
-        'slug',
-        'excerpt',
-        'content',
-        'author',
-        'category',
-        'name',
-        'content',
-        'end_date',
-        'archive',
-        'user_add',
-        'department',
-        'category_id',
-        'medias',
-    ];
 
     public function getSlugOptions(): SlugOptions
     {
@@ -64,8 +61,6 @@ final class News extends Model
     public function prunable(): Builder
     {
         return self::query()->where('published_at', '<', now()->subDays(720));
-        // Console Kernel.php
-        $schedule->command('news:prune')->daily();
     }
 
     protected static function booted(): void

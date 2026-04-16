@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\Pst\Database\Factories\OddFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,19 +17,17 @@ use Laravel\Scout\Searchable;
  * Objectif de développement durable
  */
 #[UseFactory(OddFactory::class)]
+#[Connection('maria-pst')]
+#[Fillable([
+    'name',
+    'icon',
+    'color',
+    'description',
+    'position',
+])]
 final class Odd extends Model
 {
     use HasFactory, Searchable;
-
-    protected $connection = 'maria-pst';
-
-    protected $fillable = [
-        'name',
-        'icon',
-        'color',
-        'description',
-        'position',
-    ];
 
     /**
      * Get the indexable data array for the model.

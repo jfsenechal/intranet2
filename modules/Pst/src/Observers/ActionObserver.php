@@ -7,7 +7,6 @@ namespace AcMarche\Pst\Observers;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Models\Action;
 use AcMarche\Pst\Models\TracksHistoryTrait;
-use Exception;
 
 final class ActionObserver
 {
@@ -20,12 +19,6 @@ final class ActionObserver
     {
         if ($action->department === DepartmentEnum::VILLE->value) {
             $email = config('pst')['validator']['email'];
-            try {
-                /*    Mail::to(new Address($email, 'As'))
-                        ->send(new ActionNewMail($action));*/
-            } catch (Exception $e) {
-                dd($e->getMessage());
-            }
         }
     }
 
@@ -40,7 +33,7 @@ final class ActionObserver
     /**
      * Handle the Action "deleted" event.
      */
-    public function deleted(Action $action): void
+    public function deleted(): void
     {
         // ...
     }
@@ -48,7 +41,7 @@ final class ActionObserver
     /**
      * Handle the Action "restored" event.
      */
-    public function restored(Action $action): void
+    public function restored(): void
     {
         // ...
     }
@@ -56,7 +49,7 @@ final class ActionObserver
     /**
      * Handle the Action "forceDeleted" event.
      */
-    public function forceDeleted(Action $action): void
+    public function forceDeleted(): void
     {
         // ...
     }

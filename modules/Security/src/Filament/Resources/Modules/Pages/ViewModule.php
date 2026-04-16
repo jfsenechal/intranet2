@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Modules\Pages;
 
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Security\Filament\Resources\Modules\ModuleResource;
 use AcMarche\Security\Filament\Resources\Modules\RelationManagers\UserRelationManager;
 use AcMarche\Security\Filament\Resources\Modules\Schemas\ModuleInfolist;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
+use Override;
 
 final class ViewModule extends ViewRecord
 {
+    #[Override]
     protected static string $resource = ModuleResource::class;
 
     public function getTitle(): string
@@ -28,9 +32,9 @@ final class ViewModule extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

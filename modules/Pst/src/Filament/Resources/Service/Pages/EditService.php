@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Service\Pages;
 
+use Filament\Actions\ViewAction;
 use AcMarche\Pst\Filament\Resources\Service\ServiceResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditService extends EditRecord
 {
+    #[Override]
     protected static string $resource = ServiceResource::class;
 
     public function getTitle(): string|Htmlable
@@ -21,7 +24,7 @@ final class EditService extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

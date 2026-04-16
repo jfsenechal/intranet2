@@ -11,22 +11,27 @@ use Filament\Pages\Page;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Auth;
+use Override;
 use UnitEnum;
 
 final class Inbox extends Page implements HasTable
 {
     use InteractsWithTable;
 
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'tabler-inbox';
 
+    #[Override]
     protected static ?int $navigationSort = 2;
 
+    #[Override]
     protected static ?string $navigationLabel = 'Boite mail';
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Courrier';
 
+    #[Override]
     protected string $view = 'courrier::filament.pages.inbox';
 
     public static function canAccess(array $parameters = []): bool
@@ -39,7 +44,7 @@ final class Inbox extends Page implements HasTable
         return $user?->hasRole(RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN->value) ?? false;
     }
 
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return 'Boite mail '.config('courrier.imap.ville.email');
     }

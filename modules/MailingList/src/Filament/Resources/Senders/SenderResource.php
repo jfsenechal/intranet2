@@ -15,21 +15,29 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Override;
 
 final class SenderResource extends Resource
 {
+    #[Override]
     protected static ?string $model = Sender::class;
 
+    #[Override]
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPaperAirplane;
 
+    #[Override]
     protected static ?int $navigationSort = 4;
 
+    #[Override]
     protected static ?string $navigationLabel = 'Expediteurs';
 
+    #[Override]
     protected static ?string $modelLabel = 'expediteur';
 
+    #[Override]
     protected static ?string $pluralModelLabel = 'expediteurs';
 
+    #[Override]
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getGloballySearchableAttributes(): array

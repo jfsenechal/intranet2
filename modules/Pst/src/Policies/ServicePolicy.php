@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Pst\Policies;
 
 use AcMarche\Pst\Enums\RoleEnum;
-use AcMarche\Pst\Models\Service;
 use App\Models\User;
 
 final class ServicePolicy
@@ -13,7 +12,7 @@ final class ServicePolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(): bool
     {
         return true;
     }
@@ -21,7 +20,7 @@ final class ServicePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Service $service): bool
+    public function view(): bool
     {
         return true;
     }
@@ -37,7 +36,7 @@ final class ServicePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Service $service): bool
+    public function update(User $user): bool
     {
         return $this->hasRoles($user);
     }
@@ -45,7 +44,7 @@ final class ServicePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Service $service): bool
+    public function delete(User $user): bool
     {
         return $this->hasRoles($user);
     }
@@ -53,7 +52,7 @@ final class ServicePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Service $service): bool
+    public function restore(): bool
     {
         return false;
     }
@@ -61,7 +60,7 @@ final class ServicePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Service $service): bool
+    public function forceDelete(): bool
     {
         return false;
     }

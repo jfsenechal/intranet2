@@ -15,16 +15,21 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class CategoryResource extends Resource
 {
+    #[Override]
     protected static ?string $model = Category::class;
 
+    #[Override]
     protected static ?int $navigationSort = 6;
 
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Paramètres';
 
     public static function form(Schema $schema): Schema

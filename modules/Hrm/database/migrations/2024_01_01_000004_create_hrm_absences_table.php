@@ -13,10 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         if (Schema::connection($this->connection)->hasTable('absence')) {
-            Schema::connection($this->connection)->table('absence', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('absence', function (Blueprint $table): void {
                 $table->rename('absences');
             });
-            Schema::connection($this->connection)->table('absences', function (Blueprint $table) {
+            Schema::connection($this->connection)->table('absences', function (Blueprint $table): void {
                 $table->renameColumn('employe_id', 'employee_id');
                 $table->renameColumn('date_debut', 'start_date');
                 $table->renameColumn('date_fin', 'end_date');
@@ -30,11 +30,11 @@ return new class extends Migration
                 $table->renameColumn('updated', 'updated_at');
                 $table->renameColumn('updateBy', 'updated_by');
                 $table->renameColumn('pointeuse', 'clock_updated');
-                $table->renameColumn('encare', 'encore');
+                $table->renameColumn('encare', 'certimed');
                 $table->renameColumn('dossier_agent', 'agent_file');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('absences')) {
-            Schema::connection($this->connection)->create('absences', function (Blueprint $table) {
+            Schema::connection($this->connection)->create('absences', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id');
                 $table->date('start_date')->nullable();
@@ -46,7 +46,7 @@ return new class extends Migration
                 $table->string('ssa', 5)->nullable()->comment('reason code');
                 $table->string('reason', 255)->nullable();
                 $table->string('clock_updated', 5)->nullable()->comment('oui ou non');
-                $table->string('encore', 5)->nullable()->comment('oui ou non');
+                $table->string('certimed', 5)->nullable()->comment('oui ou non');
                 $table->boolean('is_closed')->default(false);
                 $table->string('acropole', 5)->nullable()->comment('oui ou non');
                 $table->string('agent_file', 5)->nullable()->comment('oui ou non');
@@ -55,10 +55,5 @@ return new class extends Migration
                 $table->timestamps();
             });
         }
-    }
-
-    public function down(): void
-    {
-        Schema::connection($this->connection)->dropIfExists('absences');
     }
 };

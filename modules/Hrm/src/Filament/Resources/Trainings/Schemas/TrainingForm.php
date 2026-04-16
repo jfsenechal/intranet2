@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Schemas;
 
-use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -19,18 +24,18 @@ final class TrainingForm
                 Section::make('Agent et formation')
                     ->columns(2)
                     ->schema([
-                        Forms\Components\Select::make('employee_id')
+                        Select::make('employee_id')
                             ->label('Agent')
                             ->relationship('employee', 'last_name')
-                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->last_name.' '.$record->first_name)
+                            ->getOptionLabelFromRecordUsing(fn ($record): string => $record->last_name.' '.$record->first_name)
                             ->searchable()
                             ->preload()
                             ->required(),
-                        Forms\Components\TextInput::make('title')
+                        TextInput::make('name')
                             ->label('Intitule')
                             ->required()
                             ->maxLength(150),
-                        Forms\Components\Select::make('training_type')
+                        Select::make('training_type')
                             ->label('Type de formation')
                             ->options([
                                 'type1' => 'Type 1',
@@ -38,7 +43,7 @@ final class TrainingForm
                                 'type3' => 'Type 3',
                             ])
                             ->required(),
-                        Forms\Components\TextInput::make('duration_hours')
+                        TextInput::make('duration_hours')
                             ->label('Duree (heures)')
                             ->numeric()
                             ->suffix('heures'),
@@ -46,43 +51,43 @@ final class TrainingForm
                 Fieldset::make('Dates')
                     ->columns(4)
                     ->schema([
-                        Forms\Components\DatePicker::make('start_date')
+                        DatePicker::make('start_date')
                             ->label('Date de debut'),
-                        Forms\Components\DatePicker::make('end_date')
+                        DatePicker::make('end_date')
                             ->label('Date de fin'),
-                        Forms\Components\DatePicker::make('college_date')
+                        DatePicker::make('college_date')
                             ->label('Date college'),
-                        Forms\Components\DatePicker::make('reminder_date')
+                        DatePicker::make('reminder_date')
                             ->label('Date de rappel'),
                     ]),
                 Fieldset::make('Accord')
                     ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('granted_by')
+                        TextInput::make('granted_by')
                             ->label('Accorde par')
                             ->maxLength(255),
-                        Forms\Components\DatePicker::make('granted_at')
+                        DatePicker::make('granted_at')
                             ->label('Accorde le'),
                     ]),
                 Fieldset::make('Attestation')
                     ->columns(3)
                     ->schema([
-                        Forms\Components\Toggle::make('certificate_received')
+                        Toggle::make('certificate_received')
                             ->label('Attestation recue'),
-                        Forms\Components\DatePicker::make('certificate_received_at')
+                        DatePicker::make('certificate_received_at')
                             ->label('Recue le'),
-                        Forms\Components\FileUpload::make('certificate_file')
+                        FileUpload::make('certificate_file')
                             ->label('Fichier attestation')
                             ->disk('public')
                             ->directory(config('hrm.uploads.formations')),
                     ]),
                 Section::make('Description')
                     ->schema([
-                        Forms\Components\RichEditor::make('description')
+                        RichEditor::make('description')
                             ->label('Description')
                             ->columnSpanFull(),
                     ]),
-                Forms\Components\Toggle::make('is_closed')
+                Toggle::make('is_closed')
                     ->label('Cloture'),
             ]);
     }

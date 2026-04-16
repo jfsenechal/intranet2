@@ -6,9 +6,14 @@ namespace AcMarche\Courrier\Database\Factories;
 
 use AcMarche\Courrier\Models\IncomingMail;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
+/**
+ * @extends Factory<IncomingMail>
+ */
 final class IncomingMailFactory extends Factory
 {
+    #[Override]
     protected $model = IncomingMail::class;
 
     public function definition(): array
@@ -28,21 +33,21 @@ final class IncomingMailFactory extends Factory
 
     public function notified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'is_notified' => true,
         ]);
     }
 
     public function registered(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'is_registered' => true,
         ]);
     }
 
     public function withAcknowledgment(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'has_acknowledgment' => true,
         ]);
     }

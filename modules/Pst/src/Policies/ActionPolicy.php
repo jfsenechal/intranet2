@@ -16,7 +16,7 @@ final class ActionPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(): bool
     {
         return true;
     }
@@ -24,7 +24,7 @@ final class ActionPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Action $action): bool
+    public function view(): bool
     {
         return true;
     }
@@ -34,11 +34,7 @@ final class ActionPolicy
      */
     public function create(User $user): bool
     {
-        if ($user->hasOneOfThisRoles([RoleEnum::MANDATAIRE->value])) {
-            return false;
-        }
-
-        return true;
+        return ! $user->hasOneOfThisRoles([RoleEnum::MANDATAIRE->value]);
     }
 
     /**
@@ -60,19 +56,15 @@ final class ActionPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Action $action): bool
+    public function restore(User $user): bool
     {
-        if ($user->hasOneOfThisRoles([RoleEnum::ADMIN->value])) {
-            return true;
-        }
-
-        return false;
+        return $user->hasOneOfThisRoles([RoleEnum::ADMIN->value]);
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Action $action): bool
+    public function forceDelete(): bool
     {
         return false;
     }

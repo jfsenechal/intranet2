@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Users\Tables;
 
+use AcMarche\Security\Models\Role;
 use AcMarche\Pst\Filament\Resources\Users\UserResource;
 use App\Models\User;
 use Filament\Actions\BulkActionGroup;
@@ -22,7 +23,7 @@ final class UsersTable
         return $table
             ->defaultPaginationPageOption(50)
             ->defaultSort('last_name')
-            ->recordUrl(fn (User $record) => UserResource::getUrl('view', [$record]))
+            ->recordUrl(fn (User $record): string => UserResource::getUrl('view', [$record]))
             ->columns([
                 TextColumn::make('last_name')
                     ->label('Nom')
@@ -63,7 +64,7 @@ final class UsersTable
             ])
             ->filters([
                 SelectFilter::make('role')
-                    ->options(fn () => \AcMarche\Security\Models\Role::pluck('name', 'id'))
+                    ->options(fn () => Role::pluck('name', 'id'))
                     ->query(fn (Builder $query, array $data) => $query->when(
                         $data['value'],
                         fn (Builder $query, $roleId) => $query->whereHas(

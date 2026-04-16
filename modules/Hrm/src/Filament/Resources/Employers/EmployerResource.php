@@ -4,29 +4,38 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employers;
 
+use AcMarche\Hrm\Filament\Resources\Employers\Pages\CreateEmployer;
+use AcMarche\Hrm\Filament\Resources\Employers\Pages\EditEmployer;
+use AcMarche\Hrm\Filament\Resources\Employers\Pages\ListEmployers;
+use AcMarche\Hrm\Filament\Resources\Employers\Pages\ViewEmployer;
 use AcMarche\Hrm\Models\Employer;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
+use Override;
 use UnitEnum;
 
 final class EmployerResource extends Resource
 {
+    #[Override]
     protected static ?string $model = Employer::class;
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
+    #[Override]
     protected static ?int $navigationSort = 4;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-building-office';
     }
@@ -53,18 +62,33 @@ final class EmployerResource extends Resource
                 Section::make()
                     ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->label('Nom')
                             ->required()
                             ->maxLength(150)
-                            ->live(onBlur: true)
-                            ,
-                        Forms\Components\Select::make('parent_id')
+                            ->live(onBlur: true),
+                        Select::make('parent_id')
                             ->label('Employeur parent')
                             ->relationship('parent', 'name')
                             ->searchable()
                             ->preload()
                             ->columnSpanFull(),
+                    ]),
+            ]);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->columns(1)
+            ->components([
+                Section::make()
+                    ->columns(2)
+                    ->schema([
+                        TextEntry::make('name')
+                            ->label('Nom'),
+                        TextEntry::make('parent.name')
+                            ->label('Employeur parent'),
                     ]),
             ]);
     }
@@ -75,27 +99,29 @@ final class EmployerResource extends Resource
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('parent.name')
+                TextColumn::make('parent.name')
                     ->label('Parent')
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('directions_count')
+                TextColumn::make('directions_count')
                     ->label('Directions')
                     ->counts('directions')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('employees_count')
+                TextColumn::make('employees_count')
                     ->label('Employés')
                     ->counts('employees')
                     ->sortable(),
             ])
             ->filters([])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
@@ -106,9 +132,10 @@ final class EmployerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListEmployers::route('/'),
-            'create' => Pages\CreateEmployer::route('/create'),
-            'edit' => Pages\EditEmployer::route('/{record}/edit'),
+            'index' => ListEmployers::route('/'),
+            'create' => CreateEmployer::route('/create'),
+            'view' => ViewEmployer::route('/{record}/view'),
+            'edit' => EditEmployer::route('/{record}/edit'),
         ];
     }
 }

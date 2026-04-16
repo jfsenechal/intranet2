@@ -180,7 +180,7 @@ final class ActionSelectDepartmentFilterTest extends TestCase
         session([UserRepository::$department_selected_key => DepartmentEnum::VILLE->value]);
 
         $villeObjective = $this->createOperationalObjective(DepartmentEnum::VILLE->value);
-        $cpasObjective = $this->createOperationalObjective(DepartmentEnum::CPAS->value);
+        $this->createOperationalObjective(DepartmentEnum::CPAS->value);
         $internalObjective = $this->createInternalOperationalObjective();
 
         // Test that filter can be applied with VILLE objective

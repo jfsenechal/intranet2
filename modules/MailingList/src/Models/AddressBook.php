@@ -7,6 +7,8 @@ namespace AcMarche\MailingList\Models;
 use AcMarche\MailingList\Database\Factories\AddressBookFactory;
 use AcMarche\MailingList\Repositories\OwnerScope;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,16 +19,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[UseFactory(AddressBookFactory::class)]
 #[ScopedBy(OwnerScope::class)]
+#[Connection('maria-mailing-list')]
+#[Fillable([
+    'username',
+    'name',
+])]
 final class AddressBook extends Model
 {
     use HasFactory;
-
-    protected $connection = 'maria-mailing-list';
-
-    protected $fillable = [
-        'username',
-        'name',
-    ];
 
     /**
      * @return BelongsTo<User, $this>

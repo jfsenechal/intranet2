@@ -7,13 +7,13 @@ use AcMarche\Courrier\Models\Recipient;
 use AcMarche\Courrier\Models\Service;
 use App\Models\User;
 
-describe('IncomingMail Creation From Attachment', function () {
-    beforeEach(function () {
+describe('IncomingMail Creation From Attachment', function (): void {
+    beforeEach(function (): void {
         $this->user = User::factory()->create(['username' => 'test_user']);
         $this->actingAs($this->user);
     });
 
-    test('can create incoming mail with services and recipients', function () {
+    test('can create incoming mail with services and recipients', function (): void {
         $primaryService = Service::factory()->create([]);
         $secondaryService = Service::factory()->create([]);
         $primaryRecipient = Recipient::factory()->create([]);
@@ -53,7 +53,7 @@ describe('IncomingMail Creation From Attachment', function () {
             ->and($mail->primaryRecipient)->toHaveCount(1);
     });
 
-    test('can create incoming mail with only primary services and recipients', function () {
+    test('can create incoming mail with only primary services and recipients', function (): void {
         $primaryService = Service::factory()->create([]);
         $primaryRecipient = Recipient::factory()->create([]);
 
@@ -76,7 +76,7 @@ describe('IncomingMail Creation From Attachment', function () {
             ->and($mail->primaryRecipient->first()->id)->toBe($primaryRecipient->id);
     });
 
-    test('can create incoming mail without services or recipients', function () {
+    test('can create incoming mail without services or recipients', function (): void {
         $mail = IncomingMail::create([
             'reference_number' => 'TEST-2024-004',
             'sender' => 'Minimal Sender',
