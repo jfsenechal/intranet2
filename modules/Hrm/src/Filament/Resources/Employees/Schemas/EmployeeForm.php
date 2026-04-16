@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employees\Schemas;
 
+use AcMarche\Hrm\Enums\StatusEnum;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -34,10 +35,10 @@ final class EmployeeForm
                                         Select::make('civility')
                                             ->label('Civilite')
                                             ->options([
-                                                'M.' => 'Monsieur',
-                                                'Mme' => 'Madame',
-                                                'Mlle' => 'Mademoiselle',
-                                            ]),
+                                                'monsieur' => 'Monsieur',
+                                                'madame' => 'Madame',
+                                            ])
+                                            ->required(false),
                                         TextInput::make('last_name')
                                             ->label('Nom')
                                             ->required()
@@ -96,13 +97,8 @@ final class EmployeeForm
                                             ->label('Fonction')
                                             ->maxLength(255),
                                         Select::make('status')
-                                            ->label('Statut')
-                                            ->options([
-                                                'active' => 'Actif',
-                                                'retired' => 'Pension',
-                                                'terminated' => 'Sorti',
-                                                'suspended' => 'Suspendu',
-                                            ]),
+                                            ->label('Statut')->options(StatusEnum::class)
+                                            ->enum(StatusEnum::class),
                                         TextInput::make('uid')
                                             ->label('Login')
                                             ->maxLength(100),

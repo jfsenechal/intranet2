@@ -5,7 +5,7 @@ namespace AcMarche\Hrm\Enums;
 use Filament\Support\Contracts\HasLabel;
 use Illuminate\Contracts\Support\Htmlable;
 
-enum StatusEnum: string implements hasLabel
+enum StatusEnum: string implements HasLabel
 {
     case ACTIVE = 'Actif';
     case APPLICATION = 'Candidature';

@@ -19,7 +19,6 @@ final class EditEmployee extends EditRecord
     {
         return [
             ViewAction::make(),
-            DeleteAction::make(),
         ];
     }
 }
