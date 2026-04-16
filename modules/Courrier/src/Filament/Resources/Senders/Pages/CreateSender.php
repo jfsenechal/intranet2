@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Senders\Pages;
 
+use Override;
 use AcMarche\Courrier\Filament\Resources\Senders\SenderResource;
 use Filament\Resources\Pages\CreateRecord;
 
 final class CreateSender extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = SenderResource::class;
 
     public function canCreateAnother(): bool

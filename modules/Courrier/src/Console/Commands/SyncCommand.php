@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Console\Commands;
 
+use Override;
 use AcMarche\Courrier\Models\Recipient;
 use AcMarche\Courrier\Models\Service;
 use AcMarche\Security\Ldap\UserLdap;
@@ -12,10 +13,10 @@ use LdapRecord\Models\Model;
 
 final class SyncCommand extends Command
 {
-    #[\Override]
+    #[Override]
     protected $signature = 'courrier:sync {--dry-run : Run without making changes}';
 
-    #[\Override]
+    #[Override]
     protected $description = 'Sync recipients with users ldap';
 
     public function handle(): int

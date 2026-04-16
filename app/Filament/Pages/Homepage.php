@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Pages;
 
+use Override;
 use AcMarche\Security\Handler\MigrationHandler;
 use BackedEnum;
 use Filament\Pages\Page;
@@ -14,16 +15,16 @@ use Illuminate\Support\Collection;
 
 final class Homepage extends Page
 {
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = Heroicon::DocumentText;
 
-    #[\Override]
+    #[Override]
     protected string $view = 'filament.pages.home';
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Accueil';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 1;
 
     public static function getNavigationLabel(): string
@@ -54,7 +55,7 @@ final class Homepage extends Page
         return self::$layout ?? 'filament-panels::components.layout.base';
     }
 
-    public function getMaxContentWidth(): \Filament\Support\Enums\Width
+    public function getMaxContentWidth(): Width
     {
         return Width::Screen;
     }

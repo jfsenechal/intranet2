@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Courrier\Models\UserCourrierTrait;
 use AcMarche\MailingList\Models\UserMailingListTrait;
@@ -30,7 +32,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
 
 #[UseFactory(UserFactory::class)]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Fillable([
     'name',
     'first_name',
     'last_name',
@@ -48,7 +50,7 @@ use Laravel\Scout\Searchable;
     'is_administrator',
     'news_attachment',
 ])]
-#[\Illuminate\Database\Eloquent\Attributes\Hidden([
+#[Hidden([
     'password',
     'remember_token',
     'app_authentication_secret',

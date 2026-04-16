@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Database\Factories;
 
+use Override;
+use AcMarche\Document\Models\Category;
 use AcMarche\Document\Models\Document;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Document\Models\Document>
+ * @extends Factory<Document>
  */
 final class DocumentFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = Document::class;
 
     /**
@@ -29,7 +31,7 @@ final class DocumentFactory extends Factory
             'file_name' => fake()->word().'.pdf',
             'file_size' => fake()->numberBetween(1024, 10240),
             'file_mime' => 'application/pdf',
-            'category_id' => \AcMarche\Document\Models\Category::factory(),
+            'category_id' => Category::factory(),
         ];
     }
 }

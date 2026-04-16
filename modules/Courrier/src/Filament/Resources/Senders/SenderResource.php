@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Senders;
 
+use Override;
 use AcMarche\Courrier\Filament\Resources\Senders\Pages\CreateSender;
 use AcMarche\Courrier\Filament\Resources\Senders\Pages\EditSender;
 use AcMarche\Courrier\Filament\Resources\Senders\Pages\ListSenders;
@@ -19,22 +20,22 @@ use UnitEnum;
 
 final class SenderResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Sender::class;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 7;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-paper-airplane';
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Paramètres';
 
-    #[\Override]
+    #[Override]
     protected static ?string $modelLabel = 'Expéditeur';
 
-    #[\Override]
+    #[Override]
     protected static ?string $pluralModelLabel = 'Expéditeurs';
 
     public static function form(Schema $schema): Schema

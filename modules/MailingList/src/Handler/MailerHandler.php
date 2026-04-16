@@ -41,7 +41,7 @@ final class MailerHandler
             ->get();
 
         $jobs = $pendingRecipients->map(
-            fn ($recipient): \AcMarche\MailingList\Jobs\SendEmailJob => new SendEmailJob($email, $recipient)
+            fn ($recipient): SendEmailJob => new SendEmailJob($email, $recipient)
         )->all();
 
         $batch = Bus::batch($jobs)

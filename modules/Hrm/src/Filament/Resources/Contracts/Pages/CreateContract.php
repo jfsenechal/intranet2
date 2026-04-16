@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Contracts\Pages;
 
+use Override;
 use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use Filament\Resources\Pages\CreateRecord;
 
 final class CreateContract extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ContractResource::class;
 }

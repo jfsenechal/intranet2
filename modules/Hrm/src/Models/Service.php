@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,8 +15,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-hrm')]
+#[Fillable([
     'name',
     'slug',
     'abbreviation',
@@ -27,10 +31,10 @@ use Spatie\Sluggable\SlugOptions;
     'notes',
     'user_add',
 ])]
-#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'services')]
+#[Table(name: 'services')]
 final class Service extends Model
 {
-    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    use HasFactory;
     use HasUserAdd;
     use HasSlug;
 

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Declarations\Pages;
 
+use Override;
+use Filament\Actions\Action;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Mileage\Factory\PdfFactory;
 use AcMarche\Mileage\Filament\Resources\Declarations\DeclarationResource;
 use AcMarche\Mileage\Filament\Resources\Declarations\Schemas\DeclarationInfolist;
@@ -17,7 +21,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class ViewDeclaration extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = DeclarationResource::class;
 
     public function getTitle(): string
@@ -33,7 +37,7 @@ final class ViewDeclaration extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\Action::make('download')
+            Action::make('download')
                 ->label('Télécharger')
                 ->icon('tabler-download')
                 ->color(Color::Green)
@@ -51,13 +55,13 @@ final class ViewDeclaration extends ViewRecord
                         'Content-Type' => 'application/pdf',
                     ]);
                 }),
-            Actions\Action::make('back')
+            Action::make('back')
                 ->label('Retour à la liste')
                 ->icon('tabler-list')
                 ->url(DeclarationResource::getUrl('index')),
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

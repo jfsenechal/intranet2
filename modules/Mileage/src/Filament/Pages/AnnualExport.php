@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Pages;
 
+use Override;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Mileage\Enums\RolesEnum;
 use AcMarche\Mileage\Pdf\PdfFactory;
@@ -34,16 +35,16 @@ final class AnnualExport extends Page implements HasForms
 
     public int $totalKilometers = 0;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 5;
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Export annuel';
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Administration';
 
-    #[\Override]
+    #[Override]
     protected string $view = 'mileage::filament.pages.annual-export';
 
     public static function getNavigationIcon(): string

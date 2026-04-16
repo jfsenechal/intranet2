@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Imports;
 
+use Override;
 use AcMarche\MailingList\Models\AddressBook;
 use AcMarche\MailingList\Models\Contact;
 use Filament\Actions\Imports\ImportColumn;
@@ -13,7 +14,7 @@ use Filament\Forms\Components\Select;
 
 final class ContactImporter extends Importer
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Contact::class;
 
     /**

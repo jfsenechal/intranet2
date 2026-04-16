@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Override;
 use AcMarche\Mileage\Database\Factories\PersonalInformationFactory;
 use AcMarche\Mileage\Observers\PersonalInformationObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
@@ -13,8 +16,8 @@ use Illuminate\Database\Eloquent\Model;
 
 #[UseFactory(PersonalInformationFactory::class)]
 #[ObservedBy([PersonalInformationObserver::class])]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mileage')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-mileage')]
+#[Fillable([
     'car_license_plate1',
     'car_license_plate2',
     'postal_code',
@@ -29,7 +32,7 @@ final class PersonalInformation extends Model
 {
     use HasFactory;
 
-    #[\Override]
+    #[Override]
     public $timestamps = false;
 
     protected function casts(): array

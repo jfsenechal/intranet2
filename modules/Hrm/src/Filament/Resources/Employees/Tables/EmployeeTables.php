@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employees\Tables;
 
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
 use AcMarche\Hrm\Filament\Resources\Employees\EmployeeResource;
 use AcMarche\Hrm\Models\Employee;
 use Filament\Actions\BulkActionGroup;
@@ -23,24 +26,24 @@ final class EmployeeTables
             ->defaultSort('last_name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\ImageColumn::make('photo')
+                ImageColumn::make('photo')
                     ->label('')
                     ->circular()
                     ->size(40),
-                Tables\Columns\TextColumn::make('last_name')
+                TextColumn::make('last_name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable()
                     ->url(fn (Employee $record): string => EmployeeResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('first_name')
+                TextColumn::make('first_name')
                     ->label('Prenom')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('job_title')
+                TextColumn::make('job_title')
                     ->label('Fonction')
                     ->searchable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('status')
+                TextColumn::make('status')
                     ->label('Statut')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
@@ -50,16 +53,16 @@ final class EmployeeTables
                         'suspended' => 'warning',
                         default => 'gray',
                     }),
-                Tables\Columns\TextColumn::make('hired_at')
+                TextColumn::make('hired_at')
                     ->label('Entree')
                     ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('email')
+                TextColumn::make('email')
                     ->label('Email')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\IconColumn::make('is_archived')
+                IconColumn::make('is_archived')
                     ->label('Archive')
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),

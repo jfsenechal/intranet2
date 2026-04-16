@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Pages;
 
+use Override;
+use Filament\Actions\Action;
+use Filament\Actions\CreateAction;
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Pst\Filament\Resources\ActionPst\Tables\ActionTables;
 use Filament\Actions;
@@ -14,7 +17,7 @@ use Illuminate\Support\HtmlString;
 
 final class ListActionsAsGoogleSheet extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ActionPstResource::class;
 
     public function getLayout(): string
@@ -27,7 +30,7 @@ final class ListActionsAsGoogleSheet extends ListRecords
         return $this->getAllTableRecordsCount().' actions';
     }
 
-    public function getSubheading(): \Illuminate\Contracts\Support\Htmlable
+    public function getSubheading(): Htmlable
     {
         return new HtmlString(
             '<div class="flex items-center gap-2">'.
@@ -47,11 +50,11 @@ final class ListActionsAsGoogleSheet extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\Action::make('return')
+            Action::make('return')
                 ->label('Retour')
                 ->icon('tabler-arrow-left')
                 ->url(ActionPstResource::getUrl('index')),
-            Actions\CreateAction::make('create')
+            CreateAction::make('create')
                 ->label('Ajouter une action')
                 ->icon('tabler-plus'),
         ];

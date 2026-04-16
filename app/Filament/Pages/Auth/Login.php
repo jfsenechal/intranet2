@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Pages\Auth;
 
+use App\Models\User;
 use AcMarche\Security\Auth\LdapAuthService;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use Filament\Auth\Http\Responses\Contracts\LoginResponse;
@@ -51,7 +52,7 @@ final class Login extends BasePage
 
         $data = $this->form->getState();
 
-        if (!($user = LdapAuthService::checkPassword($data['email'], $data['password'])) instanceof \App\Models\User) {
+        if (!($user = LdapAuthService::checkPassword($data['email'], $data['password'])) instanceof User) {
             $this->throwFailureValidationException();
         } else {
             Filament::auth()->login($user, true);
@@ -82,7 +83,7 @@ final class Login extends BasePage
     /**
      * remove type email
      */
-    protected function getEmailFormComponent(): \Filament\Forms\Components\TextInput
+    protected function getEmailFormComponent(): TextInput
     {
         return TextInput::make('email')
             ->label('Nom d\'utilisateur')

@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News\Pages;
 
+use Override;
+use Filament\Actions\EditAction;
+use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\ForceDeleteAction;
 use AcMarche\News\Filament\Resources\News\NewsResource;
 use AcMarche\News\Filament\Resources\News\Schemas\NewsInfolist;
 use AcMarche\News\Models\News;
@@ -14,7 +20,7 @@ use Filament\Support\Colors\Color;
 
 final class ViewNews extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = NewsResource::class;
 
     public function getTitle(): string
@@ -30,17 +36,17 @@ final class ViewNews extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\Action::make('archive')
+            Action::make('archive')
                 ->icon('tabler-archive')
                 ->label('Archiver')
                 ->color(Color::Slate)
                 ->action(fn (News $news): true => $news->archive = true),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
-            Actions\RestoreAction::make(),
-            Actions\ForceDeleteAction::make(),
+            RestoreAction::make(),
+            ForceDeleteAction::make(),
         ];
     }
 }

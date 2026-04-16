@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Rates\Tables;
 
+use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Tables;
@@ -17,21 +18,21 @@ final class RateTables
             ->defaultSort('start_date', 'desc')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('start_date')
+                TextColumn::make('start_date')
                     ->label('Date de début')
                     ->date()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('end_date')
+                TextColumn::make('end_date')
                     ->label('Date de fin')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('amount')
+                TextColumn::make('amount')
                     ->label('Montant')
                     ->money('EUR')
                     ->sortable()
                     ->suffix(' €/km'),
-                Tables\Columns\TextColumn::make('omnium')
+                TextColumn::make('omnium')
                     ->label('Omnium')
                     ->money('EUR')
                     ->sortable()

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Pages;
 
+use Override;
+use Filament\Actions\CreateAction;
 use AcMarche\Pst\Enums\ActionStateEnum;
 use AcMarche\Pst\Enums\RoleEnum;
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
@@ -16,7 +18,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 final class ListActions extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ActionPstResource::class;
 
     public function getTitle(): string
@@ -67,7 +69,7 @@ final class ListActions extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter une action')
                 ->icon('tabler-plus'),
             Actions\Action::make('list-sheet')

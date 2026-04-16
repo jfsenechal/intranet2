@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\IncomingMails\Pages;
 
+use Override;
+use Filament\Actions\CreateAction;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\IncomingMailResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 final class ListIncomingMails extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = IncomingMailResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter un courrier')
                 ->icon('tabler-plus'),
         ];

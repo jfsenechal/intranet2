@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\PersonalInformation;
 
+use Override;
 use AcMarche\Mileage\Filament\Resources\PersonalInformation\Pages\ManagePersonalInformation;
 use AcMarche\Mileage\Filament\Resources\PersonalInformation\Schemas\PersonalInformationForm;
 use AcMarche\Mileage\Filament\Resources\PersonalInformation\Schemas\PersonalInformationInfolist;
@@ -19,22 +20,22 @@ use Illuminate\Database\Eloquent\Builder;
 
 final class PersonalInformationResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = PersonalInformation::class;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 3;
 
-    #[\Override]
+    #[Override]
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    #[\Override]
+    #[Override]
     protected static ?string $recordTitleAttribute = 'username';
 
-    #[\Override]
+    #[Override]
     protected static ?string $modelLabel = 'Mes informations personnelles';
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Mes informations personnelles';
 
     public static function form(Schema $schema): Schema

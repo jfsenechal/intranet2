@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Declarations;
 
+use Override;
+use AcMarche\Mileage\Filament\Resources\Declarations\Pages\ListDeclarations;
+use AcMarche\Mileage\Filament\Resources\Declarations\Pages\CreateDeclaration;
+use AcMarche\Mileage\Filament\Resources\Declarations\Pages\ViewDeclaration;
+use AcMarche\Mileage\Filament\Resources\Declarations\Pages\EditDeclaration;
 use AcMarche\Mileage\Filament\Pages\AllDeclarations;
 use AcMarche\Mileage\Filament\Resources\Declarations\Schemas\DeclarationForm;
 use AcMarche\Mileage\Filament\Resources\Declarations\Tables\DeclarationTables;
@@ -14,10 +19,10 @@ use Filament\Tables\Table;
 
 final class DeclarationResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Declaration::class;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 2;
 
     public static function getNavigationIcon(): string
@@ -43,10 +48,10 @@ final class DeclarationResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDeclarations::route('/'),
-            'create' => Pages\CreateDeclaration::route('/create'),
-            'view' => Pages\ViewDeclaration::route('/{record}/view'),
-            'edit' => Pages\EditDeclaration::route('/{record}/edit'),
+            'index' => ListDeclarations::route('/'),
+            'create' => CreateDeclaration::route('/create'),
+            'view' => ViewDeclaration::route('/{record}/view'),
+            'edit' => EditDeclaration::route('/{record}/edit'),
             'all' => AllDeclarations::route('/asall/declarations'),
         ];
     }

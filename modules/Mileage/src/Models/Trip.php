@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\Mileage\Database\Factories\TripFactory;
 use AcMarche\Mileage\Observers\TripObserver;
 use AcMarche\Security\Models\HasUserAdd;
@@ -17,8 +19,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[UseFactory(TripFactory::class)]
 #[ObservedBy([TripObserver::class])]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mileage')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-mileage')]
+#[Fillable([
     'declaration_id',
     'user_id',
     'distance',

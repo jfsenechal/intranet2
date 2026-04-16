@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Tables\Columns;
 
+use Override;
 use Filament\Tables\Columns\Column;
 
 /**
@@ -11,6 +12,6 @@ use Filament\Tables\Columns\Column;
  */
 final class ProgressColumn extends Column
 {
-    #[\Override]
+    #[Override]
     protected string $view = 'tables.columns.progress-column';
 }

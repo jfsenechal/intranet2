@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Services\Pages;
 
+use Override;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Courrier\Filament\Resources\Services\Schemas\ServiceInfolist;
 use AcMarche\Courrier\Filament\Resources\Services\ServiceResource;
 use Filament\Actions;
@@ -12,7 +15,7 @@ use Filament\Schemas\Schema;
 
 final class ViewService extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ServiceResource::class;
 
     public function getTitle(): string
@@ -28,9 +31,9 @@ final class ViewService extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

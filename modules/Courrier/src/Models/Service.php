@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Override;
 use AcMarche\Courrier\Database\Factories\ServiceFactory;
 use AcMarche\Courrier\Models\Concerns\HasDepartmentScope;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
@@ -14,21 +18,21 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 #[UseFactory(ServiceFactory::class)]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-courrier')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-courrier')]
+#[Fillable([
     'slugname',
     'name',
     'initials',
     'department',
 ])]
-#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'courrier_services')]
+#[Table(name: 'courrier_services')]
 final class Service extends Model
 {
     use HasDepartmentScope;
     use HasFactory;
     use HasSlug;
 
-    #[\Override]
+    #[Override]
     public $timestamps = false;
 
     public function incomingMails(): BelongsToMany

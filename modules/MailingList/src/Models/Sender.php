@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\MailingList\Database\Factories\SenderFactory;
 use AcMarche\MailingList\Repositories\OwnerScope;
 use App\Models\User;
@@ -15,8 +17,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[UseFactory(SenderFactory::class)]
 #[ScopedBy(OwnerScope::class)]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mailing-list')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-mailing-list')]
+#[Fillable([
     'username',
     'name',
     'email',

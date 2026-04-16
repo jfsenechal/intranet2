@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Directions\Pages;
 
+use Override;
 use AcMarche\Hrm\Filament\Resources\Directions\DirectionResource;
 use Filament\Resources\Pages\CreateRecord;
 
 final class CreateDirection extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = DirectionResource::class;
 }

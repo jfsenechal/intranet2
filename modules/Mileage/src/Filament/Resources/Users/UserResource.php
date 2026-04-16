@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Users;
 
+use Override;
 use AcMarche\Mileage\Filament\Resources\Users\Pages\CreateUser;
 use AcMarche\Mileage\Filament\Resources\Users\Pages\EditUser;
 use AcMarche\Mileage\Filament\Resources\Users\Pages\ListUsers;
@@ -19,16 +20,16 @@ use UnitEnum;
 
 final class UserResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = User::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Administration';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 7;
 
-    #[\Override]
+    #[Override]
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     public static function getNavigationIcon(): string

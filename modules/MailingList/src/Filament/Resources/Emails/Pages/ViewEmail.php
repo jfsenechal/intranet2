@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\Emails\Pages;
 
+use Override;
 use AcMarche\MailingList\Enums\EmailStatus;
 use AcMarche\MailingList\Filament\Actions\PreviewAction;
 use AcMarche\MailingList\Filament\Actions\SendAction;
@@ -18,7 +19,7 @@ use Filament\Support\Icons\Heroicon;
 
 final class ViewEmail extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = EmailResource::class;
 
     public function getTitle(): string

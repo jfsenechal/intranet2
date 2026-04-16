@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Pages;
 
+use Override;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 
 final class Procedure extends Page
 {
-    #[\Override]
+    #[Override]
     protected string $view = 'mileage::filament.pages.mileage-procedure';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 4;
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Procédure';
 
     public static function getNavigationIcon(): string

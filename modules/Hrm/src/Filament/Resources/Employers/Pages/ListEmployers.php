@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employers\Pages;
 
+use Override;
+use Filament\Actions\CreateAction;
 use AcMarche\Hrm\Filament\Resources\Employers\EmployerResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 final class ListEmployers extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = EmployerResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter un employeur')
                 ->icon('tabler-plus'),
         ];

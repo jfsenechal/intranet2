@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Declarations\Pages;
 
+use Override;
+use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Mileage\Filament\Resources\Declarations\DeclarationResource;
 use AcMarche\Mileage\Filament\Resources\Declarations\Schemas\DeclarationForm;
 use Filament\Actions;
@@ -12,7 +15,7 @@ use Filament\Schemas\Schema;
 
 final class EditDeclaration extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = DeclarationResource::class;
 
     public function form(Schema $schema): Schema
@@ -23,8 +26,8 @@ final class EditDeclaration extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
+            ViewAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

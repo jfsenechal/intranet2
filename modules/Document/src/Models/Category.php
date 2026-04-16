@@ -4,19 +4,23 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Override;
 use AcMarche\Document\Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-document')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable(['name'])]
-#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'document_categories')]
+#[Connection('maria-document')]
+#[Fillable(['name'])]
+#[Table(name: 'document_categories')]
 final class Category extends Model
 {
     use HasFactory;
 
-    #[\Override]
+    #[Override]
     public $timestamps = false;
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News\Tables;
 
+use Filament\Tables\Filters\Filter;
 use AcMarche\News\Filament\Resources\News\NewsResource;
 use AcMarche\News\Models\News;
 use Filament\Actions\BulkActionGroup;
@@ -25,7 +26,7 @@ use Illuminate\Support\Str;
 
 final class NewsTables
 {
-    public static function configure(Table $table): \Filament\Tables\Table
+    public static function configure(Table $table): Table
     {
         return $table
             ->defaultSort('created_at', 'desc')
@@ -65,7 +66,7 @@ final class NewsTables
                     ->trueLabel('Archivés seulement')
                     ->falseLabel('Non archivés seulement')
                     ->native(false),
-                Tables\Filters\Filter::make('created_at')
+                Filter::make('created_at')
                     ->label('Ajouté le')->schema([
                         Flex::make([
                             DatePicker::make('created_from')->label('Entre le'),

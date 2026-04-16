@@ -4,6 +4,14 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Prerequisites;
 
+use Override;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
+use AcMarche\Hrm\Filament\Resources\Prerequisites\Pages\ListPrerequisites;
+use AcMarche\Hrm\Filament\Resources\Prerequisites\Pages\CreatePrerequisite;
+use AcMarche\Hrm\Filament\Resources\Prerequisites\Pages\EditPrerequisite;
 use AcMarche\Hrm\Models\Prerequisite;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -18,13 +26,13 @@ use UnitEnum;
 
 final class PrerequisiteResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Prerequisite::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 7;
 
     public static function getNavigationIcon(): string
@@ -54,22 +62,22 @@ final class PrerequisiteResource extends Resource
                 Section::make()
                     ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('title')
+                        TextInput::make('title')
                             ->label('Titre')
                             ->required()
                             ->maxLength(150),
-                        Forms\Components\TextInput::make('profession')
+                        TextInput::make('profession')
                             ->label('Profession')
                             ->maxLength(150),
-                        Forms\Components\Select::make('employer_id')
+                        Select::make('employer_id')
                             ->label('Employeur')
                             ->relationship('employer', 'name')
                             ->searchable()
                             ->preload(),
-                        Forms\Components\TextInput::make('user')
+                        TextInput::make('user')
                             ->label('Utilisateur')
                             ->maxLength(150),
-                        Forms\Components\Textarea::make('description')
+                        Textarea::make('description')
                             ->label('Description')
                             ->rows(3)
                             ->columnSpanFull(),
@@ -83,20 +91,20 @@ final class PrerequisiteResource extends Resource
             ->defaultSort('title')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                     ->label('Titre')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('profession')
+                TextColumn::make('profession')
                     ->label('Profession')
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('description')
+                TextColumn::make('description')
                     ->label('Description')
                     ->limit(50)
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('employer.name')
+                TextColumn::make('employer.name')
                     ->label('Employeur')
                     ->sortable()
                     ->toggleable(),
@@ -115,9 +123,9 @@ final class PrerequisiteResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPrerequisites::route('/'),
-            'create' => Pages\CreatePrerequisite::route('/create'),
-            'edit' => Pages\EditPrerequisite::route('/{record}/edit'),
+            'index' => ListPrerequisites::route('/'),
+            'create' => CreatePrerequisite::route('/create'),
+            'edit' => EditPrerequisite::route('/{record}/edit'),
         ];
     }
 }

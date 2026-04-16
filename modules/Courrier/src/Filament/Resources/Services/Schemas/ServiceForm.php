@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Services\Schemas;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\CheckboxList;
 use AcMarche\Courrier\Filament\Components\DepartmentField;
 use AcMarche\Courrier\Models\Recipient;
 use AcMarche\Courrier\Repository\RecipientRepository;
@@ -19,22 +21,22 @@ final class ServiceForm
         return $schema
             ->columns(2)
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->label('Nom')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('initials')
+                TextInput::make('initials')
                     ->label('Initiales')
                     ->maxLength(255),
                 ...DepartmentField::make(),
                 Section::make('Membres du service')
                     ->description('Sélectionnez les destinataires qui font partie de ce service')
                     ->schema([
-                        Forms\Components\CheckboxList::make('recipients')
+                        CheckboxList::make('recipients')
                             ->hiddenLabel()
                             ->relationship(
                                 titleAttribute: 'last_name',
-                                modifyQueryUsing: fn (Builder $query): \Illuminate\Database\Eloquent\Builder => RecipientRepository::queryOrderByLastName(
+                                modifyQueryUsing: fn (Builder $query): Builder => RecipientRepository::queryOrderByLastName(
                                     $query
                                 )
                             )

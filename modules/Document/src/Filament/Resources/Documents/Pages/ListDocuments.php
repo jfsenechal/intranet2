@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Filament\Resources\Documents\Pages;
 
+use Override;
+use Filament\Actions\CreateAction;
 use AcMarche\Document\Filament\Resources\Documents\DocumentResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 final class ListDocuments extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = DocumentResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter un document')
                 ->icon('tabler-plus'),
         ];

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\App\Console\Commands;
 
+use Override;
 use AcMarche\App\Meilisearch\MeiliServer;
 use AcMarche\App\Meilisearch\MeiliTrait;
 use Illuminate\Console\Command;
@@ -17,7 +18,7 @@ final class MeiliServerCommand extends Command
      *
      * @var string
      */
-    #[\Override]
+    #[Override]
     protected $signature = 'app:meili-server {indexName} {--reset : Reset and create index} {--dump : Run without making changes} {--tasks : Run without making changes} {--api : Run without making changes}';
 
     /**
@@ -25,7 +26,7 @@ final class MeiliServerCommand extends Command
      *
      * @var string
      */
-    #[\Override]
+    #[Override]
     protected $description = 'Create and reset index';
 
     /**

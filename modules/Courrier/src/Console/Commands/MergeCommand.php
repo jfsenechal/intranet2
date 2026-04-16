@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Console\Commands;
 
+use Override;
 use AcMarche\Courrier\Enums\DepartmentCourrierEnum;
 use Exception;
 use Illuminate\Console\Command;
@@ -11,12 +12,12 @@ use Illuminate\Support\Facades\DB;
 
 final class MergeCommand extends Command
 {
-    #[\Override]
+    #[Override]
     protected $signature = 'courrier:merge
         {--dry-run : Run without making changes}
         {--target=indicateur_ville : Target database name}';
 
-    #[\Override]
+    #[Override]
     protected $description = 'Merge indicateur_cpas and indicateur_bgm databases into the target database with department field';
 
     private bool $dryRun = false;

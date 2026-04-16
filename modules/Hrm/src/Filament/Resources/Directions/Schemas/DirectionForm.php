@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Directions\Schemas;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use Filament\Forms;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -19,19 +21,19 @@ final class DirectionForm
                 Section::make('Informations')
                     ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('title')
+                        TextInput::make('title')
                             ->label('Intitule')
                             ->required()
                             ->maxLength(100)
                             ->live(onBlur: true)
                           ,
-                        Forms\Components\TextInput::make('abbreviation')
+                        TextInput::make('abbreviation')
                             ->label('Abreviation')
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('director')
+                        TextInput::make('director')
                             ->label('Directeur')
                             ->maxLength(255),
-                        Forms\Components\Select::make('employer_id')
+                        Select::make('employer_id')
                             ->label('Employeur')
                             ->relationship('employer', 'name')
                             ->searchable()

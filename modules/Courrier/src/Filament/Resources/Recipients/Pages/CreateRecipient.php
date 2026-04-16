@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Recipients\Pages;
 
+use Override;
 use AcMarche\Courrier\Filament\Resources\Recipients\RecipientResource;
 use Filament\Resources\Pages\CreateRecord;
 
 final class CreateRecipient extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = RecipientResource::class;
 
     public function getTitle(): string

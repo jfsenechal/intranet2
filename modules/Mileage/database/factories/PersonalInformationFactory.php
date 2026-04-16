@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Database\Factories;
 
+use Override;
 use AcMarche\Mileage\Models\PersonalInformation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Mileage\Models\PersonalInformation>
+ * @extends Factory<PersonalInformation>
  */
 final class PersonalInformationFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = PersonalInformation::class;
 
     /**

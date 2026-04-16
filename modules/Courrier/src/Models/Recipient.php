@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Override;
 use AcMarche\Courrier\Database\Factories\RecipientFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,8 +19,8 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 #[UseFactory(RecipientFactory::class)]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-courrier')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-courrier')]
+#[Fillable([
     'supervisor_id',
     'slug',
     'last_name',
@@ -31,7 +34,7 @@ final class Recipient extends Model
     use HasFactory;
     use HasSlug;
 
-    #[\Override]
+    #[Override]
     public $timestamps = false;
 
     public function getSlugOptions(): SlugOptions

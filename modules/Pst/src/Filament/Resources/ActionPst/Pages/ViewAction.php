@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Pages;
 
+use Override;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Pst\Actions\CanPaginateViewRecordTrait;
 use AcMarche\Pst\Actions\ReminderAction;
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
@@ -23,7 +26,7 @@ final class ViewAction extends ViewRecord
 {
     use CanPaginateViewRecordTrait;
 
-    #[\Override]
+    #[Override]
     protected static string $resource = ActionPstResource::class;
 
     public function getTitle(): string
@@ -53,7 +56,7 @@ final class ViewAction extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
             //  PreviousAction::make(),
             //  NextAction::make(),
@@ -69,7 +72,7 @@ final class ViewAction extends ViewRecord
                             ->send();
                     }),
                 ReminderAction::createAction($this->record),
-                Actions\DeleteAction::make()
+                DeleteAction::make()
                     ->label('Supprimer l\'action')
                     ->icon('tabler-trash'),
             ]

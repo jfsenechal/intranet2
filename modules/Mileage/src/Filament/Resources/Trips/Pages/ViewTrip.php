@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Trips\Pages;
 
+use Override;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\ForceDeleteAction;
 use AcMarche\Mileage\Filament\Resources\Trips\TripResource;
 use AcMarche\Mileage\Models\Trip;
 use Filament\Actions;
@@ -11,7 +16,7 @@ use Filament\Resources\Pages\ViewRecord;
 
 final class ViewTrip extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = TripResource::class;
 
     public function getTitle(): string
@@ -22,16 +27,16 @@ final class ViewTrip extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit')
                 ->disabled(fn (Trip $trip): bool => $trip->isDeclared())
                 ->tooltip(
                     fn (Trip $trip): ?string => $trip->isDeclared() ? 'Ce déplacement est déjà lié à une déclaration' : null
                 ),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
-            Actions\RestoreAction::make(),
-            Actions\ForceDeleteAction::make(),
+            RestoreAction::make(),
+            ForceDeleteAction::make(),
         ];
     }
 }

@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Recipients\Pages;
 
+use Override;
 use AcMarche\Courrier\Filament\Resources\Recipients\RecipientResource;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Contracts\Support\Htmlable;
 
 final class ListRecipients extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = RecipientResource::class;
 
     public function getSubheading(): string

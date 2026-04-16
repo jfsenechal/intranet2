@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Trips\Pages;
 
+use Override;
 use AcMarche\Mileage\Filament\Resources\PersonalInformation\PersonalInformationResource;
 use AcMarche\Mileage\Filament\Resources\Trips\TripResource;
 use AcMarche\Mileage\Repository\PersonalInformationRepository;
@@ -12,7 +13,7 @@ use Filament\Resources\Pages\CreateRecord;
 
 final class CreateTrip extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = TripResource::class;
 
     public function mount(): void

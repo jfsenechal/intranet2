@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Console\Commands;
 
+use Override;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -12,10 +13,10 @@ use Symfony\Component\Console\Command\Command as SfCommand;
 
 final class FixCommand extends Command
 {
-    #[\Override]
+    #[Override]
     protected $signature = 'pst:migration';
 
-    #[\Override]
+    #[Override]
     protected $description = 'Migrate action_user, action_mandatory and service_user tables from user_id to username';
 
     public function handle(): int

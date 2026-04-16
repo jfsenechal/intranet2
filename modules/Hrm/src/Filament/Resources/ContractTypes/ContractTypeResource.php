@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\ContractTypes;
 
+use Override;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use AcMarche\Hrm\Filament\Resources\ContractTypes\Pages\ListContractTypes;
+use AcMarche\Hrm\Filament\Resources\ContractTypes\Pages\CreateContractType;
+use AcMarche\Hrm\Filament\Resources\ContractTypes\Pages\EditContractType;
 use AcMarche\Hrm\Models\ContractType;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -20,13 +27,13 @@ use UnitEnum;
 
 final class ContractTypeResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = ContractType::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 3;
 
     public static function getNavigationIcon(): string
@@ -56,17 +63,17 @@ final class ContractTypeResource extends Resource
                 Section::make()
                     ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->label('Nom')
                             ->required()
                             ->maxLength(50)
                             ->live(onBlur: true)
                             ,
-                        Forms\Components\TextInput::make('description')
+                        TextInput::make('description')
                             ->label('Description')
                             ->maxLength(255)
                             ->columnSpanFull(),
-                        Forms\Components\Select::make('employer_id')
+                        Select::make('employer_id')
                             ->label('Employeur')
                             ->relationship('employer', 'name')
                             ->searchable()
@@ -81,15 +88,15 @@ final class ContractTypeResource extends Resource
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('description')
+                TextColumn::make('description')
                     ->label('Description')
                     ->limit(50)
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('employer.name')
+                TextColumn::make('employer.name')
                     ->label('Employeur')
                     ->sortable()
                     ->toggleable(),
@@ -108,9 +115,9 @@ final class ContractTypeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContractTypes::route('/'),
-            'create' => Pages\CreateContractType::route('/create'),
-            'edit' => Pages\EditContractType::route('/{record}/edit'),
+            'index' => ListContractTypes::route('/'),
+            'create' => CreateContractType::route('/create'),
+            'edit' => EditContractType::route('/{record}/edit'),
         ];
     }
 }

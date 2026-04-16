@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\BudgetArticles\Schemas;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use AcMarche\App\Enums\DepartmentEnum;
 use Filament\Forms;
 use Filament\Schemas\Components\Section;
@@ -17,23 +19,23 @@ final class BudgetArticleForm
             ->schema([
                 Section::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->label('Nom')
                             ->required()
                             ->maxLength(255)
                             ->columnSpanFull(),
-                        Forms\Components\Select::make('department')
+                        Select::make('department')
                             ->label('Département')
                             ->required()
                             ->options(DepartmentEnum::class)
                             ->enum(DepartmentEnum::class)
                             ->columnSpanFull(),
-                        Forms\Components\TextInput::make('functional_code')
+                        TextInput::make('functional_code')
                             ->label('Code fonctionnel')
                             ->required()
                             ->maxLength(255),
 
-                        Forms\Components\TextInput::make('economic_code')
+                        TextInput::make('economic_code')
                             ->label('Code économique')
                             ->required()
                             ->maxLength(255),

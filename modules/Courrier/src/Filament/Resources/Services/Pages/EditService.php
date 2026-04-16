@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Services\Pages;
 
+use Override;
+use Filament\Actions\ViewAction;
 use AcMarche\Courrier\Filament\Resources\Services\ServiceResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
@@ -11,7 +13,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class EditService extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ServiceResource::class;
 
     public function getTitle(): string|Htmlable
@@ -22,7 +24,7 @@ final class EditService extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

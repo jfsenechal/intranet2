@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Database\Factories;
 
+use Override;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Mileage\Models\BudgetArticle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Mileage\Models\BudgetArticle>
+ * @extends Factory<BudgetArticle>
  */
 final class BudgetArticleFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = BudgetArticle::class;
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Directions\Tables;
 
+use Filament\Tables\Columns\TextColumn;
 use AcMarche\Hrm\Filament\Resources\Directions\DirectionResource;
 use AcMarche\Hrm\Models\Direction;
 use Filament\Actions\BulkActionGroup;
@@ -21,24 +22,24 @@ final class DirectionTables
             ->defaultSort('title')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                     ->label('Intitule')
                     ->searchable()
                     ->sortable()
                     ->url(fn (Direction $record): string => DirectionResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('abbreviation')
+                TextColumn::make('abbreviation')
                     ->label('Abreviation')
                     ->searchable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('director')
+                TextColumn::make('director')
                     ->label('Directeur')
                     ->searchable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('employer.name')
+                TextColumn::make('employer.name')
                     ->label('Employeur')
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('services_count')
+                TextColumn::make('services_count')
                     ->label('Services')
                     ->counts('services')
                     ->sortable(),

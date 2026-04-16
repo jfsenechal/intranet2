@@ -105,8 +105,7 @@ final class InboxInfolist
                     $uid,
                     $index,
                     $contentType,
-                    $filename,
-                    $isPreviewable
+                    $filename
                 ))
                 ->action(
                     function (array $data, Action $action) use (

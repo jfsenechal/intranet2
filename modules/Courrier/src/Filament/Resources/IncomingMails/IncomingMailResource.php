@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\IncomingMails;
 
+use Override;
+use AcMarche\Courrier\Filament\Resources\IncomingMails\Pages\ListIncomingMails;
+use AcMarche\Courrier\Filament\Resources\IncomingMails\Pages\CreateIncomingMail;
+use AcMarche\Courrier\Filament\Resources\IncomingMails\Pages\ViewIncomingMail;
+use AcMarche\Courrier\Filament\Resources\IncomingMails\Pages\EditIncomingMail;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\Schemas\IncomingMailForm;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\Tables\IncomingMailTables;
 use AcMarche\Courrier\Models\IncomingMail;
@@ -13,10 +18,10 @@ use Filament\Tables\Table;
 
 final class IncomingMailResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = IncomingMail::class;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 1;
 
     public static function getNavigationIcon(): string
@@ -52,10 +57,10 @@ final class IncomingMailResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListIncomingMails::route('/'),
-            'create' => Pages\CreateIncomingMail::route('/create'),
-            'view' => Pages\ViewIncomingMail::route('/{record}/view'),
-            'edit' => Pages\EditIncomingMail::route('/{record}/edit'),
+            'index' => ListIncomingMails::route('/'),
+            'create' => CreateIncomingMail::route('/create'),
+            'view' => ViewIncomingMail::route('/{record}/view'),
+            'edit' => EditIncomingMail::route('/{record}/edit'),
         ];
     }
 }

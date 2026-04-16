@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Events;
 
+use Illuminate\Broadcasting\Channel;
 use AcMarche\News\Models\News;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -28,7 +29,7 @@ final class NewsProcessed implements ShouldDispatchAfterCommit
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @return array<int, Channel>
      */
     public function broadcastOn(): array
     {

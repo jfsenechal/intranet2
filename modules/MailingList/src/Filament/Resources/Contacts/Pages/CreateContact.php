@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\Contacts\Pages;
 
+use Override;
 use AcMarche\MailingList\Filament\Resources\Contacts\ContactResource;
 use Filament\Resources\Pages\CreateRecord;
 
 final class CreateContact extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ContactResource::class;
 
-    #[\Override]
+    #[Override]
     protected static ?string $title = 'Nouveau contact';
 }

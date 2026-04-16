@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst;
 
+use Override;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ListActions;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\CreateAction;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ViewAction;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\EditAction;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ListActionsAsGoogleSheet;
 use AcMarche\Pst\Filament\Resources\ActionPst\RelationManagers\FollowUpsRelationManager;
 use AcMarche\Pst\Filament\Resources\ActionPst\RelationManagers\HistoriesRelationManager;
 use AcMarche\Pst\Filament\Resources\ActionPst\RelationManagers\MediasRelationManager;
@@ -24,24 +30,24 @@ use Illuminate\Support\Collection;
 // https://filamentphp.com/content/leandrocfe-navigating-filament-pages-with-previous-and-next-buttons
 final class ActionPstResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Action::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'tabler-bolt';
 
     // required for global search
-    #[\Override]
+    #[Override]
     protected static ?string $recordTitleAttribute = 'name';
 
     // Scout handles term splitting
-    #[\Override]
+    #[Override]
     protected static ?bool $shouldSplitGlobalSearchTerms = false;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 4;
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Liste des actions';
 
     public static function shouldRegisterNavigation(): bool
@@ -74,11 +80,11 @@ final class ActionPstResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListActions::route('/'),
-            'create' => Pages\CreateAction::route('/create'),
-            'view' => Pages\ViewAction::route('/{record}'),
-            'edit' => Pages\EditAction::route('/{record}/edit'),
-            'asGoogleSheet' => Pages\ListActionsAsGoogleSheet::route('/as/google/sheet'),
+            'index' => ListActions::route('/'),
+            'create' => CreateAction::route('/create'),
+            'view' => ViewAction::route('/{record}'),
+            'edit' => EditAction::route('/{record}/edit'),
+            'asGoogleSheet' => ListActionsAsGoogleSheet::route('/as/google/sheet'),
         ];
     }
 

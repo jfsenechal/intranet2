@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Console\Commands;
 
+use Override;
 use AcMarche\Mileage\Models\PersonalInformation;
 use App\Models\User;
 use Exception;
@@ -18,7 +19,7 @@ final class MigrationCommand extends Command
      *
      * @var string
      */
-    #[\Override]
+    #[Override]
     protected $signature = 'mileage:migration {--dry-run : Run without making changes}';
 
     /**
@@ -26,7 +27,7 @@ final class MigrationCommand extends Command
      *
      * @var string
      */
-    #[\Override]
+    #[Override]
     protected $description = 'Fetch all profiles from the old intranet database and migrate them to the new database';
 
     /**

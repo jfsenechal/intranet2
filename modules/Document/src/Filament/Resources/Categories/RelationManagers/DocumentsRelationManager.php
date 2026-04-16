@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Filament\Resources\Categories\RelationManagers;
 
+use Override;
 use AcMarche\Document\Filament\Resources\Documents\DocumentResource;
 use AcMarche\Document\Models\Document;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -12,10 +13,10 @@ use Filament\Tables\Table;
 
 final class DocumentsRelationManager extends RelationManager
 {
-    #[\Override]
+    #[Override]
     protected static string $relationship = 'documents';
 
-    #[\Override]
+    #[Override]
     protected static ?string $title = 'Documents';
 
     public function isReadOnly(): bool

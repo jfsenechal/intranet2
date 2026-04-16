@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Rates\Schemas;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
 use AcMarche\Mileage\Models\Rate;
 use AcMarche\Mileage\Validator\RateOverlapValidator;
 use Closure;
@@ -20,21 +22,21 @@ final class RateForm
             ->schema([
                 Section::make()
                     ->schema([
-                        Forms\Components\TextInput::make('amount')
+                        TextInput::make('amount')
                             ->label('Montant (€/km)')
                             ->required()
                             ->numeric()
                             ->step(0.01)
                             ->prefix('€'),
 
-                        Forms\Components\TextInput::make('omnium')
+                        TextInput::make('omnium')
                             ->label('Omnium (€/km)')
                             ->required()
                             ->numeric()
                             ->step(0.01)
                             ->prefix('€'),
 
-                        Forms\Components\DatePicker::make('start_date')
+                        DatePicker::make('start_date')
                             ->label('Date début')
                             ->required()
                             ->before('end_date')
@@ -60,7 +62,7 @@ final class RateForm
                                 },
                             ]),
 
-                        Forms\Components\DatePicker::make('end_date')
+                        DatePicker::make('end_date')
                             ->label('Date fin')
                             ->required()
                             ->after('start_date')

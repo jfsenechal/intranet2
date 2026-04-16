@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\JobFunctions;
 
+use Override;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\TextColumn;
+use AcMarche\Hrm\Filament\Resources\JobFunctions\Pages\ListJobFunctions;
+use AcMarche\Hrm\Filament\Resources\JobFunctions\Pages\CreateJobFunction;
+use AcMarche\Hrm\Filament\Resources\JobFunctions\Pages\EditJobFunction;
 use AcMarche\Hrm\Models\JobFunction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -18,13 +24,13 @@ use UnitEnum;
 
 final class JobFunctionResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = JobFunction::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 1;
 
     public static function getNavigationIcon(): string
@@ -53,7 +59,7 @@ final class JobFunctionResource extends Resource
             ->components([
                 Section::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->label('Nom')
                             ->required()
                             ->maxLength(150),
@@ -67,7 +73,7 @@ final class JobFunctionResource extends Resource
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable(),
@@ -86,9 +92,9 @@ final class JobFunctionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListJobFunctions::route('/'),
-            'create' => Pages\CreateJobFunction::route('/create'),
-            'edit' => Pages\EditJobFunction::route('/{record}/edit'),
+            'index' => ListJobFunctions::route('/'),
+            'create' => CreateJobFunction::route('/create'),
+            'edit' => EditJobFunction::route('/{record}/edit'),
         ];
     }
 }

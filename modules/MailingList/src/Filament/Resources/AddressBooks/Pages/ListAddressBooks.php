@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\AddressBooks\Pages;
 
+use Override;
 use AcMarche\MailingList\Filament\Actions\ImportContactAction;
 use AcMarche\MailingList\Filament\Resources\AddressBooks\AddressBookResource;
 use Filament\Actions\CreateAction;
@@ -12,7 +13,7 @@ use Filament\Support\Icons\Heroicon;
 
 final class ListAddressBooks extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = AddressBookResource::class;
 
     protected function getHeaderActions(): array

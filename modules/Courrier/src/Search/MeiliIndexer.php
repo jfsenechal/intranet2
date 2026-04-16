@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Search;
 
+use Illuminate\Support\Facades\Date;
 use AcMarche\App\Meilisearch\MeiliServer;
 use AcMarche\App\Meilisearch\MeiliTrait;
 use AcMarche\Courrier\Models\IncomingMail;
@@ -127,7 +128,7 @@ final class MeiliIndexer
         $document['recommande'] = $courrier->recommande;
         $document['date_courrier'] = $courrier->date_courrier->format('Y-m-d');
         $date = $courrier->date_courrier;
-        $dateCourrier = \Illuminate\Support\Facades\Date::createFromDate(
+        $dateCourrier = Date::createFromDate(
             $date->format('Y'),
             $date->format('m'),
             $date->format('d'),

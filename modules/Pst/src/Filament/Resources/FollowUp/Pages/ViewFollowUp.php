@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\FollowUp\Pages;
 
+use Override;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Pst\Filament\Resources\FollowUp\FollowUpResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
 final class ViewFollowUp extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = FollowUpResource::class;
 
     public function getTitle(): string
@@ -21,9 +24,9 @@ final class ViewFollowUp extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

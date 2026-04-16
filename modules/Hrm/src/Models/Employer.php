@@ -4,20 +4,24 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-hrm')]
+#[Fillable([
     'name',
     'slug',
     'parent_id',
 ])]
-#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'employers')]
+#[Table(name: 'employers')]
 final class Employer extends Model
 {
-    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    use HasFactory;
     /**
      * @return BelongsTo<Employer>
      */

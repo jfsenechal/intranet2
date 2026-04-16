@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Services\Tables;
 
+use Filament\Tables\Columns\TextColumn;
 use AcMarche\Hrm\Filament\Resources\Services\ServiceResource;
 use AcMarche\Hrm\Models\Service;
 use Filament\Actions\BulkActionGroup;
@@ -22,23 +23,23 @@ final class ServiceTables
             ->defaultSort('title')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                     ->label('Intitule')
                     ->searchable()
                     ->sortable()
                     ->url(fn (Service $record): string => ServiceResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('abbreviation')
+                TextColumn::make('abbreviation')
                     ->label('Abreviation')
                     ->searchable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('direction.title')
+                TextColumn::make('direction.title')
                     ->label('Direction')
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('phone')
+                TextColumn::make('phone')
                     ->label('Telephone')
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('email')
+                TextColumn::make('email')
                     ->label('Email')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

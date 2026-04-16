@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Users\Pages;
 
+use Override;
 use AcMarche\Mileage\Filament\Resources\Users\UserResource;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
 
 final class EditUser extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = UserResource::class;
 
     public function getTitle(): string

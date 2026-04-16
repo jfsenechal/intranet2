@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\Categories\RelationManagers;
 
+use Override;
 use AcMarche\News\Filament\Resources\News\NewsResource;
 use AcMarche\News\Models\News;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -14,7 +15,7 @@ use Filament\Tables\Table;
 
 final class NewsRelationManager extends RelationManager
 {
-    #[\Override]
+    #[Override]
     protected static string $relationship = 'news';
 
     public function table(Table $table): Table

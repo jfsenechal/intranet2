@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\IncomingMails\Pages;
 
+use Override;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\IncomingMailResource;
 use AcMarche\Courrier\Models\Attachment;
 use AcMarche\Courrier\Models\Sender;
@@ -14,7 +15,7 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 final class CreateIncomingMail extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = IncomingMailResource::class;
 
     /** @var array<int> */

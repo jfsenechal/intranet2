@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\Courrier\Database\Factories\IncomingMailFactory;
 use AcMarche\Courrier\Repository\DepartmentScope;
 use AcMarche\Security\Models\HasUserAdd;
@@ -18,8 +20,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[UseFactory(IncomingMailFactory::class)]
 #[ScopedBy([DepartmentScope::class])]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-courrier')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-courrier')]
+#[Fillable([
     'category_id',
     'reference_number',
     'sender',

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Users\Pages;
 
+use Override;
 use AcMarche\Mileage\Filament\Resources\Users\UserResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
@@ -11,7 +12,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class ListUsers extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = UserResource::class;
 
     public function getTitle(): string

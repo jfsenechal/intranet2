@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Users\Pages;
 
+use Override;
 use AcMarche\Mileage\Filament\Resources\Users\UserResource;
 use AcMarche\Mileage\Providers\MileageServiceProvider;
 use AcMarche\Mileage\Service\PersonalInformationService;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 
 final class CreateUser extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = UserResource::class;
 
     public function getTitle(): string

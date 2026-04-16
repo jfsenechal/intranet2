@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
 use AcMarche\Courrier\Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,12 +14,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[UseFactory(CategoryFactory::class)]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-courrier')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-courrier')]
+#[Fillable([
     'name',
     'color',
 ])]
-#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'courrier_categories')]
+#[Table(name: 'courrier_categories')]
 final class Category extends Model
 {
     use HasFactory;

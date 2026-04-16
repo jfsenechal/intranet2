@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Pages;
 
+use Override;
 use AcMarche\Courrier\Enums\RolesEnum;
 use AcMarche\Courrier\Filament\Resources\Inbox\Tables\InboxTables;
 use BackedEnum;
@@ -19,19 +20,19 @@ final class Inbox extends Page implements HasTable
 {
     use InteractsWithTable;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'tabler-inbox';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 2;
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Boite mail';
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Courrier';
 
-    #[\Override]
+    #[Override]
     protected string $view = 'courrier::filament.pages.inbox';
 
     public static function canAccess(array $parameters = []): bool

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Console\Commands;
 
+use Override;
 use AcMarche\Pst\Models\Action;
 use AcMarche\Pst\Models\Odd;
 use AcMarche\Pst\Models\OperationalObjective;
@@ -16,10 +17,10 @@ use Illuminate\Support\Facades\Artisan;
 
 final class MeiliCommand extends Command
 {
-    #[\Override]
+    #[Override]
     protected $signature = 'pst:meili {--flush : Flush all indexes before importing}';
 
-    #[\Override]
+    #[Override]
     protected $description = 'Import all searchable models into Scout (Meilisearch)';
 
     /**

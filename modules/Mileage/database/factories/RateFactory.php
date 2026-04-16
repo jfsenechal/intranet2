@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Database\Factories;
 
+use Override;
 use AcMarche\Mileage\Models\Rate;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Mileage\Models\Rate>
+ * @extends Factory<Rate>
  */
 final class RateFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = Rate::class;
 
     /**

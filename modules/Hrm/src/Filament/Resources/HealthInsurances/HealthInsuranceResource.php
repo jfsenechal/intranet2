@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\HealthInsurances;
 
+use Override;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\TextColumn;
+use AcMarche\Hrm\Filament\Resources\HealthInsurances\Pages\ListHealthInsurances;
+use AcMarche\Hrm\Filament\Resources\HealthInsurances\Pages\CreateHealthInsurance;
+use AcMarche\Hrm\Filament\Resources\HealthInsurances\Pages\EditHealthInsurance;
 use AcMarche\Hrm\Models\HealthInsurance;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -18,13 +24,13 @@ use UnitEnum;
 
 final class HealthInsuranceResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = HealthInsurance::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 5;
 
     public static function getNavigationIcon(): string
@@ -53,7 +59,7 @@ final class HealthInsuranceResource extends Resource
             ->components([
                 Section::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->label('Nom')
                             ->required()
                             ->maxLength(100),
@@ -67,11 +73,11 @@ final class HealthInsuranceResource extends Resource
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('employees_count')
+                TextColumn::make('employees_count')
                     ->label('Employés')
                     ->counts('employees')
                     ->sortable(),
@@ -90,9 +96,9 @@ final class HealthInsuranceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListHealthInsurances::route('/'),
-            'create' => Pages\CreateHealthInsurance::route('/create'),
-            'edit' => Pages\EditHealthInsurance::route('/{record}/edit'),
+            'index' => ListHealthInsurances::route('/'),
+            'create' => CreateHealthInsurance::route('/create'),
+            'edit' => EditHealthInsurance::route('/{record}/edit'),
         ];
     }
 }

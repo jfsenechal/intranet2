@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Trips;
 
+use Override;
+use AcMarche\Mileage\Filament\Resources\Trips\Pages\ListTrips;
+use AcMarche\Mileage\Filament\Resources\Trips\Pages\CreateTrip;
+use AcMarche\Mileage\Filament\Resources\Trips\Pages\ViewTrip;
+use AcMarche\Mileage\Filament\Resources\Trips\Pages\EditTrip;
 use AcMarche\Mileage\Filament\Resources\Trips\Schemas\TripForm;
 use AcMarche\Mileage\Filament\Resources\Trips\Tables\TripTables;
 use AcMarche\Mileage\Models\Trip;
@@ -13,16 +18,16 @@ use Filament\Tables\Table;
 
 final class TripResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Trip::class;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 1;
 
-    #[\Override]
+    #[Override]
     protected static ?string $modelLabel = 'Déplacement';
 
-    #[\Override]
+    #[Override]
     protected static ?string $pluralModelLabel = 'Déplacements';
 
     public static function getNavigationIcon(): string
@@ -48,10 +53,10 @@ final class TripResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTrips::route('/'),
-            'create' => Pages\CreateTrip::route('/create'),
-            'view' => Pages\ViewTrip::route('/{record}/view'),
-            'edit' => Pages\EditTrip::route('/{record}/edit'),
+            'index' => ListTrips::route('/'),
+            'create' => CreateTrip::route('/create'),
+            'view' => ViewTrip::route('/{record}/view'),
+            'edit' => EditTrip::route('/{record}/edit'),
         ];
     }
 }

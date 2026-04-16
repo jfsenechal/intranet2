@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\App\Filament\Schema\Infolists;
 
+use Override;
 use Closure;
 use Filament\Infolists\Components\ViewEntry;
 use Illuminate\Contracts\Filesystem\Filesystem;
@@ -14,7 +15,7 @@ use Throwable;
 
 final class PdfViewerEntry extends ViewEntry
 {
-    #[\Override]
+    #[Override]
     protected string $view = 'app::filament.components.pdf-viewer-entry';
 
     private string $minHeight = '50svh';

@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Database\Factories;
 
+use Override;
+use Illuminate\Support\Str;
 use AcMarche\News\Models\Category;
 use AcMarche\News\Models\News;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\News\Models\News>
+ * @extends Factory<News>
  */
 final class NewsFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = News::class;
 
     /**
@@ -27,7 +29,7 @@ final class NewsFactory extends Factory
 
         return [
             'name' => $name,
-            'slug' => \Illuminate\Support\Str::slug($name),
+            'slug' => Str::slug($name),
             'content' => fake()->randomHtml(),
             'end_date' => fake()->dateTimeBetween('+1 week', '+2 weeks'),
             'department' => 'common',

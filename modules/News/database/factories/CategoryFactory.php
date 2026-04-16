@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Database\Factories;
 
+use Override;
 use AcMarche\News\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\News\Models\Category>
+ * @extends Factory<Category>
  */
 final class CategoryFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = Category::class;
 
     /**

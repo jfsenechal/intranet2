@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Auth;
 
+use LdapRecord\Auth\PasswordRequiredException;
+use LdapRecord\Auth\UsernameRequiredException;
+use LdapRecord\ContainerException;
 use AcMarche\Pst\Ldap\User as UserLdap;
 use App\Models\User;
 use LdapRecord\Container;
@@ -11,9 +14,9 @@ use LdapRecord\Container;
 final class LdapAuthService
 {
     /**
-     * @throws \LdapRecord\Auth\PasswordRequiredException
-     * @throws \LdapRecord\Auth\UsernameRequiredException
-     * @throws \LdapRecord\ContainerException
+     * @throws PasswordRequiredException
+     * @throws UsernameRequiredException
+     * @throws ContainerException
      */
     public static function checkPassword(string $username, string $password): ?User
     {

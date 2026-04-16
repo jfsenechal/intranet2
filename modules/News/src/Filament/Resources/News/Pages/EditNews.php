@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News\Pages;
 
+use Override;
+use Filament\Actions\ViewAction;
 use AcMarche\News\Filament\Resources\News\NewsResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
@@ -11,7 +13,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class EditNews extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = NewsResource::class;
 
     public function getTitle(): string|Htmlable
@@ -22,7 +24,7 @@ final class EditNews extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

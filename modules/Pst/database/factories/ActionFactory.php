@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Database\Factories;
 
+use Override;
 use AcMarche\Pst\Models\Action;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Pst\Models\Action>
+ * @extends Factory<Action>
  */
 final class ActionFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = Action::class;
 
     /**

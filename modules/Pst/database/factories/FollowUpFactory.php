@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Database\Factories;
 
+use Override;
 use AcMarche\Pst\Models\FollowUp;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Pst\Models\FollowUp>
+ * @extends Factory<FollowUp>
  */
 final class FollowUpFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = FollowUp::class;
 
     public function definition(): array

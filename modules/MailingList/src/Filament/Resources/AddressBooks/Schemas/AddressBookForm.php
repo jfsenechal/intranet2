@@ -53,7 +53,7 @@ final class AddressBookForm
                     ->multiple()
                     ->searchable()
                     ->afterStateHydrated(function (Select $component, ?AddressBook $record): void {
-                        if ($record instanceof \AcMarche\MailingList\Models\AddressBook) {
+                        if ($record instanceof AddressBook) {
                             $component->state(
                                 AddressBookRepository::getSharingAddressBookByAddressBook($record)
                             );

@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Database\Factories;
 
+use Override;
 use AcMarche\Courrier\Models\IncomingMail;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Courrier\Models\IncomingMail>
+ * @extends Factory<IncomingMail>
  */
 final class IncomingMailFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = IncomingMail::class;
 
     public function definition(): array

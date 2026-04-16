@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\ContractTypes\Pages;
 
+use Override;
+use Filament\Actions\DeleteAction;
 use AcMarche\Hrm\Filament\Resources\ContractTypes\ContractTypeResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
 final class EditContractType extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ContractTypeResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

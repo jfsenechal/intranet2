@@ -47,7 +47,7 @@ final class ActionInfolist
             ]);
     }
 
-    private static function odd(): \Filament\Infolists\Components\TextEntry
+    private static function odd(): TextEntry
     {
         return TextEntry::make('odds')
             ->label('Objectifs de développement durable')
@@ -59,7 +59,7 @@ final class ActionInfolist
             ->badge();
     }
 
-    private static function budget(): \Filament\Schemas\Components\Fieldset
+    private static function budget(): Fieldset
     {
         return Fieldset::make('budget')
             ->label('Financement')

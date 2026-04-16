@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Pages;
 
+use Override;
+use Filament\Actions\ViewAction;
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Pst\Models\Service;
 use AcMarche\Pst\Models\TracksHistoryTrait;
@@ -15,7 +17,7 @@ final class EditAction extends EditRecord
 {
     use TracksHistoryTrait;
 
-    #[\Override]
+    #[Override]
     protected static string $resource = ActionPstResource::class;
 
     /**
@@ -42,7 +44,7 @@ final class EditAction extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Pages;
 
+use Override;
+use Illuminate\Support\Facades\Date;
 use AcMarche\Courrier\Filament\Resources\NotifyRecipients\Schemas\NotifyRecipientsForm;
 use AcMarche\Courrier\Filament\Resources\NotifyRecipients\Tables\NotifyRecipientsTables;
 use AcMarche\Courrier\Jobs\SendIncomingMailNotificationJob;
@@ -31,19 +33,19 @@ final class NotifyRecipients extends Page implements HasForms, HasTable
 
     public ?string $mail_date = null;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'tabler-mail-forward';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 3;
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Notifier les destinataires';
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Courrier';
 
-    #[\Override]
+    #[Override]
     protected string $view = 'courrier::filament.pages.notify-recipients';
 
     public static function canAccess(array $parameters = []): bool
@@ -80,7 +82,7 @@ final class NotifyRecipients extends Page implements HasForms, HasTable
         }
 
         $incomingMailRepository = new IncomingMailRepository();
-        $mailDate = \Illuminate\Support\Facades\Date::parse($this->mail_date);
+        $mailDate = Date::parse($this->mail_date);
         $recipients = RecipientRepository::getWithEmail();
 
         $preview = [];
@@ -126,7 +128,7 @@ final class NotifyRecipients extends Page implements HasForms, HasTable
                         return;
                     }
 
-                    dispatch(new \AcMarche\Courrier\Jobs\SendIncomingMailNotificationJob(\Illuminate\Support\Facades\Date::parse($this->mail_date)));
+                    dispatch(new SendIncomingMailNotificationJob(Date::parse($this->mail_date)));
 
                     Notification::make()
                         ->title('Notifications en cours d\'envoi')

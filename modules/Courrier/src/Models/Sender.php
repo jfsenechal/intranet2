@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Override;
 use AcMarche\Courrier\Database\Factories\SenderFactory;
 use AcMarche\Courrier\Repository\DepartmentScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
@@ -16,8 +19,8 @@ use Spatie\Sluggable\SlugOptions;
 
 #[UseFactory(SenderFactory::class)]
 #[ScopedBy([DepartmentScope::class])]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-courrier')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-courrier')]
+#[Fillable([
     'slug',
     'name',
     'department',
@@ -27,7 +30,7 @@ final class Sender extends Model
     use HasFactory;
     use HasSlug;
 
-    #[\Override]
+    #[Override]
     public $timestamps = false;
 
     public function getSlugOptions(): SlugOptions

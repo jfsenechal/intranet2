@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Database\Factories;
 
+use Override;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Pst\Models\StrategicObjective;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Pst\Models\StrategicObjective>
+ * @extends Factory<StrategicObjective>
  */
 final class StrategicObjectiveFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = StrategicObjective::class;
 
     public function definition(): array

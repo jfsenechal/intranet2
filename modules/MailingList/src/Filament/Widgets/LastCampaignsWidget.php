@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Widgets;
 
+use Override;
 use AcMarche\MailingList\Filament\Resources\Emails\Tables\EmailsTable;
 use AcMarche\MailingList\Models\Email;
 use Filament\Tables\Table;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 final class LastCampaignsWidget extends TableWidget
 {
-    #[\Override]
+    #[Override]
     protected int|string|array $columnSpan = 'full';
 
     public function table(Table $table): Table

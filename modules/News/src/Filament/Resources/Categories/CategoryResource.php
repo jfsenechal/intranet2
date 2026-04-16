@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\Categories;
 
+use Override;
 use AcMarche\News\Filament\Resources\Categories\Pages\CreateCategory;
 use AcMarche\News\Filament\Resources\Categories\Pages\EditCategory;
 use AcMarche\News\Filament\Resources\Categories\Pages\ListCategory;
@@ -19,16 +20,16 @@ use Filament\Tables\Table;
 
 final class CategoryResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Category::class;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 2;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Catégories';
 
     public static function form(Schema $schema): Schema

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\Categories\Tables;
 
+use Filament\Tables\Columns\ColorColumn;
 use AcMarche\News\Filament\Resources\Categories\CategoryResource;
 use AcMarche\News\Models\Category;
 use Filament\Actions\BulkActionGroup;
@@ -38,7 +39,7 @@ final class CategoryTables
                         // Only render the tooltip if the column content exceeds the length limit.
                         return $state;
                     }),
-                Tables\Columns\ColorColumn::make('color')
+                ColorColumn::make('color')
                     ->searchable()
                     ->label('Couleur'),
                 TextColumn::make('news_count')

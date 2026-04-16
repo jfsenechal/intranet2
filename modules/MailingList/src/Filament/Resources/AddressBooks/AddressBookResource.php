@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\AddressBooks;
 
+use Override;
 use AcMarche\MailingList\Filament\Resources\AddressBooks\Pages\CreateAddressBook;
 use AcMarche\MailingList\Filament\Resources\AddressBooks\Pages\EditAddressBook;
 use AcMarche\MailingList\Filament\Resources\AddressBooks\Pages\ListAddressBooks;
@@ -19,25 +20,25 @@ use Filament\Tables\Table;
 
 final class AddressBookResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = AddressBook::class;
 
-    #[\Override]
+    #[Override]
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookOpen;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 2;
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Carnets d\'adresses';
 
-    #[\Override]
+    #[Override]
     protected static ?string $modelLabel = 'carnet d\'adresses';
 
-    #[\Override]
+    #[Override]
     protected static ?string $pluralModelLabel = 'carnets d\'adresses';
 
-    #[\Override]
+    #[Override]
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getGloballySearchableAttributes(): array

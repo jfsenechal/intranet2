@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Categories;
 
+use Override;
 use AcMarche\Courrier\Filament\Resources\Categories\Pages\CreateCategory;
 use AcMarche\Courrier\Filament\Resources\Categories\Pages\EditCategory;
 use AcMarche\Courrier\Filament\Resources\Categories\Pages\ListCategory;
@@ -19,16 +20,16 @@ use UnitEnum;
 
 final class CategoryResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Category::class;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 6;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Paramètres';
 
     public static function form(Schema $schema): Schema

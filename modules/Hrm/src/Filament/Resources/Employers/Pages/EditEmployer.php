@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employers\Pages;
 
+use Override;
+use Filament\Actions\DeleteAction;
 use AcMarche\Hrm\Filament\Resources\Employers\EmployerResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
 final class EditEmployer extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = EmployerResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

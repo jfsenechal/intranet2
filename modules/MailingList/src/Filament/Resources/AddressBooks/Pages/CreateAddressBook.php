@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\AddressBooks\Pages;
 
+use Override;
 use AcMarche\MailingList\Filament\Resources\AddressBooks\AddressBookResource;
 use Filament\Resources\Pages\CreateRecord;
 
 final class CreateAddressBook extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = AddressBookResource::class;
 
     public function getTitle(): string

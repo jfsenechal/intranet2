@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-hrm')]
+#[Fillable([
     'uuid',
     'regulation_agreement',
     'it_agreement',
@@ -30,10 +34,10 @@ use Illuminate\Support\Str;
     'user_add',
     'updated_by',
 ])]
-#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'teleworks')]
+#[Table(name: 'teleworks')]
 final class Telework extends Model
 {
-    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    use HasFactory;
     protected static function booted(): void
     {
         self::creating(function (Telework $telework): void {

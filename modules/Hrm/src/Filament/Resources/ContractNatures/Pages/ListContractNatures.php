@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\ContractNatures\Pages;
 
+use Override;
+use Filament\Actions\CreateAction;
 use AcMarche\Hrm\Filament\Resources\ContractNatures\ContractNatureResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 final class ListContractNatures extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ContractNatureResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter une nature')
                 ->icon('tabler-plus'),
         ];

@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\PayScales\Pages;
 
+use Override;
+use Filament\Actions\CreateAction;
 use AcMarche\Hrm\Filament\Resources\PayScales\PayScaleResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 final class ListPayScales extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = PayScaleResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter une échelle')
                 ->icon('tabler-plus'),
         ];

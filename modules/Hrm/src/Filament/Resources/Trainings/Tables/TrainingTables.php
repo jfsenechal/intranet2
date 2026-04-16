@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Tables;
 
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
 use AcMarche\Hrm\Models\Training;
 use Filament\Actions\BulkActionGroup;
@@ -23,40 +25,40 @@ final class TrainingTables
             ->defaultSort('start_date', 'desc')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('employee.last_name')
+                TextColumn::make('employee.last_name')
                     ->label('Agent')
                     ->formatStateUsing(fn (Training $record): string => $record->employee->last_name.' '.$record->employee->first_name)
                     ->searchable(['last_name', 'first_name'])
                     ->sortable()
                     ->url(fn (Training $record): string => TrainingResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                     ->label('Intitule')
                     ->searchable()
                     ->sortable()
                     ->limit(40),
-                Tables\Columns\TextColumn::make('training_type')
+                TextColumn::make('training_type')
                     ->label('Type')
                     ->badge()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('start_date')
+                TextColumn::make('start_date')
                     ->label('Debut')
                     ->date('d/m/Y')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('end_date')
+                TextColumn::make('end_date')
                     ->label('Fin')
                     ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('duration_hours')
+                TextColumn::make('duration_hours')
                     ->label('Duree')
                     ->suffix('h')
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\IconColumn::make('certificate_received')
+                IconColumn::make('certificate_received')
                     ->label('Attestation')
                     ->boolean()
                     ->toggleable(),
-                Tables\Columns\IconColumn::make('is_closed')
+                IconColumn::make('is_closed')
                     ->label('Cloture')
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),

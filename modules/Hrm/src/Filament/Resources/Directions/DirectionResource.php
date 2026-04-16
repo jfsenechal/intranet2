@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Directions;
 
+use Override;
+use AcMarche\Hrm\Filament\Resources\Directions\Pages\ListDirections;
+use AcMarche\Hrm\Filament\Resources\Directions\Pages\CreateDirection;
+use AcMarche\Hrm\Filament\Resources\Directions\Pages\ViewDirection;
+use AcMarche\Hrm\Filament\Resources\Directions\Pages\EditDirection;
 use AcMarche\Hrm\Filament\Resources\Directions\Schemas\DirectionForm;
 use AcMarche\Hrm\Filament\Resources\Directions\Tables\DirectionTables;
 use AcMarche\Hrm\Models\Direction;
@@ -14,13 +19,13 @@ use UnitEnum;
 
 final class DirectionResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Direction::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Organisation';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 1;
 
     public static function getNavigationIcon(): string
@@ -56,10 +61,10 @@ final class DirectionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDirections::route('/'),
-            'create' => Pages\CreateDirection::route('/create'),
-            'view' => Pages\ViewDirection::route('/{record}/view'),
-            'edit' => Pages\EditDirection::route('/{record}/edit'),
+            'index' => ListDirections::route('/'),
+            'create' => CreateDirection::route('/create'),
+            'view' => ViewDirection::route('/{record}/view'),
+            'edit' => EditDirection::route('/{record}/edit'),
         ];
     }
 }

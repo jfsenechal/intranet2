@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Contracts\Tables;
 
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
 use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use AcMarche\Hrm\Models\Contract;
 use Filament\Actions\BulkActionGroup;
@@ -23,38 +25,38 @@ final class ContractTables
             ->defaultSort('start_date', 'desc')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('employee.last_name')
+                TextColumn::make('employee.last_name')
                     ->label('Agent')
                     ->formatStateUsing(fn (Contract $record): string => $record->employee->last_name.' '.$record->employee->first_name)
                     ->searchable(['last_name', 'first_name'])
                     ->sortable()
                     ->url(fn (Contract $record): string => ContractResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('employer.name')
+                TextColumn::make('employer.name')
                     ->label('Employeur')
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('contractType.name')
+                TextColumn::make('contractType.name')
                     ->label('Type')
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('job_title')
+                TextColumn::make('job_title')
                     ->label('Fonction')
                     ->searchable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('start_date')
+                TextColumn::make('start_date')
                     ->label('Debut')
                     ->date('d/m/Y')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('end_date')
+                TextColumn::make('end_date')
                     ->label('Fin')
                     ->date('d/m/Y')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('work_regime')
+                TextColumn::make('work_regime')
                     ->label('Regime')
                     ->suffix('%')
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\IconColumn::make('is_closed')
+                IconColumn::make('is_closed')
                     ->label('Cloture')
                     ->boolean()
                     ->toggleable(),

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Recipients\Schemas;
 
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Select;
 use AcMarche\Courrier\Models\Recipient;
 use Filament\Forms;
 use Filament\Schemas\Components\Flex;
@@ -17,12 +19,12 @@ final class RecipientForm
             ->columns(2)
             ->schema([
                 Flex::make([
-                    Forms\Components\Toggle::make('receives_attachments')
+                    Toggle::make('receives_attachments')
                         ->label('Reçoit les pièces jointes')
                         ->helperText('Lors de la notification, les courriers seront attachés au mail')
                         ->default(false),
                 ]),
-                Forms\Components\Select::make('supervisor_id')
+                Select::make('supervisor_id')
                     ->label('Superviseur')
                     ->helperText('Le superviseur sera automatiquement mis en copie. Utilisé par le CPAS')
                     ->relationship('supervisor', 'last_name')

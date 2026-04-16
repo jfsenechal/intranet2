@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Services;
 
+use Override;
 use AcMarche\Courrier\Filament\Resources\Services\Pages\CreateService;
 use AcMarche\Courrier\Filament\Resources\Services\Pages\EditService;
 use AcMarche\Courrier\Filament\Resources\Services\Pages\ListServices;
@@ -18,13 +19,13 @@ use UnitEnum;
 
 final class ServiceResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Service::class;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 5;
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Paramètres';
 
     public static function getNavigationIcon(): string

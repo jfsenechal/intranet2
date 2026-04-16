@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Database\Factories;
 
+use Override;
 use AcMarche\Mileage\Models\Trip;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Mileage\Models\Trip>
+ * @extends Factory<Trip>
  */
 final class TripFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = Trip::class;
 
     /**

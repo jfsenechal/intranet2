@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\Senders;
 
+use Override;
 use AcMarche\MailingList\Filament\Resources\Senders\Pages\CreateSender;
 use AcMarche\MailingList\Filament\Resources\Senders\Pages\EditSender;
 use AcMarche\MailingList\Filament\Resources\Senders\Pages\ListSenders;
@@ -18,25 +19,25 @@ use Filament\Tables\Table;
 
 final class SenderResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Sender::class;
 
-    #[\Override]
+    #[Override]
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPaperAirplane;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 4;
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Expediteurs';
 
-    #[\Override]
+    #[Override]
     protected static ?string $modelLabel = 'expediteur';
 
-    #[\Override]
+    #[Override]
     protected static ?string $pluralModelLabel = 'expediteurs';
 
-    #[\Override]
+    #[Override]
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getGloballySearchableAttributes(): array

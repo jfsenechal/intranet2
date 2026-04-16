@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\Mileage\Database\Factories\DeclarationFactory;
 use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
@@ -14,8 +16,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[UseFactory(DeclarationFactory::class)]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mileage')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-mileage')]
+#[Fillable([
     'omnium',
     'iban',
     'car_license_plate1',

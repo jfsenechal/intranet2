@@ -105,7 +105,7 @@ final class ImapRepository
     {
         $message = $this->findMessageByUid($uid);
 
-        if (!$message instanceof \DirectoryTree\ImapEngine\MessageInterface) {
+        if (!$message instanceof MessageInterface) {
             throw ImapException::messageNotFound($uid);
         }
 
@@ -153,7 +153,7 @@ final class ImapRepository
 
         $message = $this->findMessageByUid($uid);
 
-        if (!$message instanceof \DirectoryTree\ImapEngine\MessageInterface) {
+        if (!$message instanceof MessageInterface) {
             throw ImapException::messageNotFound($uid);
         }
 
@@ -236,7 +236,7 @@ final class ImapRepository
             $this->connect();
         }
 
-        if (!$this->mailbox instanceof \DirectoryTree\ImapEngine\MailboxInterface) {
+        if (!$this->mailbox instanceof MailboxInterface) {
             throw ImapException::notConnected();
         }
     }
@@ -275,7 +275,7 @@ final class ImapRepository
 
     private function formatAddress(?Address $address): string
     {
-        if (!$address instanceof \DirectoryTree\ImapEngine\Address) {
+        if (!$address instanceof Address) {
             return '';
         }
 

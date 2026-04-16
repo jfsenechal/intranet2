@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Rates\Pages;
 
+use Override;
+use Filament\Actions\ViewAction;
 use AcMarche\Mileage\Filament\Resources\Rates\RateResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
@@ -11,7 +13,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class EditRate extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = RateResource::class;
 
     public function getTitle(): string
@@ -22,7 +24,7 @@ final class EditRate extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

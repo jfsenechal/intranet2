@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Filament\Resources\Documents\Tables;
 
+use Filament\Tables\Columns\TextColumn;
 use AcMarche\Document\Filament\Resources\Documents\DocumentResource;
 use AcMarche\Document\Models\Document;
 use Filament\Actions\BulkActionGroup;
@@ -22,11 +23,11 @@ final class DocumentTables
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable()
                     ->label('Intitulé')
                     ->url(fn (Document $record): string => DocumentResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('category.name')
+                TextColumn::make('category.name')
                     ->searchable()
                     ->label('Catégorie'),
             ])

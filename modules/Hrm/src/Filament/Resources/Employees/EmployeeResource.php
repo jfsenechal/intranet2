@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employees;
 
+use Override;
+use AcMarche\Hrm\Filament\Resources\Employees\Pages\ListEmployees;
+use AcMarche\Hrm\Filament\Resources\Employees\Pages\CreateEmployee;
+use AcMarche\Hrm\Filament\Resources\Employees\Pages\ViewEmployee;
+use AcMarche\Hrm\Filament\Resources\Employees\Pages\EditEmployee;
 use AcMarche\Hrm\Filament\Resources\Employees\Schemas\EmployeeForm;
 use AcMarche\Hrm\Filament\Resources\Employees\Tables\EmployeeTables;
 use AcMarche\Hrm\Models\Employee;
@@ -14,13 +19,13 @@ use UnitEnum;
 
 final class EmployeeResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Employee::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Personnel';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 1;
 
     public static function getNavigationIcon(): string
@@ -56,10 +61,10 @@ final class EmployeeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListEmployees::route('/'),
-            'create' => Pages\CreateEmployee::route('/create'),
-            'view' => Pages\ViewEmployee::route('/{record}/view'),
-            'edit' => Pages\EditEmployee::route('/{record}/edit'),
+            'index' => ListEmployees::route('/'),
+            'create' => CreateEmployee::route('/create'),
+            'view' => ViewEmployee::route('/{record}/view'),
+            'edit' => EditEmployee::route('/{record}/edit'),
         ];
     }
 }

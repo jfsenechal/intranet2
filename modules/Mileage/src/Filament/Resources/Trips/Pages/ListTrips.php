@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Trips\Pages;
 
+use Override;
+use Filament\Actions\CreateAction;
 use AcMarche\Mileage\Filament\Resources\PersonalInformation\PersonalInformationResource;
 use AcMarche\Mileage\Filament\Resources\Trips\TripResource;
 use AcMarche\Mileage\Repository\PersonalInformationRepository;
@@ -14,7 +16,7 @@ use Illuminate\Support\HtmlString;
 
 final class ListTrips extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = TripResource::class;
 
     public function getTitle(): string
@@ -22,7 +24,7 @@ final class ListTrips extends ListRecords
         return 'Liste de mes déplacements';
     }
 
-    public function getSubheading(): \Illuminate\Contracts\Support\Htmlable
+    public function getSubheading(): Htmlable
     {
         return new HtmlString('Pour créer une nouvelle déclaration, cochez les déplacements <strong>non déclarés</strong>');
     }
@@ -32,7 +34,7 @@ final class ListTrips extends ListRecords
         $userHasPersonalInfo = PersonalInformationRepository::getByCurrentUser()->exists();
 
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Nouveau déplacement')
                 ->icon('tabler-plus')
                 ->disabled(! $userHasPersonalInfo)

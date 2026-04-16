@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\MailingList\Database\Factories\EmailFactory;
 use AcMarche\MailingList\Enums\EmailStatus;
 use AcMarche\MailingList\Repositories\OwnerScope;
@@ -17,8 +19,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[UseFactory(EmailFactory::class)]
 #[ScopedBy(OwnerScope::class)]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-mailing-list')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-mailing-list')]
+#[Fillable([
     'username',
     'sender_id',
     'subject',

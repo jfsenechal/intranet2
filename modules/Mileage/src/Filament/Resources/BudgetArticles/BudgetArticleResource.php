@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\BudgetArticles;
 
+use Override;
+use AcMarche\Mileage\Filament\Resources\BudgetArticles\Pages\ListBudgetArticles;
+use AcMarche\Mileage\Filament\Resources\BudgetArticles\Pages\CreateBudgetArticle;
+use AcMarche\Mileage\Filament\Resources\BudgetArticles\Pages\EditBudgetArticle;
 use AcMarche\Mileage\Filament\Resources\BudgetArticles\Schemas\BudgetArticleForm;
 use AcMarche\Mileage\Filament\Resources\BudgetArticles\Tables\BudgetArticleTables;
 use AcMarche\Mileage\Models\BudgetArticle;
@@ -14,13 +18,13 @@ use UnitEnum;
 
 final class BudgetArticleResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = BudgetArticle::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Paramètres';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 6;
 
     public static function getNavigationIcon(): string
@@ -46,9 +50,9 @@ final class BudgetArticleResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBudgetArticles::route('/'),
-            'create' => Pages\CreateBudgetArticle::route('/create'),
-            'edit' => Pages\EditBudgetArticle::route('/{record}/edit'),
+            'index' => ListBudgetArticles::route('/'),
+            'create' => CreateBudgetArticle::route('/create'),
+            'edit' => EditBudgetArticle::route('/{record}/edit'),
         ];
     }
 }

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\JobFunctions\Pages;
 
+use Override;
 use AcMarche\Hrm\Filament\Resources\JobFunctions\JobFunctionResource;
 use Filament\Resources\Pages\CreateRecord;
 
 final class CreateJobFunction extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = JobFunctionResource::class;
 }

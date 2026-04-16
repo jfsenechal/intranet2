@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\IncomingMails\Pages;
 
+use Override;
+use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\IncomingMailResource;
 use AcMarche\Courrier\Models\Sender;
 use Filament\Actions;
@@ -11,7 +14,7 @@ use Filament\Resources\Pages\EditRecord;
 
 final class EditIncomingMail extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = IncomingMailResource::class;
 
     /** @var array<int> */
@@ -36,8 +39,8 @@ final class EditIncomingMail extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
+            ViewAction::make(),
+            DeleteAction::make(),
         ];
     }
 

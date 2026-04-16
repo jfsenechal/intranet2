@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Pages;
 
+use Override;
 use AcMarche\Mileage\Enums\RolesEnum;
 use AcMarche\Mileage\Factory\PdfFactory;
 use AcMarche\Mileage\Models\Declaration;
@@ -42,16 +43,16 @@ final class UserExport extends Page implements HasForms
 
     public string $selectedUsername = '';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 6;
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Export par utilisateur';
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Administration';
 
-    #[\Override]
+    #[Override]
     protected string $view = 'mileage::filament.pages.user-export';
 
     public static function getNavigationIcon(): string

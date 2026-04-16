@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\News\Database\Factories\NewsFactory;
 use AcMarche\News\Observers\NewsObserver;
 use AcMarche\Security\Models\HasUserAdd;
@@ -18,8 +20,8 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 #[ObservedBy([NewsObserver::class])]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-news')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-news')]
+#[Fillable([
     'title',
     'slug',
     'excerpt',

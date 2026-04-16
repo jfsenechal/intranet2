@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\RelationManagers;
 
+use Override;
 use AcMarche\Pst\Filament\Resources\ActionPst\Schemas\MediaForm;
 use AcMarche\Pst\Filament\Resources\ActionPst\Tables\MediaTables;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -12,7 +13,7 @@ use Filament\Tables\Table;
 
 final class MediasRelationManager extends RelationManager
 {
-    #[\Override]
+    #[Override]
     protected static string $relationship = 'medias';
 
     public function form(Schema $schema): Schema

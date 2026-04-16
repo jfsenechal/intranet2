@@ -65,8 +65,8 @@ final class IncomingMailForm
                         ->viewData(fn (?IncomingMail $record): array => self::getExistingAttachmentPreviewData($record))
                         ->visible(fn (?IncomingMail $record): bool => $record?->attachments->isNotEmpty() ?? false),
                     FileUpload::make('attachment_file')
-                        ->label(fn (?IncomingMail $record): string => $record instanceof \AcMarche\Courrier\Models\IncomingMail ? 'Remplacer le fichier' : 'Fichier')
-                        ->required(fn (?IncomingMail $record): bool => !$record instanceof \AcMarche\Courrier\Models\IncomingMail)
+                        ->label(fn (?IncomingMail $record): string => $record instanceof IncomingMail ? 'Remplacer le fichier' : 'Fichier')
+                        ->required(fn (?IncomingMail $record): bool => !$record instanceof IncomingMail)
                         ->acceptedFileTypes(config('courrier.allowed_mime_types'))
                         ->maxSize(config('courrier.max_file_size'))
                         ->storeFiles(false)

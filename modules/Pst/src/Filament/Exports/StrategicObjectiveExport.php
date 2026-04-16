@@ -114,9 +114,9 @@ final class StrategicObjectiveExport implements FromCollection, ShouldAutoSize, 
                     $ligne++;
                     $type = $action->type?->name ?? null;
                     $mandataires = $action->mandataries ?? new Collection();
-                    $mandatairesNames = $mandataires->map(fn(User $user) => $user->last_name.' '.$user->first_name);
+                    $mandatairesNames = $mandataires->map(fn(User $user): string => $user->last_name.' '.$user->first_name);
                     $agents = $action->users ?? new Collection();
-                    $agentsNames = $agents->map(fn(User $user) => $user->last_name.' '.$user->first_name);
+                    $agentsNames = $agents->map(fn(User $user): string => $user->last_name.' '.$user->first_name);
 
                     $servicesPorteurs = $action->leaderServices ?? new Collection();
                     $servicesPorteursNames = $servicesPorteurs->map(fn(Service $service) => $service->name);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\Emails\Pages;
 
+use Override;
 use AcMarche\MailingList\Enums\RecipientStatus;
 use AcMarche\MailingList\Filament\Resources\Emails\EmailResource;
 use AcMarche\MailingList\Models\Contact;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 
 final class CreateEmail extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = EmailResource::class;
 
     protected function handleRecordCreation(array $data): Model

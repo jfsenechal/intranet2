@@ -4,19 +4,24 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Override;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-hrm')]
+#[Fillable([
     'notification_id',
     'user',
 ])]
-#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'notification_users')]
+#[Table(name: 'notification_users')]
 final class NotificationUser extends Model
 {
-    use \Illuminate\Database\Eloquent\Factories\HasFactory;
-    #[\Override]
+    use HasFactory;
+    #[Override]
     public $timestamps = false;
 
     /**

@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Contracts;
 
+use Override;
+use AcMarche\Hrm\Filament\Resources\Contracts\Pages\ListContracts;
+use AcMarche\Hrm\Filament\Resources\Contracts\Pages\CreateContract;
+use AcMarche\Hrm\Filament\Resources\Contracts\Pages\ViewContract;
+use AcMarche\Hrm\Filament\Resources\Contracts\Pages\EditContract;
 use AcMarche\Hrm\Filament\Resources\Contracts\Schemas\ContractForm;
 use AcMarche\Hrm\Filament\Resources\Contracts\Tables\ContractTables;
 use AcMarche\Hrm\Models\Contract;
@@ -14,13 +19,13 @@ use UnitEnum;
 
 final class ContractResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Contract::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Personnel';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 2;
 
     public static function getNavigationIcon(): string
@@ -56,10 +61,10 @@ final class ContractResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContracts::route('/'),
-            'create' => Pages\CreateContract::route('/create'),
-            'view' => Pages\ViewContract::route('/{record}/view'),
-            'edit' => Pages\EditContract::route('/{record}/edit'),
+            'index' => ListContracts::route('/'),
+            'create' => CreateContract::route('/create'),
+            'view' => ViewContract::route('/{record}/view'),
+            'edit' => EditContract::route('/{record}/edit'),
         ];
     }
 }

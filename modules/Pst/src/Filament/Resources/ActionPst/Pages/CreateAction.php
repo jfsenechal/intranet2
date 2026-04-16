@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Pages;
 
+use Override;
 use AcMarche\Pst\Events\ActionProcessed;
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Security\Repository\UserRepository;
@@ -13,10 +14,10 @@ use Illuminate\Database\Eloquent\Model;
 
 final class CreateAction extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ActionPstResource::class;
 
-    #[\Override]
+    #[Override]
     protected static ?string $title = 'Ajouter une action';
 
     /**
@@ -41,7 +42,7 @@ final class CreateAction extends CreateRecord
     protected function afterCreate(): void
     {
         if ($this->record->validated === false) {
-            event(new \AcMarche\Pst\Events\ActionProcessed($this->record));
+            event(new ActionProcessed($this->record));
         }
     }
 }

@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-hrm')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-hrm')]
+#[Fillable([
     'employee_id',
     'employer_id',
     'direction_id',
@@ -24,10 +28,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'user_add',
     'updated_by',
 ])]
-#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'deadlines')]
+#[Table(name: 'deadlines')]
 final class Deadline extends Model
 {
-    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    use HasFactory;
     use HasUserAdd;
 
     /**

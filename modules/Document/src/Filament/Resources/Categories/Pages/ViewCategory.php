@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Filament\Resources\Categories\Pages;
 
+use Override;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Document\Filament\Resources\Categories\CategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
@@ -11,7 +14,7 @@ use Filament\Schemas\Schema;
 
 final class ViewCategory extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = CategoryResource::class;
 
     public function getTitle(): string
@@ -35,9 +38,9 @@ final class ViewCategory extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

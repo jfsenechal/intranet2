@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\Emails;
 
+use Override;
 use AcMarche\MailingList\Filament\Resources\Emails\Pages\CreateEmail;
 use AcMarche\MailingList\Filament\Resources\Emails\Pages\EditEmail;
 use AcMarche\MailingList\Filament\Resources\Emails\Pages\ListEmails;
@@ -19,25 +20,25 @@ use Filament\Tables\Table;
 
 final class EmailResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Email::class;
 
-    #[\Override]
+    #[Override]
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 1;
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'E-mails';
 
-    #[\Override]
+    #[Override]
     protected static ?string $modelLabel = 'e-mail';
 
-    #[\Override]
+    #[Override]
     protected static ?string $pluralModelLabel = 'e-mails';
 
-    #[\Override]
+    #[Override]
     protected static ?string $recordTitleAttribute = 'subject';
 
     public static function getGloballySearchableAttributes(): array

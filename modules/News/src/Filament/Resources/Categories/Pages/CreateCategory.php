@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\Categories\Pages;
 
+use Override;
 use AcMarche\News\Filament\Resources\Categories\CategoryResource;
 use Filament\Resources\Pages\CreateRecord;
 
 final class CreateCategory extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = CategoryResource::class;
 
     public function canCreateAnother(): bool

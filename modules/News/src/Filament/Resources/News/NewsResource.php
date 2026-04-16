@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News;
 
+use Override;
+use AcMarche\News\Filament\Resources\News\Pages\ListNews;
+use AcMarche\News\Filament\Resources\News\Pages\CreateNews;
+use AcMarche\News\Filament\Resources\News\Pages\EditNews;
+use AcMarche\News\Filament\Resources\News\Pages\ViewNews;
 use AcMarche\News\Filament\Resources\News\Schemas\NewsForm;
 use AcMarche\News\Filament\Resources\News\Tables\NewsTables;
 use AcMarche\News\Models\News;
@@ -13,10 +18,10 @@ use Filament\Tables\Table;
 
 final class NewsResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = News::class;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 1;
 
     public static function getNavigationIcon(): string
@@ -42,10 +47,10 @@ final class NewsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListNews::route('/'),
-            'create' => Pages\CreateNews::route('/create'),
-            'edit' => Pages\EditNews::route('/{record}/edit'),
-            'view' => Pages\ViewNews::route('/{record}'),
+            'index' => ListNews::route('/'),
+            'create' => CreateNews::route('/create'),
+            'edit' => EditNews::route('/{record}/edit'),
+            'view' => ViewNews::route('/{record}'),
         ];
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\RelationManagers;
 
+use Override;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -16,13 +17,13 @@ use Filament\Tables\Table;
 
 final class HistoriesRelationManager extends RelationManager
 {
-    #[\Override]
+    #[Override]
     protected static string $relationship = 'histories';
 
-    #[\Override]
+    #[Override]
     protected static ?string $title = 'Historique';
 
-    #[\Override]
+    #[Override]
     protected static ?string $label = 'Historique';
 
     public function isReadOnly(): bool

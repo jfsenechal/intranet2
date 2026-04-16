@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Contracts\Pages;
 
+use Override;
+use Filament\Actions\CreateAction;
 use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 final class ListContracts extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ContractResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter un contrat')
                 ->icon('tabler-plus'),
         ];

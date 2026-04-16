@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Pages;
 
+use Override;
 use AcMarche\Mileage\Calculator\DeclarationCalculator;
 use AcMarche\Mileage\Enums\RolesEnum;
 use AcMarche\Mileage\Filament\Resources\Declarations\DeclarationResource;
@@ -23,16 +24,16 @@ use UnitEnum;
 
 final class AllDeclarations extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = DeclarationResource::class;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 3;
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Toutes les déclarations';
 
-    #[\Override]
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Administration';
 
     /**

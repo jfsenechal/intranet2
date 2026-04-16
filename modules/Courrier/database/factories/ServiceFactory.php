@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Database\Factories;
 
+use Override;
 use AcMarche\Courrier\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Courrier\Models\Service>
+ * @extends Factory<Service>
  */
 final class ServiceFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = Service::class;
 
     public function definition(): array
