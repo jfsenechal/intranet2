@@ -33,7 +33,7 @@ final class ContractTypeResource extends Resource
     protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
     #[Override]
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 9;
 
     public static function getNavigationIcon(): string
     {

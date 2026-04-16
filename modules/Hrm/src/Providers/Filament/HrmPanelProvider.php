@@ -45,6 +45,10 @@ final class HrmPanelProvider extends PanelProvider
             ->resourceCreatePageRedirect('view')
             ->resourceEditPageRedirect('view')
             ->databaseNotifications()
+            ->navigationGroups([
+                'Personnel',
+                'Configuration',
+            ])
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Hrm\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Hrm\\Filament\\Pages')
             ->pages([])
@@ -54,21 +58,21 @@ final class HrmPanelProvider extends PanelProvider
                 NavigationItem::make(StatusEnum::APPLICATION->value)
                     ->icon(Heroicon::OutlinedUserPlus)
                     ->group('Personnel')
-                    ->sort(2)
+                    ->sort(4)
                     ->url(fn (): string => ListEmployees::getUrl(parameters: [
                         'tableFilters' => ['status' => ['value' => StatusEnum::APPLICATION->value]],
                     ])),
                 NavigationItem::make(StatusEnum::STUDENT->value)
                     ->icon(Heroicon::OutlinedAcademicCap)
                     ->group('Personnel')
-                    ->sort(3)
+                    ->sort(5)
                     ->url(fn (): string => ListEmployees::getUrl(parameters: [
                         'tableFilters' => ['status' => ['value' => StatusEnum::STUDENT->value]],
                     ])),
                 NavigationItem::make(StatusEnum::INTERN->value)
                     ->icon(Heroicon::OutlinedBriefcase)
                     ->group('Personnel')
-                    ->sort(4)
+                    ->sort(6)
                     ->url(fn (): string => ListEmployees::getUrl(parameters: [
                         'tableFilters' => ['status' => ['value' => StatusEnum::INTERN->value]],
                     ])),

@@ -32,7 +32,7 @@ final class JobFunctionResource extends Resource
     protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
     #[Override]
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 4;
 
     public static function getNavigationIcon(): string
     {
