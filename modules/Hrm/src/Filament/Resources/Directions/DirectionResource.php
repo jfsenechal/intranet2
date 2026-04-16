@@ -24,10 +24,10 @@ final class DirectionResource extends Resource
     protected static ?string $model = Direction::class;
 
     #[Override]
-    protected static string|null|UnitEnum $navigationGroup = 'Organisation';
+    protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
     #[Override]
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 6;
 
     public static function getNavigationIcon(): string
     {

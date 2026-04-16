@@ -24,7 +24,7 @@ final class ServiceResource extends Resource
     protected static ?string $model = Service::class;
 
     #[Override]
-    protected static string|null|UnitEnum $navigationGroup = 'Organisation';
+    protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
     #[Override]
     protected static ?int $navigationSort = 2;
