@@ -19,7 +19,7 @@ final class DirectionForm
                 Section::make('Informations')
                     ->columns(2)
                     ->schema([
-                        TextInput::make('title')
+                        TextInput::make('name')
                             ->label('Intitule')
                             ->required()
                             ->maxLength(100)

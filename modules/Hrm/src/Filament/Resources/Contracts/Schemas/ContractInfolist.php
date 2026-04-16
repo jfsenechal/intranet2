@@ -24,9 +24,9 @@ final class ContractInfolist
                             ->label('Agent'),
                         TextEntry::make('employer.name')
                             ->label('Employeur'),
-                        TextEntry::make('direction.title')
+                        TextEntry::make('direction.name')
                             ->label('Direction'),
-                        TextEntry::make('service.title')
+                        TextEntry::make('service.name')
                             ->label('Service'),
                     ]),
                 Section::make('Détails du contrat')
@@ -36,7 +36,7 @@ final class ContractInfolist
                             ->label('Type de contrat'),
                         TextEntry::make('contractNature.name')
                             ->label('Nature du contrat'),
-                        TextEntry::make('payScale.title')
+                        TextEntry::make('payScale.name')
                             ->label('Échelle'),
                         TextEntry::make('job_title')
                             ->label('Fonction'),

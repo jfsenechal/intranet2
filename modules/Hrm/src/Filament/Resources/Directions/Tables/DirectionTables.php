@@ -18,10 +18,10 @@ final class DirectionTables
     public static function configure(Table $table): Table
     {
         return $table
-            ->defaultSort('title')
+            ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('name')
                     ->label('Intitule')
                     ->searchable()
                     ->sortable()

@@ -31,7 +31,7 @@ final class TrainingForm
                             ->searchable()
                             ->preload()
                             ->required(),
-                        TextInput::make('title')
+                        TextInput::make('name')
                             ->label('Intitule')
                             ->required()
                             ->maxLength(150),

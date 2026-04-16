@@ -126,7 +126,7 @@ final class EmployeeForm
                                     ->schema([
                                         Select::make('pay_scale_id')
                                             ->label('Echelle')
-                                            ->relationship('payScale', 'title')
+                                            ->relationship('payScale', 'name')
                                             ->searchable()
                                             ->preload(),
                                         TextInput::make('pay_scale_code')

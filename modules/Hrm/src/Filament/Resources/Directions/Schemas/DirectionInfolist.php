@@ -18,7 +18,7 @@ final class DirectionInfolist
                 Section::make('Informations')
                     ->columns(2)
                     ->schema([
-                        TextEntry::make('title')
+                        TextEntry::make('name')
                             ->label('Intitulé'),
                         TextEntry::make('abbreviation')
                             ->label('Abréviation'),

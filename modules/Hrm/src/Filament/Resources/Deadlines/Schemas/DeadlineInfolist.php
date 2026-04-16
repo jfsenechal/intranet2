@@ -27,9 +27,9 @@ final class DeadlineInfolist
                             ),
                         TextEntry::make('employer.name')
                             ->label('Employeur'),
-                        TextEntry::make('direction.title')
+                        TextEntry::make('direction.name')
                             ->label('Direction'),
-                        TextEntry::make('service.title')
+                        TextEntry::make('service.name')
                             ->label('Service'),
                     ]),
                 Section::make('Détails')

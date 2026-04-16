@@ -63,7 +63,7 @@ final class PrerequisiteResource extends Resource
                 Section::make()
                     ->columns(2)
                     ->schema([
-                        TextInput::make('title')
+                        TextInput::make('name')
                             ->label('Titre')
                             ->required()
                             ->maxLength(150),
@@ -94,7 +94,7 @@ final class PrerequisiteResource extends Resource
                 Section::make()
                     ->columns(2)
                     ->schema([
-                        TextEntry::make('title')
+                        TextEntry::make('name')
                             ->label('Titre'),
                         TextEntry::make('profession')
                             ->label('Profession'),
@@ -112,10 +112,10 @@ final class PrerequisiteResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultSort('title')
+            ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('name')
                     ->label('Titre')
                     ->searchable()
                     ->sortable(),

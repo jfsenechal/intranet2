@@ -108,7 +108,7 @@ final class EmployeeInfolist
                                 Fieldset::make('Bareme')
                                     ->columns(3)
                                     ->schema([
-                                        TextEntry::make('payScale.title')
+                                        TextEntry::make('payScale.name')
                                             ->label('Echelle'),
                                         TextEntry::make('pay_scale_code')
                                             ->label('Code bareme'),

@@ -22,7 +22,7 @@ final class TrainingInfolist
                     ->schema([
                         TextEntry::make('employee.full_name')
                             ->label('Agent'),
-                        TextEntry::make('title')
+                        TextEntry::make('name')
                             ->label('Intitulé'),
                         TextEntry::make('training_type')
                             ->label('Type de formation')

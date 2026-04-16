@@ -20,7 +20,7 @@ final class ServiceForm
                 Section::make('Informations')
                     ->columns(2)
                     ->schema([
-                        TextInput::make('title')
+                        TextInput::make('name')
                             ->label('Intitule')
                             ->required()
                             ->maxLength(100)
@@ -30,7 +30,7 @@ final class ServiceForm
                             ->maxLength(255),
                         Select::make('direction_id')
                             ->label('Direction')
-                            ->relationship('direction', 'title')
+                            ->relationship('direction', 'name')
                             ->searchable()
                             ->preload(),
                         Select::make('employer_id')

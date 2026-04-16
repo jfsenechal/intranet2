@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Connection('maria-hrm')]
 #[Fillable([
-    'title',
+    'name',
     'object_id',
     'object_type',
     'employer_id',

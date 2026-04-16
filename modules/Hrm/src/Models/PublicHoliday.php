@@ -13,7 +13,7 @@ use Override;
 
 #[Connection('maria-hrm')]
 #[Fillable([
-    'title',
+    'name',
     'holiday_date',
 ])]
 #[Table(name: 'public_holidays')]

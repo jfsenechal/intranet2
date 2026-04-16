@@ -32,12 +32,12 @@ final class ContractForm
                             ->required(),
                         Select::make('direction_id')
                             ->label('Direction')
-                            ->relationship('direction', 'title')
+                            ->relationship('direction', 'name')
                             ->searchable()
                             ->preload(),
                         Select::make('service_id')
                             ->label('Service')
-                            ->relationship('service', 'title')
+                            ->relationship('service', 'name')
                             ->searchable()
                             ->preload(),
                     ]),
@@ -56,7 +56,7 @@ final class ContractForm
                             ->preload(),
                         Select::make('pay_scale_id')
                             ->label('Echelle')
-                            ->relationship('payScale', 'title')
+                            ->relationship('payScale', 'name')
                             ->searchable()
                             ->preload(),
                         TextInput::make('job_title')

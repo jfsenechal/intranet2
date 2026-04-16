@@ -19,10 +19,10 @@ final class ServiceTables
     public static function configure(Table $table): Table
     {
         return $table
-            ->defaultSort('title')
+            ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('name')
                     ->label('Intitule')
                     ->searchable()
                     ->sortable()
@@ -31,7 +31,7 @@ final class ServiceTables
                     ->label('Abreviation')
                     ->searchable()
                     ->toggleable(),
-                TextColumn::make('direction.title')
+                TextColumn::make('direction.name')
                     ->label('Direction')
                     ->sortable()
                     ->toggleable(),
@@ -45,7 +45,7 @@ final class ServiceTables
             ->filters([
                 SelectFilter::make('direction_id')
                     ->label('Direction')
-                    ->relationship('direction', 'title'),
+                    ->relationship('direction', 'name'),
             ])
             ->recordActions([
                 ViewAction::make(),

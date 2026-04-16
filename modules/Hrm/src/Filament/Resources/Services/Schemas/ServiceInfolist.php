@@ -18,11 +18,11 @@ final class ServiceInfolist
                 Section::make('Informations')
                     ->columns(2)
                     ->schema([
-                        TextEntry::make('title')
+                        TextEntry::make('name')
                             ->label('Intitulé'),
                         TextEntry::make('abbreviation')
                             ->label('Abréviation'),
-                        TextEntry::make('direction.title')
+                        TextEntry::make('direction.name')
                             ->label('Direction'),
                         TextEntry::make('employer.name')
                             ->label('Employeur'),
