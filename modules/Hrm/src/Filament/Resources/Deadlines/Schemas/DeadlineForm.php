@@ -9,6 +9,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -19,6 +20,14 @@ final class DeadlineForm
         return $schema
             ->columns(1)
             ->components([
+                Flex::make([
+                    TextInput::make('name')
+                        ->label('Intitulé')
+                        ->required()
+                        ->maxLength(250),
+                    Toggle::make('is_closed')
+                        ->label('Clôturée'),
+                ]),
                 Section::make('Agent et employeur')
                     ->columns(2)
                     ->schema([
@@ -26,7 +35,7 @@ final class DeadlineForm
                             ->label('Agent')
                             ->relationship('employee', 'last_name')
                             ->getOptionLabelFromRecordUsing(
-                                fn ($record): string => $record->last_name.' '.$record->first_name
+                                fn($record): string => $record->last_name.' '.$record->first_name
                             )
                             ->searchable()
                             ->preload(),
@@ -46,17 +55,6 @@ final class DeadlineForm
                             ->searchable()
                             ->preload(),
                     ]),
-                Section::make('Détails')
-                    ->columns(1)
-                    ->schema([
-                        TextInput::make('name')
-                            ->label('Intitulé')
-                            ->required()
-                            ->maxLength(250),
-                        RichEditor::make('note')
-                            ->label('Note')
-                            ->columnSpanFull(),
-                    ]),
                 Section::make('Dates')
                     ->columns(2)
                     ->schema([
@@ -69,11 +67,9 @@ final class DeadlineForm
                         DatePicker::make('closed_date')
                             ->label('Date de clôture'),
                     ]),
-                Section::make('Options')
-                    ->schema([
-                        Toggle::make('is_closed')
-                            ->label('Clôturée'),
-                    ]),
+                RichEditor::make('note')
+                    ->label('Note')
+                    ->columnSpanFull(),
             ]);
     }
 }

@@ -33,19 +33,23 @@ final class DeadlineTables
                         fn (Deadline $record): string => $record->employee?->last_name.' '.$record->employee?->first_name
                     )
                     ->searchable(['last_name', 'first_name'])
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('employer.name')
                     ->label('Employeur')
                     ->sortable()
-                    ->toggleable(),
+                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('start_date')
                     ->label('Début')
                     ->date('d/m/Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('end_date')
                     ->label('Fin')
                     ->date('d/m/Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('reminder_date')
                     ->label('Rappel')
                     ->date('d/m/Y')
