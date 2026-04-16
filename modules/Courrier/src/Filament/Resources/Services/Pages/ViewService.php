@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Services\Pages;
 
-use Override;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Courrier\Filament\Resources\Services\Schemas\ServiceInfolist;
 use AcMarche\Courrier\Filament\Resources\Services\ServiceResource;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
+use Override;
 
 final class ViewService extends ViewRecord
 {

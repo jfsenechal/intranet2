@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Contracts\Pages;
 
-use Override;
-use Filament\Actions\ViewAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
+use Override;
 
 final class EditContract extends EditRecord
 {

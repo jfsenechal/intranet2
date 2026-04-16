@@ -4,20 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News\Schemas;
 
-use Filament\Forms\Components\TextInput;
+use AcMarche\Security\Constant\DepartmentWithCommonEnum;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\DatePicker;
-use Illuminate\Support\Facades\Date;
-use AcMarche\Security\Constant\DepartmentWithCommonEnum;
-use Carbon\Carbon;
-use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Date;
 
 final class NewsForm
 {

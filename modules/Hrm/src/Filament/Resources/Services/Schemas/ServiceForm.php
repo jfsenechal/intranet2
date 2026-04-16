@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Services\Schemas;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Str;
 
 final class ServiceForm
 {

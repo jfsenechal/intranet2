@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Pages;
 
-use Override;
 use AcMarche\Pst\Events\ActionProcessed;
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Security\Repository\UserRepository;
 use Filament\Facades\Filament;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 final class CreateAction extends CreateRecord
 {

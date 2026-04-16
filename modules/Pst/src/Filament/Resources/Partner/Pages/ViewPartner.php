@@ -13,10 +13,11 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Schema;
+use Override;
 
 final class ViewPartner extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = PartnerResource::class;
 
     public function getTitle(): string

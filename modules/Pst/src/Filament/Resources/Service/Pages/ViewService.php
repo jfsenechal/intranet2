@@ -12,10 +12,11 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Schema;
+use Override;
 
 final class ViewService extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ServiceResource::class;
 
     public function getTitle(): string

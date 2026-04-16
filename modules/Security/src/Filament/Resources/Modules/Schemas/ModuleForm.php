@@ -111,7 +111,7 @@ final class ModuleForm
     public static function rolesField(?Module $module, User|Model|null $user = null): CheckboxList|Radio
     {
         $options = function (callable $get) use ($module) {
-            if (!$module instanceof \AcMarche\Security\Models\Module) {
+            if (! $module instanceof Module) {
                 $moduleId = $get('module');
                 if (! $moduleId) {
                     return [];
@@ -124,7 +124,7 @@ final class ModuleForm
         };
 
         $descriptions = function (callable $get) use ($module) {
-            if (!$module instanceof \AcMarche\Security\Models\Module) {
+            if (! $module instanceof Module) {
                 $moduleId = $get('module');
                 if (! $moduleId) {
                     return [];
@@ -147,13 +147,13 @@ final class ModuleForm
                 ->options($options)
                 ->descriptions($descriptions)
                 ->columnSpanFull()
-                ->afterStateHydrated(fn (CheckboxList $component): \Filament\Forms\Components\CheckboxList => $component->state($userRoles->toArray()));
+                ->afterStateHydrated(fn (CheckboxList $component): CheckboxList => $component->state($userRoles->toArray()));
         }
 
         return Radio::make('roles')
             ->label('Rôle')
             ->options($options)
             ->descriptions($descriptions)
-            ->afterStateHydrated(fn (Radio $component): \Filament\Forms\Components\Radio => $component->state($userRoles->first()));
+            ->afterStateHydrated(fn (Radio $component): Radio => $component->state($userRoles->first()));
     }
 }

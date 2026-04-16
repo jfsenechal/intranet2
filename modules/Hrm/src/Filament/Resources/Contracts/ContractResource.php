@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Contracts;
 
-use Override;
-use AcMarche\Hrm\Filament\Resources\Contracts\Pages\ListContracts;
 use AcMarche\Hrm\Filament\Resources\Contracts\Pages\CreateContract;
-use AcMarche\Hrm\Filament\Resources\Contracts\Pages\ViewContract;
 use AcMarche\Hrm\Filament\Resources\Contracts\Pages\EditContract;
+use AcMarche\Hrm\Filament\Resources\Contracts\Pages\ListContracts;
+use AcMarche\Hrm\Filament\Resources\Contracts\Pages\ViewContract;
 use AcMarche\Hrm\Filament\Resources\Contracts\Schemas\ContractForm;
 use AcMarche\Hrm\Filament\Resources\Contracts\Tables\ContractTables;
 use AcMarche\Hrm\Models\Contract;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class ContractResource extends Resource

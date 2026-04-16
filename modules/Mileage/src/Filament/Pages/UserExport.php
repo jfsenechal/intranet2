@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Pages;
 
-use Override;
 use AcMarche\Mileage\Enums\RolesEnum;
 use AcMarche\Mileage\Factory\PdfFactory;
 use AcMarche\Mileage\Models\Declaration;
@@ -17,8 +16,8 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Auth;
+use Override;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use UnitEnum;
 

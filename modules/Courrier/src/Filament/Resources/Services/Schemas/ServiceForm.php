@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Services\Schemas;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\CheckboxList;
 use AcMarche\Courrier\Filament\Components\DepartmentField;
 use AcMarche\Courrier\Models\Recipient;
 use AcMarche\Courrier\Repository\RecipientRepository;
-use Filament\Forms;
+use Filament\Forms\Components\CheckboxList;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Builder;

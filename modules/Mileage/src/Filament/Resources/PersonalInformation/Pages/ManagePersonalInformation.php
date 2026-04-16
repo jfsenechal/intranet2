@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\PersonalInformation\Pages;
 
-use Override;
 use AcMarche\Mileage\Filament\Resources\PersonalInformation\PersonalInformationResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ManageRecords;
+use Override;
 
 final class ManagePersonalInformation extends ManageRecords
 {

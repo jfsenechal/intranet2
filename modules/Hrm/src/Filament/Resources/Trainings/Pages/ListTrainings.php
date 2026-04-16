@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Pages;
 
-use Override;
-use Filament\Actions\CreateAction;
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Override;
 
 final class ListTrainings extends ListRecords
 {

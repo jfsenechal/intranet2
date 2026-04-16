@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News;
 
-use Override;
-use AcMarche\News\Filament\Resources\News\Pages\ListNews;
 use AcMarche\News\Filament\Resources\News\Pages\CreateNews;
 use AcMarche\News\Filament\Resources\News\Pages\EditNews;
+use AcMarche\News\Filament\Resources\News\Pages\ListNews;
 use AcMarche\News\Filament\Resources\News\Pages\ViewNews;
 use AcMarche\News\Filament\Resources\News\Schemas\NewsForm;
 use AcMarche\News\Filament\Resources\News\Tables\NewsTables;
@@ -15,6 +14,7 @@ use AcMarche\News\Models\News;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class NewsResource extends Resource
 {

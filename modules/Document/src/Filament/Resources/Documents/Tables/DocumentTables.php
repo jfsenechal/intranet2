@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Filament\Resources\Documents\Tables;
 
-use Filament\Tables\Columns\TextColumn;
 use AcMarche\Document\Filament\Resources\Documents\DocumentResource;
 use AcMarche\Document\Models\Document;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 

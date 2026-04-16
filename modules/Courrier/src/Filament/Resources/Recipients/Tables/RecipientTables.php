@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Recipients\Tables;
 
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\IconColumn;
 use AcMarche\Courrier\Filament\Resources\Recipients\RecipientResource;
 use AcMarche\Courrier\Models\Recipient;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 final class RecipientTables

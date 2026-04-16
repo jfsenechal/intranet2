@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Events;
 
-use Illuminate\Broadcasting\Channel;
 use AcMarche\Pst\Models\OperationalObjective;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;

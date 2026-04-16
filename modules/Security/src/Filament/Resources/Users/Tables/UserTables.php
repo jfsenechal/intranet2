@@ -120,7 +120,7 @@ final class UserTables
 
                         return $data;
                     })
-                    ->schema(fn (Schema $schema): \Filament\Schemas\Schema => ModuleForm::addUserFromModule($schema, $owner))
+                    ->schema(fn (Schema $schema): Schema => ModuleForm::addUserFromModule($schema, $owner))
                     ->action(function (array $data, Schema $schema) use ($owner): void {
                         try {
                             ModuleHandler::syncUserRolesForModule($owner, $schema->getRecord(), $data);

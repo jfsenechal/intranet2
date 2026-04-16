@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Filament\Resources\Documents;
 
-use Override;
-use AcMarche\Document\Filament\Resources\Documents\Pages\ListDocuments;
 use AcMarche\Document\Filament\Resources\Documents\Pages\CreateDocument;
-use AcMarche\Document\Filament\Resources\Documents\Pages\ViewDocument;
 use AcMarche\Document\Filament\Resources\Documents\Pages\EditDocument;
+use AcMarche\Document\Filament\Resources\Documents\Pages\ListDocuments;
+use AcMarche\Document\Filament\Resources\Documents\Pages\ViewDocument;
 use AcMarche\Document\Filament\Resources\Documents\Schemas\DocumentForm;
 use AcMarche\Document\Filament\Resources\Documents\Tables\DocumentTables;
 use AcMarche\Document\Models\Document;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class DocumentResource extends Resource
 {

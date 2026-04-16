@@ -7,6 +7,7 @@ namespace AcMarche\Pst\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Override;
 
 #[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
 #[\Illuminate\Database\Eloquent\Attributes\Fillable([
@@ -16,7 +17,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 final class ActionMandatory extends Model
 {
     use \Illuminate\Database\Eloquent\Factories\HasFactory;
-    #[\Override]
+
+    #[Override]
     protected $casts = [
     ];
 

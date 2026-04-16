@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Recipients;
 
-use Override;
-use AcMarche\Courrier\Filament\Resources\Recipients\Pages\ListRecipients;
 use AcMarche\Courrier\Filament\Resources\Recipients\Pages\CreateRecipient;
 use AcMarche\Courrier\Filament\Resources\Recipients\Pages\EditRecipient;
+use AcMarche\Courrier\Filament\Resources\Recipients\Pages\ListRecipients;
 use AcMarche\Courrier\Filament\Resources\Recipients\Schemas\RecipientForm;
 use AcMarche\Courrier\Filament\Resources\Recipients\Tables\RecipientTables;
 use AcMarche\Courrier\Models\Recipient;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class RecipientResource extends Resource

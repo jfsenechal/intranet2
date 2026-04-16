@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\FollowUp\Schemas;
 
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 final class FollowUpForm

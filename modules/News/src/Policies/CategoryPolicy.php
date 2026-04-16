@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\News\Policies;
 
 use AcMarche\News\Enums\RolesEnum;
-use AcMarche\News\Models\Category;
 use App\Models\User;
 
 // https://laravel.com/docs/12.x/authorization#creating-policies
@@ -72,6 +71,7 @@ final class CategoryPolicy
         if ($user->isAdministrator()) {
             return true;
         }
+
         return $user->hasOneOfThisRoles([RolesEnum::ROLE_NEWS_ADMIN->value]);
     }
 }

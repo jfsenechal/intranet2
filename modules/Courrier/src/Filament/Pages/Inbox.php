@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Pages;
 
-use Override;
 use AcMarche\Courrier\Enums\RolesEnum;
 use AcMarche\Courrier\Filament\Resources\Inbox\Tables\InboxTables;
 use BackedEnum;
@@ -12,8 +11,8 @@ use Filament\Pages\Page;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Auth;
+use Override;
 use UnitEnum;
 
 final class Inbox extends Page implements HasTable

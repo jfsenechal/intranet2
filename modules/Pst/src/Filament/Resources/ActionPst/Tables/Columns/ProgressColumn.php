@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Tables\Columns;
 
-use Override;
 use Filament\Tables\Columns\Column;
+use Override;
 
 /**
  * https://laraveldaily.com/post/filament-custom-table-column-progress-bar

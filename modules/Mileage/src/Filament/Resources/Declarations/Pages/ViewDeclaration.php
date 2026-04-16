@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Declarations\Pages;
 
-use Override;
-use Filament\Actions\Action;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Mileage\Factory\PdfFactory;
 use AcMarche\Mileage\Filament\Resources\Declarations\DeclarationResource;
 use AcMarche\Mileage\Filament\Resources\Declarations\Schemas\DeclarationInfolist;
 use AcMarche\Mileage\Models\Declaration;
-use Filament\Actions;
+use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 use Filament\Support\Colors\Color;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ViewDeclaration extends ViewRecord
 {

@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Contracts\Tables;
 
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\IconColumn;
 use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use AcMarche\Hrm\Models\Contract;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;

@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Filament\Pages;
 
-use Override;
 use AcMarche\Security\Handler\MigrationHandler;
 use BackedEnum;
 use Filament\Pages\Page;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Collection;
+use Override;
 
 final class Homepage extends Page
 {

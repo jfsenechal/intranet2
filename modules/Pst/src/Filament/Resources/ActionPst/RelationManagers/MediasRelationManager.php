@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\RelationManagers;
 
-use Override;
 use AcMarche\Pst\Filament\Resources\ActionPst\Schemas\MediaForm;
 use AcMarche\Pst\Filament\Resources\ActionPst\Tables\MediaTables;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class MediasRelationManager extends RelationManager
 {

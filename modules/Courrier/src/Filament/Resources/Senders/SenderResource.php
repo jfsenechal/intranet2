@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Senders;
 
-use Override;
 use AcMarche\Courrier\Filament\Resources\Senders\Pages\CreateSender;
 use AcMarche\Courrier\Filament\Resources\Senders\Pages\EditSender;
 use AcMarche\Courrier\Filament\Resources\Senders\Pages\ListSenders;
@@ -16,6 +15,7 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class SenderResource extends Resource

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\IncomingMails\Pages;
 
-use Override;
-use Filament\Actions\CreateAction;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\IncomingMailResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Override;
 
 final class ListIncomingMails extends ListRecords
 {

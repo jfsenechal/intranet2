@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News\Pages;
 
-use Override;
-use Filament\Actions\CreateAction;
 use AcMarche\News\Filament\Resources\News\NewsResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListNews extends ListRecords
 {

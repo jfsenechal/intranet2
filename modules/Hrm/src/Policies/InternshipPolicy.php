@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Policies;
 
-use AcMarche\Hrm\Models\Internship;
 use AcMarche\Hrm\Policies\Concerns\HrmAuthorization;
 use App\Models\User;
 
@@ -22,6 +21,7 @@ final class InternshipPolicy
         if ($this->hasReadAccess($user)) {
             return true;
         }
+
         return $this->isDirectionHead($user);
     }
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News\Tables;
 
-use Filament\Tables\Filters\Filter;
 use AcMarche\News\Filament\Resources\News\NewsResource;
 use AcMarche\News\Models\News;
 use Filament\Actions\BulkActionGroup;
@@ -14,10 +13,10 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Schemas\Components\Flex;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Width;
-use Filament\Tables;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
@@ -72,15 +71,15 @@ final class NewsTables
                             DatePicker::make('created_from')->label('Entre le'),
                             DatePicker::make('created_until')->label('Et le'),
                         ]),
-                    ])->query(fn(Builder $query, array $data): Builder => $query
-                        ->when(
-                            $data['created_from'],
-                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
-                        )
-                        ->when(
-                            $data['created_until'],
-                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
-                        )),
+                    ])->query(fn (Builder $query, array $data): Builder => $query
+                    ->when(
+                        $data['created_from'],
+                        fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                    )
+                    ->when(
+                        $data['created_until'],
+                        fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                    )),
             ], layout: FiltersLayout::AboveContent)->filtersFormWidth(Width::FourExtraLarge)
             ->recordActions([
                 ViewAction::make()

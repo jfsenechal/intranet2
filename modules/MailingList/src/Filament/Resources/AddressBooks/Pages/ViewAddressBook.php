@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\AddressBooks\Pages;
 
-use Override;
 use AcMarche\MailingList\Filament\Resources\AddressBooks\AddressBookResource;
 use AcMarche\MailingList\Models\AddressBookShare;
 use App\Models\User;
@@ -15,6 +14,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Override;
 
 final class ViewAddressBook extends ViewRecord
 {

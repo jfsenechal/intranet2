@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Console\Commands;
 
-use Override;
 use AcMarche\Courrier\Models\Recipient;
 use AcMarche\Courrier\Models\Service;
 use AcMarche\Security\Ldap\UserLdap;
 use Illuminate\Console\Command;
 use LdapRecord\Models\Model;
+use Override;
 
 final class SyncCommand extends Command
 {

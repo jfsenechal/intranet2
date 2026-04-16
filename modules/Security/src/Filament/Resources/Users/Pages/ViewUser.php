@@ -9,10 +9,11 @@ use Filament\Actions;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
+use Override;
 
 final class ViewUser extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = UserResource::class;
 
     public function getTitle(): string

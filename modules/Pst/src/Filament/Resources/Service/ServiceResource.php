@@ -15,23 +15,24 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Override;
 use UnitEnum;
 
 final class ServiceResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Service::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'tabler-users-group';
 
-    #[\Override]
+    #[Override]
     protected static string|UnitEnum|null $navigationGroup = NavigationGroupEnum::Settings;
 
-    #[\Override]
+    #[Override]
     protected static ?string $recordTitleAttribute = 'name';
 
-    #[\Override]
+    #[Override]
     protected static ?bool $shouldSplitGlobalSearchTerms = false;
 
     public static function form(Schema $schema): Schema

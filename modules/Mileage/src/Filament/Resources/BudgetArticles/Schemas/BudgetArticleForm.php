@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\BudgetArticles\Schemas;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
 use AcMarche\App\Enums\DepartmentEnum;
-use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 

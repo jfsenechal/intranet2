@@ -7,11 +7,11 @@ namespace AcMarche\Security\Filament\Resources\Users\Pages;
 use AcMarche\Security\Filament\Resources\Users\UserResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditUser extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = UserResource::class;
 
     public function getTitle(): string

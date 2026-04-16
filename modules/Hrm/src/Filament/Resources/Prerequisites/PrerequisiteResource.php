@@ -4,24 +4,22 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Prerequisites;
 
-use Override;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\TextColumn;
-use AcMarche\Hrm\Filament\Resources\Prerequisites\Pages\ListPrerequisites;
 use AcMarche\Hrm\Filament\Resources\Prerequisites\Pages\CreatePrerequisite;
 use AcMarche\Hrm\Filament\Resources\Prerequisites\Pages\EditPrerequisite;
+use AcMarche\Hrm\Filament\Resources\Prerequisites\Pages\ListPrerequisites;
 use AcMarche\Hrm\Models\Prerequisite;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class PrerequisiteResource extends Resource

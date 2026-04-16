@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\Emails\Pages;
 
-use Override;
 use AcMarche\MailingList\Enums\RecipientStatus;
 use AcMarche\MailingList\Filament\Resources\Emails\EmailResource;
 use AcMarche\MailingList\Models\Contact;
 use AcMarche\MailingList\Models\Email;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 final class CreateEmail extends CreateRecord
 {

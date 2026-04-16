@@ -4,13 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Schemas;
 
-use Filament\Schemas\Components\Wizard\Step;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\ToggleButtons;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\RichEditor;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Enums\ActionRoadmapEnum;
 use AcMarche\Pst\Enums\ActionScopeEnum;
@@ -23,11 +16,17 @@ use AcMarche\Pst\Models\OperationalObjective;
 use AcMarche\Security\Repository\UserRepository;
 use App\Models\User;
 use Filament\Actions\Action;
-use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Wizard;
+use Filament\Schemas\Components\Wizard\Step;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -160,7 +159,7 @@ final class ActionForm
                         )
                         ->preload()
                         ->required()
-                        ->visible(fn (): bool => !$owner instanceof Model)
+                        ->visible(fn (): bool => ! $owner instanceof Model)
                         ->columnSpanFull(),
                 ]),
             Section::make('Progression')

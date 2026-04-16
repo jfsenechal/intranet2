@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Database\Factories;
 
-use Override;
-use Illuminate\Support\Str;
 use AcMarche\News\Models\Category;
 use AcMarche\News\Models\News;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+use Override;
 
 /**
  * @extends Factory<News>

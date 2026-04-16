@@ -9,11 +9,12 @@ use AcMarche\Pst\Filament\Resources\Users\UserResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
+use Override;
 use STS\FilamentImpersonate\Actions\Impersonate;
 
 final class ViewUser extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = UserResource::class;
 
     public function getTitle(): string

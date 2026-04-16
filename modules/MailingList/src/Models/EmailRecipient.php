@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Connection;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\MailingList\Database\Factories\EmailRecipientFactory;
 use AcMarche\MailingList\Enums\RecipientStatus;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

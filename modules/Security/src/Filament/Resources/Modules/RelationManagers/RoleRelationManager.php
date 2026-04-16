@@ -10,10 +10,11 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 final class RoleRelationManager extends RelationManager
 {
-    #[\Override]
+    #[Override]
     protected static string $relationship = 'roles';
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
@@ -23,7 +24,7 @@ final class RoleRelationManager extends RelationManager
 
     public function isReadOnly(): bool
     {
-        return !auth()->user()->isAdministrator();
+        return ! auth()->user()->isAdministrator();
     }
 
     public function table(Table $table): Table

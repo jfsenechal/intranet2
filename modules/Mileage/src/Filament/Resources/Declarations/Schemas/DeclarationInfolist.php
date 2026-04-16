@@ -236,6 +236,7 @@ final class DeclarationInfolist
         if ($user->isAdministrator()) {
             return true;
         }
+
         return (bool) $user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value);
     }
 }

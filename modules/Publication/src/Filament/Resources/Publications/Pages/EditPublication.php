@@ -8,10 +8,11 @@ use AcMarche\Publication\Filament\Resources\Publications\PublicationResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditPublication extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = PublicationResource::class;
 
     public function getTitle(): string|Htmlable

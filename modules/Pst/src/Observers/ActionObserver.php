@@ -7,7 +7,6 @@ namespace AcMarche\Pst\Observers;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Models\Action;
 use AcMarche\Pst\Models\TracksHistoryTrait;
-use Exception;
 
 final class ActionObserver
 {

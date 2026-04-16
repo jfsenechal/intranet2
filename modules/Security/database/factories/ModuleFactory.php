@@ -6,13 +6,14 @@ namespace AcMarche\Security\Database\Factories;
 
 use AcMarche\Security\Models\Module;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Security\Models\Module>
  */
 final class ModuleFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = Module::class;
 
     /**

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Models;
 
+use AcMarche\Mileage\Database\Factories\RateFactory;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use AcMarche\Mileage\Database\Factories\RateFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

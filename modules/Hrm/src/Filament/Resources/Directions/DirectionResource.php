@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Directions;
 
-use Override;
-use AcMarche\Hrm\Filament\Resources\Directions\Pages\ListDirections;
 use AcMarche\Hrm\Filament\Resources\Directions\Pages\CreateDirection;
-use AcMarche\Hrm\Filament\Resources\Directions\Pages\ViewDirection;
 use AcMarche\Hrm\Filament\Resources\Directions\Pages\EditDirection;
+use AcMarche\Hrm\Filament\Resources\Directions\Pages\ListDirections;
+use AcMarche\Hrm\Filament\Resources\Directions\Pages\ViewDirection;
 use AcMarche\Hrm\Filament\Resources\Directions\Schemas\DirectionForm;
 use AcMarche\Hrm\Filament\Resources\Directions\Tables\DirectionTables;
 use AcMarche\Hrm\Models\Direction;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class DirectionResource extends Resource

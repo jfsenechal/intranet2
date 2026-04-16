@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Declarations\Tables;
 
-use Filament\Tables\Columns\TextColumn;
 use AcMarche\Mileage\Calculator\DeclarationCalculator;
 use AcMarche\Mileage\Filament\Resources\Declarations\DeclarationResource;
 use AcMarche\Mileage\Models\Declaration;
@@ -12,7 +11,7 @@ use AcMarche\Mileage\Repository\DeclarationRepository;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 

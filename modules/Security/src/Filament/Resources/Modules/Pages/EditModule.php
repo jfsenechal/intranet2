@@ -8,10 +8,11 @@ use AcMarche\Security\Filament\Resources\Modules\ModuleResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditModule extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ModuleResource::class;
 
     public function getTitle(): string|Htmlable

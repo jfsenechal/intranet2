@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Rates\Tables;
 
-use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 final class RateTables

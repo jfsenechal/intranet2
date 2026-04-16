@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Trips\Tables;
 
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Filters\TernaryFilter;
-use Filament\Tables\Filters\SelectFilter;
 use AcMarche\Mileage\Filament\CreateDeclarationAction;
 use AcMarche\Mileage\Filament\Resources\Trips\TripResource;
 use AcMarche\Mileage\Models\Trip;
@@ -15,7 +11,10 @@ use AcMarche\Mileage\Repository\TripRepository;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 

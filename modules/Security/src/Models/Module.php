@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Override;
 
 // https://github.com/lukas-frey/filament-icon-picker
 #[UseFactory(ModuleFactory::class)]
@@ -31,12 +32,12 @@ final class Module extends Model
 {
     use HasFactory;
 
-    #[\Override]
+    #[Override]
     public $timestamps = false;
 
     public bool $migrated = false;
 
-    #[\Override]
+    #[Override]
     protected $casts = [
         'is_public' => 'boolean',
         'is_external' => 'boolean',

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Console\Commands;
 
-use Override;
 use AcMarche\App\Meilisearch\MeiliTrait;
 use AcMarche\Courrier\Search\MeiliIndexer;
 use DateTimeImmutable;
 use Illuminate\Console\Command;
+use Override;
 
 final class MeiliIndexerCommand extends Command
 {

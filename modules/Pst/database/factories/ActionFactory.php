@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Database\Factories;
 
-use Override;
 use AcMarche\Pst\Models\Action;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
 /**
  * @extends Factory<Action>

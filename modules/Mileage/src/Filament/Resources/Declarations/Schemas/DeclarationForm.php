@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Declarations\Schemas;
 
+use AcMarche\Mileage\Models\BudgetArticle;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\DatePicker;
-use AcMarche\Mileage\Models\BudgetArticle;
-use Filament\Forms;
 use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;

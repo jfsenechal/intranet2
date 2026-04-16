@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Odd;
 
-use Override;
-use AcMarche\Pst\Filament\Resources\Odd\Pages\ListOdds;
 use AcMarche\Pst\Filament\Resources\Odd\Pages\CreateOdd;
-use AcMarche\Pst\Filament\Resources\Odd\Pages\ViewOdd;
 use AcMarche\Pst\Filament\Resources\Odd\Pages\EditOdd;
+use AcMarche\Pst\Filament\Resources\Odd\Pages\ListOdds;
+use AcMarche\Pst\Filament\Resources\Odd\Pages\ViewOdd;
 use AcMarche\Pst\Filament\Resources\Odd\Schemas\OddForm;
 use AcMarche\Pst\Filament\Resources\Odd\Tables\OddTables;
 use AcMarche\Pst\Models\Odd;
@@ -19,6 +18,7 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 // todo try https://github.com/LaravelDaily/FilamentExamples-Projects/tree/main/tables/table-reorderable-position
 final class OddResource extends Resource

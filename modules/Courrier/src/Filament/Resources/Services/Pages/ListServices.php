@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Services\Pages;
 
-use Override;
-use Filament\Actions\CreateAction;
 use AcMarche\Courrier\Filament\Resources\Services\ServiceResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListServices extends ListRecords
 {

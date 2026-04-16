@@ -7,11 +7,11 @@ namespace AcMarche\Pst\Filament\Resources\Partner\Pages;
 use AcMarche\Pst\Filament\Resources\Partner\PartnerResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListPartners extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = PartnerResource::class;
 
     public function getTitle(): string

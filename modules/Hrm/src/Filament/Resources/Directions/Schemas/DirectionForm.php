@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Directions\Schemas;
 
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
-use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Str;
 
 final class DirectionForm
 {
@@ -25,8 +23,7 @@ final class DirectionForm
                             ->label('Intitule')
                             ->required()
                             ->maxLength(100)
-                            ->live(onBlur: true)
-                          ,
+                            ->live(onBlur: true),
                         TextInput::make('abbreviation')
                             ->label('Abreviation')
                             ->maxLength(255),

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Database\Factories;
 
-use Override;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Mileage\Models\BudgetArticle;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
 /**
  * @extends Factory<BudgetArticle>

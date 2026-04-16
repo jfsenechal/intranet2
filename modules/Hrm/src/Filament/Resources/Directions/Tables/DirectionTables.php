@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Directions\Tables;
 
-use Filament\Tables\Columns\TextColumn;
 use AcMarche\Hrm\Filament\Resources\Directions\DirectionResource;
 use AcMarche\Hrm\Models\Direction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 final class DirectionTables

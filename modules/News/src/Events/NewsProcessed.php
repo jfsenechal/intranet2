@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Events;
 
-use Illuminate\Broadcasting\Channel;
 use AcMarche\News\Models\News;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;

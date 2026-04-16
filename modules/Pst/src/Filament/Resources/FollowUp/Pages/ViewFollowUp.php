@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\FollowUp\Pages;
 
-use Override;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Pst\Filament\Resources\FollowUp\FollowUpResource;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
+use Override;
 
 final class ViewFollowUp extends ViewRecord
 {

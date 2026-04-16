@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\Categories\Pages;
 
-use Override;
-use Filament\Actions\ViewAction;
 use AcMarche\News\Filament\Resources\Categories\CategoryResource;
-use Filament\Actions;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditCategory extends EditRecord
 {

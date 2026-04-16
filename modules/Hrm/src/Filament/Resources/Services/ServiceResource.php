@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Services;
 
-use Override;
-use AcMarche\Hrm\Filament\Resources\Services\Pages\ListServices;
 use AcMarche\Hrm\Filament\Resources\Services\Pages\CreateService;
-use AcMarche\Hrm\Filament\Resources\Services\Pages\ViewService;
 use AcMarche\Hrm\Filament\Resources\Services\Pages\EditService;
+use AcMarche\Hrm\Filament\Resources\Services\Pages\ListServices;
+use AcMarche\Hrm\Filament\Resources\Services\Pages\ViewService;
 use AcMarche\Hrm\Filament\Resources\Services\Schemas\ServiceForm;
 use AcMarche\Hrm\Filament\Resources\Services\Tables\ServiceTables;
 use AcMarche\Hrm\Models\Service;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class ServiceResource extends Resource

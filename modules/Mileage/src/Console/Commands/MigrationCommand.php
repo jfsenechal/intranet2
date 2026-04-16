@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Console\Commands;
 
-use Override;
 use AcMarche\Mileage\Models\PersonalInformation;
 use App\Models\User;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Override;
 use Symfony\Component\Console\Command\Command as SfCommand;
 
 final class MigrationCommand extends Command

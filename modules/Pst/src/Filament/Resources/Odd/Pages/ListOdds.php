@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Odd\Pages;
 
-use Override;
-use Filament\Actions\CreateAction;
 use AcMarche\Pst\Filament\Resources\Odd\OddResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Override;
 
 final class ListOdds extends ListRecords
 {

@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 final class Employer extends Model
 {
     use HasFactory;
+
     /**
      * @return BelongsTo<Employer>
      */

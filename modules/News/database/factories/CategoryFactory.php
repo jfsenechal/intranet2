@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Database\Factories;
 
-use Override;
 use AcMarche\News\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
 /**
  * @extends Factory<Category>

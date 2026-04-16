@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Database\Factories;
 
-use Override;
 use AcMarche\Document\Models\Category;
 use AcMarche\Document\Models\Document;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
 /**
  * @extends Factory<Document>

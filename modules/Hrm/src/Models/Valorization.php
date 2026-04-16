@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 final class Valorization extends Model
 {
     use HasFactory;
+
     /**
      * @return BelongsTo<Employee>
      */

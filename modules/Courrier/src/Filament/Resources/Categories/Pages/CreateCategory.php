@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Categories\Pages;
 
-use Override;
 use AcMarche\Courrier\Filament\Resources\Categories\CategoryResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateCategory extends CreateRecord
 {

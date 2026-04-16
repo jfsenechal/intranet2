@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News\Pages;
 
-use Override;
 use AcMarche\News\Events\NewsProcessed;
 use AcMarche\News\Filament\Resources\News\NewsResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateNews extends CreateRecord
 {

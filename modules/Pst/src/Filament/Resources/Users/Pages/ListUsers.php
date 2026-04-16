@@ -13,10 +13,11 @@ use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Schema;
+use Override;
 
 final class ListUsers extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = UserResource::class;
 
     public function getTitle(): string
@@ -32,7 +33,7 @@ final class ListUsers extends ListRecords
                 ->icon('tabler-user-plus')
                 ->modal()
                 ->modalHeading('Importer un utilisateur de la LDAP')
-                ->schema(fn (Schema $schema): \Filament\Schemas\Schema => UserForm::add($schema))
+                ->schema(fn (Schema $schema): Schema => UserForm::add($schema))
                 ->visible(fn (): bool => auth()->user()->hasOneOfThisRoles([RoleEnum::ADMIN->value]))
                 ->action(function (array $data): void {
                     try {

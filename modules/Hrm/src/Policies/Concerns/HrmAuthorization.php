@@ -77,6 +77,7 @@ trait HrmAuthorization
         if ($this->canReadCpas($user)) {
             return true;
         }
+
         return (bool) $this->canReadVille($user);
     }
 
@@ -85,6 +86,7 @@ trait HrmAuthorization
         if ($this->canManageCpas($user)) {
             return true;
         }
+
         return (bool) $this->canManageVille($user);
     }
 }

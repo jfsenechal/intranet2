@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Prerequisites\Pages;
 
-use Override;
-use Filament\Actions\CreateAction;
 use AcMarche\Hrm\Filament\Resources\Prerequisites\PrerequisiteResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Override;
 
 final class ListPrerequisites extends ListRecords
 {

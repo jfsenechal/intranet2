@@ -6,13 +6,14 @@ namespace AcMarche\Publication\Database\Factories;
 
 use AcMarche\Publication\Models\Publication;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Publication\Models\Publication>
  */
 final class PublicationFactory extends Factory
 {
-    #[\Override]
+    #[Override]
     protected $model = Publication::class;
 
     public function definition(): array

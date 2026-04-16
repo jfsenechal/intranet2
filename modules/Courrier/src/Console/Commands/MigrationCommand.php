@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Console\Commands;
 
-use Override;
 use AcMarche\Courrier\Enums\RolesEnum;
 use AcMarche\Courrier\Providers\CourrierServiceProvider;
 use AcMarche\Security\Models\Role;
@@ -13,6 +12,7 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Override;
 use Symfony\Component\Console\Command\Command as SfCommand;
 
 final class MigrationCommand extends Command
@@ -59,7 +59,7 @@ final class MigrationCommand extends Command
 
         try {
             // Check if the table has a user_id column
-            if (!Schema::connection('maria-courrier')->hasColumn('incoming_mail_recipient', 'user_id')) {
+            if (! Schema::connection('maria-courrier')->hasColumn('incoming_mail_recipient', 'user_id')) {
                 $this->error('The incoming_mail_recipient table does not have a user_id column');
 
                 return SfCommand::FAILURE;
@@ -88,7 +88,7 @@ final class MigrationCommand extends Command
                     // Get the user to retrieve the username
                     $user = User::find($recipient->user_id);
 
-                    if (!$user) {
+                    if (! $user) {
                         $this->warn(
                             "User with ID {$recipient->user_id} not found - skipping record ID {$recipient->id}"
                         );
@@ -105,7 +105,7 @@ final class MigrationCommand extends Command
                         continue;
                     }
 
-                    if (!$dryRun) {
+                    if (! $dryRun) {
                         // Update the record with username
                         DB::connection('maria-courrier')
                             ->table('incoming_mail_recipient')

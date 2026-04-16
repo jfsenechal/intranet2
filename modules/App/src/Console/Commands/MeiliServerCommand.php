@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\App\Console\Commands;
 
-use Override;
 use AcMarche\App\Meilisearch\MeiliServer;
 use AcMarche\App\Meilisearch\MeiliTrait;
 use Illuminate\Console\Command;
+use Override;
 
 final class MeiliServerCommand extends Command
 {

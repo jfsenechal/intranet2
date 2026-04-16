@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Filament\Resources\Categories\RelationManagers;
 
-use Override;
 use AcMarche\Document\Filament\Resources\Documents\DocumentResource;
 use AcMarche\Document\Models\Document;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Override;
 
 final class DocumentsRelationManager extends RelationManager
 {

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\FollowUp;
 
-use Override;
-use AcMarche\Pst\Filament\Resources\FollowUp\Pages\ListFollowUps;
 use AcMarche\Pst\Filament\Resources\FollowUp\Pages\CreateFollowUp;
-use AcMarche\Pst\Filament\Resources\FollowUp\Pages\ViewFollowUp;
 use AcMarche\Pst\Filament\Resources\FollowUp\Pages\EditFollowUp;
+use AcMarche\Pst\Filament\Resources\FollowUp\Pages\ListFollowUps;
+use AcMarche\Pst\Filament\Resources\FollowUp\Pages\ViewFollowUp;
 use AcMarche\Pst\Filament\Resources\FollowUp\Schemas\FollowUpForm;
 use AcMarche\Pst\Filament\Resources\FollowUp\Tables\FollowUpTables;
 use AcMarche\Pst\Models\FollowUp;
@@ -16,6 +15,7 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class FollowUpResource extends Resource
 {

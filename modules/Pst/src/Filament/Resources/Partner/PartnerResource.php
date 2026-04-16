@@ -16,20 +16,21 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 use UnitEnum;
 
 final class PartnerResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Partner::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = Heroicon::OutlinedUserGroup;
 
-    #[\Override]
+    #[Override]
     protected static string|UnitEnum|null $navigationGroup = NavigationGroupEnum::Settings;
 
-    #[\Override]
+    #[Override]
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getNavigationLabel(): string

@@ -8,6 +8,7 @@ use AcMarche\Publication\Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Override;
 
 #[\Illuminate\Database\Eloquent\Attributes\Connection('maria-publication')]
 #[\Illuminate\Database\Eloquent\Attributes\Fillable([
@@ -20,7 +21,7 @@ final class Category extends Model
 {
     use HasFactory;
 
-    #[\Override]
+    #[Override]
     public $timestamps = false;
 
     public function publications(): HasMany

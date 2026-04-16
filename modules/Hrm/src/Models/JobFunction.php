@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Override;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Override;
 
 #[Connection('maria-hrm')]
 #[Fillable([
@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 final class JobFunction extends Model
 {
     use HasFactory;
+
     #[Override]
     public $timestamps = false;
 

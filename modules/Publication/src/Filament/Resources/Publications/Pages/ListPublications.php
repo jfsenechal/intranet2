@@ -7,11 +7,11 @@ namespace AcMarche\Publication\Filament\Resources\Publications\Pages;
 use AcMarche\Publication\Filament\Resources\Publications\PublicationResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListPublications extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = PublicationResource::class;
 
     public function getTitle(): string

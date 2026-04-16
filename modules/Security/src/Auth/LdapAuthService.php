@@ -24,7 +24,7 @@ final class LdapAuthService
         }
         if ($user) {
             $userLdap = UserLdap::where('sAMAccountName', '=', $user->username)->first();
-            if (!$userLdap instanceof \LdapRecord\Models\Model) {
+            if (! $userLdap instanceof \LdapRecord\Models\Model) {
 
                 return null;
             }

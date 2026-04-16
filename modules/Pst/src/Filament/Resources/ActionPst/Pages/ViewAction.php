@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Pages;
 
-use Override;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Pst\Actions\CanPaginateViewRecordTrait;
 use AcMarche\Pst\Actions\ReminderAction;
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
@@ -14,13 +11,15 @@ use AcMarche\Pst\Filament\Resources\ActionPst\Schemas\ActionInfolist;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\OperationalObjectiveResource;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\StrategicObjectiveResource;
 use AcMarche\Pst\Models\Action as ActionModel;
-use Filament\Actions;
 use Filament\Actions\Action as ActionAction;
 use Filament\Actions\ActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Size;
+use Override;
 
 final class ViewAction extends ViewRecord
 {

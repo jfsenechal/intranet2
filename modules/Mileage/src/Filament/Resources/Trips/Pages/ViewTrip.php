@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Trips\Pages;
 
-use Override;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\RestoreAction;
-use Filament\Actions\ForceDeleteAction;
 use AcMarche\Mileage\Filament\Resources\Trips\TripResource;
 use AcMarche\Mileage\Models\Trip;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreAction;
 use Filament\Resources\Pages\ViewRecord;
+use Override;
 
 final class ViewTrip extends ViewRecord
 {

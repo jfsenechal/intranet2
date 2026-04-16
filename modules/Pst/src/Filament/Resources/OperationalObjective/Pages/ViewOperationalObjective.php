@@ -10,10 +10,11 @@ use AcMarche\Pst\Filament\Resources\StrategicObjective\StrategicObjectiveResourc
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
+use Override;
 
 final class ViewOperationalObjective extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = OperationalObjectiveResource::class;
 
     public function getTitle(): string

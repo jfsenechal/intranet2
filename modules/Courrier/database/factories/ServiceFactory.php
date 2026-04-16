@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Database\Factories;
 
-use Override;
 use AcMarche\Courrier\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Override;
 
 /**
  * @extends Factory<Service>

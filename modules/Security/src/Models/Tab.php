@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Override;
 
 // https://github.com/lukas-frey/filament-icon-picker
 #[UseFactory(TabFactory::class)]
@@ -20,10 +21,10 @@ final class Tab extends Model
 {
     use HasFactory;
 
-    #[\Override]
+    #[Override]
     public $timestamps = false;
 
-    #[\Override]
+    #[Override]
     protected $casts = [
     ];
 

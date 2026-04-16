@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\PersonalInformation;
 
-use Override;
 use AcMarche\Mileage\Filament\Resources\PersonalInformation\Pages\ManagePersonalInformation;
 use AcMarche\Mileage\Filament\Resources\PersonalInformation\Schemas\PersonalInformationForm;
 use AcMarche\Mileage\Filament\Resources\PersonalInformation\Schemas\PersonalInformationInfolist;
@@ -17,6 +16,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Override;
 
 final class PersonalInformationResource extends Resource
 {

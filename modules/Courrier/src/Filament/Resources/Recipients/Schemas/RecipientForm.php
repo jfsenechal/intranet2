@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Recipients\Schemas;
 
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\Select;
 use AcMarche\Courrier\Models\Recipient;
-use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Schema;
 

@@ -10,15 +10,15 @@ use AcMarche\Security\Repository\UserRepository;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
 use Maatwebsite\Excel\Facades\Excel;
+use Override;
 
 final class ListStrategicObjectives extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = StrategicObjectiveResource::class;
 
-    #[\Override]
+    #[Override]
     protected string $view = 'pst::filament.resources.strategic-objective-list';
 
     public function getTitle(): string

@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Service\Schemas;
 
-use AcMarche\Pst\Models\Service;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Schemas\Schema;
-use Illuminate\Database\Eloquent\Model;
 
 final class ServiceForm
 {

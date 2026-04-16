@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Connection;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Override;
 use AcMarche\Courrier\Database\Factories\SenderFactory;
 use AcMarche\Courrier\Repository\DepartmentScope;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Override;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 

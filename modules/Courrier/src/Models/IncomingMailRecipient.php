@@ -6,13 +6,14 @@ namespace AcMarche\Courrier\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Override;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Override;
 
 #[Table(name: 'incoming_mail_recipient')]
 final class IncomingMailRecipient extends Pivot
 {
     use HasFactory;
+
     #[Override]
     public $timestamps = false;
 

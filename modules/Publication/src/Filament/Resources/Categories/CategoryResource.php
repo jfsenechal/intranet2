@@ -11,25 +11,26 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class CategoryResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Category::class;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 2;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-tag';
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Categories';
 
-    #[\Override]
+    #[Override]
     protected static ?string $modelLabel = 'Category';
 
-    #[\Override]
+    #[Override]
     protected static ?string $pluralModelLabel = 'Categories';
 
     public static function form(Schema $schema): Schema

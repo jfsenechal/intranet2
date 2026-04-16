@@ -19,6 +19,7 @@ final class PersonalInformationPolicy
         if ($user->isAdministrator()) {
             return true;
         }
+
         return $user->hasOneOfThisRoles(RolesEnum::getRoles());
     }
 

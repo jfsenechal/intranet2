@@ -109,6 +109,11 @@ final class HrmServiceProvider extends ServiceProvider
         $this->registerPolicies();
     }
 
+    protected function moduleName(): string
+    {
+        return 'hrm';
+    }
+
     /**
      * Register the policies for the module.
      */
@@ -117,10 +122,5 @@ final class HrmServiceProvider extends ServiceProvider
         foreach ($this->policies as $model => $policy) {
             Gate::policy($model, $policy);
         }
-    }
-
-    protected function moduleName(): string
-    {
-        return 'hrm';
     }
 }

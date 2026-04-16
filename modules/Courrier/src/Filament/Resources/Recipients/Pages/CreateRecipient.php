@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Recipients\Pages;
 
-use Override;
 use AcMarche\Courrier\Filament\Resources\Recipients\RecipientResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateRecipient extends CreateRecord
 {

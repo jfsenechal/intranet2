@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Senders\Pages;
 
-use Override;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Courrier\Filament\Resources\Senders\SenderResource;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
+use Override;
 
 final class ViewSender extends ViewRecord
 {

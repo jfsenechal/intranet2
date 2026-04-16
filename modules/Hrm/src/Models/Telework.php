@@ -38,6 +38,7 @@ use Illuminate\Support\Str;
 final class Telework extends Model
 {
     use HasFactory;
+
     protected static function booted(): void
     {
         self::creating(function (Telework $telework): void {

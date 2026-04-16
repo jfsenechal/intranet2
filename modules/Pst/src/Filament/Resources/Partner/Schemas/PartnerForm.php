@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Partner\Schemas;
 
-use AcMarche\Pst\Models\Partner;
 use Filament\Forms;
 use Filament\Schemas\Schema;
-use Illuminate\Database\Eloquent\Model;
 
 final class PartnerForm
 {

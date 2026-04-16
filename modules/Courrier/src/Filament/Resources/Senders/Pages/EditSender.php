@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Senders\Pages;
 
-use Override;
-use Filament\Actions\ViewAction;
 use AcMarche\Courrier\Filament\Resources\Senders\SenderResource;
-use Filament\Actions;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditSender extends EditRecord
 {

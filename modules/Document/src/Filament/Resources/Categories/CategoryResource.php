@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Filament\Resources\Categories;
 
-use Override;
 use AcMarche\Document\Filament\Resources\Categories\Pages\CreateCategory;
 use AcMarche\Document\Filament\Resources\Categories\Pages\EditCategory;
 use AcMarche\Document\Filament\Resources\Categories\Pages\ListCategory;
@@ -17,6 +16,7 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class CategoryResource extends Resource
 {

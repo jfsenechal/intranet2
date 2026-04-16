@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -35,8 +35,8 @@ use Spatie\Sluggable\SlugOptions;
 final class Service extends Model
 {
     use HasFactory;
-    use HasUserAdd;
     use HasSlug;
+    use HasUserAdd;
 
     public function getSlugOptions(): SlugOptions
     {
@@ -44,6 +44,7 @@ final class Service extends Model
             ->generateSlugsFrom(['name'])
             ->saveSlugsTo('slug');
     }
+
     /**
      * @return BelongsTo<Direction>
      */

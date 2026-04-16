@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Services\Pages;
 
-use Override;
-use Filament\Actions\EditAction;
 use AcMarche\Hrm\Filament\Resources\Services\ServiceResource;
-use Filament\Actions;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
+use Override;
 
 final class ViewService extends ViewRecord
 {

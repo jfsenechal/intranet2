@@ -4,25 +4,21 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employers;
 
-use Override;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Columns\TextColumn;
-use AcMarche\Hrm\Filament\Resources\Employers\Pages\ListEmployers;
 use AcMarche\Hrm\Filament\Resources\Employers\Pages\CreateEmployer;
 use AcMarche\Hrm\Filament\Resources\Employers\Pages\EditEmployer;
+use AcMarche\Hrm\Filament\Resources\Employers\Pages\ListEmployers;
 use AcMarche\Hrm\Models\Employer;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
+use Override;
 use UnitEnum;
 
 final class EmployerResource extends Resource
@@ -67,8 +63,7 @@ final class EmployerResource extends Resource
                             ->label('Nom')
                             ->required()
                             ->maxLength(150)
-                            ->live(onBlur: true)
-                            ,
+                            ->live(onBlur: true),
                         Select::make('parent_id')
                             ->label('Employeur parent')
                             ->relationship('parent', 'name')

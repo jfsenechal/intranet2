@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 final class Application extends Model
 {
     use HasFactory;
+
     /**
      * @return BelongsTo<Employee>
      */

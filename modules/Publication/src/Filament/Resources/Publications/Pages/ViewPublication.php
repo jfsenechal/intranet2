@@ -9,10 +9,11 @@ use AcMarche\Publication\Models\Publication;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Colors\Color;
+use Override;
 
 final class ViewPublication extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = PublicationResource::class;
 
     public function getTitle(): string

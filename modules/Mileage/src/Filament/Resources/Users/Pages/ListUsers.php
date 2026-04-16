@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Users\Pages;
 
-use Override;
 use AcMarche\Mileage\Filament\Resources\Users\UserResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListUsers extends ListRecords
 {

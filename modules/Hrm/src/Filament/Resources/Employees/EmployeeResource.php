@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employees;
 
-use Override;
-use AcMarche\Hrm\Filament\Resources\Employees\Pages\ListEmployees;
 use AcMarche\Hrm\Filament\Resources\Employees\Pages\CreateEmployee;
-use AcMarche\Hrm\Filament\Resources\Employees\Pages\ViewEmployee;
 use AcMarche\Hrm\Filament\Resources\Employees\Pages\EditEmployee;
+use AcMarche\Hrm\Filament\Resources\Employees\Pages\ListEmployees;
+use AcMarche\Hrm\Filament\Resources\Employees\Pages\ViewEmployee;
 use AcMarche\Hrm\Filament\Resources\Employees\Schemas\EmployeeForm;
 use AcMarche\Hrm\Filament\Resources\Employees\Tables\EmployeeTables;
 use AcMarche\Hrm\Models\Employee;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class EmployeeResource extends Resource

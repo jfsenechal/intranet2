@@ -7,13 +7,14 @@ namespace AcMarche\Pst\Filament\Resources\OperationalObjective\Pages;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\OperationalObjectiveResource;
 use AcMarche\Security\Repository\UserRepository;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateOperationalObjective extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = OperationalObjectiveResource::class;
 
-    #[\Override]
+    #[Override]
     protected static bool $canCreateAnother = false;
 
     public function getTitle(): string

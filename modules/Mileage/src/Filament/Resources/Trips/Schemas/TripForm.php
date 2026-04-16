@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Trips\Schemas;
 
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 

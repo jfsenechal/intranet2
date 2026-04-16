@@ -6,12 +6,13 @@ namespace AcMarche\Pst\Filament\Resources\Service\Pages;
 
 use AcMarche\Pst\Filament\Resources\Service\ServiceResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateService extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ServiceResource::class;
 
-    #[\Override]
+    #[Override]
     protected static ?string $title = 'Ajout d\'un service';
 }

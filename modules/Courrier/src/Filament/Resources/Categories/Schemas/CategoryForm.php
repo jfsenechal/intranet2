@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Courrier\Filament\Resources\Categories\Schemas;
 
 use Filament\Forms\Components\TextInput;
-use Filament\Forms;
 use Filament\Schemas\Schema;
 
 final class CategoryForm

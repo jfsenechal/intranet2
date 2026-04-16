@@ -18,6 +18,7 @@ final class TripPolicy
         if ($user->isAdministrator()) {
             return true;
         }
+
         return $user->hasOneOfThisRoles(RolesEnum::getRoles());
     }
 
@@ -44,6 +45,7 @@ final class TripPolicy
         if ($user->isAdministrator()) {
             return true;
         }
+
         return $user->hasOneOfThisRoles(RolesEnum::getRoles());
     }
 

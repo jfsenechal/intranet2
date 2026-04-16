@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Courrier\Policies;
 
 use AcMarche\Courrier\Enums\RolesEnum;
-use AcMarche\Courrier\Models\Category;
 use App\Models\User;
 
 final class CategoryPolicy

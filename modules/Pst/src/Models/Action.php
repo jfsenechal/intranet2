@@ -32,6 +32,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Scout\Searchable;
+use Override;
 
 #[ObservedBy([ActionObserver::class])]
 #[UseFactory(ActionFactory::class)]
@@ -62,7 +63,7 @@ final class Action extends Model
 {
     use HasDepartmentScope, HasFactory, Notifiable, Searchable, SoftDeletes;
 
-    #[\Override]
+    #[Override]
     protected $casts = [
         'medias' => 'array',
         'due_date' => 'datetime',

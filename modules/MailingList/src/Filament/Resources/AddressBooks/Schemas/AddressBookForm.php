@@ -41,7 +41,7 @@ final class AddressBookForm
                             ContactForm::columns()
                         ),
                     ])
-                    ->createOptionUsing(fn(array $data): int => Contact::query()->create([
+                    ->createOptionUsing(fn (array $data): int => Contact::query()->create([
                         ...$data,
                         'username' => auth()->user()?->username,
                     ])->getKey()),

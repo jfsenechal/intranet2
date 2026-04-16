@@ -11,25 +11,26 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class PublicationResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Publication::class;
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 1;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-newspaper';
 
-    #[\Override]
+    #[Override]
     protected static ?string $navigationLabel = 'Publications';
 
-    #[\Override]
+    #[Override]
     protected static ?string $modelLabel = 'Publication';
 
-    #[\Override]
+    #[Override]
     protected static ?string $pluralModelLabel = 'Publications';
 
     public static function form(Schema $schema): Schema

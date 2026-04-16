@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\Contacts;
 
-use Override;
 use AcMarche\MailingList\Filament\Resources\Contacts\Pages\CreateContact;
 use AcMarche\MailingList\Filament\Resources\Contacts\Pages\EditContact;
 use AcMarche\MailingList\Filament\Resources\Contacts\Pages\ListContacts;
@@ -16,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Override;
 
 final class ContactResource extends Resource
 {

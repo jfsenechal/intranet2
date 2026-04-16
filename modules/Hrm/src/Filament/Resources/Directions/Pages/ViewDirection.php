@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Directions\Pages;
 
-use Override;
-use Filament\Actions\EditAction;
 use AcMarche\Hrm\Filament\Resources\Directions\DirectionResource;
-use Filament\Actions;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
+use Override;
 
 final class ViewDirection extends ViewRecord
 {

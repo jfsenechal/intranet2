@@ -20,7 +20,7 @@ final class ModuleHandler
     public static function addUserFromModule(Module $module, array $data): void
     {
         $userId = $data['user'];
-        if (!($user = UserRepository::find($userId)) instanceof \App\Models\User) {
+        if (! ($user = UserRepository::find($userId)) instanceof User) {
             throw new Exception('User not found');
         }
         self::addModuleAndRoles($module, $user, $data);
@@ -28,7 +28,7 @@ final class ModuleHandler
 
     public static function addModuleFromUser(User $user, int $moduleId, array $rolesChecked): void
     {
-        if (!($module = ModuleRepository::find($moduleId)) instanceof \AcMarche\Security\Models\Module) {
+        if (! ($module = ModuleRepository::find($moduleId)) instanceof Module) {
             throw new Exception('Module not found');
         }
         self::addModuleAndRoles($module, $user, $rolesChecked);

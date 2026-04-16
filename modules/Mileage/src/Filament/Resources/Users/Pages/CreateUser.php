@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Users\Pages;
 
-use Override;
 use AcMarche\Mileage\Filament\Resources\Users\UserResource;
 use AcMarche\Mileage\Providers\MileageServiceProvider;
 use AcMarche\Mileage\Service\PersonalInformationService;
@@ -14,6 +13,7 @@ use Exception;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 final class CreateUser extends CreateRecord
 {

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Connection;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\Mileage\Database\Factories\TripFactory;
 use AcMarche\Mileage\Observers\TripObserver;
 use AcMarche\Security\Models\HasUserAdd;
 use App\Models\User;
 use DateTimeInterface;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

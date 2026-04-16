@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Trainings;
 
-use Override;
-use AcMarche\Hrm\Filament\Resources\Trainings\Pages\ListTrainings;
 use AcMarche\Hrm\Filament\Resources\Trainings\Pages\CreateTraining;
-use AcMarche\Hrm\Filament\Resources\Trainings\Pages\ViewTraining;
 use AcMarche\Hrm\Filament\Resources\Trainings\Pages\EditTraining;
+use AcMarche\Hrm\Filament\Resources\Trainings\Pages\ListTrainings;
+use AcMarche\Hrm\Filament\Resources\Trainings\Pages\ViewTraining;
 use AcMarche\Hrm\Filament\Resources\Trainings\Schemas\TrainingForm;
 use AcMarche\Hrm\Filament\Resources\Trainings\Tables\TrainingTables;
 use AcMarche\Hrm\Models\Training;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class TrainingResource extends Resource

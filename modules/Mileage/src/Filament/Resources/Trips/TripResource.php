@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Trips;
 
-use Override;
-use AcMarche\Mileage\Filament\Resources\Trips\Pages\ListTrips;
 use AcMarche\Mileage\Filament\Resources\Trips\Pages\CreateTrip;
-use AcMarche\Mileage\Filament\Resources\Trips\Pages\ViewTrip;
 use AcMarche\Mileage\Filament\Resources\Trips\Pages\EditTrip;
+use AcMarche\Mileage\Filament\Resources\Trips\Pages\ListTrips;
+use AcMarche\Mileage\Filament\Resources\Trips\Pages\ViewTrip;
 use AcMarche\Mileage\Filament\Resources\Trips\Schemas\TripForm;
 use AcMarche\Mileage\Filament\Resources\Trips\Tables\TripTables;
 use AcMarche\Mileage\Models\Trip;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class TripResource extends Resource
 {

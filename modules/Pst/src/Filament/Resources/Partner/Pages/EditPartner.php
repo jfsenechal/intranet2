@@ -8,10 +8,11 @@ use AcMarche\Pst\Filament\Resources\Partner\PartnerResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditPartner extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = PartnerResource::class;
 
     public function getTitle(): string|Htmlable

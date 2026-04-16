@@ -230,7 +230,7 @@ final class ActionTables
                 ->options(fn () => Service::query()->orderBy('name')->pluck('name', 'id'))
                 ->multiple()
                 ->searchable()
-                ->query(fn(Builder $query, array $data): Builder => $query->when(
+                ->query(fn (Builder $query, array $data): Builder => $query->when(
                     $data['values'],
                     fn (Builder $query, array $services): Builder => $query->where(
                         fn (Builder $query) => $query

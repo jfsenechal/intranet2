@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Users;
 
-use Override;
 use AcMarche\Mileage\Filament\Resources\Users\Pages\CreateUser;
 use AcMarche\Mileage\Filament\Resources\Users\Pages\EditUser;
 use AcMarche\Mileage\Filament\Resources\Users\Pages\ListUsers;
@@ -16,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class UserResource extends Resource

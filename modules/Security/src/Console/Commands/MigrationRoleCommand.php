@@ -7,6 +7,7 @@ namespace AcMarche\Security\Console\Commands;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Override;
 use Symfony\Component\Console\Command\Command as SfCommand;
 
 final class MigrationRoleCommand extends Command
@@ -16,7 +17,7 @@ final class MigrationRoleCommand extends Command
      *
      * @var string
      */
-    #[\Override]
+    #[Override]
     protected $signature = 'intranet:migration-role';
 
     /**
@@ -24,7 +25,7 @@ final class MigrationRoleCommand extends Command
      *
      * @var string
      */
-    #[\Override]
+    #[Override]
     protected $description = 'Du vieux intranet vers le nouveau';
 
     /**

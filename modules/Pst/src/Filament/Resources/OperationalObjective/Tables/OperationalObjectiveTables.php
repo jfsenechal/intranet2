@@ -57,7 +57,7 @@ final class OperationalObjectiveTables
                 TextColumn::make('name')
                     ->label('Nom')
                     ->searchable()
-                    ->icon(fn (OperationalObjective $record): \Filament\Support\Icons\Heroicon|false => $record->isInternal() ? Heroicon::LightBulb : false)
+                    ->icon(fn (OperationalObjective $record): Heroicon|false => $record->isInternal() ? Heroicon::LightBulb : false)
                     ->iconPosition(IconPosition::After)
                     ->suffix(fn (OperationalObjective $record): string => $record->isInternal() ? '(Interne)' : '')
                     ->sortable()

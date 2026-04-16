@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Policies;
 
-use AcMarche\Hrm\Models\ContractType;
 use AcMarche\Hrm\Policies\Concerns\HrmAuthorization;
 use App\Models\User;
 

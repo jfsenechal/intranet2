@@ -7,10 +7,11 @@ namespace AcMarche\Pst\Filament\Resources\StrategicObjective\Pages;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\StrategicObjectiveResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Override;
 
 final class EditStrategicObjective extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = StrategicObjectiveResource::class;
 
     // force remove when edit

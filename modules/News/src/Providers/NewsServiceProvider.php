@@ -37,13 +37,6 @@ final class NewsServiceProvider extends ServiceProvider
         $this->registerPolicies();
     }
 
-    private function registerPolicies(): void
-    {
-        foreach ($this->policies as $model => $policy) {
-            Gate::policy($model, $policy);
-        }
-    }
-
     protected function moduleName(): string
     {
         return 'news';
@@ -52,5 +45,12 @@ final class NewsServiceProvider extends ServiceProvider
     protected function modulePath(): string
     {
         return __DIR__.'/../..';
+    }
+
+    private function registerPolicies(): void
+    {
+        foreach ($this->policies as $model => $policy) {
+            Gate::policy($model, $policy);
+        }
     }
 }

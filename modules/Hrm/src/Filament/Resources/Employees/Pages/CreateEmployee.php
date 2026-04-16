@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employees\Pages;
 
-use Override;
 use AcMarche\Hrm\Filament\Resources\Employees\EmployeeResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateEmployee extends CreateRecord
 {

@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\IncomingMails\Pages;
 
-use Override;
-use Filament\Actions\ViewAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\IncomingMailResource;
 use AcMarche\Courrier\Models\Sender;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
+use Override;
 
 final class EditIncomingMail extends EditRecord
 {

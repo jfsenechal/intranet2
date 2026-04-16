@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Connection;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\Courrier\Database\Factories\IncomingMailFactory;
 use AcMarche\Courrier\Repository\DepartmentScope;
 use AcMarche\Security\Models\HasUserAdd;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

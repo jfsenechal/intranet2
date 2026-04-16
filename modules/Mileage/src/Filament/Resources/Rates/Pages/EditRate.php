@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Rates\Pages;
 
-use Override;
-use Filament\Actions\ViewAction;
 use AcMarche\Mileage\Filament\Resources\Rates\RateResource;
-use Filament\Actions;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditRate extends EditRecord
 {

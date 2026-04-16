@@ -75,6 +75,7 @@ final class NewsPolicy
         if ($user->hasOneOfThisRoles([RolesEnum::ROLE_NEWS_ADMIN->value])) {
             return true;
         }
+
         return $user->username === $news->user_add;
     }
 }

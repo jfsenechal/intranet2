@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Rates;
 
-use Override;
-use AcMarche\Mileage\Filament\Resources\Rates\Pages\ListRates;
 use AcMarche\Mileage\Filament\Resources\Rates\Pages\CreateRate;
 use AcMarche\Mileage\Filament\Resources\Rates\Pages\EditRate;
+use AcMarche\Mileage\Filament\Resources\Rates\Pages\ListRates;
 use AcMarche\Mileage\Filament\Resources\Rates\Schemas\RateForm;
 use AcMarche\Mileage\Filament\Resources\Rates\Tables\RateTables;
 use AcMarche\Mileage\Models\Rate;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class RateResource extends Resource

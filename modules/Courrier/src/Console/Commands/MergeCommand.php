@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Console\Commands;
 
-use Override;
 use AcMarche\Courrier\Enums\DepartmentCourrierEnum;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Override;
 
 final class MergeCommand extends Command
 {

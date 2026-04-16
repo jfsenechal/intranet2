@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Database\Factories;
 
-use Override;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Pst\Models\StrategicObjective;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
 /**
  * @extends Factory<StrategicObjective>

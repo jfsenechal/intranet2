@@ -4,25 +4,21 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\ContractTypes;
 
-use Override;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Columns\TextColumn;
-use AcMarche\Hrm\Filament\Resources\ContractTypes\Pages\ListContractTypes;
 use AcMarche\Hrm\Filament\Resources\ContractTypes\Pages\CreateContractType;
 use AcMarche\Hrm\Filament\Resources\ContractTypes\Pages\EditContractType;
+use AcMarche\Hrm\Filament\Resources\ContractTypes\Pages\ListContractTypes;
 use AcMarche\Hrm\Models\ContractType;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
+use Override;
 use UnitEnum;
 
 final class ContractTypeResource extends Resource
@@ -67,8 +63,7 @@ final class ContractTypeResource extends Resource
                             ->label('Nom')
                             ->required()
                             ->maxLength(50)
-                            ->live(onBlur: true)
-                            ,
+                            ->live(onBlur: true),
                         TextInput::make('description')
                             ->label('Description')
                             ->maxLength(255)

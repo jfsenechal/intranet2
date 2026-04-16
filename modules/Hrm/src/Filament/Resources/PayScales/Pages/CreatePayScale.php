@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\PayScales\Pages;
 
-use Override;
 use AcMarche\Hrm\Filament\Resources\PayScales\PayScaleResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreatePayScale extends CreateRecord
 {

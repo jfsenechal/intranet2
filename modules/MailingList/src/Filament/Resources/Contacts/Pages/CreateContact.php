@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\Contacts\Pages;
 
-use Override;
 use AcMarche\MailingList\Filament\Resources\Contacts\ContactResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateContact extends CreateRecord
 {

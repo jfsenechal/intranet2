@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Odd\Pages;
 
-use Override;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Pst\Filament\Resources\Odd\OddResource;
 use AcMarche\Pst\Filament\Resources\Odd\RelationManagers\ActionsRelationManager;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
+use Override;
 
 final class ViewOdd extends ViewRecord
 {

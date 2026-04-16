@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\App\Filament\Schema\Infolists;
 
-use Override;
 use Closure;
 use Filament\Infolists\Components\ViewEntry;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\UnableToCheckFileExistence;
+use Override;
 use Throwable;
 
 final class PdfViewerEntry extends ViewEntry

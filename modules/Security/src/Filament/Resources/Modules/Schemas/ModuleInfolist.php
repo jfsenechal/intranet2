@@ -57,7 +57,6 @@ final class ModuleInfolist
                 ])->from('md')
                     ->columnSpanFull(),
 
-
             ]);
     }
 }

@@ -10,10 +10,11 @@ use AcMarche\Security\Filament\Resources\Modules\Schemas\ModuleInfolist;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
+use Override;
 
 final class ViewModule extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ModuleResource::class;
 
     public function getTitle(): string

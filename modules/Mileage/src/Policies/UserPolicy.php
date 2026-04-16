@@ -6,7 +6,6 @@ namespace AcMarche\Mileage\Policies;
 
 // https://laravel.com/docs/12.x/authorization#creating-policies
 use AcMarche\Mileage\Enums\RolesEnum;
-use AcMarche\Mileage\Models\BudgetArticle;
 use App\Models\User;
 
 final class UserPolicy
@@ -75,6 +74,7 @@ final class UserPolicy
         if ($user->isAdministrator()) {
             return true;
         }
+
         return $user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value);
     }
 }

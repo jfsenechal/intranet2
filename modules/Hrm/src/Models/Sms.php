@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 final class Sms extends Model
 {
     use HasFactory;
+
     /**
      * @return BelongsTo<Employee>
      */

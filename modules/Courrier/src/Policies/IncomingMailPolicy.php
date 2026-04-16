@@ -39,6 +39,7 @@ final class IncomingMailPolicy
         if ($this->isRecipientOfMail($user, $incomingMail)) {
             return true;
         }
+
         return $this->isMemberOfLinkedService($user, $incomingMail);
     }
 

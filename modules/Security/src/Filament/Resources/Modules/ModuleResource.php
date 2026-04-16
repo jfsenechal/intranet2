@@ -17,13 +17,14 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class ModuleResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = Module::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getNavigationGroup(): string

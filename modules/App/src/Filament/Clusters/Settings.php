@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\App\Filament\Clusters;
 
-use Override;
 use BackedEnum;
 use Filament\Clusters\Cluster;
+use Override;
 
 final class Settings extends Cluster
 {

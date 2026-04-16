@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -70,13 +70,8 @@ use Spatie\Sluggable\SlugOptions;
 final class Employee extends Model
 {
     use HasFactory;
-    use HasUserAdd;
     use HasSlug;
-
-    protected function getFullNameAttribute(): string
-    {
-        return $this->last_name.' '.$this->first_name;
-    }
+    use HasUserAdd;
 
     /**
      * @return BelongsTo<PayScale>
@@ -201,9 +196,10 @@ final class Employee extends Model
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom(['last_name','first_name'])
+            ->generateSlugsFrom(['last_name', 'first_name'])
             ->saveSlugsTo('slug');
     }
+
     protected static function booted(): void
     {
         self::bootHasUser();
@@ -213,6 +209,11 @@ final class Employee extends Model
                 $employee->uuid = (string) Str::uuid();
             }
         });
+    }
+
+    protected function getFullNameAttribute(): string
+    {
+        return $this->last_name.' '.$this->first_name;
     }
 
     protected function casts(): array

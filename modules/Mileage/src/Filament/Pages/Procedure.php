@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Pages;
 
-use Override;
 use Filament\Pages\Page;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class Procedure extends Page
 {

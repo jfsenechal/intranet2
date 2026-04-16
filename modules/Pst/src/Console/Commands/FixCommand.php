@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Console\Commands;
 
-use Override;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Override;
 use Symfony\Component\Console\Command\Command as SfCommand;
 
 final class FixCommand extends Command

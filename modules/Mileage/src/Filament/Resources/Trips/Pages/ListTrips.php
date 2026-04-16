@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Trips\Pages;
 
-use Override;
-use Filament\Actions\CreateAction;
 use AcMarche\Mileage\Filament\Resources\PersonalInformation\PersonalInformationResource;
 use AcMarche\Mileage\Filament\Resources\Trips\TripResource;
 use AcMarche\Mileage\Repository\PersonalInformationRepository;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\HtmlString;
+use Override;
 
 final class ListTrips extends ListRecords
 {

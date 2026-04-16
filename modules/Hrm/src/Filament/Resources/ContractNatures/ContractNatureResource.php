@@ -14,7 +14,6 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
 use UnitEnum;
 
 final class ContractNatureResource extends Resource
@@ -56,7 +55,7 @@ final class ContractNatureResource extends Resource
                             ->label('Nom')
                             ->required()
                             ->maxLength(50)
-                            ->live(onBlur: true)                           ,
+                            ->live(onBlur: true),
                         Forms\Components\TextInput::make('description')
                             ->label('Description')
                             ->maxLength(255)

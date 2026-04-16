@@ -19,6 +19,7 @@ final class DeclarationPolicy
         if ($user->isAdministrator()) {
             return true;
         }
+
         return $user->hasOneOfThisRoles(RolesEnum::getRoles());
     }
 
@@ -68,6 +69,7 @@ final class DeclarationPolicy
         if ($user->isAdministrator()) {
             return true;
         }
+
         return $user->hasRole(RolesEnum::ROLE_FINANCE_DEPLACEMENT_ADMIN->value);
     }
 

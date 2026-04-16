@@ -8,10 +8,11 @@ use AcMarche\Publication\Filament\Resources\Categories\CategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditCategory extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = CategoryResource::class;
 
     public function getTitle(): string|Htmlable

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\ContractTypes\Pages;
 
-use Override;
-use Filament\Actions\CreateAction;
 use AcMarche\Hrm\Filament\Resources\ContractTypes\ContractTypeResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Override;
 
 final class ListContractTypes extends ListRecords
 {

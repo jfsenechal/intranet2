@@ -7,10 +7,11 @@ namespace AcMarche\Pst\Filament\Resources\OperationalObjective\Pages;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\OperationalObjectiveResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Override;
 
 final class EditOperationalObjective extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = OperationalObjectiveResource::class;
 
     /**

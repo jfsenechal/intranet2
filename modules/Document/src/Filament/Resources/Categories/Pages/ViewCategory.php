@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Filament\Resources\Categories\Pages;
 
-use Override;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Document\Filament\Resources\Categories\CategoryResource;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
+use Override;
 
 final class ViewCategory extends ViewRecord
 {

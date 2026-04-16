@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\IncomingMails;
 
-use Override;
-use AcMarche\Courrier\Filament\Resources\IncomingMails\Pages\ListIncomingMails;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\Pages\CreateIncomingMail;
-use AcMarche\Courrier\Filament\Resources\IncomingMails\Pages\ViewIncomingMail;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\Pages\EditIncomingMail;
+use AcMarche\Courrier\Filament\Resources\IncomingMails\Pages\ListIncomingMails;
+use AcMarche\Courrier\Filament\Resources\IncomingMails\Pages\ViewIncomingMail;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\Schemas\IncomingMailForm;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\Tables\IncomingMailTables;
 use AcMarche\Courrier\Models\IncomingMail;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class IncomingMailResource extends Resource
 {

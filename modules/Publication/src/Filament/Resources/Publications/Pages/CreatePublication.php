@@ -6,10 +6,11 @@ namespace AcMarche\Publication\Filament\Resources\Publications\Pages;
 
 use AcMarche\Publication\Filament\Resources\Publications\PublicationResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreatePublication extends CreateRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = PublicationResource::class;
 
     public function canCreateAnother(): bool

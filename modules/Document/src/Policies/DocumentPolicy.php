@@ -78,6 +78,7 @@ final class DocumentPolicy
         )) {
             return true;
         }
+
         return $user->username === $document->user_add;
     }
 }

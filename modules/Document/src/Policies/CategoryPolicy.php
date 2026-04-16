@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Document\Policies;
 
 use AcMarche\Document\Enums\RolesEnum;
-use AcMarche\Document\Models\Category;
 use App\Models\User;
 
 final class CategoryPolicy
@@ -71,6 +70,7 @@ final class CategoryPolicy
         if ($user->isAdministrator()) {
             return true;
         }
+
         return $user->hasOneOfThisRoles(
             [
                 RolesEnum::ROLE_DOCUMENT_ADMIN->value,

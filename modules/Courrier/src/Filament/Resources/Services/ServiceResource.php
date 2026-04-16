@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\Services;
 
-use Override;
 use AcMarche\Courrier\Filament\Resources\Services\Pages\CreateService;
 use AcMarche\Courrier\Filament\Resources\Services\Pages\EditService;
 use AcMarche\Courrier\Filament\Resources\Services\Pages\ListServices;
@@ -15,6 +14,7 @@ use AcMarche\Courrier\Models\Service;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class ServiceResource extends Resource

@@ -4,22 +4,25 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Search;
 
-use Illuminate\Support\Facades\Date;
 use AcMarche\App\Meilisearch\MeiliServer;
 use AcMarche\App\Meilisearch\MeiliTrait;
 use AcMarche\Courrier\Models\IncomingMail;
 use DateTimeInterface;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Date;
 
 use function chr;
 
 final class MeiliIndexer
 {
-    public $courrierRepository;
-    public $courrierDestinataireRepository;
-    public $courrierServiceRepository;
-    public $ocr;
     use MeiliTrait;
+
+    public $courrierRepository;
+
+    public $courrierDestinataireRepository;
+
+    public $courrierServiceRepository;
+
+    public $ocr;
 
     private string $primaryKey = 'id';
 

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Courrier\Models\UserCourrierTrait;
 use AcMarche\MailingList\Models\UserMailingListTrait;
@@ -19,6 +17,8 @@ use Filament\Auth\MultiFactor\App\Contracts\HasAppAuthenticationRecovery;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -256,11 +256,6 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         return $this->full_name;
     }
 
-    protected function fullName(): Attribute
-    {
-        return Attribute::get(fn (): string => $this->last_name.' '.$this->first_name);
-    }
-
     public function fullNameAsString(): string
     {
         return $this->last_name.' '.$this->first_name;
@@ -277,6 +272,11 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
                 unset($model->attributes['plainPassword']);
             }
         });
+    }
+
+    protected function fullName(): Attribute
+    {
+        return Attribute::get(fn (): string => $this->last_name.' '.$this->first_name);
     }
 
     /**

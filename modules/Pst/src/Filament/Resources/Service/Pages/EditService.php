@@ -8,10 +8,11 @@ use AcMarche\Pst\Filament\Resources\Service\ServiceResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditService extends EditRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ServiceResource::class;
 
     public function getTitle(): string|Htmlable

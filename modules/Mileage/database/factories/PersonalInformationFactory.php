@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Database\Factories;
 
-use Override;
 use AcMarche\Mileage\Models\PersonalInformation;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Override;
 
 /**
  * @extends Factory<PersonalInformation>

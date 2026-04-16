@@ -34,7 +34,7 @@ final class ActionPolicy
      */
     public function create(User $user): bool
     {
-        return !$user->hasOneOfThisRoles([RoleEnum::MANDATAIRE->value]);
+        return ! $user->hasOneOfThisRoles([RoleEnum::MANDATAIRE->value]);
     }
 
     /**

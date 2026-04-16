@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Auth;
 
-use LdapRecord\Auth\PasswordRequiredException;
-use LdapRecord\Auth\UsernameRequiredException;
-use LdapRecord\ContainerException;
 use AcMarche\Pst\Ldap\User as UserLdap;
 use App\Models\User;
+use LdapRecord\Auth\PasswordRequiredException;
+use LdapRecord\Auth\UsernameRequiredException;
 use LdapRecord\Container;
+use LdapRecord\ContainerException;
 
 final class LdapAuthService
 {

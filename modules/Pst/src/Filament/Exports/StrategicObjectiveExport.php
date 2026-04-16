@@ -114,22 +114,22 @@ final class StrategicObjectiveExport implements FromCollection, ShouldAutoSize, 
                     $ligne++;
                     $type = $action->type?->name ?? null;
                     $mandataires = $action->mandataries ?? new Collection();
-                    $mandatairesNames = $mandataires->map(fn(User $user): string => $user->last_name.' '.$user->first_name);
+                    $mandatairesNames = $mandataires->map(fn (User $user): string => $user->last_name.' '.$user->first_name);
                     $agents = $action->users ?? new Collection();
-                    $agentsNames = $agents->map(fn(User $user): string => $user->last_name.' '.$user->first_name);
+                    $agentsNames = $agents->map(fn (User $user): string => $user->last_name.' '.$user->first_name);
 
                     $servicesPorteurs = $action->leaderServices ?? new Collection();
-                    $servicesPorteursNames = $servicesPorteurs->map(fn(Service $service) => $service->name);
+                    $servicesPorteursNames = $servicesPorteurs->map(fn (Service $service) => $service->name);
 
                     $servicesPartenaires = $action->partnerServices ?? new Collection();
-                    $servicesPartenairesNames = $servicesPartenaires->map(fn(Service $service) => $service->name);
+                    $servicesPartenairesNames = $servicesPartenaires->map(fn (Service $service) => $service->name);
 
                     $partenaires = $action->partners ?? new Collection();
-                    $partenairesNames = $partenaires->map(fn(Partner $partner) => $partner->name);
+                    $partenairesNames = $partenaires->map(fn (Partner $partner) => $partner->name);
 
                     $etatavancement = $action->state?->value ?? null;
                     $odds = $action->odds ?? new Collection();
-                    $oddsNames = $odds->map(fn(Odd $odd) => $odd->name);
+                    $oddsNames = $odds->map(fn (Odd $odd) => $odd->name);
                     $roadmap = $action->roadmap?->value ?? null;
                     $synergie = $action->synergie?->value ?? null;
 

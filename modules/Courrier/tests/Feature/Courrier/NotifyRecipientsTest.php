@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Facades\Date;
 use AcMarche\Courrier\Enums\RolesEnum;
 use AcMarche\Courrier\Filament\Pages\NotifyRecipients;
 use AcMarche\Courrier\Jobs\SendIncomingMailNotificationJob;
@@ -12,8 +11,8 @@ use AcMarche\Courrier\Models\Recipient;
 use AcMarche\Courrier\Models\Service;
 use AcMarche\Security\Models\Role;
 use App\Models\User;
-use Carbon\Carbon;
 use Filament\Facades\Filament;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Queue;
 
@@ -157,7 +156,7 @@ describe('SendIncomingMailNotificationJob', function (): void {
         $job = new SendIncomingMailNotificationJob(Date::now());
         $job->handle();
 
-        Mail::assertQueued(IncomingMailNotification::class, fn($mail): bool => $mail->hasTo($recipient->email) && $mail->incomingMails->count() === 1);
+        Mail::assertQueued(IncomingMailNotification::class, fn ($mail): bool => $mail->hasTo($recipient->email) && $mail->incomingMails->count() === 1);
     });
 
     test('regular recipient only receives mails where they are assigned', function (): void {
@@ -188,7 +187,7 @@ describe('SendIncomingMailNotificationJob', function (): void {
         $job = new SendIncomingMailNotificationJob(Date::now());
         $job->handle();
 
-        Mail::assertQueued(IncomingMailNotification::class, fn($mail): bool => $mail->hasTo($recipient->email) && $mail->incomingMails->count() === 1);
+        Mail::assertQueued(IncomingMailNotification::class, fn ($mail): bool => $mail->hasTo($recipient->email) && $mail->incomingMails->count() === 1);
     });
 
     test('recipient receives mails through service membership', function (): void {
@@ -209,7 +208,7 @@ describe('SendIncomingMailNotificationJob', function (): void {
         $job = new SendIncomingMailNotificationJob(Date::now());
         $job->handle();
 
-        Mail::assertQueued(IncomingMailNotification::class, fn($mailable) => $mailable->hasTo($recipient->email));
+        Mail::assertQueued(IncomingMailNotification::class, fn ($mailable) => $mailable->hasTo($recipient->email));
     });
 
     test('mail is marked as notified after sending', function (): void {
@@ -247,7 +246,7 @@ describe('SendIncomingMailNotificationJob', function (): void {
         $job = new SendIncomingMailNotificationJob(Date::now());
         $job->handle();
 
-        Mail::assertQueued(IncomingMailNotification::class, fn($mailable): bool => $mailable->includeAttachments === true);
+        Mail::assertQueued(IncomingMailNotification::class, fn ($mailable): bool => $mailable->includeAttachments === true);
     });
 
     test('attachments are not included when recipient does not have receives_attachments flag', function (): void {
@@ -267,7 +266,7 @@ describe('SendIncomingMailNotificationJob', function (): void {
         $job = new SendIncomingMailNotificationJob(Date::now());
         $job->handle();
 
-        Mail::assertQueued(IncomingMailNotification::class, fn($mailable): bool => $mailable->includeAttachments === false);
+        Mail::assertQueued(IncomingMailNotification::class, fn ($mailable): bool => $mailable->includeAttachments === false);
     });
 });
 

@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Document\Filament\Resources\Documents\Pages;
 
-use Override;
-use Filament\Actions\Action;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Document\Filament\Resources\Documents\DocumentResource;
 use AcMarche\Document\Filament\Resources\Documents\Schemas\DocumentInfolist;
 use AcMarche\Document\Models\Document;
-use Filament\Actions;
+use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 use Filament\Support\Colors\Color;
 use Illuminate\Support\Facades\Storage;
+use Override;
 
 final class ViewDocument extends ViewRecord
 {

@@ -11,11 +11,15 @@ use Meilisearch\Endpoints\Keys;
 
 final class MeiliServer
 {
-    public $courrierRepository;
-    public $courrierDestinataireRepository;
-    public $courrierServiceRepository;
-    public $ocr;
     use MeiliTrait;
+
+    public $courrierRepository;
+
+    public $courrierDestinataireRepository;
+
+    public $courrierServiceRepository;
+
+    public $ocr;
 
     private string $primaryKey = 'idSearch';
 

@@ -14,19 +14,20 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 final class OperationalObjectiveResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = OperationalObjective::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'tabler-target';
 
-    #[\Override]
+    #[Override]
     protected static ?string $recordTitleAttribute = 'name';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 2;
 
     public static function getModelLabel(): string

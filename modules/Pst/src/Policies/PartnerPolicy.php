@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Pst\Policies;
 
 use AcMarche\Pst\Enums\RoleEnum;
-use AcMarche\Pst\Models\Partner;
 use App\Models\User;
 
 final class PartnerPolicy
@@ -31,7 +30,7 @@ final class PartnerPolicy
      */
     public function create(User $user): bool
     {
-        return !$user->hasOneOfThisRoles([RoleEnum::MANDATAIRE->value]);
+        return ! $user->hasOneOfThisRoles([RoleEnum::MANDATAIRE->value]);
     }
 
     /**
@@ -39,7 +38,7 @@ final class PartnerPolicy
      */
     public function update(User $user): bool
     {
-        return !$user->hasOneOfThisRoles([RoleEnum::MANDATAIRE->value]);
+        return ! $user->hasOneOfThisRoles([RoleEnum::MANDATAIRE->value]);
     }
 
     /**
@@ -47,7 +46,7 @@ final class PartnerPolicy
      */
     public function delete(User $user): bool
     {
-        return !$user->hasOneOfThisRoles([RoleEnum::MANDATAIRE->value]);
+        return ! $user->hasOneOfThisRoles([RoleEnum::MANDATAIRE->value]);
     }
 
     /**

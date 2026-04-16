@@ -17,20 +17,21 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Override;
 use UnitEnum;
 
 final class UserResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = User::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-users';
 
-    #[\Override]
+    #[Override]
     protected static string|UnitEnum|null $navigationGroup = NavigationGroupEnum::Settings;
 
-    #[\Override]
+    #[Override]
     protected static ?string $recordTitleAttribute = 'fullName';
 
     public static function getModelLabel(): string

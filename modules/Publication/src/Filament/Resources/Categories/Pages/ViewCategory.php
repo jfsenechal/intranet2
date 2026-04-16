@@ -7,10 +7,11 @@ namespace AcMarche\Publication\Filament\Resources\Categories\Pages;
 use AcMarche\Publication\Filament\Resources\Categories\CategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
+use Override;
 
 final class ViewCategory extends ViewRecord
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = CategoryResource::class;
 
     public function getTitle(): string

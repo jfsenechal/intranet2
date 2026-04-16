@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\AddressBooks;
 
-use Override;
 use AcMarche\MailingList\Filament\Resources\AddressBooks\Pages\CreateAddressBook;
 use AcMarche\MailingList\Filament\Resources\AddressBooks\Pages\EditAddressBook;
 use AcMarche\MailingList\Filament\Resources\AddressBooks\Pages\ListAddressBooks;
@@ -17,6 +16,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Override;
 
 final class AddressBookResource extends Resource
 {

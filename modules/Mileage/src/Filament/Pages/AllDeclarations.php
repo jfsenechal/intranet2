@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Pages;
 
-use Override;
 use AcMarche\Mileage\Calculator\DeclarationCalculator;
 use AcMarche\Mileage\Enums\RolesEnum;
 use AcMarche\Mileage\Filament\Resources\Declarations\DeclarationResource;
@@ -17,9 +16,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Override;
 use UnitEnum;
 
 final class AllDeclarations extends ListRecords
@@ -141,7 +140,7 @@ final class AllDeclarations extends ListRecords
                         DatePicker::make('created_until')
                             ->label('Créé jusqu\'à'),
                     ])
-                    ->query(fn(Builder $query, array $data): Builder => $query
+                    ->query(fn (Builder $query, array $data): Builder => $query
                         ->when(
                             $data['created_from'],
                             fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),

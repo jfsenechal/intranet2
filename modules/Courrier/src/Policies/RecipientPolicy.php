@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Courrier\Policies;
 
 use AcMarche\Courrier\Enums\RolesEnum;
-use AcMarche\Courrier\Models\Recipient;
 use App\Models\User;
 
 final class RecipientPolicy
@@ -83,6 +82,7 @@ final class RecipientPolicy
         if ($user->isAdministrator()) {
             return true;
         }
+
         return $user->hasOneOfThisRoles(
             [
                 RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN,

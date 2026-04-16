@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst\Pages;
 
-use Override;
-use Filament\Actions\CreateAction;
 use AcMarche\Pst\Enums\ActionStateEnum;
 use AcMarche\Pst\Enums\RoleEnum;
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Pst\Models\Action;
 use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
+use Override;
 
 final class ListActions extends ListRecords
 {
@@ -55,7 +54,7 @@ final class ListActions extends ListRecords
                             ->validated()
                             ->count()
                     )
-                    ->modifyQueryUsing(fn(Builder $query): Builder => $query
+                    ->modifyQueryUsing(fn (Builder $query): Builder => $query
                         ->where('state', $actionStateEnum->value)
                         ->validated())
                     ->label($actionStateEnum->getLabel())

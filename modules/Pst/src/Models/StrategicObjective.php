@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
+use Override;
 
 #[UseFactory(StrategicObjectiveFactory::class)]
 #[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
@@ -27,7 +28,7 @@ final class StrategicObjective extends Model
 {
     use HasDepartmentScope, HasFactory, Notifiable, Searchable;
 
-    #[\Override]
+    #[Override]
     protected $casts = [
         'scope' => ActionScopeEnum::class,
         'department' => DepartmentEnum::class,

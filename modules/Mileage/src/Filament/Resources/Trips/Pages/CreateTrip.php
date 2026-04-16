@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Trips\Pages;
 
-use Override;
 use AcMarche\Mileage\Filament\Resources\PersonalInformation\PersonalInformationResource;
 use AcMarche\Mileage\Filament\Resources\Trips\TripResource;
 use AcMarche\Mileage\Repository\PersonalInformationRepository;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateTrip extends CreateRecord
 {

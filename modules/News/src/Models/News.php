@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Connection;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\News\Database\Factories\NewsFactory;
 use AcMarche\News\Observers\NewsObserver;
 use AcMarche\Security\Models\HasUserAdd;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -40,9 +39,9 @@ use Spatie\Sluggable\SlugOptions;
 final class News extends Model
 {
     use HasFactory;
+    use HasSlug;
     use HasUserAdd;
     use Prunable;
-    use HasSlug;
 
     public function getSlugOptions(): SlugOptions
     {

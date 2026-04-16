@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\Categories\RelationManagers;
 
-use Override;
 use AcMarche\News\Filament\Resources\News\NewsResource;
 use AcMarche\News\Models\News;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -12,6 +11,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Override;
 
 final class NewsRelationManager extends RelationManager
 {

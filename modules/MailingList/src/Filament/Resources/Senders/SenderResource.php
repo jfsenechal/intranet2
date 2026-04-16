@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\Senders;
 
-use Override;
 use AcMarche\MailingList\Filament\Resources\Senders\Pages\CreateSender;
 use AcMarche\MailingList\Filament\Resources\Senders\Pages\EditSender;
 use AcMarche\MailingList\Filament\Resources\Senders\Pages\ListSenders;
@@ -16,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Override;
 
 final class SenderResource extends Resource
 {

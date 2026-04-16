@@ -13,13 +13,14 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 
 final class UserResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = User::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-users';
 
     public static function getNavigationGroup(): string

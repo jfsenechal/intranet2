@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Override;
 
 #[UseFactory(RoleFactory::class)]
 #[\Illuminate\Database\Eloquent\Attributes\Fillable(['name', 'description', 'label', 'module_id'])]
@@ -18,7 +19,7 @@ final class Role extends Model
 {
     use HasFactory;
 
-    #[\Override]
+    #[Override]
     public $timestamps = false;
 
     public function module(): BelongsTo

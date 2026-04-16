@@ -12,6 +12,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -21,10 +22,10 @@ use function Laravel\Prompts\text;
 #[AsCommand(name: 'intranet:create-user')]
 final class CreateUserCommand extends Command
 {
-    #[\Override]
+    #[Override]
     protected $description = 'Create a new user';
 
-    #[\Override]
+    #[Override]
     protected $name = 'intranet:create-user';
 
     /**

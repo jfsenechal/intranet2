@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\MailingList\Filament\Resources\Emails;
 
-use Override;
 use AcMarche\MailingList\Filament\Resources\Emails\Pages\CreateEmail;
 use AcMarche\MailingList\Filament\Resources\Emails\Pages\EditEmail;
 use AcMarche\MailingList\Filament\Resources\Emails\Pages\ListEmails;
@@ -17,6 +16,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Override;
 
 final class EmailResource extends Resource
 {

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\BudgetArticles\Pages;
 
-use Override;
 use AcMarche\Mileage\Filament\Resources\BudgetArticles\BudgetArticleResource;
 use Filament\Resources\Pages\CreateRecord;
+use Override;
 
 final class CreateBudgetArticle extends CreateRecord
 {

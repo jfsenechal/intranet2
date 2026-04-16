@@ -7,11 +7,11 @@ namespace AcMarche\Pst\Filament\Resources\OperationalObjective\Pages;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\OperationalObjectiveResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListOperationalObjectives extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = OperationalObjectiveResource::class;
 
     public function getTitle(): string

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\BudgetArticles;
 
-use Override;
-use AcMarche\Mileage\Filament\Resources\BudgetArticles\Pages\ListBudgetArticles;
 use AcMarche\Mileage\Filament\Resources\BudgetArticles\Pages\CreateBudgetArticle;
 use AcMarche\Mileage\Filament\Resources\BudgetArticles\Pages\EditBudgetArticle;
+use AcMarche\Mileage\Filament\Resources\BudgetArticles\Pages\ListBudgetArticles;
 use AcMarche\Mileage\Filament\Resources\BudgetArticles\Schemas\BudgetArticleForm;
 use AcMarche\Mileage\Filament\Resources\BudgetArticles\Tables\BudgetArticleTables;
 use AcMarche\Mileage\Models\BudgetArticle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class BudgetArticleResource extends Resource

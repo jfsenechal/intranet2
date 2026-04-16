@@ -7,11 +7,11 @@ namespace AcMarche\Security\Filament\Resources\Modules\Pages;
 use AcMarche\Security\Filament\Resources\Modules\ModuleResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class ListModule extends ListRecords
 {
-    #[\Override]
+    #[Override]
     protected static string $resource = ModuleResource::class;
 
     public function getTitle(): string

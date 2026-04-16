@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Console\Commands;
 
-use Override;
 use AcMarche\Pst\Models\Action;
 use AcMarche\Pst\Models\Odd;
 use AcMarche\Pst\Models\OperationalObjective;
@@ -14,6 +13,7 @@ use AcMarche\Pst\Models\StrategicObjective;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
+use Override;
 
 final class MeiliCommand extends Command
 {

@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 final class Attachment extends Model
 {
     use HasFactory;
+
     public const UPDATED_AT = null;
 
     public function incomingMail(): BelongsTo

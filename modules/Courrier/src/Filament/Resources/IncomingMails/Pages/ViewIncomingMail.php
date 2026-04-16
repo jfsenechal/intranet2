@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace AcMarche\Courrier\Filament\Resources\IncomingMails\Pages;
 
-use Override;
-use Filament\Actions\Action;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\IncomingMailResource;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\Schemas\IncomingMailInfolist;
 use AcMarche\Courrier\Models\IncomingMail;
-use Filament\Actions;
+use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 use Filament\Support\Colors\Color;
 use Illuminate\Support\Facades\Storage;
+use Override;
 
 final class ViewIncomingMail extends ViewRecord
 {

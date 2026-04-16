@@ -15,19 +15,20 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Override;
 
 final class StrategicObjectiveResource extends Resource
 {
-    #[\Override]
+    #[Override]
     protected static ?string $model = StrategicObjective::class;
 
-    #[\Override]
+    #[Override]
     protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    #[\Override]
+    #[Override]
     protected static ?int $navigationSort = 1;
 
-    #[\Override]
+    #[Override]
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getModelLabel(): string

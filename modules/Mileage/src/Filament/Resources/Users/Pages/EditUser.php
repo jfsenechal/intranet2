@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Mileage\Filament\Resources\Users\Pages;
 
-use Override;
 use AcMarche\Mileage\Filament\Resources\Users\UserResource;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Contracts\Support\Htmlable;
+use Override;
 
 final class EditUser extends EditRecord
 {
