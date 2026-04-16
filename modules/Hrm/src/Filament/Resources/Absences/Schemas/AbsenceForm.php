@@ -8,9 +8,7 @@ use AcMarche\Hrm\Enums\ReasonsEnum;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -50,44 +48,30 @@ final class AbsenceForm
                                 'non' => 'Non',
                             ]),
                     ]),
-                Fieldset::make('Options')
+                Section::make('Options')
                     ->columns(3)
                     ->schema([
                         Toggle::make('certimed')
                             ->label('Certimed')
-                            ->options([
-                                'oui' => 'Oui',
-                                'non' => 'Non',
-                            ]),
+                        ,
                         Toggle::make('has_resumed')
                             ->label('Reprise')
-                            ->options([
-                                'oui' => 'Oui',
-                                'non' => 'Non',
-                            ]),
+                        ,
                         Toggle::make('clock_updated')
                             ->label('Pointeuse')
-                            ->options([
-                                'oui' => 'Oui',
-                                'non' => 'Non',
-                            ]),
+                        ,
                         Toggle::make('acropole')
                             ->label('Acropole')
-                            ->options([
-                                'oui' => 'Oui',
-                                'non' => 'Non',
-                            ]),
+                        ,
                         Toggle::make('agent_file')
                             ->label('Dossier agent')
-                            ->options([
-                                'oui' => 'Oui',
-                                'non' => 'Non',
-                            ]),
+                        ,
                     ]),
                 Section::make('Notes')
                     ->schema([
                         RichEditor::make('notes')
                             ->label('Notes')
+                            ->hiddenLabel()
                             ->columnSpanFull(),
                     ]),
             ]);

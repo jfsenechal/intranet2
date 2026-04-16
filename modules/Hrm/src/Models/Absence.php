@@ -58,6 +58,11 @@ final class Absence extends Model
             'reminder_date' => 'date',
             'closed_date' => 'date',
             'is_closed' => 'boolean',
+            'certimed' => 'boolean',
+            'has_resumed' => 'boolean',
+            'clock_updated' => 'boolean',
+            'acropole' => 'boolean',
+            'agent_file' => 'boolean',
         ];
     }
 }

@@ -19,7 +19,6 @@ final class AbsenceInfolist
         return $schema
             ->columns(1)
             ->components([
-
                 Flex::make([
                     Grid::make(1)
                         ->schema([
@@ -55,25 +54,40 @@ final class AbsenceInfolist
                                 ->columnSpanFull(),
                         ]),
                     Grid::make(1)
-                        ->visible(fn (): bool => auth()->user() instanceof User)
                         ->schema([
                             Section::make('Etat')
                                 ->label(null)
-                                ->schema([TextEntry::make('has_resumed')
-                                    ->label('Reprise'),
-                                    TextEntry::make('clock_updated')
-                                        ->label('Pointeuse'),
-                                    TextEntry::make('acropole')
-                                        ->label('Acropole'),
-                                    TextEntry::make('agent_file')
-                                        ->label('Dossier agent'),
+                                ->schema([
                                     IconEntry::make('is_closed')
                                         ->label('Clôturé')
-                                        ->boolean(), ]),
+                                        ->falseIcon(false)
+                                        ->boolean(),
+                                    IconEntry::make('has_resumed')
+                                        ->label('Reprise')
+                                        ->falseIcon(false)
+                                        ->boolean(),
+                                    IconEntry::make('clock_updated')
+                                        ->label('Pointeuse')
+                                        ->falseIcon(false)
+                                        ->boolean(),
+                                    IconEntry::make('acropole')
+                                        ->label('Acropole')
+                                        ->falseIcon(false)
+                                        ->boolean(),
+                                    IconEntry::make('agent_file')
+                                        ->label('Dossier agent')
+                                        ->falseIcon(false)
+                                        ->boolean(),
+                                    IconEntry::make('certimed')
+                                        ->label('Certimed')
+                                        ->falseIcon(false)
+                                        ->boolean(),
+                                ]),
 
                         ])
                         ->grow(false),
-                ])->from('md')
+                ])
+                    ->from('md')
                     ->columnSpanFull(),
 
             ]);
