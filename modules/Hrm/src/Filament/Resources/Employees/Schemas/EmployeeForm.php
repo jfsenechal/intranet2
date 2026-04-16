@@ -97,7 +97,8 @@ final class EmployeeForm
                                             ->label('Fonction')
                                             ->maxLength(255),
                                         Select::make('status')
-                                            ->label('Statut')->options(StatusEnum::class)
+                                            ->label('Statut')
+                                            ->options(StatusEnum::class)
                                             ->enum(StatusEnum::class),
                                         TextInput::make('uid')
                                             ->label('Login')

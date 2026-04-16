@@ -30,7 +30,7 @@ return new class extends Migration
                 $table->renameColumn('updated', 'updated_at');
                 $table->renameColumn('updateBy', 'updated_by');
                 $table->renameColumn('pointeuse', 'clock_updated');
-                $table->renameColumn('encare', 'encore');
+                $table->renameColumn('encare', 'certimed');
                 $table->renameColumn('dossier_agent', 'agent_file');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('absences')) {
@@ -46,7 +46,7 @@ return new class extends Migration
                 $table->string('ssa', 5)->nullable()->comment('reason code');
                 $table->string('reason', 255)->nullable();
                 $table->string('clock_updated', 5)->nullable()->comment('oui ou non');
-                $table->string('encore', 5)->nullable()->comment('oui ou non');
+                $table->string('certimed', 5)->nullable()->comment('oui ou non');
                 $table->boolean('is_closed')->default(false);
                 $table->string('acropole', 5)->nullable()->comment('oui ou non');
                 $table->string('agent_file', 5)->nullable()->comment('oui ou non');

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Absences\Schemas;
 
+use AcMarche\Hrm\Enums\ReasonsEnum;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -20,17 +21,7 @@ final class AbsenceForm
         return $schema
             ->columns(1)
             ->components([
-                Section::make('Agent')
-                    ->schema([
-                        Select::make('employee_id')
-                            ->label('Agent')
-                            ->relationship('employee', 'last_name')
-                            ->getOptionLabelFromRecordUsing(fn ($record): string => $record->last_name.' '.$record->first_name)
-                            ->searchable()
-                            ->preload()
-                            ->required(),
-                    ]),
-                Fieldset::make('Periode')
+                Section::make('Periode')
                     ->columns(4)
                     ->schema([
                         DatePicker::make('start_date')
@@ -41,46 +32,57 @@ final class AbsenceForm
                             ->label('Date de rappel'),
                         DatePicker::make('closed_date')
                             ->label('Date de cloture'),
+                        Toggle::make('is_closed')
+                            ->label('Cloturé'),
                     ]),
-                Fieldset::make('Motif')
+                Section::make('Motif')
                     ->columns(2)
                     ->schema([
-                        TextInput::make('reason')
+                        Select::make('reason')
                             ->label('Raison')
-                            ->maxLength(255),
-                        TextInput::make('ssa')
-                            ->label('SSA')
-                            ->maxLength(5),
+                            ->enum(ReasonsEnum::class)
+                            ->options(ReasonsEnum::class)
+                        ,
+                        Select::make('ssa')
+                            ->label('MEDEX / SSA / Certificat médical / Justificatif reçu ?')
+                            ->options([
+                                'oui' => 'Oui',
+                                'non' => 'Non',
+                            ]),
                     ]),
                 Fieldset::make('Options')
-                    ->columns(4)
+                    ->columns(3)
                     ->schema([
-                        Select::make('has_resumed')
+                        Toggle::make('certimed')
+                            ->label('Certimed')
+                            ->options([
+                                'oui' => 'Oui',
+                                'non' => 'Non',
+                            ]),
+                        Toggle::make('has_resumed')
                             ->label('Reprise')
                             ->options([
                                 'oui' => 'Oui',
                                 'non' => 'Non',
                             ]),
-                        Select::make('clock_updated')
+                        Toggle::make('clock_updated')
                             ->label('Pointeuse')
                             ->options([
                                 'oui' => 'Oui',
                                 'non' => 'Non',
                             ]),
-                        Select::make('acropole')
+                        Toggle::make('acropole')
                             ->label('Acropole')
                             ->options([
                                 'oui' => 'Oui',
                                 'non' => 'Non',
                             ]),
-                        Select::make('agent_file')
+                        Toggle::make('agent_file')
                             ->label('Dossier agent')
                             ->options([
                                 'oui' => 'Oui',
                                 'non' => 'Non',
                             ]),
-                        Toggle::make('is_closed')
-                            ->label('Cloture'),
                     ]),
                 Section::make('Notes')
                     ->schema([
