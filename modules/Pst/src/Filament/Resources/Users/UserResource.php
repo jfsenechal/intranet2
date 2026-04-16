@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Users;
 
+use AcMarche\Pst\Filament\Resources\Users\Pages\ViewUser;
 use AcMarche\Pst\Enums\NavigationGroupEnum;
 use AcMarche\Pst\Filament\Resources\Users\Pages\EditUser;
 use AcMarche\Pst\Filament\Resources\Users\Pages\ListUsers;
@@ -53,7 +54,7 @@ final class UserResource extends Resource
     {
         return [
             'index' => ListUsers::route('/'),
-            'view' => Pages\ViewUser::route('/{record}'),
+            'view' => ViewUser::route('/{record}'),
             'edit' => EditUser::route('/{record}/edit'),
         ];
     }

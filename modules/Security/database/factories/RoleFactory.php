@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Override;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Security\Models\Role>
+ * @extends Factory<Role>
  */
 #[UseModel(Role::class)]
 final class RoleFactory extends Factory

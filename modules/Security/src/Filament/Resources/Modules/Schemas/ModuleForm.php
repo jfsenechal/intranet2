@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Modules\Schemas;
 
+use Filament\Forms\Components\Select;
 use AcMarche\Security\Models\Module;
 use AcMarche\Security\Repository\ModuleRepository;
 use AcMarche\Security\Repository\RoleRepository;
@@ -64,7 +65,7 @@ final class ModuleForm
         $components = [];
 
         if (! $user?->id > 0) {
-            $components[] = Forms\Components\Select::make('user')
+            $components[] = Select::make('user')
                 ->label('Agent')
                 ->options(fn (UserRepository $repository): array => $repository->listLocalUsersForSelect())
                 ->searchable()
@@ -88,7 +89,7 @@ final class ModuleForm
         $components = [];
         if (! $module?->id > 0) {
             $components[] =
-                Forms\Components\Select::make('module')
+                Select::make('module')
                     ->label('Module')
                     ->options(fn (ModuleRepository $repository): array => $repository->getModulesForSelect())
                     ->reactive()

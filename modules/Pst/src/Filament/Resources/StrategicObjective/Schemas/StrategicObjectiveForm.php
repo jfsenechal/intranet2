@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\StrategicObjective\Schemas;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use AcMarche\Pst\Enums\ActionScopeEnum;
 use Filament\Forms;
 use Filament\Schemas\Components\Grid;
@@ -23,19 +25,19 @@ final class StrategicObjectiveForm
                     ->schema([
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\TextInput::make('name')
+                                TextInput::make('name')
                                     ->label('Nom')
                                     ->required()
                                     ->placeholder('Saisissez le nom de l\'objectif stratégique')
                                     ->prefixIcon('tabler-file-text')
                                     ->maxLength(255),
-                                Forms\Components\TextInput::make('position')
+                                TextInput::make('position')
                                     ->label('Position')
                                     ->required()
                                     ->placeholder('Ordre d\'affichage')
                                     ->prefixIcon('tabler-list-numbers')
                                     ->numeric(),
-                                Forms\Components\ToggleButtons::make('scope')
+                                ToggleButtons::make('scope')
                                     ->label('Volet')
                                     ->required()
                                     ->options(ActionScopeEnum::class)

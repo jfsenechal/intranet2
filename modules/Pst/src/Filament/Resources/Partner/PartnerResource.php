@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Partner;
 
+use AcMarche\Pst\Filament\Resources\Partner\Pages\ListPartners;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\CreatePartner;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\ViewPartner;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\EditPartner;
 use AcMarche\Pst\Enums\NavigationGroupEnum;
 use AcMarche\Pst\Filament\Resources\Partner\Schemas\PartnerForm;
 use AcMarche\Pst\Filament\Resources\Partner\Tables\PartnerTables;
@@ -63,10 +67,10 @@ final class PartnerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPartners::route('/'),
-            'create' => Pages\CreatePartner::route('/create'),
-            'view' => Pages\ViewPartner::route('/{record}'),
-            'edit' => Pages\EditPartner::route('/{record}/edit'),
+            'index' => ListPartners::route('/'),
+            'create' => CreatePartner::route('/create'),
+            'view' => ViewPartner::route('/{record}'),
+            'edit' => EditPartner::route('/{record}/edit'),
         ];
     }
 

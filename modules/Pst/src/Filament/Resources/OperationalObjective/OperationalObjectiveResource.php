@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\OperationalObjective;
 
+use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\ListOperationalObjectives;
+use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\CreateOperationalObjective;
+use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\ViewOperationalObjective;
+use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\EditOperationalObjective;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\Schemas\OperationalObjectiveForm;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\Tables\OperationalObjectiveTables;
 use AcMarche\Pst\Models\OperationalObjective;
@@ -48,10 +52,10 @@ final class OperationalObjectiveResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOperationalObjectives::route('/'),
-            'create' => Pages\CreateOperationalObjective::route('/create'),
-            'view' => Pages\ViewOperationalObjective::route('/{record}'),
-            'edit' => Pages\EditOperationalObjective::route('/{record}/edit'),
+            'index' => ListOperationalObjectives::route('/'),
+            'create' => CreateOperationalObjective::route('/create'),
+            'view' => ViewOperationalObjective::route('/{record}'),
+            'edit' => EditOperationalObjective::route('/{record}/edit'),
         ];
     }
 

@@ -26,7 +26,7 @@ final class DatabaseSeeder extends Seeder
                 'username' => config('app.default_user.name'),
                 'is_administrator' => true,
             ]);
-        $adminRole = Role::factory()->create([
+        Role::factory()->create([
             'name' => RoleEnum::ADMIN->value,
         ]);
         Role::factory()->create([

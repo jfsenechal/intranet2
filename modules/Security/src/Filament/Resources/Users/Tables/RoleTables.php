@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Users\Tables;
 
+use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -19,9 +20,9 @@ final class RoleTables
             ->defaultPaginationPageOption(50)
             ->defaultSort('name')
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Nom'),
-                Tables\Columns\TextColumn::make('description')
+                TextColumn::make('description')
                     ->label('Description'),
             ])
             ->headerActions([

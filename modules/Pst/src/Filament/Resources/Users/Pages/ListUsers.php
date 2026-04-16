@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Users\Pages;
 
+use Filament\Actions\Action;
+use App\Models\User;
 use AcMarche\Pst\Enums\RoleEnum;
 use AcMarche\Pst\Filament\Resources\Users\Schemas\UserForm;
 use AcMarche\Pst\Filament\Resources\Users\UserResource;
@@ -28,7 +30,7 @@ final class ListUsers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\Action::make('ImportUser')
+            Action::make('ImportUser')
                 ->label('Ajouter un utilisateur')
                 ->icon('tabler-user-plus')
                 ->modal()
@@ -42,7 +44,7 @@ final class ListUsers extends ListRecords
                             ->success()
                             ->title('Utilisateur ajouté')
                             ->send();
-                        if ($user instanceof \App\Models\User) {
+                        if ($user instanceof User) {
                             $this->redirect(UserResource::getUrl('view', ['record' => $user]));
                         }
                     } catch (Exception $exception) {
@@ -52,7 +54,7 @@ final class ListUsers extends ListRecords
                             ->send();
                     }
                 }),
-            Actions\Action::make('roles_help')
+            Action::make('roles_help')
                 ->label('Rappel des rôles')
                 ->icon('tabler-user-heart')
                 ->modal()

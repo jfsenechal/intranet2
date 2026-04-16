@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Modules\Pages;
 
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Security\Filament\Resources\Modules\ModuleResource;
 use AcMarche\Security\Filament\Resources\Modules\RelationManagers\UserRelationManager;
 use AcMarche\Security\Filament\Resources\Modules\Schemas\ModuleInfolist;
@@ -30,9 +32,9 @@ final class ViewModule extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

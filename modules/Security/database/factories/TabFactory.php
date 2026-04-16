@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Override;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Security\Models\Tab>
+ * @extends Factory<Tab>
  */
 final class TabFactory extends Factory
 {

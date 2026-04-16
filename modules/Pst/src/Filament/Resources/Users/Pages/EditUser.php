@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Users\Pages;
 
+use Filament\Actions\ViewAction;
 use AcMarche\Pst\Filament\Resources\Users\UserResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
@@ -22,7 +23,7 @@ final class EditUser extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make(),
+            ViewAction::make(),
         ];
     }
 }

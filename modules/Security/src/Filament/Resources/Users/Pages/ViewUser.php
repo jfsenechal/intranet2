@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Users\Pages;
 
+use Filament\Actions\EditAction;
 use AcMarche\Security\Filament\Resources\Users\UserResource;
 use Filament\Actions;
 use Filament\Infolists\Components\TextEntry;
@@ -46,7 +47,7 @@ final class ViewUser extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make(),
+            EditAction::make(),
         ];
     }
 }

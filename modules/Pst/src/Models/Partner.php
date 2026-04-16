@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\Pst\Database\Factories\PartnerFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,8 +15,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 
 #[UseFactory(PartnerFactory::class)]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-pst')]
+#[Fillable([
     'name',
     'phone',
     'email',

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\StrategicObjective\Pages;
 
+use Filament\Actions\CreateAction;
 use AcMarche\Pst\Filament\Exports\StrategicObjectiveExport;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\StrategicObjectiveResource;
 use AcMarche\Security\Repository\UserRepository;
@@ -39,7 +40,7 @@ final class ListStrategicObjectives extends ListRecords
                         'pst.xlsx'
                     )
                 ),
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter un OS')
                 ->icon('tabler-plus'),
         ];

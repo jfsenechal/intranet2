@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\StrategicObjective;
 
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\ListStrategicObjectives;
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\CreateStrategicObjective;
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\ViewStrategicObjective;
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\EditStrategicObjective;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\RelationManagers\OosRelationManager;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\Schemas\StrategicObjectiveForm;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\Tables\StrategicObjectiveTables;
@@ -56,10 +60,10 @@ final class StrategicObjectiveResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListStrategicObjectives::route('/'),
-            'create' => Pages\CreateStrategicObjective::route('/create'),
-            'view' => Pages\ViewStrategicObjective::route('/{record}'),
-            'edit' => Pages\EditStrategicObjective::route('/{record}/edit'),
+            'index' => ListStrategicObjectives::route('/'),
+            'create' => CreateStrategicObjective::route('/create'),
+            'view' => ViewStrategicObjective::route('/{record}'),
+            'edit' => EditStrategicObjective::route('/{record}/edit'),
         ];
     }
 

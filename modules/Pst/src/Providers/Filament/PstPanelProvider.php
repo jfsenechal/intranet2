@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Providers\Filament;
 
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\App\Traits\HooksTrait;
 use AcMarche\App\Traits\PluginTrait;
@@ -68,7 +69,7 @@ final class PstPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
-                \Illuminate\Foundation\Http\Middleware\PreventRequestForgery::class,
+                PreventRequestForgery::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,

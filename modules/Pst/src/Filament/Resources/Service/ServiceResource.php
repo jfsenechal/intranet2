@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Service;
 
+use AcMarche\Pst\Filament\Resources\Service\Pages\ListServices;
+use AcMarche\Pst\Filament\Resources\Service\Pages\CreateService;
+use AcMarche\Pst\Filament\Resources\Service\Pages\ViewService;
+use AcMarche\Pst\Filament\Resources\Service\Pages\EditService;
 use AcMarche\Pst\Enums\NavigationGroupEnum;
 use AcMarche\Pst\Filament\Resources\Service\Schemas\ServiceForm;
 use AcMarche\Pst\Filament\Resources\Service\Tables\ServiceTables;
@@ -48,10 +52,10 @@ final class ServiceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListServices::route('/'),
-            'create' => Pages\CreateService::route('/create'),
-            'view' => Pages\ViewService::route('/{record}'),
-            'edit' => Pages\EditService::route('/{record}/edit'),
+            'index' => ListServices::route('/'),
+            'create' => CreateService::route('/create'),
+            'view' => ViewService::route('/{record}'),
+            'edit' => EditService::route('/{record}/edit'),
         ];
     }
 

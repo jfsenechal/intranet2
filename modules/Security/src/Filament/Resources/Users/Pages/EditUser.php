@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Users\Pages;
 
+use Filament\Actions\ViewAction;
 use AcMarche\Security\Filament\Resources\Users\UserResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
@@ -22,7 +23,7 @@ final class EditUser extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()->icon('tabler-eye'),
+            ViewAction::make()->icon('tabler-eye'),
         ];
     }
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\StrategicObjective\Pages;
 
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\StrategicObjectiveResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
@@ -41,9 +43,9 @@ final class ViewStrategicObjective extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

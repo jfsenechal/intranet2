@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Publication\Filament\Resources\Publications\Pages;
 
+use Filament\Actions\Action;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Publication\Filament\Resources\Publications\PublicationResource;
 use AcMarche\Publication\Models\Publication;
 use Filament\Actions;
@@ -24,14 +27,14 @@ final class ViewPublication extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\Action::make('preview')
+            Action::make('preview')
                 ->label('Voir la publication')
                 ->icon('tabler-eye')
                 ->color(Color::Green)
                 ->url(fn (Publication $publication) => $publication->url, true),
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

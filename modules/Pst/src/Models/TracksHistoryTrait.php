@@ -21,7 +21,7 @@ trait TracksHistoryTrait
 
         // Get the dirty fields and run them through the custom function, then insert them into the history table
         $this->getUpdated($model)
-            ->map(fn ($value, $field) => call_user_func_array($func, [$value, $field]))
+            ->map(fn ($value, $field): mixed => call_user_func_array($func, [$value, $field]))
             ->each(function ($fields) use ($id): void {
                 History::create(
                     [
@@ -91,6 +91,6 @@ trait TracksHistoryTrait
         return collect($model->getDirty())->reject(fn ($value, $key): bool => in_array($key, ['created_at', 'updated_at']))->mapWithKeys(
             // Take the field names and convert them into human readable strings for the description of the action
             // e.g. first_name -> first name
-            fn ($value, $key) => [str_replace('_', ' ', $key) => $value]);
+            fn ($value, $key): array => [str_replace('_', ' ', $key) => $value]);
     }
 }

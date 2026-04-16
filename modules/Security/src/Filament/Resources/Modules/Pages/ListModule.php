@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Modules\Pages;
 
+use Filament\Actions\CreateAction;
 use AcMarche\Security\Filament\Resources\Modules\ModuleResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
@@ -22,7 +23,7 @@ final class ListModule extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter un module')
                 ->icon('tabler-plus'),
         ];

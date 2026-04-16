@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Users;
 
+use AcMarche\Security\Filament\Resources\Users\Pages\ListUsers;
+use AcMarche\Security\Filament\Resources\Users\Pages\CreateUser;
+use AcMarche\Security\Filament\Resources\Users\Pages\ViewUser;
+use AcMarche\Security\Filament\Resources\Users\Pages\EditUser;
 use AcMarche\Security\Constant\NavigationGroupEnum;
 use AcMarche\Security\Filament\Resources\Users\RelationManagers\ModuleRelationManager;
 use AcMarche\Security\Filament\Resources\Users\Schemas\UserForm;
@@ -53,10 +57,10 @@ final class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'view' => Pages\ViewUser::route('/{record}'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => ListUsers::route('/'),
+            'create' => CreateUser::route('/create'),
+            'view' => ViewUser::route('/{record}'),
+            'edit' => EditUser::route('/{record}/edit'),
         ];
     }
 }

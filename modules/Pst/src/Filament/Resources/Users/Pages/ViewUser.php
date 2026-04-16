@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Users\Pages;
 
+use Filament\Actions\EditAction;
 use AcMarche\Pst\Filament\Resources\Users\Schemas\UserInfolist;
 use AcMarche\Pst\Filament\Resources\Users\UserResource;
 use Filament\Actions;
@@ -30,7 +31,7 @@ final class ViewUser extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
             Impersonate::make(),
         ];

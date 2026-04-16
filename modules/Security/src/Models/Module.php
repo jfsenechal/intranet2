@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\Security\Database\Factories\ModuleFactory;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
@@ -16,7 +17,7 @@ use Override;
 
 // https://github.com/lukas-frey/filament-icon-picker
 #[UseFactory(ModuleFactory::class)]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Fillable([
     'name',
     'url',
     'description',

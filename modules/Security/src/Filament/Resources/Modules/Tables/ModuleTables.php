@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Modules\Tables;
 
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
 use AcMarche\Security\Filament\Actions\RevokeAction;
 use AcMarche\Security\Filament\Resources\Modules\ModuleResource;
 use AcMarche\Security\Handler\ModuleHandler;
@@ -27,21 +29,21 @@ final class ModuleTables
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable()
                     ->label('Intitulé')
                     ->url(fn (Module $record): string => ModuleResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\IconColumn::make('is_public')
+                IconColumn::make('is_public')
                     ->label('Accessible à tous')
                     ->icon(fn (bool $state): ?Heroicon => $state ? Heroicon::CheckCircle : null)
                     ->color('success')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\IconColumn::make('is_external')
+                IconColumn::make('is_external')
                     ->label('Url externe')
                     ->icon(fn (bool $state): ?Heroicon => $state ? Heroicon::CheckCircle : null)
                     ->color('success')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('description')
+                TextColumn::make('description')
                     ->label('Description')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -64,11 +66,11 @@ final class ModuleTables
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable()
                     ->label('Intitulé')
                     ->url(fn (Module $record): string => ModuleResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('roles.name')
+                TextColumn::make('roles.name')
                     ->label('Rôles'),
             ])
             ->filters([

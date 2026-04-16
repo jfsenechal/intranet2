@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Modules\Pages;
 
+use Filament\Actions\ViewAction;
 use AcMarche\Security\Filament\Resources\Modules\ModuleResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
@@ -23,7 +24,7 @@ final class EditModule extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

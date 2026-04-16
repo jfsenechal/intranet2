@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Override;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\AcMarche\Publication\Models\Publication>
+ * @extends Factory<Publication>
  */
 final class PublicationFactory extends Factory
 {

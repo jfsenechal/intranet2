@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Database\Factories\StrategicObjectiveFactory;
 use AcMarche\Pst\Enums\ActionScopeEnum;
@@ -17,8 +19,8 @@ use Laravel\Scout\Searchable;
 use Override;
 
 #[UseFactory(StrategicObjectiveFactory::class)]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-pst')]
+#[Fillable([
     'name',
     'position',
     'department',

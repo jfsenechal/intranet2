@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Odd\Tables;
 
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use AcMarche\Pst\Filament\Resources\Odd\OddResource;
 use AcMarche\Pst\Models\Odd;
 use Filament\Support\Enums\Alignment;
@@ -23,7 +25,7 @@ final class OddTables
             ->recordUrl(fn (Odd $record): string => OddResource::getUrl('view', [$record]))
             ->columns([
                 Stack::make([
-                    Tables\Columns\ImageColumn::make('odd_image')
+                    ImageColumn::make('odd_image')
                         ->defaultImageUrl(fn (Odd $record): string => url(sprintf(
                             '/images/odds/F_SDG_Icons-01-%02d-300x300.jpg',
                             $record->id
@@ -37,18 +39,18 @@ final class OddTables
                         ->extraImgAttributes([
                             'class' => 'rounded-lg shadow-md mx-auto',
                         ]),
-                    Tables\Columns\TextColumn::make('name')
+                    TextColumn::make('name')
                         ->weight(FontWeight::Bold)
                         ->size(TextSize::Large)
                         ->alignment(Alignment::Center)
                         ->extraAttributes(['class' => 'mt-3']),
-                    Tables\Columns\TextColumn::make('description')
+                    TextColumn::make('description')
                         ->limit(100)
                         ->alignment(Alignment::Center)
                         ->color('gray')
                         ->size(TextSize::Small)
                         ->extraAttributes(['class' => 'mt-1']),
-                    Tables\Columns\TextColumn::make('actions_for_department_count')
+                    TextColumn::make('actions_for_department_count')
                         ->counts('actionsForDepartment')
                         ->badge()
                         ->color('success')

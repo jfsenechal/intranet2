@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Partner\Tables;
 
+use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -19,16 +20,16 @@ final class PartnerTables
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('initials')
+                TextColumn::make('initials')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('phone')
+                TextColumn::make('email'),
+                TextColumn::make('phone')
                     ->label('Téléphone'),
-                Tables\Columns\TextColumn::make('actions_count')
+                TextColumn::make('actions_count')
                     ->label('Actions')
                     ->counts('actions')
                     ->sortable(),

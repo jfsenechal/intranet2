@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\Security\Database\Factories\RoleFactory;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Override;
 
 #[UseFactory(RoleFactory::class)]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable(['name', 'description', 'label', 'module_id'])]
+#[Fillable(['name', 'description', 'label', 'module_id'])]
 final class Role extends Model
 {
     use HasFactory;

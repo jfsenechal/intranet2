@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Users\Pages;
 
+use Filament\Actions\Action;
+use App\Models\User;
 use AcMarche\Security\Filament\Resources\Users\Schemas\UserForm;
 use AcMarche\Security\Filament\Resources\Users\UserResource;
 use AcMarche\Security\Ldap\UserHandler;
@@ -27,7 +29,7 @@ final class ListUsers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\Action::make('ImportUser')
+            Action::make('ImportUser')
                 ->label('Importer un agent')
                 ->icon('tabler-user-plus')
                 ->modal()
@@ -40,7 +42,7 @@ final class ListUsers extends ListRecords
                             ->success()
                             ->title('Utilisateur ajouté')
                             ->send();
-                        if ($user instanceof \App\Models\User) {
+                        if ($user instanceof User) {
                             $this->redirect(UserResource::getUrl('view', ['record' => $user], panel: 'security-panel'));
                         }
                     } catch (Exception $exception) {

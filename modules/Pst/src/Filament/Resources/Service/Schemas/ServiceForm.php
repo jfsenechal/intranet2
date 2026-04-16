@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Service\Schemas;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Schemas\Schema;
@@ -14,12 +16,12 @@ final class ServiceForm
     {
         return $schema
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('initials')
+                TextInput::make('initials')
                     ->maxLength(30),
-                Forms\Components\Select::make('users')
+                Select::make('users')
                     ->label('Agents membres')
                     ->relationship('users', 'last_name')
                     ->searchable(['first_name', 'last_name'])

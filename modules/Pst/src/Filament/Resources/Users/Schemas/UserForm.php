@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Users\Schemas;
 
+use AcMarche\Pst\Models\Service;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Security\Models\Role;
 use AcMarche\Security\Repository\UserRepository;
@@ -35,7 +36,7 @@ final class UserForm
                     ->required(),
                 CheckboxList::make('user_services')
                     ->label('Services')
-                    ->options(fn () => \AcMarche\Pst\Models\Service::pluck('name', 'id'))
+                    ->options(fn () => Service::pluck('name', 'id'))
                     ->dehydrated(false)
                     ->columns(2),
             ]);

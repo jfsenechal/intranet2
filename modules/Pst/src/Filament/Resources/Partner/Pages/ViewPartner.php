@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Partner\Pages;
 
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Pst\Filament\Resources\Partner\PartnerResource;
 use AcMarche\Pst\Models\Action;
@@ -62,9 +64,9 @@ final class ViewPartner extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()
+            EditAction::make()
                 ->icon('tabler-edit'),
-            Actions\DeleteAction::make()
+            DeleteAction::make()
                 ->icon('tabler-trash'),
         ];
     }

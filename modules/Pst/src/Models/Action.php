@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Database\Factories\ActionFactory;
 use AcMarche\Pst\Enums\ActionRoadmapEnum;
@@ -37,8 +39,8 @@ use Override;
 #[ObservedBy([ActionObserver::class])]
 #[UseFactory(ActionFactory::class)]
 #[ScopedBy([DepartmentScope::class])]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-pst')]
+#[Fillable([
     'name',
     'state',
     'state_percentage',

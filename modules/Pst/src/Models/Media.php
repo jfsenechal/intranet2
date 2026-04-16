@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\Pst\Database\Factories\MediaFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,8 +14,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 
 #[UseFactory(MediaFactory::class)]
-#[\Illuminate\Database\Eloquent\Attributes\Connection('maria-pst')]
-#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+#[Connection('maria-pst')]
+#[Fillable([
     'name',
     'action_id',
     'uuid',

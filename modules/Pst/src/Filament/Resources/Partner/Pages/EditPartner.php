@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Partner\Pages;
 
+use Filament\Actions\ViewAction;
 use AcMarche\Pst\Filament\Resources\Partner\PartnerResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
@@ -23,7 +24,7 @@ final class EditPartner extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make()
+            ViewAction::make()
                 ->icon('tabler-eye'),
         ];
     }

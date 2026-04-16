@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Publication\Filament\Resources\Categories\Pages;
 
+use Filament\Actions\CreateAction;
 use AcMarche\Publication\Filament\Resources\Categories\CategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
@@ -22,7 +23,7 @@ final class ListCategories extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Ajouter une catégorie')
                 ->icon('tabler-plus'),
         ];
