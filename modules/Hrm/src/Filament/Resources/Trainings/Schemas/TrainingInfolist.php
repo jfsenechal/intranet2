@@ -17,13 +17,9 @@ final class TrainingInfolist
         return $schema
             ->columns(1)
             ->components([
-                Section::make('Agent et formation')
+                Section::make('Formation')
                     ->columns(2)
                     ->schema([
-                        TextEntry::make('employee.full_name')
-                            ->label('Agent'),
-                        TextEntry::make('name')
-                            ->label('Intitulé'),
                         TextEntry::make('training_type')
                             ->label('Type de formation')
                             ->badge(),
@@ -70,6 +66,7 @@ final class TrainingInfolist
                     ->schema([
                         TextEntry::make('description')
                             ->label('Description')
+                            ->hiddenLabel()
                             ->html()
                             ->prose()
                             ->columnSpanFull(),

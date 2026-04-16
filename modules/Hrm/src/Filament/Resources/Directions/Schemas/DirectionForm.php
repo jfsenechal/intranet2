@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Directions\Schemas;
 
+use AcMarche\Security\Repository\UserRepository;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
@@ -27,9 +28,10 @@ final class DirectionForm
                         TextInput::make('abbreviation')
                             ->label('Abreviation')
                             ->maxLength(255),
-                        TextInput::make('director')
+                        Select::make('director')
                             ->label('Directeur')
-                            ->maxLength(255),
+                            ->options(UserRepository::listLdapUsersForSelect())
+                            ->searchable(),
                         Select::make('employer_id')
                             ->label('Employeur')
                             ->relationship('employer', 'name')

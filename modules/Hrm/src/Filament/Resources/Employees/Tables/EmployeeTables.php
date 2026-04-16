@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employees\Tables;
 
+use AcMarche\Hrm\Enums\StatusEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -40,10 +41,10 @@ final class EmployeeTables
                     ->label('Statut')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'active' => 'success',
-                        'retired' => 'info',
-                        'terminated' => 'danger',
-                        'suspended' => 'warning',
+                        StatusEnum::ACTIVE->value => 'success',
+                        StatusEnum::RETIRED->value => 'info',
+                        StatusEnum::TERMINATED->value, StatusEnum::RESIGNED->value, StatusEnum::ENDED->value, StatusEnum::CONTRACT_ENDED->value => 'danger',
+                        StatusEnum::APPLICATION->value, StatusEnum::STUDENT->value, StatusEnum::INTERN->value => 'warning',
                         default => 'gray',
                     })
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -64,12 +65,7 @@ final class EmployeeTables
             ->filters([
                 SelectFilter::make('status')
                     ->label('Statut')
-                    ->options([
-                        'active' => 'Actif',
-                        'retired' => 'Pension',
-                        'terminated' => 'Sorti',
-                        'suspended' => 'Suspendu',
-                    ]),
+                    ->options(StatusEnum::class),
                 TernaryFilter::make('is_archived')
                     ->label('Archive')
                     ->placeholder('Tous')

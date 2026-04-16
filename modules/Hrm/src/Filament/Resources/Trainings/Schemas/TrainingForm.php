@@ -24,13 +24,6 @@ final class TrainingForm
                 Section::make('Agent et formation')
                     ->columns(2)
                     ->schema([
-                        Select::make('employee_id')
-                            ->label('Agent')
-                            ->relationship('employee', 'last_name')
-                            ->getOptionLabelFromRecordUsing(fn ($record): string => $record->last_name.' '.$record->first_name)
-                            ->searchable()
-                            ->preload()
-                            ->required(),
                         TextInput::make('name')
                             ->label('Intitule')
                             ->required()
@@ -79,16 +72,18 @@ final class TrainingForm
                         FileUpload::make('certificate_file')
                             ->label('Fichier attestation')
                             ->disk('public')
-                            ->directory(config('hrm.uploads.formations')),
+                            ->directory(config('hrm.uploads.formations'))
+                            ->columnSpanFull(),
                     ]),
                 Section::make('Description')
                     ->schema([
                         RichEditor::make('description')
                             ->label('Description')
+                            ->hiddenLabel()
                             ->columnSpanFull(),
                     ]),
                 Toggle::make('is_closed')
-                    ->label('Cloture'),
+                    ->label('Clôturée'),
             ]);
     }
 }

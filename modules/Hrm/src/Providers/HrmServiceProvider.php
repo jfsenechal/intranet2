@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Providers;
 
 use AcMarche\App\Traits\ModuleServiceProviderTrait;
+use AcMarche\Hrm\Console\Commands\MigrationCommand;
 use AcMarche\Hrm\Models\Absence;
 use AcMarche\Hrm\Models\Application;
 use AcMarche\Hrm\Models\Contract;
@@ -105,6 +106,12 @@ final class HrmServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // Register commands
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                MigrationCommand::class,
+            ]);
+        }
         $this->bootModule();
         $this->registerPolicies();
     }
