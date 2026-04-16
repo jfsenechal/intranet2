@@ -109,8 +109,7 @@ final class PrerequisiteResource extends Resource
             ])
             ->filters([])
             ->recordActions([
-                EditAction::make()
-            ->icon(Heroicon::Pencil),
+                EditAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
