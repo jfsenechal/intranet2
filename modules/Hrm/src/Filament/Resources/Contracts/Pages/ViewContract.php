@@ -9,12 +9,18 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Contracts\Support\Htmlable;
 use Override;
 
 final class ViewContract extends ViewRecord
 {
     #[Override]
     protected static string $resource = ContractResource::class;
+
+    public function getTitle(): string|Htmlable
+    {
+        return 'Contrat de '.$this->record->employee->last_name.' '.$this->record->employee->first_name;
+    }
 
     protected function getHeaderActions(): array
     {

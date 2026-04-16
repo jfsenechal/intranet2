@@ -24,13 +24,6 @@ final class ContractForm
                 Section::make('Agent et employeur')
                     ->columns(2)
                     ->schema([
-                        Select::make('employee_id')
-                            ->label('Agent')
-                            ->relationship('employee', 'last_name')
-                            ->getOptionLabelFromRecordUsing(fn ($record): string => $record->last_name.' '.$record->first_name)
-                            ->searchable()
-                            ->preload()
-                            ->required(),
                         Select::make('employer_id')
                             ->label('Employeur')
                             ->relationship('employer', 'name')
@@ -69,18 +62,19 @@ final class ContractForm
                         TextInput::make('job_title')
                             ->label('Fonction')
                             ->maxLength(250),
-                        TextInput::make('status')
-                            ->label('Statut')
-                            ->maxLength(250),
                         TextInput::make('work_regime')
                             ->label('Regime de travail')
+                            ->helperText(
+                                'Par exemple 0,50 - Si interruption de carrière à 4/5 : Régime horaire = 38/38 et Régime ETP = 0,80'
+                            )
                             ->numeric()
                             ->suffix('%'),
                         TextInput::make('hourly_regime')
                             ->label('Regime horaire')
+                            ->helperText('Par exemple 19/38')
                             ->maxLength(255),
                     ]),
-                Fieldset::make('Dates')
+                Section::make('Dates')
                     ->columns(3)
                     ->schema([
                         DatePicker::make('start_date')
@@ -90,23 +84,21 @@ final class ContractForm
                         DatePicker::make('reminder_date')
                             ->label('Date de rappel'),
                     ]),
-                Fieldset::make('Remplacement')
+                Section::make('Remplacement')
                     ->columns(2)
                     ->schema([
-                        Select::make('is_replacement')
-                            ->label('Remplacement')
-                            ->options([
-                                'oui' => 'Oui',
-                                'non' => 'Non',
-                            ]),
+                        Toggle::make('is_replacement')
+                            ->label('Remplacement'),
                         Select::make('replaces_id')
                             ->label('Remplace')
                             ->relationship('replaces', 'last_name')
-                            ->getOptionLabelFromRecordUsing(fn ($record): string => $record->last_name.' '.$record->first_name)
+                            ->getOptionLabelFromRecordUsing(
+                                fn($record): string => $record->last_name.' '.$record->first_name
+                            )
                             ->searchable()
                             ->preload(),
                     ]),
-                Fieldset::make('Options')
+                Section::make('Options')
                     ->columns(4)
                     ->schema([
                         Toggle::make('is_closed')
@@ -114,7 +106,8 @@ final class ContractForm
                         Toggle::make('is_amendment')
                             ->label('Avenant'),
                         Toggle::make('is_suspended')
-                            ->label('Suspension'),
+                            ->label('Suspension')
+                            ->helperText('Interruption de carrière, congé parental, congé sans solde,...'),
                     ]),
                 Section::make('Documents')
                     ->columns(2)

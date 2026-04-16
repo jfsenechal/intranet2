@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Console\Commands;
 
 use AcMarche\Hrm\Models\Absence;
+use AcMarche\Hrm\Models\Contract;
 use Illuminate\Console\Command;
 use Override;
 
@@ -30,6 +31,16 @@ final class MigrationCommand extends Command
          * create a migration to change the type of these properties
          */
         foreach (Absence::all() as $absence) {
+
+        }
+
+        /**
+         * Contracts
+         *  set true for oui false for non
+         * for properties :
+         * is_replacement
+         */
+        foreach (Contract::all() as $absence) {
 
         }
 
