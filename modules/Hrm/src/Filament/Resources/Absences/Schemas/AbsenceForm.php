@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Absences\Schemas;
 
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Section;
@@ -18,10 +23,10 @@ final class AbsenceForm
             ->components([
                 Section::make('Agent')
                     ->schema([
-                        Forms\Components\Select::make('employee_id')
+                        Select::make('employee_id')
                             ->label('Agent')
                             ->relationship('employee', 'last_name')
-                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->last_name.' '.$record->first_name)
+                            ->getOptionLabelFromRecordUsing(fn ($record): string => $record->last_name.' '.$record->first_name)
                             ->searchable()
                             ->preload()
                             ->required(),
@@ -29,58 +34,58 @@ final class AbsenceForm
                 Fieldset::make('Periode')
                     ->columns(4)
                     ->schema([
-                        Forms\Components\DatePicker::make('start_date')
+                        DatePicker::make('start_date')
                             ->label('Date de debut'),
-                        Forms\Components\DatePicker::make('end_date')
+                        DatePicker::make('end_date')
                             ->label('Date de fin'),
-                        Forms\Components\DatePicker::make('reminder_date')
+                        DatePicker::make('reminder_date')
                             ->label('Date de rappel'),
-                        Forms\Components\DatePicker::make('closed_date')
+                        DatePicker::make('closed_date')
                             ->label('Date de cloture'),
                     ]),
                 Fieldset::make('Motif')
                     ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('reason')
+                        TextInput::make('reason')
                             ->label('Raison')
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('ssa')
+                        TextInput::make('ssa')
                             ->label('SSA')
                             ->maxLength(5),
                     ]),
                 Fieldset::make('Options')
                     ->columns(4)
                     ->schema([
-                        Forms\Components\Select::make('has_resumed')
+                        Select::make('has_resumed')
                             ->label('Reprise')
                             ->options([
                                 'oui' => 'Oui',
                                 'non' => 'Non',
                             ]),
-                        Forms\Components\Select::make('clock_updated')
+                        Select::make('clock_updated')
                             ->label('Pointeuse')
                             ->options([
                                 'oui' => 'Oui',
                                 'non' => 'Non',
                             ]),
-                        Forms\Components\Select::make('acropole')
+                        Select::make('acropole')
                             ->label('Acropole')
                             ->options([
                                 'oui' => 'Oui',
                                 'non' => 'Non',
                             ]),
-                        Forms\Components\Select::make('agent_file')
+                        Select::make('agent_file')
                             ->label('Dossier agent')
                             ->options([
                                 'oui' => 'Oui',
                                 'non' => 'Non',
                             ]),
-                        Forms\Components\Toggle::make('is_closed')
+                        Toggle::make('is_closed')
                             ->label('Cloture'),
                     ]),
                 Section::make('Notes')
                     ->schema([
-                        Forms\Components\RichEditor::make('notes')
+                        RichEditor::make('notes')
                             ->label('Notes')
                             ->columnSpanFull(),
                     ]),

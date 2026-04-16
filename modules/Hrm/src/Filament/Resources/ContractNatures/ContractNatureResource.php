@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\ContractNatures;
 
+use Override;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use AcMarche\Hrm\Filament\Resources\ContractNatures\Pages\ListContractNatures;
+use AcMarche\Hrm\Filament\Resources\ContractNatures\Pages\CreateContractNature;
+use AcMarche\Hrm\Filament\Resources\ContractNatures\Pages\EditContractNature;
 use AcMarche\Hrm\Models\ContractNature;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -18,13 +25,16 @@ use UnitEnum;
 
 final class ContractNatureResource extends Resource
 {
+    #[Override]
     protected static ?string $model = ContractNature::class;
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Configuration';
 
+    #[Override]
     protected static ?int $navigationSort = 2;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-document-text';
     }
@@ -51,16 +61,16 @@ final class ContractNatureResource extends Resource
                 Section::make()
                     ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->label('Nom')
                             ->required()
                             ->maxLength(50)
                             ->live(onBlur: true),
-                        Forms\Components\TextInput::make('description')
+                        TextInput::make('description')
                             ->label('Description')
                             ->maxLength(255)
                             ->columnSpanFull(),
-                        Forms\Components\Select::make('employer_id')
+                        Select::make('employer_id')
                             ->label('Employeur')
                             ->relationship('employer', 'name')
                             ->searchable()
@@ -75,15 +85,15 @@ final class ContractNatureResource extends Resource
             ->defaultSort('name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('description')
+                TextColumn::make('description')
                     ->label('Description')
                     ->limit(50)
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('employer.name')
+                TextColumn::make('employer.name')
                     ->label('Employeur')
                     ->sortable()
                     ->toggleable(),
@@ -102,9 +112,9 @@ final class ContractNatureResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContractNatures::route('/'),
-            'create' => Pages\CreateContractNature::route('/create'),
-            'edit' => Pages\EditContractNature::route('/{record}/edit'),
+            'index' => ListContractNatures::route('/'),
+            'create' => CreateContractNature::route('/create'),
+            'edit' => EditContractNature::route('/{record}/edit'),
         ];
     }
 }

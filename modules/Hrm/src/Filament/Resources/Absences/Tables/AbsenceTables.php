@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Absences\Tables;
 
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
 use AcMarche\Hrm\Filament\Resources\Absences\AbsenceResource;
 use AcMarche\Hrm\Models\Absence;
 use Filament\Actions\BulkActionGroup;
@@ -22,28 +24,28 @@ final class AbsenceTables
             ->defaultSort('start_date', 'desc')
             ->defaultPaginationPageOption(50)
             ->columns([
-                Tables\Columns\TextColumn::make('employee.last_name')
+                TextColumn::make('employee.last_name')
                     ->label('Agent')
-                    ->formatStateUsing(fn (Absence $record) => $record->employee->last_name.' '.$record->employee->first_name)
+                    ->formatStateUsing(fn (Absence $record): string => $record->employee->last_name.' '.$record->employee->first_name)
                     ->searchable(['last_name', 'first_name'])
                     ->sortable()
-                    ->url(fn (Absence $record) => AbsenceResource::getUrl('view', ['record' => $record->id])),
-                Tables\Columns\TextColumn::make('start_date')
+                    ->url(fn (Absence $record): string => AbsenceResource::getUrl('view', ['record' => $record->id])),
+                TextColumn::make('start_date')
                     ->label('Debut')
                     ->date('d/m/Y')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('end_date')
+                TextColumn::make('end_date')
                     ->label('Fin')
                     ->date('d/m/Y')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('reason')
+                TextColumn::make('reason')
                     ->label('Raison')
                     ->searchable()
                     ->toggleable(),
-                Tables\Columns\IconColumn::make('is_closed')
+                IconColumn::make('is_closed')
                     ->label('Cloture')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('reminder_date')
+                TextColumn::make('reminder_date')
                     ->label('Rappel')
                     ->date('d/m/Y')
                     ->sortable()
