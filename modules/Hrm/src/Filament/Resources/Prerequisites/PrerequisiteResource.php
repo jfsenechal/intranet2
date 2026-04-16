@@ -100,8 +100,6 @@ final class PrerequisiteResource extends Resource
                             ->label('Profession'),
                         TextEntry::make('employer.name')
                             ->label('Employeur'),
-                        TextEntry::make('user')
-                            ->label('Utilisateur'),
                         TextEntry::make('description')
                             ->label('Description')
                             ->columnSpanFull(),
@@ -123,10 +121,6 @@ final class PrerequisiteResource extends Resource
                     ->label('Profession')
                     ->searchable()
                     ->sortable()
-                    ->toggleable(),
-                TextColumn::make('description')
-                    ->label('Description')
-                    ->limit(50)
                     ->toggleable(),
                 TextColumn::make('employer.name')
                     ->label('Employeur')

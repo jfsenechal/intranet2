@@ -109,10 +109,6 @@ final class PayScaleResource extends Resource
                     ->label('Titre')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('description')
-                    ->label('Description')
-                    ->limit(50)
-                    ->toggleable(),
                 TextColumn::make('employer.name')
                     ->label('Employeur')
                     ->sortable()
