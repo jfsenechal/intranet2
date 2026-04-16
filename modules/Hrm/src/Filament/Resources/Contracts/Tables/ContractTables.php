@@ -26,39 +26,48 @@ final class ContractTables
             ->columns([
                 TextColumn::make('employee.last_name')
                     ->label('Agent')
-                    ->formatStateUsing(fn (Contract $record): string => $record->employee->last_name.' '.$record->employee->first_name)
+                    ->formatStateUsing(
+                        fn(Contract $record): string => $record->employee->last_name.' '.$record->employee->first_name
+                    )
                     ->searchable(['last_name', 'first_name'])
                     ->sortable()
-                    ->url(fn (Contract $record): string => ContractResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn(Contract $record): string => ContractResource::getUrl('view', ['record' => $record->id])),
                 TextColumn::make('employer.name')
                     ->label('Employeur')
                     ->sortable()
+                    ->toggleable()
                     ->toggleable(),
                 TextColumn::make('contractType.name')
                     ->label('Type')
                     ->sortable()
+                    ->toggleable()
                     ->toggleable(),
                 TextColumn::make('job_title')
                     ->label('Fonction')
                     ->searchable()
+                    ->toggleable()
                     ->toggleable(),
                 TextColumn::make('start_date')
                     ->label('Debut')
                     ->date('d/m/Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('end_date')
                     ->label('Fin')
                     ->date('d/m/Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('work_regime')
                     ->label('Regime')
                     ->suffix('%')
                     ->sortable()
-                    ->toggleable(),
+                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('is_closed')
                     ->label('Cloture')
                     ->boolean()
-                    ->toggleable(),
+                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('employer_id')
