@@ -37,7 +37,7 @@ return new class extends Migration
                 $table->rename('directions');
             });
             Schema::connection($this->connection)->table('directions', function (Blueprint $table): void {
-                $table->renameColumn('intitule', 'title');
+                $table->renameColumn('intitule', 'name');
                 $table->renameColumn('employeur_id', 'employer_id');
                 $table->renameColumn('slugname', 'slug');
                 $table->renameColumn('directeur', 'director');
@@ -49,7 +49,7 @@ return new class extends Migration
         } elseif (! Schema::connection($this->connection)->hasTable('directions')) {
             Schema::connection($this->connection)->create('directions', function (Blueprint $table): void {
                 $table->id();
-                $table->string('title', 100);
+                $table->string('name', 100);
                 $table->string('slug', 80);
                 $table->string('director', 255)->nullable();
                 $table->string('abbreviation', 255)->nullable();
@@ -65,7 +65,7 @@ return new class extends Migration
                 $table->rename('services');
             });
             Schema::connection($this->connection)->table('services', function (Blueprint $table): void {
-                $table->renameColumn('intitule', 'title');
+                $table->renameColumn('intitule', 'name');
                 $table->renameColumn('slugname', 'slug');
                 $table->renameColumn('abreviation', 'abbreviation');
                 $table->renameColumn('adresse', 'address');
@@ -80,7 +80,7 @@ return new class extends Migration
         } elseif (! Schema::connection($this->connection)->hasTable('services')) {
             Schema::connection($this->connection)->create('services', function (Blueprint $table): void {
                 $table->id();
-                $table->string('title', 100);
+                $table->string('name', 100);
                 $table->string('slug', 80);
                 $table->string('abbreviation', 255)->nullable();
                 $table->foreignId('direction_id')->nullable();
@@ -104,12 +104,12 @@ return new class extends Migration
             });
             Schema::connection($this->connection)->table('pay_scales', function (Blueprint $table): void {
                 $table->renameColumn('employeur_id', 'employer_id');
-                $table->renameColumn('intitule', 'title');
+                $table->renameColumn('intitule', 'name');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('pay_scales')) {
             Schema::connection($this->connection)->create('pay_scales', function (Blueprint $table): void {
                 $table->id();
-                $table->string('title', 50);
+                $table->string('name', 50);
                 $table->longText('description')->nullable();
                 $table->foreignId('employer_id')->nullable();
                 $table->timestamps();
@@ -196,13 +196,13 @@ return new class extends Migration
                 $table->rename('public_holidays');
             });
             Schema::connection($this->connection)->table('public_holidays', function (Blueprint $table): void {
-                $table->renameColumn('intitule', 'title');
+                $table->renameColumn('intitule', 'name');
                 $table->renameColumn('date_jour', 'holiday_date');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('public_holidays')) {
             Schema::connection($this->connection)->create('public_holidays', function (Blueprint $table): void {
                 $table->id();
-                $table->string('title', 250)->nullable();
+                $table->string('name', 250)->nullable();
                 $table->date('holiday_date');
                 $table->timestamps();
             });
@@ -215,12 +215,12 @@ return new class extends Migration
             });
             Schema::connection($this->connection)->table('prerequisites', function (Blueprint $table): void {
                 $table->renameColumn('employeur_id', 'employer_id');
-                $table->renameColumn('intitule', 'title');
+                $table->renameColumn('intitule', 'name');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('prerequisites')) {
             Schema::connection($this->connection)->create('prerequisites', function (Blueprint $table): void {
                 $table->id();
-                $table->string('title', 100);
+                $table->string('name', 100);
                 $table->string('profession', 100)->nullable();
                 $table->longText('description')->nullable();
                 $table->string('user', 255);

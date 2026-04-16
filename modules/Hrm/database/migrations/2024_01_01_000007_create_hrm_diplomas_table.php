@@ -18,7 +18,7 @@ return new class extends Migration
             });
             Schema::connection($this->connection)->table('diplomas', function (Blueprint $table): void {
                 $table->renameColumn('employe_id', 'employee_id');
-                $table->renameColumn('intitule', 'title');
+                $table->renameColumn('intitule', 'name');
                 $table->renameColumn('attestation_name', 'certificate_file');
                 $table->renameColumn('user', 'user_add');
                 $table->renameColumn('created', 'created_at');
@@ -29,7 +29,7 @@ return new class extends Migration
             Schema::connection($this->connection)->create('diplomas', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id');
-                $table->string('title', 150);
+                $table->string('name', 150);
                 $table->string('certificate_file', 255)->nullable();
                 $table->string('user_add', 255);
                 $table->string('updated_by', 255)->nullable();

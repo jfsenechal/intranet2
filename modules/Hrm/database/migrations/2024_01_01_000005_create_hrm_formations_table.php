@@ -18,7 +18,7 @@ return new class extends Migration
             });
             Schema::connection($this->connection)->table('trainings', function (Blueprint $table): void {
                 $table->renameColumn('employe_id', 'employee_id');
-                $table->renameColumn('intitule', 'title');
+                $table->renameColumn('intitule', 'name');
                 $table->renameColumn('date_debut', 'start_date');
                 $table->renameColumn('date_fin', 'end_date');
                 $table->renameColumn('date_college', 'college_date');
@@ -40,7 +40,7 @@ return new class extends Migration
             Schema::connection($this->connection)->create('trainings', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id');
-                $table->string('title', 150);
+                $table->string('name', 150);
                 $table->longText('description')->nullable();
                 $table->date('start_date')->nullable();
                 $table->date('end_date')->nullable();

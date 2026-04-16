@@ -132,7 +132,7 @@ return new class extends Migration
             });
             Schema::connection($this->connection)->table('hr_documents', function (Blueprint $table): void {
                 $table->renameColumn('employe_id', 'employee_id');
-                $table->renameColumn('intitule', 'title');
+                $table->renameColumn('intitule', 'name');
                 $table->renameColumn('fileName', 'file_name');
                 $table->renameColumn('remarques', 'notes');
                 $table->renameColumn('created', 'created_at');
@@ -143,7 +143,7 @@ return new class extends Migration
             Schema::connection($this->connection)->create('hr_documents', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id')->nullable();
-                $table->string('title', 255);
+                $table->string('name', 255);
                 $table->string('file_name', 255);
                 $table->string('mime', 255);
                 $table->longText('notes')->nullable();
@@ -326,7 +326,7 @@ return new class extends Migration
                 $table->rename('hr_notifications');
             });
             Schema::connection($this->connection)->table('hr_notifications', function (Blueprint $table): void {
-                $table->renameColumn('intitule', 'title');
+                $table->renameColumn('intitule', 'name');
                 $table->renameColumn('user', 'user_add');
                 $table->renameColumn('created', 'created_at');
                 $table->renameColumn('updated', 'updated_at');
@@ -334,7 +334,7 @@ return new class extends Migration
         } elseif (! Schema::connection($this->connection)->hasTable('hr_notifications')) {
             Schema::connection($this->connection)->create('hr_notifications', function (Blueprint $table): void {
                 $table->id();
-                $table->string('title', 250);
+                $table->string('name', 250);
                 $table->integer('object_id');
                 $table->string('object_type', 100);
                 $table->foreignId('employer_id')->nullable();
