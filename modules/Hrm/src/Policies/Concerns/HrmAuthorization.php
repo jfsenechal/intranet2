@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Policies\Concerns;
 
-use AcMarche\Mileage\Enums\RolesEnum;
+use AcMarche\Hrm\Enums\RolesEnum;
 use App\Models\User;
 
 trait HrmAuthorization
@@ -78,7 +78,7 @@ trait HrmAuthorization
             return true;
         }
 
-        return (bool) $this->canReadVille($user);
+        return $this->canReadVille($user);
     }
 
     protected function hasWriteAccess(User $user): bool
@@ -87,6 +87,6 @@ trait HrmAuthorization
             return true;
         }
 
-        return (bool) $this->canManageVille($user);
+        return $this->canManageVille($user);
     }
 }

@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employees\Tables;
 
-use AcMarche\Hrm\Filament\Resources\Employees\EmployeeResource;
-use AcMarche\Hrm\Models\Employee;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
@@ -25,23 +22,21 @@ final class EmployeeTables
             ->defaultSort('last_name')
             ->defaultPaginationPageOption(50)
             ->columns([
-                ImageColumn::make('photo')
-                    ->label('')
-                    ->circular()
-                    ->size(40),
                 TextColumn::make('last_name')
                     ->label('Nom')
                     ->searchable()
                     ->sortable()
-                    ->url(fn (Employee $record): string => EmployeeResource::getUrl('view', ['record' => $record->id])),
+                    ->limit(70),
                 TextColumn::make('first_name')
                     ->label('Prenom')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->limit(70),
                 TextColumn::make('job_title')
                     ->label('Fonction')
                     ->searchable()
-                    ->toggleable(),
+                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('status')
                     ->label('Statut')
                     ->badge()
@@ -51,12 +46,14 @@ final class EmployeeTables
                         'terminated' => 'danger',
                         'suspended' => 'warning',
                         default => 'gray',
-                    }),
+                    })
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('hired_at')
                     ->label('Entree')
                     ->date('d/m/Y')
                     ->sortable()
-                    ->toggleable(),
+                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('email')
                     ->label('Email')
                     ->searchable()
@@ -85,6 +82,7 @@ final class EmployeeTables
                 ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

@@ -9,6 +9,7 @@ use AcMarche\Hrm\Filament\Resources\Employees\Pages\EditEmployee;
 use AcMarche\Hrm\Filament\Resources\Employees\Pages\ListEmployees;
 use AcMarche\Hrm\Filament\Resources\Employees\Pages\ViewEmployee;
 use AcMarche\Hrm\Filament\Resources\Employees\Schemas\EmployeeForm;
+use AcMarche\Hrm\Filament\Resources\Employees\Schemas\EmployeeInfolist;
 use AcMarche\Hrm\Filament\Resources\Employees\Tables\EmployeeTables;
 use AcMarche\Hrm\Models\Employee;
 use Filament\Resources\Resource;
@@ -51,6 +52,11 @@ final class EmployeeResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return EmployeeForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return EmployeeInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table
