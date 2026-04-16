@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\JobFunctions\Pages;
 
 use AcMarche\Hrm\Filament\Resources\JobFunctions\JobFunctionResource;
-use Filament\Actions\DeleteAction;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Icons\Heroicon;
 use Override;
 
 final class EditJobFunction extends EditRecord
@@ -17,7 +18,8 @@ final class EditJobFunction extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            ViewAction::make()
+                ->icon(Heroicon::Eye),
         ];
     }
 }

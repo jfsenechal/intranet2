@@ -14,6 +14,8 @@ final class ListHealthInsurances extends ListRecords
     #[Override]
     protected static string $resource = HealthInsuranceResource::class;
 
+    protected static ?string $title = 'Mutuelles';
+
     protected function getHeaderActions(): array
     {
         return [

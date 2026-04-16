@@ -14,6 +14,8 @@ final class ListJobFunctions extends ListRecords
     #[Override]
     protected static string $resource = JobFunctionResource::class;
 
+    protected ?string $subheading = 'La liste des fonctions est utilisée pour les candidatures';
+
     protected function getHeaderActions(): array
     {
         return [

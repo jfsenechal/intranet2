@@ -6,7 +6,9 @@ namespace AcMarche\Hrm\Filament\Resources\Prerequisites\Pages;
 
 use AcMarche\Hrm\Filament\Resources\Prerequisites\PrerequisiteResource;
 use Filament\Actions\DeleteAction;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Icons\Heroicon;
 use Override;
 
 final class EditPrerequisite extends EditRecord
@@ -17,7 +19,8 @@ final class EditPrerequisite extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            ViewAction::make()
+            ->icon(Heroicon::Eye),
         ];
     }
 }

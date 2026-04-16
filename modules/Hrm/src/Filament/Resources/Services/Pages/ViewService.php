@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\Services\Pages;
 
 use AcMarche\Hrm\Filament\Resources\Services\ServiceResource;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Icons\Heroicon;
@@ -18,8 +19,9 @@ final class ViewService extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make()
-                ->icon(Heroicon::Pencil),
+            EditAction::make()->icon(Heroicon::Pencil),
+            DeleteAction::make()
+                ->icon(Heroicon::Trash),
         ];
     }
 }
