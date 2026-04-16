@@ -33,17 +33,14 @@ final class ContractTables
                 TextColumn::make('employer.name')
                     ->label('Employeur')
                     ->sortable()
-                    ->toggleable()
                     ->toggleable(),
                 TextColumn::make('contractType.name')
                     ->label('Type')
                     ->sortable()
-                    ->toggleable()
                     ->toggleable(),
                 TextColumn::make('job_title')
                     ->label('Fonction')
                     ->searchable()
-                    ->toggleable()
                     ->toggleable(),
                 TextColumn::make('start_date')
                     ->label('Debut')
@@ -59,12 +56,10 @@ final class ContractTables
                     ->label('Regime')
                     ->suffix('%')
                     ->sortable()
-                    ->toggleable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('is_closed')
                     ->label('Cloture')
                     ->boolean()
-                    ->toggleable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([

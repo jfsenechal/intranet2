@@ -7,6 +7,7 @@ namespace AcMarche\Hrm\Filament\Resources\Services\Pages;
 use AcMarche\Hrm\Filament\Resources\Services\ServiceResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
+use Filament\Support\Icons\Heroicon;
 use Override;
 
 final class ViewService extends ViewRecord
@@ -18,7 +19,7 @@ final class ViewService extends ViewRecord
     {
         return [
             EditAction::make()
-            ->icon(Heroicon::Pencil),
+                ->icon(Heroicon::Pencil),
         ];
     }
 }

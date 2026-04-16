@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Hrm\Filament\Resources\Trainings\Pages;
+namespace AcMarche\Hrm\Filament\Resources\JobFunctions\Pages;
 
-use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
+use AcMarche\Hrm\Filament\Resources\JobFunctions\JobFunctionResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Icons\Heroicon;
 use Override;
 
-final class ViewTraining extends ViewRecord
+final class ViewJobFunction extends ViewRecord
 {
     #[Override]
-    protected static string $resource = TrainingResource::class;
+    protected static string $resource = JobFunctionResource::class;
 
     protected function getHeaderActions(): array
     {

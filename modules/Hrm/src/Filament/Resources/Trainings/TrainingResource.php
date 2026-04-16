@@ -9,6 +9,7 @@ use AcMarche\Hrm\Filament\Resources\Trainings\Pages\EditTraining;
 use AcMarche\Hrm\Filament\Resources\Trainings\Pages\ListTrainings;
 use AcMarche\Hrm\Filament\Resources\Trainings\Pages\ViewTraining;
 use AcMarche\Hrm\Filament\Resources\Trainings\Schemas\TrainingForm;
+use AcMarche\Hrm\Filament\Resources\Trainings\Schemas\TrainingInfolist;
 use AcMarche\Hrm\Filament\Resources\Trainings\Tables\TrainingTables;
 use AcMarche\Hrm\Models\Training;
 use Filament\Resources\Resource;
@@ -51,6 +52,11 @@ final class TrainingResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return TrainingForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return TrainingInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table

@@ -7,6 +7,7 @@ namespace AcMarche\Hrm\Filament\Resources\Directions\Pages;
 use AcMarche\Hrm\Filament\Resources\Directions\DirectionResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
+use Filament\Support\Icons\Heroicon;
 use Override;
 
 final class ViewDirection extends ViewRecord
@@ -18,7 +19,7 @@ final class ViewDirection extends ViewRecord
     {
         return [
             EditAction::make()
-            ->icon(Heroicon::Pencil),
+                ->icon(Heroicon::Pencil),
         ];
     }
 }

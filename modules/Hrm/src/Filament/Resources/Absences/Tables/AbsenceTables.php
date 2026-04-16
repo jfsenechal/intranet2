@@ -43,10 +43,11 @@ final class AbsenceTables
                 TextColumn::make('reason')
                     ->label('Raison')
                     ->searchable()
-                    ->toggleable()->toggleable(),
+                    ->toggleable(),
                 IconColumn::make('is_closed')
                     ->label('Cloture')
-                    ->boolean()->toggleable(isToggledHiddenByDefault: true),
+                    ->boolean()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('reminder_date')
                     ->label('Rappel')
                     ->date('d/m/Y')

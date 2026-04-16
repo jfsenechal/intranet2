@@ -7,12 +7,15 @@ namespace AcMarche\Hrm\Filament\Resources\Employers;
 use AcMarche\Hrm\Filament\Resources\Employers\Pages\CreateEmployer;
 use AcMarche\Hrm\Filament\Resources\Employers\Pages\EditEmployer;
 use AcMarche\Hrm\Filament\Resources\Employers\Pages\ListEmployers;
+use AcMarche\Hrm\Filament\Resources\Employers\Pages\ViewEmployer;
 use AcMarche\Hrm\Models\Employer;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -74,6 +77,22 @@ final class EmployerResource extends Resource
             ]);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->columns(1)
+            ->components([
+                Section::make()
+                    ->columns(2)
+                    ->schema([
+                        TextEntry::make('name')
+                            ->label('Nom'),
+                        TextEntry::make('parent.name')
+                            ->label('Employeur parent'),
+                    ]),
+            ]);
+    }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -99,8 +118,10 @@ final class EmployerResource extends Resource
             ])
             ->filters([])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
@@ -113,6 +134,7 @@ final class EmployerResource extends Resource
         return [
             'index' => ListEmployers::route('/'),
             'create' => CreateEmployer::route('/create'),
+            'view' => ViewEmployer::route('/{record}/view'),
             'edit' => EditEmployer::route('/{record}/edit'),
         ];
     }

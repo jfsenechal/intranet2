@@ -35,7 +35,6 @@ final class EmployeeTables
                 TextColumn::make('job_title')
                     ->label('Fonction')
                     ->searchable()
-                    ->toggleable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('status')
                     ->label('Statut')
@@ -52,7 +51,6 @@ final class EmployeeTables
                     ->label('Entree')
                     ->date('d/m/Y')
                     ->sortable()
-                    ->toggleable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('email')
                     ->label('Email')

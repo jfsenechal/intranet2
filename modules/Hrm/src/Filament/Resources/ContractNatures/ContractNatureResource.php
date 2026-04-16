@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\ContractNatures;
 
-use Override;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Columns\TextColumn;
-use AcMarche\Hrm\Filament\Resources\ContractNatures\Pages\ListContractNatures;
 use AcMarche\Hrm\Filament\Resources\ContractNatures\Pages\CreateContractNature;
 use AcMarche\Hrm\Filament\Resources\ContractNatures\Pages\EditContractNature;
+use AcMarche\Hrm\Filament\Resources\ContractNatures\Pages\ListContractNatures;
+use AcMarche\Hrm\Filament\Resources\ContractNatures\Pages\ViewContractNature;
 use AcMarche\Hrm\Models\ContractNature;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class ContractNatureResource extends Resource
@@ -79,6 +80,25 @@ final class ContractNatureResource extends Resource
             ]);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->columns(1)
+            ->components([
+                Section::make()
+                    ->columns(2)
+                    ->schema([
+                        TextEntry::make('name')
+                            ->label('Nom'),
+                        TextEntry::make('employer.name')
+                            ->label('Employeur'),
+                        TextEntry::make('description')
+                            ->label('Description')
+                            ->columnSpanFull(),
+                    ]),
+            ]);
+    }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -100,8 +120,10 @@ final class ContractNatureResource extends Resource
             ])
             ->filters([])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
@@ -114,6 +136,7 @@ final class ContractNatureResource extends Resource
         return [
             'index' => ListContractNatures::route('/'),
             'create' => CreateContractNature::route('/create'),
+            'view' => ViewContractNature::route('/{record}/view'),
             'edit' => EditContractNature::route('/{record}/edit'),
         ];
     }

@@ -9,6 +9,7 @@ use AcMarche\Hrm\Filament\Resources\Services\Pages\EditService;
 use AcMarche\Hrm\Filament\Resources\Services\Pages\ListServices;
 use AcMarche\Hrm\Filament\Resources\Services\Pages\ViewService;
 use AcMarche\Hrm\Filament\Resources\Services\Schemas\ServiceForm;
+use AcMarche\Hrm\Filament\Resources\Services\Schemas\ServiceInfolist;
 use AcMarche\Hrm\Filament\Resources\Services\Tables\ServiceTables;
 use AcMarche\Hrm\Models\Service;
 use Filament\Resources\Resource;
@@ -51,6 +52,11 @@ final class ServiceResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return ServiceForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return ServiceInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table

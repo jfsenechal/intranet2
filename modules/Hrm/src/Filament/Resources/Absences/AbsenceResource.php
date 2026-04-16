@@ -11,17 +11,21 @@ use AcMarche\Hrm\Models\Absence;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Override;
 use UnitEnum;
 
 final class AbsenceResource extends Resource
 {
+    #[Override]
     protected static ?string $model = Absence::class;
 
+    #[Override]
     protected static string|null|UnitEnum $navigationGroup = 'Personnel';
 
+    #[Override]
     protected static ?int $navigationSort = 3;
 
-    public static function getNavigationIcon(): ?string
+    public static function getNavigationIcon(): string
     {
         return 'heroicon-o-calendar-days';
     }

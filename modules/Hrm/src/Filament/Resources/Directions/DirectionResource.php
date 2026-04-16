@@ -9,6 +9,7 @@ use AcMarche\Hrm\Filament\Resources\Directions\Pages\EditDirection;
 use AcMarche\Hrm\Filament\Resources\Directions\Pages\ListDirections;
 use AcMarche\Hrm\Filament\Resources\Directions\Pages\ViewDirection;
 use AcMarche\Hrm\Filament\Resources\Directions\Schemas\DirectionForm;
+use AcMarche\Hrm\Filament\Resources\Directions\Schemas\DirectionInfolist;
 use AcMarche\Hrm\Filament\Resources\Directions\Tables\DirectionTables;
 use AcMarche\Hrm\Models\Direction;
 use Filament\Resources\Resource;
@@ -51,6 +52,11 @@ final class DirectionResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return DirectionForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return DirectionInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table

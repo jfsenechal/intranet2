@@ -7,13 +7,16 @@ namespace AcMarche\Hrm\Filament\Resources\Prerequisites;
 use AcMarche\Hrm\Filament\Resources\Prerequisites\Pages\CreatePrerequisite;
 use AcMarche\Hrm\Filament\Resources\Prerequisites\Pages\EditPrerequisite;
 use AcMarche\Hrm\Filament\Resources\Prerequisites\Pages\ListPrerequisites;
+use AcMarche\Hrm\Filament\Resources\Prerequisites\Pages\ViewPrerequisite;
 use AcMarche\Hrm\Models\Prerequisite;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -83,6 +86,29 @@ final class PrerequisiteResource extends Resource
             ]);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->columns(1)
+            ->components([
+                Section::make()
+                    ->columns(2)
+                    ->schema([
+                        TextEntry::make('title')
+                            ->label('Titre'),
+                        TextEntry::make('profession')
+                            ->label('Profession'),
+                        TextEntry::make('employer.name')
+                            ->label('Employeur'),
+                        TextEntry::make('user')
+                            ->label('Utilisateur'),
+                        TextEntry::make('description')
+                            ->label('Description')
+                            ->columnSpanFull(),
+                    ]),
+            ]);
+    }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -109,8 +135,10 @@ final class PrerequisiteResource extends Resource
             ])
             ->filters([])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
@@ -123,6 +151,7 @@ final class PrerequisiteResource extends Resource
         return [
             'index' => ListPrerequisites::route('/'),
             'create' => CreatePrerequisite::route('/create'),
+            'view' => ViewPrerequisite::route('/{record}/view'),
             'edit' => EditPrerequisite::route('/{record}/edit'),
         ];
     }

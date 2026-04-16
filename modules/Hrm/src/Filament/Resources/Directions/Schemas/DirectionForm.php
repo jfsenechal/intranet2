@@ -14,7 +14,7 @@ final class DirectionForm
     public static function configure(Schema $schema): Schema
     {
         return $schema
-            ->columns(2)
+            ->columns(1)
             ->components([
                 Section::make('Informations')
                     ->columns(2)

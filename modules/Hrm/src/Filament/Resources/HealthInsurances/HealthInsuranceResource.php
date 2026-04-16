@@ -7,11 +7,14 @@ namespace AcMarche\Hrm\Filament\Resources\HealthInsurances;
 use AcMarche\Hrm\Filament\Resources\HealthInsurances\Pages\CreateHealthInsurance;
 use AcMarche\Hrm\Filament\Resources\HealthInsurances\Pages\EditHealthInsurance;
 use AcMarche\Hrm\Filament\Resources\HealthInsurances\Pages\ListHealthInsurances;
+use AcMarche\Hrm\Filament\Resources\HealthInsurances\Pages\ViewHealthInsurance;
 use AcMarche\Hrm\Models\HealthInsurance;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -65,6 +68,19 @@ final class HealthInsuranceResource extends Resource
             ]);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->columns(1)
+            ->components([
+                Section::make()
+                    ->schema([
+                        TextEntry::make('name')
+                            ->label('Nom'),
+                    ]),
+            ]);
+    }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -82,8 +98,10 @@ final class HealthInsuranceResource extends Resource
             ])
             ->filters([])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
@@ -96,6 +114,7 @@ final class HealthInsuranceResource extends Resource
         return [
             'index' => ListHealthInsurances::route('/'),
             'create' => CreateHealthInsurance::route('/create'),
+            'view' => ViewHealthInsurance::route('/{record}/view'),
             'edit' => EditHealthInsurance::route('/{record}/edit'),
         ];
     }

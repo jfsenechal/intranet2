@@ -7,11 +7,14 @@ namespace AcMarche\Hrm\Filament\Resources\JobFunctions;
 use AcMarche\Hrm\Filament\Resources\JobFunctions\Pages\CreateJobFunction;
 use AcMarche\Hrm\Filament\Resources\JobFunctions\Pages\EditJobFunction;
 use AcMarche\Hrm\Filament\Resources\JobFunctions\Pages\ListJobFunctions;
+use AcMarche\Hrm\Filament\Resources\JobFunctions\Pages\ViewJobFunction;
 use AcMarche\Hrm\Models\JobFunction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -65,6 +68,19 @@ final class JobFunctionResource extends Resource
             ]);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->columns(1)
+            ->components([
+                Section::make()
+                    ->schema([
+                        TextEntry::make('name')
+                            ->label('Nom'),
+                    ]),
+            ]);
+    }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -78,8 +94,10 @@ final class JobFunctionResource extends Resource
             ])
             ->filters([])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
@@ -92,6 +110,7 @@ final class JobFunctionResource extends Resource
         return [
             'index' => ListJobFunctions::route('/'),
             'create' => CreateJobFunction::route('/create'),
+            'view' => ViewJobFunction::route('/{record}/view'),
             'edit' => EditJobFunction::route('/{record}/edit'),
         ];
     }
