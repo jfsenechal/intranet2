@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'employer_id',
     'direction_id',
     'service_id',
-    'title',
+    'name',
     'note',
     'start_date',
     'end_date',

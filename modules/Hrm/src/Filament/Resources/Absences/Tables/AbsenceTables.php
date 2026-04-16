@@ -45,7 +45,7 @@ final class AbsenceTables
                     ->searchable()
                     ->toggleable(),
                 IconColumn::make('is_closed')
-                    ->label('Cloture')
+                    ->label('Clôturée')
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('reminder_date')
@@ -56,7 +56,7 @@ final class AbsenceTables
             ])
             ->filters([
                 TernaryFilter::make('is_closed')
-                    ->label('Cloture')
+                    ->label('Clôturée')
                     ->placeholder('Toutes')
                     ->trueLabel('Cloturees')
                     ->falseLabel('En cours'),

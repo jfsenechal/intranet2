@@ -229,18 +229,4 @@ return new class extends Migration
             });
         }
     }
-
-    public function down(): void
-    {
-        Schema::connection($this->connection)->dropIfExists('prerequisites');
-        Schema::connection($this->connection)->dropIfExists('public_holidays');
-        Schema::connection($this->connection)->dropIfExists('health_insurances');
-        Schema::connection($this->connection)->dropIfExists('contract_natures');
-        Schema::connection($this->connection)->dropIfExists('contract_types');
-        Schema::connection($this->connection)->dropIfExists('job_functions');
-        Schema::connection($this->connection)->dropIfExists('pay_scales');
-        Schema::connection($this->connection)->dropIfExists('services');
-        Schema::connection($this->connection)->dropIfExists('directions');
-        Schema::connection($this->connection)->dropIfExists('employers');
-    }
 };

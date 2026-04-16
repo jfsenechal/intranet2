@@ -94,7 +94,7 @@ return new class extends Migration
             Schema::connection($this->connection)->table('deadlines', function (Blueprint $table): void {
                 $table->renameColumn('employeur_id', 'employer_id');
                 $table->renameColumn('employe_id', 'employee_id');
-                $table->renameColumn('intitule', 'title');
+                $table->renameColumn('intitule', 'name');
                 $table->renameColumn('date_debut', 'start_date');
                 $table->renameColumn('date_fin', 'end_date');
                 $table->renameColumn('date_rappel', 'reminder_date');
@@ -112,7 +112,7 @@ return new class extends Migration
                 $table->foreignId('employer_id')->nullable();
                 $table->foreignId('direction_id')->nullable();
                 $table->foreignId('service_id')->nullable();
-                $table->string('title', 250);
+                $table->string('name', 250);
                 $table->longText('note')->nullable();
                 $table->date('start_date')->nullable();
                 $table->date('end_date')->nullable();
@@ -351,19 +351,5 @@ return new class extends Migration
                 $table->string('user', 255);
             });
         }
-    }
-
-    public function down(): void
-    {
-        Schema::connection($this->connection)->dropIfExists('notification_users');
-        Schema::connection($this->connection)->dropIfExists('hr_notifications');
-        Schema::connection($this->connection)->dropIfExists('operators');
-        Schema::connection($this->connection)->dropIfExists('sms');
-        Schema::connection($this->connection)->dropIfExists('teleworks');
-        Schema::connection($this->connection)->dropIfExists('valorizations');
-        Schema::connection($this->connection)->dropIfExists('hr_documents');
-        Schema::connection($this->connection)->dropIfExists('deadlines');
-        Schema::connection($this->connection)->dropIfExists('applications');
-        Schema::connection($this->connection)->dropIfExists('internships');
     }
 };

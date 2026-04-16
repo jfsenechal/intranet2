@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Deadlines\Tables;
 
-use AcMarche\Hrm\Models\Deadline;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
@@ -21,39 +18,7 @@ final class DeadlineTables
         return $table
             ->defaultSort('start_date', 'desc')
             ->defaultPaginationPageOption(50)
-            ->columns([
-                TextColumn::make('employee.last_name')
-                    ->label('Agent')
-                    ->formatStateUsing(
-                        fn (Deadline $record): string => $record->employee->last_name.' '.$record->employee->first_name
-                    )
-                    ->searchable(['last_name', 'first_name'])
-                    ->sortable()
-                    ->toggleable(),
-                TextColumn::make('start_date')
-                    ->label('Debut')
-                    ->date('d/m/Y')
-                    ->sortable()
-                    ->toggleable(),
-                TextColumn::make('end_date')
-                    ->label('Fin')
-                    ->date('d/m/Y')
-                    ->sortable()
-                    ->toggleable(),
-                TextColumn::make('reason')
-                    ->label('Raison')
-                    ->searchable()
-                    ->toggleable(),
-                IconColumn::make('is_closed')
-                    ->label('Cloture')
-                    ->boolean()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('reminder_date')
-                    ->label('Rappel')
-                    ->date('d/m/Y')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ->columns([])
             ->filters([
                 TernaryFilter::make('is_closed')
                     ->label('Cloture')
