@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\Absences;
 
 use AcMarche\Hrm\Filament\Resources\Absences\Schemas\AbsenceForm;
+use AcMarche\Hrm\Filament\Resources\Absences\Schemas\AbsenceInfolist;
 use AcMarche\Hrm\Filament\Resources\Absences\Tables\AbsenceTables;
 use AcMarche\Hrm\Models\Absence;
 use Filament\Resources\Resource;
@@ -43,6 +44,11 @@ final class AbsenceResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return AbsenceForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return AbsenceInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table

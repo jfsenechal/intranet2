@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Contracts\Tables;
 
-use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use AcMarche\Hrm\Models\Contract;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -27,11 +26,10 @@ final class ContractTables
                 TextColumn::make('employee.last_name')
                     ->label('Agent')
                     ->formatStateUsing(
-                        fn(Contract $record): string => $record->employee->last_name.' '.$record->employee->first_name
+                        fn (Contract $record): string => $record->employee->last_name.' '.$record->employee->first_name
                     )
                     ->searchable(['last_name', 'first_name'])
-                    ->sortable()
-                    ->url(fn(Contract $record): string => ContractResource::getUrl('view', ['record' => $record->id])),
+                    ->sortable(),
                 TextColumn::make('employer.name')
                     ->label('Employeur')
                     ->sortable()
@@ -86,6 +84,7 @@ final class ContractTables
                 ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

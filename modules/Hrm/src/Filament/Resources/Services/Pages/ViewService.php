@@ -17,7 +17,8 @@ final class ViewService extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            EditAction::make()
+            ->icon(Heroicon::Pencil),
         ];
     }
 }

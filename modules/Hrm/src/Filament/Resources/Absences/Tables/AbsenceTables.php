@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Absences\Tables;
 
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\IconColumn;
-use AcMarche\Hrm\Filament\Resources\Absences\AbsenceResource;
 use AcMarche\Hrm\Models\Absence;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
@@ -26,25 +24,29 @@ final class AbsenceTables
             ->columns([
                 TextColumn::make('employee.last_name')
                     ->label('Agent')
-                    ->formatStateUsing(fn (Absence $record): string => $record->employee->last_name.' '.$record->employee->first_name)
+                    ->formatStateUsing(
+                        fn (Absence $record): string => $record->employee->last_name.' '.$record->employee->first_name
+                    )
                     ->searchable(['last_name', 'first_name'])
                     ->sortable()
-                    ->url(fn (Absence $record): string => AbsenceResource::getUrl('view', ['record' => $record->id])),
+                    ->toggleable(),
                 TextColumn::make('start_date')
                     ->label('Debut')
                     ->date('d/m/Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('end_date')
                     ->label('Fin')
                     ->date('d/m/Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('reason')
                     ->label('Raison')
                     ->searchable()
-                    ->toggleable(),
+                    ->toggleable()->toggleable(),
                 IconColumn::make('is_closed')
                     ->label('Cloture')
-                    ->boolean(),
+                    ->boolean()->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('reminder_date')
                     ->label('Rappel')
                     ->date('d/m/Y')
@@ -62,6 +64,7 @@ final class AbsenceTables
                 ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

@@ -102,7 +102,8 @@ final class PayScaleResource extends Resource
             ])
             ->filters([])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+            ->icon(Heroicon::Pencil),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

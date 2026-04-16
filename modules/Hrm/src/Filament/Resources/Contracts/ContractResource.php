@@ -9,6 +9,7 @@ use AcMarche\Hrm\Filament\Resources\Contracts\Pages\EditContract;
 use AcMarche\Hrm\Filament\Resources\Contracts\Pages\ListContracts;
 use AcMarche\Hrm\Filament\Resources\Contracts\Pages\ViewContract;
 use AcMarche\Hrm\Filament\Resources\Contracts\Schemas\ContractForm;
+use AcMarche\Hrm\Filament\Resources\Contracts\Schemas\ContractInfolist;
 use AcMarche\Hrm\Filament\Resources\Contracts\Tables\ContractTables;
 use AcMarche\Hrm\Models\Contract;
 use Filament\Resources\Resource;
@@ -51,6 +52,11 @@ final class ContractResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return ContractForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return ContractInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table

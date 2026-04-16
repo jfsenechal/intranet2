@@ -19,7 +19,6 @@ final class EditContract extends EditRecord
     {
         return [
             ViewAction::make(),
-            DeleteAction::make(),
         ];
     }
 }
