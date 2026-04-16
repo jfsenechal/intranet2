@@ -87,9 +87,9 @@ final class IncomingMailPolicy
     {
         return $user->hasOneOfThisRoles(
             [
-                RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN,
-                RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN,
-                RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_ADMIN,
+                RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN->value,
+                RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN->value,
+                RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_ADMIN->value,
             ]
         );
     }
@@ -100,7 +100,7 @@ final class IncomingMailPolicy
     private function isRecipientOfMail(User $user, IncomingMail $incomingMail): bool
     {
         return $incomingMail->recipients()
-            ->where('username', $user->username)
+            ->where('recipients.username', $user->username)
             ->exists();
     }
 
@@ -116,7 +116,7 @@ final class IncomingMailPolicy
         }
 
         return Recipient::query()
-            ->where('username', $user->username)
+            ->where('recipients.username', $user->username)
             ->whereHas('services', fn ($query) => $query->whereIn('courrier_services.id', $serviceIds))
             ->exists();
     }

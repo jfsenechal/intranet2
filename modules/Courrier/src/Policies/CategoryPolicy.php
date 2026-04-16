@@ -18,7 +18,7 @@ final class CategoryPolicy
             return true;
         }
 
-        return $this->isAdministrator($user);
+        return $this->hasRoleAdmin($user);
     }
 
     /**
@@ -26,7 +26,7 @@ final class CategoryPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $this->isAdministrator($user);
+        return $this->hasRoleAdmin($user);
     }
 
     /**
@@ -34,7 +34,7 @@ final class CategoryPolicy
      */
     public function view(User $user): bool
     {
-        return $this->isAdministrator($user);
+        return $this->hasRoleAdmin($user);
     }
 
     /**
@@ -42,7 +42,7 @@ final class CategoryPolicy
      */
     public function create(User $user): bool
     {
-        return $this->isAdministrator($user);
+        return $this->hasRoleAdmin($user);
     }
 
     /**
@@ -50,7 +50,7 @@ final class CategoryPolicy
      */
     public function update(User $user): bool
     {
-        return $this->isAdministrator($user);
+        return $this->hasRoleAdmin($user);
     }
 
     /**
@@ -58,7 +58,7 @@ final class CategoryPolicy
      */
     public function delete(User $user): bool
     {
-        return $this->isAdministrator($user);
+        return $this->hasRoleAdmin($user);
     }
 
     /**
@@ -77,13 +77,13 @@ final class CategoryPolicy
         return false;
     }
 
-    private function isAdministrator(User $user): bool
+    private function hasRoleAdmin(User $user): bool
     {
         return $user->hasOneOfThisRoles(
             [
-                RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN,
-                RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN,
-                RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_ADMIN,
+                RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN->value,
+                RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN->value,
+                RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_ADMIN->value,
             ]
         );
     }

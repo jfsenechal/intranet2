@@ -81,9 +81,9 @@ final class SenderPolicy
     {
         return $user->hasOneOfThisRoles(
             [
-                RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN,
-                RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN,
-                RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_ADMIN,
+                RolesEnum::ROLE_INDICATEUR_CPAS_ADMIN->value,
+                RolesEnum::ROLE_INDICATEUR_VILLE_ADMIN->value,
+                RolesEnum::ROLE_INDICATEUR_BOURGMESTRE_ADMIN->value,
             ]
         );
     }
