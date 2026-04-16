@@ -17,12 +17,7 @@ final class AbsenceInfolist
         return $schema
             ->columns(1)
             ->components([
-                Section::make('Agent')
-                    ->schema([
-                        TextEntry::make('employee.full_name')
-                            ->label('Agent'),
-                    ]),
-                Fieldset::make('Période')
+                Section::make('Période')
                     ->columns(4)
                     ->schema([
                         TextEntry::make('start_date')
@@ -38,7 +33,7 @@ final class AbsenceInfolist
                             ->label('Date de clôture')
                             ->date('d/m/Y'),
                     ]),
-                Fieldset::make('Motif')
+                Section::make('Motif')
                     ->columns(2)
                     ->schema([
                         TextEntry::make('reason')
@@ -46,7 +41,7 @@ final class AbsenceInfolist
                         TextEntry::make('ssa')
                             ->label('SSA'),
                     ]),
-                Fieldset::make('Options')
+                Section::make('Options')
                     ->columns(4)
                     ->schema([
                         TextEntry::make('has_resumed')
