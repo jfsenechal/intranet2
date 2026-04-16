@@ -6,13 +6,17 @@ namespace AcMarche\Hrm\Providers\Filament;
 
 use AcMarche\App\Traits\HooksTrait;
 use AcMarche\App\Traits\PluginTrait;
+use AcMarche\Hrm\Enums\StatusEnum;
+use AcMarche\Hrm\Filament\Resources\Employees\Pages\ListEmployees;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -46,6 +50,29 @@ final class HrmPanelProvider extends PanelProvider
             ->pages([])
             ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\Hrm\\Filament\\Widgets')
             ->widgets([])
+            ->navigationItems([
+                NavigationItem::make(StatusEnum::APPLICATION->value)
+                    ->icon(Heroicon::OutlinedUserPlus)
+                    ->group('Personnel')
+                    ->sort(2)
+                    ->url(fn (): string => ListEmployees::getUrl(parameters: [
+                        'tableFilters' => ['status' => ['value' => StatusEnum::APPLICATION->value]],
+                    ])),
+                NavigationItem::make(StatusEnum::STUDENT->value)
+                    ->icon(Heroicon::OutlinedAcademicCap)
+                    ->group('Personnel')
+                    ->sort(3)
+                    ->url(fn (): string => ListEmployees::getUrl(parameters: [
+                        'tableFilters' => ['status' => ['value' => StatusEnum::STUDENT->value]],
+                    ])),
+                NavigationItem::make(StatusEnum::INTERN->value)
+                    ->icon(Heroicon::OutlinedBriefcase)
+                    ->group('Personnel')
+                    ->sort(4)
+                    ->url(fn (): string => ListEmployees::getUrl(parameters: [
+                        'tableFilters' => ['status' => ['value' => StatusEnum::INTERN->value]],
+                    ])),
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

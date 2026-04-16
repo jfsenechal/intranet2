@@ -65,7 +65,8 @@ final class EmployeeTables
             ->filters([
                 SelectFilter::make('status')
                     ->label('Statut')
-                    ->options(StatusEnum::class),
+                    ->options(StatusEnum::class)
+                    ->default(StatusEnum::ACTIVE->value),
                 TernaryFilter::make('is_archived')
                     ->label('Archive')
                     ->placeholder('Tous')
