@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employees\Schemas;
 
+use AcMarche\Hrm\Models\Employee;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Fieldset;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -26,6 +28,39 @@ final class EmployeeInfolist
                         Tab::make('Informations personnelles')
                             ->icon('heroicon-o-user')
                             ->schema([
+                                Grid::make(12)
+                                    ->schema([
+                                        ImageEntry::make('photo')
+                                            ->label('Photo')
+                                            ->disk('public')
+                                            ->imageHeight(260)
+                                            ->defaultImageUrl(fn (Employee $record): string => 'https://ui-avatars.com/api/?size=256&name='.urlencode(mb_trim($record->first_name.' '.$record->last_name)))
+                                            ->columnSpan(4),
+                                        Section::make('Coordonnées')
+                                            ->columns(2)
+                                            ->columnSpan(8)
+                                            ->schema([
+                                                TextEntry::make('address')
+                                                    ->label('Adresse')
+                                                    ->columnSpanFull(),
+                                                TextEntry::make('postal_code')
+                                                    ->label('Code postal'),
+                                                TextEntry::make('city')
+                                                    ->label('Ville'),
+                                                TextEntry::make('email')
+                                                    ->label('Email prive')
+                                                    ->icon('heroicon-o-envelope'),
+                                                TextEntry::make('professional_email')
+                                                    ->label('Email professionnel')
+                                                    ->icon('heroicon-o-envelope'),
+                                                TextEntry::make('private_phone')
+                                                    ->label('Telephone prive')
+                                                    ->icon('heroicon-o-phone'),
+                                                TextEntry::make('private_mobile')
+                                                    ->label('GSM prive')
+                                                    ->icon('heroicon-o-device-phone-mobile'),
+                                            ]),
+                                    ]),
                                 Section::make('Identite')
                                     ->columns(2)
                                     ->schema([
@@ -39,29 +74,6 @@ final class EmployeeInfolist
                                             ->boolean(),
                                         TextEntry::make('national_registry_number')
                                             ->label('Registre national'),
-                                    ]),
-                                Section::make('Coordonnées')
-                                    ->columns(2)
-                                    ->schema([
-                                        TextEntry::make('address')
-                                            ->label('Adresse')
-                                            ->columnSpanFull(),
-                                        TextEntry::make('postal_code')
-                                            ->label('Code postal'),
-                                        TextEntry::make('city')
-                                            ->label('Ville'),
-                                        TextEntry::make('email')
-                                            ->label('Email prive')
-                                            ->icon('heroicon-o-envelope'),
-                                        TextEntry::make('professional_email')
-                                            ->label('Email professionnel')
-                                            ->icon('heroicon-o-envelope'),
-                                        TextEntry::make('private_phone')
-                                            ->label('Telephone prive')
-                                            ->icon('heroicon-o-phone'),
-                                        TextEntry::make('private_mobile')
-                                            ->label('GSM prive')
-                                            ->icon('heroicon-o-device-phone-mobile'),
                                     ]),
                             ]),
                         Tab::make('Emploi')
