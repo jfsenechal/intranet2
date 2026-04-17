@@ -35,10 +35,10 @@ final class EmployeeInfolist
                                             ->disk('public')
                                             ->imageHeight(260)
                                             ->defaultImageUrl(fn (Employee $record): string => 'https://ui-avatars.com/api/?size=256&name='.urlencode(mb_trim($record->first_name.' '.$record->last_name)))
-                                            ->columnSpan(4),
-                                        Section::make('Coordonnées')
+                                            ->columnSpan(3),
+                                        Fieldset::make('Coordonnées')
                                             ->columns(2)
-                                            ->columnSpan(8)
+                                            ->columnSpan(9)
                                             ->schema([
                                                 TextEntry::make('address')
                                                     ->label('Adresse')
