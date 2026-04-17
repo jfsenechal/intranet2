@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\Employees\Tables;
 
 use AcMarche\Hrm\Enums\StatusEnum;
+use AcMarche\Hrm\Models\Direction;
+use AcMarche\Hrm\Models\PayScale;
+use AcMarche\Hrm\Models\Service;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -14,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 final class EmployeeTables
 {
@@ -62,11 +66,41 @@ final class EmployeeTables
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->filtersFormColumns(2)
             ->filters([
                 SelectFilter::make('status')
                     ->label('Statut')
                     ->options(StatusEnum::class)
                     ->default(StatusEnum::ACTIVE->value),
+                SelectFilter::make('pay_scale_id')
+                    ->label('Echelle')
+                    ->options(fn (): array => PayScale::query()->orderBy('name')->pluck('name', 'id')->all())
+                    ->searchable()
+                    ->preload(),
+                SelectFilter::make('service_id')
+                    ->label('Service')
+                    ->options(fn (): array => Service::query()->orderBy('name')->pluck('name', 'id')->all())
+                    ->searchable()
+                    ->preload()
+                    ->query(fn (Builder $query, array $data): Builder => $query->when(
+                        $data['value'] ?? null,
+                        fn (Builder $query, $serviceId): Builder => $query->whereHas(
+                            'contracts',
+                            fn (Builder $query) => $query->where('service_id', $serviceId),
+                        ),
+                    )),
+                SelectFilter::make('direction_id')
+                    ->label('Direction')
+                    ->options(fn (): array => Direction::query()->orderBy('name')->pluck('name', 'id')->all())
+                    ->searchable()
+                    ->preload()
+                    ->query(fn (Builder $query, array $data): Builder => $query->when(
+                        $data['value'] ?? null,
+                        fn (Builder $query, $directionId): Builder => $query->whereHas(
+                            'contracts',
+                            fn (Builder $query) => $query->where('direction_id', $directionId),
+                        ),
+                    )),
                 TernaryFilter::make('is_archived')
                     ->label('Archive')
                     ->placeholder('Tous')

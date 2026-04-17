@@ -12,6 +12,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 
 final class EmployeeInfolist
 {
@@ -81,10 +82,9 @@ final class EmployeeInfolist
                                                 'suspended' => 'warning',
                                                 default => 'gray',
                                             }),
-                                        TextEntry::make('uid')
-                                            ->label('Login'),
-                                        TextEntry::make('username')
-                                            ->label('Nom utilisateur'),
+                                        IconEntry::make('is_archived')
+                                            ->label('Archivé')
+                                            ->boolean(),
                                     ]),
                                 Fieldset::make('Dates')
                                     ->columns(3)
@@ -141,14 +141,13 @@ final class EmployeeInfolist
                                 ImageEntry::make('photo')
                                     ->label('Photo')
                                     ->disk('public')
-                                    ->height(300),
+                                    ->imageHeight(300),
                             ]),
-                        Tab::make('Parametres')
-                            ->icon('heroicon-o-cog-6-tooth')
+                        Tab::make('Compte informatique')
+                            ->icon(Heroicon::OutlinedUserCircle)
                             ->schema([
-                                IconEntry::make('is_archived')
-                                    ->label('Archive')
-                                    ->boolean(),
+                                TextEntry::make('username')
+                                    ->label('Nom utilisateur'),
                             ]),
                     ]),
             ]);

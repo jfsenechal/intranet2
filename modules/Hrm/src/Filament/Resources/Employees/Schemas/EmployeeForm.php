@@ -100,12 +100,8 @@ final class EmployeeForm
                                             ->label('Statut')
                                             ->options(StatusEnum::class)
                                             ->enum(StatusEnum::class),
-                                        TextInput::make('uid')
-                                            ->label('Login')
-                                            ->maxLength(100),
-                                        TextInput::make('username')
-                                            ->label('Nom utilisateur')
-                                            ->maxLength(100),
+                                        Toggle::make('is_archived')
+                                            ->label('Archivé'),
                                     ]),
                                 Fieldset::make('Dates')
                                     ->columns(3)
@@ -168,12 +164,6 @@ final class EmployeeForm
                                     ->disk('public')
                                     ->directory(config('hrm.uploads.photos'))
                                     ->imageEditor(),
-                            ]),
-                        Tab::make('Parametres')
-                            ->icon('heroicon-o-cog-6-tooth')
-                            ->schema([
-                                Toggle::make('is_archived')
-                                    ->label('Archive'),
                             ]),
                     ]),
             ]);
