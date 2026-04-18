@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Teleworks\Schemas;
 
+use AcMarche\Document\Filament\Resources\Documents\DocumentResource;
 use AcMarche\Hrm\Enums\DayTypeEnum;
 use AcMarche\Hrm\Enums\LocationTypeEnum;
 use AcMarche\Hrm\Enums\RolesEnum;
@@ -18,6 +19,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\HtmlString;
 
 final class TeleworkForm
 {
@@ -62,15 +64,30 @@ final class TeleworkForm
                             ->label('Motivation jour variable')
                             ->columnSpanFull()
                             ->visible(fn (Get $get): bool => self::dayType($get('day_type')) === DayTypeEnum::Variable),
+                        RichEditor::make('employee_notes')
+                            ->label('Remarques')
+                            ->helperText('Avez vous une remarque particulière?')
+                            ->columnSpanFull(),
                     ]),
                 Section::make('Accords')
                     ->columns(2)
                     ->schema([
                         Toggle::make('regulation_agreement')
-                            ->label('Accord règlement')
+                            ->label('J\'ai lu et accepte le règlement')
+                            ->helperText(
+                                new HtmlString(
+                                    '<a href="'.DocumentResource::getUrl(
+                                        'view',
+                                        ['record' => 13],
+                                        panel: 'document-panel'
+                                    ).'" target="_blank" class="text-primary underline">Consulter le règlement</a>'
+                                )
+                            )
                             ->required(),
                         Toggle::make('it_agreement')
-                            ->label('Accord informatique')
+                            ->label(
+                                'Je déclare m’engager à respecter les règles de sécurité informatique imposées par l’employeur.'
+                            )
                             ->required(),
                     ]),
                 Section::make('Validation du chef')
@@ -99,13 +116,6 @@ final class TeleworkForm
                             ->maxLength(100),
                         RichEditor::make('hr_notes')
                             ->label('Notes GRH')
-                            ->columnSpanFull(),
-                    ]),
-                Section::make('Remarques de l\'agent')
-                    ->schema([
-                        RichEditor::make('employee_notes')
-                            ->label('Remarques')
-                            ->hiddenLabel()
                             ->columnSpanFull(),
                     ]),
             ]);
