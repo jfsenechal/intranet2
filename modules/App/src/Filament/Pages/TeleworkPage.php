@@ -16,7 +16,7 @@ use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
 use Override;
 
-final class Telework extends Page implements HasForms
+final class TeleworkPage extends Page implements HasForms
 {
     use InteractsWithForms;
 

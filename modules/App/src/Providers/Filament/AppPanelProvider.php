@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\App\Providers\Filament;
 
-use AcMarche\App\Filament\Pages\Telework;
+use AcMarche\App\Filament\Pages\TeleworkPage;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -38,7 +38,7 @@ final class AppPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                Telework::class,
+                TeleworkPage::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([

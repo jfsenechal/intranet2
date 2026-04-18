@@ -88,6 +88,7 @@
         "spatie/browsershot": "^5.2.3",
         "spatie/laravel-pdf": "^2.1.1",
         "spatie/laravel-sluggable": "^3.8",
+        "filament/spatie-laravel-media-library-plugin": "^5.0",
         "stechstudio/filament-impersonate": "^4.0",
         "symfony/process": "^7.4"
     },
