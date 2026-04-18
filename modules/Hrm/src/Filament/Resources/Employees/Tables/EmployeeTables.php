@@ -45,7 +45,7 @@ final class EmployeeTables
                     ->label('Statut')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        StatusEnum::ACTIVE->value => 'success',
+                        StatusEnum::AGENT->value => 'success',
                         StatusEnum::RETIRED->value => 'info',
                         StatusEnum::TERMINATED->value, StatusEnum::RESIGNED->value, StatusEnum::ENDED->value, StatusEnum::CONTRACT_ENDED->value => 'danger',
                         StatusEnum::APPLICATION->value, StatusEnum::STUDENT->value, StatusEnum::INTERN->value => 'warning',
@@ -71,7 +71,7 @@ final class EmployeeTables
                 SelectFilter::make('status')
                     ->label('Statut')
                     ->options(StatusEnum::class)
-                    ->default(StatusEnum::ACTIVE->value),
+                    ->default(StatusEnum::AGENT->value),
                 SelectFilter::make('pay_scale_id')
                     ->label('Echelle')
                     ->options(fn (): array => PayScale::query()->orderBy('name')->pluck('name', 'id')->all())
@@ -106,6 +106,15 @@ final class EmployeeTables
                     ->placeholder('Tous')
                     ->trueLabel('Archives')
                     ->falseLabel('Non archives'),
+                TernaryFilter::make('has_active_contract')
+                    ->label('Contrat actif')
+                    ->placeholder('Tous')
+                    ->trueLabel('Avec contrat actif')
+                    ->falseLabel('Sans contrat actif')
+                    ->queries(
+                        true: fn (Builder $query): Builder => $query->whereHas('contracts', fn (Builder $query) => $query->active()),
+                        false: fn (Builder $query): Builder => $query->whereDoesntHave('contracts', fn (Builder $query) => $query->active()),
+                    ),
             ])
             ->recordActions([
                 ViewAction::make(),

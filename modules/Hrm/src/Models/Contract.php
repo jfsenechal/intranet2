@@ -7,10 +7,13 @@ namespace AcMarche\Hrm\Models;
 use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 #[Connection('maria-hrm')]
 #[Fillable([
@@ -44,6 +47,23 @@ final class Contract extends Model
 {
     use HasFactory;
     use HasUserAdd;
+
+    /**
+     * @deprecated The `status` column is deprecated and should not be used.
+     *             Activity is determined by `is_closed`, `is_suspended` and `end_date`.
+     */
+    public const string DEPRECATED_STATUS = 'status';
+
+    #[Scope]
+    public static function active(Builder $query): void
+    {
+        $query->where('is_closed', false)
+            ->where('is_suspended', false)
+            ->where(function (Builder $query): void {
+                $query->whereNull('end_date')
+                    ->orWhere('end_date', '>=', Carbon::today());
+            });
+    }
 
     /**
      * @return BelongsTo<Employee>

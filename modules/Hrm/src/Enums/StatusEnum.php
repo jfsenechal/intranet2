@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Hrm\Enums;
 
 use Filament\Support\Contracts\HasLabel;
-use Illuminate\Contracts\Support\Htmlable;
 
 enum StatusEnum: string implements HasLabel
 {
-    case ACTIVE = 'Actif';
+    case AGENT = 'Agent';
     case APPLICATION = 'Candidature';
     case RESIGNED = 'Démission';
     case STUDENT = 'Etudiant';
@@ -17,13 +18,13 @@ enum StatusEnum: string implements HasLabel
     case RETIRED = 'Pension';
     case INTERN = 'Stagiaire';
 
-    public function getLabel(): string|Htmlable|null
-    {
-        return $this->value;
-    }
-
     public static function options(): array
     {
         return array_column(self::cases(), 'value', 'name');
+    }
+
+    public function getLabel(): string
+    {
+        return $this->value;
     }
 }
