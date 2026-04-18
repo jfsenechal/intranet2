@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use AcMarche\Hrm\Enums\DayTypeEnum;
+use AcMarche\Hrm\Enums\LocationTypeEnum;
+use AcMarche\Hrm\Enums\WeekdayEnum;
+use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
@@ -38,9 +42,12 @@ use Illuminate\Support\Str;
 final class Telework extends Model
 {
     use HasFactory;
+    use HasUserAdd;
 
     protected static function booted(): void
     {
+        self::bootHasUser();
+
         self::creating(function (Telework $telework): void {
             if (empty($telework->uuid)) {
                 $telework->uuid = (string) Str::uuid();
@@ -56,6 +63,9 @@ final class Telework extends Model
             'manager_validated' => 'boolean',
             'manager_validated_at' => 'date',
             'date_college' => 'date',
+            'location_type' => LocationTypeEnum::class,
+            'day_type' => DayTypeEnum::class,
+            'fixed_day' => WeekdayEnum::class,
         ];
     }
 }
