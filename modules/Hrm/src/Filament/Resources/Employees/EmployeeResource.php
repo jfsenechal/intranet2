@@ -8,6 +8,12 @@ use AcMarche\Hrm\Filament\Resources\Employees\Pages\CreateEmployee;
 use AcMarche\Hrm\Filament\Resources\Employees\Pages\EditEmployee;
 use AcMarche\Hrm\Filament\Resources\Employees\Pages\ListEmployees;
 use AcMarche\Hrm\Filament\Resources\Employees\Pages\ViewEmployee;
+use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\AbsencesRelationManager;
+use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\ContractsRelationManager;
+use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\DeadlinesRelationManager;
+use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\EvaluationsRelationManager;
+use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\TrainingsRelationManager;
+use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\ValorizationsRelationManager;
 use AcMarche\Hrm\Filament\Resources\Employees\Schemas\EmployeeForm;
 use AcMarche\Hrm\Filament\Resources\Employees\Schemas\EmployeeInfolist;
 use AcMarche\Hrm\Filament\Resources\Employees\Tables\EmployeeTables;
@@ -62,6 +68,18 @@ final class EmployeeResource extends Resource
     public static function table(Table $table): Table
     {
         return EmployeeTables::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            ContractsRelationManager::class,
+            AbsencesRelationManager::class,
+            DeadlinesRelationManager::class,
+            EvaluationsRelationManager::class,
+            TrainingsRelationManager::class,
+            ValorizationsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

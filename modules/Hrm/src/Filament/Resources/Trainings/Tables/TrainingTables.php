@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Tables;
 
+use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
 use AcMarche\Hrm\Models\Training;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -26,7 +28,7 @@ final class TrainingTables
                 TextColumn::make('employee.last_name')
                     ->label('Agent')
                     ->formatStateUsing(
-                        fn(Training $record): string => $record->employee->last_name.' '.$record->employee->first_name
+                        fn (Training $record): string => $record->employee->last_name.' '.$record->employee->first_name
                     )
                     ->searchable(['last_name', 'first_name'])
                     ->sortable(),
@@ -91,6 +93,50 @@ final class TrainingTables
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
+            ]);
+    }
+
+    public static function relation(Table $table): Table
+    {
+        return $table
+            ->defaultSort('start_date', 'desc')
+            ->defaultPaginationPageOption(25)
+            ->columns([
+                TextColumn::make('name')
+                    ->label('Intitule')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(40),
+                TextColumn::make('training_type')
+                    ->label('Type')
+                    ->badge()
+                    ->toggleable(),
+                TextColumn::make('start_date')
+                    ->label('Debut')
+                    ->date('d/m/Y')
+                    ->sortable(),
+                TextColumn::make('end_date')
+                    ->label('Fin')
+                    ->date('d/m/Y')
+                    ->sortable(),
+                TextColumn::make('duration_hours')
+                    ->label('Duree')
+                    ->suffix('h')
+                    ->sortable()
+                    ->toggleable(),
+                IconColumn::make('certificate_received')
+                    ->label('Attestation')
+                    ->boolean(),
+                IconColumn::make('is_closed')
+                    ->label('Cloture')
+                    ->boolean()
+                    ->toggleable(),
+            ])
+            ->recordActions([
+                Action::make('view')
+                    ->label('Voir')
+                    ->icon('heroicon-o-eye')
+                    ->url(fn (Training $record): string => TrainingResource::getUrl('view', ['record' => $record])),
             ]);
     }
 }

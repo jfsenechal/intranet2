@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Contracts\Tables;
 
+use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use AcMarche\Hrm\Models\Contract;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -84,6 +86,49 @@ final class ContractTables
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
+            ]);
+    }
+
+    public static function relation(Table $table): Table
+    {
+        return $table
+            ->defaultSort('start_date', 'desc')
+            ->defaultPaginationPageOption(25)
+            ->columns([
+                TextColumn::make('employer.name')
+                    ->label('Employeur')
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('contractType.name')
+                    ->label('Type')
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('job_title')
+                    ->label('Fonction')
+                    ->searchable()
+                    ->toggleable(),
+                TextColumn::make('start_date')
+                    ->label('Debut')
+                    ->date('d/m/Y')
+                    ->sortable(),
+                TextColumn::make('end_date')
+                    ->label('Fin')
+                    ->date('d/m/Y')
+                    ->sortable(),
+                TextColumn::make('work_regime')
+                    ->label('Regime')
+                    ->suffix('%')
+                    ->sortable()
+                    ->toggleable(),
+                IconColumn::make('is_closed')
+                    ->label('Cloture')
+                    ->boolean(),
+            ])
+            ->recordActions([
+                Action::make('view')
+                    ->label('Voir')
+                    ->icon('heroicon-o-eye')
+                    ->url(fn (Contract $record): string => ContractResource::getUrl('view', ['record' => $record])),
             ]);
     }
 }

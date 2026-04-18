@@ -186,6 +186,14 @@ final class Employee extends Model
     }
 
     /**
+     * @return HasMany<Deadline>
+     */
+    public function deadlines(): HasMany
+    {
+        return $this->hasMany(Deadline::class);
+    }
+
+    /**
      * @return HasMany<Sms>
      */
     public function smsMessages(): HasMany

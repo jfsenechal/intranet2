@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Deadlines\Tables;
 
+use AcMarche\Hrm\Filament\Resources\Deadlines\DeadlineResource;
 use AcMarche\Hrm\Models\Deadline;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -84,6 +86,46 @@ final class DeadlineTables
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
+            ]);
+    }
+
+    public static function relation(Table $table): Table
+    {
+        return $table
+            ->defaultSort('start_date', 'desc')
+            ->defaultPaginationPageOption(25)
+            ->columns([
+                TextColumn::make('name')
+                    ->label('Intitulé')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('employer.name')
+                    ->label('Employeur')
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('start_date')
+                    ->label('Debut')
+                    ->date('d/m/Y')
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('end_date')
+                    ->label('Fin')
+                    ->date('d/m/Y')
+                    ->sortable(),
+                TextColumn::make('reminder_date')
+                    ->label('Rappel')
+                    ->date('d/m/Y')
+                    ->sortable()
+                    ->toggleable(),
+                IconColumn::make('is_closed')
+                    ->label('Clôturée')
+                    ->boolean(),
+            ])
+            ->recordActions([
+                Action::make('view')
+                    ->label('Voir')
+                    ->icon('heroicon-o-eye')
+                    ->url(fn (Deadline $record): string => DeadlineResource::getUrl('view', ['record' => $record])),
             ]);
     }
 }
