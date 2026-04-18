@@ -57,11 +57,11 @@ final class TeleworkForm
                             ->label('Jour fixe')
                             ->options(WeekdayEnum::class)
                             ->enum(WeekdayEnum::class)
-                            ->visible(fn (Get $get): bool => (int) $get('day_type') === DayTypeEnum::Fixe->value),
+                            ->visible(fn (Get $get): bool => self::dayType($get('day_type')) === DayTypeEnum::Fixe),
                         RichEditor::make('variable_day_reason')
                             ->label('Motivation jour variable')
                             ->columnSpanFull()
-                            ->visible(fn (Get $get): bool => (int) $get('day_type') === DayTypeEnum::Variable->value),
+                            ->visible(fn (Get $get): bool => self::dayType($get('day_type')) === DayTypeEnum::Variable),
                     ]),
                 Section::make('Accords')
                     ->columns(2)
@@ -109,6 +109,19 @@ final class TeleworkForm
                             ->columnSpanFull(),
                     ]),
             ]);
+    }
+
+    private static function dayType(mixed $value): ?DayTypeEnum
+    {
+        if ($value instanceof DayTypeEnum) {
+            return $value;
+        }
+
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        return DayTypeEnum::tryFrom((int) $value);
     }
 
     private static function isAdmin(): bool
