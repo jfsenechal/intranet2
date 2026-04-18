@@ -24,7 +24,7 @@ final class ListDeadlines extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label('Ajouter une absence')
+                ->label('Ajouter une échéance')
                 ->icon('tabler-plus'),
         ];
     }
