@@ -124,6 +124,14 @@ final class ContractTables
                     ->label('Cloture')
                     ->boolean(),
             ])
+            ->filters([
+                TernaryFilter::make('is_closed')
+                    ->label('Cloture')
+                    ->placeholder('Tous')
+                    ->trueLabel('Clotures')
+                    ->falseLabel('En cours')
+                    ->default(false),
+            ])
             ->recordActions([
                 Action::make('view')
                     ->label('Voir')
