@@ -26,4 +26,17 @@ return [
         'evaluations' => 'uploads/hrm/evaluations',
         'formations' => 'uploads/hrm/formations',
     ],
+    /*
+    |--------------------------------------------------------------------------
+    | HR Team Email Addresses
+    |--------------------------------------------------------------------------
+    |
+    | Recipients notified after a telework request has been validated by the
+    | manager. Comma separated list read from the HRM_TEAM_EMAILS env variable.
+    |
+    */
+    'team_emails' => array_values(array_filter(array_map(
+        'trim',
+        explode(',', (string) env('HRM_TEAM_EMAILS', 'traitements@marche.be,grh.cpas@marche.be'))
+    ))),
 ];

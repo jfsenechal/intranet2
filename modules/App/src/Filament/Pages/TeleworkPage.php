@@ -6,6 +6,7 @@ namespace AcMarche\App\Filament\Pages;
 
 use AcMarche\Hrm\Filament\Resources\Teleworks\Schemas\TeleworkForm;
 use AcMarche\Hrm\Models\Telework as TeleworkModel;
+use AcMarche\Hrm\Services\TeleworkNotifier;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -61,6 +62,7 @@ final class TeleworkPage extends Page implements HasForms
             $this->record->update($data);
         } else {
             $this->record = TeleworkModel::create($data);
+            TeleworkNotifier::notifyManagerOfNewRequest($this->record);
         }
 
         Notification::make()
