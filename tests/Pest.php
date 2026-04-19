@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+uses(PHPUnit\Framework\TestCase::class)->in('Sms');
+
 uses(
     Tests\TestCase::class,
     Illuminate\Foundation\Testing\RefreshDatabase::class,
