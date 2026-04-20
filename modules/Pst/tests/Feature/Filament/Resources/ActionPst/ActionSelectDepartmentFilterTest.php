@@ -9,8 +9,8 @@ use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Pst\Enums\ActionStateEnum;
 use AcMarche\Pst\Enums\ActionSynergyEnum;
 use AcMarche\Pst\Enums\RoleEnum;
-use AcMarche\Pst\Filament\Resources\ActionPst\Pages\CreateAction;
-use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ListActions;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\CreateActionPst;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ListActionsPst;
 use AcMarche\Pst\Models\OperationalObjective;
 use AcMarche\Pst\Models\StrategicObjective;
 use AcMarche\Security\Models\Role;
@@ -56,7 +56,7 @@ final class ActionSelectDepartmentFilterTest extends TestCase
 
         $villeObjective = $this->createOperationalObjective(DepartmentEnum::VILLE->value);
 
-        Livewire::test(CreateAction::class)
+        Livewire::test(CreateActionPst::class)
             ->fillForm([
                 'name' => 'Test Action',
                 'operational_objective_id' => $villeObjective->id,
@@ -82,7 +82,7 @@ final class ActionSelectDepartmentFilterTest extends TestCase
         // Create objective for CPAS department (different from user's selected department)
         $cpasObjective = $this->createOperationalObjective(DepartmentEnum::CPAS->value);
 
-        Livewire::test(CreateAction::class)
+        Livewire::test(CreateActionPst::class)
             ->fillForm([
                 'name' => 'Test Action',
                 'operational_objective_id' => $cpasObjective->id,
@@ -107,7 +107,7 @@ final class ActionSelectDepartmentFilterTest extends TestCase
         // Create internal objective (department = null)
         $internalObjective = $this->createInternalOperationalObjective();
 
-        Livewire::test(CreateAction::class)
+        Livewire::test(CreateActionPst::class)
             ->fillForm([
                 'name' => 'Test Action with Internal Objective',
                 'operational_objective_id' => $internalObjective->id,
@@ -132,7 +132,7 @@ final class ActionSelectDepartmentFilterTest extends TestCase
 
         $cpasObjective = $this->createOperationalObjective(DepartmentEnum::CPAS->value);
 
-        Livewire::test(CreateAction::class)
+        Livewire::test(CreateActionPst::class)
             ->fillForm([
                 'name' => 'Test CPAS Action',
                 'operational_objective_id' => $cpasObjective->id,
@@ -157,7 +157,7 @@ final class ActionSelectDepartmentFilterTest extends TestCase
 
         $villeObjective = $this->createOperationalObjective(DepartmentEnum::VILLE->value);
 
-        Livewire::test(CreateAction::class)
+        Livewire::test(CreateActionPst::class)
             ->fillForm([
                 'name' => 'Test Action',
                 'operational_objective_id' => $villeObjective->id,
@@ -184,13 +184,13 @@ final class ActionSelectDepartmentFilterTest extends TestCase
         $internalObjective = $this->createInternalOperationalObjective();
 
         // Test that filter can be applied with VILLE objective
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->loadTable()
             ->filterTable('operational_objectives', $villeObjective->id)
             ->assertOk();
 
         // Filter with internal objective should also work
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->loadTable()
             ->filterTable('operational_objectives', $internalObjective->id)
             ->assertOk();

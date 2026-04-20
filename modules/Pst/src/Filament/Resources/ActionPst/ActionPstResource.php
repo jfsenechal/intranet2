@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\ActionPst;
 
-use AcMarche\Pst\Filament\Resources\ActionPst\Pages\CreateAction;
-use AcMarche\Pst\Filament\Resources\ActionPst\Pages\EditAction;
-use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ListActions;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\CreateActionPst;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\EditActionPst;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ListActionsPst;
 use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ListActionsAsGoogleSheet;
-use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ViewAction;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ViewActionPst;
 use AcMarche\Pst\Filament\Resources\ActionPst\RelationManagers\FollowUpsRelationManager;
 use AcMarche\Pst\Filament\Resources\ActionPst\RelationManagers\HistoriesRelationManager;
 use AcMarche\Pst\Filament\Resources\ActionPst\RelationManagers\MediasRelationManager;
@@ -80,10 +80,10 @@ final class ActionPstResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListActions::route('/'),
-            'create' => CreateAction::route('/create'),
-            'view' => ViewAction::route('/{record}'),
-            'edit' => EditAction::route('/{record}/edit'),
+            'index' => ListActionsPst::route('/'),
+            'create' => CreateActionPst::route('/create'),
+            'view' => ViewActionPst::route('/{record}'),
+            'edit' => EditActionPst::route('/{record}/edit'),
             'asGoogleSheet' => ListActionsAsGoogleSheet::route('/as/google/sheet'),
         ];
     }

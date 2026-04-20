@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use AcMarche\Pst\Enums\RoleEnum;
-use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ViewAction;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ViewActionPst;
 use AcMarche\Pst\Filament\Resources\ActionPst\RelationManagers\FollowUpsRelationManager;
 use AcMarche\Pst\Filament\Resources\FollowUp\Pages\CreateFollowUp;
 use AcMarche\Pst\Filament\Resources\FollowUp\Pages\EditFollowUp;
@@ -80,7 +80,7 @@ describe('relation manager', function (): void {
 
         Livewire::test(FollowUpsRelationManager::class, [
             'ownerRecord' => $this->action,
-            'pageClass' => ViewAction::class,
+            'pageClass' => ViewActionPst::class,
         ])
             ->assertOk();
     });
@@ -92,7 +92,7 @@ describe('relation manager', function (): void {
 
         Livewire::test(FollowUpsRelationManager::class, [
             'ownerRecord' => $this->action,
-            'pageClass' => ViewAction::class,
+            'pageClass' => ViewActionPst::class,
         ])
             ->loadTable()
             ->assertCanSeeTableRecords($followups);
@@ -101,7 +101,7 @@ describe('relation manager', function (): void {
     it('can create a followup through relation manager', function (): void {
         Livewire::test(FollowUpsRelationManager::class, [
             'ownerRecord' => $this->action,
-            'pageClass' => ViewAction::class,
+            'pageClass' => ViewActionPst::class,
         ])
             ->callTableAction('create', data: [
                 'content' => '<p>Test followup content</p>',
@@ -122,7 +122,7 @@ describe('relation manager', function (): void {
 
         Livewire::test(FollowUpsRelationManager::class, [
             'ownerRecord' => $this->action,
-            'pageClass' => ViewAction::class,
+            'pageClass' => ViewActionPst::class,
         ])
             ->callTableAction('edit', $followup, data: [
                 'content' => '<p>Updated content</p>',
@@ -142,7 +142,7 @@ describe('relation manager', function (): void {
 
         Livewire::test(FollowUpsRelationManager::class, [
             'ownerRecord' => $this->action,
-            'pageClass' => ViewAction::class,
+            'pageClass' => ViewActionPst::class,
         ])
             ->callTableAction('delete', $followup)
             ->assertNotified();
@@ -155,7 +155,7 @@ describe('relation manager', function (): void {
 
         Livewire::test(FollowUpsRelationManager::class, [
             'ownerRecord' => $this->action,
-            'pageClass' => ViewAction::class,
+            'pageClass' => ViewActionPst::class,
         ])
             ->callTableAction('create', data: [
                 'content' => '',

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace AcMarche\Pst\Tests\Feature\Filament\Resources\ActionPst;
 
 use AcMarche\Pst\Enums\RoleEnum;
-use AcMarche\Pst\Filament\Resources\ActionPst\Pages\CreateAction;
-use AcMarche\Pst\Filament\Resources\ActionPst\Pages\EditAction;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\CreateActionPst;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\EditActionPst;
 use AcMarche\Pst\Models\Action;
 use AcMarche\Pst\Models\OperationalObjective;
 use AcMarche\Pst\Models\Service;
@@ -54,7 +54,7 @@ final class ActionFormTest extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        Livewire::test(CreateAction::class)
+        Livewire::test(CreateActionPst::class)
             ->assertFormFieldVisible('validated');
     }
 
@@ -62,7 +62,7 @@ final class ActionFormTest extends TestCase
     {
         $this->actingAs($this->regularUser);
 
-        Livewire::test(CreateAction::class)
+        Livewire::test(CreateActionPst::class)
             ->assertFormFieldHidden('validated');
     }
 
@@ -70,7 +70,7 @@ final class ActionFormTest extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        Livewire::test(CreateAction::class)
+        Livewire::test(CreateActionPst::class)
             ->assertFormFieldVisible('roadmap');
     }
 
@@ -78,7 +78,7 @@ final class ActionFormTest extends TestCase
     {
         $this->actingAs($this->regularUser);
 
-        Livewire::test(CreateAction::class)
+        Livewire::test(CreateActionPst::class)
             ->assertFormFieldHidden('roadmap');
     }
 
@@ -86,7 +86,7 @@ final class ActionFormTest extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertFormFieldEnabled('name');
     }
 
@@ -102,7 +102,7 @@ final class ActionFormTest extends TestCase
 
         $this->actingAs($this->regularUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertFormFieldExists('name');
     }
 
@@ -110,7 +110,7 @@ final class ActionFormTest extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertFormFieldEnabled('operational_objective_id');
     }
 
@@ -120,7 +120,7 @@ final class ActionFormTest extends TestCase
 
         $this->actingAs($this->regularUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertFormFieldDisabled('operational_objective_id');
     }
 
@@ -128,7 +128,7 @@ final class ActionFormTest extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertFormFieldEnabled('type');
     }
 
@@ -138,7 +138,7 @@ final class ActionFormTest extends TestCase
 
         $this->actingAs($this->regularUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertFormFieldDisabled('type');
     }
 
@@ -146,7 +146,7 @@ final class ActionFormTest extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertFormFieldVisible('action_mandatory');
     }
 
@@ -158,7 +158,7 @@ final class ActionFormTest extends TestCase
 
         $this->actingAs($this->responsibleUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertFormFieldVisible('action_mandatory');
     }
 
@@ -166,7 +166,7 @@ final class ActionFormTest extends TestCase
     {
         $this->actingAs($this->regularUser);
 
-        Livewire::test(CreateAction::class)
+        Livewire::test(CreateActionPst::class)
             ->assertFormFieldEnabled('name')
             ->assertFormFieldEnabled('type');
     }
@@ -176,7 +176,7 @@ final class ActionFormTest extends TestCase
     {
         $this->actingAs($this->regularUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertForbidden();
     }
 
@@ -191,7 +191,7 @@ final class ActionFormTest extends TestCase
 
         $this->actingAs($mandataireUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertForbidden();
     }
 
@@ -208,7 +208,7 @@ final class ActionFormTest extends TestCase
 
         $this->actingAs($mandataireUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertForbidden();
     }
 
@@ -218,7 +218,7 @@ final class ActionFormTest extends TestCase
 
         $this->actingAs($this->regularUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertOk();
     }
 
@@ -230,7 +230,7 @@ final class ActionFormTest extends TestCase
 
         $this->actingAs($this->regularUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertOk();
     }
 
@@ -239,7 +239,7 @@ final class ActionFormTest extends TestCase
         // Admin is not linked to action but should still be able to edit
         $this->actingAs($this->adminUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->assertOk();
     }
 

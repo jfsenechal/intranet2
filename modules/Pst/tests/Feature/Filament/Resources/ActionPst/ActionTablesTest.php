@@ -6,7 +6,7 @@ namespace AcMarche\Pst\Tests\Feature\Filament\Resources\ActionPst;
 
 use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Pst\Enums\RoleEnum;
-use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ListActions;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ListActionsPst;
 use AcMarche\Pst\Models\Action;
 use AcMarche\Pst\Models\OperationalObjective;
 use AcMarche\Pst\Models\StrategicObjective;
@@ -41,7 +41,7 @@ final class ActionTablesTest extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->assertOk();
     }
 
@@ -49,7 +49,7 @@ final class ActionTablesTest extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->assertTableFilterExists('scope');
     }
 
@@ -86,7 +86,7 @@ final class ActionTablesTest extends TestCase
             'scope' => ActionScopeEnum::EXTERNAL->value,
         ]);
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->loadTable()
             ->filterTable('scope', ActionScopeEnum::INTERNAL->value)
             ->assertCanSeeTableRecords($internalActions)
@@ -126,7 +126,7 @@ final class ActionTablesTest extends TestCase
             'scope' => ActionScopeEnum::EXTERNAL->value,
         ]);
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->loadTable()
             ->filterTable('scope', ActionScopeEnum::EXTERNAL->value)
             ->assertCanSeeTableRecords($externalActions)
@@ -137,7 +137,7 @@ final class ActionTablesTest extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->assertTableFilterExists('state');
     }
 
@@ -145,7 +145,7 @@ final class ActionTablesTest extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->assertTableFilterExists('type');
     }
 
@@ -153,7 +153,7 @@ final class ActionTablesTest extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->assertTableFilterExists('operational_objectives');
     }
 
@@ -161,7 +161,7 @@ final class ActionTablesTest extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->assertTableFilterExists('users');
     }
 
@@ -169,7 +169,7 @@ final class ActionTablesTest extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->assertTableFilterExists('services');
     }
 }

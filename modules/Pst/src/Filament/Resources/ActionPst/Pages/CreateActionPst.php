@@ -12,7 +12,7 @@ use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
 use Override;
 
-final class CreateAction extends CreateRecord
+final class CreateActionPst extends CreateRecord
 {
     #[Override]
     protected static string $resource = ActionPstResource::class;

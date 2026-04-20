@@ -15,7 +15,7 @@ use Filament\Schemas\Components\Tabs\Tab;
 use Illuminate\Database\Eloquent\Builder;
 use Override;
 
-final class ListActions extends ListRecords
+final class ListActionsPst extends ListRecords
 {
     #[Override]
     protected static string $resource = ActionPstResource::class;

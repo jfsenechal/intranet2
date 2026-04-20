@@ -9,8 +9,8 @@ use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Pst\Enums\ActionStateEnum;
 use AcMarche\Pst\Enums\ActionSynergyEnum;
 use AcMarche\Pst\Enums\RoleEnum;
-use AcMarche\Pst\Filament\Resources\ActionPst\Pages\CreateAction;
-use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ListActions;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\CreateActionPst;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\ListActionsPst;
 use AcMarche\Pst\Models\Action;
 use AcMarche\Pst\Models\OperationalObjective;
 use AcMarche\Pst\Models\StrategicObjective;
@@ -87,7 +87,7 @@ final class ActionDepartmentTest extends TestCase
             ]);
         }
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->loadTable()
             ->assertCanSeeTableRecords($villeActions);
     }
@@ -125,7 +125,7 @@ final class ActionDepartmentTest extends TestCase
         $actionsCount = Action::query()->count();
         expect($actionsCount)->toBe(2);
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->loadTable()
             ->assertCanSeeTableRecords([$cpasAction1, $cpasAction2]);
     }
@@ -148,7 +148,7 @@ final class ActionDepartmentTest extends TestCase
             'validated' => true,
         ]);
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->loadTable()
             ->assertCanSeeTableRecords($villeActions);
     }
@@ -178,7 +178,7 @@ final class ActionDepartmentTest extends TestCase
             'validated' => true,
         ]);
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->loadTable()
             ->filterTable('state', ActionStateEnum::START->value)
             ->assertCanSeeTableRecords($startActions)
@@ -210,7 +210,7 @@ final class ActionDepartmentTest extends TestCase
             'validated' => true,
         ]);
 
-        Livewire::test(ListActions::class)
+        Livewire::test(ListActionsPst::class)
             ->loadTable()
             ->filterTable('state', ActionStateEnum::PENDING->value)
             ->assertCanSeeTableRecords($pendingActions)
@@ -234,7 +234,7 @@ final class ActionDepartmentTest extends TestCase
             'validated' => true,
         ]);
 
-        $component = Livewire::test(ListActions::class);
+        $component = Livewire::test(ListActionsPst::class);
         $tabs = $component->instance()->getTabs();
 
         // Tab 0 is "All"
@@ -265,7 +265,7 @@ final class ActionDepartmentTest extends TestCase
             'validated' => false,
         ]);
 
-        $component = Livewire::test(ListActions::class);
+        $component = Livewire::test(ListActionsPst::class);
         $tabs = $component->instance()->getTabs();
 
         // Tab 1 is NotValidated for admin
@@ -283,7 +283,7 @@ final class ActionDepartmentTest extends TestCase
 
         $this->actingAs($user);
 
-        $component = Livewire::test(ListActions::class);
+        $component = Livewire::test(ListActionsPst::class);
         $tabs = $component->instance()->getTabs();
 
         // For admin: All + NotValidated + 4 ActionStateEnum cases = 6 tabs
@@ -299,7 +299,7 @@ final class ActionDepartmentTest extends TestCase
 
         $this->actingAs($regularUser);
 
-        $component = Livewire::test(ListActions::class);
+        $component = Livewire::test(ListActionsPst::class);
         $tabs = $component->instance()->getTabs();
 
         // For non-admin: All + 4 ActionStateEnum cases = 5 tabs (no NotValidated)
@@ -333,7 +333,7 @@ final class ActionDepartmentTest extends TestCase
             'validated' => false,
         ]);
 
-        $component = Livewire::test(ListActions::class);
+        $component = Livewire::test(ListActionsPst::class);
         $tabs = $component->instance()->getTabs();
 
         // For admin: Tab 2 is START (index 0=All, 1=NotValidated, 2=START)
@@ -364,7 +364,7 @@ final class ActionDepartmentTest extends TestCase
             'validated' => false,
         ]);
 
-        $component = Livewire::test(ListActions::class);
+        $component = Livewire::test(ListActionsPst::class);
         $tabs = $component->instance()->getTabs();
 
         // All tab should count everything
@@ -384,7 +384,7 @@ final class ActionDepartmentTest extends TestCase
 
         $cpasObjective = $this->createOperationalObjective(DepartmentEnum::CPAS->value);
 
-        Livewire::test(CreateAction::class)
+        Livewire::test(CreateActionPst::class)
             ->fillForm([
                 'name' => 'Test Action for CPAS',
                 'operational_objective_id' => $cpasObjective->id,

@@ -8,7 +8,7 @@ use AcMarche\Pst\Enums\ActionStateEnum;
 use AcMarche\Pst\Enums\ActionSynergyEnum;
 use AcMarche\Pst\Enums\ActionTypeEnum;
 use AcMarche\Pst\Enums\RoleEnum;
-use AcMarche\Pst\Filament\Resources\ActionPst\Pages\EditAction;
+use AcMarche\Pst\Filament\Resources\ActionPst\Pages\EditActionPst;
 use AcMarche\Pst\Models\Action;
 use AcMarche\Pst\Models\History;
 use AcMarche\Pst\Models\OperationalObjective;
@@ -51,7 +51,7 @@ final class ActionHistoryTrackingTest extends TestCase
 
         $this->actingAs($this->adminUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->fillForm([
                 'action_users' => [$newUser->username],
             ])
@@ -75,7 +75,7 @@ final class ActionHistoryTrackingTest extends TestCase
 
         $this->actingAs($this->adminUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->fillForm([
                 'action_users' => [],
             ])
@@ -95,7 +95,7 @@ final class ActionHistoryTrackingTest extends TestCase
 
         $this->actingAs($this->adminUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->fillForm([
                 'action_service_leader' => [$service->id],
             ])
@@ -116,7 +116,7 @@ final class ActionHistoryTrackingTest extends TestCase
 
         $this->actingAs($this->adminUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->fillForm([
                 'action_service_leader' => [],
             ])
@@ -136,7 +136,7 @@ final class ActionHistoryTrackingTest extends TestCase
 
         $this->actingAs($this->adminUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->fillForm([
                 'action_service_partner' => [$service->id],
             ])
@@ -161,7 +161,7 @@ final class ActionHistoryTrackingTest extends TestCase
 
         $this->actingAs($this->adminUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->fillForm([
                 'action_mandatory' => [$mandataire->username],
             ])
@@ -184,7 +184,7 @@ final class ActionHistoryTrackingTest extends TestCase
 
         $this->actingAs($this->adminUser);
 
-        Livewire::test(EditAction::class, ['record' => $this->action->id])
+        Livewire::test(EditActionPst::class, ['record' => $this->action->id])
             ->fillForm([
                 'action_users' => [$user->username],
             ])

@@ -21,7 +21,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Enums\Size;
 use Override;
 
-final class ViewAction extends ViewRecord
+final class ViewActionPst extends ViewRecord
 {
     use CanPaginateViewRecordTrait;
 

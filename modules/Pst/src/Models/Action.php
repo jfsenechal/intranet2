@@ -79,7 +79,7 @@ final class Action extends Model
     ];
 
     /**
-     * @see ListActions::class
+     * @see ListActionsPst::class
      */
     #[Scope]
     public static function validated(Builder $query): void
@@ -88,7 +88,7 @@ final class Action extends Model
     }
 
     /**
-     * @see ListActions::class
+     * @see ListActionsPst::class
      */
     #[Scope]
     public static function notValidated(Builder $query): void
