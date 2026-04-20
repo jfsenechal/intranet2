@@ -10,7 +10,6 @@ use Illuminate\Contracts\Support\Htmlable;
 enum RolesEnum: string implements HasLabel
 {
     case ROLE_GRH_ADMIN = 'ROLE_GRH_ADMIN';
-    case ROLE_GRH_READ = 'ROLE_GRH_READ';
     case ROLE_GRH_CPAS_READ = 'ROLE_GRH_CPAS_READ';
     case ROLE_GRH_VILLE_READ = 'ROLE_GRH_VILLE_READ';
     case ROLE_GRH_DIRECTION = 'ROLE_GRH_DIRECTION';

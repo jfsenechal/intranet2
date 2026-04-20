@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Policies;
 
+use AcMarche\Hrm\Models\Absence;
 use AcMarche\Hrm\Policies\Concerns\HrmAuthorization;
 use App\Models\User;
 
@@ -13,16 +14,17 @@ final class AbsencePolicy
 
     public function viewAny(User $user): bool
     {
-        return $this->hasAnyHrmRole($user);
+        return $this->isAdmin($user);
     }
 
-    public function view(User $user): bool
+    public function view(User $user, Absence $absence): bool
     {
-        if ($this->hasReadAccess($user)) {
+        if ($this->isAdmin($user)) {
             return true;
         }
 
-        return $this->isDirectionHead($user);
+        return $absence->employee !== null
+            && $this->canViewEmployee($user, $absence->employee);
     }
 
     public function create(User $user): bool

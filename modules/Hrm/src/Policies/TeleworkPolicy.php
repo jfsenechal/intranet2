@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Policies;
 
-use AcMarche\Hrm\Enums\RolesEnum;
 use AcMarche\Hrm\Models\Telework;
 use AcMarche\Hrm\Policies\Concerns\HrmAuthorization;
 use App\Models\User;
@@ -21,10 +20,6 @@ final class TeleworkPolicy
     public function view(User $user, Telework $telework): bool
     {
         if ($this->isAdmin($user)) {
-            return true;
-        }
-
-        if ($user->hasRole(RolesEnum::ROLE_GRH_READ->value)) {
             return true;
         }
 

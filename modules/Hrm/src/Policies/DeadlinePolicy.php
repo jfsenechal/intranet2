@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Policies;
 
+use AcMarche\Hrm\Models\Deadline;
 use AcMarche\Hrm\Policies\Concerns\HrmAuthorization;
 use App\Models\User;
 
@@ -13,12 +14,17 @@ final class DeadlinePolicy
 
     public function viewAny(User $user): bool
     {
-        return $this->hasAnyHrmRole($user);
+        return $this->isAdmin($user);
     }
 
-    public function view(User $user): bool
+    public function view(User $user, Deadline $deadline): bool
     {
-        return $this->hasReadAccess($user);
+        if ($this->isAdmin($user)) {
+            return true;
+        }
+
+        return $deadline->employee !== null
+            && $this->canViewEmployee($user, $deadline->employee);
     }
 
     public function create(User $user): bool

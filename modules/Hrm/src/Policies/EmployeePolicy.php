@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Policies;
 
+use AcMarche\Hrm\Models\Employee;
 use AcMarche\Hrm\Policies\Concerns\HrmAuthorization;
 use App\Models\User;
 
@@ -16,13 +17,9 @@ final class EmployeePolicy
         return $this->hasAnyHrmRole($user);
     }
 
-    public function view(User $user): bool
+    public function view(User $user, Employee $employee): bool
     {
-        if ($this->hasReadAccess($user)) {
-            return true;
-        }
-
-        return $this->isDirectionHead($user);
+        return $this->canViewEmployee($user, $employee);
     }
 
     public function create(User $user): bool
