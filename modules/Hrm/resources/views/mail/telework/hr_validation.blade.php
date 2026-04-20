@@ -2,7 +2,7 @@
     <p>Bonjour,</p>
 
     <p>
-        Une demande de télétravail validée par le chef attend votre traitement.
+        Une demande de télétravail validée par la direction attend votre traitement.
     </p>
 
     @if($employee)

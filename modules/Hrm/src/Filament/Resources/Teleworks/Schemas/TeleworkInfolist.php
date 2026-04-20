@@ -62,7 +62,7 @@ final class TeleworkInfolist
                             ->label('Accord informatique')
                             ->boolean(),
                     ]),
-                Section::make('Validation par le chef de service')
+                Section::make('Validation par la direction de service')
                     ->columns(2)
                     ->schema([
                         IconEntry::make('manager_validated')
@@ -74,7 +74,7 @@ final class TeleworkInfolist
                         TextEntry::make('manager_validator_name')
                             ->label('Validé par'),
                         TextEntry::make('manager_validation_notes')
-                            ->label('Notes Chef de service')
+                            ->label('Notes de la direction du service')
                             ->html()
                             ->columnSpanFull(),
                     ]),

@@ -26,8 +26,8 @@ final class TeleworkEmployeeManagerResultMail extends Mailable
         public readonly Employee $employee,
     ) {
         $this->subject = $telework->manager_validated
-            ? '[GRH] Votre télétravail a été validé par votre chef'
-            : '[GRH] Votre télétravail a été refusé par votre chef';
+            ? '[GRH] Votre télétravail a été validé par votre direction'
+            : '[GRH] Votre télétravail a été refusé par votre direction';
     }
 
     public function envelope(): Envelope

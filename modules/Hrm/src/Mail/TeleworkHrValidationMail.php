@@ -25,7 +25,7 @@ final class TeleworkHrValidationMail extends Mailable
         public readonly Telework $telework,
         public readonly ?Employee $employee,
     ) {
-        $this->subject = '[GRH] Télétravail validé par le chef - à traiter';
+        $this->subject = '[GRH] Télétravail validé par la direction - à traiter';
     }
 
     public function envelope(): Envelope

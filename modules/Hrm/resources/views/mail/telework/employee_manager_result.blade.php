@@ -1,4 +1,4 @@
-@component('hrm::mail.telework._layout', ['title' => 'Décision de votre chef sur votre télétravail', 'logo' => $logo])
+@component('hrm::mail.telework._layout', ['title' => 'Décision de votre direction sur votre télétravail', 'logo' => $logo])
     <p>Bonjour {{ $employee->first_name }},</p>
 
     @if($telework->manager_validated)
@@ -21,7 +21,7 @@
     @endif
 
     @if($telework->manager_validation_notes)
-        <p><strong>Commentaire du chef :</strong></p>
+        <p><strong>Commentaire du direction :</strong></p>
         <div style="background-color: #f1f5f9; padding: 12px; border-radius: 6px;">
             {!! $telework->manager_validation_notes !!}
         </div>

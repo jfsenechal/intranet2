@@ -190,9 +190,9 @@ return new class extends Migration
                 $table->renameColumn('accord_reglement', 'regulation_agreement');
                 $table->renameColumn('rue', 'street');
                 $table->renameColumn('localite', 'locality');
-                $table->renameColumn('validation_chef', 'manager_validated');
-                $table->renameColumn('date_validation_chef', 'manager_validated_at');
-                $table->renameColumn('remarque_validation_chef', 'manager_validation_notes');
+                $table->renameColumn('validation_direction', 'manager_validated');
+                $table->renameColumn('date_validation_direction', 'manager_validated_at');
+                $table->renameColumn('remarque_validation_direction', 'manager_validation_notes');
                 $table->renameColumn('remarque_grh', 'hr_notes');
                 $table->renameColumn('remarque_user', 'employee_notes');
                 $table->renameColumn('lieux', 'location_type');
@@ -200,7 +200,7 @@ return new class extends Migration
                 $table->renameColumn('jour_fixe', 'fixed_day');
                 $table->renameColumn('jour_variable_motivation', 'variable_day_reason');
                 $table->renameColumn('accord_informatique', 'it_agreement');
-                $table->renameColumn('nom_validation_chef', 'manager_validator_name');
+                $table->renameColumn('nom_validation_direction', 'manager_validator_name');
                 $table->renameColumn('nom_validation_grh', 'hr_validator_name');
                 $table->renameColumn('user', 'user_add');
                 $table->renameColumn('createdAt', 'created_at');

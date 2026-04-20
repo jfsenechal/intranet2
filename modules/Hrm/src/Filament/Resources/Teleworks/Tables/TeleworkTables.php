@@ -41,7 +41,7 @@ final class TeleworkTables
                     ->badge()
                     ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('manager_validated')
-                    ->label('Validé par le chef')
+                    ->label('Validé par la direction')
                     ->boolean()
                     ->sortable(),
                 TextColumn::make('manager_validated_at')
@@ -61,7 +61,7 @@ final class TeleworkTables
             ])
             ->filters([
                 TernaryFilter::make('manager_validated')
-                    ->label('Validation chef')
+                    ->label('Validation direction')
                     ->placeholder('Toutes')
                     ->trueLabel('Validées')
                     ->falseLabel('En attente'),
