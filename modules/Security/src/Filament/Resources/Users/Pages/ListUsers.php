@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Users\Pages;
 
-use Filament\Actions\Action;
-use App\Models\User;
 use AcMarche\Security\Filament\Resources\Users\Schemas\UserForm;
 use AcMarche\Security\Filament\Resources\Users\UserResource;
 use AcMarche\Security\Ldap\UserHandler;
+use App\Models\User;
 use Exception;
-use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Schema;

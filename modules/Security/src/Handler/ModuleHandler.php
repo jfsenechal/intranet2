@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Handler;
 
-use AcMarche\Security\Models\Role;
 use AcMarche\Security\Models\Module;
+use AcMarche\Security\Models\Role;
 use AcMarche\Security\Repository\ModuleRepository;
 use AcMarche\Security\Repository\RoleRepository;
 use AcMarche\Security\Repository\UserRepository;

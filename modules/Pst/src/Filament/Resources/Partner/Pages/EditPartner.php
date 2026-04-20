@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Partner\Pages;
 
-use Filament\Actions\ViewAction;
 use AcMarche\Pst\Filament\Resources\Partner\PartnerResource;
-use Filament\Actions;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
 use Override;

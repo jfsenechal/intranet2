@@ -35,7 +35,7 @@ final class DeadlineForm
                             ->label('Agent')
                             ->relationship('employee', 'last_name')
                             ->getOptionLabelFromRecordUsing(
-                                fn($record): string => $record->last_name.' '.$record->first_name
+                                fn ($record): string => $record->last_name.' '.$record->first_name
                             )
                             ->searchable()
                             ->preload(),

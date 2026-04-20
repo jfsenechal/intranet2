@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Publication\Filament\Resources\Publications\Pages;
 
-use Filament\Actions\CreateAction;
 use AcMarche\Publication\Filament\Resources\Publications\PublicationResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Override;
 

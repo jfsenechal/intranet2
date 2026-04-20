@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Users\Pages;
 
-use Filament\Actions\ViewAction;
 use AcMarche\Security\Filament\Resources\Users\UserResource;
-use Filament\Actions;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Override;
 

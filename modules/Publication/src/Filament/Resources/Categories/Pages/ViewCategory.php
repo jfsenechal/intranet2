@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Publication\Filament\Resources\Categories\Pages;
 
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Publication\Filament\Resources\Categories\CategoryResource;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Override;
 

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Publication\Filament\Resources\Publications;
 
-use AcMarche\Publication\Filament\Resources\Publications\Pages\ListPublications;
 use AcMarche\Publication\Filament\Resources\Publications\Pages\CreatePublication;
-use AcMarche\Publication\Filament\Resources\Publications\Pages\ViewPublication;
 use AcMarche\Publication\Filament\Resources\Publications\Pages\EditPublication;
+use AcMarche\Publication\Filament\Resources\Publications\Pages\ListPublications;
+use AcMarche\Publication\Filament\Resources\Publications\Pages\ViewPublication;
 use AcMarche\Publication\Filament\Resources\Publications\Schemas\PublicationForm;
 use AcMarche\Publication\Filament\Resources\Publications\Tables\PublicationTables;
 use AcMarche\Publication\Models\Publication;

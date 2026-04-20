@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Odd\Tables;
 
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\TextColumn;
 use AcMarche\Pst\Filament\Resources\Odd\OddResource;
 use AcMarche\Pst\Models\Odd;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\FontWeight;
 use Filament\Support\Enums\TextSize;
-use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Stack;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 final class OddTables

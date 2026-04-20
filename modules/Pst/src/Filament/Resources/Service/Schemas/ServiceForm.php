@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Service\Schemas;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
 use App\Models\User;
-use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 final class ServiceForm

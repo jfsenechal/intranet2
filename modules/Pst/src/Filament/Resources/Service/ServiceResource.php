@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Service;
 
-use AcMarche\Pst\Filament\Resources\Service\Pages\ListServices;
-use AcMarche\Pst\Filament\Resources\Service\Pages\CreateService;
-use AcMarche\Pst\Filament\Resources\Service\Pages\ViewService;
-use AcMarche\Pst\Filament\Resources\Service\Pages\EditService;
 use AcMarche\Pst\Enums\NavigationGroupEnum;
+use AcMarche\Pst\Filament\Resources\Service\Pages\CreateService;
+use AcMarche\Pst\Filament\Resources\Service\Pages\EditService;
+use AcMarche\Pst\Filament\Resources\Service\Pages\ListServices;
+use AcMarche\Pst\Filament\Resources\Service\Pages\ViewService;
 use AcMarche\Pst\Filament\Resources\Service\Schemas\ServiceForm;
 use AcMarche\Pst\Filament\Resources\Service\Tables\ServiceTables;
 use AcMarche\Pst\Models\Service;

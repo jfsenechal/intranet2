@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\PayScales\Pages;
 
 use AcMarche\Hrm\Filament\Resources\PayScales\PayScaleResource;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Icons\Heroicon;
@@ -20,7 +19,7 @@ final class EditPayScale extends EditRecord
     {
         return [
             ViewAction::make()
-            ->icon(Heroicon::Eye),
+                ->icon(Heroicon::Eye),
         ];
     }
 }

@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Users\Pages;
 
-use Filament\Actions\EditAction;
 use AcMarche\Pst\Filament\Resources\Users\Schemas\UserInfolist;
 use AcMarche\Pst\Filament\Resources\Users\UserResource;
-use Filament\Actions;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 use Override;

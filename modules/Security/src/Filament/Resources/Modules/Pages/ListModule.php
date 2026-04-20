@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Modules\Pages;
 
-use Filament\Actions\CreateAction;
 use AcMarche\Security\Filament\Resources\Modules\ModuleResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Override;
 

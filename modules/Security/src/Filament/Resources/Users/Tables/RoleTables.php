@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Users\Tables;
 
-use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 final class RoleTables

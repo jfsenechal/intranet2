@@ -56,11 +56,11 @@ final class TeleworkForm
                             ->label('Jour fixe')
                             ->options(WeekdayEnum::class)
                             ->enum(WeekdayEnum::class)
-                            ->visible(fn(Get $get): bool => self::dayType($get('day_type')) === DayTypeEnum::Fixe),
+                            ->visible(fn (Get $get): bool => self::dayType($get('day_type')) === DayTypeEnum::Fixe),
                         RichEditor::make('variable_day_reason')
                             ->label('Motivation jour variable')
                             ->columnSpanFull()
-                            ->visible(fn(Get $get): bool => self::dayType($get('day_type')) === DayTypeEnum::Variable),
+                            ->visible(fn (Get $get): bool => self::dayType($get('day_type')) === DayTypeEnum::Variable),
                         RichEditor::make('employee_notes')
                             ->label('Remarques')
                             ->helperText('Avez vous une remarque particulière?')
@@ -142,6 +142,6 @@ final class TeleworkForm
             return null;
         }
 
-        return DayTypeEnum::tryFrom((int)$value);
+        return DayTypeEnum::tryFrom((int) $value);
     }
 }

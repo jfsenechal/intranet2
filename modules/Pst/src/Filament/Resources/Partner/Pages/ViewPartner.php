@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Partner\Pages;
 
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Pst\Filament\Resources\Partner\PartnerResource;
 use AcMarche\Pst\Models\Action;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;

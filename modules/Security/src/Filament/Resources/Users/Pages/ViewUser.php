@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Users\Pages;
 
-use Filament\Actions\EditAction;
 use AcMarche\Security\Filament\Resources\Users\UserResource;
-use Filament\Actions;
+use Filament\Actions\EditAction;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;

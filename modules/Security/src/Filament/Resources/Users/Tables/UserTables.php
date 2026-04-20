@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Users\Tables;
 
-use Filament\Tables\Columns\TextColumn;
 use AcMarche\Security\Filament\Actions\RevokeAction;
 use AcMarche\Security\Filament\Resources\Modules\Schemas\ModuleForm;
 use AcMarche\Security\Handler\ModuleHandler;
@@ -19,7 +18,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;

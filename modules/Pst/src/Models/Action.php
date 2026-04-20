@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Connection;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Database\Factories\ActionFactory;
 use AcMarche\Pst\Enums\ActionRoadmapEnum;
@@ -19,6 +17,8 @@ use AcMarche\Pst\Models\Scopes\DepartmentScope;
 use AcMarche\Pst\Models\Scopes\HasDepartmentScope;
 use AcMarche\Pst\Observers\ActionObserver;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Attributes\Connection;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;

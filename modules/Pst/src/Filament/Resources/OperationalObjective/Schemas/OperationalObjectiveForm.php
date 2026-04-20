@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\OperationalObjective\Schemas;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\ToggleButtons;
 use AcMarche\App\Enums\DepartmentEnum;
 use AcMarche\Pst\Enums\ActionScopeEnum;
 use AcMarche\Security\Repository\UserRepository;
-use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;

@@ -23,12 +23,12 @@ final class DeadlinePolicy
 
     public function create(User $user): bool
     {
-        return $this->hasWriteAccess($user);
+        return $this->isAdmin($user);
     }
 
     public function update(User $user): bool
     {
-        return $this->hasWriteAccess($user);
+        return $this->isAdmin($user);
     }
 
     public function delete(User $user): bool

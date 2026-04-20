@@ -24,14 +24,14 @@ final class ManagerValidateTelework extends EditRecord
     #[Override]
     protected static ?string $title = 'Validation du directeur';
 
-    public function getTitle(): string|Htmlable
-    {
-        return 'Validation du directeur - '.$this->record->user_add;
-    }
-
     public static function canAccess(array $parameters = []): bool
     {
         return Gate::forUser(auth()->user())->check('hrm-director');
+    }
+
+    public function getTitle(): string|Htmlable
+    {
+        return 'Validation du directeur - '.$this->record->user_add;
     }
 
     #[Override]
@@ -75,7 +75,7 @@ final class ManagerValidateTelework extends EditRecord
         return [
             Action::make('back')
                 ->label('Retour à la demande')
-                ->url(fn() => ViewTelework::getUrl(['record' => $this->record])),
+                ->url(fn () => ViewTelework::getUrl(['record' => $this->record])),
         ];
     }
 }

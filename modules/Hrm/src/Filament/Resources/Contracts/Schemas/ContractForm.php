@@ -10,7 +10,6 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -93,7 +92,7 @@ final class ContractForm
                             ->label('Remplace')
                             ->relationship('replaces', 'last_name')
                             ->getOptionLabelFromRecordUsing(
-                                fn($record): string => $record->last_name.' '.$record->first_name
+                                fn ($record): string => $record->last_name.' '.$record->first_name
                             )
                             ->searchable()
                             ->preload(),

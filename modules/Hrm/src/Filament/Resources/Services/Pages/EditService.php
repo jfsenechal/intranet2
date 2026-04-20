@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\Services\Pages;
 
 use AcMarche\Hrm\Filament\Resources\Services\ServiceResource;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Icons\Heroicon;

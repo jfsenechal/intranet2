@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Publication\Filament\Resources\Categories\Pages;
 
-use Filament\Actions\ViewAction;
 use AcMarche\Publication\Filament\Resources\Categories\CategoryResource;
-use Filament\Actions;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
 use Override;

@@ -45,8 +45,8 @@ final class CreateEmployee extends CreateRecord
                     ]),
                 View::make('hrm::filament.employees.create-matches')
                     ->viewData(function (Get $get): array {
-                        $lastName = mb_trim((string)$get('last_name'));
-                        $firstName = mb_trim((string)$get('first_name'));
+                        $lastName = mb_trim((string) $get('last_name'));
+                        $firstName = mb_trim((string) $get('first_name'));
 
                         $matches = collect();
                         if (mb_strlen($lastName) >= 2) {
@@ -54,7 +54,7 @@ final class CreateEmployee extends CreateRecord
                                 ->where('last_name', 'like', '%'.$lastName.'%')
                                 ->when(
                                     $firstName !== '',
-                                    fn($query) => $query->where('first_name', 'like', '%'.$firstName.'%'),
+                                    fn ($query) => $query->where('first_name', 'like', '%'.$firstName.'%'),
                                 )
                                 ->orderBy('last_name')
                                 ->orderBy('first_name')

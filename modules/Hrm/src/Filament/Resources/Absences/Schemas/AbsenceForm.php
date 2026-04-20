@@ -39,8 +39,7 @@ final class AbsenceForm
                         Select::make('reason')
                             ->label('Raison')
                             ->enum(ReasonsEnum::class)
-                            ->options(ReasonsEnum::class)
-                        ,
+                            ->options(ReasonsEnum::class),
                         Select::make('ssa')
                             ->label('MEDEX / SSA / Certificat médical / Justificatif reçu ?')
                             ->options([
@@ -52,20 +51,15 @@ final class AbsenceForm
                     ->columns(3)
                     ->schema([
                         Toggle::make('certimed')
-                            ->label('Certimed')
-                        ,
+                            ->label('Certimed'),
                         Toggle::make('has_resumed')
-                            ->label('Reprise')
-                        ,
+                            ->label('Reprise'),
                         Toggle::make('clock_updated')
-                            ->label('Pointeuse')
-                        ,
+                            ->label('Pointeuse'),
                         Toggle::make('acropole')
-                            ->label('Acropole')
-                        ,
+                            ->label('Acropole'),
                         Toggle::make('agent_file')
-                            ->label('Dossier agent')
-                        ,
+                            ->label('Dossier agent'),
                     ]),
                 Section::make('Notes')
                     ->schema([

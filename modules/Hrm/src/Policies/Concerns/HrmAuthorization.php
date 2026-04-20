@@ -18,39 +18,13 @@ trait HrmAuthorization
         return $user->hasRole(RolesEnum::ROLE_GRH_ADMIN->value);
     }
 
-    protected function canManageCpas(User $user): bool
-    {
-        if ($this->isAdmin($user)) {
-            return true;
-        }
-
-        return $user->hasRole(RolesEnum::ROLE_GRH_CPAS->value);
-    }
-
-    protected function canManageVille(User $user): bool
-    {
-        if ($this->isAdmin($user)) {
-            return true;
-        }
-
-        return $user->hasRole(RolesEnum::ROLE_GRH_VILLE->value);
-    }
-
     protected function canReadCpas(User $user): bool
     {
-        if ($this->canManageCpas($user)) {
-            return true;
-        }
-
         return $user->hasRole(RolesEnum::ROLE_GRH_CPAS_READ->value);
     }
 
     protected function canReadVille(User $user): bool
     {
-        if ($this->canManageVille($user)) {
-            return true;
-        }
-
         return $user->hasRole(RolesEnum::ROLE_GRH_VILLE_READ->value);
     }
 
@@ -62,10 +36,7 @@ trait HrmAuthorization
     protected function hasAnyHrmRole(User $user): bool
     {
         return $user->hasOneOfThisRoles([
-            RolesEnum::ROLE_GRH->value,
             RolesEnum::ROLE_GRH_ADMIN->value,
-            RolesEnum::ROLE_GRH_CPAS->value,
-            RolesEnum::ROLE_GRH_VILLE->value,
             RolesEnum::ROLE_GRH_CPAS_READ->value,
             RolesEnum::ROLE_GRH_VILLE_READ->value,
             RolesEnum::ROLE_GRH_DIRECTION->value,
@@ -81,12 +52,5 @@ trait HrmAuthorization
         return $this->canReadVille($user);
     }
 
-    protected function hasWriteAccess(User $user): bool
-    {
-        if ($this->canManageCpas($user)) {
-            return true;
-        }
-
-        return $this->canManageVille($user);
-    }
+    private function hasWriteAccess(User $user) {}
 }

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Partner\Pages;
 
-use Filament\Actions\CreateAction;
 use AcMarche\Pst\Filament\Resources\Partner\PartnerResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Override;
 

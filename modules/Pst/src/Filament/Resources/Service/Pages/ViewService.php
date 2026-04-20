@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Service\Pages;
 
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Pst\Filament\Resources\Service\RelationManagers\ActionsRelationManager;
 use AcMarche\Pst\Filament\Resources\Service\ServiceResource;
 use App\Models\User;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Components\Fieldset;

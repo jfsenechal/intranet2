@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\OperationalObjective;
 
-use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\ListOperationalObjectives;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\CreateOperationalObjective;
-use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\ViewOperationalObjective;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\EditOperationalObjective;
+use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\ListOperationalObjectives;
+use AcMarche\Pst\Filament\Resources\OperationalObjective\Pages\ViewOperationalObjective;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\Schemas\OperationalObjectiveForm;
 use AcMarche\Pst\Filament\Resources\OperationalObjective\Tables\OperationalObjectiveTables;
 use AcMarche\Pst\Models\OperationalObjective;

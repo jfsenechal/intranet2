@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Users\Schemas;
 
-use AcMarche\Pst\Models\Service;
 use AcMarche\App\Enums\DepartmentEnum;
+use AcMarche\Pst\Models\Service;
 use AcMarche\Security\Models\Role;
 use AcMarche\Security\Repository\UserRepository;
 use Filament\Forms\Components\CheckboxList;

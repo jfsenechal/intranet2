@@ -63,7 +63,7 @@ final class ViewEmployee extends ViewRecord
                 ->icon('tabler-plus')
                 ->button(),
             DeleteAction::make()
-            ->icon(Heroicon::Trash),
+                ->icon(Heroicon::Trash),
         ];
     }
 }

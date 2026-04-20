@@ -24,14 +24,14 @@ final class HrValidateTelework extends EditRecord
     #[Override]
     protected static ?string $title = 'Traitement GRH';
 
-    public function getTitle(): string|Htmlable
-    {
-        return 'Traitement GRH - '.$this->record->user_add;
-    }
-
     public static function canAccess(array $parameters = []): bool
     {
         return Gate::forUser(auth()->user())->check('hrm-administrator');
+    }
+
+    public function getTitle(): string|Htmlable
+    {
+        return 'Traitement GRH - '.$this->record->user_add;
     }
 
     #[Override]
@@ -71,7 +71,7 @@ final class HrValidateTelework extends EditRecord
         return [
             Action::make('back')
                 ->label('Retour à la demande')
-                ->url(fn() => ViewTelework::getUrl(['record' => $this->record])),
+                ->url(fn () => ViewTelework::getUrl(['record' => $this->record])),
         ];
     }
 }

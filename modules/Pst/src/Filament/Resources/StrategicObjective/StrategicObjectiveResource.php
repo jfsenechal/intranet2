@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\StrategicObjective;
 
-use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\ListStrategicObjectives;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\CreateStrategicObjective;
-use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\ViewStrategicObjective;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\EditStrategicObjective;
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\ListStrategicObjectives;
+use AcMarche\Pst\Filament\Resources\StrategicObjective\Pages\ViewStrategicObjective;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\RelationManagers\OosRelationManager;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\Schemas\StrategicObjectiveForm;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\Tables\StrategicObjectiveTables;

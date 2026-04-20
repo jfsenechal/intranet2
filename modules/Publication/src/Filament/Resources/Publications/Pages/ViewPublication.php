@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Publication\Filament\Resources\Publications\Pages;
 
-use Filament\Actions\Action;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Publication\Filament\Resources\Publications\PublicationResource;
 use AcMarche\Publication\Models\Publication;
-use Filament\Actions;
+use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Colors\Color;
 use Override;

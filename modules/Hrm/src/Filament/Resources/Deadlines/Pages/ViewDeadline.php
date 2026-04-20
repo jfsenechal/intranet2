@@ -22,6 +22,7 @@ final class ViewDeadline extends ViewRecord
         if ($this->record->employe) {
             return 'Echéance de '.$this->record->employee->last_name.' '.$this->record->employee->first_name;
         }
+
         return 'Echéance '.$this->record->name;
     }
 

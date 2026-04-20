@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Users;
 
-use AcMarche\Pst\Filament\Resources\Users\Pages\ViewUser;
 use AcMarche\Pst\Enums\NavigationGroupEnum;
 use AcMarche\Pst\Filament\Resources\Users\Pages\EditUser;
 use AcMarche\Pst\Filament\Resources\Users\Pages\ListUsers;
+use AcMarche\Pst\Filament\Resources\Users\Pages\ViewUser;
 use AcMarche\Pst\Filament\Resources\Users\Schemas\UserForm;
 use AcMarche\Pst\Filament\Resources\Users\Tables\UsersTable;
 use App\Models\User;

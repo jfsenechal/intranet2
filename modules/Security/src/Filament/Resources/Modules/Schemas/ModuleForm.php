@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Modules\Schemas;
 
-use Filament\Forms\Components\Select;
 use AcMarche\Security\Models\Module;
 use AcMarche\Security\Repository\ModuleRepository;
 use AcMarche\Security\Repository\RoleRepository;
 use AcMarche\Security\Repository\UserRepository;
 use App\Models\User;
-use Filament\Forms;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;

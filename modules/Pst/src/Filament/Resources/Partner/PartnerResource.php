@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Partner;
 
-use AcMarche\Pst\Filament\Resources\Partner\Pages\ListPartners;
-use AcMarche\Pst\Filament\Resources\Partner\Pages\CreatePartner;
-use AcMarche\Pst\Filament\Resources\Partner\Pages\ViewPartner;
-use AcMarche\Pst\Filament\Resources\Partner\Pages\EditPartner;
 use AcMarche\Pst\Enums\NavigationGroupEnum;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\CreatePartner;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\EditPartner;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\ListPartners;
+use AcMarche\Pst\Filament\Resources\Partner\Pages\ViewPartner;
 use AcMarche\Pst\Filament\Resources\Partner\Schemas\PartnerForm;
 use AcMarche\Pst\Filament\Resources\Partner\Tables\PartnerTables;
 use AcMarche\Pst\Models\Partner;

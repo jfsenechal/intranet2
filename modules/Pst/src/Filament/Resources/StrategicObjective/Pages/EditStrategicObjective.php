@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\StrategicObjective\Pages;
 
-use Filament\Actions\ViewAction;
 use AcMarche\Pst\Filament\Resources\StrategicObjective\StrategicObjectiveResource;
-use Filament\Actions;
+use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Override;
 

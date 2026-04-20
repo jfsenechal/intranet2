@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\StrategicObjective\Schemas;
 
+use AcMarche\Pst\Enums\ActionScopeEnum;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
-use AcMarche\Pst\Enums\ActionScopeEnum;
-use Filament\Forms;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;

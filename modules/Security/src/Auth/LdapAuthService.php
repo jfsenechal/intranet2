@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Auth;
 
-use LdapRecord\Models\Model;
-use LdapRecord\Auth\PasswordRequiredException;
-use LdapRecord\Auth\UsernameRequiredException;
-use LdapRecord\ContainerException;
 use AcMarche\Security\Ldap\UserLdap;
 use App\Models\User;
+use LdapRecord\Auth\PasswordRequiredException;
+use LdapRecord\Auth\UsernameRequiredException;
 use LdapRecord\Container;
+use LdapRecord\ContainerException;
+use LdapRecord\Models\Model;
 
 final class LdapAuthService
 {

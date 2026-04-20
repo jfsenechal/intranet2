@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\ContractTypes\Pages;
 
 use AcMarche\Hrm\Filament\Resources\ContractTypes\ContractTypeResource;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Icons\Heroicon;
@@ -26,7 +25,7 @@ final class EditContractType extends EditRecord
     {
         return [
             ViewAction::make()
-            ->icon(Heroicon::Eye),
+                ->icon(Heroicon::Eye),
         ];
     }
 }

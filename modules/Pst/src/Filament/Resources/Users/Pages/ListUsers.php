@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Pst\Filament\Resources\Users\Pages;
 
-use Filament\Actions\Action;
-use App\Models\User;
 use AcMarche\Pst\Enums\RoleEnum;
 use AcMarche\Pst\Filament\Resources\Users\Schemas\UserForm;
 use AcMarche\Pst\Filament\Resources\Users\UserResource;
 use AcMarche\Security\Ldap\UserHandler;
+use App\Models\User;
 use Exception;
-use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Schema;

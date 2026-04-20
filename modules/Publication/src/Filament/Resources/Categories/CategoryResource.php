@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AcMarche\Publication\Filament\Resources\Categories;
 
-use AcMarche\Publication\Filament\Resources\Categories\Pages\ListCategories;
 use AcMarche\Publication\Filament\Resources\Categories\Pages\CreateCategory;
-use AcMarche\Publication\Filament\Resources\Categories\Pages\ViewCategory;
 use AcMarche\Publication\Filament\Resources\Categories\Pages\EditCategory;
+use AcMarche\Publication\Filament\Resources\Categories\Pages\ListCategories;
+use AcMarche\Publication\Filament\Resources\Categories\Pages\ViewCategory;
 use AcMarche\Publication\Filament\Resources\Categories\Schemas\CategoryForm;
 use AcMarche\Publication\Filament\Resources\Categories\Tables\CategoryTables;
 use AcMarche\Publication\Models\Category;

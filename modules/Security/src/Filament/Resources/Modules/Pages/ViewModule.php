@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Filament\Resources\Modules\Pages;
 
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use AcMarche\Security\Filament\Resources\Modules\ModuleResource;
 use AcMarche\Security\Filament\Resources\Modules\RelationManagers\UserRelationManager;
 use AcMarche\Security\Filament\Resources\Modules\Schemas\ModuleInfolist;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Schema;
 use Override;
