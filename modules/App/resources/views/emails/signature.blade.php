@@ -7,10 +7,10 @@
         </td>
         <td style="vertical-align: top; border-left: 2px solid #d4a017; padding-left: 15px;">
             <div style="font-size: 14px; font-weight: bold; color: #000;">
-                {{ $signature->prenom }} {{ $signature->nom }}
+                {{ $signature->first_name }} {{ $signature->last_name }}
             </div>
-            @if ($signature->fonction)
-                <div style="font-style: italic;">{{ $signature->fonction }}</div>
+            @if ($signature->job_title)
+                <div style="font-style: italic;">{{ $signature->job_title }}</div>
             @endif
             @if ($signature->service)
                 <div>{{ $signature->service }}</div>
@@ -19,17 +19,14 @@
                 <div style="font-weight: bold; margin-top: 4px;">{{ $logoTitle }}</div>
             @endif
             <div style="margin-top: 6px;">
-                {{ $signature->adresse }} &mdash; {{ $signature->code_postal }} {{ $signature->localite }}
+                {{ $signature->address }} &mdash; {{ $signature->postal_code }} {{ $signature->city }}
             </div>
             <div style="margin-top: 4px;">
-                @if ($signature->telephone)
-                    <span>Tél. : <a href="tel:{{ $signature->telephone }}" style="color: #333; text-decoration: none;">{{ $signature->telephone }}</a></span>
+                @if ($signature->phone)
+                    <span>Tél. : <a href="tel:{{ $signature->phone }}" style="color: #333; text-decoration: none;">{{ $signature->phone }}</a></span>
                 @endif
-                @if ($signature->gsm)
-                    <span style="margin-left: 8px;">GSM : <a href="tel:{{ $signature->gsm }}" style="color: #333; text-decoration: none;">{{ $signature->gsm }}</a></span>
-                @endif
-                @if ($signature->fax)
-                    <span style="margin-left: 8px;">Fax : {{ $signature->fax }}</span>
+                @if ($signature->mobile)
+                    <span style="margin-left: 8px;">GSM : <a href="tel:{{ $signature->mobile }}" style="color: #333; text-decoration: none;">{{ $signature->mobile }}</a></span>
                 @endif
             </div>
             <div>
@@ -39,11 +36,6 @@
                     <a href="{{ $signature->website }}" style="color: #d4a017; text-decoration: none;">{{ $signature->website }}</a>
                 @endif
             </div>
-            @if ($signature->ukraine)
-                <div style="margin-top: 6px; font-size: 11px; color: #005BBB;">
-                    🇺🇦 Solidaires avec l'Ukraine
-                </div>
-            @endif
         </td>
     </tr>
 </table>

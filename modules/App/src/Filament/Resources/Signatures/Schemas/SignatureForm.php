@@ -21,13 +21,13 @@ final class SignatureForm
                 Section::make('Identité')
                     ->columns(2)
                     ->schema([
-                        TextInput::make('prenom')
+                        TextInput::make('first_name')
                             ->label('Prénom')
                             ->required(),
-                        TextInput::make('nom')
+                        TextInput::make('last_name')
                             ->label('Nom')
                             ->required(),
-                        TextInput::make('fonction')
+                        TextInput::make('job_title')
                             ->label('Fonction'),
                         TextInput::make('service')
                             ->label('Service'),
@@ -35,15 +35,15 @@ final class SignatureForm
                 Section::make('Adresse')
                     ->columns(4)
                     ->schema([
-                        TextInput::make('adresse')
+                        TextInput::make('address')
                             ->label('Adresse')
                             ->required()
                             ->columnSpan(2),
-                        TextInput::make('code_postal')
+                        TextInput::make('postal_code')
                             ->label('Code postal')
                             ->required()
                             ->numeric(),
-                        TextInput::make('localite')
+                        TextInput::make('city')
                             ->label('Localité')
                             ->required(),
                     ]),
@@ -57,11 +57,11 @@ final class SignatureForm
                         TextInput::make('website')
                             ->label('Site web')
                             ->url(),
-                        TextInput::make('telephone')
+                        TextInput::make('phone')
                             ->label('Téléphone')
                             ->tel(),
-                        TextInput::make('gsm')
-                            ->label('GSM')
+                        TextInput::make('mobile')
+                            ->label('Mobile')
                             ->tel(),
                     ]),
                 Section::make('Logo')
@@ -75,7 +75,7 @@ final class SignatureForm
                                     ->all()
                             )
                             ->searchable(),
-                        TextInput::make('logotitle')
+                        TextInput::make('logo_title')
                             ->label('Titre du logo'),
                     ]),
             ]);

@@ -21,24 +21,24 @@ final class SignatureInfolist
                 Fieldset::make('Identité')
                     ->columns(2)
                     ->schema([
-                        TextEntry::make('prenom')->label('Prénom'),
-                        TextEntry::make('nom')->label('Nom'),
-                        TextEntry::make('fonction')->label('Fonction')->placeholder('—'),
+                        TextEntry::make('first_name')->label('Prénom'),
+                        TextEntry::make('last_name')->label('Nom'),
+                        TextEntry::make('job_title')->label('Fonction')->placeholder('—'),
                         TextEntry::make('service')->label('Service')->placeholder('—'),
                     ]),
                 Fieldset::make('Adresse')
                     ->columns(3)
                     ->schema([
-                        TextEntry::make('adresse')->label('Adresse'),
-                        TextEntry::make('code_postal')->label('Code postal'),
-                        TextEntry::make('localite')->label('Localité'),
+                        TextEntry::make('address')->label('Adresse'),
+                        TextEntry::make('postal_code')->label('Code postal'),
+                        TextEntry::make('city')->label('Localité'),
                     ]),
                 Fieldset::make('Contact')
                     ->columns(3)
                     ->schema([
                         TextEntry::make('email')->label('Email'),
-                        TextEntry::make('telephone')->label('Téléphone')->placeholder('—'),
-                        TextEntry::make('gsm')->label('GSM')->placeholder('—'),
+                        TextEntry::make('phone')->label('Téléphone')->placeholder('—'),
+                        TextEntry::make('mobile')->label('Mobile')->placeholder('—'),
                         TextEntry::make('website')->label('Site web')->placeholder('—'),
                     ]),
                 Fieldset::make('Logo')
@@ -48,7 +48,7 @@ final class SignatureInfolist
                             ->label('Logo')
                             ->placeholder('—')
                             ->formatStateUsing(fn ($state) => $state?->getTitle() ?? '—'),
-                        TextEntry::make('logotitle')->label('Titre du logo')->placeholder('—'),
+                        TextEntry::make('logo_title')->label('Titre du logo')->placeholder('—'),
                     ]),
                 Section::make('Aperçu HTML')
                     ->schema([

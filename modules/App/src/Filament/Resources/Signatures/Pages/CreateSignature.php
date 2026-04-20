@@ -26,14 +26,14 @@ final class CreateSignature extends CreateRecord
         $user = Auth::user();
 
         $this->form->fill([
-            'prenom' => $user?->first_name,
-            'nom' => $user?->last_name,
+            'first_name' => $user?->first_name,
+            'last_name' => $user?->last_name,
             'email' => $user?->email,
             'username' => $user?->username,
-            'telephone' => $user?->phone,
-            'gsm' => $user?->mobile,
-            'code_postal' => 6900,
-            'localite' => 'Marche-en-Famenne',
+            'phone' => $user?->phone,
+            'mobile' => $user?->mobile,
+            'postal_code' => 6900,
+            'city' => 'Marche-en-Famenne',
         ]);
     }
 

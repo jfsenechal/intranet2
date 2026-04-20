@@ -16,7 +16,7 @@ final class SignatureHtmlGenerator
         return View::make('app::emails.signature', [
             'signature' => $signature,
             'logoUrl' => $logo ? asset('vendor/app/images/logos/'.$logo->value) : null,
-            'logoTitle' => $logo?->getTitle() ?? $signature->logotitle,
+            'logoTitle' => $logo?->getTitle() ?? $signature->logo_title,
         ])->render();
     }
 }

@@ -14,22 +14,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Table(name: 'signatures')]
 #[Fillable([
     'user_id',
-    'nom',
-    'prenom',
-    'adresse',
-    'code_postal',
-    'localite',
+    'last_name',
+    'first_name',
+    'address',
+    'postal_code',
+    'city',
     'service',
-    'fonction',
+    'job_title',
     'email',
     'username',
-    'telephone',
-    'gsm',
-    'fax',
+    'phone',
+    'mobile',
     'website',
     'logo',
-    'logotitle',
-    'ukraine',
+    'logo_title',
 ])]
 final class Signature extends Model
 {
@@ -45,8 +43,7 @@ final class Signature extends Model
     {
         return [
             'logo' => SignatureEnum::class,
-            'ukraine' => 'boolean',
-            'code_postal' => 'integer',
+            'postal_code' => 'integer',
         ];
     }
 }
