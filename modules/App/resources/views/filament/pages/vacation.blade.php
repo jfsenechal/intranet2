@@ -8,5 +8,4 @@
     Une fois connectez cliquez sur "Absence prolongée"
 
 
-    https://agenda.marche.be
 </x-filament-panels::page>
