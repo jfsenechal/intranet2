@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Teleworks;
 
-use AcMarche\Hrm\Filament\Resources\Teleworks\Pages\CreateTelework;
 use AcMarche\Hrm\Filament\Resources\Teleworks\Pages\EditTelework;
 use AcMarche\Hrm\Filament\Resources\Teleworks\Pages\HrValidateTelework;
 use AcMarche\Hrm\Filament\Resources\Teleworks\Pages\ListTeleworks;
@@ -70,7 +69,6 @@ final class TeleworkResource extends Resource
     {
         return [
             'index' => ListTeleworks::route('/'),
-            'create' => CreateTelework::route('/create'),
             'view' => ViewTelework::route('/{record}/view'),
             'edit' => EditTelework::route('/{record}/edit'),
             'manager-validate' => ManagerValidateTelework::route('/{record}/manager-validate'),

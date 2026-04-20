@@ -31,28 +31,28 @@ final class TeleworkTables
                 TextColumn::make('location_type')
                     ->label('Lieu')
                     ->badge()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('day_type')
                     ->label('Type de jour')
                     ->badge()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('fixed_day')
                     ->label('Jour fixe')
                     ->badge()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('manager_validated')
-                    ->label('Validé')
+                    ->label('Validé par le chef')
                     ->boolean()
                     ->sortable(),
-                TextColumn::make('manager_validator_name')
-                    ->label('Chef')
-                    ->searchable()
-                    ->toggleable(),
                 TextColumn::make('manager_validated_at')
                     ->label('Validé le')
                     ->date('d/m/Y')
                     ->sortable()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('hr_validator_name')
+                    ->label('Validation Grh par')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Créé le')
                     ->date('d/m/Y')

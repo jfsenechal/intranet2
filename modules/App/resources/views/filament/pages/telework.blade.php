@@ -3,10 +3,9 @@
         {{ $this->form }}
 
         <div class="mt-6">
-            <x-filament-panels::form.actions
-                :actions="$this->getCachedFormActions()"
-                :full-width="$this->hasFullWidthFormActions()"
-            />
+            <x-filament::button type="submit">
+                Enregistrer
+            </x-filament::button>
         </div>
     </form>
 </x-filament-panels::page>

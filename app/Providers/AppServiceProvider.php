@@ -30,8 +30,8 @@ final class AppServiceProvider extends ServiceProvider
     {
         $this->configureTable();
         $this->translatableComponents();
-        if (! app()->environment('production')) {
-            Mail::alwaysTo('jf@marche.be');
+        if (! app()->environment('production') && config('mail.redirect_to')) {
+            Mail::alwaysTo(config('mail.redirect_to'));
         }
         $this->configureRichEditor();
         FilamentView::registerRenderHook(

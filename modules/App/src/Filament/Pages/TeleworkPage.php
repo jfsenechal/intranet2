@@ -8,7 +8,6 @@ use AcMarche\Hrm\Filament\Resources\Teleworks\Schemas\TeleworkForm;
 use AcMarche\Hrm\Models\Telework as TeleworkModel;
 use AcMarche\Hrm\Services\TeleworkNotifier;
 use BackedEnum;
-use Filament\Actions\Action;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
@@ -36,7 +35,7 @@ final class TeleworkPage extends Page implements HasForms
 
     public function getTitle(): string
     {
-        return 'Mon télétravail';
+        return 'Ma demande de télétravail';
     }
 
     public function mount(): void
@@ -69,14 +68,5 @@ final class TeleworkPage extends Page implements HasForms
             ->title('Enregistré')
             ->success()
             ->send();
-    }
-
-    protected function getFormActions(): array
-    {
-        return [
-            Action::make('save')
-                ->label('Enregistrer')
-                ->submit('save'),
-        ];
     }
 }

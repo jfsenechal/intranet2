@@ -7,9 +7,7 @@ namespace AcMarche\Hrm\Filament\Resources\Teleworks\Schemas;
 use AcMarche\Document\Filament\Resources\Documents\DocumentResource;
 use AcMarche\Hrm\Enums\DayTypeEnum;
 use AcMarche\Hrm\Enums\LocationTypeEnum;
-use AcMarche\Hrm\Enums\RolesEnum;
 use AcMarche\Hrm\Enums\WeekdayEnum;
-use App\Models\User;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -18,7 +16,6 @@ use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\HtmlString;
 
 final class TeleworkForm
@@ -59,11 +56,11 @@ final class TeleworkForm
                             ->label('Jour fixe')
                             ->options(WeekdayEnum::class)
                             ->enum(WeekdayEnum::class)
-                            ->visible(fn (Get $get): bool => self::dayType($get('day_type')) === DayTypeEnum::Fixe),
+                            ->visible(fn(Get $get): bool => self::dayType($get('day_type')) === DayTypeEnum::Fixe),
                         RichEditor::make('variable_day_reason')
                             ->label('Motivation jour variable')
                             ->columnSpanFull()
-                            ->visible(fn (Get $get): bool => self::dayType($get('day_type')) === DayTypeEnum::Variable),
+                            ->visible(fn(Get $get): bool => self::dayType($get('day_type')) === DayTypeEnum::Variable),
                         RichEditor::make('employee_notes')
                             ->label('Remarques')
                             ->helperText('Avez vous une remarque particulière?')
@@ -90,24 +87,38 @@ final class TeleworkForm
                             )
                             ->required(),
                     ]),
-                Section::make('Validation du chef')
+            ]);
+    }
+
+    public static function validationService(Schema $schema): Schema
+    {
+        return $schema
+            ->columns(1)
+            ->components([
+                Section::make('Validation du directeur')
                     ->columns(2)
-                    ->visible(self::isAdmin(...))
                     ->schema([
                         Toggle::make('manager_validated')
                             ->label('Validé'),
                         DatePicker::make('manager_validated_at')
                             ->label('Date de validation'),
                         TextInput::make('manager_validator_name')
-                            ->label('Nom du chef')
+                            ->label('Nom du directeur')
                             ->maxLength(100),
                         RichEditor::make('manager_validation_notes')
-                            ->label('Notes du chef')
+                            ->label('Notes du directeur')
                             ->columnSpanFull(),
                     ]),
-                Section::make('GRH')
+            ]);
+    }
+
+    public static function validationGrh(Schema $schema): Schema
+    {
+        return $schema
+            ->columns(1)
+            ->components([
+                Section::make('Informations du GRH')
                     ->columns(2)
-                    ->visible(self::isAdmin(...))
                     ->schema([
                         DatePicker::make('date_college')
                             ->label('Date collège'),
@@ -131,21 +142,6 @@ final class TeleworkForm
             return null;
         }
 
-        return DayTypeEnum::tryFrom((int) $value);
-    }
-
-    private static function isAdmin(): bool
-    {
-        /** @var User|null $user */
-        $user = Auth::user();
-        if (! $user instanceof User) {
-            return false;
-        }
-
-        if ($user->isAdministrator()) {
-            return true;
-        }
-
-        return $user->hasRole(RolesEnum::ROLE_GRH_ADMIN->value);
+        return DayTypeEnum::tryFrom((int)$value);
     }
 }
