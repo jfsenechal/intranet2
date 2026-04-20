@@ -18,6 +18,8 @@ use Illuminate\Support\Collection;
 
 final class MigrationHandler
 {
+    private array $modules_to_skip = [1, 2, 21, 22, 23, 26, 49, 50];
+
     public static function urlModule(Module $module): ?string
     {
         $resource = self::findTheResource($module);
@@ -37,6 +39,7 @@ final class MigrationHandler
             15 => NewsResource::getUrl('index', panel: 'news'),
             16 => IncomingMailResource::getUrl('index', panel: 'courrier-panel'),
             17 => UserResource::getUrl('index', panel: 'security-panel'),
+      //      40 => UserResource::getUrl('index', panel: 'agent-panel'),
             44 => PublicationResource::getUrl('index', panel: 'publication-panel'),
             58 => ActionPstResource::getUrl('index', panel: 'pst-panel'),
             default => null,

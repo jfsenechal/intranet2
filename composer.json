@@ -56,11 +56,16 @@
         {
             "type": "path",
             "url": "./modules/Security"
+        },
+        {
+            "type": "path",
+            "url": "./modules/Agent"
         }
     ],
     "require": {
         "php": "^8.5",
         "ext-pdo": "*",
+        "acmarche/agent": "*@dev",
         "acmarche/app": "*@dev",
         "acmarche/courrier": "*@dev",
         "acmarche/document": "*@dev",
