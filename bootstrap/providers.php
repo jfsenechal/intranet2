@@ -5,6 +5,7 @@ declare(strict_types=1);
 return [
     App\Providers\AppServiceProvider::class,
     App\Providers\Filament\AdminPanelProvider::class,
+    AcMarche\App\Providers\Filament\AppPanelProvider::class,
     AcMarche\Security\Providers\Filament\SecurityPanelProvider::class,
     AcMarche\MailingList\Providers\Filament\MailingListPanelProvider::class,
     AcMarche\Pst\Providers\Filament\PstPanelProvider::class,

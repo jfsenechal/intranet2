@@ -42,7 +42,6 @@ final class SecurityPanelProvider extends PanelProvider
             ->resourceCreatePageRedirect('view')
             ->resourceEditPageRedirect('view')
             ->maxContentWidth(Width::Full)
-
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Security\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Security\\Filament\\Pages')
             ->pages([
