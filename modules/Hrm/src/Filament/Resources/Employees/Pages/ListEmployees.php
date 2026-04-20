@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employees\Pages;
 
+use AcMarche\Hrm\Enums\StatusEnum;
 use AcMarche\Hrm\Filament\Exports\EmployeeExport;
 use AcMarche\Hrm\Filament\Resources\Employees\EmployeeResource;
 use Filament\Actions\Action;
@@ -22,7 +23,10 @@ final class ListEmployees extends ListRecords
 
     public function getTitle(): string|Htmlable
     {
-        return $this->getAllTableRecordsCount().' agents';
+        $statusValue = $this->tableFilters['status']['value'] ?? null;
+        $label = $statusValue ? StatusEnum::from($statusValue)->getLabel().'s' : 'agents';
+
+        return $this->getAllTableRecordsCount().' '.$label;
     }
 
     protected function getHeaderActions(): array

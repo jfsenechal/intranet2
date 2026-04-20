@@ -60,21 +60,21 @@ final class HrmPanelProvider extends PanelProvider
                     ->group('Personnel')
                     ->sort(4)
                     ->url(fn (): string => ListEmployees::getUrl(parameters: [
-                        'tableFilters' => ['status' => ['value' => StatusEnum::APPLICATION->value]],
+                        'filters' => ['status' => ['value' => StatusEnum::APPLICATION->value]],
                     ])),
                 NavigationItem::make(StatusEnum::STUDENT->value)
                     ->icon(Heroicon::OutlinedAcademicCap)
                     ->group('Personnel')
                     ->sort(5)
                     ->url(fn (): string => ListEmployees::getUrl(parameters: [
-                        'tableFilters' => ['status' => ['value' => StatusEnum::STUDENT->value]],
+                        'filters' => ['status' => ['value' => StatusEnum::STUDENT->value]],
                     ])),
                 NavigationItem::make(StatusEnum::INTERN->value)
                     ->icon(Heroicon::OutlinedBriefcase)
                     ->group('Personnel')
                     ->sort(6)
                     ->url(fn (): string => ListEmployees::getUrl(parameters: [
-                        'tableFilters' => ['status' => ['value' => StatusEnum::INTERN->value]],
+                        'filters' => ['status' => ['value' => StatusEnum::INTERN->value]],
                     ])),
             ])
             ->middleware([
