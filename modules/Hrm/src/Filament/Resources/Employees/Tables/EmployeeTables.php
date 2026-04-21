@@ -62,7 +62,7 @@ final class EmployeeTables
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('is_archived')
-                    ->label('Archive')
+                    ->label('Archivé')
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
