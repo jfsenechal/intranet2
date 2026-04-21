@@ -12,4 +12,6 @@ final class CreateFolder extends CreateRecord
 {
     #[Override]
     protected static string $resource = FolderResource::class;
+
+    protected static ?string $title = 'Ajouter un dossier';
 }

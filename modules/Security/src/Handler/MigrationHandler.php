@@ -19,7 +19,7 @@ use Illuminate\Support\Collection;
 
 final class MigrationHandler
 {
-    private array $modules_to_skip = [1, 2, 21, 22, 23, 26, 49, 50];
+    public const array modules_to_skip = [1, 2, 21, 22, 23, 26, 33, 49, 50];
 
     public static function urlModule(Module $module): ?string
     {
@@ -54,6 +54,10 @@ final class MigrationHandler
     {
         $tabs = TabRepository::getTabsWithModules();
         foreach ($tabs as $tab) {
+            $tab->setRelation(
+                'modules',
+                $tab->modules->reject(fn (Module $module): bool => in_array($module->id, self::modules_to_skip, true))->values(),
+            );
             foreach ($tab->modules as $module) {
                 if ($module->is_external) {
                     $module->migrated = true;
