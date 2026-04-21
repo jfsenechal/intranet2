@@ -26,11 +26,14 @@ final class ProfileTables
                 TextColumn::make('first_name')
                     ->label('Prénom'),
                 TextColumn::make('username')
-                    ->label('Identifiant')
+                    ->label('Identifiant Ldap')
                     ->sortable()
                     ->searchable()
                     ->badge()
                     ->copyable(),
+                TextColumn::make('employee_id')
+                    ->label('Identifiant Grh')
+                    ->badge(),
                 TextColumn::make('location')
                     ->label('Emplacement')
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -50,13 +53,14 @@ final class ProfileTables
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->label('Modifié')
+                    ->label('Modifié le')
                     ->since()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 TernaryFilter::make('no_mail')->label('Sans mailbox'),
+                TernaryFilter::make('employee_id')->label('Sans employee_id')
             ])
             ->recordActions([
                 ViewAction::make(),

@@ -6,9 +6,11 @@ namespace AcMarche\Agent\Filament\Resources\Profiles\Pages;
 
 use AcMarche\Agent\Filament\Resources\Profiles\ProfileResource;
 use AcMarche\Security\Filament\Resources\Users\Schemas\UserForm;
+use AcMarche\Security\Ldap\UserLdap;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
+use LdapRecord\Models\Model;
 use Override;
 
 final class CreateProfile extends CreateRecord
@@ -30,6 +32,13 @@ final class CreateProfile extends CreateRecord
         $data['uuid'] ??= (string) Str::uuid();
         $data['emails'] ??= [];
         $data['modules'] ??= [];
+
+        if (! empty($data['username'])) {
+            if (($userLdap = UserLdap::query()->findBy('sAMAccountName', $data['username'])) instanceof Model) {
+                $data['first_name'] = $userLdap->getFirstAttribute('givenname');
+                $data['last_name'] = $userLdap->getFirstAttribute('sn');
+            }
+        }
 
         return $data;
     }
