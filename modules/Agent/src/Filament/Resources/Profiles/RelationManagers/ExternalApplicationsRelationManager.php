@@ -48,7 +48,7 @@ final class ExternalApplicationsRelationManager extends RelationManager
                 TextColumn::make('description')
                     ->label('Description')
                     ->limit(80)
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->headerActions([
                 AttachAction::make()

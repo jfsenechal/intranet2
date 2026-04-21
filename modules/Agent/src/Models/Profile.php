@@ -13,10 +13,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Connection('maria-agent')]
 #[Fillable([
+    'last_name',
+    'first_name',
     'emails',
     'supervisors',
     'location',
@@ -30,14 +31,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 final class Profile extends Model
 {
     use HasUserAdd;
-    use SoftDeletes;
+
+    public function fullName(): string
+    {
+        return $this->last_name.' '.$this->first_name;
+    }
 
     /**
      * @return BelongsTo<User>
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'username', 'username');
+        $instance = (new User)->setConnection(config('database.default'));
+
+        return $this->newBelongsTo(
+            $instance->newQuery(),
+            $this,
+            'username',
+            'username',
+            'user',
+        );
     }
 
     /**

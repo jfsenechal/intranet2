@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Agent\Filament\Resources\Profiles\Tables;
 
-use AcMarche\Agent\Filament\Resources\Profiles\ProfileResource;
-use AcMarche\Agent\Models\Profile;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -13,7 +11,6 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
-use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
 final class ProfileTables
@@ -21,19 +18,19 @@ final class ProfileTables
     public static function configure(Table $table): Table
     {
         return $table
-            ->defaultSort('username')
+            ->defaultSort('last_name')
             ->defaultPaginationPageOption(50)
             ->columns([
+                TextColumn::make('last_name')
+                    ->label('Nom'),
+                TextColumn::make('first_name')
+                    ->label('Prénom'),
                 TextColumn::make('username')
                     ->label('Identifiant')
                     ->sortable()
                     ->searchable()
                     ->badge()
                     ->copyable(),
-                TextColumn::make('user.last_name')
-                    ->label('Nom'),
-                TextColumn::make('user.first_name')
-                    ->label('Prénom'),
                 TextColumn::make('location')
                     ->label('Emplacement')
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -60,12 +57,12 @@ final class ProfileTables
             ])
             ->filters([
                 TernaryFilter::make('no_mail')->label('Sans mailbox'),
-                TrashedFilter::make(),
             ])
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

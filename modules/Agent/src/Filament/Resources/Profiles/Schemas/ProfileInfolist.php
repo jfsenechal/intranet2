@@ -20,12 +20,10 @@ final class ProfileInfolist
                 Section::make('Identité')
                     ->columns(3)
                     ->schema([
-                        TextEntry::make('user.last_name')->label('Nom'),
-                        TextEntry::make('user.first_name')->label('Prénom'),
                         TextEntry::make('username')->label('Identifiant')->copyable(),
                         TextEntry::make('employee_id')->label('Matricule RH'),
                         TextEntry::make('location')->label('Emplacement'),
-                        IconEntry::make('no_mail')->label('Pas de mailbox'),
+                        IconEntry::make('no_mail')->label('Pas de mailbox')->falseIcon(false),
                         TextEntry::make('notes')->label('Remarques')->columnSpanFull(),
                     ]),
                 Section::make('Accès')
