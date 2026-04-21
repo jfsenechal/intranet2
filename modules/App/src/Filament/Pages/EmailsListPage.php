@@ -12,7 +12,7 @@ use Override;
 final class EmailsListPage extends Page
 {
     #[Override]
-    protected static string|null|BackedEnum $navigationIcon = Heroicon::ListBullet;
+    protected static string|null|BackedEnum $navigationIcon = Heroicon::AtSymbol;
 
     #[Override]
     protected static ?string $navigationLabel = 'Mails des services';
@@ -22,6 +22,6 @@ final class EmailsListPage extends Page
 
     public function getTitle(): string
     {
-        return 'Absence de bureau';
+        return 'Adresses mails des services';
     }
 }

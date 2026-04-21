@@ -16,6 +16,7 @@ final class ExternalApplicationTables
     {
         return $table
             ->defaultSort('name')
+            ->defaultPaginationPageOption(50)
             ->columns([
                 TextColumn::make('name')
                     ->label('Nom')
@@ -24,7 +25,7 @@ final class ExternalApplicationTables
                 TextColumn::make('description')
                     ->label('Description')
                     ->limit(80)
-                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->wrap(),
                 TextColumn::make('agents_count')
                     ->counts('agents')
@@ -34,7 +35,7 @@ final class ExternalApplicationTables
                     ->label('Modifié')
                     ->since()
                     ->sortable()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->recordActions([
                 EditAction::make(),

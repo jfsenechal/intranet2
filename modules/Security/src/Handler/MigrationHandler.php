@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Handler;
 
+use AcMarche\Agent\Filament\Resources\Agents\AgentResource;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\IncomingMailResource;
 use AcMarche\Document\Filament\Resources\Documents\DocumentResource;
 use AcMarche\Hrm\Filament\Resources\Employees\EmployeeResource;
@@ -39,7 +40,7 @@ final class MigrationHandler
             15 => NewsResource::getUrl('index', panel: 'news'),
             16 => IncomingMailResource::getUrl('index', panel: 'courrier-panel'),
             17 => UserResource::getUrl('index', panel: 'security-panel'),
-      //      40 => UserResource::getUrl('index', panel: 'agent-panel'),
+            40 => AgentResource::getUrl('index', panel: 'agent-panel'),
             44 => PublicationResource::getUrl('index', panel: 'publication-panel'),
             58 => ActionPstResource::getUrl('index', panel: 'pst-panel'),
             default => null,
