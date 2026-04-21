@@ -49,12 +49,12 @@ final class SignatureResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('user_id', Auth::id());
+        return parent::getEloquentQuery()->where('username', Auth::user()->username);
     }
 
     public static function canCreate(): bool
     {
-        return ! Signature::query()->where('user_id', Auth::id())->exists();
+        return ! Signature::query()->where('username', Auth::user()->username)->exists();
     }
 
     public static function form(Schema $schema): Schema

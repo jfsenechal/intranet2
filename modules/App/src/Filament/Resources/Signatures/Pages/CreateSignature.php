@@ -36,11 +36,4 @@ final class CreateSignature extends CreateRecord
             'city' => 'Marche-en-Famenne',
         ]);
     }
-
-    protected function mutateFormDataBeforeCreate(array $data): array
-    {
-        $data['user_id'] = Auth::id();
-
-        return $data;
-    }
 }

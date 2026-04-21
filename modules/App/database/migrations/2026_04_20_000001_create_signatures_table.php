@@ -16,7 +16,7 @@ return new class extends Migration
 
         Schema::create('signatures', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('user_id')->unique()->constrained()->cascadeOnDelete();
+            $table->integer('username')->unique();
             $table->string('last_name');
             $table->string('first_name');
             $table->string('address');
@@ -25,14 +25,12 @@ return new class extends Migration
             $table->string('service')->nullable();
             $table->string('job_title')->nullable();
             $table->string('email');
-            $table->string('username')->nullable();
             $table->string('phone')->nullable();
             $table->string('mobile')->nullable();
             $table->string('fax')->nullable();
             $table->string('website')->nullable();
             $table->string('logo')->nullable();
             $table->string('logo_title')->nullable();
-            $table->boolean('ukraine')->default(false);
             $table->timestamps();
         });
     }

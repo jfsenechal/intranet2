@@ -20,7 +20,7 @@ final class ListSignatures extends ListRecords
     {
         parent::mount();
 
-        $signature = Signature::query()->where('user_id', Auth::id())->first();
+        $signature = Signature::query()->where('username', Auth::user()->username)->first();
 
         if ($signature instanceof Signature) {
             $this->redirect(SignatureResource::getUrl('view', ['record' => $signature]));
