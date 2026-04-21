@@ -19,6 +19,7 @@ final class AbsenceForm
         return $schema
             ->columns(1)
             ->components([
+                ...AbsenceCallouts::components(),
                 Section::make('Periode')
                     ->columns(4)
                     ->schema([

@@ -18,6 +18,7 @@ final class AbsenceInfolist
         return $schema
             ->columns(1)
             ->components([
+                ...AbsenceCallouts::components(),
                 Flex::make([
                     Section::make(
                         self::content()
