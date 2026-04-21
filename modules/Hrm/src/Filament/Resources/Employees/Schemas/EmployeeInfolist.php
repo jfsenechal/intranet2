@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employees\Schemas;
 
+use AcMarche\Agent\Mail\ProfileRequestMail;
 use AcMarche\Hrm\Models\Employee;
+use Filament\Actions\Action;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
@@ -15,6 +18,7 @@ use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Support\Facades\Mail;
 
 final class EmployeeInfolist
 {
@@ -61,7 +65,7 @@ final class EmployeeInfolist
                                                     ->icon('heroicon-o-device-phone-mobile'),
                                             ]),
                                     ]),
-                                Section::make('Identite')
+                                Section::make('Identité')
                                     ->columns(2)
                                     ->schema([
                                         TextEntry::make('civility')
@@ -117,7 +121,7 @@ final class EmployeeInfolist
                                             ->label('Anciennete echelle')
                                             ->date('d/m/Y'),
                                     ]),
-                                Fieldset::make('Bareme')
+                                Fieldset::make('Barème')
                                     ->columns(3)
                                     ->schema([
                                         TextEntry::make('payScale.name')
@@ -130,7 +134,7 @@ final class EmployeeInfolist
                                             ->label('Unite locale'),
                                     ]),
                             ]),
-                        Tab::make('Sante')
+                        Tab::make('Santé')
                             ->icon('heroicon-o-heart')
                             ->schema([
                                 TextEntry::make('healthInsurance.name')
@@ -158,8 +162,41 @@ final class EmployeeInfolist
                         Tab::make('Compte informatique')
                             ->icon(Heroicon::OutlinedUserCircle)
                             ->schema([
-                                TextEntry::make('username')
-                                    ->label('Nom utilisateur'),
+                                TextEntry::make('profile.username')
+                                    ->label('Nom utilisateur')
+                                    ->visible(fn (Employee $record): bool => $record->profile !== null)
+                                    ->placeholder('—'),
+                                TextEntry::make('no_profile')
+                                    ->label('Compte informatique')
+                                    ->state('Aucun profil informatique pour cet agent.')
+                                    ->visible(fn (Employee $record): bool => $record->profile === null)
+                                    ->suffixAction(
+                                        Action::make('requestProfile')
+                                            ->label('Demander un compte informatique')
+                                            ->icon(Heroicon::OutlinedEnvelope)
+                                            ->color('primary')
+                                            ->requiresConfirmation()
+                                            ->modalHeading('Demander un compte informatique')
+                                            ->modalDescription('Un e-mail sera envoyé au service informatique.')
+                                            ->action(function (Employee $record): void {
+                                                $to = config('agent.informatique_email');
+                                                if (empty($to)) {
+                                                    Notification::make()
+                                                        ->title('Adresse informatique non configurée')
+                                                        ->danger()
+                                                        ->send();
+
+                                                    return;
+                                                }
+
+                                                Mail::to($to)->send(new ProfileRequestMail($record));
+
+                                                Notification::make()
+                                                    ->title('Demande envoyée au service informatique')
+                                                    ->success()
+                                                    ->send();
+                                            }),
+                                    ),
                             ]),
                     ]),
             ]);

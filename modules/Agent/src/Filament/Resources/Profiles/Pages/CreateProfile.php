@@ -5,16 +5,24 @@ declare(strict_types=1);
 namespace AcMarche\Agent\Filament\Resources\Profiles\Pages;
 
 use AcMarche\Agent\Filament\Resources\Profiles\ProfileResource;
-use AcMarche\Security\Filament\Resources\Users\Schemas\UserForm;
+use AcMarche\Hrm\Models\Employee;
 use AcMarche\Security\Ldap\UserLdap;
+use AcMarche\Security\Repository\UserRepository;
+use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 use LdapRecord\Models\Model;
+use Livewire\Attributes\Url;
 use Override;
 
 final class CreateProfile extends CreateRecord
 {
+    #[Url(as: 'employee_id')]
+    public ?int $employeeId = null;
+
     #[Override]
     protected static string $resource = ProfileResource::class;
 
@@ -22,9 +30,59 @@ final class CreateProfile extends CreateRecord
 
     protected static bool $canCreateAnother = false;
 
+    protected ?Employee $employee = null;
+
+    #[Override]
+    public function mount(): void
+    {
+        parent::mount();
+
+        if ($this->employeeId !== null) {
+            $this->employee = Employee::query()
+                ->with(['activeContracts.service', 'savedEmployer'])
+                ->find($this->employeeId);
+        }
+    }
+
     public function form(Schema $schema): Schema
     {
-        return UserForm::add($schema);
+        $components = [];
+
+        if ($this->employee instanceof Employee) {
+            $services = $this->employee->activeContracts
+                ->map(fn ($contract) => $contract->service?->name)
+                ->filter()
+                ->unique()
+                ->implode(', ');
+
+            $components[] = Section::make('Employé')
+                ->columns(2)
+                ->schema([
+                    Placeholder::make('last_name')
+                        ->label('Nom')
+                        ->content($this->employee->last_name),
+                    Placeholder::make('first_name')
+                        ->label('Prénom')
+                        ->content($this->employee->first_name),
+                    Placeholder::make('services')
+                        ->label('Services (contrats actifs)')
+                        ->content($services !== '' ? $services : '—'),
+                    Placeholder::make('hired_at')
+                        ->label('Entré le')
+                        ->content($this->employee->hired_at?->format('d/m/Y') ?? '—'),
+                    Placeholder::make('status')
+                        ->label('Statut')
+                        ->content((string) $this->employee->status),
+                ]);
+        }
+
+        $components[] = Select::make('username')
+            ->label('Utilisateur LDAP')
+            ->options(UserRepository::listLdapUsersForSelect())
+            ->searchable()
+            ->required();
+
+        return $schema->schema($components);
     }
 
     protected function mutateFormDataBeforeCreate(array $data): array
@@ -38,6 +96,10 @@ final class CreateProfile extends CreateRecord
                 $data['first_name'] = $userLdap->getFirstAttribute('givenname');
                 $data['last_name'] = $userLdap->getFirstAttribute('sn');
             }
+        }
+
+        if ($this->employeeId !== null) {
+            $data['employee_id'] = $this->employeeId;
         }
 
         return $data;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use AcMarche\Agent\Models\Profile;
 use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -133,6 +135,21 @@ final class Employee extends Model
     public function activeContracts(): HasMany
     {
         return $this->hasMany(Contract::class)->active();
+    }
+
+    /**
+     * @return HasOne<Profile>
+     */
+    public function profile(): HasOne
+    {
+        $instance = (new Profile)->setConnection('maria-agent');
+
+        return $this->newHasOne(
+            $instance->newQuery(),
+            $this,
+            $instance->getTable().'.employee_id',
+            'id',
+        );
     }
 
     /**
