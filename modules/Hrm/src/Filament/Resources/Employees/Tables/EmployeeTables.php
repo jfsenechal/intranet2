@@ -7,6 +7,7 @@ namespace AcMarche\Hrm\Filament\Resources\Employees\Tables;
 use AcMarche\Hrm\Enums\StatusEnum;
 use AcMarche\Hrm\Models\Direction;
 use AcMarche\Hrm\Models\Employee;
+use AcMarche\Hrm\Models\Employer;
 use AcMarche\Hrm\Models\PayScale;
 use AcMarche\Hrm\Models\Service;
 use Filament\Actions\BulkActionGroup;
@@ -79,6 +80,18 @@ final class EmployeeTables
                     ->label('Statut')
                     ->options(StatusEnum::class)
                     ->default(StatusEnum::AGENT->value),
+                SelectFilter::make('employer_id')
+                    ->label('Employeur')
+                    ->options(fn (): array => Employer::query()->orderBy('name')->pluck('name', 'id')->all())
+                    ->searchable()
+                    ->preload()
+                    ->query(fn (Builder $query, array $data): Builder => $query->when(
+                        $data['value'] ?? null,
+                        fn (Builder $query, $employerId): Builder => $query->whereHas(
+                            'contracts',
+                            fn (Builder $query) => $query->where('employer_id', $employerId),
+                        ),
+                    )),
                 SelectFilter::make('pay_scale_id')
                     ->label('Echelle')
                     ->options(fn (): array => PayScale::query()
