@@ -15,4 +15,5 @@ return [
     AcMarche\Mileage\Providers\Filament\MileagePanelProvider::class,
     AcMarche\News\Providers\Filament\NewsPanelProvider::class,
     AcMarche\Publication\Providers\Filament\PublicationPanelProvider::class,
+    AcMarche\Agent\Providers\Filament\AgentPanelProvider::class,
 ];
