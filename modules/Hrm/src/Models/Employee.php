@@ -74,6 +74,12 @@ final class Employee extends Model
     use HasUserAdd;
 
     /**
+     * @deprecated The `job_title` column on employees is deprecated and should not be used.
+     *             Functions are derived from active contracts via the `activeContracts` relation.
+     */
+    public const string DEPRECATED_JOB_TITLE = 'job_title';
+
+    /**
      * @return BelongsTo<PayScale>
      */
     public function payScale(): BelongsTo
@@ -119,6 +125,14 @@ final class Employee extends Model
     public function contracts(): HasMany
     {
         return $this->hasMany(Contract::class);
+    }
+
+    /**
+     * @return HasMany<Contract>
+     */
+    public function activeContracts(): HasMany
+    {
+        return $this->hasMany(Contract::class)->active();
     }
 
     /**

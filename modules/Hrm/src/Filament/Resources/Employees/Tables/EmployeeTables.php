@@ -6,6 +6,7 @@ namespace AcMarche\Hrm\Filament\Resources\Employees\Tables;
 
 use AcMarche\Hrm\Enums\StatusEnum;
 use AcMarche\Hrm\Models\Direction;
+use AcMarche\Hrm\Models\Employee;
 use AcMarche\Hrm\Models\PayScale;
 use AcMarche\Hrm\Models\Service;
 use Filament\Actions\BulkActionGroup;
@@ -26,6 +27,7 @@ final class EmployeeTables
         return $table
             ->defaultSort('last_name')
             ->defaultPaginationPageOption(50)
+            ->modifyQueryUsing(fn (Builder $query): Builder => $query->with('activeContracts'))
             ->columns([
                 TextColumn::make('last_name')
                     ->label('Nom')
@@ -33,13 +35,18 @@ final class EmployeeTables
                     ->sortable()
                     ->limit(70),
                 TextColumn::make('first_name')
-                    ->label('Prenom')
+                    ->label('Prénom')
                     ->searchable()
                     ->sortable()
                     ->limit(70),
-                TextColumn::make('job_title')
-                    ->label('Fonction')
-                    ->searchable()
+                TextColumn::make('active_functions')
+                    ->label('Fonctions')
+                    ->state(fn (Employee $record): string => $record->activeContracts
+                        ->pluck('job_title')
+                        ->filter()
+                        ->unique()
+                        ->implode(', '))
+                    ->wrap()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('status')
                     ->label('Statut')
@@ -53,7 +60,7 @@ final class EmployeeTables
                     })
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('hired_at')
-                    ->label('Entree')
+                    ->label('Entré')
                     ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -74,8 +81,14 @@ final class EmployeeTables
                     ->default(StatusEnum::AGENT->value),
                 SelectFilter::make('pay_scale_id')
                     ->label('Echelle')
-                    ->options(fn (): array => PayScale::query()->orderBy('name')->pluck('name', 'id')->all())
-                    ->searchable()
+                    ->options(fn (): array => PayScale::query()
+                        ->with('employer')
+                        ->orderBy('employer_id')
+                        ->orderBy('name')
+                        ->get()
+                        ->groupBy(fn (PayScale $payScale): string => $payScale->employer?->name ?? 'Sans employeur')
+                        ->map(fn ($group) => $group->pluck('name', 'id')->all())
+                        ->all())
                     ->preload(),
                 SelectFilter::make('service_id')
                     ->label('Service')
