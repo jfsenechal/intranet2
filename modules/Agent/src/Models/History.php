@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Connection('maria-agent')]
 #[Fillable([
-    'agent_id',
+    'profile_id',
     'name',
     'old_value',
     'new_value',
@@ -20,11 +20,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 final class History extends Model
 {
     /**
-     * @return BelongsTo<Agent>
+     * @return BelongsTo<Profile>
      */
-    public function agent(): BelongsTo
+    public function profile(): BelongsTo
     {
-        return $this->belongsTo(Agent::class);
+        return $this->belongsTo(Profile::class);
     }
 
     protected function casts(): array

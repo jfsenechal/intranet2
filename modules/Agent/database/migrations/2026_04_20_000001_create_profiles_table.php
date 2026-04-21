@@ -14,29 +14,33 @@ return new class extends Migration
     {
         if (Schema::connection('maria-agent')->hasTable('agent')) {
             Schema::connection('maria-agent')->table('agent', function (Blueprint $table): void {
-                $table->rename('agents');
+                $table->rename('profiles');
             });
-            Schema::connection('maria-agent')->table('agents', function (Blueprint $table): void {
-                $table->renameColumn('nom', 'last_name');
-                $table->renameColumn('prenom', 'first_name');
+            Schema::connection('maria-agent')->table('profiles', function (Blueprint $table): void {
                 $table->renameColumn('emplacement', 'location');
                 $table->renameColumn('remarques', 'notes');
                 $table->renameColumn('responsables', 'supervisors');
                 $table->renameColumn('employe_id', 'employee_id');
             });
-            Schema::connection('maria-agent')->table('agents', function (Blueprint $table): void {
-                if (! Schema::connection('maria-agent')->hasColumn('agents', 'created_at')) {
+            Schema::connection('maria-agent')->table('profiles', function (Blueprint $table): void {
+                if (Schema::connection('maria-agent')->hasColumn('profiles', 'nom')) {
+                    $table->dropColumn('nom');
+                }
+                if (Schema::connection('maria-agent')->hasColumn('profiles', 'prenom')) {
+                    $table->dropColumn('prenom');
+                }
+                if (! Schema::connection('maria-agent')->hasColumn('profiles', 'created_at')) {
                     $table->timestamps();
                 }
-                if (! Schema::connection('maria-agent')->hasColumn('agents', 'deleted_at')) {
+                if (! Schema::connection('maria-agent')->hasColumn('profiles', 'deleted_at')) {
                     $table->softDeletes();
                 }
+                $table->string('username')->nullable(false)->change();
             });
-        } elseif (! Schema::connection('maria-agent')->hasTable('agents')) {
-            Schema::connection('maria-agent')->create('agents', function (Blueprint $table): void {
+        } elseif (! Schema::connection('maria-agent')->hasTable('profiles')) {
+            Schema::connection('maria-agent')->create('profiles', function (Blueprint $table): void {
                 $table->id();
-                $table->string('last_name');
-                $table->string('first_name');
+                $table->string('username')->unique();
                 $table->json('emails');
                 $table->json('supervisors')->nullable();
                 $table->string('location')->nullable();
@@ -44,7 +48,6 @@ return new class extends Migration
                 $table->json('modules');
                 $table->unsignedInteger('employee_id')->nullable();
                 $table->uuid();
-                $table->string('username')->nullable();
                 $table->boolean('no_mail')->default(false);
                 $table->timestamps();
                 $table->softDeletes();
@@ -54,6 +57,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::connection('maria-agent')->dropIfExists('agents');
+        Schema::connection('maria-agent')->dropIfExists('profiles');
     }
 };

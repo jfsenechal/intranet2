@@ -21,19 +21,17 @@ return new class extends Migration
                 $table->renameColumn('value_new', 'new_value');
                 $table->renameColumn('createdAt', 'created_at');
                 $table->renameColumn('updatedAt', 'updated_at');
+                $table->renameColumn('agent_id', 'profile_id');
             });
         } elseif (! Schema::connection('maria-agent')->hasTable('histories')) {
             Schema::connection('maria-agent')->create('histories', function (Blueprint $table): void {
                 $table->id();
-                $table->unsignedBigInteger('agent_id');
+                $table->foreignId('profile_id')->constrained('profiles')->cascadeOnDelete();
                 $table->string('name', 150);
                 $table->json('old_value')->nullable();
                 $table->json('new_value')->nullable();
                 $table->string('username', 100);
                 $table->timestamps();
-
-                $table->index('agent_id');
-                $table->foreign('agent_id')->references('id')->on('agents')->cascadeOnDelete();
             });
         }
     }

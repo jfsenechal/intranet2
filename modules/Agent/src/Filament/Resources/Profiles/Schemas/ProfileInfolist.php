@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Agent\Filament\Resources\Agents\Schemas;
+namespace AcMarche\Agent\Filament\Resources\Profiles\Schemas;
 
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
@@ -10,7 +10,7 @@ use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
-final class AgentInfolist
+final class ProfileInfolist
 {
     public static function configure(Schema $schema): Schema
     {
@@ -20,8 +20,8 @@ final class AgentInfolist
                 Section::make('Identité')
                     ->columns(3)
                     ->schema([
-                        TextEntry::make('last_name')->label('Nom'),
-                        TextEntry::make('first_name')->label('Prénom'),
+                        TextEntry::make('user.last_name')->label('Nom'),
+                        TextEntry::make('user.first_name')->label('Prénom'),
                         TextEntry::make('username')->label('Identifiant')->copyable(),
                         TextEntry::make('employee_id')->label('Matricule RH'),
                         TextEntry::make('location')->label('Emplacement'),

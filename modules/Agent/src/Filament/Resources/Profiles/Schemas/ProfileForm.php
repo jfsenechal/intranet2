@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Agent\Filament\Resources\Agents\Schemas;
+namespace AcMarche\Agent\Filament\Resources\Profiles\Schemas;
 
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
@@ -14,14 +14,14 @@ use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 
-final class AgentForm
+final class ProfileForm
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->columns(1)
             ->components([
-                Tabs::make('Agent')
+                Tabs::make('Profile')
                     ->columnSpanFull()
                     ->tabs([
                         Tab::make('Identité')
@@ -30,16 +30,11 @@ final class AgentForm
                                 Section::make()
                                     ->columns(2)
                                     ->schema([
-                                        TextInput::make('last_name')
-                                            ->label('Nom')
-                                            ->required()
-                                            ->maxLength(255),
-                                        TextInput::make('first_name')
-                                            ->label('Prénom')
-                                            ->required()
-                                            ->maxLength(255),
                                         TextInput::make('username')
                                             ->label('Identifiant')
+                                            ->required()
+                                            ->disabled()
+                                            ->dehydrated()
                                             ->maxLength(255),
                                         TextInput::make('employee_id')
                                             ->label('Matricule RH')

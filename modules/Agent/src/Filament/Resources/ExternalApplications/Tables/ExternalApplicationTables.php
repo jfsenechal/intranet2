@@ -27,9 +27,9 @@ final class ExternalApplicationTables
                     ->limit(80)
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->wrap(),
-                TextColumn::make('agents_count')
-                    ->counts('agents')
-                    ->label('Agents')
+                TextColumn::make('profiles_count')
+                    ->counts('profiles')
+                    ->label('Profils')
                     ->badge(),
                 TextColumn::make('updated_at')
                     ->label('Modifié')

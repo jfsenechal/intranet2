@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Agent\Filament\Resources\Agents\Pages;
+namespace AcMarche\Agent\Filament\Resources\Profiles\Pages;
 
-use AcMarche\Agent\Filament\Resources\Agents\AgentResource;
+use AcMarche\Agent\Filament\Resources\Profiles\ProfileResource;
 use AcMarche\Security\Filament\Resources\Users\Schemas\UserForm;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 use Override;
 
-final class CreateAgent extends CreateRecord
+final class CreateProfile extends CreateRecord
 {
     #[Override]
-    protected static string $resource = AgentResource::class;
+    protected static string $resource = ProfileResource::class;
 
-    protected static ?string $title = 'Ajouter un agent';
+    protected static ?string $title = 'Ajouter un profil';
 
     protected static bool $canCreateAnother = false;
 

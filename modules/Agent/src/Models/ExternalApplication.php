@@ -18,10 +18,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 final class ExternalApplication extends Model
 {
     /**
-     * @return BelongsToMany<Agent>
+     * @return BelongsToMany<Profile>
      */
-    public function agents(): BelongsToMany
+    public function profiles(): BelongsToMany
     {
-        return $this->belongsToMany(Agent::class, 'agent_external_application');
+        return $this->belongsToMany(Profile::class, 'profile_external_application');
     }
 }

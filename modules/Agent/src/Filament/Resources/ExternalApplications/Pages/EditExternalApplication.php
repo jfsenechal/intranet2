@@ -7,6 +7,7 @@ namespace AcMarche\Agent\Filament\Resources\ExternalApplications\Pages;
 use AcMarche\Agent\Filament\Resources\ExternalApplications\ExternalApplicationResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Icons\Heroicon;
 use Override;
 
 final class EditExternalApplication extends EditRecord
@@ -17,7 +18,7 @@ final class EditExternalApplication extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()->icon(Heroicon::Trash),
         ];
     }
 }

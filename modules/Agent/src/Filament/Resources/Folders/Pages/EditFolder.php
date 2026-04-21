@@ -8,6 +8,7 @@ use AcMarche\Agent\Filament\Resources\Folders\FolderResource;
 use AcMarche\Agent\Models\Folder;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\Support\Htmlable;
 use Override;
 
@@ -28,7 +29,7 @@ final class EditFolder extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()->icon(Heroicon::Trash),
         ];
     }
 

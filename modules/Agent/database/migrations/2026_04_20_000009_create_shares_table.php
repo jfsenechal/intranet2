@@ -19,6 +19,7 @@ return new class extends Migration
             Schema::connection('maria-agent')->table('shares', function (Blueprint $table): void {
                 $table->renameColumn('shareBy', 'shared_by');
                 $table->renameColumn('shareFor', 'shared_for');
+                $table->renameColumn('agent_id', 'profile_id');
                 if (! Schema::connection('maria-agent')->hasColumn('shares', 'created_at')) {
                     $table->timestamps();
                 }
@@ -26,12 +27,10 @@ return new class extends Migration
         } elseif (! Schema::connection('maria-agent')->hasTable('shares')) {
             Schema::connection('maria-agent')->create('shares', function (Blueprint $table): void {
                 $table->id();
-                $table->unsignedBigInteger('agent_id');
+                $table->foreignId('profile_id')->constrained('profiles')->cascadeOnDelete();
                 $table->string('shared_by', 100);
                 $table->string('shared_for', 100);
                 $table->timestamps();
-
-                $table->foreign('agent_id')->references('id')->on('agents')->cascadeOnDelete();
             });
         }
     }

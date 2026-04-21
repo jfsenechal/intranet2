@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Agent\Filament\Resources\Agents\RelationManagers;
+namespace AcMarche\Agent\Filament\Resources\Profiles\RelationManagers;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;

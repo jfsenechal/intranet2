@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace AcMarche\Agent\Models;
 
 use AcMarche\Security\Models\HasUserAdd;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -15,8 +17,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Connection('maria-agent')]
 #[Fillable([
-    'last_name',
-    'first_name',
     'emails',
     'supervisors',
     'location',
@@ -27,25 +27,33 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'username',
     'no_mail',
 ])]
-final class Agent extends Model
+final class Profile extends Model
 {
     use HasUserAdd;
     use SoftDeletes;
 
     /**
-     * @return HasOne<AgentHardware>
+     * @return BelongsTo<User>
      */
-    public function hardware(): HasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(AgentHardware::class);
+        return $this->belongsTo(User::class, 'username', 'username');
     }
 
     /**
-     * @return HasOne<AgentPhone>
+     * @return HasOne<ProfileHardware>
+     */
+    public function hardware(): HasOne
+    {
+        return $this->hasOne(ProfileHardware::class);
+    }
+
+    /**
+     * @return HasOne<ProfilePhone>
      */
     public function phone(): HasOne
     {
-        return $this->hasOne(AgentPhone::class);
+        return $this->hasOne(ProfilePhone::class);
     }
 
     /**
@@ -53,7 +61,7 @@ final class Agent extends Model
      */
     public function externalApplications(): BelongsToMany
     {
-        return $this->belongsToMany(ExternalApplication::class, 'agent_external_application');
+        return $this->belongsToMany(ExternalApplication::class, 'profile_external_application');
     }
 
     /**
@@ -61,7 +69,7 @@ final class Agent extends Model
      */
     public function folders(): BelongsToMany
     {
-        return $this->belongsToMany(Folder::class, 'agent_folder');
+        return $this->belongsToMany(Folder::class, 'profile_folder');
     }
 
     /**
@@ -78,11 +86,6 @@ final class Agent extends Model
     public function shares(): HasMany
     {
         return $this->hasMany(Share::class);
-    }
-
-    public function getFullNameAttribute(): string
-    {
-        return "{$this->first_name} {$this->last_name}";
     }
 
     protected static function booted(): void

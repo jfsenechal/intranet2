@@ -11,17 +11,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Connection('maria-agent')]
 #[Fillable([
-    'agent_id',
+    'profile_id',
     'shared_by',
     'shared_for',
 ])]
 final class Share extends Model
 {
     /**
-     * @return BelongsTo<Agent>
+     * @return BelongsTo<Profile>
      */
-    public function agent(): BelongsTo
+    public function profile(): BelongsTo
     {
-        return $this->belongsTo(Agent::class);
+        return $this->belongsTo(Profile::class);
     }
 }

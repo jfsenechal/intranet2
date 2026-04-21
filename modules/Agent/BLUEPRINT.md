@@ -1,6 +1,8 @@
 # Agent Module — Filament Blueprint
 
-Module that manages **agent (staff) profiles** and their **IT provisioning**: mailbox access, external-application access, shared-folder access, hardware requests, telephony setup, audit history and external sharing of the profile.
+Module that manages **staff profiles** and their **IT provisioning**: mailbox access, external-application access, shared-folder access, hardware requests, telephony setup, audit history and external sharing of the profile.
+
+The core entity is `Profile`. A profile is linked 1:1 to an `App\Models\User` via the shared `username` column (string key, no FK constraint because the `users` table lives on the main DB connection and profiles live on `maria-agent`). Identity fields (`last_name`, `first_name`, `email`) come from the linked user — profiles never duplicate them.
 
 Source dataset: `data/agent.sql` (legacy Symfony application, database `agent`).
 
@@ -22,8 +24,8 @@ composer update acmarche/agent
 php artisan migrate --database=maria-agent --path=modules/Agent/database/migrations
 
 # Filament scaffolding (run one by one)
-php artisan make:filament-resource Agent \
-    --model=AcMarche\\Agent\\Models\\Agent \
+php artisan make:filament-resource Profile \
+    --model=AcMarche\\Agent\\Models\\Profile \
     --view --generate --no-interaction
 php artisan make:filament-resource ExternalApplication \
     --model=AcMarche\\Agent\\Models\\ExternalApplication \
@@ -32,13 +34,13 @@ php artisan make:filament-resource Folder \
     --model=AcMarche\\Agent\\Models\\Folder \
     --view --generate --no-interaction
 
-# Relation managers (attach to AgentResource)
-php artisan make:filament-relation-manager AgentResource hardware
-php artisan make:filament-relation-manager AgentResource phone
-php artisan make:filament-relation-manager AgentResource externalApplications name
-php artisan make:filament-relation-manager AgentResource folders name
-php artisan make:filament-relation-manager AgentResource histories name --view
-php artisan make:filament-relation-manager AgentResource shares shared_for
+# Relation managers (attach to ProfileResource)
+php artisan make:filament-relation-manager ProfileResource hardware
+php artisan make:filament-relation-manager ProfileResource phone
+php artisan make:filament-relation-manager ProfileResource externalApplications name
+php artisan make:filament-relation-manager ProfileResource folders name
+php artisan make:filament-relation-manager ProfileResource histories name --view
+php artisan make:filament-relation-manager ProfileResource shares shared_for
 ```
 
 After scaffolding, move generated classes from `app/Filament/…` into
@@ -51,14 +53,13 @@ After scaffolding, move generated classes from `app/Filament/…` into
 
 All live under `AcMarche\Agent\Models` with `#[Connection('maria-agent')]`.
 
-### `Agent`
-Main profile record for a staff member.
+### `Profile`
+Main record for a staff member. Identity comes from the linked `App\Models\User` via `username`.
 
 | Attribute      | Type     | Notes                                    |
 | -------------- | -------- | ---------------------------------------- |
 | `id`           | bigint   |                                          |
-| `last_name`    | string   | required                                 |
-| `first_name`   | string   | required                                 |
+| `username`     | string   | required, unique — links to `users.username` |
 | `emails`       | json     | array of shared mailbox addresses        |
 | `supervisors`  | json     | array (string list)                      |
 | `location`     | string   | nullable (physical office)               |
@@ -66,19 +67,21 @@ Main profile record for a staff member.
 | `modules`      | json     | array of Security `modules.id` values    |
 | `employee_id`  | int      | nullable — FK into `hrm.employees`       |
 | `uuid`         | uuid     |                                          |
-| `username`     | string   | nullable — AD login when provisioned     |
 | `no_mail`      | bool     | "no personal mailbox" flag               |
 | `timestamps`   |          |                                          |
 | `deleted_at`   | softDel  |                                          |
 
-Relationships: `hasOne AgentHardware`, `hasOne AgentPhone`,
-`belongsToMany ExternalApplication` (pivot `agent_external_application`),
-`belongsToMany Folder` (pivot `agent_folder`), `hasMany History`, `hasMany Share`.
-Accessor: `full_name` → `"{first_name} {last_name}"`.
-Uses `HasUserAdd` booted trait (legacy naming kept).
+Relationships:
+- `belongsTo App\Models\User` via `username` ↔ `username` (cross-connection string key — no SQL join, Eloquent resolves PHP-side).
+- `hasOne ProfileHardware`, `hasOne ProfilePhone`
+- `belongsToMany ExternalApplication` (pivot `profile_external_application`)
+- `belongsToMany Folder` (pivot `profile_folder`)
+- `hasMany History`, `hasMany Share`
+
+Uses `HasUserAdd` booted trait. Deleting a profile cascades through all related tables via FK `ON DELETE CASCADE`.
 
 ### `ExternalApplication`
-Catalog of third-party applications the agent may need (Civadis, Saphir, eComptes, …).
+Catalog of third-party applications the profile may need (Civadis, Saphir, eComptes, …).
 
 | Attribute       | Type     |
 | --------------- | -------- |
@@ -88,7 +91,7 @@ Catalog of third-party applications the agent may need (Civadis, Saphir, eCompte
 | `service_id`    | int      |
 | `timestamps`    |          |
 
-`belongsToMany Agent`.
+`belongsToMany Profile`.
 
 ### `Folder`
 Self-referential tree of shared network folders (one DFS path per node).
@@ -101,25 +104,25 @@ Self-referential tree of shared network folders (one DFS path per node).
 | `description`  | longText |
 | `timestamps`   |          |
 
-`belongsTo parent`, `hasMany children`, `belongsToMany Agent`.
+`belongsTo parent`, `hasMany children`, `belongsToMany Profile`.
 
-### `AgentHardware` (table `agent_hardware`)
-1:1 hardware request per agent.
+### `ProfileHardware` (table `profile_hardware`)
+1:1 hardware request per profile.
 
 | Attribute       | Type     |
 | --------------- | -------- |
-| `agent_id`      | fk→agents |
+| `profile_id`    | fk→profiles (cascade) |
 | `existing_pc`   | string nullable |
 | `new_pc`        | string nullable |
 | `other`         | longText |
 | `vpn`           | bool     |
 
-### `AgentPhone` (table `agent_phone`)
-1:1 telephony request per agent.
+### `ProfilePhone` (table `profile_phone`)
+1:1 telephony request per profile.
 
 | Attribute         | Type     |
 | ----------------- | -------- |
-| `agent_id`        | fk→agents |
+| `profile_id`      | fk→profiles (cascade) |
 | `existing_number` | string   |
 | `new_number`      | bool     |
 | `external_number` | bool     |
@@ -130,7 +133,7 @@ Append-only audit trail. Every edit writes one row.
 
 | Attribute     | Type   |
 | ------------- | ------ |
-| `agent_id`    | fk     |
+| `profile_id`  | fk→profiles (cascade) |
 | `name`        | string (attribute name: `email`, `responsables`, `dossier`, …) |
 | `old_value`   | json   |
 | `new_value`   | json   |
@@ -138,121 +141,111 @@ Append-only audit trail. Every edit writes one row.
 | `timestamps`  |        |
 
 ### `Share`
-An email address the agent profile has been "shared for review" with.
+An email address the profile has been "shared for review" with.
 
 | Attribute    | Type   |
 | ------------ | ------ |
-| `agent_id`   | fk     |
+| `profile_id` | fk→profiles (cascade) |
 | `shared_by`  | string (username) |
 | `shared_for` | string (email)    |
 
 ### Pivots (no model)
-`agent_external_application (agent_id, external_application_id)`
-`agent_folder (agent_id, folder_id)`
+`profile_external_application (profile_id, external_application_id)`
+`profile_folder (profile_id, folder_id)`
 
 ---
 
 ## 3. Resources
 
-### 3.1 `AgentResource`
-- **Location:** `modules/Agent/src/Filament/Resources/Agents/AgentResource.php`
+### 3.1 `ProfileResource`
+- **Location:** `modules/Agent/src/Filament/Resources/Profiles/ProfileResource.php`
 - **Navigation group:** `Gestion des agents`
 - **Navigation icon:** `heroicon-o-identification`
-- **Navigation label:** `Agents`
-- **Record title attribute:** `full_name`
+- **Navigation label:** `Profils`
+- **Record title attribute:** `username`
 
-**Form** (`Schemas/AgentForm`):
+**Form** (`Schemas/ProfileForm`):
 
 Use a `Filament\Schemas\Components\Tabs` layout with these tabs:
 
 1. **Identité**
-   - `TextInput::make('last_name')` — required, maxLength 255
-   - `TextInput::make('first_name')` — required, maxLength 255
-   - `TextInput::make('username')` — nullable, alphaDash
-   - `TextInput::make('employee_id')` — numeric, nullable, Select `Employee` (via `AcMarche\Hrm\Models\Employee`) if available
+   - `TextInput::make('username')` — required, disabled on edit (set once at create via LDAP picker)
+   - `TextInput::make('employee_id')` — numeric, nullable
    - `Toggle::make('no_mail')`
    - `TextInput::make('location')`
    - `Textarea::make('notes')` → columnSpanFull
 2. **Accès**
    - `TagsInput::make('emails')` — "Boîtes mails à partager"
    - `TagsInput::make('supervisors')` — "Responsables"
-   - `Select::make('modules')` — multiple, options from `\AcMarche\Security\Models\Module::query()->pluck('name','id')`
-   - `Select::make('externalApplications')` — `relationship('externalApplications', 'name')` multiple + preload + searchable
-   - `Select::make('folders')` — `relationship('folders', 'name')` multiple + preload + searchable
-3. **Matériel** (`Filament\Schemas\Components\Section`)
-   - Edit through relation manager; on create show `Fieldset` with:
-     `TextInput existing_pc`, `TextInput new_pc`, `Textarea other`, `Toggle vpn`
-4. **Téléphonie**
-   - `TextInput existing_number`, `Toggle new_number`, `Toggle external_number`, `TextInput mobile_number`
+3. **Matériel** — `Fieldset::make('Matériel informatique')->relationship('hardware')` with
+   `TextInput existing_pc`, `TextInput new_pc`, `Toggle vpn`, `Textarea other`
+4. **Téléphonie** — `Fieldset::make('Téléphonie')->relationship('phone')` with
+   `TextInput existing_number`, `TextInput mobile_number`, `Toggle new_number`, `Toggle external_number`
 
-**Table** (`Tables/AgentsTable`):
+On **Create**, the form is replaced by `UserForm::add($schema)` — a single `Select` of LDAP usernames. The selected username becomes the profile's `username`, which in turn links to the matching `User` row.
 
-| Column              | Class                                              | Notes                    |
-| ------------------- | -------------------------------------------------- | ------------------------ |
-| `last_name`         | `Filament\Tables\Columns\TextColumn`               | sortable, searchable     |
-| `first_name`        | idem                                               | sortable, searchable     |
-| `username`          | idem                                               | copyable, badge          |
-| `employee_id`       | idem                                               | toggleable, hidden default |
-| `externalApplications_count` | `TextColumn::make('external_applications_count')->counts('externalApplications')` | |
-| `folders_count`     | same pattern                                       |                          |
-| `no_mail`           | `IconColumn`                                       |                          |
-| `updated_at`        | `TextColumn` since                                 |                          |
+**Table** (`Tables/ProfileTables`):
+
+| Column              | Class         | Notes                      |
+| ------------------- | ------------- | -------------------------- |
+| `username`          | `TextColumn`  | sortable, searchable, badge, copyable |
+| `user.last_name`    | `TextColumn`  | display-only (cross-DB — not sortable/searchable) |
+| `user.first_name`   | `TextColumn`  | display-only (cross-DB) |
+| `location`          | `TextColumn`  | toggleable                 |
+| `external_applications_count` | `TextColumn::counts('externalApplications')` | |
+| `folders_count`     | `TextColumn::counts('folders')` |       |
+| `no_mail`           | `IconColumn`  |                            |
+| `updated_at`        | `TextColumn`  | since                      |
 
 Filters:
-- `Filament\Tables\Filters\TernaryFilter::make('no_mail')`
-- `SelectFilter::make('externalApplications')->relationship('externalApplications','name')->multiple()`
+- `TernaryFilter::make('no_mail')`
 - `TrashedFilter::make()`
 
-Row actions: `ViewAction`, `EditAction`, `DeleteAction`, `RestoreAction`, `ForceDeleteAction`.
+Row actions: `ViewAction`, `EditAction`, `DeleteAction`.
 Header action: `CreateAction`.
-Bulk: `DeleteBulkAction`, `RestoreBulkAction`.
+Bulk: `DeleteBulkAction`.
 
 **Pages** (`Pages/…`):
-- `ListAgents` (index)
-- `CreateAgent`
-- `EditAgent`
-- `ViewAgent`
+- `ListProfiles` (index)
+- `CreateProfile` — uses `UserForm::add()` for the LDAP-username picker
+- `EditProfile`
+- `ViewProfile` — title is `$record->user?->full_name ?? $record->username`
 
-**Relation managers** (attached to `AgentResource::getRelations()`):
-- `HardwareRelationManager` (hasOne — use `Forms` only)
-- `PhoneRelationManager` (hasOne)
-- `ExternalApplicationsRelationManager` (belongsToMany, attach/detach, searchable)
-- `FoldersRelationManager` (belongsToMany, attach/detach, tree-aware hint showing `parent.name` path)
-- `HistoriesRelationManager` (readonly: disable create/edit/delete, show diff of `old_value` / `new_value`)
-- `SharesRelationManager` (create with `shared_for` email, auto-fill `shared_by` with `auth()->user()->username`)
+**Relation managers** (attached to `ProfileResource::getRelations()`):
+- `ExternalApplicationsRelationManager` (belongsToMany, attach/detach)
+- `FoldersRelationManager` (belongsToMany, attach/detach, shows `parent.name`)
+- `HistoriesRelationManager` (readonly — diff of `old_value`/`new_value`)
+- `SharesRelationManager` (create with `shared_for` email, auto-fill `shared_by` = `auth()->user()->username`)
 
-**Observer** (`AcMarche\Agent\Observers\AgentObserver`):
-On `updated`, iterate `$agent->getChanges()` and write a row to `histories` for each changed attribute. Register via `#[ObservedBy]` on `Agent`.
+**Observer** (`AcMarche\Agent\Observers\ProfileObserver`):
+On `updated`, iterate `$profile->getChanges()` and write a row to `histories` for each changed attribute. Register via `#[ObservedBy]` on `Profile`.
 
 ### 3.2 `ExternalApplicationResource`
-- **Location:** `modules/Agent/src/Filament/Resources/ExternalApplications/ExternalApplicationResource.php`
-- Fields: `name` (required, unique), `description` (Textarea), `service_id` (Select pointing to existing Service model if relevant).
-- Table: `name`, `agents_count`, `created_at`.
-- Pages: Create / Edit / View / List.
+- Fields: `name` (required, unique), `description` (Textarea), `service_id`.
+- Table: `name`, `profiles_count`, `created_at`.
 
 ### 3.3 `FolderResource`
-- **Location:** `modules/Agent/src/Filament/Resources/Folders/FolderResource.php`
-- Tree-like list using `parent.name` breadcrumb, or use `kalnoy/nestedset` if ever added — for now use a `TextColumn` showing full path built in a model accessor.
-- Fields: `Select parent_id` (self-relation, searchable, nullable), `TextInput name`, `Textarea description`.
-- Table: `name`, `parent.name`, `agents_count`.
+- Tree-like list; `parent.name` column for breadcrumb.
+- Fields: `Select parent_id` (self-relation, nullable), `TextInput name`, `Textarea description`.
+- Table: `name`, `parent.name`, `profiles_count`.
 
 ---
 
 ## 4. Authorization
 
-For phase 1 authorization is role-based via the existing `AcMarche\Security` module:
+Role-based via the existing `AcMarche\Security` module:
 
-| Action  | Allowed role(s)           |
-| ------- | ------------------------- |
-| viewAny | `module:40 viewer`        |
-| view    | viewer                    |
-| create  | `module:40 editor`        |
-| update  | editor                    |
-| delete  | editor                    |
-| restore | `module:40 admin`         |
-| forceDelete | admin                 |
+| Action      | Allowed role(s)           |
+| ----------- | ------------------------- |
+| viewAny     | `module:40 viewer`        |
+| view        | viewer                    |
+| create      | `module:40 editor`        |
+| update      | editor                    |
+| delete      | editor                    |
+| restore     | `module:40 admin`         |
+| forceDelete | admin                     |
 
-Implement policies under `modules/Agent/src/Policies/{Agent,ExternalApplication,Folder}Policy.php` and register via `Gate::policy()` in `AgentServiceProvider::boot()`.
+Implement policies under `modules/Agent/src/Policies/{Profile,ExternalApplication,Folder}Policy.php` and register via `Gate::policy()` in `AgentServiceProvider::boot()`.
 
 `HistoryPolicy` / `SharePolicy` — read-only for non-admins; history has no update/delete.
 
@@ -260,13 +253,11 @@ Implement policies under `modules/Agent/src/Policies/{Agent,ExternalApplication,
 
 ## 5. Widgets (optional, phase 2)
 
-- `AgentsOverview` (StatsOverviewWidget):
-  - `Total agents` — `Agent::count()`
-  - `Sans mailbox` — `Agent::where('no_mail', true)->count()`
+- `ProfilesOverview` (StatsOverviewWidget):
+  - `Total profils` — `Profile::count()`
+  - `Sans mailbox` — `Profile::where('no_mail', true)->count()`
   - `Partagés cette semaine` — `Share::where('created_at', '>=', now()->subWeek())->count()`
-- `ApplicationsUsageChart` (BarChartWidget): top 10 external applications by assigned agents.
-
-Placement: on `ListAgents::getHeaderWidgets()` or a new `AgentsDashboard` page.
+- `ApplicationsUsageChart` (BarChartWidget): top 10 external applications by assigned profiles.
 
 ---
 
@@ -274,32 +265,22 @@ Placement: on `ListAgents::getHeaderWidgets()` or a new `AgentsDashboard` page.
 
 Feature tests under `modules/Agent/tests/Feature/`:
 
-1. `AgentResourceTest.php`
-   - `it lists agents` → `livewire(ListAgents::class)->assertCanSeeTableRecords($agents)`
-   - `it creates an agent` (fill form → `assertDatabaseHas('agents', …)`)
-   - `it updates an agent and writes history` → assert a row in `histories`
-   - `it soft deletes an agent`
-2. `ExternalApplicationResourceTest.php` — CRUD happy path
-3. `FolderResourceTest.php` — CRUD + parent/child selection
-4. `AgentRelationsTest.php`
-   - attach/detach external applications
-   - attach/detach folders
-   - hasOne hardware upsert
-   - hasOne phone upsert
-5. `ShareTest.php`
-   - creating a share auto-fills `shared_by`
-6. `Unit/AgentObserverTest.php`
-   - updating `emails` produces a history row with correct `old_value`/`new_value`
+1. `ProfileResourceTest.php` — list, create, update, soft-delete.
+2. `ExternalApplicationResourceTest.php` — CRUD happy path.
+3. `FolderResourceTest.php` — CRUD + parent/child.
+4. `ProfileRelationsTest.php` — pivots, hasOne upserts.
+5. `ShareTest.php` — auto-fill `shared_by`.
+6. `Unit/ProfileObserverTest.php` — history rows on update.
 
 Factories required under `modules/Agent/database/factories/`:
-`AgentFactory`, `ExternalApplicationFactory`, `FolderFactory`, `AgentHardwareFactory`,
-`AgentPhoneFactory`, `HistoryFactory`, `ShareFactory`.
+`ProfileFactory`, `ExternalApplicationFactory`, `FolderFactory`, `ProfileHardwareFactory`,
+`ProfilePhoneFactory`, `HistoryFactory`, `ShareFactory`.
 
 ---
 
 ## 7. Styling
 
-- **Icons (Heroicons):** Agents `identification`, External Applications `puzzle-piece`, Folders `folder`, Hardware `computer-desktop`, Phone `phone`, Histories `clock`, Shares `share`.
+- **Icons (Heroicons):** Profiles `identification`, External Applications `puzzle-piece`, Folders `folder`, Hardware `computer-desktop`, Phone `phone`, Histories `clock`, Shares `share`.
 - **Colors:** `primary` for active, `gray` for soft-deleted rows, `warning` on `no_mail = true`.
 
 ---
@@ -309,7 +290,7 @@ Factories required under `modules/Agent/database/factories/`:
 - [ ] `composer update acmarche/agent` done
 - [ ] `php artisan migrate --database=maria-agent` clean on a fresh DB **and** on a legacy `agent` DB
 - [ ] `AgentServiceProvider` discovered by Laravel package discovery
-- [ ] `AgentResource` appears in `/app` panel under "Gestion des agents"
+- [ ] `ProfileResource` appears in `/app` panel under "Gestion des agents"
 - [ ] Every list/relation manager eager-loads counts to avoid N+1
 - [ ] `vendor/bin/pint --dirty --format agent` clean
-- [ ] `php artisan test --compact --filter=Agent` green
+- [ ] `php artisan test --compact --filter=Profile` green

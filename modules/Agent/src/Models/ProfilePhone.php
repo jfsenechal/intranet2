@@ -11,22 +11,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Connection('maria-agent')]
-#[Table(name: 'agent_phone')]
+#[Table(name: 'profile_phone')]
 #[Fillable([
-    'agent_id',
+    'profile_id',
     'existing_number',
     'new_number',
     'external_number',
     'mobile_number',
 ])]
-final class AgentPhone extends Model
+final class ProfilePhone extends Model
 {
     /**
-     * @return BelongsTo<Agent>
+     * @return BelongsTo<Profile>
      */
-    public function agent(): BelongsTo
+    public function profile(): BelongsTo
     {
-        return $this->belongsTo(Agent::class);
+        return $this->belongsTo(Profile::class);
     }
 
     protected function casts(): array
