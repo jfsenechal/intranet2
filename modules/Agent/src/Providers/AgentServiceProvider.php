@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Agent\Providers;
 
+use AcMarche\Agent\Console\Commands\PruneProfilesCommand;
 use AcMarche\App\Traits\ModuleServiceProviderTrait;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,6 +21,12 @@ final class AgentServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                PruneProfilesCommand::class,
+            ]);
+        }
+
         $this->bootModule();
     }
 

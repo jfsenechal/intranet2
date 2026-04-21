@@ -28,9 +28,6 @@ return new class extends Migration
                 if (! Schema::connection('maria-agent')->hasColumn('profiles', 'created_at')) {
                     $table->timestamps();
                 }
-                if (! Schema::connection('maria-agent')->hasColumn('profiles', 'deleted_at')) {
-                    $table->softDeletes();
-                }
                 $table->string('username')->nullable(false)->change();
             });
         } elseif (! Schema::connection('maria-agent')->hasTable('profiles')) {
@@ -48,7 +45,6 @@ return new class extends Migration
                 $table->uuid();
                 $table->boolean('no_mail')->default(false);
                 $table->timestamps();
-                $table->softDeletes();
             });
         }
     }
