@@ -18,7 +18,7 @@ final class ListAgents extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label('Nouvelle fiche agent')
+                ->label('Ajouter un agent')
                 ->icon('tabler-plus'),
         ];
     }
