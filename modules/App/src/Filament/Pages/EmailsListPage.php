@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\App\Filament\Pages;
 
+use AcMarche\Security\Repository\LdapRepository;
 use BackedEnum;
 use Filament\Pages\Page;
 use Filament\Support\Icons\Heroicon;
@@ -23,5 +24,11 @@ final class EmailsListPage extends Page
     public function getTitle(): string
     {
         return 'Adresses mails des services';
+    }
+
+    public function mount(): void
+    {
+        $this->lists = LdapRepository::lists();
+        $this->services = LdapRepository::services();
     }
 }

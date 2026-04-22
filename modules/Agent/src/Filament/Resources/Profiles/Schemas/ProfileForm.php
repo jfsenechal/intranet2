@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Agent\Filament\Resources\Profiles\Schemas;
 
+use AcMarche\Agent\Filament\Forms\Components\FolderBrowser;
 use AcMarche\Security\Models\Module;
 use AcMarche\Security\Repository\LdapRepository;
 use Filament\Forms\Components\CheckboxList;
@@ -48,13 +49,33 @@ final class ProfileForm
                         ->schema([
                             Toggle::make('no_mail')
                                 ->label('Pas de mail professionnel nécessaire')
-                                ->helperText('Cet agent n\'a pas besoin d\'une adresse mail à son nom'),
+                                ->helperText('Cet agent ne nécessite pas d’adresse e-mail personnelle.'),
                             CheckboxList::make('emails')
                                 ->label('Mailboxes partagées')
                                 ->options(fn (): array => LdapRepository::listsAsOptions())
                                 ->columns(2)
-                                ->searchable()
-                                ->bulkToggleable(),
+                                ->searchable(),
+                        ]),
+                    Step::make('Téléphonie')
+                        ->icon(Heroicon::OutlinedPhone)
+                        ->schema([
+                            Fieldset::make('Téléphonie')
+                                ->relationship('phone')
+                                ->columns(2)
+                                ->schema([
+                                    TextInput::make('existing_number')
+                                        ->label('Numéro de téléphone')
+                                        ->helperText("Reprise d'un numéro existant ?"),
+                                    TextInput::make('mobile_number')
+                                        ->label('Numéro de mobile professionnel')
+                                        ->tel()
+                                        ->helperText('Format: +32475886322'),
+                                    Toggle::make('new_number')
+                                        ->label('Nouveau téléphone nécessaire ?'),
+                                    Toggle::make('external_number')
+                                        ->label('Numéro direct')
+                                        ->helperText("Doit-il être accessible depuis l'extérieur ?"),
+                                ]),
                         ]),
                     Step::make('Matériel')
                         ->icon(Heroicon::OutlinedComputerDesktop)
@@ -80,27 +101,6 @@ final class ProfileForm
                                         ->label('Autre matériel')
                                         ->rows(5)
                                         ->columnSpanFull(),
-                                ]),
-                        ]),
-                    Step::make('Téléphonie')
-                        ->icon(Heroicon::OutlinedPhone)
-                        ->schema([
-                            Fieldset::make('Téléphonie')
-                                ->relationship('phone')
-                                ->columns(2)
-                                ->schema([
-                                    TextInput::make('existing_number')
-                                        ->label('Numéro de téléphone')
-                                        ->helperText("Reprise d'un numéro existant ?"),
-                                    TextInput::make('mobile_number')
-                                        ->label('Numéro de mobile professionnel')
-                                        ->tel()
-                                        ->helperText('Format: +32475886322'),
-                                    Toggle::make('new_number')
-                                        ->label('Nouveau téléphone nécessaire ?'),
-                                    Toggle::make('external_number')
-                                        ->label('Numéro direct')
-                                        ->helperText("Doit-il être accessible depuis l'extérieur ?"),
                                 ]),
                         ]),
                     Step::make('Applications')
@@ -138,13 +138,9 @@ final class ProfileForm
                     Step::make('Dossiers')
                         ->icon(Heroicon::OutlinedDocumentText)
                         ->schema([
-                            CheckboxList::make('folders')
+                            FolderBrowser::make('folders')
                                 ->label('Dossiers')
-                                ->relationship('folders', 'name')
-                                ->columns(2)
-                                ->searchable()
-                                ->bulkToggleable(),
-
+                                ->relationship('folders'),
                         ]),
                     Step::make('Remarques')
                         ->icon(Heroicon::OutlinedDocumentText)

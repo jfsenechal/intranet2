@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Override;
+use UnitEnum;
 
 final class ExternalApplicationResource extends Resource
 {
@@ -22,6 +23,8 @@ final class ExternalApplicationResource extends Resource
 
     #[Override]
     protected static ?int $navigationSort = 2;
+
+    protected static string | UnitEnum | null $navigationGroup = 'Paramètres';
 
     #[Override]
     protected static ?string $recordTitleAttribute = 'name';
