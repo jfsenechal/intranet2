@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Repository;
 
+use AcMarche\Security\Ldap\EntryLdap;
 use AcMarche\Security\Ldap\UserLdap;
 use LdapRecord\Models\Model;
 use LdapRecord\Query\Collection;
@@ -29,29 +30,30 @@ final class LdapRepository
         return self::findByUsername($username) instanceof Model;
     }
 
-    public static function allLists(): Collection
+    public static function lists(): Collection
     {
-        return UserLdap::query()
-            ->setBaseDn(config('security.ldap.lists_dn'))
-            ->orderBy('sAMAccountName')
+        return EntryLdap::query()
+            ->in(config('security.ldap.lists_dn'))
+            ->whereHas('mail')
+            ->orderBy('mail')
             ->get();
     }
 
-    public static function allServices(): Collection
+    public static function services(): Collection
     {
-        return UserLdap::query()
-            ->setBaseDn(config('security.ldap.services_dn'))
-            ->orderBy('sAMAccountName')
+        return EntryLdap::query()
+            ->in(config('security.ldap.services_dn'))
+            ->whereHas('mail')
+            ->orderBy('mail')
             ->get();
     }
 
     /**
      * @return array<string, string>
      */
-    public static function listsAndServices(): array
+    public static function listsAsOptions(): array
     {
-        $items = self::toOptions(self::allLists())
-            + self::toOptions(self::allServices());
+        $items = self::toOptions(self::lists());
 
         ksort($items);
 
@@ -65,12 +67,12 @@ final class LdapRepository
     {
         $options = [];
         foreach ($entries as $entry) {
-            $username = $entry->getFirstAttribute('sAMAccountName');
-            if ($username === null) {
+            $email = $entry->getFirstAttribute('mail');
+            if ($email === null || $email === '') {
                 continue;
             }
 
-            $options[$username] = $entry->getFirstAttribute('displayName') ?? $username;
+            $options[$email] = $email;
         }
 
         return $options;

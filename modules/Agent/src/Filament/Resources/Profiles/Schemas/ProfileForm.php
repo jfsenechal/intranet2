@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Agent\Filament\Resources\Profiles\Schemas;
 
+use AcMarche\Security\Repository\LdapRepository;
+use Filament\Forms\Components\CheckboxList;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -45,9 +48,12 @@ final class ProfileForm
                             Toggle::make('no_mail')
                                 ->label('Pas de mail professionnel nécessaire')
                                 ->helperText('Cet agent n\'a pas besoin d\'une adresse mail à son nom'),
-                            TagsInput::make('emails')
+                            CheckboxList::make('emails')
                                 ->label('Mailboxes partagées')
-                                ->placeholder('Ajouter une adresse partagée'),
+                                ->options(fn(): array => LdapRepository::listsAsOptions())
+                                ->columns(2)
+                                ->searchable()
+                                ->bulkToggleable(),
                         ]),
                     Step::make('Matériel')
                         ->icon(Heroicon::OutlinedComputerDesktop)
@@ -59,11 +65,16 @@ final class ProfileForm
                                     TextInput::make('existing_pc')
                                         ->label('Numéro de ce PC')
                                         ->helperText("Utilisation d'un PC existant ?, si oui indiquez son numéro"),
-                                    TextInput::make('new_pc')
+                                    Select::make('new_pc')
                                         ->label('Nouveau PC nécessaire ?')
-                                        ->helperText('Non / Oui / Oui, un portable'),
+                                        ->options([
+                                            'Non' => 'Non',
+                                            'Oui' => 'Oui',
+                                            'Oui, un portable' => 'Oui, un portable',
+                                        ]),
                                     Toggle::make('vpn')
-                                        ->label('VPN'),
+                                        ->label('L\'agent fera-t-il du télétravail ?')
+                                        ->helperText('Si oui, il aura besoin d\'un VPN'),
                                     Textarea::make('other')
                                         ->label('Autre matériel')
                                         ->rows(5)
