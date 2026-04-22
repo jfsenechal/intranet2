@@ -6,7 +6,7 @@ namespace AcMarche\Courrier\Console\Commands;
 
 use AcMarche\Courrier\Models\Recipient;
 use AcMarche\Courrier\Models\Service;
-use AcMarche\Security\Ldap\UserLdap;
+use AcMarche\Security\Repository\LdapRepository;
 use Illuminate\Console\Command;
 use LdapRecord\Models\Model;
 use Override;
@@ -27,7 +27,7 @@ final class SyncCommand extends Command
 
         $this->cleanRecipients($dryRun);
 
-        $employes = UserLdap::all();
+        $employes = LdapRepository::allUsers();
 
         if ($employes->count() === 0) {
             $this->warn('No LDAP users found.');
@@ -109,7 +109,7 @@ final class SyncCommand extends Command
 
         foreach ($services as $service) {
             foreach ($service->recipients as $recipient) {
-                $entry = UserLdap::query()->where('sAMAccountName', $recipient->username)->first();
+                $entry = LdapRepository::findByUsername((string) $recipient->username);
 
                 if (! $entry instanceof Model || ! $this->isActive($entry)) {
                     if (! $dryRun) {
@@ -125,7 +125,7 @@ final class SyncCommand extends Command
     {
         $this->info('Cleaning recipients not in LDAP...');
 
-        $employes = UserLdap::all();
+        $employes = LdapRepository::allUsers();
         $ldapUsernames = $employes->map(fn (Model $e): mixed => $e->getFirstAttribute('sAMAccountName'))->filter()->toArray();
 
         if (count($ldapUsernames) <= 100) {

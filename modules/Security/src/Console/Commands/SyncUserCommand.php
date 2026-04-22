@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Security\Console\Commands;
 
 use AcMarche\Security\Ldap\UserLdap;
+use AcMarche\Security\Repository\LdapRepository;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +38,7 @@ final class SyncUserCommand extends Command
     {
         // $this->agentRole = Role::where('name', RoleEnum::AGENT->value)->first();
 
-        foreach (UserLdap::all() as $userLdap) {
+        foreach (LdapRepository::allUsers() as $userLdap) {
             if (! $userLdap->getFirstAttribute('mail')) {
                 continue;
             }
@@ -76,7 +77,7 @@ final class SyncUserCommand extends Command
     {
         $ldapUsernames = [];
 
-        foreach (UserLdap::all() as $userLdap) {
+        foreach (LdapRepository::allUsers() as $userLdap) {
             $ldapUsernames[] = $userLdap->getFirstAttribute('samaccountname');
         }
 

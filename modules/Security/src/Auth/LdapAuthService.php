@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Auth;
 
-use AcMarche\Security\Ldap\UserLdap;
+use AcMarche\Security\Repository\LdapRepository;
 use App\Models\User;
 use LdapRecord\Auth\PasswordRequiredException;
 use LdapRecord\Auth\UsernameRequiredException;
@@ -27,7 +27,7 @@ final class LdapAuthService
             return $user;
         }
         if ($user) {
-            $userLdap = UserLdap::where('sAMAccountName', '=', $user->username)->first();
+            $userLdap = LdapRepository::findByUsername((string) $user->username);
             if (! $userLdap instanceof Model) {
 
                 return null;

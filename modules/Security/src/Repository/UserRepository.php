@@ -31,7 +31,7 @@ final class UserRepository
     public static function listLdapUsersForSelect(): array
     {
         $users = [];
-        foreach (UserLdap::all() as $userLdap) {
+        foreach (LdapRepository::allUsers() as $userLdap) {
             if (! $userLdap->getFirstAttribute('mail')) {
                 continue;
             }

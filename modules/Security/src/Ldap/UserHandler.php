@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Security\Ldap;
 
+use AcMarche\Security\Repository\LdapRepository;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Str;
@@ -20,7 +21,7 @@ final class UserHandler
         if (User::where('username', $username)->first()) {
             throw new Exception('Utilisateur déjà existant');
         }
-        if (($userLdap = UserLdap::query()->findBy('sAMAccountName', $username)) instanceof Model) {
+        if (($userLdap = LdapRepository::findByUsername($username)) instanceof Model) {
             $dataUser = User::generateDataFromLdap($userLdap);
             $dataUser['username'] = $username;
             $dataUser['password'] = Str::password();

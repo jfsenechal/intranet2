@@ -6,7 +6,7 @@ namespace AcMarche\Agent\Filament\Resources\Profiles\Pages;
 
 use AcMarche\Agent\Filament\Resources\Profiles\ProfileResource;
 use AcMarche\Hrm\Models\Employee;
-use AcMarche\Security\Ldap\UserLdap;
+use AcMarche\Security\Repository\LdapRepository;
 use AcMarche\Security\Repository\UserRepository;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
@@ -105,7 +105,7 @@ final class CreateProfile extends CreateRecord
         $data['modules'] ??= [];
 
         if (! empty($data['username'])) {
-            if (($userLdap = UserLdap::query()->findBy('sAMAccountName', $data['username'])) instanceof Model) {
+            if (($userLdap = LdapRepository::findByUsername($data['username'])) instanceof Model) {
                 $data['first_name'] = $userLdap->getFirstAttribute('givenname');
                 $data['last_name'] = $userLdap->getFirstAttribute('sn');
             }

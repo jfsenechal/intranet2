@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace AcMarche\Agent\Console\Commands;
 
 use AcMarche\Agent\Models\Profile;
-use AcMarche\Security\Ldap\UserLdap;
+use AcMarche\Security\Repository\LdapRepository;
 use Illuminate\Console\Command;
-use LdapRecord\Models\Model as LdapModel;
 use Override;
 use Symfony\Component\Console\Command\Command as SfCommand;
 
@@ -53,10 +52,6 @@ final class PruneProfilesCommand extends Command
 
     private function existsInLdap(?string $username): bool
     {
-        if ($username === null || $username === '') {
-            return false;
-        }
-
-        return UserLdap::query()->findBy('sAMAccountName', $username) instanceof LdapModel;
+        return LdapRepository::existsByUsername($username);
     }
 }

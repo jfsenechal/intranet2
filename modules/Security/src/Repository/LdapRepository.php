@@ -5,24 +5,31 @@ declare(strict_types=1);
 namespace AcMarche\Security\Repository;
 
 use AcMarche\Security\Ldap\UserLdap;
+use LdapRecord\Models\Model;
 use LdapRecord\Query\Collection;
 
 final class LdapRepository
 {
-    /**
-     * @return array<string, string>
-     */
-    public function listsAndServices(): array
+    public static function allUsers(): Collection
     {
-        $items = $this->toOptions($this->allLists())
-            + $this->toOptions($this->allServices());
-
-        ksort($items);
-
-        return $items;
+        return UserLdap::all();
     }
 
-    public function allLists(): Collection
+    public static function findByUsername(string $username): ?Model
+    {
+        return UserLdap::query()->findBy('sAMAccountName', $username);
+    }
+
+    public static function existsByUsername(?string $username): bool
+    {
+        if ($username === null || $username === '') {
+            return false;
+        }
+
+        return self::findByUsername($username) instanceof Model;
+    }
+
+    public static function allLists(): Collection
     {
         return UserLdap::query()
             ->setBaseDn(config('security.ldap.lists_dn'))
@@ -30,7 +37,7 @@ final class LdapRepository
             ->get();
     }
 
-    public function allServices(): Collection
+    public static function allServices(): Collection
     {
         return UserLdap::query()
             ->setBaseDn(config('security.ldap.services_dn'))
@@ -41,7 +48,20 @@ final class LdapRepository
     /**
      * @return array<string, string>
      */
-    private function toOptions(Collection $entries): array
+    public static function listsAndServices(): array
+    {
+        $items = self::toOptions(self::allLists())
+            + self::toOptions(self::allServices());
+
+        ksort($items);
+
+        return $items;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private static function toOptions(Collection $entries): array
     {
         $options = [];
         foreach ($entries as $entry) {
