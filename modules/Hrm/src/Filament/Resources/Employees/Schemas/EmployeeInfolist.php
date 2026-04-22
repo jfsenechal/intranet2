@@ -17,6 +17,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
+use Filament\Support\Enums\IconPosition;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Facades\Mail;
 
@@ -174,6 +175,8 @@ final class EmployeeInfolist
                                         Action::make('requestProfile')
                                             ->label('Demander un compte informatique')
                                             ->icon(Heroicon::OutlinedEnvelope)
+                                            ->iconPosition(IconPosition::After)
+                                            ->link()
                                             ->color('primary')
                                             ->requiresConfirmation()
                                             ->modalHeading('Demander un compte informatique')

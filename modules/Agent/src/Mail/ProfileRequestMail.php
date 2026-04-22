@@ -23,13 +23,15 @@ final class ProfileRequestMail extends Mailable
     public function __construct(
         public readonly Employee $employee,
     ) {
-        $this->subject = '[GRH] Demande de compte informatique - '.mb_trim($employee->first_name.' '.$employee->last_name);
+        $this->subject = '[GRH] Demande de compte informatique - '.mb_trim(
+                $employee->first_name.' '.$employee->last_name
+            );
     }
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(config('mail.from.address'), (string) config('app.name')),
+            from: new Address(config('mail.from.address'), (string)config('app.name')),
             subject: $this->subject,
         );
     }
@@ -37,12 +39,12 @@ final class ProfileRequestMail extends Mailable
     public function content(): Content
     {
         $this->logo = public_path('images/Marche_logo.png');
-        if (! file_exists($this->logo)) {
+        if (!file_exists($this->logo)) {
             $this->logo = null;
         }
 
         $employers = $this->employee->activeContracts
-            ->map(fn ($contract) => $contract->employer?->name)
+            ->map(fn($contract) => $contract->employer?->name)
             ->filter()
             ->unique()
             ->implode(', ');
@@ -59,7 +61,7 @@ final class ProfileRequestMail extends Mailable
             with: [
                 'employee' => $this->employee,
                 'employeeLabel' => $label,
-                'url' => CreateProfile::getUrl(['employee_id' => $this->employee->id]),
+                'url' => CreateProfile::getUrl(['employee_id' => $this->employee->id], panel: 'agent-panel'),
                 'logo' => $this->logo,
             ],
         );
