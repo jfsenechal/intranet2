@@ -94,8 +94,8 @@ final class ProfileForm
                                         ->helperText("Reprise d'un numéro existant ?"),
                                     TextInput::make('mobile_number')
                                         ->label('Numéro de mobile professionnel')
-                                        ->helperText('Format: +32475886322')
-                                        ->regex('/^\+?[0-9\s]{6,20}$/'),
+                                        ->tel()
+                                        ->helperText('Format: +32475886322'),
                                     Toggle::make('new_number')
                                         ->label('Nouveau téléphone nécessaire ?'),
                                     Toggle::make('external_number')
