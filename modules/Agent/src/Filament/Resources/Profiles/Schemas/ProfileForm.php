@@ -27,14 +27,11 @@ final class ProfileForm
                         ->columns(2)
                         ->schema([
                             TextInput::make('username')
-                                ->label('Identifiant')
+                                ->label('Identifiant Ldap')
                                 ->required()
                                 ->disabled()
                                 ->dehydrated()
                                 ->maxLength(255),
-                            TextInput::make('employee_id')
-                                ->label('Matricule RH')
-                                ->numeric(),
                             TextInput::make('location')
                                 ->label('Dans quel local travaillera-t-il ?')
                                 ->columnSpanFull(),

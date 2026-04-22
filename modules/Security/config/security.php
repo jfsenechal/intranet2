@@ -3,5 +3,8 @@
 declare(strict_types=1);
 
 return [
-    // Security module configuration
+    'ldap' => [
+        'lists_dn' => env('LDAP_DEFAULT_LIST'),
+        'services_dn' => env('LDAP_DEFAULT_SERVICES'),
+    ],
 ];

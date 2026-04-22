@@ -21,15 +21,16 @@ final class EditProfile extends EditRecord
         return 'Profil de '.$this->record->fullName();
     }
 
+    public function getAllRelationManagers(): array
+    {
+        return [];
+    }
+
     protected function getHeaderActions(): array
     {
         return [
             ViewAction::make()
                 ->icon(Heroicon::Eye),
         ];
-    }
-
-    public function getAllRelationManagers(): array
-    {return [];
     }
 }
