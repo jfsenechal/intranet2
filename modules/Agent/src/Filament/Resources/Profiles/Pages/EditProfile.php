@@ -28,4 +28,8 @@ final class EditProfile extends EditRecord
                 ->icon(Heroicon::Eye),
         ];
     }
+
+    public function getAllRelationManagers(): array
+    {return [];
+    }
 }

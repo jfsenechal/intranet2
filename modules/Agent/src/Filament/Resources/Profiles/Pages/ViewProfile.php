@@ -24,7 +24,7 @@ final class ViewProfile extends ViewRecord
         /** @var Profile $record */
         $record = $this->record;
 
-        return $record->full_name ?? $record->username;
+        return 'Profil de '.$record->fullName() ?? $record->username;
     }
 
     public function infolist(Schema $schema): Schema
