@@ -121,8 +121,14 @@ final class ProfileForm
                                 ->options(fn (): array => Module::query()
                                     ->where('is_public', false)
                                     ->orderBy('name')
-                                    ->pluck('name', 'id')
+                                    ->get()
+                                    ->mapWithKeys(fn (Module $module): array => [
+                                        $module->id => $module->description !== null && $module->description !== ''
+                                            ? $module->name.' <span class="text-sm text-gray-500 dark:text-gray-400">('.e($module->description).')</span>'
+                                            : $module->name,
+                                    ])
                                     ->all())
+                                ->allowHtml()
                                 ->columns(2)
                                 ->searchable()
                                 ->bulkToggleable(),
