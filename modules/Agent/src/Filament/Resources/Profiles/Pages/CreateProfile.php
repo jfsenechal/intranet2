@@ -13,6 +13,7 @@ use Filament\Forms\Components\Select;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Str;
 use LdapRecord\Models\Model;
 use Livewire\Attributes\Url;
@@ -42,6 +43,18 @@ final class CreateProfile extends CreateRecord
                 ->with(['activeContracts.service', 'savedEmployer'])
                 ->find($this->employeeId);
         }
+    }
+
+    #[Override]
+    public function getTitle(): string|Htmlable
+    {
+        if ($this->employee instanceof Employee) {
+            $fullName = mb_trim($this->employee->first_name.' '.$this->employee->last_name);
+
+            return 'Ajouter un profil pour '.$fullName;
+        }
+
+        return self::$title ?? 'Ajouter un profil';
     }
 
     public function form(Schema $schema): Schema

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Agent\Models;
 
-use AcMarche\Security\Models\HasUserAdd;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -30,8 +29,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 ])]
 final class Profile extends Model
 {
-    use HasUserAdd;
-
     public function fullName(): string
     {
         return $this->last_name.' '.$this->first_name;
@@ -103,7 +100,9 @@ final class Profile extends Model
 
     protected static function booted(): void
     {
-        self::bootHasUser();
+        self::deleting(function (self $profile): void {
+            $profile->histories()->delete();
+        });
     }
 
     protected function casts(): array

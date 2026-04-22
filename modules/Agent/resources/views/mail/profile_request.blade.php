@@ -1,4 +1,4 @@
-@component('agent::mail._layout', ['title' => 'Demande de compte informatique', 'logo' => $logo])
+@component('agent::mail._layout', ['title' => 'Demande de compte informatique', 'logo' => $logo, 'message' => $message])
     <p>Bonjour,</p>
 
     <p>
