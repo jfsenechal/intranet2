@@ -60,7 +60,7 @@ final class ProfileTables
             ])
             ->filters([
                 TernaryFilter::make('no_mail')->label('Sans mailbox'),
-                TernaryFilter::make('employee_id')->label('Sans employee_id')
+                TernaryFilter::make('employee_id')->label('Sans employee_id'),
             ])
             ->recordActions([
                 ViewAction::make(),

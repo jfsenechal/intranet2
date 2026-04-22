@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Agent\Filament\Resources\Profiles\Schemas;
 
+use AcMarche\Security\Models\Module;
 use AcMarche\Security\Repository\LdapRepository;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Select;
@@ -50,7 +51,7 @@ final class ProfileForm
                                 ->helperText('Cet agent n\'a pas besoin d\'une adresse mail à son nom'),
                             CheckboxList::make('emails')
                                 ->label('Mailboxes partagées')
-                                ->options(fn(): array => LdapRepository::listsAsOptions())
+                                ->options(fn (): array => LdapRepository::listsAsOptions())
                                 ->columns(2)
                                 ->searchable()
                                 ->bulkToggleable(),
@@ -101,6 +102,43 @@ final class ProfileForm
                                         ->label('Numéro direct')
                                         ->helperText("Doit-il être accessible depuis l'extérieur ?"),
                                 ]),
+                        ]),
+                    Step::make('Applications')
+                        ->icon(Heroicon::OutlinedKey)
+                        ->schema([
+                            CheckboxList::make('externalApplications')
+                                ->label('Applications externes')
+                                ->relationship('externalApplications', 'name')
+                                ->columns(2)
+                                ->searchable()
+                                ->bulkToggleable(),
+                        ]),
+                    Step::make('Modules')
+                        ->icon(Heroicon::OutlinedDocumentText)
+                        ->schema([
+                            CheckboxList::make('modules')
+                                ->label('Modules de l\'inttranet')
+                                ->options(fn (): array => Module::query()
+                                    ->where('is_public', false)
+                                    ->orderBy('name')
+                                    ->pluck('name', 'id')
+                                    ->all())
+                                ->columns(2)
+                                ->searchable()
+                                ->bulkToggleable(),
+
+                        ]),
+
+                    Step::make('Dossiers')
+                        ->icon(Heroicon::OutlinedDocumentText)
+                        ->schema([
+                            CheckboxList::make('folders')
+                                ->label('Dossiers')
+                                ->relationship('folders', 'name')
+                                ->columns(2)
+                                ->searchable()
+                                ->bulkToggleable(),
+
                         ]),
                     Step::make('Remarques')
                         ->icon(Heroicon::OutlinedDocumentText)

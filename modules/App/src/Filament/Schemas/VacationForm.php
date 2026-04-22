@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\App\Filament\Schemas;
 
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
-class VacationForm
+final class VacationForm
 {
     public static function configure(Schema $schema): Schema
     {
@@ -16,7 +18,7 @@ class VacationForm
                 TextInput::make('subject')
                     ->label('Sujet')
                     ->required(),
-                TextArea::make('message')
+                Textarea::make('message')
                     ->label('Message')
                     ->required(),
             ]);
