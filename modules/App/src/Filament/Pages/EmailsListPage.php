@@ -31,10 +31,29 @@ final class EmailsListPage extends Page
      */
     #[Override]
     protected function getViewData(): array
-    {dd( LdapRepository::services());
+    {
+        $data = [];
+        foreach (LdapRepository::services() as $service) {
+            $data[] = [
+                'mail' => $service->getFirstAttribute('mail'),
+                'proxyaddresses' => [],
+                'description' => $service->getFirstAttribute('description'),
+            ];
+
+        }
+        foreach (LdapRepository::lists() as $list) {
+            if (!$list->getAttribute('proxyaddresses')) {
+                continue;
+            }
+            $data[] = [
+                'mail' => $list->getFirstAttribute('mail'),
+                'proxyaddresses' => $list->getAttribute('proxyaddresses'),
+                'description' => $list->getFirstAttribute('description'),
+            ];
+        }
+
         return [
-            'lists' => LdapRepository::lists(),
-            'services' => LdapRepository::services(),
+            'data' => $data,
         ];
     }
 }

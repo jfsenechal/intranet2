@@ -8,5 +8,7 @@ use LdapRecord\Models\Model;
 
 final class EntryLdap extends Model
 {
-    public static array $objectClasses = [];
+    public static array $objectClasses = [
+
+    ];
 }

@@ -34,6 +34,8 @@ final class LdapRepository
     {
         return EntryLdap::query()
             ->in(config('security.ldap.lists_dn'))
+            ->whereHas('mail')
+            ->orderBy('sAMAccountName')
             ->get();
     }
 
@@ -42,7 +44,7 @@ final class LdapRepository
         return EntryLdap::query()
             ->in(config('security.ldap.services_dn'))
             ->whereHas('mail')
-            ->orderBy('mail')
+            ->orderBy('sAMAccountName')
             ->get();
     }
 
