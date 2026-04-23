@@ -27,7 +27,7 @@ final class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->id('admin-panel')
-            ->path('admin22')
+            ->path('admin')
             ->spa()
             ->profile()
             ->sidebarCollapsibleOnDesktop()

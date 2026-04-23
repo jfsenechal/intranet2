@@ -26,9 +26,15 @@ final class EmailsListPage extends Page
         return 'Adresses mails des services';
     }
 
-    public function mount(): void
-    {
-        $this->lists = LdapRepository::lists();
-        $this->services = LdapRepository::services();
+    /**
+     * @return array<string, mixed>
+     */
+    #[Override]
+    protected function getViewData(): array
+    {dd( LdapRepository::services());
+        return [
+            'lists' => LdapRepository::lists(),
+            'services' => LdapRepository::services(),
+        ];
     }
 }
