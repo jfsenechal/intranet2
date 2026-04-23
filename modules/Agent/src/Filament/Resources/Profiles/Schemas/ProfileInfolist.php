@@ -9,6 +9,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Model;
 
 final class ProfileInfolist
 {
@@ -23,7 +24,8 @@ final class ProfileInfolist
                         TextEntry::make('username')->label('Identifiant')->copyable(),
                         TextEntry::make('employee_id')->label('Matricule RH'),
                         TextEntry::make('location')->label('Emplacement'),
-                        IconEntry::make('no_mail')->label('Pas de mailbox')->falseIcon(false),
+                        IconEntry::make('no_mail')->label('Pas de mail professionnel nécessaire')
+                            ->visible(fn(Model $record) => $record->no_mail === true),
                         TextEntry::make('notes')->label('Remarques')->columnSpanFull(),
                     ]),
                 Section::make('Accès')
