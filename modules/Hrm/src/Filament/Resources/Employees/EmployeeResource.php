@@ -21,6 +21,8 @@ use AcMarche\Hrm\Models\Employee;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Database\Eloquent\Model;
 use Override;
 use UnitEnum;
 
@@ -34,6 +36,9 @@ final class EmployeeResource extends Resource
 
     #[Override]
     protected static ?int $navigationSort = 1;
+
+    #[Override]
+    protected static ?string $recordTitleAttribute = 'last_name';
 
     public static function getNavigationIcon(): string
     {
@@ -53,6 +58,19 @@ final class EmployeeResource extends Resource
     public static function getPluralModelLabel(): string
     {
         return 'Agents';
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return [
+            'last_name',
+            'first_name',
+        ];
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string|Htmlable
+    {
+        return $record->last_name.' '.$record->first_name;
     }
 
     public static function form(Schema $schema): Schema
