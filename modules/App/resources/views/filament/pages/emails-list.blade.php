@@ -1,7 +1,5 @@
 <x-filament-panels::page>
     <x-filament::section>
-        <x-slot name="heading">Adresses mails des services</x-slot>
-
         <table class="w-full">
             <thead>
             <tr class="text-left">
