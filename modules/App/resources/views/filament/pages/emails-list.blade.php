@@ -34,7 +34,7 @@
                                 </div>
                             </x-filament::dropdown>
                             @else
-                            <div>{{$item['description']}}</div>
+                            <div>Boîte indépendante</div>
                         @endif
                     </td>
                 </tr>

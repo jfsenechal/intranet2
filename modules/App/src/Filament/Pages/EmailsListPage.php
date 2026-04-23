@@ -42,7 +42,7 @@ final class EmailsListPage extends Page
 
         }
         foreach (LdapRepository::lists() as $list) {
-            if (!$list->getAttribute('proxyaddresses')) {
+            if (! $list->getAttribute('proxyaddresses')) {
                 continue;
             }
             $data[] = [
@@ -51,6 +51,8 @@ final class EmailsListPage extends Page
                 'description' => $list->getFirstAttribute('description'),
             ];
         }
+
+        usort($data, fn (array $a, array $b): int => strcasecmp((string) $a['mail'], (string) $b['mail']));
 
         return [
             'data' => $data,
