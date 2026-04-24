@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Pages;
 
-use AcMarche\Security\Handler\MigrationHandler;
+use AcMarche\Document\Models\Document;
+use AcMarche\News\Models\News;
 use BackedEnum;
 use Filament\Pages\Page;
 use Filament\Support\Enums\Width;
@@ -14,6 +15,12 @@ use Override;
 
 final class Homepage extends Page
 {
+    public Collection $latestNews;
+
+    public Collection $latestDocuments;
+
+    public Collection $ownedCourriers;
+
     #[Override]
     protected static string|null|BackedEnum $navigationIcon = Heroicon::DocumentText;
 
@@ -36,14 +43,6 @@ final class Homepage extends Page
         return true;
     }
 
-    /**
-     * Get all tabs with their modules
-     */
-    public static function getTabsWithModules(): Collection
-    {
-        return MigrationHandler::getTabsWithModules();
-    }
-
     public function getTitle(): string
     {
         return 'Accueil ';
@@ -62,5 +61,41 @@ final class Homepage extends Page
     public function getColumns(): int
     {
         return 2;
+    }
+
+    public const array RSS_FEEDS = [
+        'lesoir' => 'https://www.lesoir.be/rss/31874/cible_principale',
+        'avenir' => 'https://www.lavenir.net/rss.aspx?foto=1&intro=1&section=zipcode&zipcode=6900',
+        'uvcw' => 'https://www.uvcw.be/rss/fil-rss.xml',
+        'dhnet' => 'https://www.dhnet.be/rss/section/regions/luxembourg.xml',
+    ];
+
+    protected function pressRelease(): array
+    {
+        $response = $this->httpClient->request('GET', 'https://presse.marche.be/api/articles');
+        $dataString = $response->getContent();
+        $data = json_decode($dataString, flags: JSON_THROW_ON_ERROR);
+        if (is_array($data)) {
+            return ['title' => 'Revue de presse', 'items' => $data];
+        }
+
+        return [];
+    }
+
+    public function mount(): void
+    {
+        /**
+         * add rss
+         */
+
+        $this->latestNews = News::query()
+            ->latest('created_at')
+            ->limit(5)
+            ->get();
+
+        $this->latestDocuments = Document::query()
+            ->latest('created_at')
+            ->limit(5)
+            ->get();
     }
 }

@@ -134,13 +134,6 @@ final class ActionTables
             ->expandableLimitedList()
             ->toggleable(isToggledHiddenByDefault: true);
 
-        $columns[] = TextColumn::make('odds.name')
-            ->label('ODD')
-            ->listWithLineBreaks()
-            ->limitList(2)
-            ->expandableLimitedList()
-            ->toggleable(isToggledHiddenByDefault: true);
-
         $columns[] = TextColumn::make('description')
             ->label('Description')
             ->limit(50)
@@ -321,6 +314,12 @@ final class ActionTables
                         fn ($user): string => $user->first_name.' '.$user->last_name
                     )->join(', ')
                 )
+                ->toggleable(isToggledHiddenByDefault: true),
+            TextColumn::make('odds.name')
+                ->label('ODD')
+                ->listWithLineBreaks()
+                ->limitList(2)
+                ->expandableLimitedList()
                 ->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('due_date')
                 ->label('Date échéance')
