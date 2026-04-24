@@ -15,17 +15,26 @@ new class extends Component {
 };
 ?>
 
-<div>
+<div class="flex flex-col items-center">
+    <div class="mb-3 px-3">
+        <a
+            href="{{ route('homepage') }}"
+            class="flex w-full items-center justify-center gap-2 rounded-lg bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:bg-purple-700 dark:hover:bg-purple-600"
+        >
+            <x-filament::icon icon="heroicon-m-home" class="h-5 w-5"/>
+            Accueil
+        </a>
+    </div>
     {{-- Trigger Button (rendered in sidebar) --}}
     <div class="mb-3 px-3">
         <button
             x-data
             @click="window.dispatchEvent(new CustomEvent('toggle-modules-launcher'))"
             type="button"
-            class="flex w-full items-center justify-center gap-2 rounded-lg bg-pink-400 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:bg-purple-700 dark:hover:bg-purple-600"
+            class="flex w-full items-center justify-center gap-2 rounded-lg bg-pink-400 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-900 focus:outline-none focus:ring-2 focus:ring-cyan-900 focus:ring-offset-2 dark:bg-purple-700 dark:hover:bg-purple-600"
         >
             <x-filament::icon icon="heroicon-m-squares-2x2" class="h-5 w-5"/>
-            Modules
+            Applications
         </button>
     </div>
 
