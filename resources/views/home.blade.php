@@ -3,39 +3,26 @@
     use AcMarche\News\Filament\Resources\News\NewsResource;
     use Illuminate\Support\Facades\Storage;
 @endphp
-
-<x-filament-panels::page>
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Intranet — Accueil</title>
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700,800" rel="stylesheet"/>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         @keyframes fade-in-up {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
         }
-
-        @keyframes pulse-ring {
-            0% { transform: scale(0.9); opacity: 0.7; }
-            80%, 100% { transform: scale(1.4); opacity: 0; }
-        }
-
         .animate-fade-in-up { animation: fade-in-up 0.6s ease-out both; }
         .animate-float { animation: float 3s ease-in-out infinite; }
-        .animate-pulse-ring::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 9999px;
-            background: currentColor;
-            animation: pulse-ring 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-        }
 
         .card-hover {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -45,39 +32,62 @@
             box-shadow: 0 20px 40px -10px rgb(0 0 0 / 0.15);
         }
 
-        .gradient-sport {
-            background: linear-gradient(135deg, #f97316 0%, #ef4444 50%, #ec4899 100%);
-        }
-        .gradient-birthday {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ef4444 100%);
-        }
-        .gradient-news {
-            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
-        }
-        .gradient-documents {
-            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
-        }
-        .gradient-rss {
-            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
-        }
-        .gradient-press {
-            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
-        }
+        .gradient-sport { background: linear-gradient(135deg, #f97316 0%, #ef4444 50%, #ec4899 100%); }
+        .gradient-birthday { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ef4444 100%); }
+        .gradient-news { background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%); }
+        .gradient-documents { background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); }
+        .gradient-rss { background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%); }
+        .gradient-press { background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%); }
+        .gradient-hero { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #6366f1 100%); }
 
         [style*="--delay"] { animation-delay: var(--delay); }
-    </style>
 
-    <div class="w-full space-y-8">
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        body { font-family: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif; }
+    </style>
+</head>
+<body class="min-h-full bg-gradient-to-br from-gray-50 to-gray-100 text-gray-900">
+
+    <header class="sticky top-0 z-40 border-b border-gray-200 bg-white/80 backdrop-blur-md">
+        <div class="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-4">
+            <div class="flex items-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 text-white font-bold shadow-md">
+                    M
+                </div>
+                <div>
+                    <p class="text-sm font-semibold uppercase tracking-wider text-gray-500">Intranet</p>
+                    <p class="text-lg font-bold text-gray-900">Ville de Marche-en-Famenne</p>
+                </div>
+            </div>
+            <a
+                href="{{ url('/app/login') }}"
+                class="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-blue-700 hover:shadow-lg"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                </svg>
+                Se connecter
+            </a>
+        </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-screen-2xl space-y-8 px-6 py-8">
         {{-- Hero banner --}}
-        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-500 via-primary-600 to-primary-800 p-8 text-white shadow-2xl animate-fade-in-up">
+        <div class="relative overflow-hidden rounded-3xl gradient-hero p-10 text-white shadow-2xl animate-fade-in-up">
             <div class="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
             <div class="absolute -bottom-20 -left-10 h-72 w-72 rounded-full bg-white/5 blur-3xl"></div>
             <div class="relative">
                 <p class="text-sm font-medium uppercase tracking-wider opacity-80">
                     {{ \Illuminate\Support\Carbon::now()->translatedFormat('l d F Y') }}
                 </p>
-                <h1 class="mt-2 text-4xl font-extrabold md:text-5xl">Bienvenue sur l'intranet</h1>
-                <p class="mt-3 max-w-2xl text-lg opacity-90">
+                <h1 class="mt-2 text-4xl font-extrabold md:text-6xl">Bienvenue sur l'intranet</h1>
+                <p class="mt-3 max-w-2xl text-lg opacity-90 md:text-xl">
                     Votre portail central pour les actualités, documents et informations du personnel.
                 </p>
             </div>
@@ -86,7 +96,7 @@
         {{-- Top row: Birthdays + Sports --}}
         <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {{-- Birthdays --}}
-            <div class="card-hover overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-800 animate-fade-in-up" style="--delay: 0.1s">
+            <div class="card-hover overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-gray-200 animate-fade-in-up" style="--delay: 0.1s">
                 <div class="gradient-birthday flex items-center gap-3 p-6 text-white">
                     <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -102,7 +112,7 @@
                 </div>
                 <div class="p-6">
                     @forelse ($todayBirthdays as $index => $employee)
-                        <div class="flex items-center gap-4 border-b border-gray-100 py-3 last:border-0 dark:border-gray-800 animate-fade-in-up" style="--delay: {{ 0.2 + ($index * 0.05) }}s">
+                        <div class="flex items-center gap-4 border-b border-gray-100 py-3 last:border-0 animate-fade-in-up" style="--delay: {{ 0.2 + ($index * 0.05) }}s">
                             <div class="relative">
                                 @if ($employee->photo && Storage::disk('public')->exists($employee->photo))
                                     <img
@@ -120,11 +130,11 @@
                                 <span class="absolute -right-1 -top-1 text-xl animate-float">🎂</span>
                             </div>
                             <div class="min-w-0 flex-1">
-                                <p class="truncate font-semibold text-gray-900 dark:text-gray-100">
+                                <p class="truncate font-semibold text-gray-900">
                                     {{ $employee->first_name }} {{ $employee->last_name }}
                                 </p>
                                 @if ($employee->activeContracts->first()?->job_title)
-                                    <p class="truncate text-sm text-gray-500 dark:text-gray-400">
+                                    <p class="truncate text-sm text-gray-500">
                                         {{ $employee->activeContracts->first()->job_title }}
                                     </p>
                                 @endif
@@ -133,7 +143,7 @@
                     @empty
                         <div class="flex flex-col items-center justify-center py-8 text-center">
                             <span class="text-4xl">🎈</span>
-                            <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                            <p class="mt-2 text-sm text-gray-500">
                                 Aucun anniversaire aujourd'hui.
                             </p>
                         </div>
@@ -144,8 +154,7 @@
             {{-- Sports --}}
             <div class="card-hover relative overflow-hidden rounded-2xl shadow-lg animate-fade-in-up" style="--delay: 0.15s">
                 <div class="gradient-sport absolute inset-0"></div>
-                <div class="absolute inset-0 bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22><g fill=%22none%22 fill-rule=%22evenodd%22><g fill=%22%23fff%22 fill-opacity=%220.08%22><path d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/></g></g></svg>')]"></div>
-                <div class="relative flex min-h-[280px] flex-col justify-between p-8 text-white">
+                <div class="relative flex min-h-[300px] flex-col justify-between p-8 text-white">
                     <div class="flex items-center gap-3">
                         <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur animate-float">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -161,7 +170,7 @@
                         <p class="mt-2 text-xl opacity-90">pour le personnel</p>
                     </div>
                     <div class="flex items-center gap-4 text-6xl">
-                        <span class="animate-float" style="--delay: 0s">⚽</span>
+                        <span class="animate-float">⚽</span>
                         <span class="animate-float" style="animation-delay: 0.3s">🏃</span>
                         <span class="animate-float" style="animation-delay: 0.6s">🏋️</span>
                         <span class="animate-float" style="animation-delay: 0.9s">🚴</span>
@@ -173,7 +182,7 @@
         {{-- Middle row: News + Documents --}}
         <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {{-- Latest news --}}
-            <div class="card-hover overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-800 animate-fade-in-up" style="--delay: 0.2s">
+            <div class="card-hover overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-gray-200 animate-fade-in-up" style="--delay: 0.2s">
                 <div class="gradient-news flex items-center justify-between p-5 text-white">
                     <div class="flex items-center gap-3">
                         <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/20 backdrop-blur">
@@ -187,19 +196,19 @@
                         {{ $latestNews->count() }}
                     </span>
                 </div>
-                <div class="divide-y divide-gray-100 dark:divide-gray-800">
+                <div class="divide-y divide-gray-100">
                     @forelse ($latestNews as $index => $news)
                         <a
                             href="{{ NewsResource::getUrl('view', ['record' => $news->id], panel: 'news') }}"
-                            class="group flex items-start gap-3 p-4 transition hover:bg-gray-50 dark:hover:bg-gray-800 animate-fade-in-up"
+                            class="group flex items-start gap-3 p-4 transition hover:bg-gray-50 animate-fade-in-up"
                             style="--delay: {{ 0.3 + ($index * 0.05) }}s"
                         >
                             <div class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500 group-hover:animate-pulse"></div>
                             <div class="min-w-0 flex-1">
-                                <p class="truncate font-medium text-gray-900 group-hover:text-primary-600 dark:text-gray-100">
+                                <p class="truncate font-medium text-gray-900 group-hover:text-blue-600">
                                     {{ $news->title ?? $news->name }}
                                 </p>
-                                <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                                <p class="mt-0.5 text-xs text-gray-500">
                                     {{ $news->created_at?->translatedFormat('d F Y') }}
                                     @if ($news->user_add)
                                         — {{ $news->user_add }}
@@ -208,13 +217,13 @@
                             </div>
                         </a>
                     @empty
-                        <p class="p-6 text-center text-sm text-gray-500 dark:text-gray-400">Aucune actualité récente.</p>
+                        <p class="p-6 text-center text-sm text-gray-500">Aucune actualité récente.</p>
                     @endforelse
                 </div>
             </div>
 
             {{-- Latest documents --}}
-            <div class="card-hover overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-800 animate-fade-in-up" style="--delay: 0.25s">
+            <div class="card-hover overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-gray-200 animate-fade-in-up" style="--delay: 0.25s">
                 <div class="gradient-documents flex items-center justify-between p-5 text-white">
                     <div class="flex items-center gap-3">
                         <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/20 backdrop-blur">
@@ -228,23 +237,23 @@
                         {{ $latestDocuments->count() }}
                     </span>
                 </div>
-                <div class="divide-y divide-gray-100 dark:divide-gray-800">
+                <div class="divide-y divide-gray-100">
                     @forelse ($latestDocuments as $index => $document)
                         <a
                             href="{{ DocumentResource::getUrl('view', ['record' => $document->id], panel: 'document-panel') }}"
-                            class="group flex items-start gap-3 p-4 transition hover:bg-gray-50 dark:hover:bg-gray-800 animate-fade-in-up"
+                            class="group flex items-start gap-3 p-4 transition hover:bg-gray-50 animate-fade-in-up"
                             style="--delay: {{ 0.35 + ($index * 0.05) }}s"
                         >
-                            <div class="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 group-hover:scale-110 transition-transform dark:bg-emerald-900/30 dark:text-emerald-400">
+                            <div class="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 transition-transform group-hover:scale-110">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                                 </svg>
                             </div>
                             <div class="min-w-0 flex-1">
-                                <p class="truncate font-medium text-gray-900 group-hover:text-primary-600 dark:text-gray-100">
+                                <p class="truncate font-medium text-gray-900 group-hover:text-blue-600">
                                     {{ $document->name }}
                                 </p>
-                                <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                                <p class="mt-0.5 text-xs text-gray-500">
                                     {{ $document->created_at?->translatedFormat('d F Y') }}
                                     @if ($document->file_name)
                                         — {{ $document->file_name }}
@@ -253,7 +262,7 @@
                             </div>
                         </a>
                     @empty
-                        <p class="p-6 text-center text-sm text-gray-500 dark:text-gray-400">Aucun document récent.</p>
+                        <p class="p-6 text-center text-sm text-gray-500">Aucun document récent.</p>
                     @endforelse
                 </div>
             </div>
@@ -262,44 +271,44 @@
         {{-- Bottom row: RSS + Press --}}
         <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {{-- RSS feed --}}
-            <div class="card-hover overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-800 animate-fade-in-up" style="--delay: 0.3s">
+            <div class="card-hover overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-gray-200 animate-fade-in-up" style="--delay: 0.3s">
                 <div class="gradient-rss flex items-center gap-3 p-5 text-white">
-                    <div class="relative flex h-10 w-10 items-center justify-center rounded-lg bg-white/20 backdrop-blur">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/20 backdrop-blur">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M5.5 18a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zM.5 10.5v3.5a9 9 0 019 9h3.5A12.5 12.5 0 00.5 10.5zm0-7v3.5A16 16 0 0116.5 23H20A19.5 19.5 0 00.5 3.5z" />
                         </svg>
                     </div>
                     <h2 class="text-lg font-bold">Flux d'actualité</h2>
                 </div>
-                <div class="max-h-[500px] overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800">
+                <div class="max-h-[500px] divide-y divide-gray-100 overflow-y-auto">
                     @forelse ($rssItems as $index => $item)
                         <a
                             href="{{ $item['link'] }}"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="group block p-4 transition hover:bg-gray-50 dark:hover:bg-gray-800 animate-fade-in-up"
+                            class="group block p-4 transition hover:bg-gray-50 animate-fade-in-up"
                             style="--delay: {{ 0.4 + ($index * 0.03) }}s"
                         >
-                            <p class="mb-1 text-xs font-semibold uppercase tracking-wide text-purple-600 dark:text-purple-400">
+                            <p class="mb-1 text-xs font-semibold uppercase tracking-wide text-purple-600">
                                 {{ $item['source'] }}
                             </p>
-                            <p class="line-clamp-2 text-sm font-medium text-gray-900 group-hover:text-primary-600 dark:text-gray-100">
+                            <p class="line-clamp-2 text-sm font-medium text-gray-900 group-hover:text-blue-600">
                                 {{ $item['title'] }}
                             </p>
                             @if ($item['date'])
-                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                <p class="mt-1 text-xs text-gray-500">
                                     {{ \Illuminate\Support\Carbon::parse($item['date'])->translatedFormat('d F Y à H:i') }}
                                 </p>
                             @endif
                         </a>
                     @empty
-                        <p class="p-6 text-center text-sm text-gray-500 dark:text-gray-400">Aucun flux disponible.</p>
+                        <p class="p-6 text-center text-sm text-gray-500">Aucun flux disponible.</p>
                     @endforelse
                 </div>
             </div>
 
             {{-- Press release --}}
-            <div class="card-hover overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-800 animate-fade-in-up" style="--delay: 0.35s">
+            <div class="card-hover overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-gray-200 animate-fade-in-up" style="--delay: 0.35s">
                 <div class="gradient-press flex items-center gap-3 p-5 text-white">
                     <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/20 backdrop-blur">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -308,34 +317,42 @@
                     </div>
                     <h2 class="text-lg font-bold">Revue de presse</h2>
                 </div>
-                <div class="max-h-[500px] overflow-y-auto divide-y divide-gray-100 dark:divide-gray-800">
+                <div class="max-h-[500px] divide-y divide-gray-100 overflow-y-auto">
                     @forelse ($pressArticles as $index => $article)
                         <a
                             href="{{ $article['url'] ?? $article['link'] ?? '#' }}"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="group block p-4 transition hover:bg-gray-50 dark:hover:bg-gray-800 animate-fade-in-up"
+                            class="group block p-4 transition hover:bg-gray-50 animate-fade-in-up"
                             style="--delay: {{ 0.45 + ($index * 0.03) }}s"
                         >
-                            <p class="line-clamp-2 text-sm font-semibold text-gray-900 group-hover:text-primary-600 dark:text-gray-100">
+                            <p class="line-clamp-2 text-sm font-semibold text-gray-900 group-hover:text-blue-600">
                                 {{ $article['title'] ?? $article['name'] ?? 'Article' }}
                             </p>
                             @if (! empty($article['source']) || ! empty($article['publisher']))
-                                <p class="mt-1 text-xs font-medium uppercase tracking-wide text-cyan-600 dark:text-cyan-400">
+                                <p class="mt-1 text-xs font-medium uppercase tracking-wide text-cyan-600">
                                     {{ $article['source'] ?? $article['publisher'] }}
                                 </p>
                             @endif
                             @if (! empty($article['publishedAt']) || ! empty($article['published_at']) || ! empty($article['date']))
-                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                <p class="mt-1 text-xs text-gray-500">
                                     {{ \Illuminate\Support\Carbon::parse($article['publishedAt'] ?? $article['published_at'] ?? $article['date'])->translatedFormat('d F Y') }}
                                 </p>
                             @endif
                         </a>
                     @empty
-                        <p class="p-6 text-center text-sm text-gray-500 dark:text-gray-400">Aucun article de presse disponible.</p>
+                        <p class="p-6 text-center text-sm text-gray-500">Aucun article de presse disponible.</p>
                     @endforelse
                 </div>
             </div>
         </div>
-    </div>
-</x-filament-panels::page>
+    </main>
+
+    <footer class="mt-12 border-t border-gray-200 bg-white">
+        <div class="mx-auto max-w-screen-2xl px-6 py-6 text-center text-sm text-gray-500">
+            © {{ date('Y') }} Ville de Marche-en-Famenne — Intranet
+        </div>
+    </footer>
+
+</body>
+</html>

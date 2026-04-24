@@ -2,23 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Pages;
+namespace App\Http\Controllers;
 
 use AcMarche\Document\Models\Document;
 use AcMarche\Hrm\Models\Employee;
 use AcMarche\News\Models\News;
-use BackedEnum;
-use Filament\Pages\Page;
-use Filament\Support\Enums\Width;
-use Filament\Support\Icons\Heroicon;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Override;
 use Throwable;
 
-final class Homepage extends Page
+final class HomeController extends Controller
 {
     /**
      * @var list<array{title: string, url: string}>
@@ -30,69 +26,15 @@ final class Homepage extends Page
         ['title' => 'DH Luxembourg', 'url' => 'https://www.dhnet.be/rss/section/regions/luxembourg.xml'],
     ];
 
-    public Collection $latestNews;
-
-    public Collection $latestDocuments;
-
-    public Collection $todayBirthdays;
-
-    /**
-     * @var array<int, array{title: string, link: string, source: string, date: ?string}>
-     */
-    public array $rssItems = [];
-
-    /**
-     * @var array<int, array<string, mixed>>
-     */
-    public array $pressArticles = [];
-
-    #[Override]
-    protected static string|null|BackedEnum $navigationIcon = Heroicon::Home;
-
-    #[Override]
-    protected string $view = 'filament.pages.home';
-
-    #[Override]
-    protected static ?string $navigationLabel = 'Accueil';
-
-    #[Override]
-    protected static ?int $navigationSort = 1;
-
-    public static function getNavigationLabel(): string
+    public function __invoke(): View
     {
-        return 'Accueil';
-    }
-
-    public static function canAccess(): bool
-    {
-        return true;
-    }
-
-    public function getTitle(): string
-    {
-        return 'Accueil';
-    }
-
-    public function getMaxContentWidth(): Width
-    {
-        return Width::Screen;
-    }
-
-    public function mount(): void
-    {
-        $this->latestNews = News::query()
-            ->latest('created_at')
-            ->limit(6)
-            ->get();
-
-        $this->latestDocuments = Document::query()
-            ->latest('created_at')
-            ->limit(6)
-            ->get();
-
-        $this->todayBirthdays = $this->fetchTodayBirthdays();
-        $this->rssItems = $this->fetchRssItems();
-        $this->pressArticles = $this->fetchPressArticles();
+        return view('home', [
+            'latestNews' => News::query()->latest('created_at')->limit(6)->get(),
+            'latestDocuments' => Document::query()->latest('created_at')->limit(6)->get(),
+            'todayBirthdays' => $this->fetchTodayBirthdays(),
+            'rssItems' => $this->fetchRssItems(),
+            'pressArticles' => $this->fetchPressArticles(),
+        ]);
     }
 
     /**
@@ -108,6 +50,7 @@ final class Homepage extends Page
             ->whereRaw('MONTH(birth_date) = ?', [$today->month])
             ->whereRaw('DAY(birth_date) = ?', [$today->day])
             ->whereHas('activeContracts')
+            ->with('activeContracts')
             ->orderBy('last_name')
             ->get();
     }
