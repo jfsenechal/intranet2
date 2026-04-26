@@ -150,14 +150,6 @@ final class EmployeeInfolist
                                     ->prose()
                                     ->columnSpanFull(),
                             ]),
-                        Tab::make('Photo')
-                            ->icon('heroicon-o-photo')
-                            ->schema([
-                                ImageEntry::make('photo')
-                                    ->label('Photo')
-                                    ->disk('public')
-                                    ->imageHeight(300),
-                            ]),
                         Tab::make('Compte informatique')
                             ->icon(Heroicon::OutlinedUserCircle)
                             ->schema([
