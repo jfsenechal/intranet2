@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Agent\Filament\Resources\Profiles\Schemas;
 
+use AcMarche\Agent\Models\Profile;
 use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -19,14 +22,30 @@ final class ProfileInfolist
             ->columns(1)
             ->components([
                 Section::make('Identité')
-                    ->columns(3)
+                    ->columns(12)
                     ->schema([
-                        TextEntry::make('username')->label('Identifiant')->copyable(),
-                        TextEntry::make('employee_id')->label('Matricule RH'),
-                        TextEntry::make('location')->label('Emplacement'),
-                        IconEntry::make('no_mail')->label('Pas de mail professionnel nécessaire')
-                            ->visible(fn(Model $record) => $record->no_mail === true),
-                        TextEntry::make('notes')->label('Remarques')->columnSpanFull(),
+                        ImageEntry::make('photo')
+                            ->label('Photo')
+                            ->disk('public')
+                            ->imageHeight(260)
+                            ->defaultImageUrl(
+                                fn (Profile $record
+                                ): string => 'https://ui-avatars.com/api/?size=256&name='.urlencode(
+                                    mb_trim($record->first_name.' '.$record->last_name)
+                                )
+                            )
+                            ->columnSpan(3),
+                        Fieldset::make('Coordonnées')
+                            ->columns(2)
+                            ->columnSpan(9)
+                            ->schema([
+                                TextEntry::make('username')->label('Identifiant')->copyable(),
+                                TextEntry::make('employee_id')->label('Matricule RH'),
+                                TextEntry::make('location')->label('Emplacement'),
+                                IconEntry::make('no_mail')->label('Pas de mail professionnel nécessaire')
+                                    ->visible(fn (Model $record) => $record->no_mail === true),
+                                TextEntry::make('notes')->label('Remarques')->columnSpanFull(),
+                            ]),
                     ]),
                 Section::make('Accès')
                     ->columns(2)
