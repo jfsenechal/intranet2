@@ -39,7 +39,7 @@ final class ProfileResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Profils';
+        return 'Profils informatiques';
     }
 
     public static function getModelLabel(): string
