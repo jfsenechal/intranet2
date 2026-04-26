@@ -14,7 +14,6 @@ use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Publication\Filament\Resources\Publications\PublicationResource;
 use AcMarche\Security\Filament\Resources\Users\UserResource;
 use AcMarche\Security\Models\Module;
-use AcMarche\Security\Repository\TabRepository;
 use Illuminate\Support\Collection;
 
 final class MigrationHandler
@@ -48,21 +47,21 @@ final class MigrationHandler
     }
 
     /**
-     * Get all tabs with their modules
+     * Get all modules sorted by name ASC, with migration status resolved.
+     *
+     * @return Collection<int,Module>
      */
-    public static function getTabsWithModules(): Collection
+    public static function getAllModules(): Collection
     {
-        $tabs = TabRepository::getTabsWithModules();
-        foreach ($tabs as $tab) {
-            $tab->setRelation(
-                'modules',
-                $tab->modules->reject(fn (Module $module): bool => in_array($module->id, self::modules_to_skip, true))->values(),
-            );
-            foreach ($tab->modules as $module) {
+        return Module::query()
+            ->whereNotIn('id', self::modules_to_skip)
+            ->orderBy('name')
+            ->get()
+            ->each(function (Module $module): void {
                 if ($module->is_external) {
                     $module->migrated = true;
 
-                    continue;
+                    return;
                 }
                 if ($url = self::urlModule($module)) {
                     $module->url = $url;
@@ -70,9 +69,6 @@ final class MigrationHandler
                 } else {
                     $module->migrated = false;
                 }
-            }
-        }
-
-        return $tabs;
+            });
     }
 }
