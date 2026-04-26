@@ -153,6 +153,26 @@ final class EmployeeInfolist
                         Tab::make('Compte informatique')
                             ->icon(Heroicon::OutlinedUserCircle)
                             ->schema([
+                                Section::make('Données partagées avec le module Agent')
+                                    ->description('Informations que le module Agent connaît de cet employé.')
+                                    ->columns(2)
+                                    ->schema([
+                                        TextEntry::make('full_name')
+                                            ->label('Nom complet')
+                                            ->state(fn (Employee $record): string => mb_trim($record->last_name.' '.$record->first_name)),
+                                        TextEntry::make('savedEmployer.name')
+                                            ->label('Employeur')
+                                            ->placeholder('—'),
+                                        ImageEntry::make('photo')
+                                            ->label('Photo')
+                                            ->disk('public')
+                                            ->imageHeight(120)
+                                            ->defaultImageUrl(fn (Employee $record): string => 'https://ui-avatars.com/api/?size=128&name='.urlencode(mb_trim($record->first_name.' '.$record->last_name))),
+                                        TextEntry::make('activeContracts.service.name')
+                                            ->label('Services (contrats actifs)')
+                                            ->listWithLineBreaks()
+                                            ->placeholder('—'),
+                                    ]),
                                 TextEntry::make('profile.username')
                                     ->label('Nom utilisateur')
                                     ->visible(fn (Employee $record): bool => $record->profile !== null)
