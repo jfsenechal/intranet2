@@ -13,6 +13,8 @@ final class ListProfiles extends ListRecords
 {
     #[Override]
     protected static string $resource = ProfileResource::class;
+    #[Override]
+    protected static ?string $title = 'Liste des profils';
 
     protected function getHeaderActions(): array
     {
