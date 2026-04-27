@@ -59,7 +59,7 @@ final class EmployeeForm
                                             ->label('Registre national')
                                             ->maxLength(100),
                                     ]),
-                                Section::make('Coordonnees')
+                                Section::make('Coordonnées')
                                     ->columns(2)
                                     ->schema([
                                         TextInput::make('address')
@@ -114,7 +114,7 @@ final class EmployeeForm
                                         DatePicker::make('scale_seniority_date')
                                             ->label('Anciennete echelle'),
                                     ]),
-                                Fieldset::make('Bareme')
+                                Fieldset::make('Barème')
                                     ->columns(3)
                                     ->schema([
                                         Select::make('pay_scale_id')
@@ -159,7 +159,7 @@ final class EmployeeForm
 
                                 return $status === StatusEnum::APPLICATION;
                             })
-                            ->icon('heroicon-o-document-text')
+                            ->icon('heroicon-o-identification')
                             ->columns(2)
                             ->schema([
                                 Select::make('diploma_level')
@@ -173,19 +173,15 @@ final class EmployeeForm
                             ->visible(function (Get $get): bool {
                                 $status = $get('status');
 
-                                return $status === StatusEnum::APPLICATION;
+                                return $status === StatusEnum::INTERN;
                             })
-                            ->icon('heroicon-o-document-text')
+                            ->icon('heroicon-o-clipboard-document-check')
+                            ->columns(2)
                             ->schema([
                                 Select::make('intern_type')
                                     ->label('Demande de stage')
                                     ->options(InternTypeEnum::class)
-                                    ->enum(InternTypeEnum::class)
-                                    ->visible(function (Get $get): bool {
-                                        $status = $get('status');
-
-                                        return $status === StatusEnum::INTERN;
-                                    }),
+                                    ->enum(InternTypeEnum::class),
                                 Select::make('diploma_level')
                                     ->label('Niveau de diplôme')
                                     ->options(ListOptions::getNiveauxDiplomesSimplifies()),
@@ -198,9 +194,10 @@ final class EmployeeForm
                             ->visible(function (Get $get): bool {
                                 $status = $get('status');
 
-                                return $status === StatusEnum::APPLICATION;
+                                return $status === StatusEnum::STUDENT;
                             })
-                            ->icon('heroicon-o-document-text')
+                            ->icon('heroicon-o-academic-cap')
+                            ->columns(2)
                             ->schema([
                                 TextInput::make('diploma_nature')
                                     ->label('Nature du diplôme')
