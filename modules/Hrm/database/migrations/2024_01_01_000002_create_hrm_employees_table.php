@@ -22,6 +22,7 @@ return new class extends Migration
                 $table->renameColumn('slugname', 'slug');
                 $table->renameColumn('fonction', 'job_title');
                 $table->renameColumn('birthday', 'birth_date');
+                $table->renameColumn('email', 'private_email');
                 $table->renameColumn('phone_private', 'private_phone');
                 $table->renameColumn('mobile_private', 'private_mobile');
                 $table->renameColumn('entree_le', 'hired_at');
@@ -80,13 +81,13 @@ return new class extends Migration
                 $table->string('job_title', 255)->nullable();
                 $table->date('birth_date')->nullable();
                 $table->boolean('show_birthday')->default(true);
-                $table->string('email', 255)->nullable();
+                $table->string('private_email', 255)->nullable();
+                $table->string('private_phone', 150)->nullable();
+                $table->string('private_mobile', 150)->nullable();
                 $table->string('professional_email', 100)->nullable();
                 $table->string('professional_mobile', 100)->nullable();
                 $table->string('professional_phone', 100)->nullable();
                 $table->string('professional_phone_extension', 100)->nullable();
-                $table->string('private_phone', 150)->nullable();
-                $table->string('private_mobile', 150)->nullable();
                 $table->string('address', 150)->nullable();
                 $table->integer('postal_code')->nullable();
                 $table->string('city', 100)->nullable();

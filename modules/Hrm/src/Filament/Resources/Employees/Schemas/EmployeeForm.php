@@ -33,7 +33,7 @@ final class EmployeeForm
                                     ->columns(3)
                                     ->schema([
                                         Select::make('civility')
-                                            ->label('Civilite')
+                                            ->label('Civilité')
                                             ->options([
                                                 'monsieur' => 'Monsieur',
                                                 'madame' => 'Madame',
@@ -69,16 +69,12 @@ final class EmployeeForm
                                         TextInput::make('city')
                                             ->label('Ville')
                                             ->maxLength(100),
-                                        TextInput::make('email')
+                                        TextInput::make('private_email')
                                             ->label('Email prive')
                                             ->email()
                                             ->maxLength(255),
-                                        TextInput::make('professional_email')
-                                            ->label('Email professionnel')
-                                            ->email()
-                                            ->maxLength(100),
                                         TextInput::make('private_phone')
-                                            ->label('Telephone prive')
+                                            ->label('Téléphone prive')
                                             ->tel()
                                             ->maxLength(150),
                                         TextInput::make('private_mobile')

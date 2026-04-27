@@ -45,12 +45,9 @@ final class EmployeeInfolist
                                             ->schema([
                                                 TextEntry::make('address')
                                                     ->label('Adresse')
+                                                    ->state(fn (Employee $record): string => mb_trim($record->address.' '.$record->postal_code.' '.$record->city))
                                                     ->columnSpanFull(),
-                                                TextEntry::make('postal_code')
-                                                    ->label('Code postal'),
-                                                TextEntry::make('city')
-                                                    ->label('Ville'),
-                                                TextEntry::make('email')
+                                                TextEntry::make('private_email')
                                                     ->label('Email prive')
                                                     ->icon('heroicon-o-envelope'),
                                                 TextEntry::make('professional_email')
