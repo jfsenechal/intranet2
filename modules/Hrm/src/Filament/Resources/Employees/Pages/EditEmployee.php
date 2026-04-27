@@ -14,15 +14,15 @@ final class EditEmployee extends EditRecord
     #[Override]
     protected static string $resource = EmployeeResource::class;
 
+    public function getRelationManagers(): array
+    {
+        return [];
+    }
+
     protected function getHeaderActions(): array
     {
         return [
             ViewAction::make(),
         ];
-    }
-
-    public function getRelationManagers(): array
-    {
-        return [];
     }
 }
