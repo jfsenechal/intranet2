@@ -16,12 +16,13 @@ return new class extends Migration
 
         Schema::create('rsses', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->unsignedInteger('user_id');
             $table->string('name');
             $table->string('url');
             $table->timestamps();
 
             $table->unique(['user_id', 'url']);
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
