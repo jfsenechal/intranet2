@@ -16,7 +16,7 @@ return new class extends Migration
 
         Schema::create('signatures', function (Blueprint $table): void {
             $table->id();
-            $table->integer('username')->unique();
+            $table->string('username')->unique();
             $table->string('last_name');
             $table->string('first_name');
             $table->string('address');
