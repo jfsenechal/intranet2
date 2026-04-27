@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Console\Commands;
 
 use AcMarche\Hrm\Models\Employee;
-use AcMarche\Security\Ldap\UserLdap;
+use AcMarche\Security\Repository\LdapRepository;
 use Illuminate\Console\Command;
 use LdapRecord\Models\Model;
-use Override;
 use Symfony\Component\Console\Command\Command as SfCommand;
 
 final class SyncEmployeeCommand extends Command
@@ -18,7 +17,6 @@ final class SyncEmployeeCommand extends Command
      *
      * @var string
      */
-    #[Override]
     protected $signature = 'hrm:sync-employees';
 
     /**
@@ -26,7 +24,6 @@ final class SyncEmployeeCommand extends Command
      *
      * @var string
      */
-    #[Override]
     protected $description = 'Sync employees with ldap';
 
     /**
@@ -34,20 +31,21 @@ final class SyncEmployeeCommand extends Command
      */
     public function handle(): int
     {
-        foreach (Employee::query()->whereHas('employees.username') as $employee) {
-            $model = UserLdap::findByUsername($employee->username);
-            if (!$model instanceof Model) {
-                //$employee->setUsername(null);
-                $employee->email_professionnel = null;
-                $employee->mobile_professionnel = null;
-                $employee->telephone_professionnel = null;
-                $employee->telephone_extension_professionnel = null;
+        foreach (Employee::query()->whereNotNull('username')->cursor() as $employee) {
+            $model = LdapRepository::findByUsername($employee->username);
+            if (! $model instanceof Model) {
+                $employee->professional_email = null;
+                $employee->professional_mobile = null;
+                $employee->professional_phone = null;
+                $employee->professional_phone_extension = null;
             } else {
-                $employee->email_professionnel = $model->getFirstAttribute('mail');
-                $employee->mobile_professionnel = $model->getFirstAttribute('mobile');
-                $employee->telephone_professionnel = $model->getFirstAttribute('telephoneNumber');
-                $employee->telephone_extension_professionnel = $model->getFirstAttribute('ipPhone');
+                $employee->professional_email = $model->getFirstAttribute('mail');
+                $employee->professional_mobile = $model->getFirstAttribute('mobile');
+                $employee->professional_phone = $model->getFirstAttribute('telephoneNumber');
+                $employee->professional_phone_extension = $model->getFirstAttribute('ipPhone');
             }
+
+            $employee->save();
         }
 
         return SfCommand::SUCCESS;

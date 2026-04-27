@@ -47,18 +47,33 @@ final class EmployeeInfolist
                                                     ->label('Adresse')
                                                     ->state(fn (Employee $record): string => mb_trim($record->address.' '.$record->postal_code.' '.$record->city))
                                                     ->columnSpanFull(),
-                                                TextEntry::make('private_email')
-                                                    ->label('Email prive')
-                                                    ->icon('heroicon-o-envelope'),
-                                                TextEntry::make('professional_email')
-                                                    ->label('Email professionnel')
-                                                    ->icon('heroicon-o-envelope'),
-                                                TextEntry::make('private_phone')
-                                                    ->label('Telephone prive')
-                                                    ->icon('heroicon-o-phone'),
-                                                TextEntry::make('private_mobile')
-                                                    ->label('GSM prive')
-                                                    ->icon('heroicon-o-device-phone-mobile'),
+                                                Fieldset::make('Privé')
+                                                    ->columns(1)
+                                                    ->schema([
+                                                        TextEntry::make('private_email')
+                                                            ->label('Email')
+                                                            ->icon('heroicon-o-envelope'),
+                                                        TextEntry::make('private_phone')
+                                                            ->label('Téléphone')
+                                                            ->icon('heroicon-o-phone'),
+                                                        TextEntry::make('private_mobile')
+                                                            ->label('GSM')
+                                                            ->icon('heroicon-o-device-phone-mobile'),
+                                                    ]),
+                                                Fieldset::make('Professionnel')
+                                                    ->columns(1)
+                                                    ->schema([
+                                                        TextEntry::make('professional_email')
+                                                            ->label('Email')
+                                                            ->icon('heroicon-o-envelope'),
+                                                        TextEntry::make('professional_phone')
+                                                            ->label('Téléphone')
+                                                            ->icon('heroicon-o-phone')
+                                                            ->state(fn (Employee $record): ?string => $record->professional_phone === null ? null : mb_trim($record->professional_phone.($record->professional_phone_extension !== null ? ' (ext. '.$record->professional_phone_extension.')' : ''))),
+                                                        TextEntry::make('professional_mobile')
+                                                            ->label('GSM')
+                                                            ->icon('heroicon-o-device-phone-mobile'),
+                                                    ]),
                                             ]),
                                     ]),
                                 Section::make('Identité')

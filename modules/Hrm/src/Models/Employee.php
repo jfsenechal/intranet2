@@ -30,8 +30,7 @@ use Spatie\Sluggable\SlugOptions;
     'job_title',
     'birth_date',
     'show_birthday',
-    'email',
-    'professional_email',
+    'private_email',
     'private_phone',
     'private_mobile',
     'address',
@@ -64,7 +63,6 @@ use Spatie\Sluggable\SlugOptions;
     'candidate_mail_count',
     'candidate_priority',
     'candidate_service_id',
-    'saved_employer_id',
     'user_add',
     'updated_by',
 ])]
