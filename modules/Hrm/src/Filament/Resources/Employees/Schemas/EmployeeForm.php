@@ -90,18 +90,20 @@ final class EmployeeForm
                                 Fieldset::make('Situation')
                                     ->columns(3)
                                     ->schema([
-                                        TextInput::make('job_title')
-                                            ->label('Fonction du candidate')
-                                            ->helperText('Utilisé uniquement pour les candidatures')
-                                            ->maxLength(255)
-                                            ->visible(
-                                                fn (Get $get): bool => $get('status') === StatusEnum::APPLICATION->value
-                                            ),
                                         Select::make('status')
                                             ->label('Statut')
                                             ->options(StatusEnum::class)
                                             ->enum(StatusEnum::class)
                                             ->live(),
+                                        TextInput::make('job_title')
+                                            ->label('Fonction du candidat')
+                                            ->helperText('Utilisé uniquement pour les candidatures')
+                                            ->maxLength(255)
+                                            ->visible(function (Get $get): bool {
+                                                $status = $get('status');
+
+                                                return $status === StatusEnum::APPLICATION;
+                                            }),
                                         Toggle::make('is_archived')
                                             ->label('Archivé'),
                                     ]),
