@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Models;
 
 use AcMarche\Agent\Models\Profile;
+use AcMarche\Hrm\Enums\InternTypeEnum;
+use AcMarche\Hrm\Enums\StatusEnum;
 use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -54,14 +56,14 @@ use Spatie\Sluggable\SlugOptions;
     'intern_type',
     'prerequisite_id',
     'is_archived',
-    'candidate_received_at',
-    'candidate_mail_reference',
-    'candidate_diploma_level',
-    'candidate_diploma_nature',
+    'received_at',
+    'mail_reference',
+    'diploma_level',
+    'diploma_nature',
     'candidate_file_name',
-    'candidate_mail_sent_at',
-    'candidate_mail_count',
-    'candidate_priority',
+    'mail_sent_at',
+    'mail_count',
+    'priority',
     'candidate_service_id',
     'user_add',
     'updated_by',
@@ -266,6 +268,8 @@ final class Employee extends Model
             'candidate_mail_sent_at' => 'date',
             'show_birthday' => 'boolean',
             'is_archived' => 'boolean',
+            'status' => StatusEnum::class,
+            'intern_type' => InternTypeEnum::class,
         ];
     }
 }

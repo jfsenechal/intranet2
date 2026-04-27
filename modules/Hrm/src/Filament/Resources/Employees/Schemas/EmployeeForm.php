@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Employees\Schemas;
 
+use AcMarche\Hrm\Enums\InternTypeEnum;
+use AcMarche\Hrm\Enums\ListOptions;
 use AcMarche\Hrm\Enums\StatusEnum;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
@@ -104,6 +106,23 @@ final class EmployeeForm
 
                                                 return $status === StatusEnum::APPLICATION;
                                             }),
+                                        Select::make('diploma_level')
+                                            ->label('Niveau de diplôme')
+                                            ->options(ListOptions::getNiveauxDiplomes())
+                                            ->visible(function (Get $get): bool {
+                                                $status = $get('status');
+
+                                                return $status === StatusEnum::APPLICATION;
+                                            }),
+                                        Select::make('intern_type')
+                                            ->label('Demande de stage')
+                                            ->options(InternTypeEnum::class)
+                                            ->enum(InternTypeEnum::class)
+                                            ->visible(function (Get $get): bool {
+                                                $status = $get('status');
+
+                                                return $status === StatusEnum::INTERN;
+                                            }),
                                         Toggle::make('is_archived')
                                             ->label('Archivé'),
                                     ]),
@@ -132,9 +151,10 @@ final class EmployeeForm
                                         TextInput::make('pay_scale_code')
                                             ->label('Code bareme')
                                             ->maxLength(255),
-                                        TextInput::make('allowance')
-                                            ->label('Indemnite')
-                                            ->maxLength(200),
+                                        Select::make('allowance')
+                                            ->label('Indemnité')
+                                            ->helperText('Montant Foyer/Résid')
+                                            ->options(ListOptions::allowances()),
                                         TextInput::make('local_unit')
                                             ->label('Unite locale')
                                             ->maxLength(100),

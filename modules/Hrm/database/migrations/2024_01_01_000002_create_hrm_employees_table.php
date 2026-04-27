@@ -55,14 +55,14 @@ return new class extends Migration
                 $table->renameColumn('archive', 'is_archived');
                 $table->renameColumn('birthday_display', 'show_birthday');
                 // Candidate fields
-                $table->renameColumn('candi_date_reception', 'candidate_received_at');
-                $table->renameColumn('candi_courrier_reference', 'candidate_mail_reference');
-                $table->renameColumn('candi_niveau_diplome', 'candidate_diploma_level');
-                $table->renameColumn('candi_nature_diplome', 'candidate_diploma_nature');
+                $table->renameColumn('candi_date_reception', 'received_at');
+                $table->renameColumn('candi_courrier_reference', 'mail_reference');
+                $table->renameColumn('candi_niveau_diplome', 'diploma_level');
+                $table->renameColumn('candi_nature_diplome', 'diploma_nature');
                 $table->renameColumn('candiFileName', 'candidate_file_name');
-                $table->renameColumn('candi_courrier_date_transmission', 'candidate_mail_sent_at');
-                $table->renameColumn('candi_courrier_nombre', 'candidate_mail_count');
-                $table->renameColumn('candi_prioritaire', 'candidate_priority');
+                $table->renameColumn('candi_courrier_date_transmission', 'mail_sent_at');
+                $table->renameColumn('candi_courrier_nombre', 'mail_count');
+                $table->renameColumn('candi_prioritaire', 'priority');
                 $table->renameColumn('candi_service_id', 'candidate_service_id');
                 $table->removeColumn('employeur_save_id');
                 $table->renameColumn('echelle_id', 'pay_scale_id');
@@ -114,16 +114,15 @@ return new class extends Migration
                 $table->foreignId('prerequisite_id')->nullable();
                 $table->boolean('is_archived')->default(false);
                 // Candidate fields
-                $table->date('candidate_received_at')->nullable();
-                $table->longText('candidate_mail_reference')->nullable();
-                $table->longText('candidate_diploma_level')->nullable();
-                $table->string('candidate_diploma_nature', 200)->nullable();
+                $table->date('received_at')->nullable();
+                $table->longText('mail_reference')->nullable();
+                $table->longText('diploma_level')->nullable();
+                $table->string('diploma_nature', 200)->nullable();
                 $table->string('candidate_file_name', 255)->nullable();
-                $table->date('candidate_mail_sent_at')->nullable();
-                $table->integer('candidate_mail_count')->default(0);
-                $table->string('candidate_priority', 100)->nullable();
+                $table->date('mail_sent_at')->nullable();
+                $table->integer('mail_count')->default(0);
+                $table->string('priority', 100)->nullable();
                 $table->foreignId('candidate_service_id')->nullable();
-                $table->foreignId('saved_employer_id')->nullable();
                 $table->string('user_add', 255);
                 $table->string('updated_by', 255)->nullable();
                 $table->timestamps();

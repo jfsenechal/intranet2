@@ -38,10 +38,10 @@ final class EmployeeInfolist
                                             ->disk('public')
                                             ->imageHeight(260)
                                             ->defaultImageUrl(
-                                                fn(Employee $record
+                                                fn (Employee $record
                                                 ): string => 'https://ui-avatars.com/api/?size=256&name='.urlencode(
-                                                        mb_trim($record->first_name.' '.$record->last_name)
-                                                    )
+                                                    mb_trim($record->first_name.' '.$record->last_name)
+                                                )
                                             )
                                             ->columnSpan(3),
                                         Fieldset::make('Coordonnées')
@@ -51,7 +51,7 @@ final class EmployeeInfolist
                                                 TextEntry::make('address')
                                                     ->label('Adresse')
                                                     ->state(
-                                                        fn(Employee $record): string => mb_trim(
+                                                        fn (Employee $record): string => mb_trim(
                                                             $record->address.' '.$record->postal_code.' '.$record->city
                                                         )
                                                     )
@@ -79,7 +79,7 @@ final class EmployeeInfolist
                                                             ->label('Téléphone')
                                                             ->icon('heroicon-o-phone')
                                                             ->state(
-                                                                fn(Employee $record
+                                                                fn (Employee $record
                                                                 ): ?string => $record->professional_phone === null ? null : mb_trim(
                                                                     $record->professional_phone.($record->professional_phone_extension !== null ? ' (ext. '.$record->professional_phone_extension.')' : '')
                                                                 )
@@ -116,7 +116,7 @@ final class EmployeeInfolist
                                         TextEntry::make('status')
                                             ->label('Statut')
                                             ->badge()
-                                            ->color(fn(string $state): string => match ($state) {
+                                            ->color(fn (string $state): string => match ($state) {
                                                 'active' => 'success',
                                                 'retired' => 'info',
                                                 'terminated' => 'danger',
@@ -185,18 +185,18 @@ final class EmployeeInfolist
                             ->schema([
                                 TextEntry::make('profile.username')
                                     ->label('Nom utilisateur')
-                                    ->visible(fn(Employee $record): bool => $record->profile !== null)
+                                    ->visible(fn (Employee $record): bool => $record->profile !== null)
                                     ->placeholder('—')
                                     ->suffixAction(RequestProfileChangeAction::make()),
                                 TextEntry::make('delete_profile')
                                     ->label('Suppression')
                                     ->state('Demander la suppression du compte informatique.')
-                                    ->visible(fn(Employee $record): bool => $record->profile !== null)
+                                    ->visible(fn (Employee $record): bool => $record->profile !== null)
                                     ->suffixAction(RequestProfileDeletionAction::make()),
                                 TextEntry::make('no_profile')
                                     ->label('Compte informatique')
                                     ->state('Aucun profil informatique pour cet agent.')
-                                    ->visible(fn(Employee $record): bool => $record->profile === null)
+                                    ->visible(fn (Employee $record): bool => $record->profile === null)
                                     ->suffixAction(RequestProfileAction::make()),
                             ]),
                     ]),
