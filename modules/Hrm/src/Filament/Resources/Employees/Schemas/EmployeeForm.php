@@ -133,10 +133,17 @@ final class EmployeeForm
                                             ->maxLength(100),
                                     ]),
                             ]),
-                        Tab::make('Sante')
+                        Tab::make('Santé/Photo')
                             ->icon('heroicon-o-heart')
                             ->columns(2)
                             ->schema([
+                                FileUpload::make('photo')
+                                    ->label('Photo')
+                                    ->image()
+                                    ->disk('public')
+                                    ->directory(config('hrm.uploads.photos'))
+                                    ->imageEditor()
+                                    ->columnSpanFull(),
                                 Select::make('health_insurance_id')
                                     ->label('Mutuelle')
                                     ->relationship('healthInsurance', 'name')
@@ -190,16 +197,6 @@ final class EmployeeForm
                                 Select::make('diploma_level')
                                     ->label('Niveau de diplôme')
                                     ->options(ListOptions::getNiveauxDiplomes()),
-                            ]),
-                        Tab::make('Photo')
-                            ->icon('heroicon-o-photo')
-                            ->schema([
-                                FileUpload::make('photo')
-                                    ->label('Photo')
-                                    ->image()
-                                    ->disk('public')
-                                    ->directory(config('hrm.uploads.photos'))
-                                    ->imageEditor(),
                             ]),
                     ]),
             ]);
