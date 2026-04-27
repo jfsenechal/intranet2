@@ -68,6 +68,8 @@ return new class extends Migration
                 $table->renameColumn('echelle_id', 'pay_scale_id');
                 $table->renameColumn('prerequis_id', 'prerequisite_id');
                 $table->renameColumn('mutuelle_id', 'health_insurance_id');
+                $table->removeColumn('phone_office');
+                $table->removeColumn('mobile_office');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('employees')) {
             Schema::connection($this->connection)->create('employees', function (Blueprint $table): void {

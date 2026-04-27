@@ -15,6 +15,7 @@ use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 
 final class EmployeeForm
@@ -90,12 +91,17 @@ final class EmployeeForm
                                     ->columns(3)
                                     ->schema([
                                         TextInput::make('job_title')
-                                            ->label('Fonction')
-                                            ->maxLength(255),
+                                            ->label('Fonction du candidate')
+                                            ->helperText('Utilisé uniquement pour les candidatures')
+                                            ->maxLength(255)
+                                            ->visible(
+                                                fn (Get $get): bool => $get('status') === StatusEnum::APPLICATION->value
+                                            ),
                                         Select::make('status')
                                             ->label('Statut')
                                             ->options(StatusEnum::class)
-                                            ->enum(StatusEnum::class),
+                                            ->enum(StatusEnum::class)
+                                            ->live(),
                                         Toggle::make('is_archived')
                                             ->label('Archivé'),
                                     ]),
