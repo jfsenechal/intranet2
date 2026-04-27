@@ -141,10 +141,10 @@ final class EmployeeInfolist
                                             ->label('Date de rappel')
                                             ->date('d/m/Y'),
                                         TextEntry::make('salary_seniority_date')
-                                            ->label('Anciennete pecuniaire')
+                                            ->label('Ancienneté pécuniaire')
                                             ->date('d/m/Y'),
                                         TextEntry::make('scale_seniority_date')
-                                            ->label('Anciennete echelle')
+                                            ->label('Ancienneté d\'échelle')
                                             ->date('d/m/Y'),
                                     ]),
                                 Fieldset::make('Barème')
@@ -153,9 +153,9 @@ final class EmployeeInfolist
                                         TextEntry::make('payScale.name')
                                             ->label('Echelle'),
                                         TextEntry::make('pay_scale_code')
-                                            ->label('Code bareme'),
+                                            ->label('Code barème'),
                                         TextEntry::make('allowance')
-                                            ->label('Indemnite'),
+                                            ->label('Indemnité'),
                                         TextEntry::make('local_unit')
                                             ->label('Unite locale'),
                                     ]),
@@ -199,6 +199,35 @@ final class EmployeeInfolist
                                     ->state('Aucun profil informatique pour cet agent.')
                                     ->visible(fn (Employee $record): bool => $record->profile === null)
                                     ->suffixAction(RequestProfileAction::make()),
+                            ]),
+                        Tab::make('Candidat')
+                            ->icon('heroicon-o-identification')
+                            ->columns(2)
+                            ->schema([
+                                TextEntry::make('diploma_level')
+                                    ->label('Niveau de diplôme'),
+                                TextEntry::make('diploma_nature')
+                                    ->label('Nature du diplôme'),
+                            ]),
+                        Tab::make('Stagiaire')
+                            ->icon('heroicon-o-clipboard-document-check')
+                            ->columns(2)
+                            ->schema([
+                                TextEntry::make('intern_type')
+                                    ->label('Demande de stage'),
+                                TextEntry::make('diploma_level_simplified')
+                                    ->label('Niveau de diplôme'),
+                                TextEntry::make('candidate_file_name')
+                                    ->label('Document du stagiaire'),
+                            ]),
+                        Tab::make('Etudiant')
+                            ->icon('heroicon-o-academic-cap')
+                            ->columns(2)
+                            ->schema([
+                                TextEntry::make('diploma_nature')
+                                    ->label('Nature du diplôme'),
+                                TextEntry::make('diploma_level')
+                                    ->label('Niveau de diplôme'),
                             ]),
                     ]),
             ]);
