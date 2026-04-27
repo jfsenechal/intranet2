@@ -43,6 +43,9 @@ return new class extends Migration
                 $table->renameColumn('mutuelle_affiliation', 'insurance_affiliation');
                 $table->renameColumn('stagiaire_type', 'intern_type');
                 $table->renameColumn('email_professionnel', 'professional_email');
+                $table->renameColumn('mobile_professionnel', 'professional_mobile');
+                $table->renameColumn('telephone_professionnel', 'professional_phone');
+                $table->renameColumn('telephone_extension_professionnel', 'professional_phone_extension');
                 $table->renameColumn('user', 'user_add');
                 $table->renameColumn('created', 'created_at');
                 $table->renameColumn('updated', 'updated_at');
@@ -79,6 +82,9 @@ return new class extends Migration
                 $table->boolean('show_birthday')->default(true);
                 $table->string('email', 255)->nullable();
                 $table->string('professional_email', 100)->nullable();
+                $table->string('professional_mobile', 100)->nullable();
+                $table->string('professional_phone', 100)->nullable();
+                $table->string('professional_phone_extension', 100)->nullable();
                 $table->string('private_phone', 150)->nullable();
                 $table->string('private_mobile', 150)->nullable();
                 $table->string('address', 150)->nullable();
