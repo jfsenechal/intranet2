@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Ad\Filament\Resources\Ad\Pages;
+namespace AcMarche\Ad\Filament\Resources\ClassifiedAd\Pages;
 
-use AcMarche\Ad\Filament\Resources\Ad\ClassifiedAdResource;
+use AcMarche\Ad\Filament\Resources\ClassifiedAd\ClassifiedAdResource;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;

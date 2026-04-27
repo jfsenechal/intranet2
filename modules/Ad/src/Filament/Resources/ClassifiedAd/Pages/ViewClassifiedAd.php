@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Ad\Filament\Resources\Ad\Pages;
+namespace AcMarche\Ad\Filament\Resources\ClassifiedAd\Pages;
 
-use AcMarche\Ad\Filament\Resources\Ad\ClassifiedAdResource;
-use AcMarche\Ad\Filament\Resources\Ad\Schemas\ClassifiedAdInfolist;
+use AcMarche\Ad\Filament\Resources\ClassifiedAd\ClassifiedAdResource;
+use AcMarche\Ad\Filament\Resources\ClassifiedAd\Schemas\ClassifiedAdInfolist;
 use AcMarche\Ad\Models\ClassifiedAd;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
@@ -41,7 +41,7 @@ final class ViewClassifiedAd extends ViewRecord
                 ->icon('tabler-archive')
                 ->label('Archiver')
                 ->color(Color::Slate)
-                ->action(fn(ClassifiedAd $classifiedAd): true => $classifiedAd->archive = true),
+                ->action(fn (ClassifiedAd $classifiedAd): true => $classifiedAd->archive = true),
             DeleteAction::make()
                 ->icon('tabler-trash'),
             RestoreAction::make(),

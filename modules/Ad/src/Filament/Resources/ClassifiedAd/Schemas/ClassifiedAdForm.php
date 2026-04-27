@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Ad\Filament\Resources\Ad\Schemas;
+namespace AcMarche\Ad\Filament\Resources\ClassifiedAd\Schemas;
 
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;

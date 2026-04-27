@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Ad\Filament\Resources\Ad\Tables;
+namespace AcMarche\Ad\Filament\Resources\ClassifiedAd\Tables;
 
-use AcMarche\Ad\Filament\Resources\Ad\ClassifiedAdResource;
 use AcMarche\Ad\Models\ClassifiedAd;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -30,7 +29,7 @@ final class ClassifiedAdTables
         return $table
             ->defaultSort('created_at', 'desc')
             ->defaultPaginationPageOption(50)
-            ->modifyQueryUsing(fn (Builder $query): Builder => $query->with('category')->where('archive', '!=', '1'))
+            ->modifyQueryUsing(fn(Builder $query): Builder => $query->with('category')->where('archive', '!=', '1'))
             ->columns([
                 Stack::make([
                     TextColumn::make('name')
@@ -38,9 +37,9 @@ final class ClassifiedAdTables
                         ->limit(120)
                         ->weight('bold')
                         ->size('md')
-                        ->description(fn (ClassifiedAd $record): string => Str::limit($record->content, 250, ' (...)'), position: 'below')
+                        ->description(fn(ClassifiedAd $record): string => Str::limit($record->content, 250, ' (...)'),
+                            position: 'below')
                         ->color(Color::Green)
-                        ->url(fn (ClassifiedAd $record): string => ClassifiedAdResource::getUrl('view', ['record' => $record->id]))
                         ->tooltip(function (TextColumn $column): ?string {
                             $state = $column->getState();
 
@@ -71,20 +70,21 @@ final class ClassifiedAdTables
                             DatePicker::make('created_from')->label('Entre le'),
                             DatePicker::make('created_until')->label('Et le'),
                         ]),
-                    ])->query(fn (Builder $query, array $data): Builder => $query
-                    ->when(
-                        $data['created_from'],
-                        fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
-                    )
-                    ->when(
-                        $data['created_until'],
-                        fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
-                    )),
+                    ])->query(fn(Builder $query, array $data): Builder => $query
+                        ->when(
+                            $data['created_from'],
+                            fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                        )
+                        ->when(
+                            $data['created_until'],
+                            fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                        )),
             ], layout: FiltersLayout::AboveContent)->filtersFormWidth(Width::FourExtraLarge)
             ->recordActions([
                 ViewAction::make()
                     ->visible(false),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

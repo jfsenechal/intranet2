@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News\Tables;
 
-use AcMarche\News\Filament\Resources\News\NewsResource;
 use AcMarche\News\Models\News;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -30,7 +29,7 @@ final class NewsTables
         return $table
             ->defaultSort('created_at', 'desc')
             ->defaultPaginationPageOption(50)
-            ->modifyQueryUsing(fn (Builder $query): Builder => $query->with('category')->where('archive', '!=', '1'))
+            ->modifyQueryUsing(fn(Builder $query): Builder => $query->with('category')->where('archive', '!=', '1'))
             ->columns([
                 Stack::make([
                     TextColumn::make('name')
@@ -38,9 +37,9 @@ final class NewsTables
                         ->limit(120)
                         ->weight('bold')
                         ->size('md')
-                        ->description(fn (News $record): string => Str::limit($record->content, 250, ' (...)'), position: 'below')
+                        ->description(fn(News $record): string => Str::limit($record->content, 250, ' (...)'),
+                            position: 'below')
                         ->color(Color::Green)
-                        ->url(fn (News $record): string => NewsResource::getUrl('view', ['record' => $record->id]))
                         ->tooltip(function (TextColumn $column): ?string {
                             $state = $column->getState();
 
@@ -71,20 +70,20 @@ final class NewsTables
                             DatePicker::make('created_from')->label('Entre le'),
                             DatePicker::make('created_until')->label('Et le'),
                         ]),
-                    ])->query(fn (Builder $query, array $data): Builder => $query
-                    ->when(
-                        $data['created_from'],
-                        fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
-                    )
-                    ->when(
-                        $data['created_until'],
-                        fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
-                    )),
+                    ])->query(fn(Builder $query, array $data): Builder => $query
+                        ->when(
+                            $data['created_from'],
+                            fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                        )
+                        ->when(
+                            $data['created_until'],
+                            fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                        )),
             ], layout: FiltersLayout::AboveContent)->filtersFormWidth(Width::FourExtraLarge)
             ->recordActions([
-                ViewAction::make()
-                    ->visible(false),
+                ViewAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

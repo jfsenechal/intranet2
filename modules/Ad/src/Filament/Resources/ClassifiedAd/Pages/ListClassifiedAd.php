@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Ad\Filament\Resources\Ad\Pages;
+namespace AcMarche\Ad\Filament\Resources\ClassifiedAd\Pages;
 
-use AcMarche\Ad\Filament\Resources\Ad\ClassifiedAdResource;
+use AcMarche\Ad\Filament\Resources\ClassifiedAd\ClassifiedAdResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Override;

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Ad\Filament\Resources\Ad;
+namespace AcMarche\Ad\Filament\Resources\ClassifiedAd;
 
-use AcMarche\Ad\Filament\Resources\Ad\Pages\CreateClassifiedAd;
-use AcMarche\Ad\Filament\Resources\Ad\Pages\EditClassifiedAd;
-use AcMarche\Ad\Filament\Resources\Ad\Pages\ListClassifiedAd;
-use AcMarche\Ad\Filament\Resources\Ad\Pages\ViewClassifiedAd;
-use AcMarche\Ad\Filament\Resources\Ad\Schemas\ClassifiedAdForm;
-use AcMarche\Ad\Filament\Resources\Ad\Tables\ClassifiedAdTables;
+use AcMarche\Ad\Filament\Resources\ClassifiedAd\Pages\CreateClassifiedAd;
+use AcMarche\Ad\Filament\Resources\ClassifiedAd\Pages\EditClassifiedAd;
+use AcMarche\Ad\Filament\Resources\ClassifiedAd\Pages\ListClassifiedAd;
+use AcMarche\Ad\Filament\Resources\ClassifiedAd\Pages\ViewClassifiedAd;
+use AcMarche\Ad\Filament\Resources\ClassifiedAd\Schemas\ClassifiedAdForm;
+use AcMarche\Ad\Filament\Resources\ClassifiedAd\Tables\ClassifiedAdTables;
 use AcMarche\Ad\Models\ClassifiedAd;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -26,7 +26,7 @@ final class ClassifiedAdResource extends Resource
 
     public static function getNavigationIcon(): string
     {
-        return 'heroicon-o-newspaper';
+        return 'heroicon-o-megaphone';
     }
 
     public static function getNavigationLabel(): string

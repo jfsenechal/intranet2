@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Ad\Filament\Resources\Categories\RelationManagers;
 
-use AcMarche\Ad\Filament\Resources\Ad\ClassifiedAdResource;
-use AcMarche\Ad\Models\ClassifiedAd;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -27,8 +25,7 @@ final class ClassifiedAdRelationManager extends RelationManager
                 TextColumn::make('name')
                     ->label('Intitulé')
                     ->limit(80)
-                    ->searchable()
-                    ->url(fn (ClassifiedAd $record): string => ClassifiedAdResource::getUrl('view', ['record' => $record->id])),
+                    ->searchable()                ,
                 IconColumn::make('archive')
                     ->label('Archivé')
                     ->boolean(),

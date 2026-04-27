@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Ad\Filament\Resources\Ad\Pages;
+namespace AcMarche\Ad\Filament\Resources\ClassifiedAd\Pages;
 
 use AcMarche\Ad\Events\ClassifiedAdProcessed;
-use AcMarche\Ad\Filament\Resources\Ad\ClassifiedAdResource;
+use AcMarche\Ad\Filament\Resources\ClassifiedAd\ClassifiedAdResource;
 use Filament\Resources\Pages\CreateRecord;
 use Override;
 
