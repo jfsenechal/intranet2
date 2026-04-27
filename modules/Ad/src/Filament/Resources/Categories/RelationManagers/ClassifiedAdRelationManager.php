@@ -25,7 +25,7 @@ final class ClassifiedAdRelationManager extends RelationManager
                 TextColumn::make('name')
                     ->label('Intitulé')
                     ->limit(80)
-                    ->searchable()                ,
+                    ->searchable(),
                 IconColumn::make('archive')
                     ->label('Archivé')
                     ->boolean(),

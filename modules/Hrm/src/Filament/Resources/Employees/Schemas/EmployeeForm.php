@@ -154,6 +154,11 @@ final class EmployeeForm
                                     ->columnSpanFull(),
                             ]),
                         Tab::make('Candidat')
+                            ->visible(function (Get $get): bool {
+                                $status = $get('status');
+
+                                return $status === StatusEnum::APPLICATION;
+                            })
                             ->icon('heroicon-o-document-text')
                             ->columns(2)
                             ->schema([
@@ -165,6 +170,11 @@ final class EmployeeForm
                                     ->maxLength(200),
                             ]),
                         Tab::make('Stagiaire')
+                            ->visible(function (Get $get): bool {
+                                $status = $get('status');
+
+                                return $status === StatusEnum::APPLICATION;
+                            })
                             ->icon('heroicon-o-document-text')
                             ->schema([
                                 Select::make('intern_type')
@@ -182,9 +192,14 @@ final class EmployeeForm
                                 FileUpload::make('candidate_file_name')
                                     ->label('Document du stagiaire')
                                     ->disk('public')
-                                    ->directory(config('hrm.uploads.candidates'))                                    ,
+                                    ->directory(config('hrm.uploads.candidates')),
                             ]),
                         Tab::make('Etudiant')
+                            ->visible(function (Get $get): bool {
+                                $status = $get('status');
+
+                                return $status === StatusEnum::APPLICATION;
+                            })
                             ->icon('heroicon-o-document-text')
                             ->schema([
                                 TextInput::make('diploma_nature')
