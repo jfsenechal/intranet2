@@ -21,7 +21,7 @@ final class CreateClassifiedAd extends CreateRecord
 
     public function getTitle(): string
     {
-        return 'Ajouter une actualité';
+        return 'Ajouter une petite annonce';
     }
 
     protected function afterCreate(): void

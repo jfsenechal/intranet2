@@ -35,7 +35,7 @@ final class AdPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Pink,
             ])
-            ->brandName('Quoi de neuf?')
+            ->brandName('Petites annonces')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->unsavedChangesAlerts()
             ->resourceCreatePageRedirect('view')

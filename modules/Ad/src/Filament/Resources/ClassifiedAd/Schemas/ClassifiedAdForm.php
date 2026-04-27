@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\Ad\Filament\Resources\Ad\Schemas;
 
-use AcMarche\Security\Constant\DepartmentWithCommonEnum;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -52,12 +51,6 @@ final class ClassifiedAdForm
                             ->label('Catégorie')
                             ->relationship('category', 'name')
                             ->required(),
-                        Select::make('department')
-                            ->label('Pour qui ?')
-                            ->default(DepartmentWithCommonEnum::COMMON->value)
-                            ->options(DepartmentWithCommonEnum::class)
-                            ->required()
-                            ->suffixIcon('tabler-ladder'),
                         DatePicker::make('end_date')
                             ->label('Date de fin de publication')
                             ->default(Date::make('now')->add('2 weeks'))
