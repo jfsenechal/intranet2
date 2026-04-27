@@ -19,6 +19,10 @@
         },
         {
             "type": "path",
+            "url": "./modules/Ad"
+        },
+        {
+            "type": "path",
             "url": "./modules/App"
         },
         {
@@ -66,6 +70,7 @@
         "php": "^8.5",
         "ext-pdo": "*",
         "acmarche/agent": "*@dev",
+        "acmarche/ad": "*@dev",
         "acmarche/app": "*@dev",
         "acmarche/courrier": "*@dev",
         "acmarche/document": "*@dev",

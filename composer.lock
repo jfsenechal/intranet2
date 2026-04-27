@@ -4,8 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4705f7732f854f2080881e0bd447dc56",
+    "content-hash": "541980968cec8c939c40864e6010cc69",
     "packages": [
+        {
+            "name": "acmarche/ad",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./modules/Ad",
+                "reference": "1b76fa2bf513642f418e0aa6425bc03881285ffd"
+            },
+            "require": {
+                "filament/filament": "^5.0",
+                "illuminate/contracts": "^12.0|^13.0",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AcMarche\\Ad\\Providers\\AdServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AcMarche\\Ad\\": "src/",
+                    "AcMarche\\Ad\\Database\\Factories\\": "database/factories/",
+                    "AcMarche\\Ad\\Database\\Seeders\\": "database/seeders/",
+                    "AcMarche\\Ad\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AcMarche",
+                    "email": "info@acmarche.be"
+                }
+            ],
+            "description": "Ad management module for AcMarche",
+            "transport-options": {
+                "relative": true
+            }
+        },
         {
             "name": "acmarche/agent",
             "version": "dev-master",
@@ -16726,6 +16769,7 @@
     "aliases": [],
     "minimum-stability": "beta",
     "stability-flags": {
+        "acmarche/ad": 20,
         "acmarche/agent": 20,
         "acmarche/app": 20,
         "acmarche/courrier": 20,
