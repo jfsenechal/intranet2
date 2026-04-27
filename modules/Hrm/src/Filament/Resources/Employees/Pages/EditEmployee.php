@@ -20,4 +20,9 @@ final class EditEmployee extends EditRecord
             ViewAction::make(),
         ];
     }
+
+    public function getRelationManagers(): array
+    {
+        return [];
+    }
 }

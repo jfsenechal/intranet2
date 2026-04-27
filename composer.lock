@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "541980968cec8c939c40864e6010cc69",
+    "content-hash": "e877a251e3759b7624a60b174a037397",
     "packages": [
         {
             "name": "acmarche/ad",
@@ -1427,16 +1427,16 @@
         },
         {
             "name": "directorytree/ldaprecord",
-            "version": "v3.8.6",
+            "version": "v4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DirectoryTree/LdapRecord.git",
-                "reference": "a1cab9f078eb4756fc6fad58caea1e3d11cad0ec"
+                "reference": "c8171fb3210dfb58070112f4955ee8e9acbd449e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DirectoryTree/LdapRecord/zipball/a1cab9f078eb4756fc6fad58caea1e3d11cad0ec",
-                "reference": "a1cab9f078eb4756fc6fad58caea1e3d11cad0ec",
+                "url": "https://api.github.com/repos/DirectoryTree/LdapRecord/zipball/c8171fb3210dfb58070112f4955ee8e9acbd449e",
+                "reference": "c8171fb3210dfb58070112f4955ee8e9acbd449e",
                 "shasum": ""
             },
             "require": {
@@ -1499,24 +1499,24 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-19T20:55:30+00:00"
+            "time": "2026-03-18T18:32:45+00:00"
         },
         {
             "name": "directorytree/ldaprecord-laravel",
-            "version": "v3.4.3",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DirectoryTree/LdapRecord-Laravel.git",
-                "reference": "86925b558655e1595aabccbb8c530eb747e87ef5"
+                "reference": "975dba582e1c87dad971970eaa92b93a05204f4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DirectoryTree/LdapRecord-Laravel/zipball/86925b558655e1595aabccbb8c530eb747e87ef5",
-                "reference": "86925b558655e1595aabccbb8c530eb747e87ef5",
+                "url": "https://api.github.com/repos/DirectoryTree/LdapRecord-Laravel/zipball/975dba582e1c87dad971970eaa92b93a05204f4d",
+                "reference": "975dba582e1c87dad971970eaa92b93a05204f4d",
                 "shasum": ""
             },
             "require": {
-                "directorytree/ldaprecord": "^v3.3",
+                "directorytree/ldaprecord": "^4.0",
                 "ext-json": "*",
                 "ext-ldap": "*",
                 "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
@@ -1558,7 +1558,7 @@
             ],
             "support": {
                 "issues": "https://github.com/DirectoryTree/LdapRecord-Laravel/issues",
-                "source": "https://github.com/DirectoryTree/LdapRecord-Laravel/tree/v3.4.3"
+                "source": "https://github.com/DirectoryTree/LdapRecord-Laravel/tree/v4.0.0"
             },
             "funding": [
                 {
@@ -1566,7 +1566,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-19T21:11:17+00:00"
+            "time": "2026-04-26T22:34:37+00:00"
         },
         {
             "name": "doctrine/inflector",

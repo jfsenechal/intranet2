@@ -136,6 +136,7 @@ final class EmployeeForm
                             ]),
                         Tab::make('Sante')
                             ->icon('heroicon-o-heart')
+                            ->columns(2)
                             ->schema([
                                 Select::make('health_insurance_id')
                                     ->label('Mutuelle')
@@ -154,11 +155,6 @@ final class EmployeeForm
                                     ->columnSpanFull(),
                             ]),
                         Tab::make('Candidat')
-                            ->visible(function (Get $get): bool {
-                                $status = $get('status');
-
-                                return $status === StatusEnum::APPLICATION;
-                            })
                             ->icon('heroicon-o-identification')
                             ->columns(2)
                             ->schema([
@@ -170,11 +166,7 @@ final class EmployeeForm
                                     ->maxLength(200),
                             ]),
                         Tab::make('Stagiaire')
-                            ->visible(function (Get $get): bool {
-                                $status = $get('status');
 
-                                return $status === StatusEnum::INTERN;
-                            })
                             ->icon('heroicon-o-clipboard-document-check')
                             ->columns(2)
                             ->schema([
@@ -191,11 +183,7 @@ final class EmployeeForm
                                     ->directory(config('hrm.uploads.candidates')),
                             ]),
                         Tab::make('Etudiant')
-                            ->visible(function (Get $get): bool {
-                                $status = $get('status');
 
-                                return $status === StatusEnum::STUDENT;
-                            })
                             ->icon('heroicon-o-academic-cap')
                             ->columns(2)
                             ->schema([
