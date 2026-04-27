@@ -25,6 +25,8 @@ return [
         'diplomas' => 'uploads/hrm/diplomas',
         'evaluations' => 'uploads/hrm/evaluations',
         'formations' => 'uploads/hrm/formations',
+        'candidates' => 'uploads/hrm/candidates',
+        'students' => 'uploads/hrm/students',
     ],
     /*
     |--------------------------------------------------------------------------

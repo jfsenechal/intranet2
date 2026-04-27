@@ -97,32 +97,6 @@ final class EmployeeForm
                                             ->options(StatusEnum::class)
                                             ->enum(StatusEnum::class)
                                             ->live(),
-                                        TextInput::make('job_title')
-                                            ->label('Fonction du candidat')
-                                            ->helperText('Utilisé uniquement pour les candidatures')
-                                            ->maxLength(255)
-                                            ->visible(function (Get $get): bool {
-                                                $status = $get('status');
-
-                                                return $status === StatusEnum::APPLICATION;
-                                            }),
-                                        Select::make('diploma_level')
-                                            ->label('Niveau de diplôme')
-                                            ->options(ListOptions::getNiveauxDiplomes())
-                                            ->visible(function (Get $get): bool {
-                                                $status = $get('status');
-
-                                                return $status === StatusEnum::APPLICATION;
-                                            }),
-                                        Select::make('intern_type')
-                                            ->label('Demande de stage')
-                                            ->options(InternTypeEnum::class)
-                                            ->enum(InternTypeEnum::class)
-                                            ->visible(function (Get $get): bool {
-                                                $status = $get('status');
-
-                                                return $status === StatusEnum::INTERN;
-                                            }),
                                         Toggle::make('is_archived')
                                             ->label('Archivé'),
                                     ]),
@@ -178,6 +152,47 @@ final class EmployeeForm
                                 RichEditor::make('notes')
                                     ->label('Remarques')
                                     ->columnSpanFull(),
+                            ]),
+                        Tab::make('Candidat')
+                            ->icon('heroicon-o-document-text')
+                            ->columns(2)
+                            ->schema([
+                                Select::make('diploma_level')
+                                    ->label('Niveau de diplôme')
+                                    ->options(ListOptions::getNiveauxDiplomes()),
+                                TextInput::make('diploma_nature')
+                                    ->label('Nature du diplôme')
+                                    ->maxLength(200),
+                            ]),
+                        Tab::make('Stagiaire')
+                            ->icon('heroicon-o-document-text')
+                            ->schema([
+                                Select::make('intern_type')
+                                    ->label('Demande de stage')
+                                    ->options(InternTypeEnum::class)
+                                    ->enum(InternTypeEnum::class)
+                                    ->visible(function (Get $get): bool {
+                                        $status = $get('status');
+
+                                        return $status === StatusEnum::INTERN;
+                                    }),
+                                Select::make('diploma_level')
+                                    ->label('Niveau de diplôme')
+                                    ->options(ListOptions::getNiveauxDiplomesSimplifies()),
+                                FileUpload::make('candidate_file_name')
+                                    ->label('Document du stagiaire')
+                                    ->disk('public')
+                                    ->directory(config('hrm.uploads.candidates'))                                    ,
+                            ]),
+                        Tab::make('Etudiant')
+                            ->icon('heroicon-o-document-text')
+                            ->schema([
+                                TextInput::make('diploma_nature')
+                                    ->label('Nature du diplôme')
+                                    ->maxLength(200),
+                                Select::make('diploma_level')
+                                    ->label('Niveau de diplôme')
+                                    ->options(ListOptions::getNiveauxDiplomes()),
                             ]),
                         Tab::make('Photo')
                             ->icon('heroicon-o-photo')
