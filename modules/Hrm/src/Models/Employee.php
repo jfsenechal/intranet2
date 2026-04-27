@@ -59,6 +59,7 @@ use Spatie\Sluggable\SlugOptions;
     'received_at',
     'mail_reference',
     'diploma_level',
+    'diploma_level_simplified',
     'diploma_nature',
     'candidate_file_name',
     'mail_sent_at',

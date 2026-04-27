@@ -165,7 +165,6 @@ final class EmployeeForm
                                     ->maxLength(200),
                             ]),
                         Tab::make('Stagiaire')
-
                             ->icon('heroicon-o-clipboard-document-check')
                             ->columns(2)
                             ->schema([
@@ -173,7 +172,7 @@ final class EmployeeForm
                                     ->label('Demande de stage')
                                     ->options(InternTypeEnum::class)
                                     ->enum(InternTypeEnum::class),
-                                Select::make('diploma_level')
+                                Select::make('diploma_level_simplified')
                                     ->label('Niveau de diplôme')
                                     ->options(ListOptions::getNiveauxDiplomesSimplifies()),
                                 FileUpload::make('candidate_file_name')
@@ -182,7 +181,6 @@ final class EmployeeForm
                                     ->directory(config('hrm.uploads.candidates')),
                             ]),
                         Tab::make('Etudiant')
-
                             ->icon('heroicon-o-academic-cap')
                             ->columns(2)
                             ->schema([
