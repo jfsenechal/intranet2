@@ -32,6 +32,7 @@ return new class extends Migration
                 $table->renameColumn('date_rappel', 'reminder_date');
                 $table->renameColumn('statut', 'status');
                 $table->renameColumn('remarques', 'notes');
+                $table->renameColumn('urgence', 'emergency_contact');
                 $table->renameColumn('image_name', 'photo');
                 $table->renameColumn('adresse', 'address');
                 $table->renameColumn('code_postal', 'postal_code');
@@ -63,7 +64,7 @@ return new class extends Migration
                 $table->renameColumn('candi_courrier_nombre', 'candidate_mail_count');
                 $table->renameColumn('candi_prioritaire', 'candidate_priority');
                 $table->renameColumn('candi_service_id', 'candidate_service_id');
-                $table->renameColumn('employeur_save_id', 'saved_employer_id');
+                $table->removeColumn('employeur_save_id');
                 $table->renameColumn('echelle_id', 'pay_scale_id');
                 $table->renameColumn('prerequis_id', 'prerequisite_id');
                 $table->renameColumn('mutuelle_id', 'health_insurance_id');
@@ -81,6 +82,7 @@ return new class extends Migration
                 $table->string('job_title', 255)->nullable();
                 $table->date('birth_date')->nullable();
                 $table->boolean('show_birthday')->default(true);
+                $table->string('emergency_contact')->nullable();
                 $table->string('private_email', 255)->nullable();
                 $table->string('private_phone', 150)->nullable();
                 $table->string('private_mobile', 150)->nullable();

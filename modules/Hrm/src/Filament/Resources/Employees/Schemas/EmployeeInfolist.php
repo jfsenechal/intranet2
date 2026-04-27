@@ -37,7 +37,12 @@ final class EmployeeInfolist
                                             ->label('Photo')
                                             ->disk('public')
                                             ->imageHeight(260)
-                                            ->defaultImageUrl(fn (Employee $record): string => 'https://ui-avatars.com/api/?size=256&name='.urlencode(mb_trim($record->first_name.' '.$record->last_name)))
+                                            ->defaultImageUrl(
+                                                fn(Employee $record
+                                                ): string => 'https://ui-avatars.com/api/?size=256&name='.urlencode(
+                                                        mb_trim($record->first_name.' '.$record->last_name)
+                                                    )
+                                            )
                                             ->columnSpan(3),
                                         Fieldset::make('Coordonnées')
                                             ->columns(2)
@@ -45,7 +50,11 @@ final class EmployeeInfolist
                                             ->schema([
                                                 TextEntry::make('address')
                                                     ->label('Adresse')
-                                                    ->state(fn (Employee $record): string => mb_trim($record->address.' '.$record->postal_code.' '.$record->city))
+                                                    ->state(
+                                                        fn(Employee $record): string => mb_trim(
+                                                            $record->address.' '.$record->postal_code.' '.$record->city
+                                                        )
+                                                    )
                                                     ->columnSpanFull(),
                                                 Fieldset::make('Privé')
                                                     ->columns(1)
@@ -69,7 +78,12 @@ final class EmployeeInfolist
                                                         TextEntry::make('professional_phone')
                                                             ->label('Téléphone')
                                                             ->icon('heroicon-o-phone')
-                                                            ->state(fn (Employee $record): ?string => $record->professional_phone === null ? null : mb_trim($record->professional_phone.($record->professional_phone_extension !== null ? ' (ext. '.$record->professional_phone_extension.')' : ''))),
+                                                            ->state(
+                                                                fn(Employee $record
+                                                                ): ?string => $record->professional_phone === null ? null : mb_trim(
+                                                                    $record->professional_phone.($record->professional_phone_extension !== null ? ' (ext. '.$record->professional_phone_extension.')' : '')
+                                                                )
+                                                            ),
                                                         TextEntry::make('professional_mobile')
                                                             ->label('GSM')
                                                             ->icon('heroicon-o-device-phone-mobile'),
@@ -102,7 +116,7 @@ final class EmployeeInfolist
                                         TextEntry::make('status')
                                             ->label('Statut')
                                             ->badge()
-                                            ->color(fn (string $state): string => match ($state) {
+                                            ->color(fn(string $state): string => match ($state) {
                                                 'active' => 'success',
                                                 'retired' => 'info',
                                                 'terminated' => 'danger',
@@ -147,11 +161,15 @@ final class EmployeeInfolist
                             ]),
                         Tab::make('Santé')
                             ->icon('heroicon-o-heart')
+                            ->columns(2)
                             ->schema([
                                 TextEntry::make('healthInsurance.name')
                                     ->label('Mutuelle'),
                                 TextEntry::make('insurance_affiliation')
                                     ->label('Affiliation mutuelle'),
+                                TextEntry::make('emergency_contact')
+                                    ->label('Contact en cas d\'urgence')
+                                    ->columnSpanFull(),
                             ]),
                         Tab::make('Notes')
                             ->icon('heroicon-o-document-text')
@@ -167,18 +185,18 @@ final class EmployeeInfolist
                             ->schema([
                                 TextEntry::make('profile.username')
                                     ->label('Nom utilisateur')
-                                    ->visible(fn (Employee $record): bool => $record->profile !== null)
+                                    ->visible(fn(Employee $record): bool => $record->profile !== null)
                                     ->placeholder('—')
                                     ->suffixAction(RequestProfileChangeAction::make()),
                                 TextEntry::make('delete_profile')
                                     ->label('Suppression')
                                     ->state('Demander la suppression du compte informatique.')
-                                    ->visible(fn (Employee $record): bool => $record->profile !== null)
+                                    ->visible(fn(Employee $record): bool => $record->profile !== null)
                                     ->suffixAction(RequestProfileDeletionAction::make()),
                                 TextEntry::make('no_profile')
                                     ->label('Compte informatique')
                                     ->state('Aucun profil informatique pour cet agent.')
-                                    ->visible(fn (Employee $record): bool => $record->profile === null)
+                                    ->visible(fn(Employee $record): bool => $record->profile === null)
                                     ->suffixAction(RequestProfileAction::make()),
                             ]),
                     ]),

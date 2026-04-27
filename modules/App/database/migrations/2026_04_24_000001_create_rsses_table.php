@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->unique(['username', 'url']);
-            $table->foreign('username')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('username')->references('username')->on('users')->cascadeOnDelete();
         });
     }
 
