@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Tables;
 
+use AcMarche\Hrm\Enums\TrainingTypeEnum;
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
 use AcMarche\Hrm\Models\Training;
 use Filament\Actions\Action;
@@ -68,11 +69,7 @@ final class TrainingTables
             ->filters([
                 SelectFilter::make('training_type')
                     ->label('Type')
-                    ->options([
-                        'type1' => 'Type 1',
-                        'type2' => 'Type 2',
-                        'type3' => 'Type 3',
-                    ]),
+                    ->options(TrainingTypeEnum::class),
                 TernaryFilter::make('certificate_received')
                     ->label('Attestation recue')
                     ->placeholder('Toutes')

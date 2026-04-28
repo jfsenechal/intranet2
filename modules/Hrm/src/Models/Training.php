@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use AcMarche\Hrm\Enums\TrainingTypeEnum;
 use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -62,6 +63,7 @@ final class Training extends Model
             'granted_at' => 'date',
             'certificate_received' => 'boolean',
             'is_closed' => 'boolean',
+            'training_type' => TrainingTypeEnum::class,
         ];
     }
 }

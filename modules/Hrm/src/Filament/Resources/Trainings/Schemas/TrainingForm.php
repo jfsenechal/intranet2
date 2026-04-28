@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Schemas;
 
 use AcMarche\Hrm\Enums\ListOptions;
+use AcMarche\Hrm\Enums\TrainingTypeEnum;
 use AcMarche\Hrm\Models\Training;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
@@ -35,11 +36,8 @@ final class TrainingForm
                             ->maxLength(150),
                         Select::make('training_type')
                             ->label('Type de formation')
-                            ->options([
-                                'type1' => 'Type 1',
-                                'type2' => 'Type 2',
-                                'type3' => 'Type 3',
-                            ])
+                            ->options(TrainingTypeEnum::class)
+                            ->enum(TrainingTypeEnum::class)
                             ->required(),
                         Fieldset::make('Durée')
                             ->columns(2)
