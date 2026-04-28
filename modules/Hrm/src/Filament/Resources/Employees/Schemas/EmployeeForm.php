@@ -125,6 +125,12 @@ final class EmployeeForm
                                         TextInput::make('pay_scale_code')
                                             ->label('Code barème')
                                             ->maxLength(255),
+                                        Select::make('prerequisite_id')
+                                            ->label('Prérequis')
+                                            ->helperText('Pour l\'évolution')
+                                            ->relationship('prerequisite', 'name')
+                                            ->searchable()
+                                            ->preload(),
                                         Select::make('allowance')
                                             ->label('Indemnité')
                                             ->helperText('Montant Foyer/Résid')

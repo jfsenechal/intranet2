@@ -9,7 +9,6 @@ use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use AcMarche\Hrm\Filament\Resources\Deadlines\DeadlineResource;
 use AcMarche\Hrm\Filament\Resources\Diplomas\DiplomaResource;
 use AcMarche\Hrm\Filament\Resources\Employees\EmployeeResource;
-use AcMarche\Hrm\Filament\Resources\Prerequisites\PrerequisiteResource;
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -54,10 +53,6 @@ final class ViewEmployee extends ViewRecord
                     ->label('Ajouter une formation')
                     ->icon('tabler-plus')
                     ->url(TrainingResource::getUrl('create', $employeeId)),
-                Action::make('addPrerequisite')
-                    ->label('Ajouter un prérequis')
-                    ->icon('tabler-plus')
-                    ->url(PrerequisiteResource::getUrl('create', $employeeId)),
                 Action::make('addDiploma')
                     ->label('Ajouter un diplôme')
                     ->icon('tabler-plus')
