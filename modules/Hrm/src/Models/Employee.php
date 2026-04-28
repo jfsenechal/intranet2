@@ -107,14 +107,6 @@ final class Employee extends Model
     }
 
     /**
-     * @return BelongsTo<Employer>
-     */
-    public function savedEmployer(): BelongsTo
-    {
-        return $this->belongsTo(Employer::class, 'saved_employer_id');
-    }
-
-    /**
      * @return BelongsTo<Service>
      */
     public function candidateService(): BelongsTo
