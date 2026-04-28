@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d350415c398cac5e8d33e972e1c9ee95",
+    "content-hash": "265815c8e87c9a0ca19b321df2f07970",
     "packages": [
         {
             "name": "acmarche/ad",
@@ -517,6 +517,49 @@
                 }
             ],
             "description": "Security management module for AcMarche",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "acmarche/whoiswho",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./modules/WhoIsWho",
+                "reference": "63a4a3f141b90aa799cda1ed18c8fbe6aff2b2e9"
+            },
+            "require": {
+                "filament/filament": "^5.0",
+                "illuminate/contracts": "^12.0|^13.0",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AcMarche\\WhoIsWho\\Providers\\WhoIsWhoServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AcMarche\\WhoIsWho\\": "src/",
+                    "AcMarche\\WhoIsWho\\Database\\Factories\\": "database/factories/",
+                    "AcMarche\\WhoIsWho\\Database\\Seeders\\": "database/seeders/",
+                    "AcMarche\\WhoIsWho\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AcMarche",
+                    "email": "info@acmarche.be"
+                }
+            ],
+            "description": "WhoIsWho and travel expense management module for AcMarche",
             "transport-options": {
                 "relative": true
             }
@@ -17114,7 +17157,8 @@
         "acmarche/news": 20,
         "acmarche/pst": 20,
         "acmarche/publication": 20,
-        "acmarche/security": 20
+        "acmarche/security": 20,
+        "acmarche/whoiswho": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

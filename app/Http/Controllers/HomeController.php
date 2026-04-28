@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use AcMarche\Ad\Models\ClassifiedAd;
 use AcMarche\Document\Models\Document;
 use AcMarche\Hrm\Models\Employee;
 use AcMarche\News\Models\News;
@@ -31,6 +32,7 @@ final class HomeController extends Controller
         return view('home', [
             'latestNews' => News::query()->latest('created_at')->limit(6)->get(),
             'latestDocuments' => Document::query()->latest('created_at')->limit(6)->get(),
+            'latestAds' => ClassifiedAd::query()->latest('created_at')->limit(6)->get(),
             'todayBirthdays' => $this->fetchTodayBirthdays(),
             'rssItems' => $this->fetchRssItems(),
             'pressArticles' => $this->fetchPressArticles(),

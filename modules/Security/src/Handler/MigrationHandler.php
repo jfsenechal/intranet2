@@ -40,6 +40,7 @@ final class MigrationHandler
             16 => IncomingMailResource::getUrl('index', panel: 'courrier-panel'),
             17 => UserResource::getUrl('index', panel: 'security-panel'),
             40 => ProfileResource::getUrl('index', panel: 'agent-panel'),
+            42 => ProfileResource::getUrl('index', panel: 'whoiswho-panel'),
             44 => PublicationResource::getUrl('index', panel: 'publication-panel'),
             58 => ActionPstResource::getUrl('index', panel: 'pst-panel'),
             default => null,
