@@ -111,10 +111,6 @@ final class EmployerResource extends Resource
                     ->label('Directions')
                     ->counts('directions')
                     ->sortable(),
-                TextColumn::make('employees_count')
-                    ->label('Employés')
-                    ->counts('employees')
-                    ->sortable(),
             ])
             ->filters([])
             ->recordActions([

@@ -57,6 +57,10 @@ final class ViewEmployee extends ViewRecord
                     ->label('Ajouter un diplôme')
                     ->icon('tabler-plus')
                     ->url(DiplomaResource::getUrl('create', $employeeId)),
+                Action::make('addValorization')
+                    ->label('Ajouter une valorisation')
+                    ->icon('tabler-plus')
+                    ->url(DiplomaResource::getUrl('create', $employeeId)),
             ])
                 ->label('Ajouter...')
                 ->color('warning')

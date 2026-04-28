@@ -29,7 +29,7 @@ final class DirectionTables
                 TextColumn::make('abbreviation')
                     ->label('Abreviation')
                     ->searchable()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('director')
                     ->label('Directeur')
                     ->searchable()
@@ -41,7 +41,8 @@ final class DirectionTables
                 TextColumn::make('services_count')
                     ->label('Services')
                     ->counts('services')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
             ])
             ->filters([])
             ->recordActions([
