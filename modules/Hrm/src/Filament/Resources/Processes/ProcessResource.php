@@ -16,6 +16,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Override;
+use UnitEnum;
 
 final class ProcessResource extends Resource
 {
@@ -23,22 +24,25 @@ final class ProcessResource extends Resource
     protected static ?string $model = Process::class;
 
     #[Override]
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
+    protected static string|null|UnitEnum $navigationGroup = 'Listing';
+
+    #[Override]
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::BookOpen;
 
     #[Override]
     protected static ?int $navigationSort = 3;
 
     #[Override]
-    protected static ?string $navigationLabel = 'Processes';
+    protected static ?string $navigationLabel = 'Processus';
 
     #[Override]
-    protected static ?string $modelLabel = 'contact';
+    protected static ?string $modelLabel = 'processus';
 
     #[Override]
-    protected static ?string $pluralModelLabel = 'contacts';
+    protected static ?string $pluralModelLabel = 'processus';
 
     #[Override]
-    protected static ?string $recordTitleAttribute = 'last_name';
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
     {

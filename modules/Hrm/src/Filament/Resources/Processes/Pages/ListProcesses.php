@@ -19,7 +19,7 @@ final class ListProcesses extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label('Nouveau contact')
+                ->label('Nouveau processus')
                 ->icon(Heroicon::Plus),
         ];
     }
