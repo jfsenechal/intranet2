@@ -31,7 +31,7 @@ final class EmployeeForm
                         Tab::make('Informations personnelles')
                             ->icon('heroicon-o-user')
                             ->schema([
-                                Section::make('Identite')
+                                Section::make('Identité')
                                     ->columns(3)
                                     ->schema([
                                         Select::make('civility')
@@ -46,13 +46,14 @@ final class EmployeeForm
                                             ->required()
                                             ->maxLength(100),
                                         TextInput::make('first_name')
-                                            ->label('Prenom')
+                                            ->label('Prénom')
                                             ->required()
                                             ->maxLength(100),
                                         DatePicker::make('birth_date')
                                             ->label('Date de naissance'),
                                         Toggle::make('show_birthday')
                                             ->label('Afficher anniversaire')
+                                            ->helperText('En page d\'accueil et dans qui est qui.')
                                             ->default(true),
                                         TextInput::make('national_registry_number')
                                             ->label('Registre national')
@@ -72,15 +73,15 @@ final class EmployeeForm
                                             ->label('Ville')
                                             ->maxLength(100),
                                         TextInput::make('private_email')
-                                            ->label('Email prive')
+                                            ->label('Email privé')
                                             ->email()
                                             ->maxLength(255),
                                         TextInput::make('private_phone')
-                                            ->label('Téléphone prive')
+                                            ->label('Téléphone privé')
                                             ->tel()
                                             ->maxLength(150),
                                         TextInput::make('private_mobile')
-                                            ->label('GSM prive')
+                                            ->label('GSM privé')
                                             ->tel()
                                             ->maxLength(150),
                                     ]),
@@ -111,7 +112,7 @@ final class EmployeeForm
                                         DatePicker::make('salary_seniority_date')
                                             ->label('Anciennete pecuniaire'),
                                         DatePicker::make('scale_seniority_date')
-                                            ->label('Anciennete echelle'),
+                                            ->label('Ancienneté d\'échelle'),
                                     ]),
                                 Fieldset::make('Barème')
                                     ->columns(3)
@@ -122,7 +123,7 @@ final class EmployeeForm
                                             ->searchable()
                                             ->preload(),
                                         TextInput::make('pay_scale_code')
-                                            ->label('Code bareme')
+                                            ->label('Code barème')
                                             ->maxLength(255),
                                         Select::make('allowance')
                                             ->label('Indemnité')
