@@ -22,25 +22,17 @@ final class ValorizationForm
                 Section::make('Valorisation')
                     ->columns(2)
                     ->schema([
-                        Select::make('employee_id')
-                            ->label('Agent')
-                            ->relationship('employee', 'last_name')
-                            ->getOptionLabelFromRecordUsing(
-                                fn (Employee $record): string => $record->last_name.' '.$record->first_name
-                            )
-                            ->searchable(['last_name', 'first_name'])
-                            ->preload()
-                            ->required(),
                         TextInput::make('employer_name')
                             ->label('Employeur')
                             ->required()
                             ->maxLength(150),
                         TextInput::make('duration')
                             ->label('Durée')
+                            ->helperText('Exemple: 9 mois')
                             ->required()
                             ->maxLength(150),
                         TextInput::make('regime')
-                            ->label('Régime')
+                            ->label('Régime horaire')
                             ->maxLength(150),
                     ]),
                 Section::make('Contenu')

@@ -43,7 +43,7 @@ final class EmployeeExport implements FromQuery, WithHeadings, WithMapping
             $row->job_title,
             $row->status,
             $row->hired_at?->format('d/m/Y'),
-            $row->email,
+            $row->private_email,
             $row->is_archived ? 'Oui' : 'Non',
         ];
     }

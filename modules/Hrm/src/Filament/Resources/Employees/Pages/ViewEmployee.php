@@ -9,15 +9,21 @@ use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use AcMarche\Hrm\Filament\Resources\Deadlines\DeadlineResource;
 use AcMarche\Hrm\Filament\Resources\Diplomas\DiplomaResource;
 use AcMarche\Hrm\Filament\Resources\Employees\EmployeeResource;
+use AcMarche\Hrm\Filament\Resources\HrDocuments\Schemas\HrDocumentForm;
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
 use AcMarche\Hrm\Filament\Resources\Valorizations\ValorizationResource;
+use AcMarche\Hrm\Models\Employee;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Facades\Storage;
 use Override;
 
 final class ViewEmployee extends ViewRecord
@@ -54,6 +60,21 @@ final class ViewEmployee extends ViewRecord
                     ->label('Ajouter une formation')
                     ->icon('tabler-plus')
                     ->url(TrainingResource::getUrl('create', $employeeId)),
+                Action::make('addDocument')
+                    ->label('Ajouter un document')
+                    ->icon('tabler-plus')
+                    ->modalHeading('Ajouter un document')
+                    ->schema(HrDocumentForm::getSchema())
+                    ->action(function (array $data, Employee $record): void {
+                        $path = $data['file_name'] ?? null;
+                        $record->documents()->create([
+                            'name' => $data['name'],
+                            'file_name' => $path,
+                            'mime' => $path ? (Storage::disk('public')->mimeType($path) ?: '') : '',
+                            'notes' => $data['notes'] ?? null,
+                        ]);
+                    })
+                    ->successNotificationTitle('Document ajouté'),
                 Action::make('addDiploma')
                     ->label('Ajouter un diplôme')
                     ->icon('tabler-plus')
