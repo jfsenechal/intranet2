@@ -14,6 +14,7 @@ use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Publication\Filament\Resources\Publications\PublicationResource;
 use AcMarche\Security\Filament\Resources\Users\UserResource;
 use AcMarche\Security\Models\Module;
+use AcMarche\WhoIsWho\Filament\Pages\Index as WhoIsWhoIndex;
 use Illuminate\Support\Collection;
 
 final class MigrationHandler
@@ -40,7 +41,7 @@ final class MigrationHandler
             16 => IncomingMailResource::getUrl('index', panel: 'courrier-panel'),
             17 => UserResource::getUrl('index', panel: 'security-panel'),
             40 => ProfileResource::getUrl('index', panel: 'agent-panel'),
-            42 => ProfileResource::getUrl('index', panel: 'whoiswho-panel'),
+            42 => WhoIsWhoIndex::getUrl(panel: 'whoiswho-panel'),
             44 => PublicationResource::getUrl('index', panel: 'publication-panel'),
             58 => ActionPstResource::getUrl('index', panel: 'pst-panel'),
             default => null,
