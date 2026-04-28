@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Schemas;
 
+use AcMarche\Hrm\Enums\ListOptions;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -21,11 +22,11 @@ final class TrainingForm
         return $schema
             ->columns(1)
             ->components([
-                Section::make('Agent et formation')
+                Section::make('Formation')
                     ->columns(2)
                     ->schema([
                         TextInput::make('name')
-                            ->label('Intitule')
+                            ->label('Intitulé')
                             ->required()
                             ->maxLength(150),
                         Select::make('training_type')
@@ -37,7 +38,7 @@ final class TrainingForm
                             ])
                             ->required(),
                         TextInput::make('duration_hours')
-                            ->label('Duree (heures)')
+                            ->label('Durée (heures)')
                             ->numeric()
                             ->suffix('heures'),
                     ]),
@@ -45,22 +46,22 @@ final class TrainingForm
                     ->columns(4)
                     ->schema([
                         DatePicker::make('start_date')
-                            ->label('Date de debut'),
+                            ->label('Date de début'),
                         DatePicker::make('end_date')
                             ->label('Date de fin'),
                         DatePicker::make('college_date')
-                            ->label('Date college'),
+                            ->label('Date de Collège'),
                         DatePicker::make('reminder_date')
                             ->label('Date de rappel'),
                     ]),
                 Fieldset::make('Accord')
                     ->columns(2)
                     ->schema([
-                        TextInput::make('granted_by')
+                        Select::make('granted_by')
                             ->label('Accorde par')
-                            ->maxLength(255),
+                            ->options(ListOptions::getAccordePar()),
                         DatePicker::make('granted_at')
-                            ->label('Accorde le'),
+                            ->label('Accordé le'),
                     ]),
                 Fieldset::make('Attestation')
                     ->columns(3)

@@ -7,6 +7,7 @@ namespace AcMarche\Hrm\Filament\Resources\Employees\Pages;
 use AcMarche\Hrm\Filament\Resources\Absences\AbsenceResource;
 use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use AcMarche\Hrm\Filament\Resources\Deadlines\DeadlineResource;
+use AcMarche\Hrm\Filament\Resources\Diplomas\DiplomaResource;
 use AcMarche\Hrm\Filament\Resources\Employees\EmployeeResource;
 use AcMarche\Hrm\Filament\Resources\Prerequisites\PrerequisiteResource;
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
@@ -41,22 +42,26 @@ final class ViewEmployee extends ViewRecord
                     ->label('Ajouter une absence')
                     ->icon('tabler-plus')
                     ->url(AbsenceResource::getUrl('create', $employeeId)),
-                Action::make('addContract')
-                    ->label('Ajouter un contrat')
-                    ->icon('tabler-plus')
-                    ->url(ContractResource::getUrl('create', $employeeId)),
                 Action::make('addDeadline')
                     ->label('Ajouter une échéance')
                     ->icon('tabler-plus')
                     ->url(DeadlineResource::getUrl('create', $employeeId)),
-                Action::make('addPrerequisite')
-                    ->label('Ajouter un prérequis')
+                Action::make('addContract')
+                    ->label('Ajouter un contrat')
                     ->icon('tabler-plus')
-                    ->url(PrerequisiteResource::getUrl('create', $employeeId)),
+                    ->url(ContractResource::getUrl('create', $employeeId)),
                 Action::make('addTraining')
                     ->label('Ajouter une formation')
                     ->icon('tabler-plus')
                     ->url(TrainingResource::getUrl('create', $employeeId)),
+                Action::make('addPrerequisite')
+                    ->label('Ajouter un prérequis')
+                    ->icon('tabler-plus')
+                    ->url(PrerequisiteResource::getUrl('create', $employeeId)),
+                Action::make('addDiploma')
+                    ->label('Ajouter un diplôme')
+                    ->icon('tabler-plus')
+                    ->url(DiplomaResource::getUrl('create', $employeeId)),
             ])
                 ->label('Ajouter...')
                 ->color('warning')

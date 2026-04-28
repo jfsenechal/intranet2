@@ -7,6 +7,7 @@ namespace AcMarche\Hrm\Filament\Resources\Diplomas\Schemas;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Facades\Storage;
 
 final class DiplomaInfolist
 {
@@ -18,11 +19,13 @@ final class DiplomaInfolist
                 Section::make('Diplôme')
                     ->columns(2)
                     ->schema([
-                        TextEntry::make('name')
-                            ->label('Intitulé'),
                         TextEntry::make('certificate_file')
                             ->label('Fichier attestation')
-                            ->placeholder('—'),
+                            ->placeholder('—')
+                            ->icon('heroicon-o-arrow-down-tray')
+                            ->formatStateUsing(fn (?string $state): ?string => $state ? 'Télécharger' : null)
+                            ->url(fn (?string $state): ?string => $state ? Storage::disk('public')->url($state) : null)
+                            ->openUrlInNewTab(),
                         TextEntry::make('user_add')
                             ->label('Ajouté par'),
                         TextEntry::make('created_at')
