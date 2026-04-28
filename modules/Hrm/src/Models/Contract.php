@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use AcMarche\Hrm\Enums\ContractStatusEnum;
 use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -144,6 +145,7 @@ final class Contract extends Model
             'is_amendment' => 'boolean',
             'is_suspended' => 'boolean',
             'work_regime' => 'float',
+            'status' => ContractStatusEnum::class,
         ];
     }
 }

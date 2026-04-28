@@ -20,14 +20,14 @@ final class ContractInfolist
                 Section::make('Agent et employeur')
                     ->columns(2)
                     ->schema([
-                        TextEntry::make('employee.full_name')
-                            ->label('Agent'),
                         TextEntry::make('employer.name')
                             ->label('Employeur'),
                         TextEntry::make('direction.name')
                             ->label('Direction'),
                         TextEntry::make('service.name')
                             ->label('Service'),
+                        TextEntry::make('status')
+                            ->label('Statut'),
                     ]),
                 Section::make('Détails du contrat')
                     ->columns(3)
@@ -86,6 +86,7 @@ final class ContractInfolist
                     ->schema([
                         TextEntry::make('college')
                             ->label('College')
+                            ->hiddenLabel()
                             ->html()
                             ->prose()
                             ->columnSpanFull(),

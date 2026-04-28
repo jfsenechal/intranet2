@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Contracts\Schemas;
 
+use AcMarche\Hrm\Enums\ContractStatusEnum;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -39,6 +40,10 @@ final class ContractForm
                             ->relationship('service', 'name')
                             ->searchable()
                             ->preload(),
+                        Select::make('status')
+                            ->label('Statut')
+                            ->options(ContractStatusEnum::class)
+                            ->enum(ContractStatusEnum::class),
                     ]),
                 Section::make('Details du contrat')
                     ->columns(3)
