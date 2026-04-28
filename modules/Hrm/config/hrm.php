@@ -39,6 +39,6 @@ return [
     */
     'team_emails' => array_values(array_filter(array_map(
         'trim',
-        explode(',', (string) env('HRM_TEAM_EMAILS', 'traitements@marche.be,grh.cpas@marche.be'))
+        explode(',', (string) env('HRM_TEAM_EMAILS', 'grh@domain.be,grh.cpas@domain.be'))
     ))),
 ];
