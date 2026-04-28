@@ -24,7 +24,7 @@ final class ExternalApplicationResource extends Resource
     #[Override]
     protected static ?int $navigationSort = 2;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Paramètres';
+    protected static string|UnitEnum|null $navigationGroup = 'Paramètres';
 
     #[Override]
     protected static ?string $recordTitleAttribute = 'name';

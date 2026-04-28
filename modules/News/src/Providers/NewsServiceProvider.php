@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace AcMarche\News\Providers;
 
 use AcMarche\App\Traits\ModuleServiceProviderTrait;
-use AcMarche\News\Models\Category;
-use AcMarche\News\Models\News;
-use AcMarche\News\Policies\CategoryPolicy;
-use AcMarche\News\Policies\NewsPolicy;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 final class NewsServiceProvider extends ServiceProvider
@@ -17,14 +12,6 @@ final class NewsServiceProvider extends ServiceProvider
     use ModuleServiceProviderTrait;
 
     public static int $module_id = 15;
-
-    /**
-     * @var array<class-string, class-string>
-     */
-    private array $policies = [
-        Category::class => CategoryPolicy::class,
-        News::class => NewsPolicy::class,
-    ];
 
     public function register(): void
     {
@@ -34,7 +21,6 @@ final class NewsServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->bootModule();
-        $this->registerPolicies();
     }
 
     protected function moduleName(): string
@@ -45,12 +31,5 @@ final class NewsServiceProvider extends ServiceProvider
     protected function modulePath(): string
     {
         return __DIR__.'/../..';
-    }
-
-    private function registerPolicies(): void
-    {
-        foreach ($this->policies as $model => $policy) {
-            Gate::policy($model, $policy);
-        }
     }
 }

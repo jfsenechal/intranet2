@@ -25,6 +25,9 @@ return [
         'diplomas' => 'uploads/hrm/diplomas',
         'evaluations' => 'uploads/hrm/evaluations',
         'formations' => 'uploads/hrm/formations',
+        'valorizations' => 'uploads/hrm/valorizations',
+        'candidates' => 'uploads/hrm/candidates',
+        'students' => 'uploads/hrm/students',
     ],
     /*
     |--------------------------------------------------------------------------
@@ -37,6 +40,6 @@ return [
     */
     'team_emails' => array_values(array_filter(array_map(
         'trim',
-        explode(',', (string) env('HRM_TEAM_EMAILS', 'traitements@marche.be,grh.cpas@marche.be'))
+        explode(',', (string) env('HRM_TEAM_EMAILS', 'grh@domain.be,grh.cpas@domain.be'))
     ))),
 ];

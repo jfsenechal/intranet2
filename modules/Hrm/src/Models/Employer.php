@@ -46,12 +46,4 @@ final class Employer extends Model
     {
         return $this->hasMany(Direction::class, 'employer_id');
     }
-
-    /**
-     * @return HasMany<Employee>
-     */
-    public function employees(): HasMany
-    {
-        return $this->hasMany(Employee::class, 'saved_employer_id');
-    }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AcMarche\News\Filament\Resources\News\Tables;
 
-use AcMarche\News\Filament\Resources\News\NewsResource;
 use AcMarche\News\Models\News;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -38,9 +37,9 @@ final class NewsTables
                         ->limit(120)
                         ->weight('bold')
                         ->size('md')
-                        ->description(fn (News $record): string => Str::limit($record->content, 250, ' (...)'), position: 'below')
+                        ->description(fn (News $record): string => Str::limit($record->content, 250, ' (...)'),
+                            position: 'below')
                         ->color(Color::Green)
-                        ->url(fn (News $record): string => NewsResource::getUrl('view', ['record' => $record->id]))
                         ->tooltip(function (TextColumn $column): ?string {
                             $state = $column->getState();
 
@@ -82,9 +81,9 @@ final class NewsTables
                     )),
             ], layout: FiltersLayout::AboveContent)->filtersFormWidth(Width::FourExtraLarge)
             ->recordActions([
-                ViewAction::make()
-                    ->visible(false),
+                ViewAction::make(),
             ])
+            ->recordAction(ViewAction::class)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

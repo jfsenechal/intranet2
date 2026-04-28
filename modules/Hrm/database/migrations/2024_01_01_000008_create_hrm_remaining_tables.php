@@ -237,6 +237,9 @@ return new class extends Migration
         // SMS
         if (Schema::connection($this->connection)->hasTable('sms')) {
             Schema::connection($this->connection)->table('sms', function (Blueprint $table): void {
+                $table->rename('sms_reminders');
+            });
+            Schema::connection($this->connection)->table('sms_reminders', function (Blueprint $table): void {
                 $table->renameColumn('employe_id', 'employee_id');
                 $table->renameColumn('numero', 'phone_number');
                 $table->renameColumn('date_rappel', 'reminder_date');
@@ -246,8 +249,8 @@ return new class extends Migration
                 $table->renameColumn('updatedAt', 'updated_at');
                 $table->renameColumn('updateBy', 'updated_by');
             });
-        } elseif (! Schema::connection($this->connection)->hasTable('sms')) {
-            Schema::connection($this->connection)->create('sms', function (Blueprint $table): void {
+        } elseif (! Schema::connection($this->connection)->hasTable('sms_reminders')) {
+            Schema::connection($this->connection)->create('sms_reminders', function (Blueprint $table): void {
                 $table->id();
                 $table->foreignId('employee_id')->nullable();
                 $table->string('phone_number', 12);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Contracts\Schemas;
 
+use AcMarche\Hrm\Enums\ContractStatusEnum;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -39,6 +40,10 @@ final class ContractForm
                             ->relationship('service', 'name')
                             ->searchable()
                             ->preload(),
+                        Select::make('status')
+                            ->label('Statut')
+                            ->options(ContractStatusEnum::class)
+                            ->enum(ContractStatusEnum::class),
                     ]),
                 Section::make('Details du contrat')
                     ->columns(3)
@@ -62,12 +67,11 @@ final class ContractForm
                             ->label('Fonction')
                             ->maxLength(250),
                         TextInput::make('work_regime')
-                            ->label('Regime de travail')
+                            ->label('Regime de travail (ETP)')
                             ->helperText(
                                 'Par exemple 0,50 - Si interruption de carrière à 4/5 : Régime horaire = 38/38 et Régime ETP = 0,80'
                             )
-                            ->numeric()
-                            ->suffix('%'),
+                            ->numeric(),
                         TextInput::make('hourly_regime')
                             ->label('Regime horaire')
                             ->helperText('Par exemple 19/38')

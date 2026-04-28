@@ -24,7 +24,7 @@ final class ContractResource extends Resource
     protected static ?string $model = Contract::class;
 
     #[Override]
-    protected static string|null|UnitEnum $navigationGroup = 'Personnel';
+    protected static string|null|UnitEnum $navigationGroup = 'Listing';
 
     #[Override]
     protected static ?int $navigationSort = 7;

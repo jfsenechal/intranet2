@@ -6,6 +6,7 @@ namespace AcMarche\Hrm\Providers;
 
 use AcMarche\App\Traits\ModuleServiceProviderTrait;
 use AcMarche\Hrm\Console\Commands\MigrationCommand;
+use AcMarche\Hrm\Console\Commands\SyncEmployeeCommand;
 use AcMarche\Hrm\Enums\RolesEnum;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -28,6 +29,7 @@ final class HrmServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 MigrationCommand::class,
+                SyncEmployeeCommand::class,
             ]);
         }
         $this->bootModule();

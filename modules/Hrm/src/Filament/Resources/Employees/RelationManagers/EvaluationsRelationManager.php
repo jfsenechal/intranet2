@@ -20,13 +20,13 @@ final class EvaluationsRelationManager extends RelationManager
         return 'Evaluations';
     }
 
-    public function isReadOnly(): bool
+    public function isReadOnly22(): bool
     {
         return true;
     }
 
     public function table(Table $table): Table
     {
-        return EvaluationTables::relation($table);
+        return EvaluationTables::configure($table);
     }
 }

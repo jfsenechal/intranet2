@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Tables;
 
+use AcMarche\Hrm\Enums\TrainingTypeEnum;
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
 use AcMarche\Hrm\Models\Training;
 use Filament\Actions\Action;
@@ -12,10 +13,12 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\Summarizers\Summarizer;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Query\Builder;
 
 final class TrainingTables
 {
@@ -51,9 +54,14 @@ final class TrainingTables
                     ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('duration_hours')
-                    ->label('Duree')
-                    ->suffix('h')
+                TextColumn::make('duration_minutes')
+                    ->label('Durée')
+                    ->formatStateUsing(fn (?int $state): string => Training::formatDuration($state))
+                    ->summarize(
+                        Summarizer::make()
+                            ->label('Total')
+                            ->using(fn (Builder $query): string => Training::formatDuration((int) $query->sum('duration_minutes')))
+                    )
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('certificate_received')
@@ -68,11 +76,7 @@ final class TrainingTables
             ->filters([
                 SelectFilter::make('training_type')
                     ->label('Type')
-                    ->options([
-                        'type1' => 'Type 1',
-                        'type2' => 'Type 2',
-                        'type3' => 'Type 3',
-                    ]),
+                    ->options(TrainingTypeEnum::class),
                 TernaryFilter::make('certificate_received')
                     ->label('Attestation recue')
                     ->placeholder('Toutes')
@@ -119,9 +123,14 @@ final class TrainingTables
                     ->label('Fin')
                     ->date('d/m/Y')
                     ->sortable(),
-                TextColumn::make('duration_hours')
-                    ->label('Duree')
-                    ->suffix('h')
+                TextColumn::make('duration_minutes')
+                    ->label('Durée')
+                    ->formatStateUsing(fn (?int $state): string => Training::formatDuration($state))
+                    ->summarize(
+                        Summarizer::make()
+                            ->label('Total')
+                            ->using(fn (Builder $query): string => Training::formatDuration((int) $query->sum('duration_minutes')))
+                    )
                     ->sortable()
                     ->toggleable(),
                 IconColumn::make('certificate_received')
@@ -131,6 +140,21 @@ final class TrainingTables
                     ->label('Cloture')
                     ->boolean()
                     ->toggleable(),
+            ])
+            ->filters([
+                SelectFilter::make('training_type')
+                    ->label('Type')
+                    ->options(TrainingTypeEnum::class),
+                TernaryFilter::make('certificate_received')
+                    ->label('Attestation recue')
+                    ->placeholder('Toutes')
+                    ->trueLabel('Recues')
+                    ->falseLabel('Non recues'),
+                TernaryFilter::make('is_closed')
+                    ->label('Cloture')
+                    ->placeholder('Toutes')
+                    ->trueLabel('Cloturees')
+                    ->falseLabel('En cours'),
             ])
             ->recordActions([
                 Action::make('view')

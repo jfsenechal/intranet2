@@ -20,19 +20,17 @@ final class AbsenceForm
             ->columns(1)
             ->components([
                 ...AbsenceCallouts::components(),
-                Section::make('Periode')
-                    ->columns(4)
+                Section::make('Période')
+                    ->columns(2)
                     ->schema([
                         DatePicker::make('start_date')
-                            ->label('Date de debut'),
+                            ->label('Date de début'),
                         DatePicker::make('end_date')
                             ->label('Date de fin'),
                         DatePicker::make('reminder_date')
                             ->label('Date de rappel'),
                         DatePicker::make('closed_date')
-                            ->label('Date de cloture'),
-                        Toggle::make('is_closed')
-                            ->label('Cloturé'),
+                            ->label('Date de clôture'),
                     ]),
                 Section::make('Motif')
                     ->columns(2)
@@ -51,6 +49,8 @@ final class AbsenceForm
                 Section::make('Options')
                     ->columns(3)
                     ->schema([
+                        Toggle::make('is_closed')
+                            ->label('Cloturé'),
                         Toggle::make('certimed')
                             ->label('Certimed'),
                         Toggle::make('has_resumed')

@@ -25,7 +25,7 @@ final class TeleworkResource extends Resource
     protected static ?string $model = Telework::class;
 
     #[Override]
-    protected static string|null|UnitEnum $navigationGroup = 'Personnel';
+    protected static string|null|UnitEnum $navigationGroup = 'Listing';
 
     #[Override]
     protected static ?int $navigationSort = 99;

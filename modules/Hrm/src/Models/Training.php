@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use AcMarche\Hrm\Enums\TrainingTypeEnum;
 use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -21,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'end_date',
     'college_date',
     'reminder_date',
-    'duration_hours',
+    'duration_minutes',
     'training_type',
     'certificate_file',
     'certificate_received',
@@ -37,6 +38,24 @@ final class Training extends Model
 {
     use HasFactory;
     use HasUserAdd;
+
+    public static function formatDuration(?int $minutes): string
+    {
+        $minutes = (int) $minutes;
+        if ($minutes === 0) {
+            return '';
+        }
+        $hours = intdiv($minutes, 60);
+        $remaining = $minutes % 60;
+        if ($hours === 0) {
+            return sprintf('%dmin', $remaining);
+        }
+        if ($remaining === 0) {
+            return sprintf('%dh', $hours);
+        }
+
+        return sprintf('%dh %02dmin', $hours, $remaining);
+    }
 
     /**
      * @return BelongsTo<Employee>
@@ -62,6 +81,7 @@ final class Training extends Model
             'granted_at' => 'date',
             'certificate_received' => 'boolean',
             'is_closed' => 'boolean',
+            'training_type' => TrainingTypeEnum::class,
         ];
     }
 }

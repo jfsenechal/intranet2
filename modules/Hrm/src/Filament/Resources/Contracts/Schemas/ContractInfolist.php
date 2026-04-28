@@ -20,14 +20,14 @@ final class ContractInfolist
                 Section::make('Agent et employeur')
                     ->columns(2)
                     ->schema([
-                        TextEntry::make('employee.full_name')
-                            ->label('Agent'),
                         TextEntry::make('employer.name')
                             ->label('Employeur'),
                         TextEntry::make('direction.name')
                             ->label('Direction'),
                         TextEntry::make('service.name')
                             ->label('Service'),
+                        TextEntry::make('status')
+                            ->label('Statut'),
                     ]),
                 Section::make('Détails du contrat')
                     ->columns(3)
@@ -43,8 +43,7 @@ final class ContractInfolist
                         TextEntry::make('status')
                             ->label('Statut'),
                         TextEntry::make('work_regime')
-                            ->label('Régime de travail')
-                            ->suffix(' %'),
+                            ->label('Régime de travail (ETP)'),
                         TextEntry::make('hourly_regime')
                             ->label('Régime horaire'),
                     ]),
@@ -86,7 +85,11 @@ final class ContractInfolist
                     ->schema([
                         TextEntry::make('college')
                             ->label('College')
+                            ->hiddenLabel()
                             ->html()
+                            // Note e($state) escapes HTML first (security), then nl2br() adds <br> tags. If the stored value already contains HTML you want to keep, drop the e():
+                            // ->formatStateUsing(fn (?string $state): ?string => nl2br($state ?? ''))
+                            ->formatStateUsing(fn (?string $state): ?string => $state ? nl2br(e($state)) : null)
                             ->prose()
                             ->columnSpanFull(),
                     ]),

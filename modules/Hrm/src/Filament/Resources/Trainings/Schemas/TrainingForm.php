@@ -4,14 +4,20 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Schemas;
 
+use AcMarche\Hrm\Enums\ListOptions;
+use AcMarche\Hrm\Enums\TrainingTypeEnum;
+use AcMarche\Hrm\Models\Training;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 
 final class TrainingForm
@@ -21,46 +27,71 @@ final class TrainingForm
         return $schema
             ->columns(1)
             ->components([
-                Section::make('Agent et formation')
+                Section::make('Formation')
                     ->columns(2)
                     ->schema([
                         TextInput::make('name')
-                            ->label('Intitule')
+                            ->label('Intitulé')
                             ->required()
                             ->maxLength(150),
                         Select::make('training_type')
                             ->label('Type de formation')
-                            ->options([
-                                'type1' => 'Type 1',
-                                'type2' => 'Type 2',
-                                'type3' => 'Type 3',
-                            ])
+                            ->options(TrainingTypeEnum::class)
+                            ->enum(TrainingTypeEnum::class)
                             ->required(),
-                        TextInput::make('duration_hours')
-                            ->label('Duree (heures)')
-                            ->numeric()
-                            ->suffix('heures'),
+                        Fieldset::make('Durée')
+                            ->columns(2)
+                            ->schema([
+                                TextInput::make('duration_hours')
+                                    ->label('Heures')
+                                    ->numeric()
+                                    ->minValue(0)
+                                    ->suffix('h')
+                                    ->dehydrated(false)
+                                    ->afterStateHydrated(function (Set $set, ?Training $record): void {
+                                        $set('duration_hours', intdiv((int) $record?->duration_minutes, 60));
+                                    })
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(function (Get $get, Set $set): void {
+                                        $set('duration_minutes', ((int) $get('duration_hours')) * 60 + ((int) $get('duration_minutes_part')));
+                                    }),
+                                TextInput::make('duration_minutes_part')
+                                    ->label('Minutes')
+                                    ->numeric()
+                                    ->minValue(0)
+                                    ->maxValue(59)
+                                    ->suffix('min')
+                                    ->dehydrated(false)
+                                    ->afterStateHydrated(function (Set $set, ?Training $record): void {
+                                        $set('duration_minutes_part', ((int) $record?->duration_minutes) % 60);
+                                    })
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(function (Get $get, Set $set): void {
+                                        $set('duration_minutes', ((int) $get('duration_hours')) * 60 + ((int) $get('duration_minutes_part')));
+                                    }),
+                                Hidden::make('duration_minutes'),
+                            ]),
                     ]),
                 Fieldset::make('Dates')
                     ->columns(4)
                     ->schema([
                         DatePicker::make('start_date')
-                            ->label('Date de debut'),
+                            ->label('Date de début'),
                         DatePicker::make('end_date')
                             ->label('Date de fin'),
                         DatePicker::make('college_date')
-                            ->label('Date college'),
+                            ->label('Date de Collège'),
                         DatePicker::make('reminder_date')
                             ->label('Date de rappel'),
                     ]),
                 Fieldset::make('Accord')
                     ->columns(2)
                     ->schema([
-                        TextInput::make('granted_by')
+                        Select::make('granted_by')
                             ->label('Accorde par')
-                            ->maxLength(255),
+                            ->options(ListOptions::getAccordePar()),
                         DatePicker::make('granted_at')
-                            ->label('Accorde le'),
+                            ->label('Accordé le'),
                     ]),
                 Fieldset::make('Attestation')
                     ->columns(3)

@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Evaluations\Tables;
 
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 final class EvaluationTables
 {
-    public static function relation(Table $table): Table
+    public static function configure(Table $table): Table
     {
         return $table
             ->defaultSort('evaluation_date', 'desc')
@@ -18,11 +20,13 @@ final class EvaluationTables
                 TextColumn::make('evaluation_date')
                     ->label('Date évaluation')
                     ->date('d/m/Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('next_evaluation_date')
                     ->label('Prochaine évaluation')
                     ->date('d/m/Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('validation_date')
                     ->label('Validation')
                     ->date('d/m/Y')
@@ -36,6 +40,11 @@ final class EvaluationTables
                     ->label('Direction')
                     ->sortable()
                     ->toggleable(),
-            ]);
+            ])
+            ->recordActions([
+                ViewAction::make(),
+                EditAction::make(),
+            ])
+            ->recordAction(ViewAction::class);
     }
 }
