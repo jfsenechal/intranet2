@@ -10,6 +10,7 @@ use AcMarche\Hrm\Filament\Resources\Deadlines\DeadlineResource;
 use AcMarche\Hrm\Filament\Resources\Diplomas\DiplomaResource;
 use AcMarche\Hrm\Filament\Resources\Employees\EmployeeResource;
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
+use AcMarche\Hrm\Filament\Resources\Valorizations\ValorizationResource;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\DeleteAction;
@@ -60,7 +61,7 @@ final class ViewEmployee extends ViewRecord
                 Action::make('addValorization')
                     ->label('Ajouter une valorisation')
                     ->icon('tabler-plus')
-                    ->url(DiplomaResource::getUrl('create', $employeeId)),
+                    ->url(ValorizationResource::getUrl('create', $employeeId)),
             ])
                 ->label('Ajouter...')
                 ->color('warning')
