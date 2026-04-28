@@ -23,7 +23,7 @@ return new class extends Migration
                 $table->renameColumn('date_fin', 'end_date');
                 $table->renameColumn('date_college', 'college_date');
                 $table->renameColumn('date_rappel', 'reminder_date');
-                $table->renameColumn('duree', 'duration_hours');
+                $table->renameColumn('duree', 'duration_minutes');
                 $table->renameColumn('typef', 'training_type');
                 $table->renameColumn('attestation_name', 'certificate_file');
                 $table->renameColumn('attestation_recue', 'certificate_received');
@@ -46,7 +46,7 @@ return new class extends Migration
                 $table->date('end_date')->nullable();
                 $table->date('college_date')->nullable();
                 $table->date('reminder_date')->nullable();
-                $table->integer('duration_hours')->nullable();
+                $table->integer('duration_minutes')->nullable();
                 $table->string('training_type', 50)->comment('type 1, type 2, type 3');
                 $table->string('certificate_file', 255)->nullable();
                 $table->boolean('certificate_received')->default(false);

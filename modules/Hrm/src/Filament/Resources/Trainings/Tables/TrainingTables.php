@@ -51,7 +51,7 @@ final class TrainingTables
                     ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('duration_hours')
+                TextColumn::make('duration_minutes')
                     ->label('Duree')
                     ->suffix('h')
                     ->sortable()
@@ -119,7 +119,7 @@ final class TrainingTables
                     ->label('Fin')
                     ->date('d/m/Y')
                     ->sortable(),
-                TextColumn::make('duration_hours')
+                TextColumn::make('duration_minutes')
                     ->label('Duree')
                     ->suffix('h')
                     ->sortable()

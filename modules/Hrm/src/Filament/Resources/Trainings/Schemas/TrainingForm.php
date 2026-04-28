@@ -37,10 +37,10 @@ final class TrainingForm
                                 'type3' => 'Type 3',
                             ])
                             ->required(),
-                        TextInput::make('duration_hours')
-                            ->label('Durée (heures)')
+                        TextInput::make('duration_minutes')
+                            ->label('Durée (minutes)')
                             ->numeric()
-                            ->suffix('heures'),
+                            ->suffix('minutes'),
                     ]),
                 Fieldset::make('Dates')
                     ->columns(4)

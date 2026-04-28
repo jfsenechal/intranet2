@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'end_date',
     'college_date',
     'reminder_date',
-    'duration_hours',
+    'duration_minutes',
     'training_type',
     'certificate_file',
     'certificate_received',
