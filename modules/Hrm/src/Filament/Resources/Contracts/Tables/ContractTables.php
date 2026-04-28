@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Contracts\Tables;
 
+use AcMarche\Hrm\Enums\ContractStatusEnum;
 use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use AcMarche\Hrm\Models\Contract;
 use Filament\Actions\Action;
@@ -58,6 +59,11 @@ final class ContractTables
                     ->label('Regime')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('status')
+                    ->label('Statut')
+                    ->badge()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('is_closed')
                     ->label('Cloture')
                     ->boolean()
@@ -70,6 +76,9 @@ final class ContractTables
                 SelectFilter::make('contract_type_id')
                     ->label('Type')
                     ->relationship('contractType', 'name'),
+                SelectFilter::make('status')
+                    ->label('Statut')
+                    ->options(ContractStatusEnum::class),
                 TernaryFilter::make('is_closed')
                     ->label('Cloture')
                     ->placeholder('Tous')
