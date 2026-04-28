@@ -39,6 +39,24 @@ final class Training extends Model
     use HasFactory;
     use HasUserAdd;
 
+    public static function formatDuration(?int $minutes): string
+    {
+        $minutes = (int) $minutes;
+        if ($minutes === 0) {
+            return '';
+        }
+        $hours = intdiv($minutes, 60);
+        $remaining = $minutes % 60;
+        if ($hours === 0) {
+            return sprintf('%dmin', $remaining);
+        }
+        if ($remaining === 0) {
+            return sprintf('%dh', $hours);
+        }
+
+        return sprintf('%dh %02dmin', $hours, $remaining);
+    }
+
     /**
      * @return BelongsTo<Employee>
      */
