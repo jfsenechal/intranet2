@@ -43,8 +43,7 @@ final class ContractInfolist
                         TextEntry::make('status')
                             ->label('Statut'),
                         TextEntry::make('work_regime')
-                            ->label('Régime de travail')
-                            ->suffix(' %'),
+                            ->label('Régime de travail (ETP)'),
                         TextEntry::make('hourly_regime')
                             ->label('Régime horaire'),
                     ]),
@@ -88,6 +87,9 @@ final class ContractInfolist
                             ->label('College')
                             ->hiddenLabel()
                             ->html()
+                            // Note e($state) escapes HTML first (security), then nl2br() adds <br> tags. If the stored value already contains HTML you want to keep, drop the e():
+                            // ->formatStateUsing(fn (?string $state): ?string => nl2br($state ?? ''))
+                            ->formatStateUsing(fn (?string $state): ?string => $state ? nl2br(e($state)) : null)
                             ->prose()
                             ->columnSpanFull(),
                     ]),

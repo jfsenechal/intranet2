@@ -56,7 +56,6 @@ final class ContractTables
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('work_regime')
                     ->label('Regime')
-                    ->suffix('%')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('is_closed')

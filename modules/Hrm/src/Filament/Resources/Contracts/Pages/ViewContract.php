@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Contracts\Pages;
 
+use AcMarche\Hrm\Filament\Actions\BackToEmployeeAction;
 use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -25,6 +26,7 @@ final class ViewContract extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
+            BackToEmployeeAction::make(),
             EditAction::make()
                 ->icon(Heroicon::Pencil),
             DeleteAction::make()

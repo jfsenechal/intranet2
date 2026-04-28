@@ -67,12 +67,11 @@ final class ContractForm
                             ->label('Fonction')
                             ->maxLength(250),
                         TextInput::make('work_regime')
-                            ->label('Regime de travail')
+                            ->label('Regime de travail (ETP)')
                             ->helperText(
                                 'Par exemple 0,50 - Si interruption de carrière à 4/5 : Régime horaire = 38/38 et Régime ETP = 0,80'
                             )
-                            ->numeric()
-                            ->suffix('%'),
+                            ->numeric(),
                         TextInput::make('hourly_regime')
                             ->label('Regime horaire')
                             ->helperText('Par exemple 19/38')

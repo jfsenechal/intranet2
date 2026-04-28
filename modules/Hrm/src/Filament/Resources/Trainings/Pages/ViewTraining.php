@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Pages;
 
+use AcMarche\Hrm\Filament\Actions\BackToEmployeeAction;
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -25,6 +26,7 @@ final class ViewTraining extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
+            BackToEmployeeAction::make(),
             EditAction::make()
                 ->icon(Heroicon::Pencil),
             DeleteAction::make()->icon(Heroicon::Trash),
