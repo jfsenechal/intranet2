@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use AcMarche\Hrm\Enums\ReasonsEnum;
 use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -63,6 +64,7 @@ final class Absence extends Model
             'clock_updated' => 'boolean',
             'acropole' => 'boolean',
             'agent_file' => 'boolean',
+            'reason' => ReasonsEnum::class,
         ];
     }
 }
