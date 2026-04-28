@@ -5,14 +5,18 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Schemas;
 
 use AcMarche\Hrm\Enums\ListOptions;
+use AcMarche\Hrm\Models\Training;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 
 final class TrainingForm
@@ -37,10 +41,38 @@ final class TrainingForm
                                 'type3' => 'Type 3',
                             ])
                             ->required(),
-                        TextInput::make('duration_minutes')
-                            ->label('Durée (minutes)')
-                            ->numeric()
-                            ->suffix('minutes'),
+                        Fieldset::make('Durée')
+                            ->columns(2)
+                            ->schema([
+                                TextInput::make('duration_hours')
+                                    ->label('Heures')
+                                    ->numeric()
+                                    ->minValue(0)
+                                    ->suffix('h')
+                                    ->dehydrated(false)
+                                    ->afterStateHydrated(function (Set $set, ?Training $record): void {
+                                        $set('duration_hours', intdiv((int) $record?->duration_minutes, 60));
+                                    })
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(function (Get $get, Set $set): void {
+                                        $set('duration_minutes', ((int) $get('duration_hours')) * 60 + ((int) $get('duration_minutes_part')));
+                                    }),
+                                TextInput::make('duration_minutes_part')
+                                    ->label('Minutes')
+                                    ->numeric()
+                                    ->minValue(0)
+                                    ->maxValue(59)
+                                    ->suffix('min')
+                                    ->dehydrated(false)
+                                    ->afterStateHydrated(function (Set $set, ?Training $record): void {
+                                        $set('duration_minutes_part', ((int) $record?->duration_minutes) % 60);
+                                    })
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(function (Get $get, Set $set): void {
+                                        $set('duration_minutes', ((int) $get('duration_hours')) * 60 + ((int) $get('duration_minutes_part')));
+                                    }),
+                                Hidden::make('duration_minutes'),
+                            ]),
                     ]),
                 Fieldset::make('Dates')
                     ->columns(4)

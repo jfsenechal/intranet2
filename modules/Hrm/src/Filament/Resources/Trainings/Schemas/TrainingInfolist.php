@@ -78,7 +78,22 @@ final class TrainingInfolist
                             ->badge(),
                         TextEntry::make('duration_minutes')
                             ->label('Durée')
-                            ->suffix(' minutes'),
+                            ->formatStateUsing(function (?int $state): string {
+                                $minutes = (int) $state;
+                                if ($minutes === 0) {
+                                    return '';
+                                }
+                                $hours = intdiv($minutes, 60);
+                                $remaining = $minutes % 60;
+                                if ($hours === 0) {
+                                    return sprintf('%dmin', $remaining);
+                                }
+                                if ($remaining === 0) {
+                                    return sprintf('%dh', $hours);
+                                }
+
+                                return sprintf('%dh %02dmin', $hours, $remaining);
+                            }),
                     ]),
             ]);
     }
