@@ -12,6 +12,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -46,8 +47,14 @@ final class HrmPanelProvider extends PanelProvider
             ->resourceEditPageRedirect('view')
             ->databaseNotifications()
             ->navigationGroups([
-                'Personnel',
-                'Configuration',
+                NavigationGroup::make()
+                    ->label('Personnel')
+                    ->collapsed(),
+                NavigationGroup::make()
+                    ->label('Listing'),
+                NavigationGroup::make()
+                    ->label('Configuration')
+                    ->collapsed(),
             ])
             ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\Hrm\\Filament\\Resources')
             ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\Hrm\\Filament\\Pages')
