@@ -38,4 +38,11 @@ final class EvaluationTables
                     ->toggleable(),
             ]);
     }
+
+    public static function configure(Table $table):Table
+    {
+   return $table
+            ->defaultSort('evaluation_date', 'desc')
+            ->defaultPaginationPageOption(25);
+    }
 }

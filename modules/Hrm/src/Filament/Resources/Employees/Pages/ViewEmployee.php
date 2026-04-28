@@ -9,6 +9,7 @@ use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use AcMarche\Hrm\Filament\Resources\Deadlines\DeadlineResource;
 use AcMarche\Hrm\Filament\Resources\Diplomas\DiplomaResource;
 use AcMarche\Hrm\Filament\Resources\Employees\EmployeeResource;
+use AcMarche\Hrm\Filament\Resources\Evaluations\EvaluationResource;
 use AcMarche\Hrm\Filament\Resources\HrDocuments\Schemas\HrDocumentForm;
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
 use AcMarche\Hrm\Filament\Resources\Valorizations\ValorizationResource;
@@ -17,9 +18,6 @@ use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\Support\Htmlable;
@@ -79,6 +77,10 @@ final class ViewEmployee extends ViewRecord
                     ->label('Ajouter un diplôme')
                     ->icon('tabler-plus')
                     ->url(DiplomaResource::getUrl('create', $employeeId)),
+                Action::make('addEvaluation')
+                    ->label('Ajouter un évaluation')
+                    ->icon('tabler-plus')
+                    ->url(EvaluationResource::getUrl('create', $employeeId)),
                 Action::make('addValorization')
                     ->label('Ajouter une valorisation')
                     ->icon('tabler-plus')

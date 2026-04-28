@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Models;
 
+use AcMarche\Hrm\Enums\EvaluationResultEnum;
 use AcMarche\Security\Models\HasUserAdd;
 use Illuminate\Database\Eloquent\Attributes\Connection;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -59,6 +60,7 @@ final class Evaluation extends Model
             'evaluation_date' => 'date',
             'next_evaluation_date' => 'date',
             'validation_date' => 'date',
+            'result' => EvaluationResultEnum::class,
         ];
     }
 }
