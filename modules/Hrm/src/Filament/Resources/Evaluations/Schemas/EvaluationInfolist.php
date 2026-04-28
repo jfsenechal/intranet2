@@ -45,6 +45,7 @@ final class EvaluationInfolist
                                     ->placeholder('—'),
                                 TextEntry::make('validation_date')
                                     ->label('Date de validation')
+                                    ->helperText('Validé par le Collège, BP ou CA')
                                     ->date('d/m/Y')
                                     ->placeholder('—'),
                             ]),

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\Hrm\Filament\Resources\Evaluations\Tables;
+namespace AcMarche\Hrm\Filament\Resources\SmsReminders\Tables;
 
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-final class EvaluationTables
+final class SmsReminderTables
 {
     public static function configure(Table $table): Table
     {

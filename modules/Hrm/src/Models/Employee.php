@@ -226,11 +226,11 @@ final class Employee extends Model
     }
 
     /**
-     * @return HasMany<Sms>
+     * @return HasMany<SmsReminder>
      */
     public function smsMessages(): HasMany
     {
-        return $this->hasMany(Sms::class);
+        return $this->hasMany(SmsReminder::class);
     }
 
     public function getSlugOptions(): SlugOptions

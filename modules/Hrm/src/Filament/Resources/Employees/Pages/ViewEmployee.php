@@ -11,6 +11,7 @@ use AcMarche\Hrm\Filament\Resources\Diplomas\DiplomaResource;
 use AcMarche\Hrm\Filament\Resources\Employees\EmployeeResource;
 use AcMarche\Hrm\Filament\Resources\Evaluations\EvaluationResource;
 use AcMarche\Hrm\Filament\Resources\HrDocuments\Schemas\HrDocumentForm;
+use AcMarche\Hrm\Filament\Resources\SmsReminders\SmsReminderResource;
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
 use AcMarche\Hrm\Filament\Resources\Valorizations\ValorizationResource;
 use AcMarche\Hrm\Models\Employee;
@@ -19,6 +20,7 @@ use Filament\Actions\ActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
+use Filament\Support\Enums\Size;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Storage;
@@ -42,53 +44,59 @@ final class ViewEmployee extends ViewRecord
             EditAction::make()
                 ->icon(Heroicon::Pencil),
             ActionGroup::make([
-                Action::make('addAbsence')
-                    ->label('Ajouter une absence')
-                    ->icon('tabler-plus')
-                    ->url(AbsenceResource::getUrl('create', $employeeId)),
-                Action::make('addDeadline')
-                    ->label('Ajouter une échéance')
-                    ->icon('tabler-plus')
-                    ->url(DeadlineResource::getUrl('create', $employeeId)),
-                Action::make('addContract')
-                    ->label('Ajouter un contrat')
-                    ->icon('tabler-plus')
-                    ->url(ContractResource::getUrl('create', $employeeId)),
-                Action::make('addTraining')
-                    ->label('Ajouter une formation')
-                    ->icon('tabler-plus')
-                    ->url(TrainingResource::getUrl('create', $employeeId)),
-                Action::make('addDocument')
-                    ->label('Ajouter un document')
-                    ->icon('tabler-plus')
-                    ->modalHeading('Ajouter un document')
-                    ->schema(HrDocumentForm::getSchema())
-                    ->action(function (array $data, Employee $record): void {
-                        $path = $data['file_name'] ?? null;
-                        $record->documents()->create([
-                            'name' => $data['name'],
-                            'file_name' => $path,
-                            'mime' => $path ? (Storage::disk('public')->mimeType($path) ?: '') : '',
-                            'notes' => $data['notes'] ?? null,
-                        ]);
-                    })
-                    ->successNotificationTitle('Document ajouté'),
-                Action::make('addDiploma')
-                    ->label('Ajouter un diplôme')
-                    ->icon('tabler-plus')
-                    ->url(DiplomaResource::getUrl('create', $employeeId)),
-                Action::make('addEvaluation')
-                    ->label('Ajouter un évaluation')
-                    ->icon('tabler-plus')
-                    ->url(EvaluationResource::getUrl('create', $employeeId)),
-                Action::make('addValorization')
-                    ->label('Ajouter une valorisation')
-                    ->icon('tabler-plus')
-                    ->url(ValorizationResource::getUrl('create', $employeeId)),
-            ])
+                    Action::make('addAbsence')
+                        ->label('Ajouter une absence')
+                        ->icon('tabler-plus')
+                        ->url(AbsenceResource::getUrl('create', $employeeId)),
+                    Action::make('addDeadline')
+                        ->label('Ajouter une échéance')
+                        ->icon('tabler-plus')
+                        ->url(DeadlineResource::getUrl('create', $employeeId)),
+                    Action::make('addContract')
+                        ->label('Ajouter un contrat')
+                        ->icon('tabler-plus')
+                        ->url(ContractResource::getUrl('create', $employeeId)),
+                    Action::make('addTraining')
+                        ->label('Ajouter une formation')
+                        ->icon('tabler-plus')
+                        ->url(TrainingResource::getUrl('create', $employeeId)),
+                    Action::make('addSms')
+                        ->label('Ajouter un SMS')
+                        ->icon('tabler-plus')
+                        ->url(SmsReminderResource::getUrl('create', $employeeId)),
+                    Action::make('addDocument')
+                        ->label('Ajouter un document')
+                        ->icon('tabler-plus')
+                        ->modalHeading('Ajouter un document')
+                        ->schema(HrDocumentForm::getSchema())
+                        ->action(function (array $data, Employee $record): void {
+                            $path = $data['file_name'] ?? null;
+                            $record->documents()->create([
+                                'name' => $data['name'],
+                                'file_name' => $path,
+                                'mime' => $path ? (Storage::disk('public')->mimeType($path) ?: '') : '',
+                                'notes' => $data['notes'] ?? null,
+                            ]);
+                        })
+                        ->successNotificationTitle('Document ajouté'),
+                    Action::make('addDiploma')
+                        ->label('Ajouter un diplôme')
+                        ->icon('tabler-plus')
+                        ->url(DiplomaResource::getUrl('create', $employeeId)),
+                    Action::make('addEvaluation')
+                        ->label('Ajouter un évaluation')
+                        ->icon('tabler-plus')
+                        ->url(EvaluationResource::getUrl('create', $employeeId)),
+                    Action::make('addValorization')
+                        ->label('Ajouter une valorisation')
+                        ->icon('tabler-plus')
+                        ->url(ValorizationResource::getUrl('create', $employeeId)),
+                ]
+            )
                 ->label('Ajouter...')
                 ->color('warning')
                 ->icon('tabler-plus')
+                ->size(Size::Large)
                 ->button(),
             DeleteAction::make()
                 ->icon(Heroicon::Trash),
