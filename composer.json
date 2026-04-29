@@ -102,7 +102,6 @@
         "laravel/sanctum": "^4.0",
         "laravel/scout": "^10.23",
         "laravel/tinker": "^3.0",
-        "maatwebsite/excel": "^3.1.67",
         "meilisearch/meilisearch-php": "^1.16",
         "nunomaduro/essentials": "^1.2",
         "psy/psysh": "^0.12.19",
@@ -112,7 +111,7 @@
         "spatie/laravel-sluggable": "^3.8",
         "stechstudio/filament-impersonate": "^4.0",
         "symfony/process": "^7.4",
-        "tuncaybahadir/quar": "^1.7"
+        "simplesoftwareio/simple-qrcode": "4.2.0"
     },
     "require-dev": {
         "driftingly/rector-laravel": "^2.2",
