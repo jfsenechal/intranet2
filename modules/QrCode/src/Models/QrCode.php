@@ -42,7 +42,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'ssid',
     'password',
     'encryption',
-    'hidden',
+    'network_hidden',
 ])]
 final class QrCode extends Model
 {
@@ -66,7 +66,7 @@ final class QrCode extends Model
             'pixels' => 'integer',
             'margin' => 'integer',
             'label_size' => 'integer',
-            'hidden' => 'boolean',
+            'network_hidden' => 'boolean',
         ];
     }
 }

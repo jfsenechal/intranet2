@@ -91,7 +91,7 @@ final class QrCodeGenerator
         $encryption = $qrCode->encryption ?: 'nopass';
         $ssid = $this->escapeWifi($qrCode->ssid ?? '');
         $password = $this->escapeWifi($qrCode->password ?? '');
-        $hidden = $qrCode->hidden ? 'true' : 'false';
+        $hidden = $qrCode->network_hidden ? 'true' : 'false';
 
         return sprintf('WIFI:T:%s;S:%s;P:%s;H:%s;;', $encryption, $ssid, $password, $hidden);
     }

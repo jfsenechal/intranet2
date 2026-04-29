@@ -32,7 +32,7 @@ it('builds a wifi payload', function (): void {
     $qrCode->ssid = 'home';
     $qrCode->password = 'secret;1';
     $qrCode->encryption = 'WPA';
-    $qrCode->hidden = false;
+    $qrCode->network_hidden = false;
 
     expect((new QrCodeGenerator())->buildPayload($qrCode))
         ->toBe('WIFI:T:WPA;S:home;P:secret\\;1;H:false;;');

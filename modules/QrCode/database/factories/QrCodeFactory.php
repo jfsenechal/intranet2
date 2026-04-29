@@ -38,7 +38,7 @@ final class QrCodeFactory extends Factory
             'label_size' => 16,
             'label_alignment' => 'center',
             'encryption' => 'WPA',
-            'hidden' => false,
+            'network_hidden' => false,
         ];
     }
 
@@ -57,7 +57,7 @@ final class QrCodeFactory extends Factory
             'ssid' => fake()->word(),
             'password' => fake()->password(),
             'encryption' => 'WPA',
-            'hidden' => false,
+            'network_hidden' => false,
         ]);
     }
 }

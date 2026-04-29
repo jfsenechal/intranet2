@@ -44,7 +44,7 @@ return new class extends Migration {
             $table->string('ssid', 100)->nullable();
             $table->string('password', 150)->nullable();
             $table->string('encryption', 10)->default('WPA');
-            $table->boolean('hidden')->default(false);
+            $table->boolean('network_hidden')->default(false);
 
             $table->timestamps();
         });

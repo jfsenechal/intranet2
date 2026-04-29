@@ -187,7 +187,7 @@ final class QrCodeForm
                             ->password()
                             ->revealable()
                             ->maxLength(150),
-                        Toggle::make('hidden')
+                        Toggle::make('network_hidden')
                             ->label('Réseau caché')
                             ->default(false),
                     ]),
