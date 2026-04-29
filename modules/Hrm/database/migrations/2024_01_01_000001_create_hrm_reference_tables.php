@@ -194,18 +194,7 @@ return new class extends Migration
         // Public holidays table
         if (Schema::connection($this->connection)->hasTable('jour_ferie')) {
             Schema::connection($this->connection)->table('jour_ferie', function (Blueprint $table): void {
-                $table->rename('public_holidays');
-            });
-            Schema::connection($this->connection)->table('public_holidays', function (Blueprint $table): void {
-                $table->renameColumn('intitule', 'name');
-                $table->renameColumn('date_jour', 'holiday_date');
-            });
-        } elseif (! Schema::connection($this->connection)->hasTable('public_holidays')) {
-            Schema::connection($this->connection)->create('public_holidays', function (Blueprint $table): void {
-                $table->id();
-                $table->string('name', 250)->nullable();
-                $table->date('holiday_date');
-                $table->timestamps();
+                $table->drop();
             });
         }
 

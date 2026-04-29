@@ -14,6 +14,7 @@ use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\DeadlinesRelation
 use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\DiplomasRelationManager;
 use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\DocumentsRelationManager;
 use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\EvaluationsRelationManager;
+use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\InternshipsRelationManager;
 use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\TrainingsRelationManager;
 use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\ValorizationsRelationManager;
 use AcMarche\Hrm\Filament\Resources\Employees\Schemas\EmployeeForm;
@@ -98,6 +99,7 @@ final class EmployeeResource extends Resource
             DeadlinesRelationManager::class,
             EvaluationsRelationManager::class,
             TrainingsRelationManager::class,
+            InternshipsRelationManager::class,
             DiplomasRelationManager::class,
             DocumentsRelationManager::class,
             ValorizationsRelationManager::class,
