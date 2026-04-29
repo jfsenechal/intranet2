@@ -75,9 +75,9 @@ final class SmsReminderResource extends Resource
             'index' => ListSmsReminders::route('/'),
             'create' => CreateSmsReminder::route('/create'),
             'history' => SmsHistory::route('/history'),
+            'send' => SendSmsReminder::route('/send'),
             'view' => ViewSmsReminder::route('/{record}/view'),
             'edit' => EditSmsReminder::route('/{record}/edit'),
-            'send' => SendSmsReminder::route('/{record}/send'),
         ];
     }
 }

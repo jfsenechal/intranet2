@@ -33,6 +33,11 @@ final class ListSmsReminders extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('sendSms')
+                ->label('Envoyer un SMS')
+                ->icon(Heroicon::OutlinedEnvelope)
+                ->color('gray')
+                ->url(SmsReminderResource::getUrl('send')),
             Action::make('history')
                 ->label('Historique API')
                 ->icon(Heroicon::Clock)

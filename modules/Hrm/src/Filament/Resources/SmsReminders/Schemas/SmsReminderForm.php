@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\SmsReminders\Schemas;
 
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Section;
@@ -37,7 +37,7 @@ final class SmsReminderForm
                     ]),
                 Section::make('Notes')
                     ->schema([
-                        RichEditor::make('message')
+                        Textarea::make('message')
                             ->label('Message')
                             ->helperText('Max 160 caractères. caractères')
                             ->hiddenLabel()
@@ -51,17 +51,13 @@ final class SmsReminderForm
         return $schema
             ->columns(1)
             ->components([
-                Fieldset::make('Numéro')
-                    ->columns(2)
+                Section::make('Données')
                     ->schema([
                         TextInput::make('phone_number')
                             ->label('Numéro')
                             ->tel()
                             ->helperText('Format: 32476642612'),
-                    ]),
-                Section::make('Notes')
-                    ->schema([
-                        RichEditor::make('message')
+                        Textarea::make('message')
                             ->label('Message')
                             ->helperText('Max 160 caractères. caractères')
                             ->hiddenLabel()
