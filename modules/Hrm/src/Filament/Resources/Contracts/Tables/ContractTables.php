@@ -29,7 +29,7 @@ final class ContractTables
                 TextColumn::make('employee.last_name')
                     ->label('Agent')
                     ->formatStateUsing(
-                        fn (Contract $record): string => $record->employee->last_name.' '.$record->employee->first_name
+                        fn(Contract $record): string => $record->employee->last_name.' '.$record->employee->first_name
                     )
                     ->searchable(['last_name', 'first_name'])
                     ->sortable(),
@@ -69,6 +69,8 @@ final class ContractTables
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->filtersFormColumns(2)
+            ->persistFiltersInSession()
             ->filters([
                 SelectFilter::make('employer_id')
                     ->label('Employeur')
@@ -83,7 +85,8 @@ final class ContractTables
                     ->label('Clôturé')
                     ->placeholder('Tous')
                     ->trueLabel('Clôturés')
-                    ->falseLabel('En cours'),
+                    ->falseLabel('En cours')
+                    ->default(false),
             ])
             ->recordActions([
                 ViewAction::make(),
@@ -144,7 +147,7 @@ final class ContractTables
                 Action::make('view')
                     ->label('Voir')
                     ->icon('heroicon-o-eye')
-                    ->url(fn (Contract $record): string => ContractResource::getUrl('view', ['record' => $record])),
+                    ->url(fn(Contract $record): string => ContractResource::getUrl('view', ['record' => $record])),
             ]);
     }
 }

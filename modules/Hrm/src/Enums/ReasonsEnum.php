@@ -10,6 +10,7 @@ enum ReasonsEnum: string implements HasLabel
 {
     case ACCIDENT = 'accident';
     case CIRCUMSTANCE = 'circonstance';
+    case CIRCUMSTANCE_SICKNESS = 'circonstance maladie';
     case CIRCUMSTANCE_SICKNESS_ONE_DAY = 'circonstance maladie 1 jour';
     case CIRCUMSTANCE_SICKNESS_HALF_DAY = 'circonstance maladie 1/2 jour';
     case EXCEPTIONAL_LEAVE = 'congés exceptionnels';
@@ -36,6 +37,7 @@ enum ReasonsEnum: string implements HasLabel
         return match ($this) {
             self::ACCIDENT => 'Accident',
             self::CIRCUMSTANCE => 'Circonstance',
+            self::CIRCUMSTANCE_SICKNESS => 'Circonstance maladie',
             self::CIRCUMSTANCE_SICKNESS_ONE_DAY => 'Circonstance maladie 1 jour',
             self::CIRCUMSTANCE_SICKNESS_HALF_DAY => 'Circonstance maladie 1/2 jour',
             self::EXCEPTIONAL_LEAVE => 'Congés exceptionnels',

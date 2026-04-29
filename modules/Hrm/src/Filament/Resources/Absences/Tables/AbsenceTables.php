@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Absences\Tables;
 
+use AcMarche\Hrm\Enums\ReasonsEnum;
 use AcMarche\Hrm\Filament\Resources\Absences\AbsenceResource;
 use AcMarche\Hrm\Models\Absence;
 use Filament\Actions\Action;
@@ -11,10 +12,14 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 final class AbsenceTables
 {
@@ -56,12 +61,45 @@ final class AbsenceTables
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->filtersFormColumns(2)
+            ->persistFiltersInSession()
             ->filters([
+                SelectFilter::make('reason')
+                    ->label('Raison')
+                    ->options(ReasonsEnum::class),
+                SelectFilter::make('employee_id')
+                    ->label('Agent')
+                    ->relationship(
+                        'employee',
+                        'last_name',
+                        fn (Builder $query) => $query->orderBy('last_name')->orderBy('first_name')
+                    )
+                    ->getOptionLabelFromRecordUsing(fn ($record): string => $record->last_name.' '.$record->first_name)
+                    ->searchable()
+                    ->preload(),
+                Filter::make('period')
+                    ->label('Période')
+                    ->schema([
+                        DatePicker::make('from')
+                            ->label('Du'),
+                        DatePicker::make('until')
+                            ->label('Au'),
+                    ])
+                    ->query(fn (Builder $query, array $data): Builder => $query
+                        ->when(
+                            $data['from'] ?? null,
+                            fn (Builder $query, $date): Builder => $query->whereDate('end_date', '>=', $date),
+                        )
+                        ->when(
+                            $data['until'] ?? null,
+                            fn (Builder $query, $date): Builder => $query->whereDate('start_date', '<=', $date),
+                        )),
                 TernaryFilter::make('is_closed')
                     ->label('Clôturée')
                     ->placeholder('Toutes')
-                    ->trueLabel('Cloturees')
-                    ->falseLabel('En cours'),
+                    ->trueLabel('Clôturées')
+                    ->falseLabel('En cours')
+                    ->default(false),
             ])
             ->recordActions([
                 ViewAction::make(),

@@ -11,11 +11,14 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 final class DeadlineTables
 {
@@ -46,7 +49,7 @@ final class DeadlineTables
                     ->label('Début')
                     ->date('d/m/Y')
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 TextColumn::make('end_date')
                     ->label('Fin')
                     ->date('d/m/Y')
@@ -67,15 +70,48 @@ final class DeadlineTables
                     ->boolean()
                     ->toggleable(),
             ])
+            ->filtersFormColumns(2)
+            ->persistFiltersInSession()
             ->filters([
                 SelectFilter::make('employer_id')
                     ->label('Employeur')
                     ->relationship('employer', 'name'),
+                SelectFilter::make('service_id')
+                    ->label('Service')
+                    ->relationship('service', 'name')
+                    ->searchable()
+                    ->preload(),
+                SelectFilter::make('direction_id')
+                    ->label('Direction')
+                    ->relationship('direction', 'name')
+                    ->searchable()
+                    ->preload(),
+                Filter::make('end_date_from')
+                    ->label("Date de l'échéance")
+                    ->schema([
+                        DatePicker::make('end_date_from')
+                            ->label('À partir de'),
+                    ])
+                    ->query(fn (Builder $query, array $data): Builder => $query->when(
+                        $data['end_date_from'] ?? null,
+                        fn (Builder $query, $date): Builder => $query->whereDate('end_date', '>=', $date),
+                    )),
+                Filter::make('reminder_date_from')
+                    ->label('Date de rappel')
+                    ->schema([
+                        DatePicker::make('reminder_date_from')
+                            ->label('À partir de'),
+                    ])
+                    ->query(fn (Builder $query, array $data): Builder => $query->when(
+                        $data['reminder_date_from'] ?? null,
+                        fn (Builder $query, $date): Builder => $query->whereDate('reminder_date', '>=', $date),
+                    )),
                 TernaryFilter::make('is_closed')
                     ->label('Clôture')
                     ->placeholder('Toutes')
                     ->trueLabel('Clôturées')
-                    ->falseLabel('En cours'),
+                    ->falseLabel('En cours')
+                    ->default(false),
             ])
             ->recordActions([
                 ViewAction::make(),
