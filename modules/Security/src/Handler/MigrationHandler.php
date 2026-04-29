@@ -5,6 +5,11 @@ declare(strict_types=1);
 namespace AcMarche\Security\Handler;
 
 use AcMarche\Agent\Filament\Resources\Profiles\ProfileResource;
+use AcMarche\App\Filament\Pages\ClaimRequestPage;
+use AcMarche\App\Filament\Pages\EmailsListPage;
+use AcMarche\App\Filament\Pages\TeleworkPage;
+use AcMarche\App\Filament\Pages\VacationPage;
+use AcMarche\App\Filament\Resources\Signatures\SignatureResource;
 use AcMarche\Courrier\Filament\Resources\IncomingMails\IncomingMailResource;
 use AcMarche\Document\Filament\Resources\Documents\DocumentResource;
 use AcMarche\Hrm\Filament\Resources\Employees\EmployeeResource;
@@ -19,7 +24,7 @@ use Illuminate\Support\Collection;
 
 final class MigrationHandler
 {
-    public const array modules_to_skip = [1, 2, 21, 22, 23, 26, 33, 49, 50];
+    public const array modules_to_skip = [1, 2, 23, 49];
 
     public static function urlModule(Module $module): ?string
     {
@@ -40,9 +45,15 @@ final class MigrationHandler
             15 => NewsResource::getUrl('index', panel: 'news'),
             16 => IncomingMailResource::getUrl('index', panel: 'courrier-panel'),
             17 => UserResource::getUrl('index', panel: 'security-panel'),
+            21 => SignatureResource::getUrl('index', panel: 'app-panel'),
+            22 => 'https://agenda.marche.be',
+            26 => VacationPage::getUrl(panel: 'app-panel'),
+            33 => EmailsListPage::getUrl(panel: 'app-panel'),
+            36 => ClaimRequestPage::getUrl(panel: 'app-panel'),
             40 => ProfileResource::getUrl('index', panel: 'agent-panel'),
             42 => WhoIsWhoIndex::getUrl(panel: 'whoiswho-panel'),
             44 => PublicationResource::getUrl('index', panel: 'publication-panel'),
+            50 => TeleworkPage::getUrl(panel: 'app-panel'),
             58 => ActionPstResource::getUrl('index', panel: 'pst-panel'),
             default => null,
         };
