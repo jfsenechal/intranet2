@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\SmsReminders\Tables;
 
+use AcMarche\Hrm\Models\SmsReminder;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
 final class SmsReminderTables
@@ -14,32 +16,49 @@ final class SmsReminderTables
     public static function configure(Table $table): Table
     {
         return $table
-            ->defaultSort('evaluation_date', 'desc')
+            ->defaultSort('reminder_date', 'desc')
             ->defaultPaginationPageOption(25)
             ->columns([
-                TextColumn::make('evaluation_date')
-                    ->label('Date évaluation')
+                TextColumn::make('employee.last_name')
+                    ->label('Agent')
+                    ->formatStateUsing(
+                        fn (SmsReminder $record): string => $record->employee?->last_name.' '.$record->employee?->first_name
+                    )
+                    ->searchable(['last_name', 'first_name'])
+                    ->sortable(),
+                TextColumn::make('phone_number')
+                    ->label('Numéro')
+                    ->searchable()
+                    ->toggleable(),
+                TextColumn::make('reminder_date')
+                    ->label('Date de rappel')
+                    ->date('d/m/Y')
+                    ->sortable(),
+                TextColumn::make('other_reminder_date')
+                    ->label('Autre date de rappel')
                     ->date('d/m/Y')
                     ->sortable()
-                    ->toggleable(),
-                TextColumn::make('next_evaluation_date')
-                    ->label('Prochaine évaluation')
-                    ->date('d/m/Y')
-                    ->sortable()
-                    ->toggleable(),
-                TextColumn::make('validation_date')
-                    ->label('Validation')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('sent_at')
+                    ->label('Envoyé le')
                     ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('result')
                     ->label('Résultat')
-                    ->badge()
-                    ->toggleable(),
-                TextColumn::make('direction.name')
-                    ->label('Direction')
-                    ->sortable()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_by')
+                    ->label('Créé par')
+                    ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filters([
+                TernaryFilter::make('sent_at')
+                    ->label('Envoi')
+                    ->nullable()
+                    ->placeholder('Tous')
+                    ->trueLabel('Envoyés')
+                    ->falseLabel('Non envoyés')
+                    ->default(false),
             ])
             ->recordActions([
                 ViewAction::make(),

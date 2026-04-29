@@ -23,7 +23,7 @@ final class SmsReminderForm
                     ->schema([
                         TextInput::make('phone_number')
                             ->label('Numéro')
-                            ->tel()// todo add private_mobile_number auto
+                            ->tel()
                             ->helperText('Format: 32476642612'),
                     ]),
                 Section::make('Dates')
@@ -34,6 +34,30 @@ final class SmsReminderForm
                             ->required(),
                         DatePicker::make('other_reminder_date')
                             ->label('Autre date de rappel'),
+                    ]),
+                Section::make('Notes')
+                    ->schema([
+                        RichEditor::make('message')
+                            ->label('Message')
+                            ->helperText('Max 160 caractères. caractères')
+                            ->hiddenLabel()
+                            ->columnSpanFull(),
+                    ]),
+            ]);
+    }
+
+    public static function forSending(Schema $schema): Schema
+    {
+        return $schema
+            ->columns(1)
+            ->components([
+                Fieldset::make('Numéro')
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('phone_number')
+                            ->label('Numéro')
+                            ->tel()
+                            ->helperText('Format: 32476642612'),
                     ]),
                 Section::make('Notes')
                     ->schema([

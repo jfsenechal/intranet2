@@ -95,16 +95,16 @@ final class EmployeeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ApplicationsRelationManager::class,
             ContractsRelationManager::class,
             AbsencesRelationManager::class,
             DeadlinesRelationManager::class,
             EvaluationsRelationManager::class,
             TrainingsRelationManager::class,
-            InternshipsRelationManager::class,
             DiplomasRelationManager::class,
             DocumentsRelationManager::class,
             ValorizationsRelationManager::class,
+            InternshipsRelationManager::class,
+            ApplicationsRelationManager::class,
         ];
     }
 

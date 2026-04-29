@@ -51,6 +51,10 @@
         },
         {
             "type": "path",
+            "url": "./modules/QrCode"
+        },
+        {
+            "type": "path",
             "url": "./modules/Hrm"
         },
         {
@@ -84,6 +88,7 @@
         "acmarche/news": "*@dev",
         "acmarche/pst": "*@dev",
         "acmarche/publication": "*@dev",
+        "acmarche/qrcode": "*@dev",
         "acmarche/security": "*@dev",
         "acmarche/whoiswho": "*@dev",
         "chrome-php/chrome": "^1.15",
@@ -106,7 +111,8 @@
         "spatie/laravel-pdf": "^2.1.1",
         "spatie/laravel-sluggable": "^3.8",
         "stechstudio/filament-impersonate": "^4.0",
-        "symfony/process": "^7.4"
+        "symfony/process": "^7.4",
+        "tuncaybahadir/quar": "^1.7"
     },
     "require-dev": {
         "driftingly/rector-laravel": "^2.2",

@@ -30,6 +30,7 @@ final class CreateSmsReminder extends CreateRecord
 
         if ($employee = $this->getEmployeeFromQuery()) {
             $data['employee_id'] = $employee->id;
+            $data['phone_number'] = $employee->private_mobile ?: $employee->private_phone;
         }
 
         $this->form->fill($data);

@@ -54,6 +54,7 @@ final class MigrationHandler
             42 => WhoIsWhoIndex::getUrl(panel: 'whoiswho-panel'),
             44 => PublicationResource::getUrl('index', panel: 'publication-panel'),
             50 => TeleworkPage::getUrl(panel: 'app-panel'),
+            56 => ActionPstResource::getUrl('index', panel: 'qrcode-panel'),
             58 => ActionPstResource::getUrl('index', panel: 'pst-panel'),
             default => null,
         };

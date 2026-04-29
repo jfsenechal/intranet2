@@ -7,6 +7,8 @@ namespace AcMarche\Hrm\Filament\Resources\SmsReminders;
 use AcMarche\Hrm\Filament\Resources\SmsReminders\Pages\CreateSmsReminder;
 use AcMarche\Hrm\Filament\Resources\SmsReminders\Pages\EditSmsReminder;
 use AcMarche\Hrm\Filament\Resources\SmsReminders\Pages\ListSmsReminders;
+use AcMarche\Hrm\Filament\Resources\SmsReminders\Pages\SendSmsReminder;
+use AcMarche\Hrm\Filament\Resources\SmsReminders\Pages\SmsHistory;
 use AcMarche\Hrm\Filament\Resources\SmsReminders\Pages\ViewSmsReminder;
 use AcMarche\Hrm\Filament\Resources\SmsReminders\Schemas\SmsReminderForm;
 use AcMarche\Hrm\Filament\Resources\SmsReminders\Schemas\SmsReminderInfolist;
@@ -72,8 +74,10 @@ final class SmsReminderResource extends Resource
         return [
             'index' => ListSmsReminders::route('/'),
             'create' => CreateSmsReminder::route('/create'),
+            'history' => SmsHistory::route('/history'),
             'view' => ViewSmsReminder::route('/{record}/view'),
             'edit' => EditSmsReminder::route('/{record}/edit'),
+            'send' => SendSmsReminder::route('/{record}/send'),
         ];
     }
 }

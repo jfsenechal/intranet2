@@ -65,7 +65,7 @@ final class ContractTables
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('is_closed')
-                    ->label('Cloture')
+                    ->label('Clôturé')
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -80,9 +80,9 @@ final class ContractTables
                     ->label('Statut')
                     ->options(ContractStatusEnum::class),
                 TernaryFilter::make('is_closed')
-                    ->label('Cloture')
+                    ->label('Clôturé')
                     ->placeholder('Tous')
-                    ->trueLabel('Clotures')
+                    ->trueLabel('Clôturés')
                     ->falseLabel('En cours'),
             ])
             ->recordActions([

@@ -75,6 +75,7 @@ final class EmployeeTables
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filtersFormColumns(2)
+            ->persistFiltersInSession()
             ->filters([
                 SelectFilter::make('status')
                     ->label('Statut')

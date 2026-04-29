@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'result',
     'updated_by',
 ])]
-#[Table(name: 'sms')]
+#[Table(name: 'sms_reminders')]
 final class SmsReminder extends Model
 {
     use HasFactory;

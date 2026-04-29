@@ -39,10 +39,10 @@ final class SmsReminderInfolist
                                     ->date('d/m/Y')
                                     ->placeholder('—'),
                             ]),
-                        Section::make('Notes')
+                        Section::make('Message')
                             ->schema([
-                                TextEntry::make('notes')
-                                    ->label('Notes')
+                                TextEntry::make('message')
+                                    ->label('Message')
                                     ->hiddenLabel()
                                     ->html()
                                     ->prose()

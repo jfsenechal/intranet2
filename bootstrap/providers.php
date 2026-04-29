@@ -18,4 +18,5 @@ return [
     AcMarche\Publication\Providers\Filament\PublicationPanelProvider::class,
     AcMarche\Agent\Providers\Filament\AgentPanelProvider::class,
     AcMarche\WhoIsWho\Providers\Filament\WhoIsWhoPanelProvider::class,
+    AcMarche\QrCode\Providers\Filament\QrCodePanelProvider::class,
 ];

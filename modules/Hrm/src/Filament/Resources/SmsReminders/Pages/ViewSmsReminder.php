@@ -6,6 +6,7 @@ namespace AcMarche\Hrm\Filament\Resources\SmsReminders\Pages;
 
 use AcMarche\Hrm\Filament\Actions\BackToEmployeeAction;
 use AcMarche\Hrm\Filament\Resources\SmsReminders\SmsReminderResource;
+use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
@@ -27,6 +28,11 @@ final class ViewSmsReminder extends ViewRecord
     {
         return [
             BackToEmployeeAction::make(),
+            Action::make('send')
+                ->label('Envoyer le SMS')
+                ->icon(Heroicon::PaperAirplane)
+                ->color('primary')
+                ->url(fn (): string => SmsReminderResource::getUrl('send', ['record' => $this->record])),
             EditAction::make()
                 ->icon(Heroicon::Pencil),
             DeleteAction::make()
