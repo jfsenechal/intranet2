@@ -9,6 +9,7 @@ use AcMarche\Hrm\Filament\Resources\Employees\Pages\EditEmployee;
 use AcMarche\Hrm\Filament\Resources\Employees\Pages\ListEmployees;
 use AcMarche\Hrm\Filament\Resources\Employees\Pages\ViewEmployee;
 use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\AbsencesRelationManager;
+use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\ApplicationsRelationManager;
 use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\ContractsRelationManager;
 use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\DeadlinesRelationManager;
 use AcMarche\Hrm\Filament\Resources\Employees\RelationManagers\DiplomasRelationManager;
@@ -94,6 +95,7 @@ final class EmployeeResource extends Resource
     public static function getRelations(): array
     {
         return [
+            ApplicationsRelationManager::class,
             ContractsRelationManager::class,
             AbsencesRelationManager::class,
             DeadlinesRelationManager::class,
