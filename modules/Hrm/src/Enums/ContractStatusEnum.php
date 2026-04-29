@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\Hrm\Enums;
 
 use Filament\Support\Contracts\HasLabel;

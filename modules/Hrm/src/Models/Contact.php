@@ -18,5 +18,4 @@ use Illuminate\Database\Eloquent\Model;
     'phone_2',
     'description',
 ])]
-final class Contact extends Model {
-}
+final class Contact extends Model {}

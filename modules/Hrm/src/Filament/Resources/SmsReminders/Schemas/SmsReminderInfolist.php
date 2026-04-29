@@ -56,7 +56,7 @@ final class SmsReminderInfolist
                         TextEntry::make('employee.last_name')
                             ->label('Agent')
                             ->formatStateUsing(
-                                fn(
+                                fn (
                                     $state,
                                     SmsReminder $record
                                 ): string => $record->employee?->last_name.' '.$record->employee?->first_name

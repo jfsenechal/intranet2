@@ -23,7 +23,7 @@ final class SmsReminderForm
                     ->schema([
                         TextInput::make('phone_number')
                             ->label('Numéro')
-                            ->tel()//todo add private_mobile_number auto
+                            ->tel()// todo add private_mobile_number auto
                             ->helperText('Format: 32476642612'),
                     ]),
                 Section::make('Dates')
