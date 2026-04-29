@@ -26,4 +26,6 @@ uses(
     '../modules/Publication/tests/Feature',
     '../modules/Courrier/tests/Feature',
     '../modules/Courrier/tests/Unit',
+    '../modules/QrCode/tests/Unit',
+    '../modules/QrCode/tests/Feature',
 );
