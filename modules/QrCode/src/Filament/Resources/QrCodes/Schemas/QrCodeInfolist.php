@@ -32,7 +32,7 @@ final class QrCodeInfolist
                     ->columns(2)
                     ->schema([
                         TextEntry::make('name')->label('Nom'),
-                        TextEntry::make('type')->label('Type')->badge(),
+                        TextEntry::make('action')->label('Action')->badge(),
                         TextEntry::make('format')->label('Format'),
                         TextEntry::make('pixels')->label('Taille')->suffix(' px'),
                         TextEntry::make('created_at')->label('Créé le')->dateTime('d/m/Y H:i'),

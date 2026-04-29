@@ -4,7 +4,7 @@ namespace AcMarche\QrCode\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 
-enum QrCodeTypeEnum:string implements HasLabel
+enum QrCodeActionEnum:string implements HasLabel
 {
     case SMS = 'sms';
     case PHONE_NUMBER = 'phoneNumber';

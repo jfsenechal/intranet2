@@ -30,8 +30,8 @@ final class QrCodeTable
                     ->label('Nom')
                     ->searchable()
                     ->url(fn (QrCode $record): string => QrCodeResource::getUrl('view', ['record' => $record->id])),
-                TextColumn::make('type')
-                    ->label('Type')
+                TextColumn::make('action')
+                    ->label('Action')
                     ->badge()
                     ->searchable(),
                 ColorColumn::make('color')
@@ -45,7 +45,7 @@ final class QrCodeTable
             ])
             ->filters([
                 SelectFilter::make('type')
-                    ->options(\AcMarche\QrCode\Enums\QrCodeTypeEnum::class),
+                    ->options(\AcMarche\QrCode\Enums\QrCodeActionEnum::class),
             ])
             ->recordActions([
                 ViewAction::make()->icon('tabler-eye'),

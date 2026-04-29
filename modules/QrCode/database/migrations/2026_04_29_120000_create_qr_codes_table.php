@@ -2,21 +2,18 @@
 
 declare(strict_types=1);
 
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('qr_codes', function (Blueprint $table): void {
             $table->id();
-            $table->foreignIdFor(User::class)->nullable()->constrained('users')->nullOnDelete();
             $table->string('username', 100)->nullable();
             $table->string('name', 150);
-            $table->string('type', 30);
+            $table->string('action', 30);
 
             $table->string('color', 10)->default('#000000');
             $table->string('background_color', 10)->default('#FFFFFF');
@@ -50,7 +47,6 @@ return new class extends Migration
             $table->boolean('hidden')->default(false);
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

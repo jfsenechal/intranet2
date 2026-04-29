@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\QrCode\Service;
 
-use AcMarche\QrCode\Enums\QrCodeTypeEnum;
+use AcMarche\QrCode\Enums\QrCodeActionEnum;
 use AcMarche\QrCode\Models\QrCode as QrCodeModel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode as QrCodeFacade;
 
@@ -50,24 +50,24 @@ final class QrCodeGenerator
     public function buildPayload(QrCodeModel $qrCode): string
     {
         return match ($qrCode->type) {
-            QrCodeTypeEnum::URL,
-            QrCodeTypeEnum::TEXT => (string) ($qrCode->message ?? ''),
+            QrCodeActionEnum::URL,
+            QrCodeActionEnum::TEXT => (string) ($qrCode->message ?? ''),
 
-            QrCodeTypeEnum::PHONE_NUMBER => 'tel:'.($qrCode->phone_number ?? ''),
+            QrCodeActionEnum::PHONE_NUMBER => 'tel:'.($qrCode->phone_number ?? ''),
 
-            QrCodeTypeEnum::SMS => 'SMSTO:'.($qrCode->phone_number ?? '').':'.($qrCode->message ?? ''),
+            QrCodeActionEnum::SMS => 'SMSTO:'.($qrCode->phone_number ?? '').':'.($qrCode->message ?? ''),
 
-            QrCodeTypeEnum::EMAIL => $this->buildEmail($qrCode),
+            QrCodeActionEnum::EMAIL => $this->buildEmail($qrCode),
 
-            QrCodeTypeEnum::WIFI => $this->buildWifi($qrCode),
+            QrCodeActionEnum::WIFI => $this->buildWifi($qrCode),
 
-            QrCodeTypeEnum::GEO => sprintf(
+            QrCodeActionEnum::GEO => sprintf(
                 'geo:%s,%s',
                 $qrCode->latitude ?? '0',
                 $qrCode->longitude ?? '0',
             ),
 
-            QrCodeTypeEnum::EPC => $this->buildEpc($qrCode),
+            QrCodeActionEnum::EPC => $this->buildEpc($qrCode),
         };
     }
 

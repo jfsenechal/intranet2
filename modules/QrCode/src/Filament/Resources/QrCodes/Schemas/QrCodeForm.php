@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\QrCode\Filament\Resources\QrCodes\Schemas;
 
-use AcMarche\QrCode\Enums\QrCodeTypeEnum;
+use AcMarche\QrCode\Enums\QrCodeActionEnum;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -28,9 +28,9 @@ final class QrCodeForm
                             ->label('Nom')
                             ->required()
                             ->maxLength(150),
-                        Select::make('type')
-                            ->label('Type')
-                            ->options(QrCodeTypeEnum::class)
+                        Select::make('actionQr')
+                            ->label('Action')
+                            ->options(QrCodeActionEnum::class)
                             ->required()
                             ->live()
                             ->afterStateUpdated(fn (Select $component) => $component
@@ -40,7 +40,7 @@ final class QrCodeForm
                                 ?->fill()),
                     ]),
 
-                Grid::make(1)
+                Grid::make(2)
                     ->schema(fn (Get $get): array => self::fieldsForType($get('type')))
                     ->key('dynamicTypeFields'),
 
@@ -91,12 +91,12 @@ final class QrCodeForm
     /**
      * @return array<int, \Filament\Schemas\Components\Component|\Filament\Forms\Components\Field>
      */
-    public static function fieldsForType(QrCodeTypeEnum|string|null $type): array
+    public static function fieldsForType(QrCodeActionEnum|string|null $type): array
     {
-        $type = $type instanceof QrCodeTypeEnum ? $type : QrCodeTypeEnum::tryFrom((string) $type);
+        $type = $type instanceof QrCodeActionEnum ? $type : QrCodeActionEnum::tryFrom((string) $type);
 
         return match ($type) {
-            QrCodeTypeEnum::URL => [
+            QrCodeActionEnum::URL => [
                 Section::make('URL')->schema([
                     TextInput::make('message')
                         ->label('URL')
@@ -107,7 +107,7 @@ final class QrCodeForm
                 ]),
             ],
 
-            QrCodeTypeEnum::TEXT => [
+            QrCodeActionEnum::TEXT => [
                 Section::make('Texte')->schema([
                     Textarea::make('message')
                         ->label('Texte')
@@ -117,7 +117,7 @@ final class QrCodeForm
                 ]),
             ],
 
-            QrCodeTypeEnum::PHONE_NUMBER => [
+            QrCodeActionEnum::PHONE_NUMBER => [
                 Section::make('Téléphone')->schema([
                     TextInput::make('phone_number')
                         ->label('Numéro de téléphone')
@@ -127,7 +127,7 @@ final class QrCodeForm
                 ]),
             ],
 
-            QrCodeTypeEnum::SMS => [
+            QrCodeActionEnum::SMS => [
                 Section::make('SMS')
                     ->columns(2)
                     ->schema([
@@ -145,7 +145,7 @@ final class QrCodeForm
                     ]),
             ],
 
-            QrCodeTypeEnum::EMAIL => [
+            QrCodeActionEnum::EMAIL => [
                 Section::make('Email')
                     ->columns(2)
                     ->schema([
@@ -165,7 +165,7 @@ final class QrCodeForm
                     ]),
             ],
 
-            QrCodeTypeEnum::WIFI => [
+            QrCodeActionEnum::WIFI => [
                 Section::make('Wifi')
                     ->columns(2)
                     ->schema([
@@ -193,7 +193,7 @@ final class QrCodeForm
                     ]),
             ],
 
-            QrCodeTypeEnum::GEO => [
+            QrCodeActionEnum::GEO => [
                 Section::make('Coordonnées GPS')
                     ->columns(2)
                     ->schema([
@@ -208,7 +208,7 @@ final class QrCodeForm
                     ]),
             ],
 
-            QrCodeTypeEnum::EPC => [
+            QrCodeActionEnum::EPC => [
                 Section::make('Virement SEPA (EPC)')
                     ->columns(2)
                     ->schema([

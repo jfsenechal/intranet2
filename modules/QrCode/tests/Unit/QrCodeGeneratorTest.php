@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use AcMarche\QrCode\Enums\QrCodeTypeEnum;
+use AcMarche\QrCode\Enums\QrCodeActionEnum;
 use AcMarche\QrCode\Models\QrCode;
 use AcMarche\QrCode\Service\QrCodeGenerator;
 
 it('builds a URL payload', function (): void {
     $qrCode = new QrCode();
-    $qrCode->type = QrCodeTypeEnum::URL;
+    $qrCode->type = QrCodeActionEnum::URL;
     $qrCode->message = 'https://acmarche.be';
 
     $payload = (new QrCodeGenerator())->buildPayload($qrCode);
@@ -18,7 +18,7 @@ it('builds a URL payload', function (): void {
 
 it('builds an SMS payload', function (): void {
     $qrCode = new QrCode();
-    $qrCode->type = QrCodeTypeEnum::SMS;
+    $qrCode->type = QrCodeActionEnum::SMS;
     $qrCode->phone_number = '+32474000000';
     $qrCode->message = 'Hello';
 
@@ -28,7 +28,7 @@ it('builds an SMS payload', function (): void {
 
 it('builds a wifi payload', function (): void {
     $qrCode = new QrCode();
-    $qrCode->type = QrCodeTypeEnum::WIFI;
+    $qrCode->type = QrCodeActionEnum::WIFI;
     $qrCode->ssid = 'home';
     $qrCode->password = 'secret;1';
     $qrCode->encryption = 'WPA';
@@ -40,7 +40,7 @@ it('builds a wifi payload', function (): void {
 
 it('builds an EPC payload', function (): void {
     $qrCode = new QrCode();
-    $qrCode->type = QrCodeTypeEnum::EPC;
+    $qrCode->type = QrCodeActionEnum::EPC;
     $qrCode->recipient = 'AC Marche';
     $qrCode->iban = 'BE68 5390 0754 7034';
     $qrCode->amount = '12.5';
@@ -57,7 +57,7 @@ it('builds an EPC payload', function (): void {
 
 it('renders an SVG QR code', function (): void {
     $qrCode = new QrCode();
-    $qrCode->type = QrCodeTypeEnum::URL;
+    $qrCode->type = QrCodeActionEnum::URL;
     $qrCode->message = 'https://acmarche.be';
     $qrCode->format = 'SVG';
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\QrCode\Filament\Pages;
 
-use AcMarche\QrCode\Enums\QrCodeTypeEnum;
+use AcMarche\QrCode\Enums\QrCodeActionEnum;
 use AcMarche\QrCode\Filament\Resources\QrCodes\Schemas\QrCodeForm;
 use AcMarche\QrCode\Models\QrCode;
 use AcMarche\QrCode\Service\QrCodeGenerator;
@@ -49,7 +49,7 @@ final class GenerateQrCode extends Page implements HasForms
     public function mount(): void
     {
         $this->form->fill([
-            'type' => QrCodeTypeEnum::URL->value,
+            'type' => QrCodeActionEnum::URL->value,
             'color' => '#000000',
             'background_color' => '#FFFFFF',
             'format' => 'SVG',
@@ -160,9 +160,9 @@ final class GenerateQrCode extends Page implements HasForms
         $qrCode = new QrCode();
         $qrCode->fill($data);
         $qrCode->name = $data['name'] ?? 'QR code';
-        $qrCode->type = $data['type'] instanceof QrCodeTypeEnum
+        $qrCode->type = $data['type'] instanceof QrCodeActionEnum
             ? $data['type']
-            : QrCodeTypeEnum::from((string) $data['type']);
+            : QrCodeActionEnum::from((string) $data['type']);
 
         return $qrCode;
     }

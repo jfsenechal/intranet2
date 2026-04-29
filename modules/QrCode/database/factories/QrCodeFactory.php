@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\QrCode\Database\Factories;
 
-use AcMarche\QrCode\Enums\QrCodeTypeEnum;
+use AcMarche\QrCode\Enums\QrCodeActionEnum;
 use AcMarche\QrCode\Models\QrCode;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -24,10 +24,9 @@ final class QrCodeFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
             'username' => fake()->userName(),
             'name' => fake()->words(3, true),
-            'type' => QrCodeTypeEnum::URL,
+            'type' => QrCodeActionEnum::URL,
             'message' => fake()->url(),
             'color' => '#000000',
             'background_color' => '#FFFFFF',
@@ -46,7 +45,7 @@ final class QrCodeFactory extends Factory
     public function url(string $url = 'https://example.com'): self
     {
         return $this->state(fn (): array => [
-            'type' => QrCodeTypeEnum::URL,
+            'type' => QrCodeActionEnum::URL,
             'message' => $url,
         ]);
     }
@@ -54,7 +53,7 @@ final class QrCodeFactory extends Factory
     public function wifi(): self
     {
         return $this->state(fn (): array => [
-            'type' => QrCodeTypeEnum::WIFI,
+            'type' => QrCodeActionEnum::WIFI,
             'ssid' => fake()->word(),
             'password' => fake()->password(),
             'encryption' => 'WPA',

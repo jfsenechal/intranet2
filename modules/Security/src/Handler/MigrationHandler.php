@@ -17,6 +17,7 @@ use AcMarche\Mileage\Filament\Resources\Trips\TripResource;
 use AcMarche\News\Filament\Resources\News\NewsResource;
 use AcMarche\Pst\Filament\Resources\ActionPst\ActionPstResource;
 use AcMarche\Publication\Filament\Resources\Publications\PublicationResource;
+use AcMarche\QrCode\Filament\Resources\QrCodes\QrCodeResource;
 use AcMarche\Security\Filament\Resources\Users\UserResource;
 use AcMarche\Security\Models\Module;
 use AcMarche\WhoIsWho\Filament\Pages\Index as WhoIsWhoIndex;
@@ -54,7 +55,7 @@ final class MigrationHandler
             42 => WhoIsWhoIndex::getUrl(panel: 'whoiswho-panel'),
             44 => PublicationResource::getUrl('index', panel: 'publication-panel'),
             50 => TeleworkPage::getUrl(panel: 'app-panel'),
-            // 56 => ActionPstResource::getUrl('index', panel: 'qrcode-panel'),
+            56 => QrCodeResource::getUrl('index', panel: 'qrcode-panel'),
             58 => ActionPstResource::getUrl('index', panel: 'pst-panel'),
             default => null,
         };

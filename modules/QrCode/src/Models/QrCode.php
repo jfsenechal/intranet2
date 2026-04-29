@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\QrCode\Models;
 
 use AcMarche\QrCode\Database\Factories\QrCodeFactory;
-use AcMarche\QrCode\Enums\QrCodeTypeEnum;
+use AcMarche\QrCode\Enums\QrCodeActionEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
@@ -16,10 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[UseFactory(QrCodeFactory::class)]
 #[Fillable([
-    'user_id',
     'username',
     'name',
-    'type',
+    'action',
     'color',
     'background_color',
     'pixels',
@@ -63,7 +62,7 @@ final class QrCode extends Model
     protected function casts(): array
     {
         return [
-            'type' => QrCodeTypeEnum::class,
+            'action' => QrCodeActionEnum::class,
             'pixels' => 'integer',
             'margin' => 'integer',
             'label_size' => 'integer',
