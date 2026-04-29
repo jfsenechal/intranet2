@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Table(name: 'signatures')]
 #[Fillable([
-    'user_id',
     'last_name',
     'first_name',
     'address',
@@ -36,7 +35,7 @@ final class Signature extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'username', 'username');
     }
 
     protected function casts(): array

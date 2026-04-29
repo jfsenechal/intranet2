@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Table(name: 'rsses')]
 #[Fillable([
-    'user_id',
+    'username',
     'name',
     'url',
 ])]
@@ -23,6 +23,6 @@ final class Rss extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'username', 'username');
     }
 }
