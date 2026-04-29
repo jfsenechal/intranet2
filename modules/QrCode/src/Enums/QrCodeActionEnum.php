@@ -18,14 +18,14 @@ enum QrCodeActionEnum:string implements HasLabel
     public function getLabel(): string
     {
         return match ($this) {
-            self::SMS => 'Sms',
-            self::PHONE_NUMBER => 'Numéro de téléphone',
-            self::EMAIL => 'Email',
-            self::WIFI => 'Wifi',
-            self::URL => 'Url',
-            self::TEXT => 'Texte',
-            self::GEO => 'Geo',
-            self::EPC => 'Virement bancaire',
+            self::SMS => 'Envoyer un sms',
+            self::PHONE_NUMBER => 'Appeler le numéro de téléphone',
+            self::EMAIL => 'Envoyer un email',
+            self::WIFI => 'Configurer un code wifi',
+            self::URL => 'Accéder  un site web (url)',
+            self::TEXT => 'Générer un texte',
+            self::GEO => 'Géolocaliser un lieu',
+            self::EPC => 'Effectuer un virement bancaire',
         };
     }
 }
