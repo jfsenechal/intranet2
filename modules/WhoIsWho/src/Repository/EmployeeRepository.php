@@ -50,9 +50,6 @@ final class EmployeeRepository
         return $query->where(function (Builder $query) use ($term): void {
             $query->where('last_name', 'like', '%'.$term.'%')
                 ->orWhere('first_name', 'like', '%'.$term.'%')
-                ->orWhereHas('activeContracts', function (Builder $query) use ($term): void {
-                    $query->where('job_title', 'like', '%'.$term.'%');
-                })
                 ->orWhereHas('activeContracts.service', function (Builder $query) use ($term): void {
                     $query->where('name', 'like', '%'.$term.'%');
                 });

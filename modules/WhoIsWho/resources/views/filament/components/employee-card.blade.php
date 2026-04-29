@@ -25,7 +25,7 @@
 <div class="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4 shadow-sm flex gap-4">
     <img src="{{ $photoUrl }}"
          alt="{{ $fullName }}"
-         class="h-24 w-24 rounded-full object-cover flex-shrink-0 bg-gray-100 dark:bg-gray-800" />
+         class="h-24 w-24 rounded-full object-cover shrink-0 bg-gray-100 dark:bg-gray-800" />
 
     <div class="flex-1 min-w-0">
         <div class="text-base font-semibold text-gray-900 dark:text-gray-100 truncate">

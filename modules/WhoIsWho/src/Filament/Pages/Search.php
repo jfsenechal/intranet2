@@ -65,7 +65,7 @@ final class Search extends Page implements HasForms
             ->columns(1)
             ->components([
                 TextInput::make('term')
-                    ->label('Nom, prénom, fonction ou service')
+                    ->label('Nom, prénom ou service')
                     ->placeholder('Tapez au moins 2 caractères...')
                     ->autofocus()
                     ->required()
