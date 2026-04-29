@@ -28,7 +28,7 @@ final class QrCodeForm
                             ->label('Nom')
                             ->required()
                             ->maxLength(150),
-                        Select::make('actionQr')
+                        Select::make('action')
                             ->label('Action')
                             ->options(QrCodeActionEnum::class)
                             ->required()
@@ -41,7 +41,7 @@ final class QrCodeForm
                     ]),
 
                 Grid::make(2)
-                    ->schema(fn (Get $get): array => self::fieldsForType($get('type')))
+                    ->schema(fn (Get $get): array => self::fieldsForType($get('action')))
                     ->key('dynamicTypeFields'),
 
                 Section::make('Apparence')
@@ -91,11 +91,11 @@ final class QrCodeForm
     /**
      * @return array<int, \Filament\Schemas\Components\Component|\Filament\Forms\Components\Field>
      */
-    public static function fieldsForType(QrCodeActionEnum|string|null $type): array
+    public static function fieldsForType(QrCodeActionEnum|string|null $action): array
     {
-        $type = $type instanceof QrCodeActionEnum ? $type : QrCodeActionEnum::tryFrom((string) $type);
+        $action = $action instanceof QrCodeActionEnum ? $action : QrCodeActionEnum::tryFrom((string) $action);
 
-        return match ($type) {
+        return match ($action) {
             QrCodeActionEnum::URL => [
                 Section::make('URL')->schema([
                     TextInput::make('message')

@@ -12,7 +12,7 @@ final class QrCodeGenerator
 {
     /**
      * Render a QR code as a string (SVG markup or PNG binary)
-     * based on the model's configured type and styling.
+     * based on the model's configured action and styling.
      */
     public function render(QrCodeModel $qrCode): string
     {
@@ -49,7 +49,7 @@ final class QrCodeGenerator
 
     public function buildPayload(QrCodeModel $qrCode): string
     {
-        return match ($qrCode->type) {
+        return match ($qrCode->action) {
             QrCodeActionEnum::URL,
             QrCodeActionEnum::TEXT => (string) ($qrCode->message ?? ''),
 

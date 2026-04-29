@@ -26,7 +26,7 @@ final class QrCodeFactory extends Factory
         return [
             'username' => fake()->userName(),
             'name' => fake()->words(3, true),
-            'type' => QrCodeActionEnum::URL,
+            'action' => QrCodeActionEnum::URL,
             'message' => fake()->url(),
             'color' => '#000000',
             'background_color' => '#FFFFFF',
@@ -45,7 +45,7 @@ final class QrCodeFactory extends Factory
     public function url(string $url = 'https://example.com'): self
     {
         return $this->state(fn (): array => [
-            'type' => QrCodeActionEnum::URL,
+            'action' => QrCodeActionEnum::URL,
             'message' => $url,
         ]);
     }
@@ -53,7 +53,7 @@ final class QrCodeFactory extends Factory
     public function wifi(): self
     {
         return $this->state(fn (): array => [
-            'type' => QrCodeActionEnum::WIFI,
+            'action' => QrCodeActionEnum::WIFI,
             'ssid' => fake()->word(),
             'password' => fake()->password(),
             'encryption' => 'WPA',

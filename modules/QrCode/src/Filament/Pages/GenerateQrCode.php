@@ -49,7 +49,7 @@ final class GenerateQrCode extends Page implements HasForms
     public function mount(): void
     {
         $this->form->fill([
-            'type' => QrCodeActionEnum::URL->value,
+            'action' => QrCodeActionEnum::URL->value,
             'color' => '#000000',
             'background_color' => '#FFFFFF',
             'format' => 'SVG',
@@ -160,9 +160,9 @@ final class GenerateQrCode extends Page implements HasForms
         $qrCode = new QrCode();
         $qrCode->fill($data);
         $qrCode->name = $data['name'] ?? 'QR code';
-        $qrCode->type = $data['type'] instanceof QrCodeActionEnum
-            ? $data['type']
-            : QrCodeActionEnum::from((string) $data['type']);
+        $qrCode->action = $data['action'] instanceof QrCodeActionEnum
+            ? $data['action']
+            : QrCodeActionEnum::from((string) $data['action']);
 
         return $qrCode;
     }

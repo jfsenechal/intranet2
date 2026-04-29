@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\QrCode\Filament\Resources\QrCodes\Tables;
 
+use AcMarche\QrCode\Enums\QrCodeActionEnum;
 use AcMarche\QrCode\Filament\Resources\QrCodes\QrCodeResource;
 use AcMarche\QrCode\Models\QrCode;
 use Filament\Actions\Action;
@@ -44,8 +45,8 @@ final class QrCodeTable
                     ->sortable(),
             ])
             ->filters([
-                SelectFilter::make('type')
-                    ->options(\AcMarche\QrCode\Enums\QrCodeActionEnum::class),
+                SelectFilter::make('action')
+                    ->options(QrCodeActionEnum::class),
             ])
             ->recordActions([
                 ViewAction::make()->icon('tabler-eye'),
