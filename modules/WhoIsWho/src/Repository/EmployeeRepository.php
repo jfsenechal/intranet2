@@ -62,6 +62,7 @@ final class EmployeeRepository
     public static function servicesWithAgents(): Collection
     {
         return Service::query()
+            ->with(['direction', 'employer'])
             ->whereHas('contracts', function (Builder $query): void {
                 $query->active()
                     ->whereHas('employee', function (Builder $query): void {

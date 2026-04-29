@@ -29,7 +29,7 @@
             <x-slot name="heading">
                 {{ $currentLetter }} ({{ $employees->count() }})
             </x-slot>
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @foreach ($employees as $employee)
                     @include('whoiswho::filament.components.employee-card', ['employee' => $employee])
                 @endforeach
@@ -41,7 +41,7 @@
                 <x-slot name="heading">
                     {{ $letter }} ({{ $letterEmployees->count() }})
                 </x-slot>
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     @foreach ($letterEmployees as $employee)
                         @include('whoiswho::filament.components.employee-card', ['employee' => $employee])
                     @endforeach

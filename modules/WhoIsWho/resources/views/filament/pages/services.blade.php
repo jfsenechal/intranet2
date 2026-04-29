@@ -44,6 +44,21 @@
                         @endif
                     </x-slot>
 
+                    <dl class="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        @if ($selectedService->direction)
+                            <div>
+                                <dt class="font-medium text-gray-500 dark:text-gray-400">Direction</dt>
+                                <dd class="text-gray-900 dark:text-gray-100">{{ $selectedService->direction->name }}</dd>
+                            </div>
+                        @endif
+                        @if ($selectedService->employer)
+                            <div>
+                                <dt class="font-medium text-gray-500 dark:text-gray-400">Employeur</dt>
+                                <dd class="text-gray-900 dark:text-gray-100">{{ $selectedService->employer->name }}</dd>
+                            </div>
+                        @endif
+                    </dl>
+
                     @if ($employees && $employees->isNotEmpty())
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             @foreach ($employees as $employee)

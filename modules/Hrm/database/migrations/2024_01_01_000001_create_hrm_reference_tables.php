@@ -76,6 +76,7 @@ return new class extends Migration
                 $table->renameColumn('user', 'user_add');
                 $table->renameColumn('created', 'created_at');
                 $table->renameColumn('updated', 'updated_at');
+                $table->renameColumn('employeur_id', 'employer_id');
             });
         } elseif (! Schema::connection($this->connection)->hasTable('services')) {
             Schema::connection($this->connection)->create('services', function (Blueprint $table): void {
