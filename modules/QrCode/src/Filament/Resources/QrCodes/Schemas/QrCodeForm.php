@@ -171,6 +171,7 @@ final class QrCodeForm
                     ->schema([
                         TextInput::make('ssid')
                             ->label('SSID')
+                            ->helperText('Nom du réseaux')
                             ->required()
                             ->maxLength(100),
                         Select::make('encryption')
