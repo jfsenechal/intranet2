@@ -14,6 +14,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Schemas\Components\Flex;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
@@ -68,15 +69,19 @@ final class AbsenceTables
             ->filters([
                 SelectFilter::make('reason')
                     ->label('Raison')
-                    ->options(ReasonsEnum::class),
+                    ->options(ReasonsEnum::class)
+                    ->columnSpanFull(),
                 Filter::make('period')
                     ->label('Période')
                     ->schema([
-                        DatePicker::make('from')
-                            ->label('Du'),
-                        DatePicker::make('until')
-                            ->label('Au'),
+                        Flex::make([
+                            DatePicker::make('from')
+                                ->label('Du'),
+                            DatePicker::make('until')
+                                ->label('Au'),
+                        ]),
                     ])
+                    ->columnSpanFull()
                     ->query(fn (Builder $query, array $data): Builder => $query
                         ->when(
                             $data['from'] ?? null,
