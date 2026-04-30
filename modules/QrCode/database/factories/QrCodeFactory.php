@@ -6,7 +6,6 @@ namespace AcMarche\QrCode\Database\Factories;
 
 use AcMarche\QrCode\Enums\QrCodeActionEnum;
 use AcMarche\QrCode\Models\QrCode;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Override;
 

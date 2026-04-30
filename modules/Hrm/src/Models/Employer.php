@@ -24,6 +24,38 @@ final class Employer extends Model
     use HasFactory;
 
     /**
+     * @return array<int>
+     */
+    public static function descendantsAndSelfIds(int $id): array
+    {
+        return self::query()
+            ->where('id', $id)
+            ->orWhere('parent_id', $id)
+            ->pluck('id')
+            ->all();
+    }
+
+    /**
+     * @return array<string, array<int, string>>
+     */
+    public static function groupedSelectOptions(): array
+    {
+        $employers = self::query()->orderBy('name')->get();
+        $childrenByParent = $employers->whereNotNull('parent_id')->groupBy('parent_id');
+
+        $options = [];
+        foreach ($employers->whereNull('parent_id') as $parent) {
+            $group = [$parent->id => $parent->name];
+            foreach ($childrenByParent->get($parent->id, []) as $child) {
+                $group[$child->id] = $child->name;
+            }
+            $options[$parent->name] = $group;
+        }
+
+        return $options;
+    }
+
+    /**
      * @return BelongsTo<Employer>
      */
     public function parent(): BelongsTo

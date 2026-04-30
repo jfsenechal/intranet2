@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AcMarche\QrCode\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 
-enum QrCodeActionEnum:string implements HasLabel
+enum QrCodeActionEnum: string implements HasLabel
 {
     case SMS = 'sms';
     case PHONE_NUMBER = 'phoneNumber';

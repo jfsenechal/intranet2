@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Deadlines\Tables;
 
+use AcMarche\Hrm\Filament\Filters\EmployerFilter;
 use AcMarche\Hrm\Filament\Resources\Deadlines\DeadlineResource;
 use AcMarche\Hrm\Models\Deadline;
 use Filament\Actions\Action;
@@ -73,9 +74,7 @@ final class DeadlineTables
             ->filtersFormColumns(2)
             ->persistFiltersInSession()
             ->filters([
-                SelectFilter::make('employer_id')
-                    ->label('Employeur')
-                    ->relationship('employer', 'name'),
+                EmployerFilter::make(),
                 SelectFilter::make('service_id')
                     ->label('Service')
                     ->relationship('service', 'name')

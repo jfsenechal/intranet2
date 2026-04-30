@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\Contracts\Tables;
 
 use AcMarche\Hrm\Enums\ContractStatusEnum;
+use AcMarche\Hrm\Filament\Filters\EmployerFilter;
 use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use AcMarche\Hrm\Models\Contract;
 use Filament\Actions\Action;
@@ -29,7 +30,7 @@ final class ContractTables
                 TextColumn::make('employee.last_name')
                     ->label('Agent')
                     ->formatStateUsing(
-                        fn(Contract $record): string => $record->employee->last_name.' '.$record->employee->first_name
+                        fn (Contract $record): string => $record->employee->last_name.' '.$record->employee->first_name
                     )
                     ->searchable(['last_name', 'first_name'])
                     ->sortable(),
@@ -72,9 +73,7 @@ final class ContractTables
             ->filtersFormColumns(2)
             ->persistFiltersInSession()
             ->filters([
-                SelectFilter::make('employer_id')
-                    ->label('Employeur')
-                    ->relationship('employer', 'name'),
+                EmployerFilter::make(),
                 SelectFilter::make('contract_type_id')
                     ->label('Type')
                     ->relationship('contractType', 'name'),
@@ -147,7 +146,7 @@ final class ContractTables
                 Action::make('view')
                     ->label('Voir')
                     ->icon('heroicon-o-eye')
-                    ->url(fn(Contract $record): string => ContractResource::getUrl('view', ['record' => $record])),
+                    ->url(fn (Contract $record): string => ContractResource::getUrl('view', ['record' => $record])),
             ]);
     }
 }

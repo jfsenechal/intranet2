@@ -36,6 +36,7 @@ final class CreateSignature extends CreateRecord
             'city' => 'Marche-en-Famenne',
         ]);
     }
+
     /**
      * @param  array<string, mixed>  $data
      * @return array<string, mixed>
