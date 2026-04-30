@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Services\Tables;
 
+use AcMarche\Hrm\Filament\Filters\DirectionFilter;
 use AcMarche\Hrm\Filament\Resources\Services\ServiceResource;
 use AcMarche\Hrm\Models\Service;
 use Filament\Actions\BulkActionGroup;
@@ -11,7 +12,6 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 final class ServiceTables
@@ -43,9 +43,7 @@ final class ServiceTables
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('direction_id')
-                    ->label('Direction')
-                    ->relationship('direction', 'name'),
+                DirectionFilter::make(),
             ])
             ->recordActions([
                 ViewAction::make(),

@@ -28,6 +28,23 @@ final class PayScale extends Model
     public $timestamps = false;
 
     /**
+     * @return array<string, array<int, string>>
+     */
+    public static function groupedSelectOptions(): array
+    {
+        return self::query()
+            ->with('employer')
+            ->orderBy('employer_id')
+            ->orderBy('name')
+            ->get()
+            ->groupBy(fn (PayScale $payScale): string => $payScale->employer?->name ?? 'Sans employeur')
+            ->map(fn ($group) => $group->mapWithKeys(fn (PayScale $payScale): array => [
+                $payScale->id => '-- '.$payScale->name,
+            ])->all())
+            ->all();
+    }
+
+    /**
      * @return BelongsTo<Employer>
      */
     public function employer(): BelongsTo

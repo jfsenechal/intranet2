@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Deadlines\Tables;
 
+use AcMarche\Hrm\Filament\Filters\DirectionFilter;
 use AcMarche\Hrm\Filament\Filters\EmployerFilter;
+use AcMarche\Hrm\Filament\Filters\ServiceFilter;
 use AcMarche\Hrm\Filament\Resources\Deadlines\DeadlineResource;
 use AcMarche\Hrm\Models\Deadline;
 use Filament\Actions\Action;
@@ -16,7 +18,6 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -75,16 +76,8 @@ final class DeadlineTables
             ->persistFiltersInSession()
             ->filters([
                 EmployerFilter::make(),
-                SelectFilter::make('service_id')
-                    ->label('Service')
-                    ->relationship('service', 'name')
-                    ->searchable()
-                    ->preload(),
-                SelectFilter::make('direction_id')
-                    ->label('Direction')
-                    ->relationship('direction', 'name')
-                    ->searchable()
-                    ->preload(),
+                ServiceFilter::make(),
+                DirectionFilter::make(),
                 Filter::make('end_date_from')
                     ->label("Date de l'échéance")
                     ->schema([

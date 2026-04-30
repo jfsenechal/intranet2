@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\Employees\Tables;
 
 use AcMarche\Hrm\Enums\StatusEnum;
+use AcMarche\Hrm\Filament\Filters\DirectionFilter;
 use AcMarche\Hrm\Filament\Filters\EmployerFilter;
-use AcMarche\Hrm\Models\Direction;
+use AcMarche\Hrm\Filament\Filters\ServiceFilter;
 use AcMarche\Hrm\Models\Employee;
 use AcMarche\Hrm\Models\PayScale;
-use AcMarche\Hrm\Models\Service;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -93,11 +93,7 @@ final class EmployeeTables
                         ->map(fn ($group) => $group->pluck('name', 'id')->all())
                         ->all())
                     ->preload(),
-                SelectFilter::make('service_id')
-                    ->label('Service')
-                    ->options(fn (): array => Service::query()->orderBy('name')->pluck('name', 'id')->all())
-                    ->searchable()
-                    ->preload()
+                ServiceFilter::make()
                     ->query(fn (Builder $query, array $data): Builder => $query->when(
                         $data['value'] ?? null,
                         fn (Builder $query, $serviceId): Builder => $query->whereHas(
@@ -105,11 +101,7 @@ final class EmployeeTables
                             fn (Builder $query) => $query->where('service_id', $serviceId),
                         ),
                     )),
-                SelectFilter::make('direction_id')
-                    ->label('Direction')
-                    ->options(fn (): array => Direction::query()->orderBy('name')->pluck('name', 'id')->all())
-                    ->searchable()
-                    ->preload()
+                DirectionFilter::make()
                     ->query(fn (Builder $query, array $data): Builder => $query->when(
                         $data['value'] ?? null,
                         fn (Builder $query, $directionId): Builder => $query->whereHas(

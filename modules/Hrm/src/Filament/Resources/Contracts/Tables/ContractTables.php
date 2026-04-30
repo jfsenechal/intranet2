@@ -5,7 +5,12 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\Contracts\Tables;
 
 use AcMarche\Hrm\Enums\ContractStatusEnum;
+use AcMarche\Hrm\Filament\Filters\ContractNatureFilter;
+use AcMarche\Hrm\Filament\Filters\ContractTypeFilter;
+use AcMarche\Hrm\Filament\Filters\DirectionFilter;
 use AcMarche\Hrm\Filament\Filters\EmployerFilter;
+use AcMarche\Hrm\Filament\Filters\PayScaleFilter;
+use AcMarche\Hrm\Filament\Filters\ServiceFilter;
 use AcMarche\Hrm\Filament\Resources\Contracts\ContractResource;
 use AcMarche\Hrm\Models\Contract;
 use Filament\Actions\Action;
@@ -15,9 +20,11 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 final class ContractTables
 {
@@ -47,12 +54,12 @@ final class ContractTables
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('start_date')
-                    ->label('Debut')
+                    ->label('Débute le')
                     ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('end_date')
-                    ->label('Fin')
+                    ->label('Prend fin le')
                     ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -74,9 +81,11 @@ final class ContractTables
             ->persistFiltersInSession()
             ->filters([
                 EmployerFilter::make(),
-                SelectFilter::make('contract_type_id')
-                    ->label('Type')
-                    ->relationship('contractType', 'name'),
+                DirectionFilter::make(),
+                ServiceFilter::make(),
+                ContractNatureFilter::make(),
+                ContractTypeFilter::make(),
+                PayScaleFilter::make(),
                 SelectFilter::make('status')
                     ->label('Statut')
                     ->options(ContractStatusEnum::class),
@@ -86,7 +95,35 @@ final class ContractTables
                     ->trueLabel('Clôturés')
                     ->falseLabel('En cours')
                     ->default(false),
-            ])
+                TernaryFilter::make('is_amendment')
+                    ->label('Avenant')
+                    ->placeholder('Tous')
+                    ->trueLabel('Avenants')
+                    ->falseLabel('Non avenants'),
+                TernaryFilter::make('is_suspended')
+                    ->label('Suspendu')
+                    ->placeholder('Tous')
+                    ->trueLabel('Suspendus')
+                    ->falseLabel('Non suspendus'),
+                TernaryFilter::make('is_replacement')
+                    ->label('Remplacement')
+                    ->placeholder('Tous')
+                    ->trueLabel('Remplacements')
+                    ->falseLabel('Non remplacements'),
+                TernaryFilter::make('end_date_expired')
+                    ->label('Échéance dépassée')
+                    ->placeholder('Tous')
+                    ->trueLabel('Dépassée')
+                    ->falseLabel('À venir ou sans fin')
+                    ->queries(
+                        true: fn (Builder $query): Builder => $query->whereDate('end_date', '<', today()),
+                        false: fn (Builder $query): Builder => $query->where(
+                            fn (Builder $query) => $query
+                                ->whereDate('end_date', '>=', today())
+                                ->orWhereNull('end_date'),
+                        ),
+                    ),
+            ], layout: FiltersLayout::Modal)
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),

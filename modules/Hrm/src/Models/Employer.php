@@ -47,7 +47,7 @@ final class Employer extends Model
         foreach ($employers->whereNull('parent_id') as $parent) {
             $group = [$parent->id => $parent->name];
             foreach ($childrenByParent->get($parent->id, []) as $child) {
-                $group[$child->id] = $child->name;
+                $group[$child->id] = '-- '.$child->name;
             }
             $options[$parent->name] = $group;
         }

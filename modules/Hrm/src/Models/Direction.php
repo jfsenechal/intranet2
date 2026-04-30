@@ -31,6 +31,23 @@ final class Direction extends Model
     use HasSlug;
     use HasUserAdd;
 
+    /**
+     * @return array<string, array<int, string>>
+     */
+    public static function groupedSelectOptions(): array
+    {
+        return self::query()
+            ->with('employer')
+            ->orderBy('employer_id')
+            ->orderBy('name')
+            ->get()
+            ->groupBy(fn (Direction $direction): string => $direction->employer?->name ?? 'Sans employeur')
+            ->map(fn ($group) => $group->mapWithKeys(fn (Direction $direction): array => [
+                $direction->id => '-- '.$direction->name,
+            ])->all())
+            ->all();
+    }
+
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()

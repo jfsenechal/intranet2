@@ -71,8 +71,6 @@ final class ClaimRequestPage extends Page implements HasForms
     }
 
     /**
-     *
-     *
 <div class="container">
 
     <div class="card">
