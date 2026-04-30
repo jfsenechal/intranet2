@@ -86,7 +86,7 @@ final class TrainingTables
                 SelectFilter::make('training_type')
                     ->label('Type')
                     ->options(TrainingTypeEnum::class),
-                EmployerFilter::makeThrough(),
+                EmployerFilter::makeThrough('employee.contracts'),
                 ContractActiveFilter::makeWithContracts(),
                 TernaryFilter::make('certificate_received')
                     ->label('Attestation recue')

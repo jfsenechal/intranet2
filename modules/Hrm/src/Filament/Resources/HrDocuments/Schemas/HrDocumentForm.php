@@ -11,13 +11,6 @@ use Filament\Schemas\Schema;
 
 final class HrDocumentForm
 {
-    public static function configure(Schema $schema): Schema
-    {
-        return $schema
-            ->columns(1)
-            ->components(self::getSchema());
-    }
-
     public static function getSchema(): array
     {
         return [
