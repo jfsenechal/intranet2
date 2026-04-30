@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Internships\Tables;
 
-use AcMarche\Hrm\Filament\Resources\Internships\InternshipResource;
 use AcMarche\Hrm\Models\Internship;
-use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -142,10 +140,9 @@ final class InternshipTables
                     ->preload(),
             ])
             ->recordActions([
-                Action::make('view')
+                ViewAction::make('view')
                     ->label('Voir')
-                    ->icon('heroicon-o-eye')
-                    ->url(fn (Internship $record): string => InternshipResource::getUrl('view', ['record' => $record])),
+                    ->icon('heroicon-o-eye'),
             ]);
     }
 }

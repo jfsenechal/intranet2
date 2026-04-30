@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Applications\Tables;
 
-use AcMarche\Hrm\Filament\Resources\Applications\ApplicationResource;
 use AcMarche\Hrm\Models\Application;
-use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -28,7 +26,8 @@ final class ApplicationTables
                 TextColumn::make('employee.last_name')
                     ->label('Candidat')
                     ->formatStateUsing(
-                        fn (Application $record): string => $record->employee->last_name.' '.$record->employee->first_name
+                        fn (Application $record
+                        ): string => $record->employee->last_name.' '.$record->employee->first_name
                     )
                     ->searchable(['last_name', 'first_name'])
                     ->sortable(),
@@ -166,10 +165,10 @@ final class ApplicationTables
                     ->falseLabel('Non'),
             ])
             ->recordActions([
-                Action::make('view')
+                ViewAction::class
                     ->label('Voir')
-                    ->icon('heroicon-o-eye')
-                    ->url(fn (Application $record): string => ApplicationResource::getUrl('view', ['record' => $record])),
+                    ->icon('heroicon-o-eye'),
+
             ]);
     }
 }

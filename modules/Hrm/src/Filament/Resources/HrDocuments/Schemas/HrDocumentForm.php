@@ -7,7 +7,6 @@ namespace AcMarche\Hrm\Filament\Resources\HrDocuments\Schemas;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Schema;
 
 final class HrDocumentForm
 {
