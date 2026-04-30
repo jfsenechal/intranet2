@@ -26,4 +26,19 @@ final class EmployerFilter
             ));
 
     }
+
+    public static function makeThrough(): SelectFilter
+    {
+        return self::make()
+            ->query(fn (Builder $query, array $data): Builder => $query->when(
+                $data['value'] ?? null,
+                fn (Builder $query, $employerId): Builder => $query->whereHas(
+                    'employee',
+                    fn (Builder $query) => $query->whereIn(
+                        'employer_id',
+                        Employer::descendantsAndSelfIds((int) $employerId),
+                    ),
+                ),
+            ));
+    }
 }

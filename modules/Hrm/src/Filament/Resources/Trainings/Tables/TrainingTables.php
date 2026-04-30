@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\Trainings\Tables;
 
 use AcMarche\Hrm\Enums\TrainingTypeEnum;
+use AcMarche\Hrm\Filament\Filters\ContractActiveFilter;
+use AcMarche\Hrm\Filament\Filters\EmployerFilter;
 use AcMarche\Hrm\Filament\Resources\Trainings\TrainingResource;
 use AcMarche\Hrm\Models\Training;
 use Filament\Actions\Action;
@@ -15,6 +17,7 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\Summarizers\Summarizer;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
@@ -60,7 +63,11 @@ final class TrainingTables
                     ->summarize(
                         Summarizer::make()
                             ->label('Total')
-                            ->using(fn (Builder $query): string => Training::formatDuration((int) $query->sum('duration_minutes')))
+                            ->using(
+                                fn (Builder $query): string => Training::formatDuration(
+                                    (int) $query->sum('duration_minutes')
+                                )
+                            )
                     )
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -73,21 +80,25 @@ final class TrainingTables
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->filtersFormColumns(2)
+            ->persistFiltersInSession()
             ->filters([
                 SelectFilter::make('training_type')
                     ->label('Type')
                     ->options(TrainingTypeEnum::class),
+                EmployerFilter::makeThrough(),
+                ContractActiveFilter::makeWithContracts(),
                 TernaryFilter::make('certificate_received')
                     ->label('Attestation recue')
                     ->placeholder('Toutes')
                     ->trueLabel('Recues')
                     ->falseLabel('Non recues'),
                 TernaryFilter::make('is_closed')
-                    ->label('Cloture')
+                    ->label('Clôturée')
                     ->placeholder('Toutes')
-                    ->trueLabel('Cloturees')
+                    ->trueLabel('Clôturées')
                     ->falseLabel('En cours'),
-            ])
+            ], layout: FiltersLayout::Modal)
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
@@ -129,7 +140,11 @@ final class TrainingTables
                     ->summarize(
                         Summarizer::make()
                             ->label('Total')
-                            ->using(fn (Builder $query): string => Training::formatDuration((int) $query->sum('duration_minutes')))
+                            ->using(
+                                fn (Builder $query): string => Training::formatDuration(
+                                    (int) $query->sum('duration_minutes')
+                                )
+                            )
                     )
                     ->sortable()
                     ->toggleable(),
