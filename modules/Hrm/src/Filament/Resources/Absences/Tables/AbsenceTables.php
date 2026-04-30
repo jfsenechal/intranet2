@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AcMarche\Hrm\Filament\Resources\Absences\Tables;
 
 use AcMarche\Hrm\Enums\ReasonsEnum;
+use AcMarche\Hrm\Filament\Filters\ContractActiveFilter;
 use AcMarche\Hrm\Filament\Resources\Absences\AbsenceResource;
 use AcMarche\Hrm\Models\Absence;
 use Filament\Actions\Action;
@@ -15,6 +16,7 @@ use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
@@ -67,16 +69,6 @@ final class AbsenceTables
                 SelectFilter::make('reason')
                     ->label('Raison')
                     ->options(ReasonsEnum::class),
-                SelectFilter::make('employee_id')
-                    ->label('Agent')
-                    ->relationship(
-                        'employee',
-                        'last_name',
-                        fn (Builder $query) => $query->orderBy('last_name')->orderBy('first_name')
-                    )
-                    ->getOptionLabelFromRecordUsing(fn ($record): string => $record->last_name.' '.$record->first_name)
-                    ->searchable()
-                    ->preload(),
                 Filter::make('period')
                     ->label('Période')
                     ->schema([
@@ -100,7 +92,8 @@ final class AbsenceTables
                     ->trueLabel('Clôturées')
                     ->falseLabel('En cours')
                     ->default(false),
-            ])
+                ContractActiveFilter::makeWithContracts(),
+            ], layout: FiltersLayout::Modal)
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),

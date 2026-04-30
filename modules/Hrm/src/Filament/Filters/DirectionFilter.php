@@ -6,6 +6,7 @@ namespace AcMarche\Hrm\Filament\Filters;
 
 use AcMarche\Hrm\Models\Direction;
 use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 final class DirectionFilter
 {
@@ -16,5 +17,17 @@ final class DirectionFilter
             ->options(fn (): array => Direction::groupedSelectOptions())
             ->searchable()
             ->preload();
+    }
+
+    public static function makeWithContracts(): SelectFilter
+    {
+        return self::make()
+            ->query(fn (Builder $query, array $data): Builder => $query->when(
+                $data['value'] ?? null,
+                fn (Builder $query, $serviceId): Builder => $query->whereHas(
+                    'employee.contracts',
+                    fn (Builder $query) => $query->where('direction_id', $serviceId),
+                ),
+            ));
     }
 }

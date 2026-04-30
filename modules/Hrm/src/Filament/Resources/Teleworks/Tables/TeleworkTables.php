@@ -59,6 +59,8 @@ final class TeleworkTables
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->filtersFormColumns(2)
+            ->persistFiltersInSession()
             ->filters([
                 TernaryFilter::make('manager_validated')
                     ->label('Validation direction')

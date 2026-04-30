@@ -47,7 +47,7 @@ final class TeleworkResource extends Resource
 
     public static function getPluralModelLabel(): string
     {
-        return 'Télétravails';
+        return 'Télétravail';
     }
 
     public static function form(Schema $schema): Schema

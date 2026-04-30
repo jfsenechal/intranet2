@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace AcMarche\Hrm\Filament\Resources\Diplomas\Tables;
 
+use AcMarche\Hrm\Filament\Filters\ContractActiveFilter;
+use AcMarche\Hrm\Filament\Filters\DirectionFilter;
+use AcMarche\Hrm\Filament\Filters\ServiceFilter;
 use AcMarche\Hrm\Filament\Resources\Diplomas\DiplomaResource;
 use AcMarche\Hrm\Models\Diploma;
 use Filament\Actions\Action;
@@ -46,6 +49,13 @@ final class DiplomaTables
                     ->date('d/m/Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filtersFormColumns(2)
+            ->persistFiltersInSession()
+            ->filters([
+                DirectionFilter::makeWithContracts(),
+                ServiceFilter::makeWithContracts(),
+                ContractActiveFilter::makeWithContracts(),
             ])
             ->recordActions([
                 ViewAction::make(),

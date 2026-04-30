@@ -16,7 +16,7 @@ final class ListTeleworks extends ListRecords
 
     public function getTitle(): string|Htmlable
     {
-        return $this->getAllTableRecordsCount().' télétravails';
+        return $this->getAllTableRecordsCount().' télétravail';
     }
 
     protected function getHeaderActions(): array
