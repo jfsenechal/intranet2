@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\WhoIsWho\Providers\Filament;
+namespace AcMarche\EmailManagement\Providers\Filament;
 
 use AcMarche\App\Traits\HooksTrait;
 use AcMarche\App\Traits\PluginTrait;
@@ -20,7 +20,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-final class WhoIsWhoPanelProvider extends PanelProvider
+final class EmailManagementPanelProvider extends PanelProvider
 {
     use HooksTrait;
     use PluginTrait;
@@ -30,9 +30,9 @@ final class WhoIsWhoPanelProvider extends PanelProvider
         $path = $this->getPluginBasePath().'/../../';
 
         return $panel
-            ->id('who-is-who-panel')
-            ->path('who-is-who')
-            ->brandName('Qui est qui ?')
+            ->id('email-management-panel')
+            ->path('email-management')
+            ->brandName('Gestion des emails')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->colors([
                 'primary' => Color::Pink,
@@ -42,12 +42,12 @@ final class WhoIsWhoPanelProvider extends PanelProvider
             ->resourceEditPageRedirect('view')
             ->databaseNotifications()
 
-            ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\WhoIsWho\\Filament\\Resources')
-            ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\WhoIsWho\\Filament\\Pages')
+            ->discoverResources(in: $path.'Filament/Resources', for: 'AcMarche\\EmailManagement\\Filament\\Resources')
+            ->discoverPages(in: $path.'Filament/Pages', for: 'AcMarche\\EmailManagement\\Filament\\Pages')
             ->pages([
 
             ])
-            ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\WhoIsWho\\Filament\\Widgets')
+            ->discoverWidgets(in: $path.'Filament/Widgets', for: 'AcMarche\\EmailManagement\\Filament\\Widgets')
             ->widgets([
 
             ])

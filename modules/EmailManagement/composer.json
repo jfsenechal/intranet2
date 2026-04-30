@@ -1,6 +1,6 @@
 {
-    "name": "acmarche/who-is-who",
-    "description": "WhoIsWho and travel expense management module for AcMarche",
+    "name": "acmarche/email-management",
+    "description": "EmailManagement and travel expense management module for AcMarche",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -16,16 +16,16 @@
     },
     "autoload": {
         "psr-4": {
-            "AcMarche\\WhoIsWho\\": "src/",
-            "AcMarche\\WhoIsWho\\Database\\Factories\\": "database/factories/",
-            "AcMarche\\WhoIsWho\\Database\\Seeders\\": "database/seeders/",
-            "AcMarche\\WhoIsWho\\Tests\\": "tests"
+            "AcMarche\\EmailManagement\\": "src/",
+            "AcMarche\\EmailManagement\\Database\\Factories\\": "database/factories/",
+            "AcMarche\\EmailManagement\\Database\\Seeders\\": "database/seeders/",
+            "AcMarche\\EmailManagement\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "AcMarche\\WhoIsWho\\Providers\\WhoIsWhoServiceProvider"
+                "AcMarche\\EmailManagement\\Providers\\EmailManagementServiceProvider"
             ]
         }
     },

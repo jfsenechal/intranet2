@@ -62,7 +62,7 @@
                     @if ($employees && $employees->isNotEmpty())
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             @foreach ($employees as $employee)
-                                @include('whoiswho::filament.components.employee-card', ['employee' => $employee])
+                                @include('who-is-who::filament.components.employee-card', ['employee' => $employee])
                             @endforeach
                         </div>
                     @endif

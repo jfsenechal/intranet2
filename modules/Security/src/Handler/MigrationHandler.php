@@ -52,7 +52,7 @@ final class MigrationHandler
             33 => EmailsListPage::getUrl(panel: 'app-panel'),
             36 => ClaimRequestPage::getUrl(panel: 'app-panel'),
             40 => ProfileResource::getUrl('index', panel: 'agent-panel'),
-            42 => WhoIsWhoIndex::getUrl(panel: 'whoiswho-panel'),
+            42 => WhoIsWhoIndex::getUrl(panel: 'who-is-who-panel'),
             44 => PublicationResource::getUrl('index', panel: 'publication-panel'),
             50 => TeleworkPage::getUrl(panel: 'app-panel'),
             56 => QrCodeResource::getUrl('index', panel: 'qrcode-panel'),

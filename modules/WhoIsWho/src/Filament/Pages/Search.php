@@ -33,7 +33,7 @@ final class Search extends Page implements HasForms
     public bool $searched = false;
 
     #[Override]
-    protected string $view = 'whoiswho::filament.pages.search';
+    protected string $view = 'who-is-who::filament.pages.search';
 
     #[Override]
     protected static ?int $navigationSort = 2;

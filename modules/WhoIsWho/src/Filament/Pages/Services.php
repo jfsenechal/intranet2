@@ -14,7 +14,7 @@ final class Services extends Page
     public ?int $serviceId = null;
 
     #[Override]
-    protected string $view = 'whoiswho::filament.pages.services';
+    protected string $view = 'who-is-who::filament.pages.services';
 
     #[Override]
     protected static ?int $navigationSort = 3;

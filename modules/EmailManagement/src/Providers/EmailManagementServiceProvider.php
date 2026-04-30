@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace AcMarche\WhoIsWho\Providers;
+namespace AcMarche\EmailManagement\Providers;
 
 use AcMarche\App\Traits\ModuleServiceProviderTrait;
 use Illuminate\Support\ServiceProvider;
 
-final class WhoIsWhoServiceProvider extends ServiceProvider
+final class EmailManagementServiceProvider extends ServiceProvider
 {
     use ModuleServiceProviderTrait;
 
-    public static int $module_id = 42;
+    public static int $module_id = 5;
 
     public function register(): void
     {
@@ -31,6 +31,6 @@ final class WhoIsWhoServiceProvider extends ServiceProvider
 
     protected function moduleName(): string
     {
-        return 'who-is-who';
+        return 'email-management';
     }
 }

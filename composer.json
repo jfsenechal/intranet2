@@ -35,6 +35,10 @@
         },
         {
             "type": "path",
+            "url": "./modules/EmailManagement"
+        },
+        {
+            "type": "path",
             "url": "./modules/Mileage"
         },
         {
@@ -82,6 +86,7 @@
         "acmarche/app": "*@dev",
         "acmarche/courrier": "*@dev",
         "acmarche/document": "*@dev",
+        "acmarche/email-management": "*@dev",
         "acmarche/hrm": "*@dev",
         "acmarche/mailing-list": "*@dev",
         "acmarche/mileage": "*@dev",
@@ -90,7 +95,7 @@
         "acmarche/publication": "*@dev",
         "acmarche/qrcode": "*@dev",
         "acmarche/security": "*@dev",
-        "acmarche/whoiswho": "*@dev",
+        "acmarche/who-is-who": "*@dev",
         "chrome-php/chrome": "^1.15",
         "directorytree/imapengine-laravel": "^v1.2.1",
         "directorytree/ldaprecord-laravel": "^v4.0.0",

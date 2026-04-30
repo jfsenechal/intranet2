@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "73955a5cf2a96ba1db90defb4e3301f0",
+    "content-hash": "8e0b9d57f9a4437460889ead4cdc611a",
     "packages": [
         {
             "name": "acmarche/ad",
@@ -216,6 +216,49 @@
                 }
             ],
             "description": "Document management module for AcMarche",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "acmarche/email-management",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./modules/EmailManagement",
+                "reference": "f939c5b73fec2e7ee23f490f1bdcccac4abfd8d2"
+            },
+            "require": {
+                "filament/filament": "^5.0",
+                "illuminate/contracts": "^12.0|^13.0",
+                "php": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AcMarche\\EmailManagement\\Providers\\EmailManagementServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AcMarche\\EmailManagement\\": "src/",
+                    "AcMarche\\EmailManagement\\Database\\Factories\\": "database/factories/",
+                    "AcMarche\\EmailManagement\\Database\\Seeders\\": "database/seeders/",
+                    "AcMarche\\EmailManagement\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AcMarche",
+                    "email": "info@acmarche.be"
+                }
+            ],
+            "description": "EmailManagement and travel expense management module for AcMarche",
             "transport-options": {
                 "relative": true
             }
@@ -566,12 +609,12 @@
             }
         },
         {
-            "name": "acmarche/whoiswho",
+            "name": "acmarche/who-is-who",
             "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./modules/WhoIsWho",
-                "reference": "63a4a3f141b90aa799cda1ed18c8fbe6aff2b2e9"
+                "reference": "5139f9c419b4ca36f8a6250bcc32e8dbfd0c620b"
             },
             "require": {
                 "filament/filament": "^5.0",
@@ -14866,16 +14909,16 @@
         },
         {
             "name": "php-debugbar/php-debugbar",
-            "version": "v3.7.5",
+            "version": "v3.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-debugbar/php-debugbar.git",
-                "reference": "dbf77f48fa6e6b57ed57ae67aa047b2535697788"
+                "reference": "1690ee1728827f9deb4b60457fa387cf44672c56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-debugbar/php-debugbar/zipball/dbf77f48fa6e6b57ed57ae67aa047b2535697788",
-                "reference": "dbf77f48fa6e6b57ed57ae67aa047b2535697788",
+                "url": "https://api.github.com/repos/php-debugbar/php-debugbar/zipball/1690ee1728827f9deb4b60457fa387cf44672c56",
+                "reference": "1690ee1728827f9deb4b60457fa387cf44672c56",
                 "shasum": ""
             },
             "require": {
@@ -14952,7 +14995,7 @@
             ],
             "support": {
                 "issues": "https://github.com/php-debugbar/php-debugbar/issues",
-                "source": "https://github.com/php-debugbar/php-debugbar/tree/v3.7.5"
+                "source": "https://github.com/php-debugbar/php-debugbar/tree/v3.7.6"
             },
             "funding": [
                 {
@@ -14964,7 +15007,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-15T11:58:43+00:00"
+            "time": "2026-04-30T07:31:44+00:00"
         },
         {
             "name": "php-debugbar/symfony-bridge",
@@ -17079,6 +17122,7 @@
         "acmarche/app": 20,
         "acmarche/courrier": 20,
         "acmarche/document": 20,
+        "acmarche/email-management": 20,
         "acmarche/hrm": 20,
         "acmarche/mailing-list": 20,
         "acmarche/mileage": 20,
@@ -17087,7 +17131,7 @@
         "acmarche/publication": 20,
         "acmarche/qrcode": 20,
         "acmarche/security": 20,
-        "acmarche/whoiswho": 20
+        "acmarche/who-is-who": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

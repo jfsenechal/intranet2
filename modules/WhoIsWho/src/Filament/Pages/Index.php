@@ -14,7 +14,7 @@ final class Index extends Page
     public ?string $letter = null;
 
     #[Override]
-    protected string $view = 'whoiswho::filament.pages.index';
+    protected string $view = 'who-is-who::filament.pages.index';
 
     #[Override]
     protected static ?int $navigationSort = 1;
